@@ -81,6 +81,18 @@ const Test = () => {
         arm2Angle = {45}
         />
       </BotTestWrapper>
+      <BotTestWrapper
+      size = {settings.cellSize}
+      >
+        <Bot
+        model = 'BotRobbey'
+        arm1 = 'Pewpew'
+        arm2 = 'Pewpew'
+        botColors = {null}
+        arm1Angle = {180}
+        arm2Angle = {45}
+        />
+      </BotTestWrapper>
     </>
   )
 }

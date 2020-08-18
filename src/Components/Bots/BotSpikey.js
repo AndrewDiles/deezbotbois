@@ -64,15 +64,15 @@ const BotSpikey = ( { children,botColors, cellSize } ) => {
           />
         </ExtensionWrapper>
         <RollerWrapper>
-        <Roller
-        color = {botColors.rollers}
-        />
-        <Roller
-        color = {botColors.rollers}
-        />
-        <Roller
-        color = {botColors.rollers}
-        />
+          <Roller
+          color = {botColors.rollers}
+          />
+          <Roller
+          color = {botColors.rollers}
+          />
+          <Roller
+          color = {botColors.rollers}
+          />
         </RollerWrapper>
       </Wrapper>
   )

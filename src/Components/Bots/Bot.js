@@ -11,6 +11,7 @@ import BotSpikey from './BotSpikey';
 import BotBiggey from './BotBiggey';
 import BotZippey from './BotZippey';
 import BotJager from './BotJager';
+import BotRobbey from './BotRobbey';
 
 // arms imports:
 import Pewpew from '../Arms/Pewpew/Pewpew';
@@ -46,6 +47,10 @@ const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle } ) => {
     break;
     case 'BotJager' : {
       SelectedBot = BotJager;
+    }
+    break;
+    case 'BotRobbey' : {
+      SelectedBot = BotRobbey;
     }
     break;
     default:{
