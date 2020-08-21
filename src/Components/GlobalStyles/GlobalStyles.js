@@ -74,6 +74,41 @@ html {
   width: 100vw;
 }
 
-`;
+/* former load in:
+@keyframes loadInScreen {
+  0% {
+    top: -100%;
+  }
+  100% {
+    width: 100%;
+    height:100%;
+    top:0;
+  }
+} */
+@keyframes loadInScreen {
+  0% {
+    width: 10px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  25% {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+  75% {
+    width: 100%;
+    height: 100px;
+    border-radius: 50%;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+
+`
+;
 
 export default GlobalStyles;

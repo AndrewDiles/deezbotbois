@@ -1,7 +1,10 @@
+import {colors} from '../../Constants/colorSchemes';
+
 const initialState = {
   email: null,
   handle : null,
   navLocationPreference: null,
+  colorTheme: null,
   botBuilds: null,
   aiScripts: null,
   lastLogInBitsReceived: null,
@@ -27,4 +30,6 @@ export default function userInfo(
         return state;
       }
     }
-  }
+  };
+
+export const getThemeColors = state => state.userInfo.colorTheme ? state.userInfo.colorTheme : colors;

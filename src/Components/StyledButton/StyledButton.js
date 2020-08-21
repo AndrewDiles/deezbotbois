@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import {colors} from '../../Constants/colorSchemes';
+import { useSelector } from "react-redux";
+import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 const StyledButton = ( { handleClick, disabled, selected, children} ) => {
+  const userInfo = useSelector((state) => state.userInfo);
+  const colors = useSelector(getThemeColors);
+  // To be completed - add customization via props or selector?
 
   return (
       <ButtonStylings

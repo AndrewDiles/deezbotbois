@@ -14,7 +14,7 @@ const Test = () => {
       >
         <Bot
         model = 'BotBoxey'
-        arm1 = 'Pewpew'
+        arm1 = 'Powpow'
         arm2 = {null}
         botColors = {null}
         arm1Angle = {null}
@@ -38,10 +38,10 @@ const Test = () => {
       >
         <Bot
         model = 'BotSpikey'
-        arm1 = 'Pewpew'
+        arm1 = 'Bonkbonk'
         arm2 = {null}
         botColors = {null}
-        arm1Angle = {90}
+        arm1Angle = {null}
         arm2Angle = {null}
         />
       </BotTestWrapper>
@@ -50,8 +50,8 @@ const Test = () => {
       >
         <Bot
         model = 'BotBiggey'
-        arm1 = 'Pewpew'
-        arm2 = 'Pewpew'
+        arm1 = 'Poppop'
+        arm2 = 'Powpow'
         botColors = {null}
         arm1Angle = {180}
         arm2Angle = {45}

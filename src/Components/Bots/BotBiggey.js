@@ -124,8 +124,8 @@ const Head = styled.div`
   align-content: center;
 `
 const Eye = styled.div`
-  height: 20%;
-  width: 20%;
+  height: 40%;
+  width: 40%;
   background-color: ${props => props.color};
 `
 const HeadWrapper = styled.div`

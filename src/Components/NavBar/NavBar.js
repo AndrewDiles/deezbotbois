@@ -13,6 +13,7 @@ import {
 
 import StyledButton from '../StyledButton/StyledButton';
 import StyledIcon from '../StyledIcon/StyledIcon';
+import SizeSlider from '../SizeSlider/SizeSlider'
 
 function NavBar() {
   const dispatch = useDispatch();
@@ -30,10 +31,17 @@ function NavBar() {
     }
   }
   const login = () => {
-
+    console.log('gapi',window.gapi.auth2);
+      // var auth2 = window.gapi.auth2.getAuthInstance();
+      // auth2.signIn().then(function () {
+      //   console.log('User signed in.');
+      // });
   }
   const logout = () => {
-
+      var auth2 = window.gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
   }
 
   return (
@@ -47,9 +55,9 @@ function NavBar() {
         >
         </StyledIcon>
       </div>
-      <div>
-        Main options
-      </div>
+      <SizeSlider>
+        
+      </SizeSlider>
       <div>
         {
           userInfo.email === null ? (
@@ -58,6 +66,7 @@ function NavBar() {
             >
               LOG IN
             </StyledButton>
+            // <div class="g-signin2" data-onsuccess="onSignIn"></div>
           ) : (
             <StyledButton
             handleClick = {logout}
@@ -83,4 +92,5 @@ const Wrapper = styled.nav`
   align-items: center;
   align-content: center;
   box-shadow: ${props => props.navLocation === 'top' ? '0 8px 6px -6px black' : '8px 0 6px -6px black'};
+  z-index: 10;
 `
