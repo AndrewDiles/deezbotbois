@@ -5,6 +5,7 @@ export const colors = {
   notSelected: 'rgba(255,255,255,0.3)',
   hovered: 'silver',
   textColor : 'black',
+  buttonText: 'rgba(0, 0, 0, 0.54)',
 };
 export const defaultBotColors = {
   primary: 'lime',

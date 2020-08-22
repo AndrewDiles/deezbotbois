@@ -10,9 +10,9 @@ import styled from "styled-components";
 import { updateUrl } from "./Redux/actions";
 import { getThemeColors } from './Redux/reducers/user-reducer';
 
-
 import GlobalStyles from "./Components/GlobalStyles/GlobalStyles";
 import NavBar from "./Components/NavBar/NavBar";
+import Home from "./Components/Home/Home";
 import Test from "./Components/Test/Test";
 
 
@@ -21,14 +21,16 @@ function App() {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
   const colors = useSelector(getThemeColors);
-  setTimeout(()=>{
-    document.getElementById('root').style.display = 'block';
-    setIsLoading(false);
-  },1000)
   
   React.useEffect(() => {
-    dispatch(updateUrl(window.location.href));
-  }, []);
+    let trimmedUrl = window.location.href.replace("http://localhost:3000/", "")
+    if (trimmedUrl === "") trimmedUrl = "home";
+    dispatch(updateUrl(trimmedUrl));
+    setTimeout(()=>{
+      document.getElementById('root').style.display = 'block';
+      setIsLoading(false);
+    },1000)
+  }, [dispatch]);
 
   return (
     <Router>
@@ -41,7 +43,10 @@ function App() {
         >
           <Switch>
             <Route exact path="/">
-              {/* <Home/> */}
+              <Redirect to="/home" />
+            </Route>
+            <Route exact path="/home">
+              <Home/>
             </Route>
             <Route exact path="/login">
               {/* <Login /> */}

@@ -36,7 +36,7 @@ const SizeSlider = ({ disabled }) => {
     return ()=>{
       window.removeEventListener('mousemove',handleMove)
     }
-  },[dialClicked]);
+  },[dialClicked,dispatch]);
 
   const handleClick = () => {
     setDialClicked(!dialClicked);

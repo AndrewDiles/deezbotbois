@@ -1,7 +1,8 @@
 const initialState = {
   serverStatus: 'idle',
   currentUrl : null,
-  navLocation: 'top',
+	navLocation: 'top',
+	profileTab: 'inactive',
   cellSize : 50,
 }
 
@@ -43,7 +44,25 @@ export default function settings(
           serverStatus: 'idle',
           error: action.error
         }
-      }
+			}
+			case 'ACTIVATE_PROFILE_TAB' : {
+				return {
+					...state,
+					viewingProfileTab : 'active'
+				}
+			}
+			case 'DEACTIVATE_PROFILE_TAB' : {
+				return {
+					...state,
+					viewingProfileTab : 'inactive'
+				}
+			}
+			case 'HOVER_PROFILE_TAB' : {
+				return {
+					...state,
+					viewingProfileTab : 'hovering'
+				}
+			}
       default:{
         return state;
       }
