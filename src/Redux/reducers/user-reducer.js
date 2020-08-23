@@ -6,6 +6,7 @@ const initialState = {
 	navLocationPreference: null,
 	cellSizePreference : null,
 	imageUrl : null,
+	googleImageUrl : null,
 	colorTheme: null,
 	availableBots : null,
 	botBuilds: null,

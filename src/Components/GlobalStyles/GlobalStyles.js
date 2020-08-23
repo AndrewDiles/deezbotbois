@@ -107,6 +107,23 @@ html {
     border-radius: 0;
   }
 }
+@keyframes glowUserImg {
+	0% {
+		background: radial-gradient(closest-side, black,black,indigo, blue, white);
+	}
+	25% {
+		background: radial-gradient(closest-side, black,black,indigo, purple, white);
+	}
+	50% {
+		background: radial-gradient(closest-side, black,black,indigo, indigo, white);
+	}
+	75% {
+		background: radial-gradient(closest-side, black,black,indigo, indigo, lightcyan);
+	}
+	100% {
+		background: radial-gradient(closest-side, black,black,indigo, blue, lavender);
+	}
+}
 
 `
 ;

@@ -19,7 +19,7 @@ function Login() {
 
   const handleSuccessfulGoogleLogin = (res) => {
 		let googleRes = res.profileObj;
-		console.log('res',res);
+		// console.log('res',res);
 		dispatch(communicating());
 		fetch('server/googleLogIn', {
 			method: "POST",

@@ -51,6 +51,7 @@ const client = new MongoClient(uri, {
 					navLocationPreference : navLocation,
 					cellSizePreference : cellSize,
 					imageUrl : imageUrl,
+					googleImageUrl : imageUrl,
 					colorTheme : {
 						primary: 'white',
 						secondary: 'white',
@@ -60,32 +61,12 @@ const client = new MongoClient(uri, {
 						textColor : 'black',
 						buttonText: 'rgba(0, 0, 0, 0.54)',
 					},
-					availableBots : {
-						Biggie: false,
-						Boxey: true,
-						Jager: false,
-						Lumpey: false,
-						Robbey: false,
-						Spikey: false,
-						Zipper: false
-					},
+					availableBots : ['Boxey'],
+					availableArms : ["Gun1"],
+					availableAcc : [],
 					botBuilds : [],
 					battleBits: 0,
-					levelProgress : {
-						Level001: {
-							beaten: false,
-							Biggie: false,
-							Boxey: false,
-							Jager: false,
-							Lumpey: false,
-							Robbey: false,
-							Spikey: false,
-							Zipper: false,
-							Obj1: false,
-							Obj2: false,
-							Obj3: false
-						}
-					},
+					levelProgress : [[]],
 					tournamentHistory : null,
 					lastLogInBitsReceived: 0
         }
@@ -191,6 +172,7 @@ const client = new MongoClient(uri, {
 					navLocationPreference : navLocation,
 					cellSizePreference : cellSize,
 					imageUrl : 'https://imgur.com/jS4tREI',
+					googleImageUrl : null,
 					colorTheme : {
 						primary: 'white',
 						secondary: 'white',
@@ -200,32 +182,12 @@ const client = new MongoClient(uri, {
 						textColor : 'black',
 						buttonText: 'rgba(0, 0, 0, 0.54)',
 					},
-					availableBots : {
-						Biggie: false,
-						Boxey: true,
-						Jager: false,
-						Lumpey: false,
-						Robbey: false,
-						Spikey: false,
-						Zipper: false
-					},
+					availableBots : ['Boxey'],
+					availableArms : ["Gun1"],
+					availableAcc : [],
 					botBuilds : [],
 					battleBits: 0,
-					levelProgress : {
-						Level001: {
-							beaten: false,
-							Biggie: false,
-							Boxey: false,
-							Jager: false,
-							Lumpey: false,
-							Robbey: false,
-							Spikey: false,
-							Zipper: false,
-							Obj1: false,
-							Obj2: false,
-							Obj3: false
-						}
-					},
+					levelProgress : [[]],
 					tournamentHistory : null,
 					lastLogInBitsReceived: 0
         }

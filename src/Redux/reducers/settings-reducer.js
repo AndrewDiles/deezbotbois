@@ -48,19 +48,19 @@ export default function settings(
 			case 'ACTIVATE_PROFILE_TAB' : {
 				return {
 					...state,
-					viewingProfileTab : 'active'
+					profileTab : 'active'
 				}
 			}
 			case 'DEACTIVATE_PROFILE_TAB' : {
 				return {
 					...state,
-					viewingProfileTab : 'inactive'
+					profileTab : 'inactive'
 				}
 			}
 			case 'HOVER_PROFILE_TAB' : {
 				return {
 					...state,
-					viewingProfileTab : 'hovering'
+					profileTab : 'hovering'
 				}
 			}
       default:{

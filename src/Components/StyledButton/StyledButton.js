@@ -29,7 +29,6 @@ export default StyledButton;
 
 const ButtonStylings = styled.button`
   width: 100px;
-  height: 40px;
   padding: 5px;
   position: relative;
   background-color: ${props => props.selected ? 'rgba(207, 181, 59, 0.8)' : 'rgba(255,255,255,0.3)'};

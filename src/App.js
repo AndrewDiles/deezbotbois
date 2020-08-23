@@ -13,7 +13,9 @@ import { getThemeColors } from './Redux/reducers/user-reducer';
 import GlobalStyles from "./Components/GlobalStyles/GlobalStyles";
 import NavBar from "./Components/NavBar/NavBar";
 import Home from "./Components/Home/Home";
+import Levels from "./Components/Levels/Levels";
 import Test from "./Components/Test/Test";
+import Settings from "./Components/Settings/Settings";
 
 
 function App() {
@@ -51,8 +53,11 @@ function App() {
             <Route exact path="/login">
               {/* <Login /> */}
             </Route>
-            <Route exact path="/view-account">
-              {/* <Account /> */}
+            <Route exact path="/settings">
+              <Settings />
+            </Route>
+						<Route exact path="/levels">
+              <Levels />
             </Route>
             {/* <Route exact path="/view-lobby">
               {userInfo.user? (

@@ -4,6 +4,7 @@ import StyledButton from '../StyledButton/StyledButton';
 
 import {
 	logOut,
+	deactivateProfileTab
 } from '../../Redux/actions';
 
 function Logout() {
@@ -11,7 +12,7 @@ function Logout() {
 
   return (
     <StyledButton
-      handleClick = {()=>{dispatch(logOut())}}
+      handleClick = {()=>{dispatch(logOut());dispatch(deactivateProfileTab())}}
       >
 				LOG OUT
     </StyledButton>
