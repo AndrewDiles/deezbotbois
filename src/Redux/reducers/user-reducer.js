@@ -38,6 +38,11 @@ export default function userInfo(
 					lastLogInBitsReceived : action.currentTime,
 				}
 			}
+			case 'REPLACE_USER_INFO' : {
+				return {
+					...action.newUserInfo,
+				}
+			}
       default:{
         return state;
       }

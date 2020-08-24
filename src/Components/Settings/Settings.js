@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import styled from 'styled-components';
+import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import {
-	updateUrl,
-	deactivateProfileTab,
-	setNavLocation
+	setNavLocation,
+	communicating,
+	communicationsSuccessful,
+	communicationsFailed,
+	replaceUserInfo
+
 } from '../../Redux/actions';
 
 import StyledButton from '../StyledButton/StyledButton';
+import StyledIcon from '../StyledIcon/StyledIcon';
+import {floppyDisk} from 'react-icons-kit/icomoon/floppyDisk'
 import SizeSlider from '../SizeSlider/SizeSlider';
 import Logout from '../NavBar/Logout';
 import Bot from '../Bots/Bot';
@@ -19,27 +25,92 @@ const Settings = ({ disabled }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const [newHandle, setNewHandle] = useState(userInfo.handle);
+	const [changeMade, setChangeMade] = useState(false);
+	const [serverErrorMsg, setServerErrorMsg] = useState(null);
+	const colors = useSelector(getThemeColors);
+
+	React.useEffect(() => {
+		let eraseServerErrorMsg;
+		if (serverErrorMsg) {
+			eraseServerErrorMsg = setTimeout(()=>{
+				setServerErrorMsg(null)
+			},2000)
+		}
+		return () => clearTimeout(eraseServerErrorMsg)
+	},[serverErrorMsg])
 
 	if (userInfo.email === undefined || userInfo.email === null) {
     return (
       <Redirect to="/home" />
     )
 	}
+	const updateChangeMade = () => {
+		if (changeMade) return;
+		setChangeMade(true);
+	}
 	const changeNavLocation = (ev) => {
 		if (ev.target === undefined) return;
 		console.log('ev.target',ev.target)
 		console.log('ev.target.value',ev.target.innerText)
+		updateChangeMade();
     if (ev.target.innerText === 'TOP') {
       dispatch(setNavLocation('top'));
     }
     else {
       dispatch(setNavLocation('left'));
     }
-  }
+	}
+	const saveSettings = () => {
+		if (!changeMade) return;
+		let newUserInfo = {...userInfo};
+		newUserInfo.handle = newHandle;
+		newUserInfo.navLocationPreference = settings.navLocation;
+		newUserInfo.cellSizePreference = settings.cellSize;
+		// newUserInfo.imageUrl =
+		// newUserInfo.colorTheme = 
+		dispatch(communicating());
+		fetch('server/replaceUserInfo', {
+			method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        email: newUserInfo.email,
+				userInfo: newUserInfo
+      }),
+		}).then((res)=>{
+			if (res.status === 200) {
+				res.json().then((data)=>{
+					setChangeMade(false);
+					dispatch(replaceUserInfo(data.userInfo));
+					dispatch(communicationsSuccessful());
+					// dispatch(setNavLocation(data.userInfo.navLocationPreference));  update new URL
+				})
+			}
+			else if (res.status === 400) {
+				dispatch(communicationsFailed());
+				console.log('Missing data')
+			}
+			else if (res.status === 404) {
+				dispatch(communicationsFailed());
+				console.log('Could not find account')
+			}
+			else if (res.status === 500) {
+				dispatch(communicationsFailed());
+				console.log('Server error')
+			}
+		})
 
+
+	}
+	
 	// TBD: Modofication of: url image, nav location, handle, color theme.... 
   return (
-		<Wrapper>
+		<Wrapper
+		navLocation = {settings.navLocation}
+		profileTab = {settings.profileTab}
+		colors = {colors}
+		>
 			<h1>
 				Hello {userInfo.handle}!
 			</h1>
@@ -48,8 +119,13 @@ const Settings = ({ disabled }) => {
 				Change your handle:
 				<br/>
 				<br/>
-				<input className = "centeredInput" defaultValue = {newHandle} input="text" maxLength = "24" onChange = {(ev)=>{setNewHandle(ev.target.value)}}>
-				</input>
+				<StyledInput hovered = {colors.hovered}className = "centeredInput" defaultValue = {newHandle} input="text" maxLength = "24" onChange = {(ev)=>{updateChangeMade();setNewHandle(ev.target.value)}}>
+				</StyledInput>
+				{newHandle.length === 0 &&
+					<ErrorP>
+						Handle must not be empty
+					</ErrorP>
+				}
 			</Styledh5>
 
 			<Styledh5>
@@ -57,14 +133,19 @@ const Settings = ({ disabled }) => {
 				<br/>
 				<br/>
 				<StyledButton
+				selected = {settings.navLocation === 'top'}
 				value = "top"
 				handleClick = {(ev)=>{changeNavLocation(ev)}}
+				disabled = {settings.navLocation === 'top'}
+
 				>
 					TOP
 				</StyledButton>
 				<StyledButton
+				selected = {settings.navLocation === 'left'}
 				value = "left"
 				handleClick = {(ev)=>{changeNavLocation(ev)}}
+				disabled = {settings.navLocation === 'left'}
 				>
 					LEFT
 				</StyledButton>
@@ -87,26 +168,45 @@ const Settings = ({ disabled }) => {
 					/>
 				</BotDiv>
 			</RowDiv>
-
+			<StyledIcon
+				handleClick = {saveSettings}
+				padding = {5}
+				disabled = {!changeMade || serverErrorMsg !== null}
+      	icon = {floppyDisk}
+      />
 		</Wrapper>
   )
 }
 export default Settings;
 
+const StyledInput = styled.input`
+transition: background-color .75s;
+&:hover {
+	background-color: ${props => props.hovered};
+}
+`
 const Wrapper = styled.div`
-	background: lime;
-	color: black;
+	margin: ${(props) =>
+		props.navLocation === "top" ? 
+			props.profileTab !== 'active' ? "50px 0 0 0" : "50px 135px 0 0"
+			: props.profileTab !== 'active' ? "0 0 0 0" : "0 0 0 270px"
+			};
+	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
 `
 const Styledh5 = styled.h5`
 	z-index: 8;
 `
+const ErrorP = styled.p`
+	color: red;
+	font-size: 0.6em;
+`
 
 const BotDiv = styled.div`
 	position:absolute;
 	margin-left: 100px;
-	z-index: 5;
+	z-index: 0;
 `
 const RowDiv = styled.div`
 	display: flex;

@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 const StyledButton = ( { handleClick, disabled, selected, children} ) => {
-  const userInfo = useSelector((state) => state.userInfo);
-  const colors = useSelector(getThemeColors);
-  // To be completed - add theme customization via props or selector?
+	const colors = useSelector(getThemeColors);
+	const settings = useSelector((state) => state.settings);
+	if (settings.serverStatus !== 'idle') disabled = true;
   
   if (handleClick === undefined) {
     handleClick = () => {
@@ -32,7 +32,7 @@ const ButtonStylings = styled.button`
 	min-height: 40px;
   padding: 5px;
   position: relative;
-  background-color: ${props => props.selected ? 'rgba(207, 181, 59, 0.8)' : 'rgba(255,255,255,0.3)'};
+  background-color: ${props => props.selected ? props.colors.selected : props.colors.notSelected};
   margin: 5px;
   border-radius: 5px;
   border: 1px solid transparent;
@@ -45,7 +45,7 @@ const ButtonStylings = styled.button`
   transition: color .75s, background-color .75s;
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
-    background-color: silver;
-    color: white;
+    background-color: ${props => !props.disabled && props.colors.hovered};
+    color: ${props => !props.disabled && 'white'};
   }
 `

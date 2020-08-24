@@ -8,7 +8,9 @@ const morgan = require("morgan");
 const {
   handleGoogleLogIn, 
   handleLogIn,
-  handleCreateAccount,
+	handleCreateAccount,
+	handleIncreaseBitCount,
+	handleReplaceUserInfo,
 } = require('./handlers');
 
 const PORT = process.env.PORT || 9009;
@@ -68,7 +70,19 @@ App
 
   // .get('*', function(req, res, next) {
   //   res.sendFile(path.join(__dirname, '../build/index.html'));
-  // })
+	// })
+	
+	.post("/server/increaseBitCount", handleIncreaseBitCount)
+	// Body has shape: {
+	// email:
+	// time:
+	// }
+
+	.post("/server/replaceUserInfo", handleReplaceUserInfo)
+	// Body has shape: {
+	// email:
+	// userInfo:
+	// }
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
 

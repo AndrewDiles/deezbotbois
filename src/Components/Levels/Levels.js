@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
+import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 
 import {
@@ -10,12 +11,12 @@ import {
 
 import StyledButton from '../StyledButton/StyledButton';
 import SizeSlider from '../SizeSlider/SizeSlider';
-import Logout from '../NavBar/Logout';
 
 const Levels = ({ disabled }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
+	const colors = useSelector(getThemeColors);
 
 	if (userInfo.email === undefined || userInfo.email === null) {
     return (
@@ -24,9 +25,30 @@ const Levels = ({ disabled }) => {
 	}
 
   return (
-		<div>
-    	Levels go here XD
-		</div>
+    <Wrapper
+		navLocation = {settings.navLocation}
+		profileTab = {settings.profileTab}
+		colors = {colors}
+		>
+      Level selections go here
+    </Wrapper>
   )
 }
+
 export default Levels;
+
+const Wrapper = styled.div`
+	margin: ${(props) =>
+		props.navLocation === "top" ? 
+			props.profileTab !== 'active' ? "50px 0 0 0" : "50px 135px 0 0"
+			: props.profileTab !== 'active' ? "0 0 0 135px" : "0 0 0 270px"
+			};
+	color: ${props => props.colors.textColor};
+	width: 100%;
+	height: 100%;
+	display : flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+`

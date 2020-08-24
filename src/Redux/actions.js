@@ -59,3 +59,7 @@ export const increaseBitCount = (bitIncrease, currentTime) => ({
 	bitIncrease: bitIncrease,
 	currentTime: currentTime,
 });
+export const replaceUserInfo = (newUserInfo) => ({
+	type: 'REPLACE_USER_INFO',
+	newUserInfo: newUserInfo,
+});

@@ -66,10 +66,10 @@ function NavBar() {
 	},[dispatch, settings.profileTab, settings.navLocation, userInfo.imageUrl]);
 
 	React.useEffect(() => {
-		const timer = setTimeout(() => {
+		const timer = setInterval(() => {
 			setTime(Date.now());
-		}, 100);
-		return () => clearTimeout(timer);
+		}, 500);
+		return () => clearInterval(timer);
 	});
 
   const toggleNavLocation = () => {

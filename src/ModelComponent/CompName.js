@@ -5,7 +5,7 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import styled from 'styled-components';
 
-const Home = () => {
+const CompName = () => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	
@@ -15,11 +15,11 @@ const Home = () => {
 		profileTab = {settings.profileTab}
 		colors = {colors}
 		>
-      Welcome Home
+      This is indeed a component
     </Wrapper>
   )
 }
-export default Home;
+export default CompName;
 
 const Wrapper = styled.div`
 	margin: ${(props) =>
@@ -30,9 +30,9 @@ const Wrapper = styled.div`
 	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
-	display : flex;
+	/* display : flex;
 	flex-direction: row;
 	justify-content: center;
 	align-content: center;
-	align-items: center;
+	align-items: center; */
 `

@@ -6,7 +6,8 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, padding} ) => {
   const colors = useSelector(getThemeColors);
-	console.log('glowing',glowing)
+	const settings = useSelector((state) => state.settings);
+	if (settings.serverStatus !== 'idle') disabled = true;
   return (
       <IconStylings
       disabled = {disabled || null}
@@ -31,7 +32,6 @@ const IconStylings = styled(Icon)`
   padding: ${props => props.padding && `${props.padding}px`};
   position: relative;
   color: ${props => !props.glowing && props.colors.buttonText};
-
 	animation: ${props => props.glowing && '1s linear infinite alternate glowGift'};
 
   margin: 5px;
@@ -41,7 +41,7 @@ const IconStylings = styled(Icon)`
   transition: color .75s, background-color .75s;
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
-    background-color: ${props => props.colors.hovered};
-    color: white;
+    background-color: ${props => !props.disabled && props.colors.hovered};
+	color: ${props => !props.disabled && 'white'};
   }
 `

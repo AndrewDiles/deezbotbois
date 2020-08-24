@@ -199,10 +199,79 @@ const client = new MongoClient(uri, {
       console.log(err);
       res.status(500).json({ status: 500, message: "error" });
     }
-  };
+	};
+
+	const handleIncreaseBitCount = async (req, res) => {
+		const email = req.body.email;
+		const time = req.body.time;
+		console.log('email and time',email, time);
+		if (email === undefined || time === undefined) {
+      res.status(400).json({ status: 400, message: 'Information is missing' });
+		}
+		
+		try {
+		await client.connect();
+		} catch (err) {
+			console.log('unable to connect to mongo client:', err);
+		}
+
+		const db = client.db('botBoiDatabase');
+		let query = {email : email};
+		try {
+			const result = await db.collection('userData').findOne(query);
+			console.log('result',result)
+			if (!result || result.length === 0) {
+        res.status(404).json({ status: 404, message: 'Could not find user info connected to given email' });
+      }
+      else {
+			const newUserInfo = { $set: { battleBits: 1+result.battleBits, lastLogInBitsReceived : time } };;
+			const r = await db.collection('userData').updateOne(query, newUserInfo);
+			assert.equal(1, r.modifiedCount);
+			res.status(200).json({ status: 200, message: "Success!" })
+			}
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ status: 500, message: "error" });
+    }
+
+	}
+
+	const handleReplaceUserInfo = async (req, res) => {
+		const email = req.body.email;
+		const newUserInfo = req.body.userInfo;
+		if (email === undefined || newUserInfo === undefined) {
+      res.status(400).json({ status: 400, message: 'Information is missing' });
+		}
+		
+		try {
+		await client.connect();
+		} catch (err) {
+			console.log('unable to connect to mongo client:', err);
+		}
+
+		const db = client.db('botBoiDatabase');
+
+		let query = {email : email};
+		try {
+			const result = await db.collection('userData').findOne(query);
+			if (!result || result.length === 0) {
+        res.status(404).json({ status: 404, message: 'Could not find user info connected to given email' });
+      }
+      else {			
+			const r = await db.collection('userData').updateOne(query, newUserInfo);
+			assert.equal(1, r.modifiedCount);
+			res.status(200).json({ status: 200, userInfo: newUserInfo, message: "Success!" })
+			}
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ status: 500, message: "error" });
+    }
+	}
 
 module.exports = {
   handleGoogleLogIn,
   handleLogIn,
-  handleCreateAccount
+	handleCreateAccount,
+	handleIncreaseBitCount,
+	handleReplaceUserInfo
 };
