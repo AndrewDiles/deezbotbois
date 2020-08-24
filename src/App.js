@@ -95,9 +95,10 @@ const Wrapper = styled.div`
   flex-direction: ${(props) =>
     props.navLocation === "top" ? "row" : "column"};
   margin: ${(props) =>
-    props.navLocation === "top" ? "50px 0 0 0" : "0 0 0 125px"};
+    props.navLocation === "top" ? "50px 0 0 0" : "0 0 0 135px"};
   justify-content: center;
   align-items: center;
-  align-content: center;
+  align-content: top;
+	text-align: center;
   overflow: hidden;
 `;

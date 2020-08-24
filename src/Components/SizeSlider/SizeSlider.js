@@ -85,6 +85,7 @@ const Wrapper = styled.div`
   text-align: center;
   align-items: center;
   transition: background-color .75s;
+	z-index: 12;
   &:hover {
     background-color: ${props => props.disabled ? `${props.color}` : `${props.hoverColor}`};
   }

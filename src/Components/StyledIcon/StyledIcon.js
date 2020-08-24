@@ -4,9 +4,9 @@ import { Icon } from 'react-icons-kit';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const StyledIcon = ( { handleClick, disabled, selected, children, icon} ) => {
+const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, padding} ) => {
   const colors = useSelector(getThemeColors);
-
+	console.log('glowing',glowing)
   return (
       <IconStylings
       disabled = {disabled || null}
@@ -15,7 +15,9 @@ const StyledIcon = ( { handleClick, disabled, selected, children, icon} ) => {
       selected = {selected}
       children = {children}
       size = {30}
-      colors = {colors}
+			colors = {colors}
+			glowing = {glowing}
+			padding = {padding}
       >
         {children}
       </IconStylings>
@@ -26,10 +28,12 @@ export default StyledIcon;
 const IconStylings = styled(Icon)`
   height: 40px;
   width: 40px;
-  padding: 5px;
+  padding: ${props => props.padding && `${props.padding}px`};
   position: relative;
-  color: ${props => props.colors.buttonText};
-  background-color: ${props => props.selected ? props.selected : props.notSelected};
+  color: ${props => !props.glowing && props.colors.buttonText};
+
+	animation: ${props => props.glowing && '1s linear infinite alternate glowGift'};
+
   margin: 5px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;

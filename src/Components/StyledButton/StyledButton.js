@@ -28,16 +28,17 @@ const StyledButton = ( { handleClick, disabled, selected, children} ) => {
 export default StyledButton;
 
 const ButtonStylings = styled.button`
-  width: 100px;
+  width: 125px;
+	min-height: 40px;
   padding: 5px;
   position: relative;
   background-color: ${props => props.selected ? 'rgba(207, 181, 59, 0.8)' : 'rgba(255,255,255,0.3)'};
   margin: 5px;
   border-radius: 5px;
   border: 1px solid transparent;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  font-family: Roboto, sans-serif;
+  font-family: 'Press Start 2P', cursive;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
   color: ${props => props.colors.buttonText};

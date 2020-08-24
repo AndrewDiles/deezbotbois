@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 
 import styled from 'styled-components';
-import {arrows_move_left} from 'react-icons-kit/linea/arrows_move_left';
-import {arrows_move_top} from 'react-icons-kit/linea/arrows_move_top';
+
 
 import {
   updateUrl,
@@ -16,6 +15,8 @@ import {
 
 import StyledButton from '../StyledButton/StyledButton';
 import StyledIcon from '../StyledIcon/StyledIcon';
+import {arrows_move_left} from 'react-icons-kit/linea/arrows_move_left';
+import {arrows_move_top} from 'react-icons-kit/linea/arrows_move_top';
 import Login from './Login';
 import Profile from '../Profile/Profile';
 import Bot from '../Bots/Bot';
@@ -28,8 +29,8 @@ function NavBar() {
 		// dispatch(updateUrl(window.location.href));
 
 	React.useEffect((event) => {
-		const target = document.getElementById('userImg');
-		if (target === null) return;
+		const targets = document.getElementsByClassName('userImg');
+		if (targets === null || targets.length === 0) return;
 		const handleMouseOver = () => {
 			if (!userInfo.imageUrl) return;
 			if (settings.profileTab === 'inactive') {
@@ -46,22 +47,23 @@ function NavBar() {
 				dispatch(activateProfileTab());
 			}
 			else if (settings.profileTab === 'active') {
-				dispatch(deactivateProfileTab());
+				dispatch(hoverProfileTab());
 			}
 			else {
 				dispatch(activateProfileTab());
 			}
 		}
-		target.addEventListener('mouseenter',handleMouseOver);
-		target.addEventListener('mouseout',handleMouseOff);
-		target.addEventListener('click',handleClick);
+			targets[0].addEventListener('mouseenter',handleMouseOver);
+			targets[0].addEventListener('mouseout',handleMouseOff);
+			targets[0].addEventListener('click',handleClick);
+		
     return ()=>{
-			if (target === null) return;
-      target.removeEventListener('mouseenter',handleMouseOver);
-			target.removeEventListener('mouseout',handleMouseOff);
-			target.removeEventListener('click',handleClick);
+			if (targets === null || targets.length === 0) return;
+			targets[0].removeEventListener('mouseenter',handleMouseOver);
+			targets[0].removeEventListener('mouseout',handleMouseOff);
+			targets[0].removeEventListener('click',handleClick);
     }
-	},[dispatch, settings.profileTab, userInfo.imageUrl]);
+	},[dispatch, settings.profileTab, settings.navLocation, userInfo.imageUrl]);
 
 	React.useEffect(() => {
 		const timer = setTimeout(() => {
@@ -83,10 +85,36 @@ function NavBar() {
     <Wrapper
     navLocation = {settings.navLocation}
     >
-      <StyledIcon
-      handleClick = {toggleNavLocation}
-      icon = {settings.navLocation === 'top' ? arrows_move_left : arrows_move_top}
-      />
+			<RowDiv>
+      	<StyledIcon
+				handleClick = {toggleNavLocation}
+				padding = {5}
+      	icon = {settings.navLocation === 'top' ? arrows_move_left : arrows_move_top}
+      	/>
+				{userInfo.imageUrl && settings.navLocation === 'left' &&
+					<BorderDivForUserImg
+					navLocation = {settings.navLocation}
+					glow = {time - userInfo.lastLogInBitsReceived}
+					>
+						{userInfo.imageUrl[0] === 'h' ? (
+							<UserImg
+							className = 'userImg'
+							src={userInfo.imageUrl}
+							alt = "User's picture.  Likely of them, but perhaps not."
+							/>
+						) : (
+							<Bot
+							id = 'userImg'
+							alternativeBotSize = {40}
+							model = {userInfo.imageUrl}
+							arm1 = {'Pewpew'}
+							arm1Angle = {-45}
+							/>
+						)
+						}
+					</BorderDivForUserImg>
+				}
+			</RowDiv>
       <StyledNavLink to="/home">
         <StyledButton
           handleClick = {() => {dispatch(updateUrl('home'))}}
@@ -119,19 +147,20 @@ function NavBar() {
             <Login/>
           ) : (
 						<>
-							{userInfo.imageUrl &&
+							{userInfo.imageUrl && settings.navLocation === 'top' &&
 								<BorderDivForUserImg
+								navLocation = {settings.navLocation}
 								glow = {time - userInfo.lastLogInBitsReceived}
 								>
 									{userInfo.imageUrl[0] === 'h' ? (
 										<UserImg
-										id = 'userImg'
+										className = 'userImg'
 										src={userInfo.imageUrl}
 										alt = "User's picture.  Likely of them, but perhaps not."
 										/>
 									) : (
 										<Bot
-										id = 'userImg'
+										className = 'userImg'
 										alternativeBotSize = {40}
 										model = {userInfo.imageUrl}
 										arm1 = {'Pewpew'}
@@ -146,7 +175,7 @@ function NavBar() {
         }
       </UserDiv>
 			{
-				settings.profileTab === 'inactive' ? <></> : <Profile/>
+				settings.profileTab === 'inactive' ? <></> : <Profile time = {time}/>
 			}
     </Wrapper>
   );
@@ -169,14 +198,14 @@ const BorderDivForUserImg = styled.div`
 	}
 `
 const Wrapper = styled.nav`
-  width: ${props => props.navLocation === 'top' ? '100%' : '125px'};
+  width: ${props => props.navLocation === 'top' ? '100%' : '135px'};
   height: ${props => props.navLocation === 'top' ? '50px' : '100%'};
   position: fixed;
   display: flex;
   flex-direction: ${props => props.navLocation === 'top' ? 'row' : 'column'};
   justify-content: space-between;
-  align-items: center;
-  align-content: center;
+  align-items: ${props => props.navLocation === 'top' ? 'center' : 'left'};
+  align-content: ${props => props.navLocation === 'top' ? 'center' : 'left'};
   box-shadow: ${props => props.navLocation === 'top' ? '0 8px 6px -6px black' : '8px 0 6px -6px black'};
   z-index: 10;
 `
@@ -190,4 +219,11 @@ const UserImg = styled.img`
 	z-index: 21;
 `
 const UserDiv = styled.div`
+`
+const RowDiv = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-content: center;
+text-align: center;
 `

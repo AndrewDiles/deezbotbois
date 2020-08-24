@@ -54,3 +54,8 @@ export const updateNavPref = (navLocation) => ({
   type: 'UPDATE_NAV_LOCATION_PREFERENCE',
   navLocation: navLocation
 });
+export const increaseBitCount = (bitIncrease, currentTime) => ({
+  type: 'INCREASE_BIT_COUNT',
+	bitIncrease: bitIncrease,
+	currentTime: currentTime,
+});

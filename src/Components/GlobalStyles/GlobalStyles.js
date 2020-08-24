@@ -9,6 +9,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     border: 0;
     vertical-align: baseline;
+		font-family: 'Press Start 2P', cursive;
   }
   table {
     border-collapse: collapse;
@@ -22,9 +23,9 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     line-height: 1.4;
     -webkit-font-smoothing: antialiased;
-    font-family: Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    /* font-family: Montserrat, -apple-system, BlinkMacSystemFont, 'Segoe UI',
       Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-      sans-serif;
+      sans-serif; */
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -74,6 +75,16 @@ html {
   width: 100vw;
 }
 
+.centeredInput {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+	text-align:center
+}
+.disableClicks {
+  pointer-events: none;
+}
+
 /* former load in:
 @keyframes loadInScreen {
   0% {
@@ -108,7 +119,7 @@ html {
   }
 }
 @keyframes glowUserImg {
-	0% {
+	/* 0% {
 		background: radial-gradient(closest-side, black,black,indigo, blue, white);
 	}
 	25% {
@@ -122,7 +133,23 @@ html {
 	}
 	100% {
 		background: radial-gradient(closest-side, black,black,indigo, blue, lavender);
-	}
+	} */
+	0% {background: radial-gradient(closest-side, deepskyblue,white,white);}
+	10% {background: radial-gradient(closest-side, blue,deepskyblue,white,white);}
+	20% {background: radial-gradient(closest-side, blue,blue,deepskyblue,white,white);}
+	30% {background: radial-gradient(closest-side, blue,blue,blue,deepskyblue,white,white);}
+	40% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,deepskyblue,white,white);}
+	50% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
+	60% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
+	70% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
+	80% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
+	90% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
+	100% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
+}
+
+@keyframes glowGift {
+	0% {color: rgba(0, 0, 0, 0.54)};
+	100% {color: blue};
 }
 
 `

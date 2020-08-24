@@ -30,7 +30,14 @@ export default function userInfo(
           ...state,
           navLocationPreference : action.navLocation,
         }
-      }
+			}
+			case 'INCREASE_BIT_COUNT' : {
+				return {
+					...state,
+					battleBits: state.battleBits+action.bitIncrease,
+					lastLogInBitsReceived : action.currentTime,
+				}
+			}
       default:{
         return state;
       }

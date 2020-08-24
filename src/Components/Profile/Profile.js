@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
+import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import {
 	updateUrl,
@@ -10,10 +11,12 @@ import {
 
 import StyledButton from '../StyledButton/StyledButton';
 import Logout from '../NavBar/Logout';
+import Gift from './Gift';
 
-const Profile = ({ disabled }) => {
+const Profile = ({ time, disabled }) => {
 	const dispatch = useDispatch();
 	const settings = useSelector((state) => state.settings);
+	const colors = useSelector(getThemeColors);
 
 	if (settings.profileTab === 'inactive') {
 		return (<></>)
@@ -23,7 +26,11 @@ const Profile = ({ disabled }) => {
     <ProfileWrapper
 		navLocation = {settings.navLocation}
 		profileTab = {settings.profileTab}
+		notSelected = {colors.notSelected}
 		>
+			<Gift
+			time = {time}
+			></Gift>
 			<StyledNavLink to="/settings">
         <StyledButton
           handleClick = {() => {dispatch(updateUrl('settings'))}}
@@ -45,19 +52,26 @@ export default Profile;
 
 const ProfileWrapper = styled.div`
 	position: absolute;
+	width: 135px;
 	right: ${props=>props.navLocation === 'top' ? '0' : ''};
-	top: ${props=>props.navLocation === 'top' ? '50px' : ''};
-	left: ${props=>props.navLocation === 'top' ? '' : '125px'};
-	bottom: ${props=>props.navLocation === 'top' ? '' : '0'};
+	top: ${props=>props.navLocation === 'top' ? '50px' : '0'};
+	left: ${props=>props.navLocation === 'top' ? '' : '135px'};
 	background-color: ${
 		props=>props.profileTab !== 'inactive' &&
-		props.profileTab === 'active' ? 'blue' : 'purple'
+		props.profileTab === 'active' ? '' : `${props.notSelected}`
 	};
+	box-shadow: ${props => props.profileTab === 'active' ? 
+		props.navLocation === 'top' ? '0 2px 6px black, -2px 0px 6px black' : '0px 2px 6px black, 2px 0px 6px black' : 
+		props.navLocation === 'top' ? '0 2px 6px silver, -2px 0px 6px silver' : '0px 2px 6px silver, 2px 0px 6px silver'
+	};
+	margin: ${props=>props.navLocation === 'top' ? '5px 0 0 0' : '0 0 0 5px'};
 	display : flex;
 	flex-direction: column;
-	justify-content: right;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
 	z-index: 20;
 `
 const StyledNavLink = styled(NavLink)`
-  width: 100px;
+  width: 100%;
 `

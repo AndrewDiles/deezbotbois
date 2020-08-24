@@ -54,7 +54,7 @@ function Login() {
 
   return (
     <StyledGoogleLogin
-      buttonText = "LOG IN"
+      buttonText = "LOGIN"
       clientId = {REACT_APP_AUTH0_CLIENT_ID}
       onSuccess = {(res)=>{handleSuccessfulGoogleLogin(res)}}
       onFailure = {(res)=>{console.log(res)}}
