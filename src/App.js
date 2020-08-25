@@ -14,6 +14,7 @@ import GlobalStyles from "./Components/GlobalStyles/GlobalStyles";
 import NavBar from "./Components/NavBar/NavBar";
 import Home from "./Components/Home/Home";
 import Levels from "./Components/Levels/Levels";
+import Rules from "./Components/Rules/Rules"
 import Test from "./Components/Test/Test";
 import Settings from "./Components/Settings/Settings";
 
@@ -58,6 +59,9 @@ function App() {
             </Route>
 						<Route exact path="/levels">
               <Levels />
+            </Route>
+						<Route exact path="/rules">
+              <Rules />
             </Route>
             {/* <Route exact path="/view-lobby">
               {userInfo.user? (

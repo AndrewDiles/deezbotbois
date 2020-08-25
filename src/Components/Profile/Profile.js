@@ -30,7 +30,8 @@ const Profile = ({ time, disabled }) => {
 		>
 			<Gift
 			time = {time}
-			></Gift>
+			>
+			</Gift>
 			<StyledNavLink to="/settings">
         <StyledButton
           handleClick = {() => {dispatch(updateUrl('settings'))}}

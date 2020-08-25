@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
@@ -17,7 +17,6 @@ import StyledButton from '../StyledButton/StyledButton';
 import StyledIcon from '../StyledIcon/StyledIcon';
 import {floppyDisk} from 'react-icons-kit/icomoon/floppyDisk'
 import SizeSlider from '../SizeSlider/SizeSlider';
-import Logout from '../NavBar/Logout';
 import Bot from '../Bots/Bot';
 
 const Settings = ({ disabled }) => {
@@ -25,6 +24,8 @@ const Settings = ({ disabled }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const [newHandle, setNewHandle] = useState(userInfo.handle);
+	const [lastTimeCellSizeWasChanged, setLastTimeCellSizeWasChanged] = useState(Date.now());
+	const [botShowing, setBotShowing] = useState(false);
 	const [changeMade, setChangeMade] = useState(false);
 	const [serverErrorMsg, setServerErrorMsg] = useState(null);
 	const colors = useSelector(getThemeColors);
@@ -38,6 +39,22 @@ const Settings = ({ disabled }) => {
 		}
 		return () => clearTimeout(eraseServerErrorMsg)
 	},[serverErrorMsg])
+
+	React.useEffect(() => {
+		let eraseBotFromDom;
+		if (settings.cellSize !== userInfo.cellSizePreference) {
+			setChangeMade(true);
+			setBotShowing(true);
+			setLastTimeCellSizeWasChanged(Date.now())
+			eraseBotFromDom = setTimeout(()=>{
+				if (Date.now() > (lastTimeCellSizeWasChanged + 2500)) {
+					setBotShowing(false);
+				}
+			},3000)
+		}
+		return () => clearTimeout(eraseBotFromDom)
+	},[settings.cellSize])
+
 
 	if (userInfo.email === undefined || userInfo.email === null) {
     return (
@@ -159,6 +176,7 @@ const Settings = ({ disabled }) => {
 			<RowDiv>
 				<SizeSlider/>
 				<BotDiv
+				botShowing = {botShowing}
 				className = 'disableClicks'
 				>
 					<Bot
@@ -186,10 +204,10 @@ transition: background-color .75s;
 }
 `
 const Wrapper = styled.div`
-	margin: ${(props) =>
+	padding: ${(props) =>
 		props.navLocation === "top" ? 
 			props.profileTab !== 'active' ? "50px 0 0 0" : "50px 135px 0 0"
-			: props.profileTab !== 'active' ? "0 0 0 0" : "0 0 0 270px"
+			: props.profileTab !== 'active' ? "0 135px 0 0" : "0 135px 0 135px"
 			};
 	color: ${props => props.colors.textColor};
 	width: 100%;
@@ -204,7 +222,8 @@ const ErrorP = styled.p`
 `
 
 const BotDiv = styled.div`
-	position:absolute;
+	position: absolute;
+	display: ${props => !props.botShowing && 'none'};
 	margin-left: 100px;
 	z-index: 0;
 `

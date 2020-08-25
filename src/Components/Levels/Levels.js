@@ -38,10 +38,10 @@ const Levels = ({ disabled }) => {
 export default Levels;
 
 const Wrapper = styled.div`
-	margin: ${(props) =>
+	padding: ${(props) =>
 		props.navLocation === "top" ? 
 			props.profileTab !== 'active' ? "50px 0 0 0" : "50px 135px 0 0"
-			: props.profileTab !== 'active' ? "0 0 0 135px" : "0 0 0 270px"
+			: props.profileTab !== 'active' ? "0 135px 0 0" : "0 135px 0 135px"
 			};
 	color: ${props => props.colors.textColor};
 	width: 100%;

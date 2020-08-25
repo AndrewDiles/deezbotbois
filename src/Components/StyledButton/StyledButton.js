@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const StyledButton = ( { handleClick, disabled, selected, children} ) => {
+const StyledButton = ( { handleClick, disabled, selected, absolute, children} ) => {
 	const colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
 	if (settings.serverStatus !== 'idle') disabled = true;
@@ -19,7 +19,8 @@ const StyledButton = ( { handleClick, disabled, selected, children} ) => {
       onClick = {(ev)=> {handleClick(ev)}}
       selected = {selected}
       children = {children}
-      colors = {colors}
+			colors = {colors}
+			absolute = {absolute}
       >
         {children}
       </ButtonStylings>
@@ -31,7 +32,7 @@ const ButtonStylings = styled.button`
   width: 125px;
 	min-height: 40px;
   padding: 5px;
-  position: relative;
+  position: ${props => props.absolute ? 'absolute' : 'relative'};
   background-color: ${props => props.selected ? props.colors.selected : props.colors.notSelected};
   margin: 5px;
   border-radius: 5px;

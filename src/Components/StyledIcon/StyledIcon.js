@@ -4,7 +4,7 @@ import { Icon } from 'react-icons-kit';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, padding} ) => {
+const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, padding, absolute} ) => {
   const colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
 	if (settings.serverStatus !== 'idle') disabled = true;
@@ -19,6 +19,7 @@ const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing,
 			colors = {colors}
 			glowing = {glowing}
 			padding = {padding}
+			absolute = {absolute}
       >
         {children}
       </IconStylings>
@@ -30,7 +31,7 @@ const IconStylings = styled(Icon)`
   height: 40px;
   width: 40px;
   padding: ${props => props.padding && `${props.padding}px`};
-  position: relative;
+  position: ${props => props.absolute ? 'absolute' : 'relative'};
   color: ${props => !props.glowing && props.colors.buttonText};
 	animation: ${props => props.glowing && '1s linear infinite alternate glowGift'};
 

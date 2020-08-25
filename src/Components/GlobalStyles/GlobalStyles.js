@@ -96,6 +96,7 @@ html {
     top:0;
   }
 } */
+
 @keyframes loadInScreen {
   0% {
     width: 10px;
@@ -151,7 +152,32 @@ html {
 	0% {color: rgba(0, 0, 0, 0.54)};
 	100% {color: blue};
 }
+@keyframes slideStarLeft {
+	0% {left:50px}
+	50% {left:-50px;}
+	100%{
+		left:-57px;
+		transform: scale(2);
+		color:rgba(220, 220, 255, 0.1);
+	}
+}
 
+@keyframes slideStarUpRight {
+	0% {
+		right:45px;
+		top: 0px;
+	}
+	50% {
+		right:5px;
+		top: -50px;
+		}
+	100%{
+		right:5px;
+		top: -55px;
+		transform: scale(2);
+		color:rgba(220, 220, 255, 0.1);
+	}
+}
 `
 ;
 

@@ -131,6 +131,14 @@ function NavBar() {
       	  </StyledButton>
       	</StyledNavLink>
 			}
+			<StyledNavLink to="/rules">
+        <StyledButton
+          handleClick = {() => {dispatch(updateUrl('rules'))}}
+          >
+          RULES
+        </StyledButton>
+      </StyledNavLink>
+
       <StyledNavLink to="/test">
         <StyledButton
           handleClick = {() => {dispatch(updateUrl('test'))}}

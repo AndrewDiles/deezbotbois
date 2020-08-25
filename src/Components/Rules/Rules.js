@@ -5,7 +5,7 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import styled from 'styled-components';
 
-const Home = () => {
+const Rules = () => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	
@@ -15,11 +15,26 @@ const Home = () => {
 		profileTab = {settings.profileTab}
 		colors = {colors}
 		>
-      Welcome Home
+      A lot of rules will go here.
+			<br/>
+			Ranging from:
+			<br/>
+			- The nature of the game
+			<br/>
+			- The order of resolution of action types / bot priority cycling
+			<br/>
+			- Equipment, accessories, skill tree planning
+			<br/>
+			- The script based protocols
+			<br/>
+			- Attributes of bots
+			<br/>
+			- Damage formulas
+
     </Wrapper>
   )
 }
-export default Home;
+export default Rules;
 
 const Wrapper = styled.div`
 	padding: ${(props) =>
@@ -35,4 +50,12 @@ const Wrapper = styled.div`
 	justify-content: center;
 	align-content: center;
 	align-items: center;
+	color: ${props => props.colors.textColor};
+	width: 100%;
+	height: 100%;
+	/* display : flex;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	align-items: center; */
 `

@@ -13,6 +13,13 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true
 });
 
+try {
+	client.connect();
+	} catch (err) {
+		console.log('unable to connect to mongo client:', err);
+	}
+
+
   const handleGoogleLogIn = async (req, res) => {
     const email = req.body.email;
     const imageUrl = req.body.imageUrl;
@@ -24,11 +31,11 @@ const client = new MongoClient(uri, {
       res.status(400).json({ status: 400, message: 'Email not provided' });
     }
 
-    try {
-    await client.connect();
-    } catch (err) {
-      console.log('unable to connect to mongo client:', err);
-    }
+    // try {
+    // await client.connect();
+    // } catch (err) {
+    //   console.log('unable to connect to mongo client:', err);
+    // }
 
     const db = client.db('botBoiDatabase');
     
@@ -102,11 +109,11 @@ const client = new MongoClient(uri, {
       res.status(400).json({ status: 400, message: 'Email or password not entered.' });
 		}
 		
-    try {
-    await client.connect();
-    } catch (err) {
-      console.log('unable to connect to mongo client:', err);
-    }
+    // try {
+    // await client.connect();
+    // } catch (err) {
+    //   console.log('unable to connect to mongo client:', err);
+    // }
     const db = client.db('botBoiDatabase');
     try {
       const result = await db.collection('userAuth').findOne({ email: email });
@@ -141,11 +148,11 @@ const client = new MongoClient(uri, {
       res.status(400).json({ status: 400, message: 'Information is missing' });
     }
 
-    try {
-    await client.connect();
-    } catch (err) {
-      console.log('unable to connect to mongo client:', err);
-    }
+    // try {
+    // await client.connect();
+    // } catch (err) {
+    //   console.log('unable to connect to mongo client:', err);
+    // }
 
     const db = client.db('botBoiDatabase');
     
@@ -209,11 +216,11 @@ const client = new MongoClient(uri, {
       res.status(400).json({ status: 400, message: 'Information is missing' });
 		}
 		
-		try {
-		await client.connect();
-		} catch (err) {
-			console.log('unable to connect to mongo client:', err);
-		}
+		// try {
+		// await client.connect();
+		// } catch (err) {
+		// 	console.log('unable to connect to mongo client:', err);
+		// }
 
 		const db = client.db('botBoiDatabase');
 		let query = {email : email};
@@ -243,11 +250,11 @@ const client = new MongoClient(uri, {
       res.status(400).json({ status: 400, message: 'Information is missing' });
 		}
 		
-		try {
-		await client.connect();
-		} catch (err) {
-			console.log('unable to connect to mongo client:', err);
-		}
+		// try {
+		// await client.connect();
+		// } catch (err) {
+		// 	console.log('unable to connect to mongo client:', err);
+		// }
 
 		const db = client.db('botBoiDatabase');
 
@@ -257,13 +264,14 @@ const client = new MongoClient(uri, {
 			if (!result || result.length === 0) {
         res.status(404).json({ status: 404, message: 'Could not find user info connected to given email' });
       }
-      else {			
-			const r = await db.collection('userData').updateOne(query, newUserInfo);
-			assert.equal(1, r.modifiedCount);
-			res.status(200).json({ status: 200, userInfo: newUserInfo, message: "Success!" })
+      else {
+				newUserInfo._id = result._id;
+				const r = await db.collection('userData').replaceOne(query, newUserInfo);
+				assert.equal(1, r.modifiedCount);
+				res.status(200).json({ status: 200, userInfo: newUserInfo, message: "Success!" })
 			}
     } catch (err) {
-      console.log(err);
+    	console.log(err);
       res.status(500).json({ status: 500, message: "error" });
     }
 	}

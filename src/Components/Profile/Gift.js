@@ -8,6 +8,9 @@ import {
 	communicationsFailed
 } from '../../Redux/actions';
 
+import styled from 'styled-components';
+
+import Star from '../Star/Star';
 import StyledIcon from '../StyledIcon/StyledIcon';
 import {gift} from 'react-icons-kit/icomoon/gift';
 import StyledButton from '../StyledButton/StyledButton';
@@ -15,6 +18,7 @@ import StyledButton from '../StyledButton/StyledButton';
 const Gift = ({ time }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
+	const [starDisplaying, setStarDisplaying] = React.useState(false);
 
 	const handleClickOnGift = () => {
 		console.log('grats, clicked on the gift');
@@ -33,6 +37,8 @@ const Gift = ({ time }) => {
 				res.json().then((data)=>{
 					dispatch(increaseBitCount(1,time));
 					dispatch(communicationsSuccessful());
+					setStarDisplaying(true);
+					setTimeout(()=>{setStarDisplaying(false)},2500);
 				})
 			}
 			else if (res.status === 400) {
@@ -47,6 +53,7 @@ const Gift = ({ time }) => {
 		})
 	}
 	let timeUntilGift = 79200000 - time + userInfo.lastLogInBitsReceived;
+	
 	if (timeUntilGift <= 0) {
 	return (
 		<StyledIcon
@@ -59,14 +66,11 @@ const Gift = ({ time }) => {
 	}
 	else {
 		let displayedRemainingTime;
-		if (timeUntilGift > 2*3600000) {
-			displayedRemainingTime = `${Math.floor(timeUntilGift/3600000)} HRS TO NEXT BIT`;
-		}
-		else if (timeUntilGift > 3600000) {
-			displayedRemainingTime = `1 HOUR TO NEXT BIT`;
+		if (timeUntilGift > 3600000) {
+			displayedRemainingTime = `${Math.floor(timeUntilGift/3600000)}+ HRS TO NEXT BIT`;
 		}
 		else if (timeUntilGift > 120000) {
-			displayedRemainingTime = `${Math.floor(timeUntilGift/60000)} MINS TO NEXT BIT`;
+			displayedRemainingTime = `${Math.floor(timeUntilGift/60000)}+ MINS TO NEXT BIT`;
 		}
 		else if (timeUntilGift > 1000 ) {
 			displayedRemainingTime = `${Math.floor(timeUntilGift/1000)} SECS TO NEXT BIT`;
@@ -75,12 +79,26 @@ const Gift = ({ time }) => {
 			displayedRemainingTime = `${Math.floor(timeUntilGift)} mS TO NEXT BIT`;
 		}
 			return (
-			<StyledButton
-			disabled = {true}
-			>
+				<StyledDiv>
+				<StyledButton
+				disabled = {true}
+				>
 				{displayedRemainingTime}
-			</StyledButton>
+				</StyledButton>
+				{ starDisplaying &&
+					<Star
+					color = 'blue'
+					animated = {1}
+					/>
+				}
+			</StyledDiv>
 		)
+		
 	}
 }
 export default Gift;
+
+const StyledDiv = styled.div`
+	width: auto;
+	height: auto;
+`

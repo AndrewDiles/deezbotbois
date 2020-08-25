@@ -15,7 +15,6 @@ import {
 function Login() {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
-  const userInfo = useSelector((state) => state.userInfo);
 
   const handleSuccessfulGoogleLogin = (res) => {
 		let googleRes = res.profileObj;
@@ -69,4 +68,9 @@ const StyledGoogleLogin = styled(GoogleLogin)`
   border-radius: 5px !important;
   height: 40px !important;
   overflow: hidden !important;
+	transition: color .75s, border .75s !important;
+	&:hover{
+		color: #000 !important;
+		border: black 2px solid !important;
+	}
 `
