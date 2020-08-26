@@ -20,6 +20,10 @@ Intentions with the GUI include:
 - An expanding screen opening on first load of the page
 - Capacity to toggle nav bar between top and left of screen 
 
+
+## BUGS:
+- if user's avatar image is a bot, then the onHover to reveal the sample profile tab fails to trigger once they hover over the bot (it only triggers when hovering over the background.)
+
 ## Reminders
 
 For bot building:

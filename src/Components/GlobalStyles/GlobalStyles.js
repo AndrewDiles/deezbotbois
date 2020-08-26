@@ -84,6 +84,12 @@ html {
 .disableClicks {
   pointer-events: none;
 }
+.centeredFlex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
 
 /* former load in:
 @keyframes loadInScreen {

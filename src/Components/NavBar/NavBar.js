@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 
 import styled from 'styled-components';
-
+import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import {
   updateUrl,
@@ -25,11 +25,13 @@ function NavBar() {
 	const [time, setTime] = React.useState(Date.now());
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
-  const userInfo = useSelector((state) => state.userInfo);
+	const userInfo = useSelector((state) => state.userInfo);
+	const colors = useSelector(getThemeColors);
 		// dispatch(updateUrl(window.location.href));
 
 	React.useEffect((event) => {
 		const targets = document.getElementsByClassName('userImg');
+		console.log('targets for on click use effects', targets)
 		if (targets === null || targets.length === 0) return;
 		const handleMouseOver = () => {
 			if (!userInfo.imageUrl) return;
@@ -83,7 +85,8 @@ function NavBar() {
 
   return (
     <Wrapper
-    navLocation = {settings.navLocation}
+		navLocation = {settings.navLocation}
+		colors = {colors}
     >
 			<RowDiv>
       	<StyledIcon
@@ -103,13 +106,16 @@ function NavBar() {
 							alt = "User's picture.  Likely of them, but perhaps not."
 							/>
 						) : (
-							<Bot
-							id = 'userImg'
-							alternativeBotSize = {40}
-							model = {userInfo.imageUrl}
-							arm1 = {'Pewpew'}
-							arm1Angle = {-45}
-							/>
+							<BotWrapper
+							className = 'userImg'
+							>
+								<Bot
+								alternativeBotSize = {40}
+								model = {userInfo.imageUrl}
+								arm1 = {'Pewpew'}
+								arm1Angle = {-45}
+								/>
+							</BotWrapper>
 						)
 						}
 					</BorderDivForUserImg>
@@ -167,15 +173,17 @@ function NavBar() {
 										alt = "User's picture.  Likely of them, but perhaps not."
 										/>
 									) : (
-										<Bot
+										<BotWrapper
 										className = 'userImg'
-										alternativeBotSize = {40}
-										model = {userInfo.imageUrl}
-										arm1 = {'Pewpew'}
-										arm1Angle = {-45}
-										/>
-										)
-									}
+										>
+											<Bot
+											alternativeBotSize = {40}
+											model = {userInfo.imageUrl}
+											arm1 = {'Pewpew'}
+											arm1Angle = {-45}
+											/>
+										</BotWrapper>
+									)}
 								</BorderDivForUserImg>
 							}
 						</>
@@ -216,6 +224,8 @@ const Wrapper = styled.nav`
   align-content: ${props => props.navLocation === 'top' ? 'center' : 'left'};
   box-shadow: ${props => props.navLocation === 'top' ? '0 8px 6px -6px black' : '8px 0 6px -6px black'};
   z-index: 10;
+	background-color: ${props => props.colors.primary};
+	color: ${props => props.colors.textColor};
 `
 const StyledNavLink = styled(NavLink)`
   width: 100px;
@@ -230,8 +240,14 @@ const UserDiv = styled.div`
 `
 const RowDiv = styled.div`
 display: flex;
-flex-direction: row;
-justify-content: space-between;
 align-content: center;
 text-align: center;
+flex-direction: row;
+justify-content: space-between;
+`
+const BotWrapper = styled.div`
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	z-index: 21;
 `

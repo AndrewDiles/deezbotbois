@@ -24,6 +24,7 @@ const Settings = ({ disabled }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const [newHandle, setNewHandle] = useState(userInfo.handle);
+	const [newAvImg, setNewAvImg] = useState(userInfo.imageUrl);
 	const [lastTimeCellSizeWasChanged, setLastTimeCellSizeWasChanged] = useState(Date.now());
 	const [botShowing, setBotShowing] = useState(false);
 	const [changeMade, setChangeMade] = useState(false);
@@ -77,12 +78,17 @@ const Settings = ({ disabled }) => {
       dispatch(setNavLocation('left'));
     }
 	}
+	const handleClickAvatarImgOption = (incomingAvatarImage) => {
+		if (incomingAvatarImage === userInfo.imageUrl) return;
+		setNewAvImg(incomingAvatarImage);
+	}
 	const saveSettings = () => {
 		if (!changeMade) return;
 		let newUserInfo = {...userInfo};
 		newUserInfo.handle = newHandle;
 		newUserInfo.navLocationPreference = settings.navLocation;
 		newUserInfo.cellSizePreference = settings.cellSize;
+		newUserInfo.imageUrl = newAvImg;
 		// newUserInfo.imageUrl =
 		// newUserInfo.colorTheme = 
 		dispatch(communicating());
@@ -117,8 +123,6 @@ const Settings = ({ disabled }) => {
 				console.log('Server error')
 			}
 		})
-
-
 	}
 	
 	// TBD: Modofication of: url image, nav location, handle, color theme.... 
@@ -136,7 +140,14 @@ const Settings = ({ disabled }) => {
 				Change your handle:
 				<br/>
 				<br/>
-				<StyledInput hovered = {colors.hovered}className = "centeredInput" defaultValue = {newHandle} input="text" maxLength = "24" onChange = {(ev)=>{updateChangeMade();setNewHandle(ev.target.value)}}>
+				<StyledInput
+				color = {colors}
+				hovered = {colors.hovered}
+				className = "centeredInput" 
+				defaultValue = {newHandle} 
+				input="text" maxLength = "24" 
+				onChange = {(ev)=>{updateChangeMade();setNewHandle(ev.target.value)}}
+				>
 				</StyledInput>
 				{newHandle.length === 0 &&
 					<ErrorP>
@@ -171,8 +182,6 @@ const Settings = ({ disabled }) => {
 			<Styledh5>
 				Change the size of your bots / battlegrid:
 			</Styledh5>
-			<br/>
-			<br/>
 			<RowDiv>
 				<SizeSlider/>
 				<BotDiv
@@ -186,6 +195,51 @@ const Settings = ({ disabled }) => {
 					/>
 				</BotDiv>
 			</RowDiv>
+			<Styledh5>
+				Change your avatar image:
+			</Styledh5>
+
+			<AvatarImgSelection>
+				{userInfo.googleImageUrl && 
+					<AvatarImgOption
+					className = {'centeredFlex'}
+					colors = {colors}
+					selected = {userInfo.googleImageUrl === newAvImg}
+					onClick={e => handleClickAvatarImgOption(userInfo.googleImageUrl)}
+					>
+						{/* <option style={{display: "none"}} value = {userInfo.googleImageUrl}/> */}
+						<UserImg
+						className = 'userImg'
+						src={userInfo.googleImageUrl}
+						alt = "User's picture.  Likely of them, but perhaps not."
+						/>
+					</AvatarImgOption>
+				}
+				{userInfo.availableBots.map((botName) => (
+					<AvatarImgOption
+					key = {botName}
+					className = {'centeredFlex'}
+					colors = {colors}
+					selected = {botName === newAvImg}
+					onClick={e => handleClickAvatarImgOption(botName)}
+					>
+						{/* <option style={{display: "none"}} value = {botName}/> */}
+						<Bot
+						className = 'userImg'
+						alternativeBotSize = {40}
+						model = {botName}
+						arm1 = {'Pewpew'}
+						arm1Angle = {-45}
+						/>
+					</AvatarImgOption>
+				))
+				}
+			</AvatarImgSelection>
+
+			<br/>
+
+			Add color scheme changes.
+
 			<StyledIcon
 				handleClick = {saveSettings}
 				padding = {5}
@@ -198,6 +252,7 @@ const Settings = ({ disabled }) => {
 export default Settings;
 
 const StyledInput = styled.input`
+background-color: ${props => props.colors.secondary}
 transition: background-color .75s;
 &:hover {
 	background-color: ${props => props.hovered};
@@ -233,4 +288,35 @@ const RowDiv = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+`
+const AvatarImgSelection = styled.div`
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	width: 265px;
+	margin-left: auto;
+  margin-right: auto;
+	@media screen and (max-width: 550px) {
+    width: 155px;
+		grid-template-columns: 1fr 1fr 1fr;
+  }
+`
+const UserImg = styled.img`
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	z-index: 21;
+`
+
+const AvatarImgOption = styled.div`
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	background-color: ${props => props.selected && props.colors.selected};
+	opacity: ${props => !props.selected && 0.5};
+	&:hover{
+		background-color: ${props => !props.selected && props.colors.hovered};
+		cursor: ${props => !props.selected ? 'pointer' : 'not-allowed'};
+		opacity: ${props => !props.selected && 0.8};
+	}
 `

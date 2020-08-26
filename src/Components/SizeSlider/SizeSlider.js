@@ -30,7 +30,7 @@ const SizeSlider = ({ disabled }) => {
       if (bar.getBoundingClientRect().x > ev.clientX) appliedMouseLocation = 0;
       else if (bar.getBoundingClientRect().x + bar.getBoundingClientRect().width < ev.clientX) appliedMouseLocation = 100;
       else appliedMouseLocation = ev.clientX-bar.getBoundingClientRect().x;
-      dispatch(setCellSize(pixelCountToCellSize(appliedMouseLocation)));
+      dispatch(setCellSize(pixelCountToCellSize(appliedMouseLocation-3)));
     }
     dialClicked ? window.addEventListener('mousemove',handleMove) : window.removeEventListener('mousemove',handleMove);
     return ()=>{

@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const StyledButton = ( { handleClick, disabled, selected, absolute, children} ) => {
-	const colors = useSelector(getThemeColors);
+const StyledButton = ( { handleClick, disabled, selected, absolute, colorSampling, children} ) => {
+	let colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
 	if (settings.serverStatus !== 'idle') disabled = true;
+	if (colorSampling) colors = colorSampling;
   
   if (handleClick === undefined) {
     handleClick = () => {
@@ -42,7 +43,7 @@ const ButtonStylings = styled.button`
   font-family: 'Press Start 2P', cursive;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
-  color: ${props => props.colors.buttonText};
+  color: ${props => props.colors.textColor};
   transition: color .75s, background-color .75s;
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};

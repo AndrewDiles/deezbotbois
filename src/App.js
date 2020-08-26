@@ -42,7 +42,7 @@ function App() {
         {isLoading && <BlackScreen/>}
         <Wrapper 
         navLocation = {settings.navLocation}
-        color = {colors.primary}
+        colors = {colors}
         >
           <Switch>
             <Route exact path="/">
@@ -90,7 +90,8 @@ const BlackScreen = styled.div`
   background-color: black;
 `
 const Wrapper = styled.div`
-  background-color: ${props => props.color};
+  background-color: ${props => props.colors.primary};
+	color: ${props => props.colors.textColor};
   position: absolute;
   width: 100%;
   height: 100%;

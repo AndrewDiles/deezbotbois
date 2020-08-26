@@ -32,7 +32,7 @@ const IconStylings = styled(Icon)`
   width: 40px;
   padding: ${props => props.padding && `${props.padding}px`};
   position: ${props => props.absolute ? 'absolute' : 'relative'};
-  color: ${props => !props.glowing && props.colors.buttonText};
+  color: ${props => !props.glowing && props.colors.textColor};
 	animation: ${props => props.glowing && '1s linear infinite alternate glowGift'};
 
   margin: 5px;

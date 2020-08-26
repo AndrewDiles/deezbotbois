@@ -27,6 +27,7 @@ const Profile = ({ time, disabled }) => {
 		navLocation = {settings.navLocation}
 		profileTab = {settings.profileTab}
 		notSelected = {colors.notSelected}
+		className = {'centeredFlex'}
 		>
 			<Gift
 			time = {time}
@@ -66,11 +67,7 @@ const ProfileWrapper = styled.div`
 		props.navLocation === 'top' ? '0 2px 6px silver, -2px 0px 6px silver' : '0px 2px 6px silver, 2px 0px 6px silver'
 	};
 	margin: ${props=>props.navLocation === 'top' ? '5px 0 0 0' : '0 0 0 5px'};
-	display : flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
 	z-index: 20;
 `
 const StyledNavLink = styled(NavLink)`

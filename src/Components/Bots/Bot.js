@@ -37,7 +37,7 @@ import Bonkbonk from '../Arms/Bonkbonk';
 
 const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeBotSize } ) => {
   const settings = useSelector((state) => state.settings);
-
+	// console.log('model',model);
   if (!botColors) botColors = defaultBotColors;
 
   let SelectedBot = null;
