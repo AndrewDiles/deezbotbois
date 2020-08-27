@@ -22,7 +22,13 @@ Intentions with the GUI include:
 
 
 ## BUGS:
+
 - if user's avatar image is a bot, then the onHover to reveal the sample profile tab fails to trigger once they hover over the bot (it only triggers when hovering over the background.)
+
+- Main display not scrollable
+
+- If user swaps between color schemes and tries to update, mongo will throw error
+## Solution: verify if new user object is the same as the old using JSON.stringify
 
 ## Reminders
 

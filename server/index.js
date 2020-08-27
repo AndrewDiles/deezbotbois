@@ -9,6 +9,7 @@ const {
   handleGoogleLogIn, 
   handleLogIn,
 	handleCreateAccount,
+	handleChangePassword,
 	handleIncreaseBitCount,
 	handleReplaceUserInfo,
 } = require('./handlers');
@@ -56,7 +57,13 @@ App
 	.post("/server/logIn", handleLogIn)
 	// Body has shape: {
   // email:
-  // password:
+	// password:
+	// confirmationCode:
+	// }
+
+	.post("/server/changePassword", handleChangePassword)
+	// Body has shape: {
+	// newAuthInfo: 
 	// }
 
 	.post("/server/createAccount", handleCreateAccount)

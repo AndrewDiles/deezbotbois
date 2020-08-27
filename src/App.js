@@ -17,6 +17,7 @@ import Levels from "./Components/Levels/Levels";
 import Rules from "./Components/Rules/Rules"
 import Test from "./Components/Test/Test";
 import Settings from "./Components/Settings/Settings";
+import Account from "./Components/Account/Account";
 
 
 function App() {
@@ -57,6 +58,9 @@ function App() {
             </Route>
             <Route exact path="/settings">
               <Settings />
+            </Route>
+						<Route exact path="/account">
+              <Account />
             </Route>
 						<Route exact path="/levels">
               <Levels />

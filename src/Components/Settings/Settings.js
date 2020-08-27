@@ -30,6 +30,7 @@ const Settings = ({ disabled }) => {
 	const [botShowing, setBotShowing] = useState(false);
 	const [changeMade, setChangeMade] = useState(false);
 	const [serverErrorMsg, setServerErrorMsg] = useState(null);
+	const [successMsg, setSuccessMsg] = useState(null);
 	let colors = useSelector(getThemeColors);
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
 
@@ -48,6 +49,16 @@ const Settings = ({ disabled }) => {
 		}
 		return () => clearTimeout(eraseServerErrorMsg)
 	},[serverErrorMsg])
+
+	React.useEffect(() => {
+		let eraseSuccessMsg;
+		if (successMsg) {
+			eraseSuccessMsg = setTimeout(()=>{
+				setSuccessMsg(null)
+			},2000)
+		}
+		return () => clearTimeout(eraseSuccessMsg)
+	},[successMsg])
 
 	React.useEffect(() => {
 		let eraseBotFromDom;
@@ -103,6 +114,12 @@ const Settings = ({ disabled }) => {
 		newUserInfo.cellSizePreference = settings.cellSize;
 		newUserInfo.imageUrl = newAvImg;
 		newUserInfo.colorTheme = settings.colorsTesting;
+		// verify there actually is a change to make
+		if (JSON.stringify(newUserInfo) === JSON.stringify(userInfo)) {
+			setServerErrorMsg("No changes detected.");
+			setChangeMade(false);
+			return;
+		}
 		dispatch(communicating());
 		fetch('server/replaceUserInfo', {
 			method: "POST",
@@ -119,6 +136,7 @@ const Settings = ({ disabled }) => {
 					setChangeMade(false);
 					dispatch(replaceUserInfo(data.userInfo));
 					dispatch(communicationsSuccessful());
+					setSuccessMsg("Settings change successful!")
 					// dispatch(setNavLocation(data.userInfo.navLocationPreference));  update new URL
 				})
 			}
@@ -145,7 +163,7 @@ const Settings = ({ disabled }) => {
 		colors = {colors}
 		>
 			<h1>
-				Hello {userInfo.handle}!
+				Hello {newHandle}!
 			</h1>
 
 			<Styledh5>
@@ -292,6 +310,7 @@ const Settings = ({ disabled }) => {
 					</StyledButton>
 				</ColDiv>
 			</RowDiv>
+			<br/>
 
 			<StyledIcon
 				handleClick = {saveSettings}
@@ -299,6 +318,12 @@ const Settings = ({ disabled }) => {
 				disabled = {!changeMade || serverErrorMsg !== null}
       	icon = {floppyDisk}
       />
+			<ErrorP>
+				{serverErrorMsg}
+			</ErrorP>
+			<SuccessP>
+				{successMsg}
+			</SuccessP>
 		</Wrapper>
   )
 }
@@ -306,7 +331,6 @@ export default Settings;
 
 const StyledInput = styled.input`
 	background-color: ${props => props.colors.secondary};
-	transition: background-color .75s;
 	color: ${props => props.colors.textColor};
 	&:hover {
 		background-color: ${props => props.colors.hovered};
@@ -329,6 +353,10 @@ const ErrorP = styled.p`
 	color: red;
 	font-size: 0.6em;
 `
+const SuccessP = styled.p`
+	color: lime;
+	font-size: 0.6em;
+`
 
 const BotDiv = styled.div`
 	position: absolute;
@@ -342,6 +370,9 @@ const RowDiv = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+	@media screen and (max-width: 800px) {
+		flex-wrap: wrap;
+	}
 `
 const ColDiv = styled.div`
 	display: flex;
@@ -349,6 +380,7 @@ const ColDiv = styled.div`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
+	margin: 0 10px;
 `
 const AvatarImgSelection = styled.div`
 	display: grid;

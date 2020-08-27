@@ -44,6 +44,16 @@ const Profile = ({ time, disabled }) => {
         </StyledButton>
       </StyledNavLink>
 
+			<StyledNavLink to="/account">
+        <StyledButton
+					handleClick = {() => {dispatch(updateUrl('account'))}}
+					selected = {settings.currentUrl === 'account'}
+					disabled = {settings.currentUrl === 'account'}
+          >
+          ACCOUNT
+        </StyledButton>
+      </StyledNavLink>
+
 			<StyledButton
         handleClick = {() => {dispatch(deactivateProfileTab())}}
         >
