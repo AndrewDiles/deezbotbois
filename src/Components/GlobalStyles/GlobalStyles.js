@@ -141,17 +141,17 @@ html {
 	100% {
 		background: radial-gradient(closest-side, black,black,indigo, blue, lavender);
 	} */
-	0% {background: radial-gradient(closest-side, deepskyblue,white,white);}
-	10% {background: radial-gradient(closest-side, blue,deepskyblue,white,white);}
-	20% {background: radial-gradient(closest-side, blue,blue,deepskyblue,white,white);}
-	30% {background: radial-gradient(closest-side, blue,blue,blue,deepskyblue,white,white);}
-	40% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,deepskyblue,white,white);}
-	50% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
-	60% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
-	70% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
-	80% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
-	90% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
-	100% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,white,white);}
+	0% {background: radial-gradient(closest-side, deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	10% {background: radial-gradient(closest-side, blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	20% {background: radial-gradient(closest-side, blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	30% {background: radial-gradient(closest-side, blue,blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	40% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	50% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	60% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	70% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	80% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	90% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
+	100% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
 }
 
 @keyframes glowGift {

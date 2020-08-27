@@ -9,9 +9,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 const SizeSlider = ({ disabled }) => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const settings = useSelector((state) => state.settings);
   const [dialClicked, setDialClicked] = React.useState(false);
-  const colors = useSelector(getThemeColors);
+  let colors = useSelector(getThemeColors);
+	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
   const cellSize = useSelector((state) => state.settings.cellSize);
   // Before reducer re-factor: color = {userInfo.colorTheme && userInfo.colorTheme.secondary || colors.secondary}
 

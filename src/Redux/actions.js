@@ -14,6 +14,15 @@ export const setCellSize = (size) => ({
   type: 'SET_CELL_SIZE',
   size: size
 });
+// settings color testing scheme for settings
+export const setColorTesting = (colors) => ({
+	type: 'SET_COLORS_TESTING',
+	colors: colors
+})
+// retruns color testing scheme to null after log out
+export const resetColorTesting = () => ({
+	type: 'SET_COLORS_TESTING_DEFAULT',
+})
 // activating user tab in nav bar:
 export const activateProfileTab = () => ({
   type: 'ACTIVATE_PROFILE_TAB',

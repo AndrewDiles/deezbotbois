@@ -16,7 +16,8 @@ import Gift from './Gift';
 const Profile = ({ time, disabled }) => {
 	const dispatch = useDispatch();
 	const settings = useSelector((state) => state.settings);
-	const colors = useSelector(getThemeColors);
+	let colors = useSelector(getThemeColors);
+	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
 
 	if (settings.profileTab === 'inactive') {
 		return (<></>)
@@ -35,7 +36,9 @@ const Profile = ({ time, disabled }) => {
 			</Gift>
 			<StyledNavLink to="/settings">
         <StyledButton
-          handleClick = {() => {dispatch(updateUrl('settings'))}}
+					handleClick = {() => {dispatch(updateUrl('settings'))}}
+					selected = {settings.currentUrl === 'settings'}
+					disabled = {settings.currentUrl === 'settings'}
           >
           SETTINGS
         </StyledButton>

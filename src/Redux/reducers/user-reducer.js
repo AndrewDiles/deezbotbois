@@ -1,4 +1,4 @@
-import {colors} from '../../Constants/colorSchemes';
+import {vanilla} from '../../Constants/colorSchemes';
 
 const initialState = {
   email: null,
@@ -49,4 +49,4 @@ export default function userInfo(
     }
   };
 
-export const getThemeColors = state => state.userInfo.colorTheme ? state.userInfo.colorTheme : colors;
+export const getThemeColors = state => state.userInfo.colorTheme ? state.userInfo.colorTheme : vanilla;

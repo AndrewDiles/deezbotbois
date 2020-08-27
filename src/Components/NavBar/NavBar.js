@@ -26,7 +26,8 @@ function NavBar() {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
 	const userInfo = useSelector((state) => state.userInfo);
-	const colors = useSelector(getThemeColors);
+	let colors = useSelector(getThemeColors);
+	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
 		// dispatch(updateUrl(window.location.href));
 
 	React.useEffect((event) => {
@@ -123,7 +124,9 @@ function NavBar() {
 			</RowDiv>
       <StyledNavLink to="/home">
         <StyledButton
-          handleClick = {() => {dispatch(updateUrl('home'))}}
+					handleClick = {() => {dispatch(updateUrl('home'))}}
+					selected = {settings.currentUrl === 'home'}
+					disabled = {settings.currentUrl === 'home'}
           >
           HOME
         </StyledButton>
@@ -131,7 +134,9 @@ function NavBar() {
 			{ userInfo.email !== null &&
 				<StyledNavLink to="/levels">
       	  <StyledButton
-      	    handleClick = {() => {dispatch(updateUrl('levels'))}}
+						handleClick = {() => {dispatch(updateUrl('levels'))}}
+						selected = {settings.currentUrl === 'levels'}
+						disabled = {settings.currentUrl === 'levels'}
       	    >
       	    FIGHT-EM
       	  </StyledButton>
@@ -139,7 +144,9 @@ function NavBar() {
 			}
 			<StyledNavLink to="/rules">
         <StyledButton
-          handleClick = {() => {dispatch(updateUrl('rules'))}}
+					handleClick = {() => {dispatch(updateUrl('rules'))}}
+					selected = {settings.currentUrl === 'rules'}
+					disabled = {settings.currentUrl === 'rules'}
           >
           RULES
         </StyledButton>
@@ -147,7 +154,9 @@ function NavBar() {
 
       <StyledNavLink to="/test">
         <StyledButton
-          handleClick = {() => {dispatch(updateUrl('test'))}}
+					handleClick = {() => {dispatch(updateUrl('test'))}}
+					selected = {settings.currentUrl === 'test'}
+					disabled = {settings.currentUrl === 'test'}
           >
           TEST
         </StyledButton>

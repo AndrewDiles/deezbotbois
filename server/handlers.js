@@ -107,6 +107,9 @@ try {
     if (email === undefined || password === undefined) {
       res.status(400).json({ status: 400, message: 'Email or password not entered.' });
 		}
+		else if (password === 'google') {
+			res.status(403).json({ status: 403, message: "password may not be exactly 'google'." });
+		}
 		
     // try {
     // await client.connect();
@@ -145,7 +148,11 @@ try {
 			navLocation === undefined
 			) {
       res.status(400).json({ status: 400, message: 'Information is missing' });
-    }
+		}
+		else if (password === 'google') {
+			res.status(403).json({ status: 403, message: "password may not be exactly 'google'." });
+		}
+		
 
     // try {
     // await client.connect();
@@ -247,7 +254,6 @@ try {
 		if (email === undefined || newUserInfo === undefined) {
       res.status(400).json({ status: 400, message: 'Information is missing' });
 		}
-		
 		// try {
 		// await client.connect();
 		// } catch (err) {

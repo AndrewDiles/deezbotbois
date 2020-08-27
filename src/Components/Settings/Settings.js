@@ -3,14 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
+import {vanilla,dark,vibrant,paleGreen} from '../../Constants/colorSchemes';
 
 import {
 	setNavLocation,
+	setColorTesting,
 	communicating,
 	communicationsSuccessful,
 	communicationsFailed,
 	replaceUserInfo
-
 } from '../../Redux/actions';
 
 import StyledButton from '../StyledButton/StyledButton';
@@ -29,7 +30,14 @@ const Settings = ({ disabled }) => {
 	const [botShowing, setBotShowing] = useState(false);
 	const [changeMade, setChangeMade] = useState(false);
 	const [serverErrorMsg, setServerErrorMsg] = useState(null);
-	const colors = useSelector(getThemeColors);
+	let colors = useSelector(getThemeColors);
+	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
+
+	React.useEffect(() => {
+		if (JSON.stringify(settings.colorsTesting) !== JSON.stringify(userInfo.colorTheme)) {
+			dispatch(setColorTesting(userInfo.colorTheme));
+		}
+	},[])
 
 	React.useEffect(() => {
 		let eraseServerErrorMsg;
@@ -78,9 +86,14 @@ const Settings = ({ disabled }) => {
       dispatch(setNavLocation('left'));
     }
 	}
+	const handleColorThemeClick = (scheme) => {
+		setChangeMade(true);
+		dispatch(setColorTesting(scheme));
+	}
 	const handleClickAvatarImgOption = (incomingAvatarImage) => {
 		if (incomingAvatarImage === userInfo.imageUrl) return;
 		setNewAvImg(incomingAvatarImage);
+		setChangeMade(true);
 	}
 	const saveSettings = () => {
 		if (!changeMade) return;
@@ -89,8 +102,7 @@ const Settings = ({ disabled }) => {
 		newUserInfo.navLocationPreference = settings.navLocation;
 		newUserInfo.cellSizePreference = settings.cellSize;
 		newUserInfo.imageUrl = newAvImg;
-		// newUserInfo.imageUrl =
-		// newUserInfo.colorTheme = 
+		newUserInfo.colorTheme = settings.colorsTesting;
 		dispatch(communicating());
 		fetch('server/replaceUserInfo', {
 			method: "POST",
@@ -125,7 +137,7 @@ const Settings = ({ disabled }) => {
 		})
 	}
 	
-	// TBD: Modofication of: url image, nav location, handle, color theme.... 
+	// TBD: Modofication of: nav location, color theme.... 
   return (
 		<Wrapper
 		navLocation = {settings.navLocation}
@@ -137,12 +149,11 @@ const Settings = ({ disabled }) => {
 			</h1>
 
 			<Styledh5>
-				Change your handle:
+				Handle change:
 				<br/>
 				<br/>
 				<StyledInput
-				color = {colors}
-				hovered = {colors.hovered}
+				colors = {colors}
 				className = "centeredInput" 
 				defaultValue = {newHandle} 
 				input="text" maxLength = "24" 
@@ -157,7 +168,7 @@ const Settings = ({ disabled }) => {
 			</Styledh5>
 
 			<Styledh5>
-				Change the location of your navigation menu:
+				Location of your navigation menu:
 				<br/>
 				<br/>
 				<StyledButton
@@ -180,7 +191,7 @@ const Settings = ({ disabled }) => {
 			</Styledh5>
 			
 			<Styledh5>
-				Change the size of your bots / battlegrid:
+				Size of your bots / battlegrid:
 			</Styledh5>
 			<RowDiv>
 				<SizeSlider/>
@@ -196,7 +207,7 @@ const Settings = ({ disabled }) => {
 				</BotDiv>
 			</RowDiv>
 			<Styledh5>
-				Change your avatar image:
+				Avatar image:
 			</Styledh5>
 
 			<AvatarImgSelection>
@@ -238,7 +249,49 @@ const Settings = ({ disabled }) => {
 
 			<br/>
 
-			Add color scheme changes.
+			Color scheme:
+			<RowDiv>
+
+				<ColDiv>
+					<StyledButton
+					colorSampling = {vanilla}
+					disabled = {JSON.stringify(settings.colorsTesting) === JSON.stringify(vanilla)}
+					handleClick = {()=>{handleColorThemeClick(vanilla)}}
+					>
+						VANILLA
+					</StyledButton>
+				</ColDiv>
+
+				<ColDiv>
+					<StyledButton
+					colorSampling = {dark}
+					disabled = {JSON.stringify(settings.colorsTesting) === JSON.stringify(dark)}
+					handleClick = {()=>{handleColorThemeClick(dark)}}
+					>
+						DARK
+					</StyledButton>
+				</ColDiv>
+
+				<ColDiv>
+					<StyledButton
+					colorSampling = {vibrant}
+					disabled = {JSON.stringify(settings.colorsTesting) === JSON.stringify(vibrant)}
+					handleClick = {()=>{handleColorThemeClick(vibrant)}}
+					>
+						VIBRANT
+					</StyledButton>
+				</ColDiv>
+
+				<ColDiv>
+					<StyledButton
+					colorSampling = {paleGreen}
+					disabled = {JSON.stringify(settings.colorsTesting) === JSON.stringify(paleGreen)}
+					handleClick = {()=>{handleColorThemeClick(paleGreen)}}
+					>
+						GREEN
+					</StyledButton>
+				</ColDiv>
+			</RowDiv>
 
 			<StyledIcon
 				handleClick = {saveSettings}
@@ -252,11 +305,12 @@ const Settings = ({ disabled }) => {
 export default Settings;
 
 const StyledInput = styled.input`
-background-color: ${props => props.colors.secondary}
-transition: background-color .75s;
-&:hover {
-	background-color: ${props => props.hovered};
-}
+	background-color: ${props => props.colors.secondary};
+	transition: background-color .75s;
+	color: ${props => props.colors.textColor};
+	&:hover {
+		background-color: ${props => props.colors.hovered};
+	}
 `
 const Wrapper = styled.div`
 	padding: ${(props) =>
@@ -285,6 +339,13 @@ const BotDiv = styled.div`
 const RowDiv = styled.div`
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+`
+const ColDiv = styled.div`
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	width: 100%;

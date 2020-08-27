@@ -1,9 +1,11 @@
+import { vanilla } from '../../Constants/colorSchemes'; 
 const initialState = {
   serverStatus: 'idle',
   currentUrl : null,
 	navLocation: 'top',
 	profileTab: 'inactive',
-  cellSize : 50,
+	cellSize : 50,
+	colorsTesting: null,
 }
 
 export default function settings(
@@ -20,7 +22,20 @@ export default function settings(
           ...state,
           navLocation : action.navLocation,
         }
-      }case 'SET_CELL_SIZE' : {
+			}
+			case 'SET_COLORS_TESTING' : {
+        return {
+          ...state,
+          colorsTesting : action.colors,
+        }
+			}
+			case 'SET_COLORS_TESTING_DEFAULT' : {
+        return {
+          ...state,
+          colorsTesting : vanilla,
+        }
+			}
+			case 'SET_CELL_SIZE' : {
         return {
           ...state,
           cellSize : action.size,

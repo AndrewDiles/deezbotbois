@@ -7,7 +7,9 @@ const StyledButton = ( { handleClick, disabled, selected, absolute, colorSamplin
 	let colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
 	if (settings.serverStatus !== 'idle') disabled = true;
+	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
 	if (colorSampling) colors = colorSampling;
+	
   
   if (handleClick === undefined) {
     handleClick = () => {
@@ -48,6 +50,6 @@ const ButtonStylings = styled.button`
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     background-color: ${props => !props.disabled && props.colors.hovered};
-    color: ${props => !props.disabled && 'white'};
+    color: ${props => !props.disabled && props.colors.hoveredText};
   }
 `

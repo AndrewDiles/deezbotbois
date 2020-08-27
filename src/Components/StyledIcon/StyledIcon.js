@@ -5,8 +5,9 @@ import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, padding, absolute} ) => {
-  const colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
+	let colors = useSelector(getThemeColors);
+	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
 	if (settings.serverStatus !== 'idle') disabled = true;
   return (
       <IconStylings
@@ -43,6 +44,6 @@ const IconStylings = styled(Icon)`
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     background-color: ${props => !props.disabled && props.colors.hovered};
-	color: ${props => !props.disabled && 'white'};
+		color: ${props => !props.disabled && props.colors.hoveredText};
   }
 `

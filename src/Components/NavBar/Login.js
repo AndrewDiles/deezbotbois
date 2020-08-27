@@ -9,7 +9,8 @@ import {
 	communicationsSuccessful,
 	communicationsFailed,
 	receiveUserInfo,
-	setNavLocation
+	setNavLocation,
+	setColorTesting
 } from '../../Redux/actions';
 
 function Login() {
@@ -38,6 +39,7 @@ function Login() {
 					dispatch(receiveUserInfo(data.userInfo));
 					dispatch(communicationsSuccessful());
 					dispatch(setNavLocation(data.userInfo.navLocationPreference));
+					dispatch(setColorTesting(data.userInfo.colorTheme));
 				})
 			}
 			else if (res.status === 400) {

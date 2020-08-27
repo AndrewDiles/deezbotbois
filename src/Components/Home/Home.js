@@ -1,13 +1,18 @@
 import React from 'react';
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import styled from 'styled-components';
+import { updateUrl} from '../../Redux/actions';
 
 const Home = () => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
+	const dispatch = useDispatch();
+	React.useEffect(()=>{
+		dispatch(updateUrl('home'));
+	},[])
 	
   return (
     <Wrapper

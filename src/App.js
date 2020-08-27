@@ -23,7 +23,8 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
-  const colors = useSelector(getThemeColors);
+  let colors = useSelector(getThemeColors);
+	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
   
   React.useEffect(() => {
     let trimmedUrl = window.location.href.replace("http://localhost:3000/", "")
