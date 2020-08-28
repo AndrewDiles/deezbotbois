@@ -32,7 +32,6 @@ function NavBar() {
 
 	React.useEffect((event) => {
 		const targets = document.getElementsByClassName('userImg');
-		// console.log('targets for on click use effects', targets)
 		if (targets === null || targets.length === 0) return;
 		const handleMouseOver = () => {
 			if (!userInfo.imageUrl) return;
@@ -57,13 +56,13 @@ function NavBar() {
 			}
 		}
 			targets[0].addEventListener('mouseenter',handleMouseOver);
-			targets[0].addEventListener('mouseout',handleMouseOff);
+			targets[0].addEventListener('mouseleave',handleMouseOff);
 			targets[0].addEventListener('click',handleClick);
 		
     return ()=>{
 			if (targets === null || targets.length === 0) return;
 			targets[0].removeEventListener('mouseenter',handleMouseOver);
-			targets[0].removeEventListener('mouseout',handleMouseOff);
+			targets[0].removeEventListener('mouseleave',handleMouseOff);
 			targets[0].removeEventListener('click',handleClick);
     }
 	},[dispatch, settings.profileTab, settings.navLocation, userInfo.imageUrl]);
@@ -111,6 +110,7 @@ function NavBar() {
 							className = 'userImg'
 							>
 								<Bot
+								// className = 'userImg'
 								alternativeBotSize = {40}
 								model = {userInfo.imageUrl}
 								arm1 = {'Pewpew'}
@@ -131,17 +131,7 @@ function NavBar() {
           HOME
         </StyledButton>
       </StyledNavLink>
-			{ userInfo.email !== null &&
-				<StyledNavLink to="/levels">
-      	  <StyledButton
-						handleClick = {() => {dispatch(updateUrl('levels'))}}
-						selected = {settings.currentUrl === 'levels'}
-						disabled = {settings.currentUrl === 'levels'}
-      	    >
-      	    FIGHT-EM
-      	  </StyledButton>
-      	</StyledNavLink>
-			}
+
 			<StyledNavLink to="/rules">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('rules'))}}
@@ -212,6 +202,7 @@ function NavBar() {
 										className = 'userImg'
 										>
 											<Bot
+											// className = 'userImg'
 											alternativeBotSize = {40}
 											model = {userInfo.imageUrl}
 											arm1 = {'Pewpew'}
@@ -243,10 +234,10 @@ const BorderDivForUserImg = styled.div`
 	border-radius: 50%;
 	transition: transform .75s;
 	animation: ${props => props.glow > 79200000 ? '1s linear infinite alternate glowUserImg':''};
-	:hover {
+	/* :hover {
 		transform: scale(1.2);
 		cursor: pointer;
-	}
+	} */
 `
 const Wrapper = styled.nav`
   width: ${props => props.navLocation === 'top' ? '100%' : '135px'};

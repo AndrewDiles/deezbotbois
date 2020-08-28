@@ -5,7 +5,7 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import styled from 'styled-components';
 
-const Rules = () => {
+const Assemble = () => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	
@@ -15,27 +15,24 @@ const Rules = () => {
 		profileTab = {settings.profileTab}
 		colors = {colors}
 		>
-      A lot of rules will go here.
-			<br/>
-			Ranging from:
-			<br/>
-			- The nature of the game
-			<br/>
-			- The order of resolution of action types / bot priority cycling
-			<br/>
-			- Equipment, accessories, skill tree planning
-			<br/>
-			- The script based protocols
-			<br/>
-			- Attributes of bots
-			<br/>
-			- Damage formulas
-
+      Assemble bots here
     </Wrapper>
   )
 }
-export default Rules;
+export default Assemble;
 
+// pre - overflow: auto
+// padding: ${(props) =>
+// 	props.navLocation === "top" ? 
+// 		props.profileTab !== 'active' ? "50px 0 0 0" : "50px 135px 0 0"
+// 		: props.profileTab !== 'active' ? "0 135px 0 0" : "0 135px 0 135px"
+// 		};
+// post -overflor-y: auto
+// padding: ${(props) =>
+// 		props.navLocation === "top" ? 
+// 			props.profileTab !== 'active' ? "50px 0 0 0" : "50px 135px 0 0"
+// 			: props.profileTab !== 'active' ? "0 0 0 135px" : "0 0 0 270px"
+// 			};
 const Wrapper = styled.div`
 	padding: ${(props) =>
 		props.navLocation === "top" ? 
@@ -45,7 +42,6 @@ const Wrapper = styled.div`
 	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
-	overflow: auto;
 	display : flex;
 	flex-direction: row;
 	justify-content: center;
@@ -54,6 +50,7 @@ const Wrapper = styled.div`
 	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
+	overflow: auto;
 	/* display : flex;
 	flex-direction: row;
 	justify-content: center;

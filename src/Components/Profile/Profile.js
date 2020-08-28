@@ -34,6 +34,27 @@ const Profile = ({ time, disabled }) => {
 			time = {time}
 			>
 			</Gift>
+
+			<StyledNavLink to="/assemble">
+        <StyledButton
+					handleClick = {() => {dispatch(updateUrl('assemble'))}}
+					selected = {settings.currentUrl === 'assemble'}
+					disabled = {settings.currentUrl === 'assemble'}
+      	  >
+      	  BUILD-EM
+        </StyledButton>
+    	</StyledNavLink>
+
+			<StyledNavLink to="/levels">
+        <StyledButton
+					handleClick = {() => {dispatch(updateUrl('levels'))}}
+					selected = {settings.currentUrl === 'levels'}
+					disabled = {settings.currentUrl === 'levels'}
+      	  >
+      	  FIGHT-EM
+        </StyledButton>
+    	</StyledNavLink>
+
 			<StyledNavLink to="/settings">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('settings'))}}

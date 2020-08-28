@@ -107,8 +107,8 @@ export default Test;
 const Wrapper = styled.div`
 	padding: ${(props) =>
 		props.navLocation === "top" ? 
-			props.profileTab !== 'active' ? "50px 0 0 0" : "50px 135px 0 0"
-			: props.profileTab !== 'active' ? "0 135px 0 0" : "0 135px 0 135px"
+			props.profileTab === 'active' && "0 140px 0 0"
+			: props.profileTab === 'active' ? "0 140px 0 140px" : "0 140px 0 0"
 			};
 	color: ${props => props.colors.textColor};
 	width: 100%;
@@ -121,6 +121,7 @@ const Wrapper = styled.div`
 	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
+	overflow: auto;
 	display : flex;
 	flex-direction: row;
 	justify-content: center;

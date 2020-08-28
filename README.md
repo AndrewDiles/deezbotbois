@@ -21,13 +21,20 @@ Intentions with the GUI include:
 - Capacity to toggle nav bar between top and left of screen 
 
 
-## BUGS:
+## ACTIVE BUGS
 
 - Need to return to Nav bar and correct the size of buttons/their content, based on @media screen query so they fit in the bar while the screen is more narrow
 
-- if user's avatar image is a bot, then the onHover to reveal the sample profile tab fails to trigger once they hover over the bot (it only triggers when hovering over the background.)
+
+
+
+## PAST BUGS
 
 - Main display not scrollable
+## Solution: Wrapper required css property: overflow-y: auto;
+
+- if user's avatar image is a bot, then the onHover to reveal the sample profile tab fails to trigger once they hover over the bot (it only triggers when hovering over the background.)
+## Solution: I incorrectly used mouseout instead of mouseleave ~.~
 
 - If user swaps between color schemes and tries to update, mongo will throw error
 ## Solution: verify if new user object is the same as the old using JSON.stringify
