@@ -30,6 +30,7 @@ Intentions with the GUI include:
 - If user swaps between color schemes and tries to update, mongo will throw error
 ## Solution: verify if new user object is the same as the old using JSON.stringify
 
+
 ## Reminders
 
 For bot building:

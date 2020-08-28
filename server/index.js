@@ -6,8 +6,8 @@ const morgan = require("morgan");
 // const path = require('path');
 
 const {
-  handleGoogleLogIn, 
-  handleLogIn,
+  handleGoogleLogin, 
+  handleLogin,
 	handleCreateAccount,
 	handleChangePassword,
 	handleIncreaseBitCount,
@@ -45,7 +45,7 @@ App
   // .use("/", express.static(__dirname + "/"))
 
   // provided an email address this will either log a user in or create a new account for them
-  .post("/server/googleLogIn", handleGoogleLogIn)
+  .post("/server/googleLogin", handleGoogleLogin)
   // Body has shape: {
   // email:
   // name:
@@ -54,7 +54,7 @@ App
 	// navLocation:
 	// }
 	
-	.post("/server/logIn", handleLogIn)
+	.post("/server/login", handleLogin)
 	// Body has shape: {
   // email:
 	// password:

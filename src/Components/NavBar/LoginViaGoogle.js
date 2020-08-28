@@ -13,7 +13,7 @@ import {
 	setColorTesting
 } from '../../Redux/actions';
 
-function Login() {
+function LoginViaGoogle() {
   const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
 
@@ -64,12 +64,13 @@ function Login() {
     </StyledGoogleLogin>
   );
 }
-export default Login;
+export default LoginViaGoogle;
 
 const StyledGoogleLogin = styled(GoogleLogin)`
   border-radius: 5px !important;
   height: 40px !important;
   overflow: hidden !important;
+	margin-top: 5px !important;
 	transition: color .75s, border .75s !important;
 	&:hover{
 		color: #000 !important;

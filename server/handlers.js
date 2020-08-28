@@ -6,7 +6,8 @@ const assert = require('assert');
 const nodemailer = require('nodemailer');
 // const password = process.env.mongoKey || require('./mongo');
 const { password } = require('./mongo.js');
-const { emailPassword } = require('./hotmail.js');
+const { emailPassword, gmailAppPassword } = require('./hotmail.js');
+const { isNull } = require('util');
 const myEmailAddress = 'a_diles@hotmail.com';
 
 const uri = `mongodb+srv://botMaster:${password}@botboicluster.imeos.azure.mongodb.net/test`;
@@ -24,6 +25,20 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+// const transporter = nodemailer.createTransport({
+// 	host: "smtp.gmail.com",
+// 	port: 465,
+// 	secure: true,
+// 	// tls: { ciphers:'SSLv3' },
+// 	auth: {
+//     user: myEmailAddress,
+//     pass: gmailAppPassword,
+//   }
+// 	});
+
+
+
+
 
 try {
 	client.connect();
@@ -32,7 +47,7 @@ try {
 	}
 
 
-  const handleGoogleLogIn = async (req, res) => {
+  const handleGoogleLogin = async (req, res) => {
     const email = req.body.email;
     const imageUrl = req.body.imageUrl;
 		const name = req.body.name;
@@ -40,7 +55,8 @@ try {
 		const navLocation = req.body.navLocation;
 
     if (email === undefined) {
-      res.status(400).json({ status: 400, message: 'Email not provided' });
+			res.status(400).json({ status: 400, message: 'Email not provided' });
+			return;
     }
 
     // try {
@@ -57,7 +73,8 @@ try {
 				// case no account under that email address, creating one:
 				// First add info to Auth collection
         let newUserAuthData = {
-          email: email,
+					email: email,
+					userName: "DeezBotBois",
 					password: 'google',
 					confirmed: true,
         };
@@ -109,81 +126,89 @@ try {
       }
     } catch (err) {
       console.log(err);
-      res.status(500).json({ status: 500, message: "error" });
+      res.status(500).json({ status: 500, message: "error caught" });
     }
   };
 
-	const handleLogIn = async (req, res) => {
+	const handleLogin = async (req, res) => {
     const email = req.body.email;
 		const password = req.body.password;
-		const confirmationCode = req.body.confirmationCode;
+		const confirmationCode = req.body.confirmationCode || null;
 		
     if (email === undefined || password === undefined) {
-      res.status(400).json({ status: 400, message: 'Email or password not entered.' });
+			res.status(400).json({ status: 400, message: 'Email or password not entered.' });
 		}
 		else if (password === 'google') {
 			res.status(403).json({ status: 403, message: "password may not be exactly 'google'." });
 		}
-		
-    // try {
-    // await client.connect();
-    // } catch (err) {
-    //   console.log('unable to connect to mongo client:', err);
-    // }
-    const db = client.db('botBoiDatabase');
-    try {
-      const result = await db.collection('userAuth').findOne({ email: email });
-      if (!result || result.length === 0) {
-				res.status(404).json({ status: 404, message: "No user found with that email." })
-			}
-			else if (result.password !== password) {
-				res.status(401).json({ status: 401, message: "Password does not match." })
-			}
-			// case: account still needs to be confirmed
-			else if (!result.confirmed){
-				// case: incorrect code
-				if (result.confirmationCode !== confirmationCode) {
-					res.status(401).json({ status: 401, message: "Confirmation code does not match." })
+		else {
+			const db = client.db('botBoiDatabase');
+			const query = { email: email };
+    	try {
+    	  const result = await db.collection('userAuth').findOne(query);
+    	  if (!result || result.length === 0) {
+					res.status(404).json({ status: 404, message: "No user found with that email." })
 				}
-				// case: correct code - update the auth no longer require the code
-				const newAuthInfo = {...result};
-				delete newAuthInfo.confirmationCode;
-				newAuthInfo.confirmed = true;
-				const r = await db.collection('userAuth').replaceOne(query, newAuthInfo);
-				assert.equal(1, r.modifiedCount);
-				// Now get the userData
-				try {
-					const userInfo = await db.collection('userData').findOne({ email: email });
-					if (!userInfo) {
-						res.status(404).json({ status: 404, message: "Auth succeeded, but could not find data..." });
+				else if (result.password !== password) {
+					res.status(401).json({ status: 401, message: "Password does not match." })
+				}
+				// case: account still needs to be confirmed
+				else if (result.confirmed === false){
+					console.log('account has yet to be confirmed')
+					console.log('needed code:', result.confirmationCode, 'code sent', confirmationCode)
+					// case: incorrect code
+					if (result.confirmationCode !== confirmationCode) {
+						res.status(401).json({ status: 401, message: "Confirmation code does not match." })
+					}
+					else if (result.confirmationCode === confirmationCode) {
+						// case: correct code - update the auth no longer require the code
+						const newAuthInfo = {...result};
+						delete newAuthInfo.confirmationCode;
+						newAuthInfo.confirmed = true;
+						const r = await db.collection('userAuth').replaceOne(query, newAuthInfo);
+						assert.equal(1, r.modifiedCount);
+						// Now get the userData
+						try {
+							const userInfo = await db.collection('userData').findOne({ email: email });
+							if (!userInfo) {
+								res.status(404).json({ status: 404, message: "Auth succeeded, but could not find data..." });
+							}
+							else {
+								res.status(200).json({ status: 200, userInfo: userInfo })
+							}
+						}catch (err) {
+							console.log(err);
+							res.status(500).json({ status: 500, message: "error caught after auth successful" });
+						}
 					}
 					else {
-						res.status(200).json({ status: 200, userInfo: userInfo })
+						res.status(400).json({ status: 400, message: 'Confirmation code is missing.' });
 					}
-				}catch (err) {
-					console.log(err);
-					res.status(500).json({ status: 500, message: "error after auth successful" });
 				}
+				// case: account has been confirmed
+    	  else if (result.confirmed === true) {
+					console.log('You the else... ',result.confirmationCode, confirmationCode, result.confimed)
+					try {
+						const userInfo = await db.collection('userData').findOne({ email: email });
+						if (!userInfo) {
+							res.status(404).json({ status: 404, message: "Auth succeeded, but could not find data..." });
+						}
+						else {
+							res.status(200).json({ status: 200, userInfo: userInfo })
+						}
+					}catch (err) {
+						console.log(err);
+						res.status(500).json({ status: 500, message: "error caught after auth successful" });
+					}
+				}
+				else {
+					res.status(500).json({ status: 500, message: "error caught" });
+				}
+    	} catch (err) {
+    	  console.log(err);
+    	  res.status(500).json({ status: 500, message: "error caught" });
 			}
-			// case: account has been confirmed
-      else {
-				try {
-					const userInfo = await db.collection('userData').findOne({ email: email });
-					if (!userInfo) {
-						res.status(404).json({ status: 404, message: "Auth succeeded, but could not find data..." });
-					}
-					else {
-						res.status(200).json({ status: 200, userInfo: userInfo })
-					}
-				}catch (err) {
-					console.log(err);
-					res.status(500).json({ status: 500, message: "error after auth successful" });
-				}
-      }
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ status: 500, message: "error" });
-    }
+		}
   };
 
 	const handleCreateAccount = async (req, res) => {
@@ -216,7 +241,7 @@ try {
 			else {
 				// Case no account - create one
 				// First add info to Auth collection
-				let randomConfirmationCode = Math.random();
+				let randomConfirmationCode = Math.floor(100000*Math.random());
         let newUserAuthData = {
           email : email,
 					password : password,
@@ -228,11 +253,22 @@ try {
 
 				// email user confirmation code
 				const mailOptions = {
-					from: myEmailAddress,
-					to: email,
+					from: `"Deez Bot Bois" <${myEmailAddress}>`,
+					to: `${email} ${email}`,
 					subject: 'Deez Bot Bois account Confirmation',
-					text: `Please use the code: ${confirmationCode} to login.  Happy battling!`
+					html: `<b>Greetings ${handle} </b><br><br>
+					Your confirmation code is ${randomConfirmationCode}<br>
+					Please input it with your first login (after that you won't need it).<br>
+					Happy building and battling!
+					`
 				};
+				transporter.sendMail(mailOptions, function(error, info){
+					if (error) {
+						console.log(error);
+					} else {
+						console.log('Email sent: ' + info.response);
+					}
+				});
 
 				// Second add info to Data collection
         let newUserData = {
@@ -240,7 +276,8 @@ try {
 					handle : handle,
 					navLocationPreference : navLocation,
 					cellSizePreference : cellSize,
-					imageUrl : 'https://imgur.com/jS4tREI',
+					// imageUrl : 'https://imgur.com/jS4tREI',
+					imageUrl : 'BotBoxey',
 					googleImageUrl : null,
 					colorTheme : {
 						primary: 'white',
@@ -266,7 +303,7 @@ try {
       }
     } catch (err) {
       console.log(err);
-      res.status(500).json({ status: 500, message: "error" });
+      res.status(500).json({ status: 500, message: "error caught" });
     }
 	};
 
@@ -305,7 +342,7 @@ try {
 			}
 		}catch (err) {
 			console.log(err);
-			res.status(500).json({ status: 500, message: "error" });
+			res.status(500).json({ status: 500, message: "error caught" });
 		}
 	}
 
@@ -339,7 +376,7 @@ try {
 			}
     } catch (err) {
       console.log(err);
-      res.status(500).json({ status: 500, message: "error" });
+      res.status(500).json({ status: 500, message: "error caught" });
     }
 
 	}
@@ -372,13 +409,13 @@ try {
 			}
     } catch (err) {
     	console.log(err);
-      res.status(500).json({ status: 500, message: "error" });
+      res.status(500).json({ status: 500, message: "error caught" });
     }
 	}
 
 module.exports = {
-  handleGoogleLogIn,
-  handleLogIn,
+  handleGoogleLogin,
+  handleLogin,
 	handleCreateAccount,
 	handleChangePassword,
 	handleIncreaseBitCount,

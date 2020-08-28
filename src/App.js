@@ -18,6 +18,7 @@ import Rules from "./Components/Rules/Rules"
 import Test from "./Components/Test/Test";
 import Settings from "./Components/Settings/Settings";
 import Account from "./Components/Account/Account";
+import AltLogin from "./Components/NavBar/AltLogin";
 
 
 function App() {
@@ -53,8 +54,8 @@ function App() {
             <Route exact path="/home">
               <Home/>
             </Route>
-            <Route exact path="/login">
-              {/* <Login /> */}
+            <Route exact path="/altLogin">
+              <AltLogin />
             </Route>
             <Route exact path="/settings">
               <Settings />

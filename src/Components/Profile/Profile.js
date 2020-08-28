@@ -75,6 +75,8 @@ const ProfileWrapper = styled.div`
 		props=>props.profileTab !== 'inactive' &&
 		props.profileTab === 'active' ? '' : `${props.notSelected}`
 	};
+	opacity: ${props => props.profileTab === 'hovering' && '0.5'};
+	;
 	box-shadow: ${props => props.profileTab === 'active' ? 
 		props.navLocation === 'top' ? '0 2px 6px black, -2px 0px 6px black' : '0px 2px 6px black, 2px 0px 6px black' : 
 		props.navLocation === 'top' ? '0 2px 6px silver, -2px 0px 6px silver' : '0px 2px 6px silver, 2px 0px 6px silver'

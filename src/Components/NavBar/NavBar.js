@@ -17,7 +17,7 @@ import StyledButton from '../StyledButton/StyledButton';
 import StyledIcon from '../StyledIcon/StyledIcon';
 import {arrows_move_left} from 'react-icons-kit/linea/arrows_move_left';
 import {arrows_move_top} from 'react-icons-kit/linea/arrows_move_top';
-import Login from './Login';
+import LoginViaGoogle from './LoginViaGoogle';
 import Profile from '../Profile/Profile';
 import Bot from '../Bots/Bot';
 
@@ -32,7 +32,7 @@ function NavBar() {
 
 	React.useEffect((event) => {
 		const targets = document.getElementsByClassName('userImg');
-		console.log('targets for on click use effects', targets)
+		// console.log('targets for on click use effects', targets)
 		if (targets === null || targets.length === 0) return;
 		const handleMouseOver = () => {
 			if (!userInfo.imageUrl) return;
@@ -167,7 +167,33 @@ function NavBar() {
 			>
         {
           userInfo.email === null ? (
-            <Login/>
+						settings.navLocation === 'top' ? (
+							<div>
+								<StyledNavLink to="/altLogin">
+        					<StyledButton
+										handleClick = {() => {dispatch(updateUrl('altLogin'))}}
+										selected = {settings.currentUrl === 'altLogin'}
+										disabled = {settings.currentUrl === 'altLogin'}
+        					  >
+        					  ALT LOGIN
+        					</StyledButton>
+      					</StyledNavLink>
+								<LoginViaGoogle/>
+							</div>
+						) : (
+							<ColDiv>
+								<StyledNavLink to="/altLogin">
+        					<StyledButton
+										handleClick = {() => {dispatch(updateUrl('altLogin'))}}
+										selected = {settings.currentUrl === 'altLogin'}
+										disabled = {settings.currentUrl === 'altLogin'}
+        					  >
+        					  ALT LOGIN
+        					</StyledButton>
+      					</StyledNavLink>
+								<LoginViaGoogle/>
+							</ColDiv>
+						)
           ) : (
 						<>
 							{userInfo.imageUrl && settings.navLocation === 'top' &&
@@ -254,6 +280,15 @@ text-align: center;
 flex-direction: row;
 justify-content: space-between;
 `
+const TopLogInWrapper = styled.div`
+
+`
+const ColDiv = styled.div`
+display: flex;
+flex-direction: column;
+align-content: left;
+`
+
 const BotWrapper = styled.div`
 	width: 40px;
 	height: 40px;
