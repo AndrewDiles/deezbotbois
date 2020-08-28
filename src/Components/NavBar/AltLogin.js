@@ -1,20 +1,187 @@
 import React, { useState } from 'react';
+import { Redirect } from "react-router-dom";
 import styled from 'styled-components';
 
-import { useSelector } from "react-redux";
-import { getThemeColors } from '../../Redux/reducers/user-reducer';
+import { useSelector, useDispatch } from "react-redux";
+import userInfo, { getThemeColors } from '../../Redux/reducers/user-reducer';
 import StyledButton from '../StyledButton/StyledButton';
 
+import {
+	communicating,
+	communicationsSuccessful,
+	communicationsFailed,
+	receiveUserInfo,
+	setNavLocation,
+	setColorTesting,
+	setCellSize,
+	updateUrl
+} from '../../Redux/actions';
+
 const AltLogin = () => {
+	const dispatch = useDispatch();
 	const settings = useSelector((state) => state.settings);
+	const userInfo = useSelector((state) => state.userInfo);
 	const colors = useSelector(getThemeColors);
 	const [existingAccount, setExistingAccount] = useState(null);
 	const [accountConfirmed, setAccountConfirmed] = useState(null);
-	const [handle, setNewHandle] = useState(null);
+	const [handle, setHandle] = useState(null);
+	const [emailEntry, setEmailEntry] = useState(null);
+	const [password1, setPassword1] = useState(null);
+	const [password2, setPassword2] = useState(null);
+	const [confirmationCode, setConfirmationCode] = useState(null);
+	const [errorMsg, setErrorMsg] = useState(null); 
+	const [successMsg ,setSuccessMsg] = useState(null);
+	const [secondSuccessMsg ,setSecondSuccessMsg] = useState(null);
+
+	React.useEffect(() => {
+		if (userInfo.email !== null) {
+			dispatch(updateUrl('home'))
+		}
+	},[userInfo.email])
+
+	React.useEffect(() => {
+		let eraseSuccessMsg;
+		if (successMsg) {
+			eraseSuccessMsg = setTimeout(()=>{
+				setSuccessMsg(null)
+			},5000)
+		}
+		return () => clearTimeout(eraseSuccessMsg)
+	},[successMsg])
+	React.useEffect(() => {
+		let eraseSecondSuccessMsg;
+		if (secondSuccessMsg) {
+			eraseSecondSuccessMsg = setTimeout(()=>{
+				setSecondSuccessMsg(null)
+			},7500)
+		}
+		return () => clearTimeout(eraseSecondSuccessMsg)
+	},[secondSuccessMsg])
+	React.useEffect(() => {
+		let eraseErrorMsg;
+		if (errorMsg) {
+			eraseErrorMsg = setTimeout(()=>{
+				setErrorMsg(null)
+			},2000)
+		}
+		return () => clearTimeout(eraseErrorMsg)
+	},[errorMsg])
+
+	const resetFields = () => {
+		setHandle(null);
+		setEmailEntry(null);
+		setPassword1(null);
+		setPassword2(null);
+		setConfirmationCode(null);
+	}
+	const testForValidEmail = (supposedEmail) => {
+		// Below test function lifted from https://www.w3resource.com/javascript/form/email-validation.php
+		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(supposedEmail)) return (true)
+		return (false)
+	}
 	
-	const selectExistingAccount = (value) => {
-		setExistingAccount(value);
-		console.log(value, existingAccount)
+	const testForInvalidNewAccountData = () => {
+		if (handle === null || handle === '' || !emailEntry || 
+		password1 === null || password1 === '' || 
+		password2 === null || password2 === ''
+		) return true;
+		if (password1 !== password2) return true;
+		if (!testForValidEmail(emailEntry)) return true;
+		return false;
+	}
+	const testForInvalidLoginData = () => {
+		if (!testForValidEmail(emailEntry)) return true;
+		if (password1 === null || password1 === '') return true;
+		return false
+	}
+	const testForInvalidFirstLoginData = () => {
+		let result;
+		result = testForInvalidLoginData();
+		if (result) return result
+
+		if (confirmationCode === null || confirmationCode === '') return true;
+		let charTest = false;
+		let i = 0;
+		Array.from(confirmationCode).forEach((character)=> {
+			i ++;
+			if (!charTest) {
+				if (!(character >= 0 && character <= 9)) charTest = true;
+			}
+		})
+		if (i !== 5) charTest = true;
+		return charTest;
+	}
+	const handleSubmitNewAccount = () => {
+		dispatch(communicating());
+		fetch('server/createAccount', {
+			method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ 
+        email: emailEntry,
+				password: password1,
+				handle: handle,
+				cellSize: settings.cellSize,
+				navLocation: settings.navLocation
+      }),
+		}).then((res)=>{
+			if (res.status === 200) {
+				res.json().then((data)=>{
+					resetFields();
+					setAccountConfirmed(false);
+					setExistingAccount(true);
+					dispatch(communicationsSuccessful());
+					setSuccessMsg("Account creation successful!")
+					setSecondSuccessMsg("Please retrieve your confirmation number from your email.")
+				})
+			}
+			else {
+				res.json().then((data)=>{
+					setErrorMsg(data.message)
+					console.log(data.status, data.message)
+				})
+				dispatch(communicationsFailed())
+			}
+		})
+	}
+
+	const handleLogin = () => {
+		dispatch(communicating());
+		fetch('server/login', {
+			method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailEntry,
+				password: password1,
+				confirmationCode: parseInt(confirmationCode)
+      }),
+		}).then((res)=>{
+			if (res.status === 200) {
+				res.json().then((data)=>{
+					dispatch(receiveUserInfo(data.userInfo));
+					dispatch(setNavLocation(data.userInfo.navLocationPreference));
+					dispatch(setColorTesting(data.userInfo.colorTheme));
+					dispatch(setCellSize(data.userInfo.cellSizePreference));
+					dispatch(communicationsSuccessful());
+				})
+			}
+			else {
+				res.json().then((data)=>{
+					setErrorMsg(data.message)
+					console.log(data.status, data.message)
+				})
+				dispatch(communicationsFailed())
+			}
+		})
+	}
+	
+	if (settings.currentUrl === 'home') {
+		return (
+			<Redirect to="/home"/>
+		)
 	}
   return (
     <Wrapper
@@ -27,13 +194,13 @@ const AltLogin = () => {
 			>
 				Do you have an account? &ensp;
       	<StyledButton
-				handleClick = {() => {setExistingAccount(true);(setAccountConfirmed(null))}}
+				handleClick = {() => {resetFields();setExistingAccount(true);(setAccountConfirmed(null))}}
 				selected = {existingAccount === true}
 				>
 					YES
 				</StyledButton>
 				<StyledButton
-				handleClick = {() => {setExistingAccount(false);(setAccountConfirmed(null))}}
+				handleClick = {() => {resetFields();setExistingAccount(false);(setAccountConfirmed(null))}}
 				selected = {existingAccount === false}
 				>
 					NO
@@ -46,13 +213,13 @@ const AltLogin = () => {
 				>
 					Have you confirmed it? &ensp;
 					<StyledButton
-					handleClick = {() => {setAccountConfirmed(true)}}
+					handleClick = {() => {resetFields();setAccountConfirmed(true)}}
 					selected = {accountConfirmed === true}
 					>
 						YES
 					</StyledButton>
 					<StyledButton
-					handleClick = {() => {setAccountConfirmed(false)}}
+					handleClick = {() => {resetFields();setAccountConfirmed(false)}}
 					selected = {accountConfirmed === false}
 					>
 						NO
@@ -60,55 +227,129 @@ const AltLogin = () => {
 				</RowDiv>
 			}
 			{existingAccount === false &&
-				<RowDiv>
-					<h2>
+				<div>
+					<Styledh2>
 						CREATE A NEW ACCOUNT
-					</h2>
+					</Styledh2>
 					<br/>
-					HANDLE: &ensp; 
-					<StyledInput
-					colors = {colors}
-					className = "centeredInput" 
-					input="text" maxLength = "24" 
-					onChange = {(ev)=>{setNewHandle(ev.target.value)}}
-					/>
-					<br/>
-				</RowDiv>
+					<RowDiv>
+						HANDLE: &ensp; 
+						<StyledInput
+						colors = {colors}
+						className = "centeredInput" 
+						type="text" maxLength = "24" 
+						onChange = {(ev)=>{setHandle(ev.target.value)}}
+						/>
+						<br/>
+					</RowDiv>
+					<RowDiv>
+						EMAIL: &ensp; 
+						<StyledInput
+						colors = {colors}
+						className = "centeredInput" 
+						type="text" maxLength = "24" 
+						onChange = {(ev)=>{setEmailEntry(ev.target.value)}}
+						/>
+						<br/>
+					</RowDiv>
+					<RowDiv>
+						PASSWORD: &ensp; 
+						<StyledInput
+						colors = {colors}
+						className = "centeredInput" 
+						type="text" maxLength = "24" 
+						onChange = {(ev)=>{setPassword1(ev.target.value)}}
+						/>
+						<br/>
+					</RowDiv>
+					<RowDiv>
+						PASSWORD: &ensp; 
+						<StyledInput
+						colors = {colors}
+						className = "centeredInput" 
+						type="text" maxLength = "24" 
+						onChange = {(ev)=>{setPassword2(ev.target.value)}}
+						/>
+						<br/>
+					</RowDiv>
+					<RowDiv>
+						<StyledButton
+						handleClick = {() => {handleSubmitNewAccount()}}
+						disabled = {testForInvalidNewAccountData()}
+						>
+							SUMBIT
+						</StyledButton>
+						<br/>
+					</RowDiv>
+				</div>
 			}
-			{existingAccount === true && accountConfirmed === true &&
-				<RowDiv>
-					<h2>
-						LOGIN
-					</h2>
+			{existingAccount === true && accountConfirmed !== null &&
+				<div>
+					<Styledh2>
+					LOGIN
+					</Styledh2>
 					<br/>
-					EMAIL: &ensp; 
-					{/* <StyledInput
-					colors = {colors}
-					className = "centeredInput" 
-					input="text" maxLength = "24" 
-					onChange = {(ev)=>{setNewHandle(ev.target.value)}}
-					/> */}
-					<br/>
-				</RowDiv>
+					<RowDiv>
+						EMAIL: &ensp; 
+						<StyledInput
+						colors = {colors}
+						className = "centeredInput" 
+						type="text" maxLength = "24" 
+						onChange = {(ev)=>{setEmailEntry(ev.target.value)}}
+						/>
+						<br/>
+					</RowDiv>
+					<RowDiv>
+						PASSWORD: &ensp; 
+						<StyledInput
+						colors = {colors}
+						className = "centeredInput" 
+						type="password" maxLength = "24"
+						onChange = {(ev)=>{setPassword1(ev.target.value)}}
+						/>
+						<br/>
+					</RowDiv>
+					{accountConfirmed === false &&
+						<RowDiv>
+							CONFIRMATION NUMBER: &ensp; 
+							<StyledInput
+							colors = {colors}
+							codeEntry = {true}
+							className = "centeredInput" 
+							type="text" maxLength = "5" 
+							onChange = {(ev)=>{setConfirmationCode(ev.target.value)}}
+							/>
+							<br/>
+						</RowDiv>
+					}
+					<RowDiv>
+						<StyledButton
+						handleClick = {() => {handleLogin()}}
+						disabled = {accountConfirmed === true ? testForInvalidLoginData() : testForInvalidFirstLoginData()}
+						>
+							LOGIN
+						</StyledButton>
+						<br/>
+					</RowDiv>
+				</div>
 			}
-			{existingAccount === true && accountConfirmed === false &&
-				<RowDiv>
-					<h2>
-						FIRST LOGIN
-					</h2>
-					<br/>
-					EMAIL: &ensp; 
-					{/* <StyledInput
-					colors = {colors}
-					className = "centeredInput" 
-					input="text" maxLength = "24" 
-					onChange = {(ev)=>{setNewHandle(ev.target.value)}}
-					/> */}
-					<br/>
-				</RowDiv>
+			{errorMsg &&
+				<ErrorP>
+					{errorMsg}
+				</ErrorP>
+			}
+			{successMsg &&
+				<SuccessP>
+					{successMsg}
+				</SuccessP>
+			}
+			{secondSuccessMsg &&
+				<SuccessP>
+					{secondSuccessMsg}
+				</SuccessP>
 			}
     </Wrapper>
-  )
+	)
 }
 export default AltLogin;
 
@@ -138,9 +379,38 @@ const Wrapper = styled.div`
 
 const StyledInput = styled.input`
 	background-color: ${props => props.colors.secondary};
+	font-size:16px;
+	width: ${props => props.codeEntry ? '100px' : '100%'};
+	height: 25px;
 	color: ${props => props.colors.textColor};
 	&:hover {
 		background-color: ${props => props.colors.hovered};
 	}
 `
-const RowDiv = styled.div``
+const RowDiv = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+`
+
+const ErrorP = styled.p`
+	color: red;
+	font-size: 0.6em;
+`
+const SuccessP = styled.p`
+	color: lime;
+	font-size: 0.6em;
+`
+const Styledh2 = styled.h2`
+	text-align: center;
+	width: 500px;
+	@media screen and (max-width: 800px) {
+			width: 400px
+		}
+	@media screen and (max-width: 600px) {
+		width: 300px
+	}
+	@media screen and (max-width: 400px) {
+		width: 200px
+	}
+`

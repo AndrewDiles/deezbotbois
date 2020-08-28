@@ -23,6 +23,8 @@ Intentions with the GUI include:
 
 ## BUGS:
 
+- Need to return to Nav bar and correct the size of buttons/their content, based on @media screen query so they fit in the bar while the screen is more narrow
+
 - if user's avatar image is a bot, then the onHover to reveal the sample profile tab fails to trigger once they hover over the bot (it only triggers when hovering over the background.)
 
 - Main display not scrollable
@@ -30,6 +32,10 @@ Intentions with the GUI include:
 - If user swaps between color schemes and tries to update, mongo will throw error
 ## Solution: verify if new user object is the same as the old using JSON.stringify
 
+## Potential Improvements
+
+
+- Include a link in the confirmation email that auto fills the confirmationCode
 
 ## Reminders
 

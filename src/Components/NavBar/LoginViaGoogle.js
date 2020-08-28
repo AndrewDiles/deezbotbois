@@ -10,7 +10,8 @@ import {
 	communicationsFailed,
 	receiveUserInfo,
 	setNavLocation,
-	setColorTesting
+	setColorTesting,
+	setCellSize
 } from '../../Redux/actions';
 
 function LoginViaGoogle() {
@@ -37,9 +38,10 @@ function LoginViaGoogle() {
 			if (res.status === 200) {
 				res.json().then((data)=>{
 					dispatch(receiveUserInfo(data.userInfo));
-					dispatch(communicationsSuccessful());
 					dispatch(setNavLocation(data.userInfo.navLocationPreference));
 					dispatch(setColorTesting(data.userInfo.colorTheme));
+					dispatch(setCellSize(data.userInfo.cellSizePreference));
+					dispatch(communicationsSuccessful());
 				})
 			}
 			else if (res.status === 400) {

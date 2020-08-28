@@ -168,7 +168,7 @@ function NavBar() {
         {
           userInfo.email === null ? (
 						settings.navLocation === 'top' ? (
-							<div>
+							<TopLogInWrapper>
 								<StyledNavLink to="/altLogin">
         					<StyledButton
 										handleClick = {() => {dispatch(updateUrl('altLogin'))}}
@@ -179,7 +179,7 @@ function NavBar() {
         					</StyledButton>
       					</StyledNavLink>
 								<LoginViaGoogle/>
-							</div>
+							</TopLogInWrapper>
 						) : (
 							<ColDiv>
 								<StyledNavLink to="/altLogin">
@@ -281,7 +281,11 @@ flex-direction: row;
 justify-content: space-between;
 `
 const TopLogInWrapper = styled.div`
-
+display: flex;
+flex-direction: row;
+align-content: right;
+justify-content: space-between;
+width: 260px;
 `
 const ColDiv = styled.div`
 display: flex;

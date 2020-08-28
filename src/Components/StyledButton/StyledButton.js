@@ -46,6 +46,7 @@ const ButtonStylings = styled.button`
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
   color: ${props => props.colors.textColor};
+	opacity: ${props => props.disabled && 0.5};
   transition: color .75s, background-color .75s;
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
