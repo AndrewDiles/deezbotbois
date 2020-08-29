@@ -6,7 +6,9 @@ const assert = require('assert');
 const nodemailer = require('nodemailer');
 // const password = process.env.mongoKey || require('./mongo');
 const { password } = require('./mongo.js');
-const { emailPassword, gmailAppPassword } = require('./hotmail.js');
+const { emailPassword } = require('./hotmail.js');
+const { encryptomancer, recnamotpyrcne } = require('./encryptomancer.js');
+const { magic } = require('./magicUser');
 const { isNull } = require('util');
 const myEmailAddress = 'a_diles@hotmail.com';
 
@@ -75,7 +77,7 @@ try {
         let newUserAuthData = {
 					email: email,
 					userName: "DeezBotBois",
-					password: 'google',
+					password: encryptomancer('google', magic),
 					confirmed: true,
         };
         const test1 = await db.collection('userAuth').insertOne(newUserAuthData);
@@ -132,13 +134,13 @@ try {
 
 	const handleLogin = async (req, res) => {
     const email = req.body.email;
-		const password = req.body.password;
+		const password = encryptomancer(req.body.password,magic);
 		const confirmationCode = req.body.confirmationCode || null;
 		
     if (email === undefined || password === undefined) {
 			res.status(400).json({ status: 400, message: 'Email or password not entered.' });
 		}
-		else if (password === 'google') {
+		else if (password === encryptomancer('google',magic)) {
 			res.status(403).json({ status: 403, message: "password may not be exactly 'google'." });
 		}
 		else {
@@ -149,7 +151,7 @@ try {
     	  if (!result || result.length === 0) {
 					res.status(404).json({ status: 404, message: "No user found with that email." })
 				}
-				else if (result.password !== password) {
+				else if (result.password.toString() !== password.toString()) {
 					res.status(401).json({ status: 401, message: "Password does not match." })
 				}
 				// case: account still needs to be confirmed
@@ -213,7 +215,7 @@ try {
 
 	const handleCreateAccount = async (req, res) => {
 		const email = req.body.email;
-		const password = req.body.password;
+		const password = encryptomancer(req.body.password, magic);
 		const handle = req.body.handle;
 		const cellSize = req.body.cellSize;
 		const navLocation = req.body.navLocation;
@@ -226,7 +228,7 @@ try {
 			) {
       res.status(400).json({ status: 400, message: 'Information is missing' });
 		}
-		else if (password === 'google') {
+		else if (password === encryptomancer('google',magic)) {
 			res.status(403).json({ status: 403, message: "password may not be exactly 'google'." });
 		}
 
@@ -315,7 +317,7 @@ try {
 		else if (authInfo.password === 'google') {
 			res.status(403).json({ status: 403, message: "password may not be exactly 'google'." });
 		}
-		
+		authInfo.password = encryptomancer(authInfo.password,magic);
 		const db = client.db('botBoiDatabase');
 		
     try {

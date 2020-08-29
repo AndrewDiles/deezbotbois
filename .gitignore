@@ -15,6 +15,7 @@
 authInfo.js
 mongo.js
 hotmail.js
+magicUser.js
 
 # misc
 .DS_Store

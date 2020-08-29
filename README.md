@@ -41,6 +41,11 @@ Intentions with the GUI include:
 
 ## Potential Improvements
 
+- Change log in to only request confirmation code once an attempt to login for the first time has been made, instead of asking user if they need to input one.
+
+- encrypt passwords
+
+- Refactor fetch functions into re-useable, importable functions.
 
 - Include a link in the confirmation email that auto fills the confirmationCode
 
