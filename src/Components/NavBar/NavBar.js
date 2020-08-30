@@ -234,10 +234,10 @@ const BorderDivForUserImg = styled.div`
 	border-radius: 50%;
 	transition: transform .75s;
 	animation: ${props => props.glow > 79200000 ? '1s linear infinite alternate glowUserImg':''};
-	/* :hover {
+	:hover {
 		transform: scale(1.2);
 		cursor: pointer;
-	} */
+	}
 `
 const Wrapper = styled.nav`
   width: ${props => props.navLocation === 'top' ? '100%' : '135px'};

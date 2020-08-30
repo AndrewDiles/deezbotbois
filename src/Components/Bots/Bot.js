@@ -38,7 +38,17 @@ import Bonkbonk from '../Arms/Bonkbonk';
 const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeBotSize } ) => {
   const settings = useSelector((state) => state.settings);
 	// console.log('model',model);
-  if (!botColors) botColors = defaultBotColors;
+	if (!model) {
+		console.log('no bot model');
+		return (
+			<NoBot 
+			cellSize = {alternativeBotSize || settings.cellSize}
+			/>
+		)
+	}
+	
+	console.log('bot model:', model)
+	if (!botColors) botColors = defaultBotColors;
 
   let SelectedBot = null;
   switch(model) {
@@ -109,13 +119,13 @@ const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeB
       botColors = {botColors}
       cellSize = {alternativeBotSize || settings.cellSize}
       >
-        <SelectedArm1
-        botColors = {botColors}
-        cellSize = {alternativeBotSize || settings.cellSize}
-        armAngle = {arm1Angle}
-        >
-
-        </SelectedArm1>
+				{SelectedArm1 &&  
+					<SelectedArm1
+					botColors = {botColors}
+					cellSize = {alternativeBotSize || settings.cellSize}
+					armAngle = {arm1Angle}
+					/>
+				}
         {SelectedArm2 &&
           <SelectedArm2
           botColors = {botColors}
@@ -132,4 +142,9 @@ export default Bot;
 const Wrapper = styled.div`
   height: ${props => `${props.cellSize}px`};
   width: ${props => `${props.cellSize}px`};
+`
+const NoBot = styled.div`
+	height: ${props => `${props.cellSize}px`};
+  width: ${props => `${props.cellSize}px`};
+	background: rgba(0,0,0,0.2);
 `

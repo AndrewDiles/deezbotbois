@@ -7,7 +7,6 @@ import {starFull} from 'react-icons-kit/icomoon/starFull'
 
 const Star = ({ color, animated }) => {
 	const settings = useSelector((state) => state.settings);
-	console.log('settings',settings)
 			return (
 			<StyledIcon
 			navlocation = {settings.navLocation}

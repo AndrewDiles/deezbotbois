@@ -12,6 +12,8 @@ const {
 	handleChangePassword,
 	handleIncreaseBitCount,
 	handleReplaceUserInfo,
+	handleCreateNewBot,
+	handleUpdateBotBuilds,
 } = require('./handlers');
 
 const PORT = process.env.PORT || 9009;
@@ -89,6 +91,15 @@ App
 	// Body has shape: {
 	// email:
 	// userInfo:
+	// }
+	.post("/server/createNewBot", handleCreateNewBot)
+	// Body has shape: {
+	// email:
+	// }
+	.post("/server/updateBotBuilds", handleUpdateBotBuilds)
+	// Body has shape: {
+	// email:
+	// botBuilds:
 	// }
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

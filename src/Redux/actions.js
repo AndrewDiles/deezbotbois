@@ -68,6 +68,20 @@ export const increaseBitCount = (bitIncrease, currentTime) => ({
 	bitIncrease: bitIncrease,
 	currentTime: currentTime,
 });
+export const receiveBotInfo = (botInfo) => ({
+	type: 'RECEIVE_BOT_INFO',
+	botInfo: botInfo
+})
+export const changeBotColors = (index, botColors) => ({
+	type: 'CHANGE_BOT_COLORS',
+	index: index,
+	botColors: botColors
+})
+export const changeBotName = (index, botName) => ({
+	type: 'CHANGE_BOT_NAME',
+	index: index,
+	botName: botName
+})
 export const replaceUserInfo = (newUserInfo) => ({
 	type: 'REPLACE_USER_INFO',
 	newUserInfo: newUserInfo,

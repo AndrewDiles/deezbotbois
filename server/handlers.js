@@ -158,8 +158,12 @@ try {
 				else if (result.confirmed === false){
 					console.log('account has yet to be confirmed')
 					console.log('needed code:', result.confirmationCode, 'code sent', confirmationCode)
+					// case: confirmation code not send
+					if (confirmationCode === undefined || confirmationCode === null) {
+						res.status(206).json({ status: 206, message: "Please submit confirmation code." })
+					}
 					// case: incorrect code
-					if (result.confirmationCode !== confirmationCode) {
+					else if (result.confirmationCode !== confirmationCode) {
 						res.status(401).json({ status: 401, message: "Confirmation code does not match." })
 					}
 					else if (result.confirmationCode === confirmationCode) {
@@ -415,6 +419,87 @@ try {
     }
 	}
 
+	const handleCreateNewBot = async (req, res) => {
+		const email = req.body.email;
+		if (email === undefined) {
+      res.status(400).json({ status: 400, message: 'Information is missing' });
+		}
+
+		const db = client.db('botBoiDatabase');
+
+		let query = {email : email};
+		try {
+			const result = await db.collection('userData').findOne(query);
+			if (!result || result.length === 0) {
+        res.status(404).json({ status: 404, message: 'Could not find user info connected to given email' });
+      }
+      else {
+				let botInfo = result.botBuilds;
+				let newBot = {
+					name: null,
+					model: 'BotBoxey',
+					colors: {
+						primary: 'lime',
+						secondary: 'turquoise',
+						trim: 'green',
+						extensions: 'silver',
+						rollers: 'black',
+						eyes: 'orange',
+						armTrim: 'steelblue',
+						armPrimary: 'silver',
+						armSecondary: 'deepskyblue'
+						},
+					equipment : {
+						arm1: null,
+						arm2: null,
+						arm3: null,
+						acc1: null,
+						acc2: null,
+						acc3: null,
+						acc4: null,
+						acc5: null
+					},
+					script: {}
+				};
+				botInfo.push(newBot);
+				const newUserInfo = { $set: { botBuilds: botInfo } };
+				const r = await db.collection('userData').updateOne(query, newUserInfo);
+				assert.equal(1, r.modifiedCount);
+				res.status(200).json({ status: 200, botInfo: botInfo, message: "New Bot Created!" })
+			}
+    } catch (err) {
+    	console.log(err);
+      res.status(500).json({ status: 500, message: "error caught" });
+    }
+	}
+
+	const handleUpdateBotBuilds = async (req, res) => {
+		const email = req.body.email;
+		const newBotBuilds = req.body.botBuilds;
+		if (email === undefined || newBotBuilds === undefined) {
+      res.status(400).json({ status: 400, message: 'Information is missing' });
+		}
+
+		const db = client.db('botBoiDatabase');
+
+		let query = {email : email};
+		try {
+			const result = await db.collection('userData').findOne(query);
+			if (!result || result.length === 0) {
+        res.status(404).json({ status: 404, message: 'Could not find user info connected to given email' });
+      }
+      else {
+				const newUserInfo = { $set: { botBuilds: newBotBuilds } };
+				const r = await db.collection('userData').updateOne(query, newUserInfo);
+				assert.equal(1, r.modifiedCount);
+				res.status(200).json({ status: 200, botBuilds: newBotBuilds, message: "Bots Saved!" })
+			}
+    } catch (err) {
+    	console.log(err);
+      res.status(500).json({ status: 500, message: "error caught" });
+    }
+	}
+
 module.exports = {
   handleGoogleLogin,
   handleLogin,
@@ -422,4 +507,6 @@ module.exports = {
 	handleChangePassword,
 	handleIncreaseBitCount,
 	handleReplaceUserInfo,
+	handleCreateNewBot,
+	handleUpdateBotBuilds
 };

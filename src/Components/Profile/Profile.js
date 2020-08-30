@@ -12,6 +12,7 @@ import {
 import StyledButton from '../StyledButton/StyledButton';
 import Logout from '../NavBar/Logout';
 import Gift from './Gift';
+import SizeSlider from '../SizeSlider/SizeSlider';
 
 const Profile = ({ time, disabled }) => {
 	const dispatch = useDispatch();
@@ -54,6 +55,8 @@ const Profile = ({ time, disabled }) => {
       	  FIGHT-EM
         </StyledButton>
     	</StyledNavLink>
+
+			<SizeSlider/>
 
 			<StyledNavLink to="/settings">
         <StyledButton

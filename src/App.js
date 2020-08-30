@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import { updateUrl } from "./Redux/actions";
-import { getThemeColors } from './Redux/reducers/user-reducer';
+import userInfo, { getThemeColors } from './Redux/reducers/user-reducer';
 
 import GlobalStyles from "./Components/GlobalStyles/GlobalStyles";
 import NavBar from "./Components/NavBar/NavBar";
@@ -25,7 +25,8 @@ import AltLogin from "./Components/NavBar/AltLogin";
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const dispatch = useDispatch();
-  const settings = useSelector((state) => state.settings);
+	const settings = useSelector((state) => state.settings);
+	const userInfo = useSelector((state) => state.userInfo);
   let colors = useSelector(getThemeColors);
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
   
@@ -65,7 +66,11 @@ function App() {
               <Account />
             </Route>
 						<Route exact path="/assemble">
-              <Assemble />
+							{userInfo.botBuilds ? (
+								<Assemble />
+							) : (
+								<Redirect to="/home" />
+							)}
             </Route>
 						<Route exact path="/levels">
               <Levels />

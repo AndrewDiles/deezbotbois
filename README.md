@@ -43,11 +43,19 @@ Intentions with the GUI include:
 
 - Change log in to only request confirmation code once an attempt to login for the first time has been made, instead of asking user if they need to input one.
 
-- encrypt passwords
 
 - Refactor fetch functions into re-useable, importable functions.
 
 - Include a link in the confirmation email that auto fills the confirmationCode
+
+
+
+## Potential Improvements Met
+
+- encrypt passwords
+# DONE
+- Don't ask user if it is their first time logging in.  Instead, let them try, and then ask for the confirmation code.
+# DONE
 
 ## Reminders
 

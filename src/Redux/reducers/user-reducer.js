@@ -38,6 +38,28 @@ export default function userInfo(
 					lastLogInBitsReceived : action.currentTime,
 				}
 			}
+			case 'RECEIVE_BOT_INFO' : {
+				return {
+					...state,
+					botBuilds : action.botInfo,
+				}
+			}
+			case 'CHANGE_BOT_COLORS' : {
+				let botBuilds = {...state.botBuilds};
+				botBuilds[action.index].colors = action.botColors;
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
+			case 'CHANGE_BOT_NAME' : {
+				let botBuilds = {...state.botBuilds};
+				botBuilds[action.index].name = action.botName;
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
 			case 'REPLACE_USER_INFO' : {
 				return {
 					...action.newUserInfo,

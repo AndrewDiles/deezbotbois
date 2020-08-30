@@ -112,38 +112,56 @@ const AltLogin = () => {
 		return charTest;
 	}
 	const handleSubmitNewAccount = () => {
-		dispatch(communicating());
-		fetch('server/createAccount', {
-			method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ 
-        email: emailEntry,
-				password: password1,
-				handle: handle,
-				cellSize: settings.cellSize,
-				navLocation: settings.navLocation
-      }),
-		}).then((res)=>{
-			if (res.status === 200) {
-				res.json().then((data)=>{
-					resetFields();
-					setAccountConfirmed(false);
-					setExistingAccount(true);
-					dispatch(communicationsSuccessful());
-					setSuccessMsg("Account creation successful!")
-					setSecondSuccessMsg("Please retrieve your confirmation number from your email.")
-				})
-			}
-			else {
-				res.json().then((data)=>{
-					setErrorMsg(data.message)
-					console.log(data.status, data.message)
-				})
-				dispatch(communicationsFailed())
-			}
-		})
+		if (handle === null || handle === '') {
+			setErrorMsg('Please enter a handle!');
+			return;
+		}
+		else if (!testForValidEmail(emailEntry)) {
+			setErrorMsg('Invalid Email Address!');
+			return;
+		}
+		else if (password1 === null || password1 === '' || password2 === null || password2 === '') {
+			setErrorMsg('A password may not be blank.');
+			return;
+		}
+		else if (password1 !== password2) {
+			setErrorMsg('Passwords do not match!');
+			return;
+		}
+		else {
+			dispatch(communicating());
+			fetch('server/createAccount', {
+				method: "POST",
+    	  headers: {
+    	    "Content-Type": "application/json",
+    	  },
+    	  body: JSON.stringify({ 
+    	    email: emailEntry,
+					password: password1,
+					handle: handle,
+					cellSize: settings.cellSize,
+					navLocation: settings.navLocation
+    	  }),
+			}).then((res)=>{
+				if (res.status === 200) {
+					res.json().then((data)=>{
+						resetFields();
+						setAccountConfirmed(false);
+						setExistingAccount(true);
+						dispatch(communicationsSuccessful());
+						setSuccessMsg("Account creation successful!")
+						setSecondSuccessMsg("Please retrieve your confirmation number from your email.")
+					})
+				}
+				else {
+					res.json().then((data)=>{
+						setErrorMsg(data.message)
+						console.log(data.status, data.message)
+					})
+					dispatch(communicationsFailed())
+				}
+			})
+		}
 	}
 
 	const handleLogin = () => {
@@ -165,6 +183,13 @@ const AltLogin = () => {
 					dispatch(setNavLocation(data.userInfo.navLocationPreference));
 					dispatch(setColorTesting(data.userInfo.colorTheme));
 					dispatch(setCellSize(data.userInfo.cellSizePreference));
+					dispatch(communicationsSuccessful());
+				})
+			}
+			else if (res.status === 206) {
+				res.json().then((data)=>{
+					setSuccessMsg(data.message);
+					setAccountConfirmed(false);
 					dispatch(communicationsSuccessful());
 				})
 			}
@@ -207,7 +232,7 @@ const AltLogin = () => {
 				</StyledButton>
 			</RowDiv>
 			<br/>
-			{existingAccount === true &&
+			{/* {existingAccount === true &&
 				<RowDiv
 				className = {'centeredFlex'}
 				>
@@ -225,7 +250,7 @@ const AltLogin = () => {
 						NO
 					</StyledButton>
 				</RowDiv>
-			}
+			} */}
 			{existingAccount === false &&
 				<div>
 					<Styledh2>
@@ -275,7 +300,7 @@ const AltLogin = () => {
 					<RowDiv>
 						<StyledButton
 						handleClick = {() => {handleSubmitNewAccount()}}
-						disabled = {testForInvalidNewAccountData()}
+						// disabled = {testForInvalidNewAccountData()}
 						>
 							SUMBIT
 						</StyledButton>
@@ -283,7 +308,7 @@ const AltLogin = () => {
 					</RowDiv>
 				</div>
 			}
-			{existingAccount === true && accountConfirmed !== null &&
+			{existingAccount === true &&
 				<div>
 					<Styledh2>
 					LOGIN
@@ -325,7 +350,7 @@ const AltLogin = () => {
 					<RowDiv>
 						<StyledButton
 						handleClick = {() => {handleLogin()}}
-						disabled = {accountConfirmed === true ? testForInvalidLoginData() : testForInvalidFirstLoginData()}
+						disabled = {accountConfirmed === null ? testForInvalidLoginData() : testForInvalidFirstLoginData()}
 						>
 							LOGIN
 						</StyledButton>
