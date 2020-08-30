@@ -436,7 +436,7 @@ try {
       else {
 				let botInfo = result.botBuilds;
 				let newBot = {
-					name: null,
+					name: '',
 					model: 'BotBoxey',
 					colors: {
 						primary: 'lime',
@@ -489,6 +489,8 @@ try {
         res.status(404).json({ status: 404, message: 'Could not find user info connected to given email' });
       }
       else {
+			// 	let newUserInfo = {...result}
+			// 	newUserInfo.botBuilds = newBotBuilds;
 				const newUserInfo = { $set: { botBuilds: newBotBuilds } };
 				const r = await db.collection('userData').updateOne(query, newUserInfo);
 				assert.equal(1, r.modifiedCount);

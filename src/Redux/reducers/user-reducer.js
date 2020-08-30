@@ -53,7 +53,7 @@ export default function userInfo(
 				}
 			}
 			case 'CHANGE_BOT_NAME' : {
-				let botBuilds = {...state.botBuilds};
+				let botBuilds = [...state.botBuilds];
 				botBuilds[action.index].name = action.botName;
 				return {
 					...state,

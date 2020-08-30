@@ -39,15 +39,13 @@ const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeB
   const settings = useSelector((state) => state.settings);
 	// console.log('model',model);
 	if (!model) {
-		console.log('no bot model');
+		// console.log('no bot model');
 		return (
 			<NoBot 
 			cellSize = {alternativeBotSize || settings.cellSize}
 			/>
 		)
 	}
-	
-	console.log('bot model:', model)
 	if (!botColors) botColors = defaultBotColors;
 
   let SelectedBot = null;

@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect } from "react-router-dom";
-
+import React from 'react';
 import { useSelector } from "react-redux";
-import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import styled from 'styled-components';
 import StyledIcon from '../StyledIcon/StyledIcon';
@@ -10,9 +7,10 @@ import {arrowRight} from 'react-icons-kit/icomoon/arrowRight';
 import {arrowLeft} from 'react-icons-kit/icomoon/arrowLeft';
 import Bot from '../Bots/Bot';
 
-const BotSelection = ({ botInfo, setBotNumberSelected, botNumberSelected}) => {
+const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	const colors = useSelector(getThemeColors);
+	const settings = useSelector((state) => state.settings);
+	const botInfo = userInfo.botBuilds;
 
 	const handleRotateBot = (direction) => {
 		if (!userInfo.botBuilds) return;
@@ -33,9 +31,6 @@ const BotSelection = ({ botInfo, setBotNumberSelected, botNumberSelected}) => {
 	}
   return (
     <Wrapper>
-			<h3>
-				SELECT BUILD
-			</h3>
 			<RowDivSpace>
 				<Bot
 				alternativeBotSize = {50}

@@ -67,6 +67,7 @@ function NavBar() {
     }
 	},[dispatch, settings.profileTab, settings.navLocation, userInfo.imageUrl]);
 
+	// Notice: the timer causes the navBar to re-render every .5 seconds
 	React.useEffect(() => {
 		const timer = setInterval(() => {
 			setTime(Date.now());

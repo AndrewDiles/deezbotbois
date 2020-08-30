@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import MessageDisplay from '../MessageDisplay/MessageDisplay';
 import CreateNewBot from './CreateNewBot';
 import SaveBots from './SaveBots';
+import DeleteBot from './DeleteBot';
 import BotSelection from './BotSelection';
 import BotModel from './BotModel';
 import BotEquipment from './BotEquipment';
@@ -18,21 +19,17 @@ import BotScripts from './BotScripts';
 const Assemble = () => {
 	const settings = useSelector((state) => state.settings);
 	const userInfo = useSelector((state) => state.userInfo);
+	const [botSnapshot, setBotSnapshot] = useState(JSON.parse(JSON.stringify(userInfo.botBuilds)));
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [successMsg, setSuccessMsg] = useState(null);
-	const [botNumberSelected, setBotNumberSelected] = useState(null);
-	// const [botInfo, setBotInfo] = useState(userInfo.botBuilds);
+	const [botNumberSelected, setBotNumberSelected] = useState(0);
+	// const [botLoaded, setBotLoaded] = useState(false);
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
 
-	useEffect(() => {
-    // if (userInfo.botBuilds && userInfo.botBuilds.length !== 0) {
-			setBotNumberSelected(0);
-		// }
-	}, [userInfo.botBuilds.length]);
 	// useEffect(() => {
-  //   setBotInfo(userInfo.botBuilds);
-	// }, [userInfo.botBuilds]);
+	// 		setBotNumberSelected(0);
+	// }, [userInfo.botBuilds.length]);
 	useEffect(() => {
 		let eraseSuccessMsg;
 		if (successMsg) {
@@ -83,42 +80,50 @@ const Assemble = () => {
 				setSuccessMsg = {setSuccessMsg}
 				/>
 				<SaveBots
-				disabled = {userInfo.botBuilds.toString() === botInfo.toString()}
-				botInfo = {botInfo}
+				disabled = {JSON.stringify(botSnapshot) === JSON.stringify(botInfo)}
 				setErrorMsg = {setErrorMsg}
 				setSuccessMsg = {setSuccessMsg}
+				setBotSnapshot = {setBotSnapshot}
 				/>
+				{/* Delete bot? */}
 			</RowDivSpace>
 			<br/>
-			<RowDivSpace>
-				<BotSelection
-				botInfo = {botInfo} 
+			{botInfo.length > 0 &&
+				<RowDivSpace>
+					<BotSelection
+					setBotNumberSelected = {setBotNumberSelected}
+					botNumberSelected = {botNumberSelected}
+					// botLoaded = {botLoaded} 
+					// setBotLoaded = {setBotLoaded}
+					/>
+				</RowDivSpace>
+			}
+			{botInfo.length > 0 &&
+				<DeleteBot
 				setBotNumberSelected = {setBotNumberSelected}
 				botNumberSelected = {botNumberSelected}
+				setErrorMsg = {setErrorMsg}
+				setSuccessMsg = {setSuccessMsg}
+				setBotSnapshot = {setBotSnapshot}
 				/>
-			</RowDivSpace>
-			<AssemblyGrid>
-				<BotModel
-				botInfo = {botInfo} 
-				setBotNumberSelected = {setBotNumberSelected}
-				botNumberSelected = {botNumberSelected}
-				/>
-				<BotEquipment
-				botInfo = {botInfo} 
-				setBotNumberSelected = {setBotNumberSelected}
-				botNumberSelected = {botNumberSelected}
-				/>
-				<BotAI
-				botInfo = {botInfo} 
-				setBotNumberSelected = {setBotNumberSelected}
-				botNumberSelected = {botNumberSelected}
-				/>
-				<BotScripts
-				botInfo = {botInfo} 
-				setBotNumberSelected = {setBotNumberSelected}
-				botNumberSelected = {botNumberSelected}
-				/>
-      </AssemblyGrid>
+			}
+				<br/>
+			{botInfo.length > 0 &&
+				<AssemblyGrid>
+					<BotModel
+					botNumberSelected = {botNumberSelected}
+					/>
+					<BotEquipment
+					botNumberSelected = {botNumberSelected}
+					/>
+					<BotAI
+					botNumberSelected = {botNumberSelected}
+					/>
+					<BotScripts
+					botNumberSelected = {botNumberSelected}
+					/>
+      	</AssemblyGrid>
+			}
     </Wrapper>
   )
 }
@@ -153,7 +158,7 @@ const AssemblyGrid = styled.div`
     width: 620px;
 		grid-template-columns: 1fr 1fr;
   }
-	@media screen and (max-width: 600px) {
+	@media screen and (max-width: 750px) {
     width: 300px;
 		grid-template-columns: 1fr;
   }

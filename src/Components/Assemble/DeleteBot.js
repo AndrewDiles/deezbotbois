@@ -1,8 +1,6 @@
 import React from 'react';
-
 import { useSelector, useDispatch } from "react-redux";
-import { getThemeColors } from '../../Redux/reducers/user-reducer';
-
+import styled from 'styled-components';
 import StyledButton from '../StyledButton/StyledButton';
 
 import {
@@ -12,21 +10,35 @@ import {
 	receiveBotInfo,
 } from '../../Redux/actions';
 
-const SaveBots = ({ disabled, setErrorMsg, setSuccessMsg, setBotSnapshot }) => {
+const DeleteBot = ({ setBotNumberSelected, botNumberSelected, setErrorMsg, setSuccessMsg, setBotSnapshot }) => {
 	const settings = useSelector((state) => state.settings);
 	const userInfo = useSelector((state) => state.userInfo);
+	const [confirmOpen, setConfirmOpen] = React.useState(false);
 	const botInfo = userInfo.botBuilds;
 	const dispatch = useDispatch();
-	const handleSaveBots = () => {
+
+	React.useEffect(() => {
+		let closeTimer;
+		if (confirmOpen) {
+			closeTimer = setTimeout(()=>{
+				if (setConfirmOpen) {
+					setConfirmOpen(null)
+				}
+			},5000)
+		}
+		return () => clearTimeout(closeTimer)
+	},[confirmOpen])
+
+	const handleDeleteBot = () => {
 		dispatch(communicating());
-			fetch('server/updateBotBuilds', {
+			fetch('server/removeBot', {
 				method: "POST",
     	  headers: {
     	    "Content-Type": "application/json",
     	  },
     	  body: JSON.stringify({ 
 					email: userInfo.email,
-					botBuilds: botInfo,
+					index: botNumberSelected,
     	  }),
 			}).then((res)=>{
 				if (res.status === 200) {
@@ -47,12 +59,30 @@ const SaveBots = ({ disabled, setErrorMsg, setSuccessMsg, setBotSnapshot }) => {
 			})
 	}
   return (
-    <StyledButton
-			handleClick = {() => {handleSaveBots()}}
-			disabled = {disabled || settings.serverStatus !== 'idle'}
-			>
-				SAVE BOTS
+		<RowDivCenter
+		className = {'centeredFlex'}
+		>
+    	<StyledButton
+				handleClick = {() => {setConfirmOpen(true)}}
+				disabled = {settings.serverStatus !== 'idle'}
+				>
+					REMOVE BUILD
+			</StyledButton>
+			{confirmOpen && 
+				<StyledButton
+				handleClick = {() => {handleDeleteBot()}}
+				disabled = {settings.serverStatus !== 'idle'}
+				>
+				CONFIRM REMOVAL
 		</StyledButton>
+			}
+		</RowDivCenter>
   )
 }
-export default SaveBots;
+export default DeleteBot;
+
+const RowDivCenter = styled.div`
+	/* width: ${props => props.cellSize && `${4*props.cellSize}px`}; */
+	width: 300px;
+	flex-direction: row;
+`

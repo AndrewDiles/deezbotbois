@@ -1,13 +1,10 @@
 import React from 'react';
-
 import { useSelector } from "react-redux";
-import { getThemeColors } from '../../Redux/reducers/user-reducer';
-
 import styled from 'styled-components';
 
-const BotEquipment = ({ botInfo, setBotNumberSelected, botNumberSelected}) => {
+const BotEquipment = ({ botNumberSelected}) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	const colors = useSelector(getThemeColors);
+	const botInfo = userInfo.botBuilds;
 
 	if (!userInfo.botBuilds) {
 		return (<></>)

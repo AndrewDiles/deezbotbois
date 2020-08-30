@@ -10,30 +10,32 @@ import {
 	changeBotName,
 } from '../../Redux/actions';
 
-const BotModel = ({ botInfo, setBotNumberSelected, botNumberSelected}) => {
-	// const userInfo = useSelector((state) => state.userInfo);
-	const [name, setName] = useState(null);
+const BotModel = ({ botNumberSelected}) => {
+	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
 	const colors = useSelector(getThemeColors);
+	const botInfo = userInfo.botBuilds;
+	// const [initialChange, setInitialChange] = React.useState(true);
+	// const [name, setName] = useState(botInfo[botNumberSelected].name);
 
-	React.useEffect(()=>{
-		if(botInfo[setBotNumberSelected]) {
-			setName(botInfo[setBotNumberSelected].name)
-		}
-	},[botInfo])
+	// React.useEffect(()=>{
+	// 	setInitialChange(true)
+	// },[botNumberSelected])
 
-	// if (!userInfo.botBuilds) {
-	// 	return (<></>)
-	// }
   return (
     <Wrapper>
 			NAME
+			{botInfo[botNumberSelected] &&
 			<StyledInput
 			colors = {colors}
 			className = "centeredInput" 
 			type="text" maxLength = "12" 
-			onChange = {(ev)=>{setName(ev.target.value);dispatch(changeBotName(setBotNumberSelected, name))}}
+			value = {userInfo.botBuilds[botNumberSelected].name}
+			onChange = {(ev)=>{
+				// initialChange ? setInitialChange(false) :
+				dispatch(changeBotName(botNumberSelected, ev.target.value))}}
 			/>
+			}
     </Wrapper>
   )
 }
