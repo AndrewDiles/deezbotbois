@@ -4,7 +4,7 @@ import { Icon } from 'react-icons-kit';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, padding, absolute} ) => {
+const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, size, padding, absolute} ) => {
 	const settings = useSelector((state) => state.settings);
 	let colors = useSelector(getThemeColors);
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
@@ -16,7 +16,7 @@ const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing,
       icon = {icon}
       selected = {selected}
       children = {children}
-      size = {30}
+      size = {size || 30}
 			colors = {colors}
 			glowing = {glowing}
 			padding = {padding}
@@ -29,8 +29,6 @@ const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing,
 export default StyledIcon;
 
 const IconStylings = styled(Icon)`
-  height: 40px;
-  width: 40px;
   padding: ${props => props.padding && `${props.padding}px`};
   position: ${props => props.absolute ? 'absolute' : 'relative'};
   color: ${props => !props.glowing && props.colors.textColor};
@@ -46,4 +44,9 @@ const IconStylings = styled(Icon)`
     background-color: ${props => !props.disabled && props.colors.hovered};
 		color: ${props => !props.disabled && props.colors.hoveredText};
   }
+	> i {
+		text-align: center;
+		justify-content: center;
+		align-self: center;
+	}
 `

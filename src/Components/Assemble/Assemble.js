@@ -13,6 +13,8 @@ import DeleteBot from './DeleteBot';
 import BotSelection from './BotSelection';
 import BotModel from './BotModel';
 import BotEquipment from './BotEquipment';
+import BotStats from './BotStats';
+import BotTechTree from './BotTechTree';
 import BotAI from './BotAI';
 import BotScripts from './BotScripts';
 
@@ -55,16 +57,22 @@ const Assemble = () => {
 				<ColDivCenter
 				className = {'centeredFlex'}
 				>
-					<MessageDisplay
-					type = {'success'}
-					msg = {successMsg}
-					setMsg = {setSuccessMsg}
-					/>
-					<MessageDisplay
-					type = {'error'}
-					msg = {errorMsg}
-					setMsg = {setErrorMsg}
-					/>
+					{successMsg &&
+						<MessageDisplay
+						type = {'success'}
+						msg = {successMsg}
+						setMsg = {setSuccessMsg}
+						textSize = {'1.7em'}
+						/>
+					}
+					{errorMsg &&
+						<MessageDisplay
+						type = {'error'}
+						msg = {errorMsg}
+						setMsg = {setErrorMsg}
+						textSize = {'1.7em'}
+						/>
+					}
 					{!successMsg && !errorMsg &&
 					<h1>
 						BUILD-EM
@@ -109,11 +117,19 @@ const Assemble = () => {
 			}
 				<br/>
 			{botInfo.length > 0 &&
-				<AssemblyGrid>
+				<AssemblyGrid
+				navLocation = {settings.navLocation}
+				>
 					<BotModel
 					botNumberSelected = {botNumberSelected}
 					/>
 					<BotEquipment
+					botNumberSelected = {botNumberSelected}
+					/>
+					<BotStats
+					botNumberSelected = {botNumberSelected}
+					/>
+					<BotTechTree
 					botNumberSelected = {botNumberSelected}
 					/>
 					<BotAI
@@ -148,18 +164,26 @@ const Wrapper = styled.div`
 `
 const AssemblyGrid = styled.div`
 	display: grid;
-	grid-gap: 20px;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	width: 1260px;
+	grid-gap: 10px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	width: 1600px;
 	margin-left: auto;
   margin-right: auto;
 	overflow-y: auto;
-	@media screen and (max-width: 1300px) {
-    width: 620px;
+	@media screen and 
+	(max-width: ${props => props.navLocation === 'top' ? '1700px' : '1830px'}) {
+    /* width: 1160px; */
+		width: 1030px;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+	@media screen and 
+	(max-width: ${props => props.navLocation === 'top' ? '1150px' : '1280px'}) {
+    width: 510px;
 		grid-template-columns: 1fr 1fr;
   }
-	@media screen and (max-width: 750px) {
-    width: 300px;
+	@media screen and
+	(max-width: ${props => props.navLocation === 'top' ? '700px' : '830px'}) {
+    width: 250px;
 		grid-template-columns: 1fr;
   }
 
@@ -170,10 +194,10 @@ const RowDivSpace = styled.div`
 	align-items: center;
 	text-align: center;
 	/* width: ${props => props.cellSize && `${4*props.cellSize}px`}; */
-	width: 300px;
+	width: 250px;
 `
 const ColDivCenter = styled.div`
 	/* width: ${props => props.cellSize && `${4*props.cellSize}px`}; */
-	width: 300px;
+	width: 250px;
 	flex-direction: column;
 `

@@ -55,9 +55,9 @@ const Profile = ({ time, disabled }) => {
       	  FIGHT-EM
         </StyledButton>
     	</StyledNavLink>
-
-			<SizeSlider/>
-
+			{settings.currentUrl !== 'settings' &&
+				<SizeSlider/>
+			}
 			<StyledNavLink to="/settings">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('settings'))}}

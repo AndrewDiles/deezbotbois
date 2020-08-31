@@ -502,6 +502,35 @@ try {
     }
 	}
 
+	const handleRemoveBot = async (req, res) => {
+		const email = req.body.email;
+		const index = req.body.index;
+		if (email === undefined || index === undefined) {
+      res.status(400).json({ status: 400, message: 'Information is missing' });
+		}
+
+		const db = client.db('botBoiDatabase');
+
+		let query = {email : email};
+		try {
+			const result = await db.collection('userData').findOne(query);
+			if (!result || result.length === 0) {
+        res.status(404).json({ status: 404, message: 'Could not find user info connected to given email' });
+      }
+      else {
+				let newBotBuilds = result.botBuilds;
+				newBotBuilds.splice(index,1);
+				const newUserInfo = { $set: { botBuilds: newBotBuilds } };
+				const r = await db.collection('userData').updateOne(query, newUserInfo);
+				assert.equal(1, r.modifiedCount);
+				res.status(200).json({ status: 200, botBuilds: newBotBuilds, message: "Bot Removed!" })
+			}
+    } catch (err) {
+    	console.log(err);
+      res.status(500).json({ status: 500, message: "error caught" });
+    }
+	}
+
 module.exports = {
   handleGoogleLogin,
   handleLogin,
@@ -510,5 +539,6 @@ module.exports = {
 	handleIncreaseBitCount,
 	handleReplaceUserInfo,
 	handleCreateNewBot,
-	handleUpdateBotBuilds
+	handleUpdateBotBuilds,
+	handleRemoveBot
 };

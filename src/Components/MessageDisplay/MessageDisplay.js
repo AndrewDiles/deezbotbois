@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-const MessageDisplay = ({type, msg, setMsg}) => {
+const MessageDisplay = ({type, msg, setMsg, textSize}) => {
 
 	useEffect(() => {
 		let eraseMsg;
@@ -16,6 +16,7 @@ const MessageDisplay = ({type, msg, setMsg}) => {
   return (
 		<MessageP
 		type = {type}
+		textSize = {textSize}
 		>
 			{msg}
 		</MessageP>
@@ -24,7 +25,8 @@ const MessageDisplay = ({type, msg, setMsg}) => {
 export default MessageDisplay;
 
 const MessageP = styled.p`
+	white-space: nowrap;
 	color: ${props => props.type === 'error' && 'red'};
 	color: ${props => props.type === 'success' && 'lime'};
-	font-size: 0.6em;
+	font-size: ${props => props.textSize ? props.textSize : '0.6em'};
 `

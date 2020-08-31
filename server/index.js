@@ -14,6 +14,7 @@ const {
 	handleReplaceUserInfo,
 	handleCreateNewBot,
 	handleUpdateBotBuilds,
+	handleRemoveBot,
 } = require('./handlers');
 
 const PORT = process.env.PORT || 9009;
@@ -101,6 +102,13 @@ App
 	// email:
 	// botBuilds:
 	// }
+	.delete("/server/removeBot", handleRemoveBot)
+	// Body has shape: {
+	// email:
+	// index:
+	// }
+
+
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
 

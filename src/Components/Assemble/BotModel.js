@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 
 import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
-
+import StyledIcon from '../StyledIcon/StyledIcon';
+import {dice} from 'react-icons-kit/icomoon/dice';
 import styled from 'styled-components';
+import robotNameGen from '../../Constants/robotNameGen';
 
 import {
 	changeBotColors,
 	changeBotName,
 } from '../../Redux/actions';
+import settings from '../../Redux/reducers/settings-reducer';
 
 const BotModel = ({ botNumberSelected}) => {
 	const userInfo = useSelector((state) => state.userInfo);
@@ -21,21 +24,36 @@ const BotModel = ({ botNumberSelected}) => {
 	// React.useEffect(()=>{
 	// 	setInitialChange(true)
 	// },[botNumberSelected])
-
+	if (!botInfo[botNumberSelected]) return (<></>)
   return (
     <Wrapper>
 			NAME
-			{botInfo[botNumberSelected] &&
-			<StyledInput
-			colors = {colors}
-			className = "centeredInput" 
-			type="text" maxLength = "12" 
-			value = {userInfo.botBuilds[botNumberSelected].name}
-			onChange = {(ev)=>{
-				// initialChange ? setInitialChange(false) :
-				dispatch(changeBotName(botNumberSelected, ev.target.value))}}
-			/>
-			}
+			<RowDivCenter
+			className = {'centeredFlex'}
+			>
+				{/* {botInfo[botNumberSelected] && */}
+				<StyledInput
+				colors = {colors}
+				className = "centeredInput" 
+				type="text" maxLength = "16" 
+				value = {userInfo.botBuilds[botNumberSelected].name}
+				onChange = {(ev)=>{
+					// initialChange ? setInitialChange(false) :
+					dispatch(changeBotName(botNumberSelected, ev.target.value))}}
+				/>
+				{/* } */}
+				<DiceDiv>
+					<StyledIcon
+					handleClick = {(ev)=>{
+						// initialChange ? setInitialChange(false) :
+						dispatch(changeBotName(botNumberSelected, robotNameGen()))}}
+					size = {14}
+					padding = {2}
+					icon = {dice}
+					disabled = {settings.serverStatus === 'idle'}
+    			/>
+				</DiceDiv>
+			</RowDivCenter>
     </Wrapper>
   )
 }
@@ -56,4 +74,16 @@ const StyledInput = styled.input`
 	&:hover {
 		background-color: ${props => props.colors.hovered};
 	}
+`
+const RowDivCenter = styled.div`
+	width: 100%;
+	flex-direction: row;
+	justify-content: center;
+`
+const DiceDiv = styled.div`
+	width: 28px;
+	height: 28px;
+	position: relative;
+	right: 40px;
+	bottom: 5px;
 `

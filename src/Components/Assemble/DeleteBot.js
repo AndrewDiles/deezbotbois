@@ -32,7 +32,7 @@ const DeleteBot = ({ setBotNumberSelected, botNumberSelected, setErrorMsg, setSu
 	const handleDeleteBot = () => {
 		dispatch(communicating());
 			fetch('server/removeBot', {
-				method: "POST",
+				method: "DELETE",
     	  headers: {
     	    "Content-Type": "application/json",
     	  },
@@ -83,6 +83,6 @@ export default DeleteBot;
 
 const RowDivCenter = styled.div`
 	/* width: ${props => props.cellSize && `${4*props.cellSize}px`}; */
-	width: 300px;
+	width: 250px;
 	flex-direction: row;
 `
