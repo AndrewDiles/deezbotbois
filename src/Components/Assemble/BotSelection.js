@@ -31,10 +31,12 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 	}
   return (
     <Wrapper>
+			SELECT BUILD
 			<RowDivSpace>
 				<Bot
-				alternativeBotSize = {50}
+				alternativeBotSize = {40}
 				model = {botInfo[botNumberSelected-1] && botInfo[botNumberSelected-1].model}
+				faded = {true}
 				/>
 				<StyledIcon
 				handleClick = {()=>{handleRotateBot('left')}}
@@ -43,7 +45,7 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				disabled = {botNumberSelected === 0}
       	/>
 				<Bot
-				alternativeBotSize = {100}
+				alternativeBotSize = {70}
 				model = {botInfo[botNumberSelected] && botInfo[botNumberSelected].model}
 				/>
 				<StyledIcon
@@ -54,7 +56,8 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				disabled = {botNumberSelected === userInfo.botBuilds.length-1}
     		/>
 				<Bot
-				alternativeBotSize = {50}
+				alternativeBotSize = {40}
+				faded = {true}
 				model = {botInfo[botNumberSelected+1] && botInfo[botNumberSelected+1].model}
 				/>
 			</RowDivSpace>

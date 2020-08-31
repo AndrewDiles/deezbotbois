@@ -14,6 +14,7 @@ import {
 	replaceUserInfo
 } from '../../Redux/actions';
 
+import MessageDisplay from '../MessageDisplay/MessageDisplay';
 import StyledButton from '../StyledButton/StyledButton';
 import StyledIcon from '../StyledIcon/StyledIcon';
 import {floppyDisk} from 'react-icons-kit/icomoon/floppyDisk'
@@ -179,9 +180,14 @@ const Settings = ({ disabled }) => {
 				>
 				</StyledInput>
 				{newHandle.length === 0 &&
-					<ErrorP>
-						Handle must not be empty
-					</ErrorP>
+					// <ErrorP>
+					// 	Handle must not be empty
+					// </ErrorP>
+					<MessageDisplay
+					type = {'error'}
+					msg = {'Handle must not be empty'}
+					setMsg = {null}
+					/>
 				}
 			</Styledh5>
 
@@ -318,12 +324,20 @@ const Settings = ({ disabled }) => {
 				disabled = {!changeMade || serverErrorMsg !== null}
       	icon = {floppyDisk}
       />
-			<ErrorP>
-				{serverErrorMsg}
-			</ErrorP>
-			<SuccessP>
-				{successMsg}
-			</SuccessP>
+			{serverErrorMsg &&
+				<MessageDisplay
+				type = {'error'}
+				msg = {serverErrorMsg}
+				setMsg = {setServerErrorMsg}
+				/>
+			}
+			{successMsg &&
+				<MessageDisplay
+				type = {'success'}
+				msg = {successMsg}
+				setMsg = {setSuccessMsg}
+				/>
+			}
 		</Wrapper>
   )
 }
@@ -352,10 +366,6 @@ const Styledh5 = styled.h5`
 `
 const ErrorP = styled.p`
 	color: red;
-	font-size: 0.6em;
-`
-const SuccessP = styled.p`
-	color: lime;
 	font-size: 0.6em;
 `
 

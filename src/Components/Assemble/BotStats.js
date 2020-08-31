@@ -10,19 +10,11 @@ const BotStats = ({ botNumberSelected}) => {
 		return (<></>)
 	}
   return (
-    <Wrapper>
+    <div
+		className = "assemblyGridChild" 
+		>
 			Bot stats
-    </Wrapper>
+    </div>
   )
 }
 export default BotStats;
-
-const Wrapper = styled.div`
-	width: 100%;
-	height: 100%;
-	display : flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-`

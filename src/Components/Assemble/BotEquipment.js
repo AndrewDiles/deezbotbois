@@ -10,19 +10,11 @@ const BotEquipment = ({ botNumberSelected}) => {
 		return (<></>)
 	}
   return (
-    <Wrapper>
+    <div
+		className = "assemblyGridChild" 
+		>
 			Bot equipment
-    </Wrapper>
+    </div>
   )
 }
 export default BotEquipment;
-
-const Wrapper = styled.div`
-	width: 100%;
-	height: 100%;
-	display : flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-`

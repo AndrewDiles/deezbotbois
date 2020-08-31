@@ -126,7 +126,7 @@ const Account = () => {
 				<ColDiv>
 					<StyledInput
 					colors = {colors}
-					className = "centeredInput" 
+					className = "centeredInput"
 					input="text" maxLength = "24" 
 					onChange = {(ev)=>{updateChangeMade();setNewPassword1(ev.target.value)}}
 					>

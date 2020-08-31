@@ -10,19 +10,11 @@ const BotTechTree = ({ botNumberSelected}) => {
 		return (<></>)
 	}
   return (
-    <Wrapper>
+    <div
+		className = "assemblyGridChild" 
+		>
 			Bot Tech Tree
-    </Wrapper>
+    </div>
   )
 }
 export default BotTechTree;
-
-const Wrapper = styled.div`
-	width: 100%;
-	height: 100%;
-	display : flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-`

@@ -82,6 +82,18 @@ export const changeBotName = (index, botName) => ({
 	index: index,
 	botName: botName
 })
+export const changeBotModel = (index, botModel) => ({
+	type: 'CHANGE_BOT_MODEL',
+	index: index,
+	botModel: botModel
+})
+export const changeBotColorX = (index, colorPosition, color) => ({
+	type: 'CHANGE_BOT_COLOR_X',
+	index: index,
+	colorPosition: colorPosition,
+	color, color
+})
+
 export const replaceUserInfo = (newUserInfo) => ({
 	type: 'REPLACE_USER_INFO',
 	newUserInfo: newUserInfo,

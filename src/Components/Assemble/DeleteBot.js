@@ -66,7 +66,7 @@ const DeleteBot = ({ setBotNumberSelected, botNumberSelected, setErrorMsg, setSu
 				handleClick = {() => {setConfirmOpen(true)}}
 				disabled = {settings.serverStatus !== 'idle'}
 				>
-					REMOVE BUILD
+					DISMANTLE BUILD
 			</StyledButton>
 			{confirmOpen && 
 				<StyledButton

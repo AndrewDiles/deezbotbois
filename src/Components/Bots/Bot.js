@@ -35,7 +35,7 @@ import Bonkbonk from '../Arms/Bonkbonk';
 
 
 
-const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeBotSize } ) => {
+const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeBotSize, faded } ) => {
   const settings = useSelector((state) => state.settings);
 	// console.log('model',model);
 	if (!model) {
@@ -111,7 +111,8 @@ const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeB
 
   return (
     <Wrapper
-    cellSize = {alternativeBotSize || settings.cellSize}
+		cellSize = {alternativeBotSize || settings.cellSize}
+		faded = {faded}
     >
       <SelectedBot
       botColors = {botColors}
@@ -140,6 +141,7 @@ export default Bot;
 const Wrapper = styled.div`
   height: ${props => `${props.cellSize}px`};
   width: ${props => `${props.cellSize}px`};
+	opacity: ${props => props.faded === true && 0.5};
 `
 const NoBot = styled.div`
 	height: ${props => `${props.cellSize}px`};

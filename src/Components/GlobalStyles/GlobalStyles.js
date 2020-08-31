@@ -90,6 +90,16 @@ html {
 	align-items: center;
 	text-align: center;
 }
+.assemblyGridChild {
+	width: 100%;
+	height: 100%;
+	display : flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	border: 1px solid rgba(0,0,0,0.1);
+}
 
 /* former load in:
 @keyframes loadInScreen {

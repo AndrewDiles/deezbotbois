@@ -60,6 +60,22 @@ export default function userInfo(
 					botBuilds : botBuilds,
 				}
 			}
+			case 'CHANGE_BOT_MODEL' : {
+				let botBuilds = [...state.botBuilds];
+				botBuilds[action.index].model = action.botModel;
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
+			case 'CHANGE_BOT_COLOR_X' : {
+				let botBuilds = [...state.botBuilds];
+				botBuilds[action.index].colors[action.colorPosition] = action.color;
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
 			case 'REPLACE_USER_INFO' : {
 				return {
 					...action.newUserInfo,

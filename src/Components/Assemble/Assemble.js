@@ -101,8 +101,6 @@ const Assemble = () => {
 					<BotSelection
 					setBotNumberSelected = {setBotNumberSelected}
 					botNumberSelected = {botNumberSelected}
-					// botLoaded = {botLoaded} 
-					// setBotLoaded = {setBotLoaded}
 					/>
 				</RowDivSpace>
 			}
@@ -166,13 +164,12 @@ const AssemblyGrid = styled.div`
 	display: grid;
 	grid-gap: 10px;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-	width: 1600px;
+	width: 1550px;
 	margin-left: auto;
   margin-right: auto;
 	overflow-y: auto;
 	@media screen and 
 	(max-width: ${props => props.navLocation === 'top' ? '1700px' : '1830px'}) {
-    /* width: 1160px; */
 		width: 1030px;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
   }

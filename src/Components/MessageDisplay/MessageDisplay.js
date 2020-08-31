@@ -5,7 +5,7 @@ const MessageDisplay = ({type, msg, setMsg, textSize}) => {
 
 	useEffect(() => {
 		let eraseMsg;
-		if (msg) {
+		if (msg && setMsg) {
 			eraseMsg = setTimeout(()=>{
 				setMsg(null)
 			},2000)

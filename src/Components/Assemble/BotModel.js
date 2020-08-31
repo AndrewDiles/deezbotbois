@@ -6,10 +6,12 @@ import StyledIcon from '../StyledIcon/StyledIcon';
 import {dice} from 'react-icons-kit/icomoon/dice';
 import styled from 'styled-components';
 import robotNameGen from '../../Constants/robotNameGen';
+import ModelChanger from './ModelChanger';
 
 import {
 	changeBotColors,
 	changeBotName,
+	changeBotColorX,
 } from '../../Redux/actions';
 import settings from '../../Redux/reducers/settings-reducer';
 
@@ -26,7 +28,9 @@ const BotModel = ({ botNumberSelected}) => {
 	// },[botNumberSelected])
 	if (!botInfo[botNumberSelected]) return (<></>)
   return (
-    <Wrapper>
+    <div
+		className = "assemblyGridChild" 
+		>
 			NAME
 			<RowDivCenter
 			className = {'centeredFlex'}
@@ -54,23 +58,19 @@ const BotModel = ({ botNumberSelected}) => {
     			/>
 				</DiceDiv>
 			</RowDivCenter>
-    </Wrapper>
+			<br/>
+			<ModelChanger
+			botNumberSelected = {botNumberSelected}
+			/>
+    </div>
   )
 }
 export default BotModel;
 
-const Wrapper = styled.div`
-	width: 100%;
-	height: 100%;
-	display : flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
-`
 const StyledInput = styled.input`
 	background-color: ${props => props.colors.secondary};
 	color: ${props => props.colors.textColor};
+	height: 26px;
 	&:hover {
 		background-color: ${props => props.colors.hovered};
 	}
