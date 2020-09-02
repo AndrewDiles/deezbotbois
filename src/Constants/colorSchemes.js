@@ -9,7 +9,7 @@ export const paleGreen = {
 };
 export const vibrant = {
   primary: '#F6D9D6',
-  secondary: '#F6D9D6',
+  secondary: '#F7CECF',
   selected: '#65A5C2',
   notSelected: '#99F5DF',
   hovered: '#1F6C8F',
@@ -18,7 +18,7 @@ export const vibrant = {
 };
 export const dark = {
   primary: '#1b1b2f',
-  secondary: '#1b1b2f',
+  secondary: '#0A0B37',
   selected: '#162447',
   notSelected: '#1f4068',
   hovered: '#002F75',

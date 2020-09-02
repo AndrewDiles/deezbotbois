@@ -255,7 +255,11 @@ const Wrapper = styled.nav`
 	color: ${props => props.colors.textColor};
 `
 const StyledNavLink = styled(NavLink)`
-  width: 100px;
+  width: 125px;
+	height: 40px;
+	margin: 5px;
+	border-radius: 5px;
+  border: 1px solid transparent;
 `
 const UserImg = styled.img`
 	width: 40px;

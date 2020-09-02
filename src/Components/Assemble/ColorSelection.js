@@ -88,7 +88,7 @@ const ColorSelection = ({ botNumberSelected }) => {
 export default ColorSelection;
 
 const LocationOption = styled.div`
-	width: 225px;
+	width: 211px;
 	font-size: 0.75em;
 	display: flex;
 	flex-direction: row;
@@ -142,4 +142,5 @@ const Wrapper = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	text-align: center;
+	padding: 2px;
 `

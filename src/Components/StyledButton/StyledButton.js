@@ -34,10 +34,10 @@ export default StyledButton;
 const ButtonStylings = styled.button`
   width: 125px;
 	min-height: 40px;
-  padding: 5px;
+  /* padding: 5px; */
   position: ${props => props.absolute ? 'absolute' : 'relative'};
   background-color: ${props => props.selected ? props.colors.selected : props.colors.notSelected};
-  margin: 5px;
+  /* margin: 5px; */
   border-radius: 5px;
   border: 1px solid transparent;
   font-size: 12px;

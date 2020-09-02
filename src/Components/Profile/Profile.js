@@ -35,7 +35,6 @@ const Profile = ({ time, disabled }) => {
 			time = {time}
 			>
 			</Gift>
-
 			<StyledNavLink to="/assemble">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('assemble'))}}
@@ -45,7 +44,6 @@ const Profile = ({ time, disabled }) => {
       	  BUILD-EM
         </StyledButton>
     	</StyledNavLink>
-
 			<StyledNavLink to="/levels">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('levels'))}}
@@ -56,7 +54,7 @@ const Profile = ({ time, disabled }) => {
         </StyledButton>
     	</StyledNavLink>
 			{settings.currentUrl !== 'settings' &&
-				<SizeSlider/>
+					<SizeSlider/>
 			}
 			<StyledNavLink to="/settings">
         <StyledButton
@@ -67,7 +65,6 @@ const Profile = ({ time, disabled }) => {
           SETTINGS
         </StyledButton>
       </StyledNavLink>
-
 			<StyledNavLink to="/account">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('account'))}}
@@ -77,13 +74,16 @@ const Profile = ({ time, disabled }) => {
           ACCOUNT
         </StyledButton>
       </StyledNavLink>
-
-			<StyledButton
+			<StyledNavLink to={settings.currentUrl}>
+			<StyledButton 
         handleClick = {() => {dispatch(deactivateProfileTab())}}
         >
-        CLOSE USER BAR
+        COLLAPSE
       </StyledButton>
+			</StyledNavLink>
+			<StyledNavLink to={settings.currentUrl}>
 			<Logout/>
+			</StyledNavLink>
 		</ProfileWrapper>
   )
 }
@@ -110,5 +110,10 @@ const ProfileWrapper = styled.div`
 	z-index: 20;
 `
 const StyledNavLink = styled(NavLink)`
-  width: 100%;
+  width: 125px;
+	height: 40px;
+	margin: 5px;
+	border-radius: 5px;
+  border: 1px solid transparent;
+	line-height: 10px;
 `

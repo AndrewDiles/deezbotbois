@@ -115,6 +115,13 @@ html {
 .colorOptions::-webkit-scrollbar {
   display: none;
 }
+.navLink {
+	width: 125px;
+	height: 40px;
+	margin: 5px;
+	border-radius: 5px;
+  border: 1px solid transparent;
+}
 
 /* former load in:
 @keyframes loadInScreen {
