@@ -28,7 +28,7 @@ export const dark = {
 
 export const vanilla = {
   primary: 'white',
-  secondary: 'white',
+  secondary: 'ghostwhite',
   selected: 'rgba(170, 170, 170, 0.45)',
   notSelected: 'rgba(255,255,255,0.3)',
   hovered: 'silver',

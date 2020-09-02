@@ -62,7 +62,7 @@ const Assemble = () => {
 						type = {'success'}
 						msg = {successMsg}
 						setMsg = {setSuccessMsg}
-						textSize = {'1.7em'}
+						textSize = {'1.5em'}
 						/>
 					}
 					{errorMsg &&
@@ -70,13 +70,13 @@ const Assemble = () => {
 						type = {'error'}
 						msg = {errorMsg}
 						setMsg = {setErrorMsg}
-						textSize = {'1.7em'}
+						textSize = {'1.5em'}
 						/>
 					}
 					{!successMsg && !errorMsg &&
-					<h1>
+					<h2>
 						BUILD-EM
-					</h1>
+					</h2>
 					}
 				</ColDivCenter>
 			</RowDivSpace>

@@ -12,8 +12,6 @@ import Bot from '../Bots/Bot';
 const ModelChanger = ({ botNumberSelected }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
-	const settings = useSelector((state) => state.settings);
-	const botInfo = userInfo.botBuilds;
 	const [indexOfSelectedModel, setIndexOfSelectedModel] = useState(
 		userInfo.availableBots.indexOf(userInfo.botBuilds[botNumberSelected].model)); 
 	
@@ -44,13 +42,20 @@ const ModelChanger = ({ botNumberSelected }) => {
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}
+	let colorsToSendToBotComponent = null;
+	if (botNumberSelected !== null) {
+		colorsToSendToBotComponent = userInfo.botBuilds[botNumberSelected].colors;
+	}
   return (
     <Wrapper>
 			CHANGE MODEL
+			<br/>
+			{userInfo.botBuilds[botNumberSelected].model}
 			<RowDivSpace>
 				<Bot
 				alternativeBotSize = {40}
 				model = {userInfo.availableBots[indexOfSelectedModel-1]}
+				botColors ={colorsToSendToBotComponent}
 				faded = {true}
 				/>
 				<StyledIcon
@@ -62,6 +67,7 @@ const ModelChanger = ({ botNumberSelected }) => {
 				<Bot
 				alternativeBotSize = {70}
 				model = {userInfo.botBuilds[botNumberSelected].model}
+				botColors ={colorsToSendToBotComponent}
 				/>
 				<StyledIcon
 				handleClick = {()=>{handleSwapModel('right')}}
@@ -73,9 +79,9 @@ const ModelChanger = ({ botNumberSelected }) => {
 				alternativeBotSize = {40}
 				faded = {true}
 				model = {userInfo.availableBots[indexOfSelectedModel+1]}
+				botColors ={colorsToSendToBotComponent}
 				/>
 			</RowDivSpace>
-			{userInfo.botBuilds[botNumberSelected].model}
     </Wrapper>
   )
 }
@@ -83,7 +89,7 @@ export default ModelChanger;
 
 const Wrapper = styled.div`
 	width: 100%;
-	height: 100%;
+	height: 125px;
 	display : flex;
 	flex-direction: column;
 	justify-content: center;

@@ -48,7 +48,23 @@ const randomNames = [
 	'Golem',
 	'Bit',
 	'Scrappy',
-	'Mike T Vision'
+	'Mike T Vision',
+	'Mr. Robot',
+	'Spin Cylce',
+	'Sprocket',
+	'Tinker',
+	'Simulacrum',
+	'Amalgam',
+	'A. Daniels',
+	'Dot',
+	'Hack',
+	'Slash',
+	'Biggs',
+	'Wedge',
+	'R. Batty',
+	'Spruce Bruh',
+	'Bacon Boi',
+	'Mr. Smiley'
 ];
 
 const robotNameGen = () => {

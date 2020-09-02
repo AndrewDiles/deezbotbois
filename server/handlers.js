@@ -100,8 +100,19 @@ try {
 						textColor : 'rgba(0, 0, 0, 0.54)',
 					},
 					availableBots : ['BotBoxey'],
-					availableArms : ["Gun1"],
-					availableAcc : [],
+					availableArms : ["Gun1", "Sword1"],
+					availableAcc : ["Thick Paint"],
+					availableBotColors : {
+						primary: ['lime', 'khaki'],
+  					secondary: ['turquoise','tomato'],
+  					trim: ['green','darkkhaki'],
+  					extensions: ['silver','steelblue'],
+  					rollers: ['black','orchid'],
+  					eyes: ['orange', 'dodgerblue'],
+  					armTrim: ['steelblue', 'darkmagenta'],
+  					armPrimary: ['silver', 'pink'],
+  					armSecondary: ['deepskyblue', 'firebrick']
+					},
 					botBuilds : [],
 					battleBits: 0,
 					levelProgress : [[]],
@@ -431,7 +442,8 @@ try {
 
 	const handleCreateNewBot = async (req, res) => {
 		const email = req.body.email;
-		if (email === undefined) {
+		const botInfo = req.body.botInfo
+		if (email === undefined || botInfo === undefined) {
       res.status(400).json({ status: 400, message: 'Information is missing' });
 		}
 
@@ -444,7 +456,6 @@ try {
         res.status(404).json({ status: 404, message: 'Could not find user info connected to given email' });
       }
       else {
-				let botInfo = result.botBuilds;
 				let newBot = {
 					name: '',
 					model: 'BotBoxey',

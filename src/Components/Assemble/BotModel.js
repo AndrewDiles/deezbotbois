@@ -7,6 +7,7 @@ import {dice} from 'react-icons-kit/icomoon/dice';
 import styled from 'styled-components';
 import robotNameGen from '../../Constants/robotNameGen';
 import ModelChanger from './ModelChanger';
+import ColorSelection from './ColorSelection';
 
 import {
 	changeBotColors,
@@ -60,6 +61,9 @@ const BotModel = ({ botNumberSelected}) => {
 			</RowDivCenter>
 			<br/>
 			<ModelChanger
+			botNumberSelected = {botNumberSelected}
+			/>
+			<ColorSelection
 			botNumberSelected = {botNumberSelected}
 			/>
     </div>

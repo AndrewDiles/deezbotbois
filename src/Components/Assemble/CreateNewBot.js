@@ -24,7 +24,8 @@ const CreateNewBot = ({ setBotNumberSelected, setErrorMsg, setSuccessMsg }) => {
     	    "Content-Type": "application/json",
     	  },
     	  body: JSON.stringify({ 
-    	    email: userInfo.email,
+					email: userInfo.email,
+					botInfo: userInfo.botBuilds,
     	  }),
 			}).then((res)=>{
 				if (res.status === 200) {

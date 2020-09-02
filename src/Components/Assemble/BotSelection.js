@@ -29,6 +29,16 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}
+	let colorsToSendToBotComponent,colorsToSendToPreviousBotComponent, colorsToSendToNextBotComponent = null;
+	if (botNumberSelected !== null && userInfo.botBuilds.length > 0) {
+		colorsToSendToBotComponent = userInfo.botBuilds[botNumberSelected].colors;
+		if (botNumberSelected > 0) {
+			colorsToSendToPreviousBotComponent = userInfo.botBuilds[botNumberSelected-1].colors;
+		}
+		if (botNumberSelected < userInfo.botBuilds.length -1) {
+			colorsToSendToNextBotComponent = userInfo.botBuilds[botNumberSelected+1].colors;
+		}
+	}
   return (
     <Wrapper>
 			SELECT BUILD
@@ -37,6 +47,7 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				alternativeBotSize = {40}
 				model = {botInfo[botNumberSelected-1] && botInfo[botNumberSelected-1].model}
 				faded = {true}
+				botColors ={colorsToSendToPreviousBotComponent}
 				/>
 				<StyledIcon
 				handleClick = {()=>{handleRotateBot('left')}}
@@ -47,6 +58,7 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				<Bot
 				alternativeBotSize = {70}
 				model = {botInfo[botNumberSelected] && botInfo[botNumberSelected].model}
+				botColors ={colorsToSendToBotComponent}
 				/>
 				<StyledIcon
 				handleClick = {()=>{handleRotateBot('right')}}
@@ -59,6 +71,7 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				alternativeBotSize = {40}
 				faded = {true}
 				model = {botInfo[botNumberSelected+1] && botInfo[botNumberSelected+1].model}
+				botColors ={colorsToSendToNextBotComponent}
 				/>
 			</RowDivSpace>
     </Wrapper>

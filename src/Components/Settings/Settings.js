@@ -88,8 +88,8 @@ const Settings = ({ disabled }) => {
 	}
 	const changeNavLocation = (ev) => {
 		if (ev.target === undefined) return;
-		console.log('ev.target',ev.target)
-		console.log('ev.target.value',ev.target.innerText)
+		// console.log('ev.target',ev.target)
+		// console.log('ev.target.value',ev.target.innerText)
 		updateChangeMade();
     if (ev.target.innerText === 'TOP') {
       dispatch(setNavLocation('top'));

@@ -100,6 +100,21 @@ html {
 	align-items: center;
 	border: 1px solid rgba(0,0,0,0.1);
 }
+.colorOptions {
+	height: 225px;
+	width: 35px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	flex-direction: column;
+	padding: 2px 0;
+	-ms-overflow-style: none;
+  scrollbar-width: none;
+
+}
+.colorOptions::-webkit-scrollbar {
+  display: none;
+}
 
 /* former load in:
 @keyframes loadInScreen {

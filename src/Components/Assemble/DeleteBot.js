@@ -46,6 +46,9 @@ const DeleteBot = ({ setBotNumberSelected, botNumberSelected, setErrorMsg, setSu
 						dispatch(receiveBotInfo(data.botBuilds))
 						setBotSnapshot(JSON.parse(JSON.stringify(data.botBuilds)))
 						setSuccessMsg(data.message)
+						if (botNumberSelected !==0) {
+							setBotNumberSelected(botNumberSelected-1);
+						}
 						dispatch(communicationsSuccessful());
 					})
 				}
@@ -70,7 +73,7 @@ const DeleteBot = ({ setBotNumberSelected, botNumberSelected, setErrorMsg, setSu
 			</StyledButton>
 			{confirmOpen && 
 				<StyledButton
-				handleClick = {() => {handleDeleteBot()}}
+				handleClick = {() => {handleDeleteBot();setConfirmOpen(false)}}
 				disabled = {settings.serverStatus !== 'idle'}
 				>
 				CONFIRM REMOVAL

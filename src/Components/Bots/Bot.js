@@ -38,6 +38,7 @@ import Bonkbonk from '../Arms/Bonkbonk';
 const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeBotSize, faded } ) => {
   const settings = useSelector((state) => state.settings);
 	// console.log('model',model);
+	// console.log('botColors',botColors)
 	if (!model) {
 		// console.log('no bot model');
 		return (
