@@ -16,60 +16,39 @@ import {ic_change_history} from 'react-icons-kit/md/ic_change_history'
 // Change %
 
 import {sigma} from 'react-icons-kit/icomoon/sigma' 				// Total
-import StyledIcon from '../StyledIcon/StyledIcon';
+import ToolTipIcon from '../ToolTip/ToolTipIcon';
 
 const AttributeHeader = () => {
 	return (
 		<AttributeRow>
-			<StyledIcon
-			value = {'Attribute'}
-			// handleClick = {()=>{handleRotateBot('left')}}
-			// padding = {5}
-			icon = {ic_brightness_auto}
-			size = {15}
-    	/>
-			<StyledIcon
-			value = {'Base'}
-			// handleClick = {()=>{handleRotateBot('left')}}
-			// padding = {5}
-			icon = {profile}
-			size = {15}
-    	/>
-			<StyledIcon
-			value = {'Equipment'}
-			// handleClick = {()=>{handleRotateBot('left')}}
-			// padding = {5}
-			icon = {suitcase}
-			size = {15}
-    	/>
-			<StyledIcon
-			value = {'Tech'}
-			// handleClick = {()=>{handleRotateBot('left')}}
-			// padding = {5}
-			icon = {usb}
-			size = {15}
-    	/>
-			<StyledIcon
-			value = {'PlusMinus'}
-			// handleClick = {()=>{handleRotateBot('left')}}
-			// padding = {5}
-			icon = {ic_exposure}
-			size = {15}
-    	/>
-			<StyledIcon
-			value = {'PercentChange'}
-			// handleClick = {()=>{handleRotateBot('left')}}
-			// padding = {5}
-			icon = {ic_change_history}
-			size = {15}
-    	/>
-			<StyledIcon
-			value = {'Sum'}
-			// handleClick = {()=>{handleRotateBot('left')}}
-			// padding = {5}
-			icon = {sigma}
-			size = {15}
-    	/>
+			<ToolTipIcon
+			name = 'Attribute'
+			iconImport = {ic_brightness_auto}
+			/>
+			<ToolTipIcon
+			name = 'Base'
+			iconImport = {profile}
+			/>
+			<ToolTipIcon
+			name = 'Equipment'
+			iconImport = {suitcase}
+			/>
+			<ToolTipIcon
+			name = 'Tech'
+			iconImport = {usb}
+			/>
+			<ToolTipIcon
+			name = 'PlusMinus'
+			iconImport = {ic_exposure}
+			/>
+			<ToolTipIcon
+			name = 'PercentChange'
+			iconImport = {ic_change_history}
+			/>
+			<ToolTipIcon
+			name = 'Sum'
+			iconImport = {sigma}
+			/>
 		</AttributeRow>
 	)
 }

@@ -28,17 +28,17 @@ import {ic_timeline} from 'react-icons-kit/md/ic_timeline'	// MovementDistance
 import {ic_format_list_numbered} from 'react-icons-kit/md/ic_format_list_numbered'
 // Initiative
 import {power} from 'react-icons-kit/icomoon/power'					// Costs
-import StyledIcon from '../StyledIcon/StyledIcon';
+import ToolTipIcon from '../ToolTip/ToolTipIcon';
 
 import baseBotAttributes, {attributeInfo} from '../../Constants/attributes';
 import { accessoryStats, weaponStats, equipmentSlots } from '../../Constants/equipment';
 
 
-const Attribute = ({ botNumberSelected, attribute }) => {
+const Attribute = ({ botNumberSelected, attribute, equipmentStagedToChange }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const colors = useSelector(getThemeColors);
-	const [messageOpen, setMessageOpen] = useState(false);
-	const [messageHovered, setMessageHovered] = useState(false);
+	// const [messageOpen, setMessageOpen] = useState(false);
+	// const [messageHovered, setMessageHovered] = useState(false);
 	const [baseAttributeValue, setBaseAttributeValue] = useState(null);
 	const [equipmentAttributeModifier, setEquipmentAttributeModifier] = useState(null);
 	let iconImport = null;
@@ -61,20 +61,20 @@ const Attribute = ({ botNumberSelected, attribute }) => {
 		})
 		setEquipmentAttributeModifier(sum);
 	},[userInfo.botBuilds, botNumberSelected])
-	useEffect(()=>{
-		let targetIcon = document.getElementById(`${attribute}Icon`);
-		let onMouseEnter = (ev) => {
-			// Below test will prevent multiple ToolTips pooping up by triggering mouseenter through divs
-			if (ev.target === targetIcon) setMessageHovered(true);
-		}
-		if (targetIcon) {
-			targetIcon.addEventListener('mouseenter',onMouseEnter);
-		}
-		return ()=>{
-			if (!targetIcon) return;
-			targetIcon.removeEventListener('mouseenter',onMouseEnter);
-    }
-	},[attribute])
+	// useEffect(()=>{
+	// 	let targetIcon = document.getElementById(`${attribute}Icon`);
+	// 	let onMouseEnter = (ev) => {
+	// 		// Below test will prevent multiple ToolTips pooping up by triggering mouseenter through divs
+	// 		if (ev.target === targetIcon) setMessageHovered(true);
+	// 	}
+	// 	if (targetIcon) {
+	// 		targetIcon.addEventListener('mouseenter',onMouseEnter);
+	// 	}
+	// 	return ()=>{
+	// 		if (!targetIcon) return;
+	// 		targetIcon.removeEventListener('mouseenter',onMouseEnter);
+  //   }
+	// },[attribute])
 	// const handleClickIcon = () => {
 	// 	setMessageOpen(!messageOpen)
 	// }
@@ -152,25 +152,31 @@ const Attribute = ({ botNumberSelected, attribute }) => {
     <AttributeRow
 		color = {colors.secondary}
 		>
-			<StyledIcon
+			<ToolTipIcon
+			name = {attribute}
+			iconImport = {iconImport}
+			/>
+
+			{/* <StyledIcon
 			id = {`${attribute}Icon`}
 			// handleClick = {()=>{handleClickIcon()}}
 			// padding = {5}
 			icon = {iconImport}
 			size = {15}
       />
-			<NumberCell
-			className = {'centeredFlex'}
-			>
-				{baseAttributeValue}
-				<ToolTip
+			<ToolTip
 				messageOpen = {messageOpen}
 				setMessageOpen = {setMessageOpen}
 				messageHovered = {messageHovered}
 				setMessageHovered = {setMessageHovered}
 				>
 					{attributeInfo[attribute]}
-				</ToolTip>
+			</ToolTip> */}
+			<NumberCell
+			className = {'centeredFlex'}
+			>
+				{baseAttributeValue}
+				
 			</NumberCell>
 			<NumberCell
 			className = {'centeredFlex'}

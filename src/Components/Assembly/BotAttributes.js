@@ -6,7 +6,7 @@ import AttributeHeader from './AttributeHeader';
 import Attribute from './Attribute';
 
 
-const BotAttributes = ({ botNumberSelected}) => {
+const BotAttributes = ({ botNumberSelected, equipmentStagedToChange }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const displayedAttributes = [
 		'BAR',
@@ -43,6 +43,7 @@ const BotAttributes = ({ botNumberSelected}) => {
 						key = {attribute}
 						attribute = {attribute}
 						botNumberSelected = {botNumberSelected}
+						equipmentStagedToChange = {equipmentStagedToChange}
 						>
 						</Attribute>
 					)

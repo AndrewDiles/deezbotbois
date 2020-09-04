@@ -25,6 +25,7 @@ const Assembly = () => {
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [successMsg, setSuccessMsg] = useState(null);
 	const [botNumberSelected, setBotNumberSelected] = useState(0);
+	const [equipmentStagedToChange, setEquipmentStagedToChange] = useState(null)
 	// const [botLoaded, setBotLoaded] = useState(false);
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
@@ -123,9 +124,12 @@ const Assembly = () => {
 					/>
 					<BotEquipment
 					botNumberSelected = {botNumberSelected}
+					equipmentStagedToChange = {equipmentStagedToChange}
+					setEquipmentStagedToChange = {setEquipmentStagedToChange}
 					/>
 					<BotAttributes
 					botNumberSelected = {botNumberSelected}
+					equipmentStagedToChange = {equipmentStagedToChange}
 					/>
 					<BotTechTree
 					botNumberSelected = {botNumberSelected}

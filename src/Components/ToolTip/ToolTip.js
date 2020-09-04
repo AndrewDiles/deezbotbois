@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMessageHovered}) => {
+const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMessageHovered, fontSize}) => {
 	const colors = useSelector(getThemeColors);
 	React.useEffect(()=>{
 		const target = document.getElementById(`MessageWindow${children}`);
-		let onMouseLeave = () => {setMessageHovered(false);setMessageOpen(false)}
+		let onMouseLeave = () => {
+			if (setMessageHovered)setMessageHovered(false);
+			if (setMessageOpen) setMessageOpen(false)}
 		if (target) {
 			target.addEventListener('mouseleave',onMouseLeave);
 		}
@@ -16,14 +18,19 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
 			target.removeEventListener('mouseleave',onMouseLeave);
 		}
 	})
+	const handleClose = () => {
+		if (setMessageOpen) setMessageOpen(false);
+		if (setMessageHovered) setMessageHovered(false);
+	}
 	
   return (
     <Message
 		id = {`MessageWindow${children}`}
-		onClick = {()=>{setMessageOpen(false);setMessageHovered(false)}}
+		onClick = {()=>handleClose()}
 		messageOpen = {messageOpen}
 		colors = {colors}
 		messageHovered = {messageHovered}
+		fontSize = {fontSize}
 		// location = {location}
 		>
 			{children}
@@ -36,13 +43,12 @@ const Message = styled.div`
 	height: auto;
 	min-height: 50px;
 	font-size: 1em;
-	position: absolute;
-	
-
+	position: relative;
+	font-size: ${props => props.fontSize ? props.fontSize : null};
 	display: ${props=> props.messageHovered ? 'flex' : props.messageOpen ? 'flex' : 'none'};
-	
 	flex-wrap: wrap;
 	justify-content: center;
+	justify-self: center;
 	align-items: center;
 	background-color: ${props => props.colors.secondary};
 	color: ${props => props.colors.textColor};

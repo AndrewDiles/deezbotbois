@@ -396,7 +396,7 @@ const ColDiv = styled.div`
 const AvatarImgSelection = styled.div`
 	display: grid;
 	grid-gap: 10px;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: repeat(5, 1fr);
 	width: 265px;
 	margin-left: auto;
   margin-right: auto;
