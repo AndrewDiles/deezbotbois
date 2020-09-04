@@ -13,12 +13,12 @@ import DeleteBot from './DeleteBot';
 import BotSelection from './BotSelection';
 import BotModel from './BotModel';
 import BotEquipment from './BotEquipment';
-import BotStats from './BotStats';
+import BotAttributes from './BotAttributes';
 import BotTechTree from './BotTechTree';
 import BotAI from './BotAI';
 import BotScripts from './BotScripts';
 
-const Assemble = () => {
+const Assembly = () => {
 	const settings = useSelector((state) => state.settings);
 	const userInfo = useSelector((state) => state.userInfo);
 	const [botSnapshot, setBotSnapshot] = useState(JSON.parse(JSON.stringify(userInfo.botBuilds)));
@@ -124,7 +124,7 @@ const Assemble = () => {
 					<BotEquipment
 					botNumberSelected = {botNumberSelected}
 					/>
-					<BotStats
+					<BotAttributes
 					botNumberSelected = {botNumberSelected}
 					/>
 					<BotTechTree
@@ -141,7 +141,7 @@ const Assemble = () => {
     </Wrapper>
   )
 }
-export default Assemble;
+export default Assembly;
 
 const Wrapper = styled.div`
 	padding: ${(props) =>
@@ -154,24 +154,24 @@ const Wrapper = styled.div`
 	height: 100%;
 	display : flex;
 	flex-direction: column;
-	justify-content: center;
+	/* justify-content: center; */
 	align-content: center;
 	align-items: center;
 	color: ${props => props.colors.textColor};
-	overflow: auto;
+	overflow-y: auto;
 `
 const AssemblyGrid = styled.div`
 	display: grid;
 	grid-gap: 10px;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-columns: repeat(6, 1fr);
 	width: 1550px;
 	margin-left: auto;
   margin-right: auto;
-	overflow-y: auto;
+	/* overflow-y: auto; */
 	@media screen and 
 	(max-width: ${props => props.navLocation === 'top' ? '1700px' : '1830px'}) {
 		width: 1030px;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-columns: repeat(4, 1fr);
   }
 	@media screen and 
 	(max-width: ${props => props.navLocation === 'top' ? '1150px' : '1280px'}) {
@@ -190,11 +190,9 @@ const RowDivSpace = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	text-align: center;
-	/* width: ${props => props.cellSize && `${4*props.cellSize}px`}; */
 	width: 250px;
 `
 const ColDivCenter = styled.div`
-	/* width: ${props => props.cellSize && `${4*props.cellSize}px`}; */
 	width: 250px;
 	flex-direction: column;
 `

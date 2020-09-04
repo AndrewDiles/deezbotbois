@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const BotBoxie = ( { children,botColors, cellSize } ) => {
+const BotLumpey = ( { children,botColors, cellSize } ) => {
   let borderSize = 1+Math.floor(cellSize/100);
   borderSize = `${borderSize}px`;
   
@@ -39,7 +39,7 @@ const BotBoxie = ( { children,botColors, cellSize } ) => {
       </Wrapper>
   )
 }
-export default BotBoxie;
+export default BotLumpey;
 
 const Wrapper = styled.div`
   height: 100%;
@@ -75,7 +75,7 @@ const Body = styled.div`
   border-radius: 50%;
   z-index:2;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-content: center;
   align-items: center;
 `

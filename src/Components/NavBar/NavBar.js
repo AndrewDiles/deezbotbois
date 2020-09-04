@@ -123,7 +123,7 @@ function NavBar() {
 					</BorderDivForUserImg>
 				}
 			</RowDiv>
-      <StyledNavLink to="/home">
+      <StyledNavLink to="/home" tabIndex="-1">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('home'))}}
 					selected = {settings.currentUrl === 'home'}
@@ -133,7 +133,7 @@ function NavBar() {
         </StyledButton>
       </StyledNavLink>
 
-			<StyledNavLink to="/rules">
+			<StyledNavLink to="/rules" tabIndex="-1">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('rules'))}}
 					selected = {settings.currentUrl === 'rules'}
@@ -143,7 +143,7 @@ function NavBar() {
         </StyledButton>
       </StyledNavLink>
 
-      <StyledNavLink to="/test">
+      <StyledNavLink to="/test" tabIndex="-1">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('test'))}}
 					selected = {settings.currentUrl === 'test'}
@@ -160,7 +160,7 @@ function NavBar() {
           userInfo.email === null ? (
 						settings.navLocation === 'top' ? (
 							<TopLogInWrapper>
-								<StyledNavLink to="/altLogin">
+								<StyledNavLink to="/altLogin" tabIndex="-1">
         					<StyledButton
 										handleClick = {() => {dispatch(updateUrl('altLogin'))}}
 										selected = {settings.currentUrl === 'altLogin'}
@@ -168,12 +168,12 @@ function NavBar() {
         					  >
         					  ALT LOGIN
         					</StyledButton>
-      					</StyledNavLink>
+      					</StyledNavLink >
 								<LoginViaGoogle/>
 							</TopLogInWrapper>
 						) : (
 							<ColDiv>
-								<StyledNavLink to="/altLogin">
+								<StyledNavLink to="/altLogin" tabIndex="-1">
         					<StyledButton
 										handleClick = {() => {dispatch(updateUrl('altLogin'))}}
 										selected = {settings.currentUrl === 'altLogin'}

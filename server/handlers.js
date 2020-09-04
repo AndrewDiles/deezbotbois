@@ -101,7 +101,7 @@ try {
 					},
 					availableBots : ['BotBoxey'],
 					availableArms : ["Gun1", "Sword1"],
-					availableAcc : ["Thick Paint"],
+					availableAcc : ["thickPaint"],
 					availableBotColors : {
 						primary: ['lime', 'khaki'],
   					secondary: ['turquoise','tomato'],
@@ -305,7 +305,7 @@ try {
 					},
 					availableBots : ['BotBoxey'],
 					availableArms : ["Gun1", "Sword1"],
-					availableAcc : ["Thick Paint"],
+					availableAcc : ["thickPaint"],
 					availableBotColors : {
 						primary: ['lime', 'khaki'],
   					secondary: ['turquoise','tomato'],

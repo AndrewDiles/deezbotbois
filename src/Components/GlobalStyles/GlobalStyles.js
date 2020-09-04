@@ -93,11 +93,13 @@ html {
 .assemblyGridChild {
 	width: 100%;
 	height: 100%;
-	display : flex;
+	min-height: 600px;
+	/* display : flex;
 	flex-direction: column;
 	justify-content: center;
-	align-content: center;
-	align-items: center;
+	align-content: top;
+	text-align: top;
+	align-items: top; */
 	border: 1px solid rgba(0,0,0,0.1);
 }
 .colorOptions {

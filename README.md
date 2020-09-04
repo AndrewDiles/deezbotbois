@@ -31,15 +31,21 @@ Intentions with the GUI include:
 ## PAST BUGS
 
 - Main display not scrollable
-## Solution: Wrapper required css property: overflow-y: auto;
+# Solution: Wrapper required css property: overflow-y: auto;
 
 - if user's avatar image is a bot, then the onHover to reveal the sample profile tab fails to trigger once they hover over the bot (it only triggers when hovering over the background.)
-## Solution: I incorrectly used mouseout instead of mouseleave ~.~
+# Solution: I incorrectly used mouseout instead of mouseleave ~.~
 
 - If user swaps between color schemes and tries to update, mongo will throw error
-## Solution: verify if new user object is the same as the old using JSON.stringify
+# Solution: verify if new user object is the same as the old using JSON.stringify
 
-## Potential Improvements
+- NavLinks and StyledButtons are not perfectly aligned.
+# Solution: upon correcting their stylings, the profile tab gained an unfortunate "bad looking" layout.  Sub hacky solution was to put all the buttons inside Nav Links.  For buttons that were not supposed to be links, I sent them to where the user already was (which does not occur).
+
+- For non-mouse users, selecting optinos in nav links won't bubble to button's click function.
+# Solution: Set navlink's tabindex="-1"
+
+# Potential Improvements
 
 - Change log in to only request confirmation code once an attempt to login for the first time has been made, instead of asking user if they need to input one.
 
@@ -54,6 +60,7 @@ Intentions with the GUI include:
 
 - encrypt passwords
 # DONE
+
 - Don't ask user if it is their first time logging in.  Instead, let them try, and then ask for the confirmation code.
 # DONE
 

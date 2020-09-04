@@ -13,7 +13,7 @@ import userInfo, { getThemeColors } from './Redux/reducers/user-reducer';
 import GlobalStyles from "./Components/GlobalStyles/GlobalStyles";
 import NavBar from "./Components/NavBar/NavBar";
 import Home from "./Components/Home/Home";
-import Assemble from "./Components/Assemble/Assemble";
+import Assembly from "./Components/Assembly/Assembly";
 import Levels from "./Components/Levels/Levels";
 import Rules from "./Components/Rules/Rules"
 import Test from "./Components/Test/Test";
@@ -65,9 +65,9 @@ function App() {
 						<Route exact path="/account">
               <Account />
             </Route>
-						<Route exact path="/assemble">
+						<Route exact path="/assembly">
 							{userInfo.botBuilds ? (
-								<Assemble />
+								<Assembly />
 							) : (
 								<Redirect to="/home" />
 							)}

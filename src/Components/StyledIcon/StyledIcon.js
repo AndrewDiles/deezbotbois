@@ -4,13 +4,17 @@ import { Icon } from 'react-icons-kit';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, size, padding, absolute} ) => {
+const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, size, padding, absolute, id} ) => {
 	const settings = useSelector((state) => state.settings);
 	let colors = useSelector(getThemeColors);
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
 	if (settings.serverStatus !== 'idle') disabled = true;
+	if (!handleClick) {
+		handleClick = () => {}
+	}
   return (
       <IconStylings
+			id = {id}
       disabled = {disabled || null}
       onClick = {(ev)=> {handleClick(ev)}}
       icon = {icon}

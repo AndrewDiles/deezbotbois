@@ -9,6 +9,7 @@ import {arrowRight} from 'react-icons-kit/icomoon/arrowRight';
 import {arrowLeft} from 'react-icons-kit/icomoon/arrowLeft';
 import Bot from '../Bots/Bot';
 
+
 const ModelChanger = ({ botNumberSelected }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);

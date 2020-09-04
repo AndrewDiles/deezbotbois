@@ -91,7 +91,7 @@ export const changeBotColorX = (index, colorPosition, color) => ({
 	type: 'CHANGE_BOT_COLOR_X',
 	index: index,
 	colorPosition: colorPosition,
-	color, color
+	color: color
 })
 
 export const replaceUserInfo = (newUserInfo) => ({

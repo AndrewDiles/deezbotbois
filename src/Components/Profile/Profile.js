@@ -35,16 +35,16 @@ const Profile = ({ time, disabled }) => {
 			time = {time}
 			>
 			</Gift>
-			<StyledNavLink to="/assemble">
+			<StyledNavLink to="/assembly" tabIndex="-1">
         <StyledButton
-					handleClick = {() => {dispatch(updateUrl('assemble'))}}
-					selected = {settings.currentUrl === 'assemble'}
-					disabled = {settings.currentUrl === 'assemble'}
+					handleClick = {() => {dispatch(updateUrl('assembly'))}}
+					selected = {settings.currentUrl === 'assembly'}
+					disabled = {settings.currentUrl === 'assembly'}
       	  >
       	  BUILD-EM
         </StyledButton>
     	</StyledNavLink>
-			<StyledNavLink to="/levels">
+			<StyledNavLink to="/levels" tabIndex="-1">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('levels'))}}
 					selected = {settings.currentUrl === 'levels'}
@@ -56,7 +56,7 @@ const Profile = ({ time, disabled }) => {
 			{settings.currentUrl !== 'settings' &&
 					<SizeSlider/>
 			}
-			<StyledNavLink to="/settings">
+			<StyledNavLink to="/settings" tabIndex="-1">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('settings'))}}
 					selected = {settings.currentUrl === 'settings'}
@@ -65,7 +65,7 @@ const Profile = ({ time, disabled }) => {
           SETTINGS
         </StyledButton>
       </StyledNavLink>
-			<StyledNavLink to="/account">
+			<StyledNavLink to="/account" tabIndex="-1">
         <StyledButton
 					handleClick = {() => {dispatch(updateUrl('account'))}}
 					selected = {settings.currentUrl === 'account'}
@@ -74,14 +74,14 @@ const Profile = ({ time, disabled }) => {
           ACCOUNT
         </StyledButton>
       </StyledNavLink>
-			<StyledNavLink to={settings.currentUrl}>
+			<StyledNavLink to={settings.currentUrl} tabIndex="-1">
 			<StyledButton 
         handleClick = {() => {dispatch(deactivateProfileTab())}}
         >
         COLLAPSE
       </StyledButton>
 			</StyledNavLink>
-			<StyledNavLink to={settings.currentUrl}>
+			<StyledNavLink to={settings.currentUrl} tabIndex="-1">
 			<Logout/>
 			</StyledNavLink>
 		</ProfileWrapper>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
@@ -8,11 +8,10 @@ import styled from 'styled-components';
 import robotNameGen from '../../Constants/robotNameGen';
 import ModelChanger from './ModelChanger';
 import ColorSelection from './ColorSelection';
+import baseBotAttributes from '../../Constants/attributes';
 
 import {
-	changeBotColors,
-	changeBotName,
-	changeBotColorX,
+	changeBotName
 } from '../../Redux/actions';
 import settings from '../../Redux/reducers/settings-reducer';
 
@@ -21,36 +20,33 @@ const BotModel = ({ botNumberSelected}) => {
 	const dispatch = useDispatch();
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
-	// const [initialChange, setInitialChange] = React.useState(true);
-	// const [name, setName] = useState(botInfo[botNumberSelected].name);
 
-	// React.useEffect(()=>{
-	// 	setInitialChange(true)
-	// },[botNumberSelected])
 	if (!botInfo[botNumberSelected]) return (<></>)
   return (
     <div
 		className = "assemblyGridChild" 
 		>
+			<h3>
+				MODEL
+			</h3>
+			<ModelChanger
+			botNumberSelected = {botNumberSelected}
+			/>
 			NAME
 			<RowDivCenter
 			className = {'centeredFlex'}
 			>
-				{/* {botInfo[botNumberSelected] && */}
 				<StyledInput
 				colors = {colors}
 				className = "centeredInput" 
 				type="text" maxLength = "16" 
 				value = {userInfo.botBuilds[botNumberSelected].name}
 				onChange = {(ev)=>{
-					// initialChange ? setInitialChange(false) :
 					dispatch(changeBotName(botNumberSelected, ev.target.value))}}
 				/>
-				{/* } */}
 				<DiceDiv>
 					<StyledIcon
 					handleClick = {(ev)=>{
-						// initialChange ? setInitialChange(false) :
 						dispatch(changeBotName(botNumberSelected, robotNameGen()))}}
 					size = {14}
 					padding = {2}
@@ -60,12 +56,12 @@ const BotModel = ({ botNumberSelected}) => {
 				</DiceDiv>
 			</RowDivCenter>
 			<br/>
-			<ModelChanger
-			botNumberSelected = {botNumberSelected}
-			/>
+			COLORS
 			<ColorSelection
 			botNumberSelected = {botNumberSelected}
 			/>
+			<br/>
+			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Description}
     </div>
   )
 }
