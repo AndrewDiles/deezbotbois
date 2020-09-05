@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Pewpew = ( { botColors, cellSize, armAngle } ) => {
+const Gun3 = ( { botColors, cellSize, armAngle } ) => {
   let borderSize = Math.floor(cellSize/100);
   borderSize = `${borderSize}px`;
   if (armAngle === null) {
     armAngle = 0;
-    // -90: up, 0: right, 90: down, 180 left, 270: up
   }
   
   return (
@@ -26,10 +25,10 @@ const Pewpew = ( { botColors, cellSize, armAngle } ) => {
     </Base>
   )
 }
-export default Pewpew;
+export default Gun3;
 const Barrel = styled.div`
-  height: ${props => `${props.size/30}px`};
-  width: ${props => `${props.size/5}px`};
+  height: ${props => `${props.size/20}px`};
+  width: ${props => `${props.size/3}px`};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   background: ${props => props.color};
   position: relative;
@@ -39,8 +38,8 @@ const Barrel = styled.div`
   z-index:4;
 `
 const Base = styled.div`
-  height: ${props => `${props.size/20}px`};
-  width: ${props => `${props.size/20}px`};
+  height: ${props => `${props.size/12}px`};
+  width: ${props => `${props.size/12}px`};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   background: ${props => props.color};
   border-radius: 50%;

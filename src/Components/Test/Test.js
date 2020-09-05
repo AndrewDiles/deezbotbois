@@ -20,7 +20,7 @@ const Test = () => {
       >
         <Bot
         model = 'BotBoxey'
-        arm1 = 'Powpow'
+        arm1 = 'Gun3'
         arm2 = {null}
         botColors = {null}
         arm1Angle = {null}
@@ -32,7 +32,7 @@ const Test = () => {
       >
         <Bot
         model = 'BotLumpey'
-        arm1 = 'Pewpew'
+        arm1 = 'Gun1'
         arm2 = {null}
         botColors = {null}
         arm1Angle = {156}
@@ -44,7 +44,7 @@ const Test = () => {
       >
         <Bot
         model = 'BotSpikey'
-        arm1 = 'Bonkbonk'
+        arm1 = 'Hammer1'
         arm2 = {null}
         botColors = {null}
         arm1Angle = {null}
@@ -56,8 +56,8 @@ const Test = () => {
       >
         <Bot
         model = 'BotBiggey'
-        arm1 = 'Poppop'
-        arm2 = 'Powpow'
+        arm1 = 'Gun2'
+        arm2 = 'Gun3'
         botColors = {null}
         arm1Angle = {180}
         arm2Angle = {45}
@@ -68,7 +68,7 @@ const Test = () => {
       >
         <Bot
         model = 'BotZippey'
-        arm1 = 'Pewpew'
+        arm1 = 'Gun1'
         arm2 = {null}
         botColors = {null}
         arm1Angle = {180}
@@ -80,7 +80,7 @@ const Test = () => {
       >
         <Bot
         model = 'BotJager'
-        arm1 = 'Pewpew'
+        arm1 = 'Gun1'
         arm2 = {null}
         botColors = {null}
         arm1Angle = {180}
@@ -92,8 +92,8 @@ const Test = () => {
       >
         <Bot
         model = 'BotRobbey'
-        arm1 = 'Pewpew'
-        arm2 = 'Pewpew'
+        arm1 = 'Gun1'
+        arm2 = 'Gun1'
         botColors = {null}
         arm1Angle = {180}
         arm2Angle = {45}

@@ -31,6 +31,8 @@ const Levels = ({ disabled }) => {
 		colors = {colors}
 		>
       Level selections go here
+			<br/>
+			Include 5 level Gambits and 20 level Gauntlets with better rewards
     </Wrapper>
   )
 }

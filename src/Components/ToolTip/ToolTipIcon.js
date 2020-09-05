@@ -5,7 +5,7 @@ import StyledIcon from '../StyledIcon/StyledIcon';
 import ToolTip from './ToolTip';
 import {attributeInfo} from '../../Constants/attributes';
 
-const ToolTipIcon = ({ name, iconImport}) => {
+const ToolTipIcon = ({ name, iconImport, selfLocation }) => {
 	const [messageHovered, setMessageHovered] = useState(false);
 
 	React.useEffect(()=>{
@@ -34,6 +34,7 @@ const ToolTipIcon = ({ name, iconImport}) => {
 				messageHovered = {messageHovered}
 				setMessageHovered = {setMessageHovered}
 				fontSize = '0.6em'
+				selfLocation = {selfLocation}
 				>
 					{attributeInfo[name]}
 				</ToolTip>

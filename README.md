@@ -47,6 +47,8 @@ Intentions with the GUI include:
 
 # Potential Improvements
 
+- In Assembly add ability to click and expand each section
+
 - Change log in to only request confirmation code once an attempt to login for the first time has been made, instead of asking user if they need to input one.
 
 

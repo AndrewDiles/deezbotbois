@@ -25,7 +25,7 @@ const Assembly = () => {
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [successMsg, setSuccessMsg] = useState(null);
 	const [botNumberSelected, setBotNumberSelected] = useState(0);
-	const [equipmentStagedToChange, setEquipmentStagedToChange] = useState(null)
+	const [equipmentStaging, setEquipmentStaging] = useState({from: null, to: null})
 	// const [botLoaded, setBotLoaded] = useState(false);
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
@@ -42,6 +42,9 @@ const Assembly = () => {
 		}
 		return () => clearTimeout(eraseSuccessMsg)
 	},[successMsg])
+	useEffect(()=>{
+		setEquipmentStaging({from: null, to: null})
+	},[botNumberSelected])
 	if (userInfo.email === undefined || userInfo.email === null) {
     return (
       <Redirect to="/home" />
@@ -124,12 +127,13 @@ const Assembly = () => {
 					/>
 					<BotEquipment
 					botNumberSelected = {botNumberSelected}
-					equipmentStagedToChange = {equipmentStagedToChange}
-					setEquipmentStagedToChange = {setEquipmentStagedToChange}
+					equipmentStaging = {equipmentStaging} 
+					setEquipmentStaging = {setEquipmentStaging}
 					/>
 					<BotAttributes
 					botNumberSelected = {botNumberSelected}
-					equipmentStagedToChange = {equipmentStagedToChange}
+					equipmentStaging = {equipmentStaging}
+					setEquipmentStaging = {setEquipmentStaging}
 					/>
 					<BotTechTree
 					botNumberSelected = {botNumberSelected}

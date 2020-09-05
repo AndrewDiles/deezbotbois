@@ -114,7 +114,7 @@ function NavBar() {
 								// className = 'userImg'
 								alternativeBotSize = {40}
 								model = {userInfo.imageUrl}
-								arm1 = {'Pewpew'}
+								arm1 = {'Gun1'}
 								arm1Angle = {-45}
 								/>
 							</BotWrapper>
@@ -206,7 +206,7 @@ function NavBar() {
 											// className = 'userImg'
 											alternativeBotSize = {40}
 											model = {userInfo.imageUrl}
-											arm1 = {'Pewpew'}
+											arm1 = {'Gun1'}
 											arm1Angle = {-45}
 											/>
 										</BotWrapper>

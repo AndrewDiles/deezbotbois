@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Poppop = ( { botColors, cellSize, armAngle } ) => {
+const Gun1 = ( { botColors, cellSize, armAngle } ) => {
   let borderSize = Math.floor(cellSize/100);
   borderSize = `${borderSize}px`;
   if (armAngle === null) {
     armAngle = 0;
+    // -90: up, 0: right, 90: down, 180 left, 270: up
   }
   
   return (
@@ -25,10 +26,10 @@ const Poppop = ( { botColors, cellSize, armAngle } ) => {
     </Base>
   )
 }
-export default Poppop;
+export default Gun1;
 const Barrel = styled.div`
-  height: ${props => `${props.size/25}px`};
-  width: ${props => `${props.size/4}px`};
+  height: ${props => `${props.size/30}px`};
+  width: ${props => `${props.size/5}px`};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   background: ${props => props.color};
   position: relative;
@@ -38,8 +39,8 @@ const Barrel = styled.div`
   z-index:4;
 `
 const Base = styled.div`
-  height: ${props => `${props.size/15}px`};
-  width: ${props => `${props.size/15}px`};
+  height: ${props => `${props.size/20}px`};
+  width: ${props => `${props.size/20}px`};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   background: ${props => props.color};
   border-radius: 50%;

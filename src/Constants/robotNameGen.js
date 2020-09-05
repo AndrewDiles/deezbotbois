@@ -64,7 +64,9 @@ const randomNames = [
 	'R. Batty',
 	'Spruce Bruh',
 	'Bacon Boi',
-	'Mr. Smiley'
+	'Mr. Smiley',
+	'Brobot',
+	'Dan Riffs'
 ];
 
 const robotNameGen = () => {

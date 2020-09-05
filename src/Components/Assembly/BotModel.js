@@ -62,6 +62,16 @@ const BotModel = ({ botNumberSelected}) => {
 			/>
 			<br/>
 			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Description}
+			<br/>
+			<SpecialDiv>
+			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special1}
+			</SpecialDiv>
+			<SpecialDiv>
+			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special2}
+			</SpecialDiv>
+			<SpecialDiv>
+			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special3}
+			</SpecialDiv>
     </div>
   )
 }
@@ -86,4 +96,8 @@ const DiceDiv = styled.div`
 	position: relative;
 	right: 40px;
 	bottom: 5px;
+`
+const SpecialDiv = styled.div`
+	margin-top: 10px;
+	font-size: 0.8em;
 `

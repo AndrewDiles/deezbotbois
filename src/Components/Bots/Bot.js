@@ -14,10 +14,10 @@ import BotJager from './BotJager';
 import BotRobbey from './BotRobbey';
 
 // arms imports:
-import Pewpew from '../Arms/Pewpew';
-import Poppop from '../Arms/Poppop';
-import Powpow from '../Arms/Powpow';
-import Bonkbonk from '../Arms/Bonkbonk';
+import Gun1 from '../Arms/Gun1';
+import Gun2 from '../Arms/Gun2';
+import Gun3 from '../Arms/Gun3';
+import Hammer1 from '../Arms/Hammer1';
 
 // Popper
 // bonkbonk
@@ -37,10 +37,7 @@ import Bonkbonk from '../Arms/Bonkbonk';
 
 const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeBotSize, faded } ) => {
   const settings = useSelector((state) => state.settings);
-	// console.log('model',model);
-	// console.log('botColors',botColors)
 	if (!model) {
-		// console.log('no bot model');
 		return (
 			<NoBot 
 			cellSize = {alternativeBotSize || settings.cellSize}
@@ -83,24 +80,24 @@ const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeB
     }
   }
 
-  let SelectedArm1, SelectedArm2 = null;
+  let SelectedArm1, SelectedArm2, SelectedArm3 = null;
   function armsSelection(armsString, armNumber) {
     // This function assumes 2 is the maximum number of weapons a bot can carry
     switch(armsString) {
-      case 'Pewpew' : {
-        armNumber === 1 ? SelectedArm1 = Pewpew : SelectedArm2 = Pewpew;
+      case 'Gun1' : {
+        armNumber === 1 ? SelectedArm1 = Gun1 : armNumber === 2 ? SelectedArm2 = Gun1 : SelectedArm3 = Gun1;
       }
       break;
-      case 'Poppop' : {
-        armNumber === 1 ? SelectedArm1 = Poppop : SelectedArm2 = Poppop;
+      case 'Gun2' : {
+        armNumber === 1 ? SelectedArm1 = Gun2 : armNumber === 2 ? SelectedArm2 = Gun2 : SelectedArm3 = Gun2;
       }
       break;
-      case 'Powpow' : {
-        armNumber === 1 ? SelectedArm1 = Powpow : SelectedArm2 = Powpow;
+      case 'Gun3' : {
+        armNumber === 1 ? SelectedArm1 = Gun3 : armNumber === 2 ? SelectedArm2 = Gun3 : SelectedArm3 = Gun3;
       }
       break;
-      case 'Bonkbonk' : {
-        armNumber === 1 ? SelectedArm1 = Bonkbonk : SelectedArm2 = Bonkbonk;
+      case 'Hammer1' : {
+        armNumber === 1 ? SelectedArm1 = Hammer1 : armNumber === 2 ? SelectedArm2 = Hammer1 : SelectedArm3 = Hammer1;
       }
       break;
       default:{

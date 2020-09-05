@@ -4,7 +4,7 @@ const initialState = {
   currentUrl : null,
 	navLocation: 'top',
 	profileTab: 'inactive',
-	cellSize : 50,
+	cellSize : 75,
 	colorsTesting: null,
 }
 

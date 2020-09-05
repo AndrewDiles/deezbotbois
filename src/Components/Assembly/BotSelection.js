@@ -30,7 +30,7 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 		return (<></>)
 	}
 	let colorsToSendToBotComponent,colorsToSendToPreviousBotComponent, colorsToSendToNextBotComponent = null;
-	if (botNumberSelected !== null && userInfo.botBuilds.length > 0) {
+	if (botNumberSelected !== null && userInfo.botBuilds.length > 0 && userInfo.botBuilds[botNumberSelected]) {
 		colorsToSendToBotComponent = userInfo.botBuilds[botNumberSelected].colors;
 		if (botNumberSelected > 0) {
 			colorsToSendToPreviousBotComponent = userInfo.botBuilds[botNumberSelected-1].colors;

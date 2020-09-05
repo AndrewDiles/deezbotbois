@@ -54,12 +54,14 @@ export const accessoryStats = {
 	}
 }
 export const weaponStats = {
-	gun1: {
+	Gun1: {
 		name: "pewpew",
 		description: "Handgun of questionable efficacy and naming.",
 		damage: 8,
 		superTypes: ['Ranged'],
 		subTypes: ['Piercing', 'Accuracy'],
+		projectileSpeed: 4,
+		attackShape: 'line',
 		reloadTime: 2,
 		fireCost: 20,
 		targetFireCost: 30,

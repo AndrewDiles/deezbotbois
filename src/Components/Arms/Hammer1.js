@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Bonkbonk = ( { botColors, cellSize, armAngle } ) => {
+const Hammer1 = ( { botColors, cellSize, armAngle } ) => {
   let borderSize = Math.floor(cellSize/100);
   borderSize = `${borderSize}px`;
   if (armAngle === null) {
@@ -28,7 +28,7 @@ const Bonkbonk = ( { botColors, cellSize, armAngle } ) => {
     </Base>
   )
 }
-export default Bonkbonk;
+export default Hammer1;
 const Head = styled.div`
   height: ${props => `${props.size/26}px`};
   width: ${props => `${props.size/6}px`};

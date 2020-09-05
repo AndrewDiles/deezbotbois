@@ -48,7 +48,7 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStagedToChange }) =>
 		else {
 			setBaseAttributeValue(baseBotAttributes[userInfo.botBuilds[botNumberSelected].model][attribute]);
 		}
-	},[botNumberSelected]);
+	},[userInfo.botBuilds, botNumberSelected]);
 	useEffect(()=>{
 		if (botNumberSelected === undefined) return;
 		let sum = 0;
@@ -155,6 +155,7 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStagedToChange }) =>
 			<ToolTipIcon
 			name = {attribute}
 			iconImport = {iconImport}
+			selfLocation = 'left'
 			/>
 
 			{/* <StyledIcon
