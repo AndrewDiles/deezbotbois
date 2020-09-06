@@ -215,7 +215,7 @@ const AltLogin = () => {
 		colors = {colors}
 		>
 			<RowDiv
-			className = {'centeredFlex'}
+			className = 'centeredFlex'
 			>
 				Do you have an account? &ensp;
       	<StyledButton
@@ -232,25 +232,6 @@ const AltLogin = () => {
 				</StyledButton>
 			</RowDiv>
 			<br/>
-			{/* {existingAccount === true &&
-				<RowDiv
-				className = {'centeredFlex'}
-				>
-					Have you confirmed it? &ensp;
-					<StyledButton
-					handleClick = {() => {resetFields();setAccountConfirmed(true)}}
-					selected = {accountConfirmed === true}
-					>
-						YES
-					</StyledButton>
-					<StyledButton
-					handleClick = {() => {resetFields();setAccountConfirmed(false)}}
-					selected = {accountConfirmed === false}
-					>
-						NO
-					</StyledButton>
-				</RowDiv>
-			} */}
 			{existingAccount === false &&
 				<div>
 					<Styledh2>

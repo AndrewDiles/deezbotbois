@@ -76,6 +76,22 @@ export default function userInfo(
 					botBuilds : botBuilds,
 				}
 			}
+			case 'EQUIP_WEAPON' : {
+				let botBuilds = [...state.botBuilds];
+				botBuilds[action.index].equipment[action.slotKey] = action.name;
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
+			case 'UNEQUIP_WEAPON' : {
+				let botBuilds = [...state.botBuilds];
+				botBuilds[action.index].equipment[action.slotKey] = null;
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
 			case 'REPLACE_USER_INFO' : {
 				return {
 					...action.newUserInfo,

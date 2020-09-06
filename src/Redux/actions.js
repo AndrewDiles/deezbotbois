@@ -93,6 +93,17 @@ export const changeBotColorX = (index, colorPosition, color) => ({
 	colorPosition: colorPosition,
 	color: color
 })
+export const equipWeapon = (index, slotKey, name) => ({
+	type: 'EQUIP_WEAPON',
+	index: index,
+	slotKey: slotKey,
+	name: name
+})
+export const unequipWeapon = (index, slotKey) => ({
+	type: 'UNEQUIP_WEAPON',
+	index: index,
+	slotKey: slotKey
+})
 
 export const replaceUserInfo = (newUserInfo) => ({
 	type: 'REPLACE_USER_INFO',

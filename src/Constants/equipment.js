@@ -35,7 +35,7 @@ export const accessoryStats = {
 	solderingNanobots: {
 		name: 'Soldering Nanobots',
 		description: 'Miniscule metal miracle workers.',
-		AutoRepair: 1,
+		AutoRepair: .1,
 	},
 	batteryPack: {
 		name: 'Battery Pack',
@@ -55,7 +55,7 @@ export const accessoryStats = {
 }
 export const weaponStats = {
 	Gun1: {
-		name: "pewpew",
+		name: "Pewpew",
 		description: "Handgun of questionable efficacy and naming.",
 		damage: 8,
 		superTypes: ['Ranged'],
@@ -63,8 +63,18 @@ export const weaponStats = {
 		projectileSpeed: 4,
 		attackShape: 'line',
 		reloadTime: 2,
-		fireCost: 20,
+		attackCost: 20,
 		targetFireCost: 30,
 		aimCost: 5,
+	},
+	Sword1: {
+		name: "Busted Sword",
+		description: "A sword that was once great.",
+		damage: 11,
+		superTypes: ['Melee'],
+		subTypes: ['Piercing', 'Slashing', 'Power'],
+		attackShape: 'cell',
+		reloadTime: 0,
+		attackCost: 20,
 	}
 }

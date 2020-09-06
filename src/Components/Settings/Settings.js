@@ -229,7 +229,7 @@ const Settings = ({ disabled }) => {
       <AvatarImgSelection>
         {userInfo.googleImageUrl && (
           <AvatarImgOption
-            className={"centeredFlex"}
+            className="centeredFlex"
             colors={colors}
             selected={userInfo.googleImageUrl === newAvImg}
             onClick={(e) => handleClickAvatarImgOption(userInfo.googleImageUrl)}
@@ -245,7 +245,7 @@ const Settings = ({ disabled }) => {
         {userInfo.availableBots.map((botName) => (
           <AvatarImgOption
             key={botName}
-            className={"centeredFlex"}
+            className="centeredFlex"
             colors={colors}
             selected={botName === newAvImg}
             onClick={(e) => handleClickAvatarImgOption(botName)}

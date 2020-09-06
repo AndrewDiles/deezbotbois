@@ -73,7 +73,7 @@ const baseBotAttributes = {
 		Power: 15,
 		Capacitor: 60,
 		Reactor: 12,
-		AutoRepair: 1,
+		AutoRepair: .1,
 		ScanDistance: 2,
 		ScanCost: 10,
 		MovementDistance: 0,
@@ -85,7 +85,7 @@ const baseBotAttributes = {
 		Description: "Immobile war machine!",
 		Special1: "+1 Weapon slot",
 		Special2: "-3 Accessory slots",
-		Special3: "+1 AutoRepair"
+		Special3: "+.1 AutoRepair"
 	},
 	BotRobbey: {
 		Durability: 14,
@@ -163,7 +163,7 @@ export const attributeInfo = {
 	Power: 'Power: Increases damage from weapons with subType "Power"',
 	Capacitor: 'Capacitor: Maximum energy stored [kJ]',
 	Reactor: 'Reactor: Maximum energy recharged [kW]',
-	AutoRepair: 'Auto Repair: Total durability recovered over 10 ticks',
+	AutoRepair: 'Auto Repair: Total durability recovered over each tick',
 	ScanDistance: 'Scan Distance: Maximum distance that bots will be detected using a scan',
 	ScanCost: 'Scan Cost: Energy cost to scan [kJ]',
 	MovementDistance: 'Movement Distance: Maximum traversable distance in one tick',
@@ -182,6 +182,19 @@ export const attributeInfo = {
 	PercentChange: 'Increase/decrease from upcoming change as a percent',
 	Sum: "Build's total attribute value"
 }
-export const attributeHeaderInfo = {
-	
-}
+export const displayedAttributes = [
+	'BAR',
+	'Durability',
+	'Armor',
+	'Shield',
+	'Accuracy',
+	'Power',
+	'Capacitor',
+	'Reactor',
+	'AutoRepair',
+	'ScanDistance',
+	'ScanCost',
+	'MovementDistance',
+	'MovementCost',
+	'Initiative'
+]

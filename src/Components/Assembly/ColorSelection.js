@@ -31,7 +31,7 @@ const ColorSelection = ({ botNumberSelected }) => {
   return (
 		<Wrapper>
 			<ColDiv
-			className = {'centeredFlex'}
+			className = 'centeredFlex'
 			>
 		{Object.keys(userInfo.botBuilds[botNumberSelected].colors).map((colorLocation)=>{
 			return (
@@ -40,7 +40,7 @@ const ColorSelection = ({ botNumberSelected }) => {
 				>
 					{colorLocation}
 						<RowDiv
-						className = {'centeredFlex'}
+						className = 'centeredFlex'
 						>
 							<ColorSquare
 							onClick = {e=>{handleClickColorSquare(colorLocation)}}

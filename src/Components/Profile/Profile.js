@@ -29,7 +29,7 @@ const Profile = ({ time, disabled }) => {
 		navLocation = {settings.navLocation}
 		profileTab = {settings.profileTab}
 		notSelected = {colors.notSelected}
-		className = {'centeredFlex'}
+		className = 'centeredFlex'
 		>
 			<Gift
 			time = {time}

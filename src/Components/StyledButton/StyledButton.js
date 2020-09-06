@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const StyledButton = ( { handleClick, disabled, selected, absolute, colorSampling, children} ) => {
+const StyledButton = ( { handleClick, disabled, selected, absolute, colorSampling, width, fontSize, children} ) => {
 	let colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
 	if (settings.serverStatus !== 'idle') disabled = true;
@@ -24,6 +24,8 @@ const StyledButton = ( { handleClick, disabled, selected, absolute, colorSamplin
       children = {children}
 			colors = {colors}
 			absolute = {absolute}
+			width = {width}
+			fontSize = {fontSize}
       >
         {children}
       </ButtonStylings>
@@ -32,7 +34,7 @@ const StyledButton = ( { handleClick, disabled, selected, absolute, colorSamplin
 export default StyledButton;
 
 const ButtonStylings = styled.button`
-  width: 125px;
+  width: ${props=>props.width ? `${props.width}px` : '125px'};
 	min-height: 40px;
   /* padding: 5px; */
   position: ${props => props.absolute ? 'absolute' : 'relative'};
@@ -40,7 +42,7 @@ const ButtonStylings = styled.button`
   /* margin: 5px; */
   border-radius: 5px;
   border: 1px solid transparent;
-  font-size: 12px;
+  font-size: ${props=>props.fontSize ? `${props.fontSize}px` : '12px'};
   font-weight: 500;
   font-family: 'Press Start 2P', cursive;
   text-align: center;

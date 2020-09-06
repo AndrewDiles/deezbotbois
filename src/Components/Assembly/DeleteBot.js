@@ -63,7 +63,7 @@ const DeleteBot = ({ setBotNumberSelected, botNumberSelected, setErrorMsg, setSu
 	}
   return (
 		<RowDivCenter
-		className = {'centeredFlex'}
+		className = 'centeredFlex'
 		>
     	<StyledButton
 				handleClick = {() => {setConfirmOpen(true)}}

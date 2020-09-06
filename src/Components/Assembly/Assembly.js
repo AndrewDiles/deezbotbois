@@ -15,7 +15,7 @@ import BotModel from './BotModel';
 import BotEquipment from './BotEquipment';
 import BotAttributes from './BotAttributes';
 import BotTechTree from './BotTechTree';
-import BotAI from './BotAI';
+import BotAI from './BotAI/BotAI';
 import BotScripts from './BotScripts';
 
 const Assembly = () => {
@@ -59,7 +59,7 @@ const Assembly = () => {
 		>
 			<RowDivSpace>
 				<ColDivCenter
-				className = {'centeredFlex'}
+				className = 'centeredFlex'
 				>
 					{successMsg &&
 						<MessageDisplay
@@ -177,7 +177,7 @@ const AssemblyGrid = styled.div`
   margin-right: auto;
 	/* overflow-y: auto; */
 	@media screen and 
-	(max-width: ${props => props.navLocation === 'top' ? '1700px' : '1830px'}) {
+	(max-width: ${props => props.navLocation === 'top' ? '1600px' : '1730px'}) {
 		width: 1030px;
 		grid-template-columns: repeat(4, 1fr);
   }

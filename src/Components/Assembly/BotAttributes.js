@@ -2,28 +2,29 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 
+import { displayedAttributes } from '../../Constants/attributes';
+
 import AttributeHeader from './AttributeHeader';
 import Attribute from './Attribute';
 
-
 const BotAttributes = ({ botNumberSelected, equipmentStaging, setEquipmentStaging }) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	const displayedAttributes = [
-		'BAR',
-		'Durability',
-		'Armor',
-		'Shield',
-		'Accuracy',
-		'Power',
-		'Capacitor',
-		'Reactor',
-		'AutoRepair',
-		'ScanDistance',
-		'ScanCost',
-		'MovementDistance',
-		'MovementCost',
-		'Initiative'
-	];
+	// const displayedAttributes = [
+	// 	'BAR',
+	// 	'Durability',
+	// 	'Armor',
+	// 	'Shield',
+	// 	'Accuracy',
+	// 	'Power',
+	// 	'Capacitor',
+	// 	'Reactor',
+	// 	'AutoRepair',
+	// 	'ScanDistance',
+	// 	'ScanCost',
+	// 	'MovementDistance',
+	// 	'MovementCost',
+	// 	'Initiative'
+	// ];
 
 	if (!userInfo.botBuilds) {
 		return (<></>)

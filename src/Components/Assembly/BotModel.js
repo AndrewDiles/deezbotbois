@@ -34,7 +34,7 @@ const BotModel = ({ botNumberSelected}) => {
 			/>
 			NAME
 			<RowDivCenter
-			className = {'centeredFlex'}
+			className = 'centeredFlex'
 			>
 				<StyledInput
 				colors = {colors}

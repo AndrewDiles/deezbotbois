@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-import ToolTip from '../ToolTip/ToolTip';
-
 import {heart} from 'react-icons-kit/icomoon/heart' 				// Durability 
 import {shield} from 'react-icons-kit/icomoon/shield' 			// Armor
 import {sphere} from 'react-icons-kit/icomoon/sphere' 			// Shield
@@ -174,13 +172,13 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStagedToChange }) =>
 					{attributeInfo[attribute]}
 			</ToolTip> */}
 			<NumberCell
-			className = {'centeredFlex'}
+			className = 'centeredFlex'
 			>
 				{baseAttributeValue}
 				
 			</NumberCell>
 			<NumberCell
-			className = {'centeredFlex'}
+			className = 'centeredFlex'
 			>
 				{equipmentAttributeModifier === 0 ? '-' : equipmentAttributeModifier}
 			</NumberCell>
