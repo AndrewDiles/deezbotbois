@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Slasher = ( { botColors, cellSize, armAngle } ) => {
+const Sword1 = ( { botColors, cellSize, armAngle } ) => {
   let borderSize = Math.floor(cellSize/100);
   borderSize = `${borderSize}px`;
   if (armAngle === null) {
@@ -14,22 +14,30 @@ const Slasher = ( { botColors, cellSize, armAngle } ) => {
       <Shaft
       size = {cellSize}
       trim = {botColors.armTrim}
-      color = {botColors.armPrimary}
+      color = {botColors.armSecondary}
       borderSize = {borderSize}
       angle = {armAngle}
       >
-        <Head
+        <Hilt
         size = {cellSize}
         trim = {botColors.armTrim}
         color = {botColors.armPrimary}
         borderSize = {borderSize}
         />
+				{/* <Tip
+				size = {cellSize}
+      	trim = {botColors.armTrim}
+      	color = {botColors.armSecondary}
+      	borderSize = {borderSize}
+      	angle = {armAngle}
+				/> */}
       </Shaft>
+			
     </Base>
   )
 }
-export default Slasher;
-const Head = styled.div`
+export default Sword1;
+const Hilt = styled.div`
   height: ${props => `${props.size/32}px`};
   width: ${props => `${props.size/8}px`};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
@@ -52,5 +60,17 @@ const Shaft = styled.div`
   z-index:4;
 `
 const Base = styled.div`
-z-index: 3;
+	z-index: 3;
 `
+// const Tip = styled.div`
+//   height: ${props => `${props.size/36}px`};
+//   width: ${props => `${props.size/36}px`};
+// 	/* border: ${props => `${props.borderSize} solid ${props.trim}`}; */
+//   background: ${props => props.color};
+//   position: relative;
+//   left: 95%;
+// 	top: ${props => props.borderSize === '0px' ? '-88%' : props.borderSize === '1px' ? '-150%' : '-180%'};
+//   transform-origin: left;
+//   transform: rotate(45deg);
+//   z-index:3;
+// `

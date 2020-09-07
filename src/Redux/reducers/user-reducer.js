@@ -63,6 +63,38 @@ export default function userInfo(
 			case 'CHANGE_BOT_MODEL' : {
 				let botBuilds = [...state.botBuilds];
 				botBuilds[action.index].model = action.botModel;
+				if (action.maxArms === 1) {
+					botBuilds[action.index].equipment.arm2 = null;
+					botBuilds[action.index].equipment.arm3 = null;
+				}
+				else if (action.maxArms === 2) {
+					botBuilds[action.index].equipment.arm3 = null;
+				}
+				if (action.maxAccs === 0) {
+					botBuilds[action.index].equipment.acc1 = null;
+					botBuilds[action.index].equipment.acc2 = null;
+					botBuilds[action.index].equipment.acc3 = null;
+					botBuilds[action.index].equipment.acc4 = null;
+					botBuilds[action.index].equipment.acc5 = null;
+				}
+				else if (action.maxAccs === 1) {
+					botBuilds[action.index].equipment.acc2 = null;
+					botBuilds[action.index].equipment.acc3 = null;
+					botBuilds[action.index].equipment.acc4 = null;
+					botBuilds[action.index].equipment.acc5 = null;
+				}
+				else if (action.maxAccs === 2) {
+					botBuilds[action.index].equipment.acc3 = null;
+					botBuilds[action.index].equipment.acc4 = null;
+					botBuilds[action.index].equipment.acc5 = null;
+				}
+				else if (action.maxAccs === 3) {
+					botBuilds[action.index].equipment.acc4 = null;
+					botBuilds[action.index].equipment.acc5 = null;
+				}
+				else if (action.maxAccs === 4) {
+					botBuilds[action.index].equipment.acc5 = null;
+				}
 				return {
 					...state,
 					botBuilds : botBuilds,

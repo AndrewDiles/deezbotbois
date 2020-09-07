@@ -29,12 +29,12 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			<h3>
 			EQUIPMENT
 			</h3>
-			<RowDiv>
+			<RowDiv className = 'centeredFlex'>
 				<StyledButton
 				handleClick = {e=> {setTypeViewing('weapons');setEquipmentStaging({from: null, to: null})}}
 				selected = {typeViewing === 'weapons'}
 				disabled = {typeViewing === 'weapons'}
-				width = '125'
+				width = '120'
 				fontSize = '10'
 				>
 					WEAPONS
@@ -43,7 +43,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				handleClick = {e=> {setTypeViewing('accessories');setEquipmentStaging({from: null, to: null})}}
 				selected = {typeViewing === 'accessories'}
 				disabled = {typeViewing === 'accessories'}
-				width = '125'
+				width = '120'
 				fontSize = '10'
 				>
 					ACCESSORIES

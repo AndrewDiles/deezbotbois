@@ -8,6 +8,7 @@ import StyledIcon from '../StyledIcon/StyledIcon';
 import {arrowRight} from 'react-icons-kit/icomoon/arrowRight';
 import {arrowLeft} from 'react-icons-kit/icomoon/arrowLeft';
 import Bot from '../Bots/Bot';
+import baseBotAttributes from '../../Constants/attributes';
 
 
 const ModelChanger = ({ botNumberSelected }) => {
@@ -24,7 +25,13 @@ const ModelChanger = ({ botNumberSelected }) => {
 		if (direction === 'left') {
 			if (indexOfSelectedModel === 0) return;
 			else {
-				dispatch(changeBotModel(botNumberSelected, userInfo.availableBots[indexOfSelectedModel-1]));
+				// need to verify and remove excess arms and acc
+				dispatch(changeBotModel(
+					botNumberSelected, 
+					userInfo.availableBots[indexOfSelectedModel-1],
+					baseBotAttributes[userInfo.availableBots[indexOfSelectedModel-1]].WeaponSlots,
+					baseBotAttributes[userInfo.availableBots[indexOfSelectedModel-1]].AccessorySlots,
+				));
 				setIndexOfSelectedModel(indexOfSelectedModel-1);
 				
 			}
@@ -32,7 +39,12 @@ const ModelChanger = ({ botNumberSelected }) => {
 		else if (direction === 'right'){
 			if (indexOfSelectedModel === userInfo.availableBots.length-1) return;
 			else {
-				dispatch(changeBotModel(botNumberSelected, userInfo.availableBots[indexOfSelectedModel+1]));
+				dispatch(changeBotModel(
+					botNumberSelected,
+					userInfo.availableBots[indexOfSelectedModel+1],
+					baseBotAttributes[userInfo.availableBots[indexOfSelectedModel+1]].WeaponSlots,
+					baseBotAttributes[userInfo.availableBots[indexOfSelectedModel+1]].AccessorySlots,
+				));
 				setIndexOfSelectedModel(indexOfSelectedModel+1);
 			}
 		}
@@ -68,6 +80,9 @@ const ModelChanger = ({ botNumberSelected }) => {
 				<Bot
 				alternativeBotSize = {70}
 				model = {userInfo.botBuilds[botNumberSelected].model}
+				arm1 = {userInfo.botBuilds[botNumberSelected].equipment.arm1}
+				arm2 = {userInfo.botBuilds[botNumberSelected].equipment.arm2}
+				arm3 = {userInfo.botBuilds[botNumberSelected].equipment.arm3}
 				botColors ={colorsToSendToBotComponent}
 				/>
 				<StyledIcon

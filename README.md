@@ -29,6 +29,8 @@ Intentions with the GUI include:
 
 
 ## PAST BUGS
+- Accessories and weapons that exceed maximum allowed number based on model are not removed during model changes.
+# Solution: Manage state variable in reducer by sending it the max allowable values
 
 - Main display not scrollable
 # Solution: Wrapper required css property: overflow-y: auto;
@@ -46,6 +48,8 @@ Intentions with the GUI include:
 # Solution: Set navlink's tabindex="-1"
 
 # Potential Improvements
+
+- Add drag and drop for equipping
 
 - In Assembly add ability to click and expand each section
 

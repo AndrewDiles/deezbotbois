@@ -53,7 +53,7 @@ const ButtonStylings = styled.button`
   transition: color .75s, background-color .75s;
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
-    background-color: ${props => !props.disabled && props.colors.hovered};
+    background-color: ${props => !props.disabled && props.selected ? props.selected : props.colors.hovered};
     color: ${props => !props.disabled && props.colors.hoveredText};
   }
 `

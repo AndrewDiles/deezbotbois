@@ -2,13 +2,36 @@ import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
 import StyledButton from '../StyledButton/StyledButton';
-import { accessoryStats, weaponStats } from '../../Constants/equipment';
-import {equipWeapon} from '../../Redux/actions';
+import ToolTip from '../ToolTip/ToolTip';
+import WeaponContents from '../ToolTip/WeaponContents';
+import { weaponStats } from '../../Constants/equipment';
+import { equipWeapon } from '../../Redux/actions';
 
 const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected  }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
+	const [messageHovered, setMessageHovered] = React.useState(false);
+
+	React.useEffect(()=>{
+		const target = document.getElementById(`${weapon}Button`)
+		const onMouseEnter = (ev) => {
+			// if (ev.target === target) 
+			setMessageHovered(true);
+		}
+		const onMouseLeave = (ev) => {
+			// if (ev.target === target) 
+			setMessageHovered(false);
+		}
+		if (target) {
+			target.addEventListener('mouseenter',onMouseEnter);
+			target.addEventListener('mouseleave',onMouseLeave);
+		}
+		return ()=>{
+			if (!target) return;
+			target.removeEventListener('mouseenter',onMouseEnter);
+		}
+	},[weapon, messageHovered])
 
 	if (!userInfo.botBuilds || botNumberSelected === null) {
 		return (<></>)
@@ -46,6 +69,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 			<RowDiv className = 'centeredFlex'>
 				{(equipmentStaging.to && equipmentStaging.to.name === weapon) ? (
 					<StyledButton
+					id = {`${weapon}Button`}
 					width = '180'
 					handleClick = {unstage}
 					selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
@@ -54,6 +78,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
     			</StyledButton>
 				):(
 					<StyledButton
+					id = {`${weapon}Button`}
 					width = '240'
 					handleClick = {stage}
 					selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
@@ -101,10 +126,22 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 								// </StyledButton>
 							)
 						)
-							
 					)
 				}
 			</RowDiv>
+			{messageHovered &&
+				<ToolTip
+				messageHovered = {messageHovered}
+				setMessageHovered = {setMessageHovered}
+				width= '240'
+				>
+					{weaponStats[weapon] &&
+						<WeaponContents
+						weaponInfo = {weaponStats[weapon]}
+						/>
+					}
+				</ToolTip>
+			}
 		</ColDiv>
   )
 }

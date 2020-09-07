@@ -64,13 +64,13 @@ const BotModel = ({ botNumberSelected}) => {
 			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Description}
 			<br/>
 			<SpecialDiv>
-			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special1}
+				{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special1}
 			</SpecialDiv>
 			<SpecialDiv>
-			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special2}
+				{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special2}
 			</SpecialDiv>
 			<SpecialDiv>
-			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special3}
+				{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special3}
 			</SpecialDiv>
     </div>
   )

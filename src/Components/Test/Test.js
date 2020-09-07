@@ -15,7 +15,7 @@ const Test = () => {
 		profileTab = {settings.profileTab}
 		colors = {colors}
 		>
-      <BotTestWrapper
+      {/* <BotTestWrapper
       size = {settings.cellSize}
       >
         <Bot
@@ -26,20 +26,20 @@ const Test = () => {
         arm1Angle = {null}
         arm2Angle = {null}
         />
-      </BotTestWrapper>
+      </BotTestWrapper> */}
       <BotTestWrapper
       size = {settings.cellSize}
       >
         <Bot
         model = 'BotLumpey'
-        arm1 = 'Gun1'
+        arm1 = 'Sword1'
         arm2 = {null}
         botColors = {null}
-        arm1Angle = {156}
+        arm1Angle = {111}
         arm2Angle = {null}
         />
       </BotTestWrapper>
-      <BotTestWrapper
+      {/* <BotTestWrapper
       size = {settings.cellSize}
       >
         <Bot
@@ -50,7 +50,7 @@ const Test = () => {
         arm1Angle = {null}
         arm2Angle = {null}
         />
-      </BotTestWrapper>
+      </BotTestWrapper> */}
       <BotTestWrapper
       size = {settings.cellSize}
       >
@@ -63,7 +63,7 @@ const Test = () => {
         arm2Angle = {45}
         />
       </BotTestWrapper>
-      <BotTestWrapper
+      {/* <BotTestWrapper
       size = {settings.cellSize}
       >
         <Bot
@@ -86,7 +86,7 @@ const Test = () => {
         arm1Angle = {180}
         arm2Angle = {45}
         />
-      </BotTestWrapper>
+      </BotTestWrapper> */}
       <BotTestWrapper
       size = {settings.cellSize}
       >

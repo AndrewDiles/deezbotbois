@@ -18,6 +18,8 @@ import Gun1 from '../Arms/Gun1';
 import Gun2 from '../Arms/Gun2';
 import Gun3 from '../Arms/Gun3';
 import Hammer1 from '../Arms/Hammer1';
+import Sword1 from '../Arms/Sword1';
+
 
 // Popper
 // bonkbonk
@@ -98,6 +100,10 @@ const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeB
       break;
       case 'Hammer1' : {
         armNumber === 1 ? SelectedArm1 = Hammer1 : armNumber === 2 ? SelectedArm2 = Hammer1 : SelectedArm3 = Hammer1;
+      }
+			break;
+			case 'Sword1' : {
+        armNumber === 1 ? SelectedArm1 = Sword1 : armNumber === 2 ? SelectedArm2 = Sword1 : SelectedArm3 = Sword1;
       }
       break;
       default:{
