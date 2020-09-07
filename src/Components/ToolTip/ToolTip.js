@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMessageHovered, fontSize, selfLocation, width}) => {
+const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMessageHovered, fontSize, selfLocation, width, animated}) => {
 	const colors = useSelector(getThemeColors);
 	React.useEffect(()=>{
 		const target = document.getElementById(`MessageWindow${children}`);
@@ -33,6 +33,7 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
 		fontSize = {fontSize}
 		selfLocation = {selfLocation}
 		width = {width}
+		animated = {animated}
 		// location = {location}
 		>
 			{children}
@@ -40,6 +41,7 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
   )
 }
 export default ToolTip;
+
 const Message = styled.div`
 	width: ${props => props.width ? `${props.width}px` : '200px'};
 	height: auto;
@@ -57,6 +59,10 @@ const Message = styled.div`
 	cursor: pointer;
 	border: 1px solid rgba(0,0,0,0.1);
 	z-index: 15;
+	animation: ${props => props.animated === 'equipment' ? '.75s ease-out 1 openFromTopToBottom' 
+	: props.animated === 'attribute' ? '.75s ease-out 1 attributeExpandxAxis'
+	:''};
+	overflow: hidden;
 `
 
 // Attempt to force window location modification bsaed on spawn point

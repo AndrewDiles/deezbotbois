@@ -25,36 +25,43 @@ const AttributeHeader = () => {
 			name = 'Attribute'
 			iconImport = {ic_brightness_auto}
 			selfLocation = 'left'
+			animated = 'attribute'
 			/>
 			<ToolTipIcon
 			name = 'Base'
 			iconImport = {profile}
 			selfLocation = 'left'
+			animated = 'attribute'
 			/>
 			<ToolTipIcon
 			name = 'Equipment'
 			iconImport = {suitcase}
 			selfLocation = 'center'
+			animated = 'attribute'
 			/>
 			<ToolTipIcon
 			name = 'Tech'
 			iconImport = {usb}
 			selfLocation = 'center'
+			animated = 'attribute'
 			/>
 			<ToolTipIcon
 			name = 'PlusMinus'
 			iconImport = {ic_exposure}
 			selfLocation = 'center'
+			animated = 'attribute'
 			/>
 			<ToolTipIcon
 			name = 'PercentChange'
 			iconImport = {ic_change_history}
 			selfLocation = 'right'
+			animated = 'attribute'
 			/>
 			<ToolTipIcon
 			name = 'Sum'
 			iconImport = {sigma}
 			selfLocation = 'right'
+			animated = 'attribute'
 			/>
 		</AttributeRow>
 	)

@@ -159,6 +159,38 @@ html {
     border-radius: 0;
   }
 }
+@keyframes openFromTopToBottom {
+  0% {
+		width: 0px;
+    height: 5px;
+		min-height: 0px;
+  }
+  25% {
+    width: 240px;
+    height: 5px;
+		min-height: 0px;
+  }
+  99% {
+    width: 240px;
+    height: 50px;
+		min-height: 0px;
+  }
+	100% {
+		width: 240px;
+    height: 100%;
+		min-height: 50px;
+	}
+}
+@keyframes attributeExpandxAxis {
+  0% {
+		width: 5px;
+		height: 50px;
+  }
+	100% {
+		width: 200px;
+		height: 50px;
+	}
+}
 @keyframes glowUserImg {
 	/* 0% {
 		background: radial-gradient(closest-side, black,black,indigo, blue, white);

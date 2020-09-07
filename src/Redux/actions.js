@@ -95,14 +95,14 @@ export const changeBotColorX = (index, colorPosition, color) => ({
 	colorPosition: colorPosition,
 	color: color
 })
-export const equipWeapon = (index, slotKey, name) => ({
-	type: 'EQUIP_WEAPON',
+export const equipItem = (index, slotKey, name) => ({
+	type: 'EQUIP_ITEM',
 	index: index,
 	slotKey: slotKey,
 	name: name
 })
-export const unequipWeapon = (index, slotKey) => ({
-	type: 'UNEQUIP_WEAPON',
+export const unequipItem = (index, slotKey) => ({
+	type: 'UNEQUIP_ITEM',
 	index: index,
 	slotKey: slotKey
 })

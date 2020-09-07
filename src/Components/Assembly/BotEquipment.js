@@ -5,12 +5,17 @@ import baseBotAttributes, {attributeInfo} from '../../Constants/attributes';
 import ItemEquipped from './ItemEquipped';
 import StyledButton from '../StyledButton/StyledButton';
 import WeaponInventoryItem from './WeaponInventoryItem';
+import AccessoryInventoryItem from './AccessoryInventoryItem';
+import StyledIcon from '../StyledIcon/StyledIcon';
+import {arrowUp} from 'react-icons-kit/icomoon/arrowUp';
+import {arrowDown} from 'react-icons-kit/icomoon/arrowDown';
 
 const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging}) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
 	const [slots, setSlots] = useState({weapons: 0, accessories: 0});
 	const [typeViewing, setTypeViewing] = useState('weapons');
+	const [inventoryIndexRange, setInventoryIndexRange] = useState({min:0, max:5});
 
 	React.useEffect(()=>{
 		if (botNumberSelected === null || botNumberSelected === undefined) return;
@@ -22,6 +27,12 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}
+	const clickUp = () => {
+		setInventoryIndexRange({min:inventoryIndexRange.min-1,max:inventoryIndexRange.max-1})
+	}
+	const clickDown = () => {
+		setInventoryIndexRange({min:inventoryIndexRange.min+1,max:inventoryIndexRange.max+1})
+	}
   return (
     <div
 		className = "assemblyGridChild" 
@@ -31,7 +42,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			</h3>
 			<RowDiv className = 'centeredFlex'>
 				<StyledButton
-				handleClick = {e=> {setTypeViewing('weapons');setEquipmentStaging({from: null, to: null})}}
+				handleClick = {e=> {setInventoryIndexRange({min:0, max:5});setTypeViewing('weapons');setEquipmentStaging({from: null, to: null})}}
 				selected = {typeViewing === 'weapons'}
 				disabled = {typeViewing === 'weapons'}
 				width = '120'
@@ -40,7 +51,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 					WEAPONS
 				</StyledButton>
 				<StyledButton
-				handleClick = {e=> {setTypeViewing('accessories');setEquipmentStaging({from: null, to: null})}}
+				handleClick = {e=> {setInventoryIndexRange({min:0, max:5});setTypeViewing('accessories');setEquipmentStaging({from: null, to: null})}}
 				selected = {typeViewing === 'accessories'}
 				disabled = {typeViewing === 'accessories'}
 				width = '120'
@@ -142,33 +153,58 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			<h4>
 				INVENTORY
 			</h4>
+			{/* <StyledIcon
+			handleClick = {clickUp}
+			disabled = {inventoryIndexRange.min === 0}
+			icon = {arrowUp}
+			/> */}
+			{/* UP ARROW only clickable if index.min > 0*/}
 			{typeViewing === 'weapons' &&
-				<ColDiv className = 'centeredFlex'>
-					{userInfo.availableArms.map((weapon)=>{
-						//only display if it is not equipped
+				<InventoryWrapper className = 'centeredFlex'>
+					{userInfo.availableArms.map((weapon, index)=>{
+						// Only display if it is not equipped
 						if (!Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(weapon)){
-						return(
-								<WeaponInventoryItem
-								key = {weapon}
-								weapon = {weapon}
-								equipmentStaging = {equipmentStaging}
-								setEquipmentStaging = {setEquipmentStaging}
-								botNumberSelected = {botNumberSelected}
-								/>
-							)
+							// Only display if index is window the viewing range
+							if (index <= inventoryIndexRange.max && index >= inventoryIndexRange.min) {
+								return(
+									<WeaponInventoryItem
+									key = {weapon}
+									weapon = {weapon}
+									equipmentStaging = {equipmentStaging}
+									setEquipmentStaging = {setEquipmentStaging}
+									botNumberSelected = {botNumberSelected}
+									/>
+								)
+							}
 						}
-					})
-					
-					}
-				</ColDiv>
+					})}
+				</InventoryWrapper>
 			}
 			{typeViewing === 'accessories' &&
-				<ColDiv className = 'centeredFlex'>
-
-				</ColDiv>
+				<InventoryWrapper className = 'centeredFlex'>
+						{userInfo.availableAcc.map((accessory, index)=>{
+						if (!Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(accessory)){
+							if (index <= inventoryIndexRange.max && index >= inventoryIndexRange.min) {	
+								return(
+										<AccessoryInventoryItem
+										key = {accessory}
+										accessory = {accessory}
+										equipmentStaging = {equipmentStaging}
+										setEquipmentStaging = {setEquipmentStaging}
+										botNumberSelected = {botNumberSelected}
+										/>
+								)
+							}
+						}
+					})}
+				</InventoryWrapper>
 			}
-
-			{/* Inventory needs to verify if they item is already equiped to deny its equippability (sp?) */}
+			{/* <StyledIcon
+			handleClick = {clickDown}
+			disabled = {inventoryIndexRange.max === Object.keys(userInfo.availableAcc).length}
+			icon = {arrowDown}
+			/> */}
+			{/* DOWN ARROW only clickable if index.max < Object.keys.length*/}
     </div>
   )
 }
@@ -179,4 +215,9 @@ const ColDiv = styled.div`
 const RowDiv = styled.div`
 	display: flex;
 	flex-direction: row;
+`
+const InventoryWrapper = styled.div`
+	flex-direction: column;
+	max-height: 300px;
+	/* overflow-y: scroll; */
 `

@@ -53,7 +53,7 @@ const AltLogin = () => {
 		if (secondSuccessMsg) {
 			eraseSecondSuccessMsg = setTimeout(()=>{
 				setSecondSuccessMsg(null)
-			},7500)
+			},5500)
 		}
 		return () => clearTimeout(eraseSecondSuccessMsg)
 	},[secondSuccessMsg])

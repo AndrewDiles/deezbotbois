@@ -108,7 +108,7 @@ export default function userInfo(
 					botBuilds : botBuilds,
 				}
 			}
-			case 'EQUIP_WEAPON' : {
+			case 'EQUIP_ITEM' : {
 				let botBuilds = [...state.botBuilds];
 				botBuilds[action.index].equipment[action.slotKey] = action.name;
 				return {
@@ -116,7 +116,7 @@ export default function userInfo(
 					botBuilds : botBuilds,
 				}
 			}
-			case 'UNEQUIP_WEAPON' : {
+			case 'UNEQUIP_ITEM' : {
 				let botBuilds = [...state.botBuilds];
 				botBuilds[action.index].equipment[action.slotKey] = null;
 				return {

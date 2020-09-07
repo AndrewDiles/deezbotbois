@@ -59,13 +59,14 @@ const ToolTipContents = styled.div`
 	padding: 2px;
 `
 const Name = styled.div`
-	font-size: 1.2em;
+	font-size: 1.1em;
 	font-weight: 200;
 	grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
 	align-self: start;
+	white-space: nowrap;
 `
 const SuperType = styled.div`
 	font-size: 0.8em;

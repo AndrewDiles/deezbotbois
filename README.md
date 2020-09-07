@@ -25,6 +25,9 @@ Intentions with the GUI include:
 
 - Need to return to Nav bar and correct the size of buttons/their content, based on @media screen query so they fit in the bar while the screen is more narrow
 
+- ToolTips on attributes can remain with fast mousemovement: going to remove them based on a timer.
+
+- ToolTips on weapons / accessories in inventory bounces window up and down once enough items make scrolling possible.  Going to make up and down arrows to navigate.
 
 
 
@@ -61,7 +64,6 @@ Intentions with the GUI include:
 - Include a link in the confirmation email that auto fills the confirmationCode
 
 
-
 ## Potential Improvements Met
 
 - encrypt passwords
@@ -88,17 +90,4 @@ import {insertTemplate} from 'react-icons-kit/icomoon/insertTemplate'
 
 import {copy} from 'react-icons-kit/icomoon/copy'
 
-import {floppyDisk} from 'react-icons-kit/icomoon/floppyDisk'
-
-import {shield} from 'react-icons-kit/icomoon/shield'
-import {sphere} from 'react-icons-kit/icomoon/sphere'
-import {power} from 'react-icons-kit/icomoon/power'
-import {bin} from 'react-icons-kit/icomoon/bin'
-import {fire} from 'react-icons-kit/icomoon/fire'
-import {lab} from 'react-icons-kit/icomoon/lab'
-import {wrench} from 'react-icons-kit/icomoon/wrench'
-import {target} from 'react-icons-kit/icomoon/target'
-import {hammer} from 'react-icons-kit/icomoon/hammer'
 import {eye} from 'react-icons-kit/icomoon/eye'
-import {arrowRight} from 'react-icons-kit/icomoon/arrowRight'
-import {arrowRight} from 'react-icons-kit/icomoon/arrowLeft'

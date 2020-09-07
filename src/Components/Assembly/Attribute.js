@@ -154,6 +154,7 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStagedToChange }) =>
 			name = {attribute}
 			iconImport = {iconImport}
 			selfLocation = 'left'
+			animated = 'attribute'
 			/>
 
 			{/* <StyledIcon

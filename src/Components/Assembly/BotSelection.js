@@ -48,6 +48,9 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				model = {botInfo[botNumberSelected-1] && botInfo[botNumberSelected-1].model}
 				faded = {true}
 				botColors ={colorsToSendToPreviousBotComponent}
+				arm1 = {botInfo[botNumberSelected-1] && userInfo.botBuilds[botNumberSelected-1].equipment.arm1}
+				arm2 = {botInfo[botNumberSelected-1] && userInfo.botBuilds[botNumberSelected-1].equipment.arm2}
+				arm3 = {botInfo[botNumberSelected-1] && userInfo.botBuilds[botNumberSelected-1].equipment.arm3}
 				/>
 				<StyledIcon
 				handleClick = {()=>{handleRotateBot('left')}}
@@ -59,6 +62,9 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				alternativeBotSize = {70}
 				model = {botInfo[botNumberSelected] && botInfo[botNumberSelected].model}
 				botColors ={colorsToSendToBotComponent}
+				arm1 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm1}
+				arm2 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm2}
+				arm3 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm3}
 				/>
 				<StyledIcon
 				handleClick = {()=>{handleRotateBot('right')}}
@@ -72,6 +78,9 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				faded = {true}
 				model = {botInfo[botNumberSelected+1] && botInfo[botNumberSelected+1].model}
 				botColors ={colorsToSendToNextBotComponent}
+				arm1 = {botInfo[botNumberSelected+1] && userInfo.botBuilds[botNumberSelected+1].equipment.arm1}
+				arm2 = {botInfo[botNumberSelected+1] && userInfo.botBuilds[botNumberSelected+1].equipment.arm2}
+				arm3 = {botInfo[botNumberSelected+1] && userInfo.botBuilds[botNumberSelected+1].equipment.arm3}
 				/>
 			</RowDivSpace>
     </Wrapper>

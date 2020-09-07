@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import StyledButton from '../StyledButton/StyledButton';
 import ToolTip from '../ToolTip/ToolTip';
 import { accessoryStats, weaponStats } from '../../Constants/equipment';
-import {unequipWeapon} from '../../Redux/actions';
+import {unequipItem} from '../../Redux/actions';
 import WeaponContents from '../ToolTip/WeaponContents';
 import AccessoryContents from '../ToolTip/AccessoryContents';
 
@@ -68,7 +68,7 @@ const ItemEquipped = ({ slotKey, type, equipmentStaging, setEquipmentStaging, bo
 		setEquipmentStaging({from: null, to: null})
 	}
 	const unequip = () => {
-		dispatch(unequipWeapon(botNumberSelected, slotKey))
+		dispatch(unequipItem(botNumberSelected, slotKey))
 		unstage();
 	}
 	const handleClickSlot = () => {
@@ -116,6 +116,7 @@ const ItemEquipped = ({ slotKey, type, equipmentStaging, setEquipmentStaging, bo
 				setMessageHovered = {setMessageHovered}
 				// fontSize = '0.6em'
 				width= '240'
+				animated = {'equipment'}
 				>
 					{weaponStats[botInfo[botNumberSelected].equipment[slotKey]] &&
 						<WeaponContents
