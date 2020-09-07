@@ -64,7 +64,6 @@ export const weaponStats = {
 		attackShape: 'line',
 		reloadTime: 2,
 		attackCost: 20,
-		targetFireCost: 30,
 		aimCost: 5,
 	},
 	Sword1: {
@@ -72,9 +71,8 @@ export const weaponStats = {
 		description: "A sword that was once great.",
 		damage: 11,
 		superTypes: ['Melee'],
-		subTypes: ['Piercing', 'Slashing', 'Power'],
+		subTypes: ['Piercing', 'Power'],
 		attackShape: 'cell',
-		reloadTime: 0,
 		attackCost: 20,
 	}
 }

@@ -38,64 +38,81 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 	}
 	const equip = () => {
 		dispatch(equipWeapon(botNumberSelected, equipmentStaging.from.slot, equipmentStaging.to.name))
-		fullUnstage();
+		unstage();
 	}
 	
   return (
-		<RowDiv className = 'centeredFlex'>
-    	<StyledButton
-			width = '180'
-			// handleClick = {handleClickSlot}
-			selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
-			>
-				{weaponStats[weapon].name}
-    	</StyledButton>
-			{(botInfo[botNumberSelected].equipment.arm1 === weapon ||
-				botInfo[botNumberSelected].equipment.arm2 === weapon ||
-				botInfo[botNumberSelected].equipment.arm3 === weapon) ? (
+		<ColDiv className = 'centeredFlex'>
+			<RowDiv className = 'centeredFlex'>
+				{(equipmentStaging.to && equipmentStaging.to.name === weapon) ? (
 					<StyledButton
-					disabled = 'true'
-					width = '60'
-					fontSize = '8'
+					width = '180'
+					handleClick = {unstage}
+					selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
 					>
-						EQUIPPED
-					</StyledButton>
-				) : (
-					equipmentStaging.to && equipmentStaging.to.name === weapon && equipmentStaging.from ? (
+						{weaponStats[weapon].name}
+    			</StyledButton>
+				):(
+					<StyledButton
+					width = '240'
+					handleClick = {stage}
+					selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
+					>
+						{weaponStats[weapon].name}
+    			</StyledButton>
+				)}
+						
+				{(botInfo[botNumberSelected].equipment.arm1 === weapon ||
+					botInfo[botNumberSelected].equipment.arm2 === weapon ||
+					botInfo[botNumberSelected].equipment.arm3 === weapon) ? (
 						<StyledButton
-						handleClick = {equip}
+						disabled = 'true'
 						width = '60'
 						fontSize = '8'
 						>
-							EQUIP
+							EQUIPPED
 						</StyledButton>
-					): (
-						equipmentStaging.to && equipmentStaging.to.name === weapon ? (
+					) : (
+						equipmentStaging.to && equipmentStaging.to.name === weapon && equipmentStaging.from ? (
 							<StyledButton
-							handleClick = {unstage}
-							width = '60'
-							fontSize = '6'
-							>
-								UNSELECT
-							</StyledButton>
-						) : (
-							<StyledButton
-							handleClick = {stage}
+							handleClick = {equip}
 							width = '60'
 							fontSize = '8'
 							>
-								SELECT
+								EQUIP
 							</StyledButton>
+						): (
+							equipmentStaging.to && equipmentStaging.to.name === weapon ? (
+								<StyledButton
+								handleClick = {unstage}
+								width = '60'
+								fontSize = '6'
+								>
+									UNSELECT
+								</StyledButton>
+							) : (
+								<></>
+								// <StyledButton
+								// handleClick = {stage}
+								// width = '60'
+								// fontSize = '8'
+								// >
+								// 	SELECT
+								// </StyledButton>
+							)
 						)
+							
 					)
-					
-				)
-			}
-		</RowDiv>
+				}
+			</RowDiv>
+		</ColDiv>
   )
 }
 export default WeaponInventoryItem;
 
 const RowDiv = styled.div`
 	flex-direction: row;
+`
+const ColDiv = styled.div`
+	flex-direction: column;
 `

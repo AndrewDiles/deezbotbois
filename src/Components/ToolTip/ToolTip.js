@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMessageHovered, fontSize, selfLocation}) => {
+const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMessageHovered, fontSize, selfLocation, width}) => {
 	const colors = useSelector(getThemeColors);
 	React.useEffect(()=>{
 		const target = document.getElementById(`MessageWindow${children}`);
@@ -32,6 +32,7 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
 		messageHovered = {messageHovered}
 		fontSize = {fontSize}
 		selfLocation = {selfLocation}
+		width = {width}
 		// location = {location}
 		>
 			{children}
@@ -40,7 +41,7 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
 }
 export default ToolTip;
 const Message = styled.div`
-	width: 200px;
+	width: ${props => props.width ? `${props.width}px` : '200px'};
 	height: auto;
 	min-height: 50px;
 	font-size: 1em;
