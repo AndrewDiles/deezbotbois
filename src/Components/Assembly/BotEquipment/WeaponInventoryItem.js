@@ -1,20 +1,20 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
-import StyledButton from '../StyledButton/StyledButton';
-import ToolTip from '../ToolTip/ToolTip';
-import AccessoryContents from '../ToolTip/AccessoryContents';
-import { accessoryStats } from '../../Constants/equipment';
-import { equipItem } from '../../Redux/actions';
+import StyledButton from '../../StyledButton/StyledButton';
+import ToolTip from '../../ToolTip/ToolTip';
+import WeaponContents from '../../ToolTip/WeaponContents';
+import { weaponStats } from '../../../Constants/equipment';
+import { equipItem } from '../../../Redux/actions';
 
-const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStaging, botNumberSelected  }) => {
+const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected  }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
 	const [messageHovered, setMessageHovered] = React.useState(false);
 
 	React.useEffect(()=>{
-		const target = document.getElementById(`${accessory}Button`)
+		const target = document.getElementById(`${weapon}Button`)
 		const onMouseEnter = (ev) => {
 			// if (ev.target === target) 
 			setMessageHovered(true);
@@ -31,19 +31,19 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 			if (!target) return;
 			target.removeEventListener('mouseenter',onMouseEnter);
 		}
-	},[accessory, messageHovered])
+	},[weapon, messageHovered])
 
 	if (!userInfo.botBuilds || botNumberSelected === null) {
 		return (<></>)
 	}
-	console.log('accessory from wepinvitem', accessory)
+	console.log('weapon from wepinvitem', weapon)
 	const stage = () => {
 		setEquipmentStaging(
 			{
 				from: equipmentStaging.from,
 				to: {
-					type: 'accessory',
-					name: accessory
+					type: 'weapon',
+					name: weapon
 				}
 			}
 		)
@@ -67,32 +67,29 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
   return (
 		<ColDiv className = 'centeredFlex'>
 			<RowDiv className = 'centeredFlex'>
-				{(equipmentStaging.to && equipmentStaging.to.name === accessory) ? (
+				{(equipmentStaging.to && equipmentStaging.to.name === weapon) ? (
 					<StyledButton
-					id = {`${accessory}Button`}
+					id = {`${weapon}Button`}
 					width = '180'
 					handleClick = {unstage}
-					selected = {equipmentStaging.to && equipmentStaging.to.name === accessory}
+					selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
 					>
-						{accessoryStats[accessory].name}
+						{weaponStats[weapon].name}
     			</StyledButton>
 				):(
 					<StyledButton
-					id = {`${accessory}Button`}
+					id = {`${weapon}Button`}
 					width = '240'
 					handleClick = {stage}
-					selected = {equipmentStaging.to && equipmentStaging.to.name === accessory}
+					selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
 					>
-						{accessoryStats[accessory].name}
+						{weaponStats[weapon].name}
     			</StyledButton>
 				)}
 						
-				{(botInfo[botNumberSelected].equipment.acc1 === accessory ||
-					botInfo[botNumberSelected].equipment.acc2 === accessory ||
-					botInfo[botNumberSelected].equipment.acc3 === accessory ||
-					botInfo[botNumberSelected].equipment.acc4 === accessory ||
-					botInfo[botNumberSelected].equipment.acc5 === accessory
-					) ? (
+				{(botInfo[botNumberSelected].equipment.arm1 === weapon ||
+					botInfo[botNumberSelected].equipment.arm2 === weapon ||
+					botInfo[botNumberSelected].equipment.arm3 === weapon) ? (
 						<StyledButton
 						disabled = 'true'
 						width = '60'
@@ -101,7 +98,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 							EQUIPPED
 						</StyledButton>
 					) : (
-						equipmentStaging.to && equipmentStaging.to.name === accessory && equipmentStaging.from ? (
+						equipmentStaging.to && equipmentStaging.to.name === weapon && equipmentStaging.from ? (
 							<StyledButton
 							handleClick = {equip}
 							width = '60'
@@ -110,7 +107,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 								EQUIP
 							</StyledButton>
 						): (
-							equipmentStaging.to && equipmentStaging.to.name === accessory ? (
+							equipmentStaging.to && equipmentStaging.to.name === weapon ? (
 								<StyledButton
 								handleClick = {unstage}
 								width = '60'
@@ -139,9 +136,9 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 				width= '240'
 				animated = {'equipment'}
 				>
-					{accessoryStats[accessory] &&
-						<AccessoryContents
-						accessoryInfo = {accessoryStats[accessory]}
+					{weaponStats[weapon] &&
+						<WeaponContents
+						weaponInfo = {weaponStats[weapon]}
 						/>
 					}
 				</ToolTip>
@@ -149,7 +146,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 		</ColDiv>
   )
 }
-export default AccessoryInventoryItem;
+export default WeaponInventoryItem;
 
 const RowDiv = styled.div`
 	flex-direction: row;

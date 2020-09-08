@@ -11,12 +11,12 @@ import CreateNewBot from './CreateNewBot';
 import SaveBots from './SaveBots';
 import DeleteBot from './DeleteBot';
 import BotSelection from './BotSelection';
-import BotModel from './BotModel';
-import BotEquipment from './BotEquipment';
-import BotAttributes from './BotAttributes';
-import BotTechTree from './BotTechTree';
+import BotModel from './BotModel/BotModel';
+import BotEquipment from './BotEquipment/BotEquipment';
+import BotAttributes from './BotAttributes/BotAttributes';
+import BotTechTree from './BotTechTree/BotTechTree';
 import BotAI from './BotAI/BotAI';
-import BotScripts from './BotScripts';
+import BotScripts from './BotScripts/BotScripts';
 
 const Assembly = () => {
 	const settings = useSelector((state) => state.settings);

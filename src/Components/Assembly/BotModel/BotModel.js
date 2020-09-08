@@ -1,19 +1,17 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from "react-redux";
-import { getThemeColors } from '../../Redux/reducers/user-reducer';
-import StyledIcon from '../StyledIcon/StyledIcon';
+import { getThemeColors } from '../../../Redux/reducers/user-reducer';
+import StyledIcon from '../../StyledIcon/StyledIcon';
 import {dice} from 'react-icons-kit/icomoon/dice';
 import styled from 'styled-components';
-import robotNameGen from '../../Constants/robotNameGen';
+import robotNameGen from '../../../Constants/robotNameGen';
 import ModelChanger from './ModelChanger';
 import ColorSelection from './ColorSelection';
-import baseBotAttributes from '../../Constants/attributes';
+import baseBotAttributes from '../../../Constants/attributes';
 
-import {
-	changeBotName
-} from '../../Redux/actions';
-import settings from '../../Redux/reducers/settings-reducer';
+import { changeBotName } from '../../../Redux/actions';
+import settings from '../../../Redux/reducers/settings-reducer';
 
 const BotModel = ({ botNumberSelected}) => {
 	const userInfo = useSelector((state) => state.userInfo);

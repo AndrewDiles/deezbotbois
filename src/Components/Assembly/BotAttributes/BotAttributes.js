@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 
-import { displayedAttributes } from '../../Constants/attributes';
+import { displayedAttributes } from '../../../Constants/attributes';
 
 import AttributeHeader from './AttributeHeader';
 import Attribute from './Attribute';

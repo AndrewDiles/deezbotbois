@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
-import baseBotAttributes, {attributeInfo} from '../../Constants/attributes';
+import baseBotAttributes, {attributeInfo} from '../../../Constants/attributes';
 import ItemEquipped from './ItemEquipped';
-import StyledButton from '../StyledButton/StyledButton';
+import StyledButton from '../../StyledButton/StyledButton';
 import WeaponInventoryItem from './WeaponInventoryItem';
 import AccessoryInventoryItem from './AccessoryInventoryItem';
-import StyledIcon from '../StyledIcon/StyledIcon';
+import StyledIcon from '../../StyledIcon/StyledIcon';
 import {arrowUp} from 'react-icons-kit/icomoon/arrowUp';
 import {arrowDown} from 'react-icons-kit/icomoon/arrowDown';
 

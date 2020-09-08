@@ -1,8 +1,7 @@
 import React from 'react';
-import { useSelector } from "react-redux";
 import styled from 'styled-components';
 
-import {ic_brightness_auto} from 'react-icons-kit/md/ic_brightness_auto'
+import {ic_brightness_auto} from 'react-icons-kit/md/ic_brightness_auto';
 // Attribute
 
 import {profile} from 'react-icons-kit/icomoon/profile'
@@ -16,7 +15,7 @@ import {ic_change_history} from 'react-icons-kit/md/ic_change_history'
 // Change %
 
 import {sigma} from 'react-icons-kit/icomoon/sigma' 				// Total
-import ToolTipIcon from '../ToolTip/ToolTipIcon';
+import ToolTipIcon from '../../ToolTip/ToolTipIcon';
 
 const AttributeHeader = () => {
 	return (
@@ -46,9 +45,15 @@ const AttributeHeader = () => {
 			animated = 'attribute'
 			/>
 			<ToolTipIcon
+			name = 'Sum'
+			iconImport = {sigma}
+			selfLocation = 'center'
+			animated = 'attribute'
+			/>
+			<ToolTipIcon
 			name = 'PlusMinus'
 			iconImport = {ic_exposure}
-			selfLocation = 'center'
+			selfLocation = 'right'
 			animated = 'attribute'
 			/>
 			<ToolTipIcon
@@ -56,13 +61,7 @@ const AttributeHeader = () => {
 			iconImport = {ic_change_history}
 			selfLocation = 'right'
 			animated = 'attribute'
-			/>
-			<ToolTipIcon
-			name = 'Sum'
-			iconImport = {sigma}
-			selfLocation = 'right'
-			animated = 'attribute'
-			/>
+			/>			
 		</AttributeRow>
 	)
 }

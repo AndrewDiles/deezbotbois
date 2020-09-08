@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
-import StyledButton from '../StyledButton/StyledButton';
-import ToolTip from '../ToolTip/ToolTip';
-import { accessoryStats, weaponStats } from '../../Constants/equipment';
-import {unequipItem} from '../../Redux/actions';
-import WeaponContents from '../ToolTip/WeaponContents';
-import AccessoryContents from '../ToolTip/AccessoryContents';
+import StyledButton from '../../StyledButton/StyledButton';
+import ToolTip from '../../ToolTip/ToolTip';
+import { accessoryStats, weaponStats } from '../../../Constants/equipment';
+import {unequipItem} from '../../../Redux/actions';
+import WeaponContents from '../../ToolTip/WeaponContents';
+import AccessoryContents from '../../ToolTip/AccessoryContents';
 
 const ItemEquipped = ({ slotKey, type, equipmentStaging, setEquipmentStaging, botNumberSelected  }) => {
 	const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const ItemEquipped = ({ slotKey, type, equipmentStaging, setEquipmentStaging, bo
 				from: {
 					slot: slotKey,
 					type: type,
-					name: name
+					name: botInfo[botNumberSelected].equipment[slotKey]
 				},
 				to: equipmentStaging.to
 			}

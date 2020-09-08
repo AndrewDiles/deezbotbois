@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-import { changeBotModel } from '../../Redux/actions';
+import { changeBotModel } from '../../../Redux/actions';
 
 import styled from 'styled-components';
-import StyledIcon from '../StyledIcon/StyledIcon';
+import StyledIcon from '../../StyledIcon/StyledIcon';
 import {arrowRight} from 'react-icons-kit/icomoon/arrowRight';
 import {arrowLeft} from 'react-icons-kit/icomoon/arrowLeft';
-import Bot from '../Bots/Bot';
-import baseBotAttributes from '../../Constants/attributes';
+import Bot from '../../Bots/Bot';
+import baseBotAttributes from '../../../Constants/attributes';
 
 
 const ModelChanger = ({ botNumberSelected }) => {

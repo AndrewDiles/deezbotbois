@@ -167,7 +167,7 @@ export const attributeInfo = {
 	ScanDistance: 'Scan Distance: Maximum distance that bots will be detected using a scan',
 	ScanCost: 'Scan Cost: Energy cost to scan [kJ]',
 	MovementDistance: 'Movement Distance: Maximum traversable distance in one tick',
-	MovementCost: 'Movement Cost: Energy cost to scan [kJ]',
+	MovementCost: 'Movement Cost: Energy cost to move up to Movement Distance [kJ]',
 	CollisionAmplifier: 'Collision Amplifier: Multiplier on damage dealt during a collision',
 	WeaponSlots: 'Weapon Slots: Maximum number of equipable weapons',
 	AccessorySlots: 'Accessory Slots: Maximum number of equipable accessories',
