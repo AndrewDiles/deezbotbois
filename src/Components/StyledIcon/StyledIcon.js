@@ -34,6 +34,7 @@ export default StyledIcon;
 
 const IconStylings = styled(Icon)`
   padding: ${props => props.padding && `${props.padding}px`};
+	padding-bottom: ${props => props.padding === 'mini' && '5px'};
   position: ${props => props.absolute ? 'absolute' : 'relative'};
   color: ${props => !props.glowing && props.colors.textColor};
 	animation: ${props => props.glowing && '1s linear infinite alternate glowGift'};

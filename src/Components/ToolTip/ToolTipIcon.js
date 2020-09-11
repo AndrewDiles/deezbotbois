@@ -55,6 +55,7 @@ const ToolTipIcon = ({ name, iconImport, selfLocation, animated }) => {
 				id = {`${name}Icon`}
 				icon = {iconImport}
 				size = {15}
+				padding = 'mini'
 				/>
 			)
 	)

@@ -36,7 +36,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 	if (!userInfo.botBuilds || botNumberSelected === null) {
 		return (<></>)
 	}
-	console.log('weapon from wepinvitem', weapon)
+	// console.log('weapon from wepinvitem', weapon)
 	const stage = () => {
 		setEquipmentStaging(
 			{

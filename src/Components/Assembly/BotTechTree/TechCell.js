@@ -1,11 +1,10 @@
 import React from 'react';
-
 import styled from 'styled-components';
 import { Icon } from 'react-icons-kit';
-import {androidBulb} from 'react-icons-kit/ionicons/androidBulb';
-import {androidColorPalette} from 'react-icons-kit/ionicons/androidColorPalette';
 
-const TechCell = ({ handleClick, icon1, icon2, locked, purchased, size, trimSize}) => {
+const TechCell = ({ handleClick, icon1, icon2, locked, purchased, size, trimSize
+,index
+}) => {
 	const [trimColor, setTrimColor] = React.useState('rgba(0,0,125,0.6)');
 	const [radialUrl, setRadialUrl] = React.useState('GradientLocked');
 	React.useEffect(()=>{
@@ -26,19 +25,19 @@ const TechCell = ({ handleClick, icon1, icon2, locked, purchased, size, trimSize
 			setRadialUrl('GradientLocked');
 		}
 	},[locked,purchased])
-	
+
+	console.log('locked test:', `index ${index} is ${locked}`);
+	console.log('purchased test:', `index ${index} is ${purchased}`);
+
 	if (!handleClick) {
 		handleClick = () => {
 			console.log('No handleClick was asigned')
 		}
 	}
-	
 	if (!size) {
 		size = 58;
 		trimSize = 2
 	}
-	icon1 = androidBulb;
-	icon2 = androidColorPalette;
 	
 	let offset = trimSize/2;
 	let quarterSize = size/4;

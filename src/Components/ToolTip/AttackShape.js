@@ -10,8 +10,9 @@ const AttackShape = ({ shape, cellSize }) => {
 		cellSize = {cellSize}
 		color = {colors.secondary}
 		>
-			{shape.map((cell)=>(
+			{shape.map((cell, index)=>(
 				<Cell
+				key = {index}
 				color = {cell || colors.primary}
 				cellSize = {cellSize}
 				/>

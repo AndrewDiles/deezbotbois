@@ -7,9 +7,12 @@ import {heart} from 'react-icons-kit/icomoon/heart' 				// Durability
 import {shield} from 'react-icons-kit/icomoon/shield' 			// Armor
 import {sphere} from 'react-icons-kit/icomoon/sphere' 			// Shield
 // import {ic_gps_fixed} from 'react-icons-kit/md/ic_gps_fixed'
-import {target} from 'react-icons-kit/ikons/target'
+// import {target} from 'react-icons-kit/ikons/target'
+// import {bullseye} from 'react-icons-kit/ikons/bullseye'
+import {u1F3AF} from 'react-icons-kit/noto_emoji_regular/u1F3AF'
 // import {target} from 'react-icons-kit/icomoon/target'				// Accuracy
-import {hammer} from 'react-icons-kit/icomoon/hammer' 			// Power
+// import {hammer} from 'react-icons-kit/icomoon/hammer' 			
+import {u1F529} from 'react-icons-kit/noto_emoji_regular/u1F529'// Power
 import {ic_battery_full} from 'react-icons-kit/md/ic_battery_full' 
 // Capacitor
 
@@ -49,7 +52,8 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 			// setequipmentAttributeValue(0);
 			let sum = 0;
 			equipmentSlots.forEach((slot)=>{
-				if (accessoryStats[userInfo.botBuilds[botNumberSelected].equipment[slot]] && accessoryStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute]) {
+				if (accessoryStats[userInfo.botBuilds[botNumberSelected].equipment[slot]] && accessoryStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute]
+					) {
 					sum += accessoryStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute];
 				}
 				else if (weaponStats[userInfo.botBuilds[botNumberSelected].equipment[slot]] && weaponStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute]) {
@@ -108,11 +112,11 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 			break;
 		}
 		case 'Accuracy' : {
-			iconImport = target;
+			iconImport = u1F3AF;
 			break;
 		}
 		case 'Power' : {
-			iconImport = hammer;
+			iconImport = u1F529;
 			break;
 		}
 		case 'Capacitor' : {

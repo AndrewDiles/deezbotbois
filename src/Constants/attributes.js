@@ -19,7 +19,102 @@ const baseBotAttributes = {
 		Description: "Dicephalous heavy unit.",
 		Special1: "+1 Weapon slot",
 		Special2: "+1 Scan distance",
-		Special3: "+50% Movement energy cost"
+		Special3: "+50% Movement energy cost",
+		BlueStarConversionRate: 2,
+		TechTree: [
+			null,
+			{
+				affect: 'Durability',
+				magnitude: 1,
+				cost: 1
+			},
+			{
+				affect: 'aimCost',
+				magnitude: -1,
+				cost: 1
+			},
+			null,
+			{
+				affect: 'Armor',
+				magnitude: 1,
+				cost: 2
+			},
+			{
+				affect: 'Durability',
+				magnitude: 2,
+				cost: 2
+			},
+			{
+				affect: 'attackCost',
+				magnitude: -2,
+				cost: 3
+			},
+			{
+				affect: 'ScanCost',
+				magnitude: -1,
+				cost: 2
+			},
+			{
+				affect: 'Shield',
+				magnitude: 1,
+				cost: 2
+			},
+			{
+				affect: 'MovementDistance',
+				magnitude: 1,
+				cost: 4
+			},
+			{
+				affect: 'Damage',
+				magnitude: 1,
+				cost: 4
+			},
+			{
+				affect: 'reloadTime',
+				magnitude: -1,
+				cost: 5
+			},
+			{
+				affect: 'ArmorVsPiercingMultiplier',
+				magnitude: 2,
+				cost: 5
+			},
+			{
+				affect: 'chargeAction',
+				magnitude: true,
+				cost: 5
+			},
+			{
+				affect: 'AutoRepair',
+				magnitude: .1,
+				cost: 6
+			},
+			{
+				affect: 'ScanDistance',
+				magnitude: 1,
+				cost: 2
+			},
+			{
+				affect: 'CollisionDamageMultipliter',
+				magnitude: 0.5,
+				cost: 7
+			},
+			{
+				affect: 'MeleeDamageMultiplier',
+				magnitude: 2,
+				cost: 7
+			},
+			{
+				affect: 'RangedDamageMultiplier',
+				magnitude: 1.5,
+				cost: 10
+			},
+			{
+				affect: 'MovementDistance',
+				magnitude: 1,
+				cost: 4
+			}
+		]
 	},
   BotBoxey: {
 		Durability: 20,
@@ -46,77 +141,95 @@ const baseBotAttributes = {
 		TechTree: [
 			null,
 			{
-				Durability: 1,
-				Cost: 1
+				affect: 'Durability',
+				magnitude: 1,
+				cost: 1
 			},
 			{
-				aimCost: -1,
-				Cost: 1
+				affect: 'aimCost',
+				magnitude: -1,
+				cost: 1
 			},
 			null,
 			{
-				Armor: 1,
-				Cost: 2
+				affect: 'Armor',
+				magnitude: 1,
+				cost: 2
 			},
 			{
-				Durability: 2,
-				Cost: 2
+				affect: 'Durability',
+				magnitude: 2,
+				cost: 2
 			},
 			{
-				attackCost: -2,
-				Cost: 3
+				affect: 'attackCost',
+				magnitude: -2,
+				cost: 3
 			},
 			{
-				ScanCost: -1,
-				Cost: 2
+				affect: 'ScanCost',
+				magnitude: -1,
+				cost: 2
 			},
 			{
-				Shield: 1,
-				Cost: 2
+				affect: 'Shield',
+				magnitude: 1,
+				cost: 2
 			},
 			{
-				MovementDistance: 1,
-				Cost: 4
+				affect: 'MovementDistance',
+				magnitude: 1,
+				cost: 4
 			},
 			{
-				Damage: 1,
-				Cost: 4
+				affect: 'Damage',
+				magnitude: 1,
+				cost: 4
 			},
 			{
-				reloadTime: -1,
-				Cost: 5
+				affect: 'reloadTime',
+				magnitude: -1,
+				cost: 5
 			},
 			{
-				ArmorVsPiercingMultiplier: 2,
-				Cost: 5
+				affect: 'ArmorVsPiercingMultiplier',
+				magnitude: 2,
+				cost: 5
 			},
 			{
-				chargeAction: true,
-				Cost: 5
+				affect: 'chargeAction',
+				magnitude: true,
+				cost: 5
 			},
 			{
-				AutoRepair: .1,
-				Cost: 6
+				affect: 'AutoRepair',
+				magnitude: .1,
+				cost: 6
 			},
 			{
-				ScanDistance: 1,
-				Cost: 2
+				affect: 'ScanDistance',
+				magnitude: 1,
+				cost: 2
 			},
 			{
-				CollisionDamageMultipliter: 0.5,
-				Cost: 7
+				affect: 'CollisionDamageMultipliter',
+				magnitude: 0.5,
+				cost: 7
 			},
 			{
-				MeleeDamageMultiplier: 2,
-				Cost: 7
+				affect: 'MeleeDamageMultiplier',
+				magnitude: 2,
+				cost: 7
 			},
 			{
-				RangedDamageMultiplier: 1.5,
-				Cost: 10
+				affect: 'RangedDamageMultiplier',
+				magnitude: 1.5,
+				cost: 10
 			},
 			{
-				MovementDistance: 1,
-				Cost: 4
+				affect: 'MovementDistance',
+				magnitude: 1,
+				cost: 4
 			}
 		]
 	},

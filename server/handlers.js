@@ -480,6 +480,13 @@ try {
 						acc4: null,
 						acc5: null
 					},
+					techTree : [
+						null, false, false, null,
+						false, false, false, false,
+						false, false, false, false,
+						false, false, false, false,
+						false, false, false, false
+					],
 					script: {}
 				};
 				botInfo.push(newBot);
