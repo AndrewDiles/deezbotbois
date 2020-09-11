@@ -25,7 +25,7 @@ Intentions with the GUI include:
 
 - Need to return to Nav bar and correct the size of buttons/their content, based on @media screen query so they fit in the bar while the screen is more narrow
 
-- ToolTips on attributes can remain with fast mousemovement: going to remove them based on a timer.
+- ToolTips on attributes can remain with fast mousemovement: going to remove them based on a timer.  This is a bad solution.
 
 - ToolTips on weapons / accessories in inventory bounces window up and down once enough items make scrolling possible.  Going to make up and down arrows to navigate.
 

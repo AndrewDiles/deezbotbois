@@ -41,7 +41,84 @@ const baseBotAttributes = {
 		Description: "Jack of all trades, master of none.",
 		Special1: "+1 Accessory slot",
 		Special2: "-",
-		Special3: "-"
+		Special3: "-",
+		BlueStarConversionRate: 1,
+		TechTree: [
+			null,
+			{
+				Durability: 1,
+				Cost: 1
+			},
+			{
+				aimCost: -1,
+				Cost: 1
+			},
+			null,
+			{
+				Armor: 1,
+				Cost: 2
+			},
+			{
+				Durability: 2,
+				Cost: 2
+			},
+			{
+				attackCost: -2,
+				Cost: 3
+			},
+			{
+				ScanCost: -1,
+				Cost: 2
+			},
+			{
+				Shield: 1,
+				Cost: 2
+			},
+			{
+				MovementDistance: 1,
+				Cost: 4
+			},
+			{
+				Damage: 1,
+				Cost: 4
+			},
+			{
+				reloadTime: -1,
+				Cost: 5
+			},
+			{
+				ArmorVsPiercingMultiplier: 2,
+				Cost: 5
+			},
+			{
+				chargeAction: true,
+				Cost: 5
+			},
+			{
+				AutoRepair: .1,
+				Cost: 6
+			},
+			{
+				ScanDistance: 1,
+				Cost: 2
+			},
+			{
+				CollisionDamageMultipliter: 0.5,
+				Cost: 7
+			},
+			{
+				MeleeDamageMultiplier: 2,
+				Cost: 7
+			},
+			{
+				RangedDamageMultiplier: 1.5,
+				Cost: 10
+			},
+			{
+				MovementDistance: 1,
+				Cost: 4
+			}
+		]
 	},
 	BotJager: {
 		Durability: 20,

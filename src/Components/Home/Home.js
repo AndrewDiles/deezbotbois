@@ -5,7 +5,6 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import styled from 'styled-components';
 import { updateUrl} from '../../Redux/actions';
-import TechCell from '../Assembly/BotTechTree/TechCell';
 
 const Home = () => {
 	const settings = useSelector((state) => state.settings);
@@ -22,7 +21,6 @@ const Home = () => {
 		colors = {colors}
 		>
       Welcome Home
-			<TechCell></TechCell>
     </Wrapper>
   )
 }

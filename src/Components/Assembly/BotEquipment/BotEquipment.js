@@ -23,7 +23,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			weapons: baseBotAttributes[botInfo[botNumberSelected].model].WeaponSlots, 
 			accessories: baseBotAttributes[botInfo[botNumberSelected].model].AccessorySlots, 
 		});
-	},[botNumberSelected, botInfo[botNumberSelected].model ])
+	},[ botNumberSelected, botInfo[botNumberSelected].model ])
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}
