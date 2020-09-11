@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { attackShapes } from '../../Constants/equipment';
+import AttackShape from './AttackShape';
 
 const WeaponContents = ({ weaponInfo }) => {
 	return (
@@ -7,15 +9,18 @@ const WeaponContents = ({ weaponInfo }) => {
 			<Name>
 				{weaponInfo.name}
 			</Name>
-			<SuperType>
+			<Types>
+				{`${weaponInfo.superTypes[0]} - ${weaponInfo.subTypes[0]}, ${weaponInfo.subTypes[1]}`} 
+			</Types>
+			{/* <SuperType>
 				{weaponInfo.superTypes[0]}
-			</SuperType>
-			<SubType1>
+			</SuperType> */}
+			{/* <SubType1>
 				{weaponInfo.subTypes[0]}
 			</SubType1>
 			<SubType2>
 				{weaponInfo.subTypes[1]}
-			</SubType2>
+			</SubType2> */}
 			<Damage>
 				<div>
 					DMG
@@ -44,6 +49,14 @@ const WeaponContents = ({ weaponInfo }) => {
 					{weaponInfo.projectileSpeed}
 				</Speed>
 			}
+			{weaponInfo.attackShape &&
+				<Shape>
+					<AttackShape
+					shape = {attackShapes[weaponInfo.attackShape]}
+					cellSize = {4}
+					/>
+				</Shape>
+			}
 		</ToolTipContents>
 	)
 }
@@ -59,42 +72,54 @@ const ToolTipContents = styled.div`
 	padding: 2px;
 `
 const Name = styled.div`
-	font-size: 1.1em;
+	font-size: 1.4em;
 	font-weight: 200;
 	grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 5;
   grid-row-start: 1;
   grid-row-end: 2;
-	align-self: start;
+	place-self: center;
 	white-space: nowrap;
 `
-const SuperType = styled.div`
-	font-size: 0.8em;
+const Types = styled.div`
+	font-size: 0.7em;
 	font-weight: 200;
-	grid-column-start: 4;
+	grid-column-start: 1;
   grid-column-end: 4;
-  grid-row-start: 1;
-  grid-row-end: 2;
-	align-self: center;
-`
-const SubType1 = styled.div`
-	font-size: 0.6em;
-	grid-column-start: 5;
-  grid-column-end: 5;
-  grid-row-start: 1;
-  grid-row-end: 1;
-	align-self: center;
-	justify-self: end;
-`
-const SubType2 = styled.div`
-	font-size: 0.6em;
-	grid-column-start: 5;
-  grid-column-end: 5;
   grid-row-start: 2;
   grid-row-end: 2;
-	align-self: center;
-	justify-self: end;
+	align-self: end;
+	justify-self: start;
+	white-space: nowrap;
 `
+// const SuperType = styled.div`
+// 	font-size: 0.8em;
+// 	font-weight: 200;
+// 	grid-column-start: 1;
+//   grid-column-end: 1;
+//   grid-row-start: 2;
+//   grid-row-end: 2;
+// 	align-self: start;
+// 	justify-self: start;
+// `
+// const SubType1 = styled.div`
+// 	font-size: 0.6em;
+// 	grid-column-start: 2;
+//   grid-column-end: 2;
+//   grid-row-start: 2;
+//   grid-row-end: 2;
+// 	align-self: center;
+// 	justify-self: start;
+// `
+// const SubType2 = styled.div`
+// 	font-size: 0.6em;
+// 	grid-column-start: 3;
+//   grid-column-end: 3;
+//   grid-row-start: 2;
+//   grid-row-end: 2;
+// 	align-self: center;
+// 	justify-self: start;
+// `
 const Damage = styled.div`
 	font-size: 0.7em;
 	grid-column-start: 1;
@@ -135,7 +160,7 @@ const Shape = styled.div`
 	font-size: 0.7em;
 	grid-column-start: 5;
   grid-column-end: 5;
-  grid-row-start: 4;
+  grid-row-start: 1;
   grid-row-end: 4;
 	align-self: center;
 	justify-self: end;

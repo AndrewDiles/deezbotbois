@@ -21,15 +21,38 @@ const Rules = () => {
 			<br/>
 			- The nature of the game
 			<br/>
-			- The order of resolution of action types / bot priority cycling
+			- The order of resolution of action types / bot priority cycling:
+			<ol>
+				<li>
+					Melee Attacks
+				</li>
+				<li>
+					Movement / test for collisions
+				</li>
+				<li>
+					Test for projectile / cell damage
+				</li>
+				<li>
+					Ranged Attacks and Projectiles movement
+				</li>
+				<li>
+					Test for projectile / cell damage
+				</li>
+				<li>
+					Aim. Scan. Detect adjacent.
+				</li>
+				<li>
+					Internal: reload, refresh collision potentials
+				</li>
+			</ol>
 			<br/>
 			- Equipment, accessories, skill tree planning
 			<br/>
-			- The script based protocols
+			- The script based protocols, Energy costs cannot be reduced to less than 1
 			<br/>
 			- Attributes of bots
 			<br/>
-			- Damage formulas
+			- Damage formulas: Damage cannot be reduced to less than 1
 
     </Wrapper>
   )

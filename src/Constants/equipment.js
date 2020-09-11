@@ -72,7 +72,33 @@ export const weaponStats = {
 		damage: 11,
 		superTypes: ['Melee'],
 		subTypes: ['Piercing', 'Power'],
-		attackShape: 'cell',
+		attackShape: 'adjacentCell',
 		attackCost: 20,
 	}
+}
+export const attackShapes = {
+	adjacentCell : [
+		null, null, null, null, null, null,
+		null, null, null, null, null, null,
+		null, null, 'violet', null, null, null,
+		null, null, 'lime', 'red', null, null,
+		null, null, null, null, null, null,
+		null, null, null, null, null, null,
+	],
+	line : [
+		null, null, null, null, null, null,
+		null, null, null, null, null, null,
+		null, null, null, null, 'red', 'red',
+		null, null, 'red', 'red', null, null,
+		null, 'lime', 'violet', 'violet', 'violet', 'violet',
+		null, null, null, null, null, null,
+	],
+	cone : [
+		null, null, null, null, null, null,
+		null, 'violet', null, null, null, null,
+		null, 'violet', 'violet', 'lime', null, null,
+		null, 'violet', null, null, 'red', 'red',
+		null, null, null, null, 'red', 'red',
+		null, null, null, null, null, null,
+	]
 }

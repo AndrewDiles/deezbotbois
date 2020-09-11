@@ -163,22 +163,22 @@ html {
   0% {
 		width: 0px;
     height: 5px;
-		min-height: 0px;
+		/* min-height: 0px; */
   }
   25% {
     width: 240px;
     height: 5px;
-		min-height: 0px;
+		/* min-height: 0px; */
   }
   99% {
     width: 240px;
     height: 50px;
-		min-height: 0px;
+		/* min-height: 0px; */
   }
 	100% {
 		width: 240px;
     height: 100%;
-		min-height: 50px;
+		/* min-height: 50px; */
 	}
 }
 @keyframes attributeExpandxAxis {

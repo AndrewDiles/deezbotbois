@@ -9,7 +9,6 @@ import Bot from '../Bots/Bot';
 
 const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	const settings = useSelector((state) => state.settings);
 	const botInfo = userInfo.botBuilds;
 
 	const handleRotateBot = (direction) => {

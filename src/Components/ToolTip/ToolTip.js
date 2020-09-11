@@ -45,7 +45,7 @@ export default ToolTip;
 const Message = styled.div`
 	width: ${props => props.width ? `${props.width}px` : '200px'};
 	height: auto;
-	min-height: 50px;
+	/* min-height: 50px; */
 	font-size: 1em;
 	position: relative;
 	font-size: ${props => props.fontSize ? props.fontSize : null};
