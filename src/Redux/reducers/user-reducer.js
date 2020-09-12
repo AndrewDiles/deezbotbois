@@ -129,6 +129,30 @@ export default function userInfo(
 					...action.newUserInfo,
 				}
 			}
+			case 'RESET_TECH_TREE' : {
+				let botBuilds = [...state.botBuilds];
+				botBuilds[action.index].techTree = [
+					null, false, false, null,
+					false, false, false, false,
+					false, false, false, false,
+					false, false, false, false,
+					false, false, false, false
+				];
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
+			case 'ADD_TECH' : {
+				console.log(action)
+				let botBuilds = [...state.botBuilds];
+				botBuilds[action.index].techTree[action.techIndex] = true;
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
+
       default:{
         return state;
       }

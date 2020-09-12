@@ -106,7 +106,15 @@ export const unequipItem = (index, slotKey) => ({
 	index: index,
 	slotKey: slotKey
 })
-
+export const resetTechTree = (index) => ({
+	type: 'RESET_TECH_TREE',
+	index: index
+})
+export const addTech = (index, techIndex) => ({
+	type: 'ADD_TECH',
+	index: index,
+	techIndex: techIndex
+})
 export const replaceUserInfo = (newUserInfo) => ({
 	type: 'REPLACE_USER_INFO',
 	newUserInfo: newUserInfo,

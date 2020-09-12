@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { techTreeRequirements } from '../../../Constants/helperFunctions';
 import baseBotAttributes from '../../../Constants/attributes';
 
@@ -24,27 +24,43 @@ import {loop2} from 'react-icons-kit/icomoon/loop2'
 import {ic_wifi_tethering} from 'react-icons-kit/md/ic_wifi_tethering'
 import {sphere} from 'react-icons-kit/icomoon/sphere'
 
+import {
+	addTech,
+} from '../../../Redux/actions';
 
 const TechCellProvider = ({ availableStars, availableBlueStars, tech, size, trimSize, botNumberSelected, index }) => {
 	const botInfo = useSelector((state) => state.userInfo.botBuilds);
-	const [techRequirementMet, setTechRequirementMet] = useState(false);
-	const [starRequirementMet, setStarRequirementMet] = useState(false);
-	const [blueStarConversionRate, setBlueStarConversionRate] = useState(1);
+	const dispatch = useDispatch();
 	const [locked, setLocked] = useState('locked');
 	
-	React.useEffect(()=> {
-		setBlueStarConversionRate(baseBotAttributes[botInfo[botNumberSelected].model].BlueStarConversionRate);
+	const updateState = () => {
 		let techRequirement = techTreeRequirements(index);
-		if (techRequirement === true) setTechRequirementMet(true);
-		else if (botInfo[botNumberSelected].techTree[techRequirement]) setTechRequirementMet(true);
-		else setTechRequirementMet(false);
+		console.log('tech requirement on index', index, techRequirement)
+		console.log(index, '<-index, Evaluation of its requirement->',botInfo[botNumberSelected].techTree[techRequirement])
+		let techRequirementMet = null;
+		if (techRequirement === null || techRequirement === undefined) techRequirementMet = true;
+		else if (botInfo[botNumberSelected].techTree[techRequirement]) techRequirementMet = true;
+		else techRequirementMet = false;
+		let starRequirementMet = false;
+		// console.log('tech requirementMet on index', index, techRequirementMet)
 		let starRequirement = baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index].cost;
-		if ((availableStars + Math.floor(availableBlueStars/blueStarConversionRate)) >= starRequirement) setStarRequirementMet(true);
-		if (!techRequirementMet) setLocked('locked');
-		else if (!starRequirementMet) setLocked('lackingStars')
-		else setLocked('unlocked');
+		// console.log('starRequirement on index', index, starRequirement)
+		if ((availableStars + availableBlueStars) >= starRequirement) starRequirementMet = true;
+		let locked = null;
+		if (!techRequirementMet) locked = 'locked'
+		else if (!starRequirementMet) locked = 'lackingStars';
+		else locked = 'unlocked';
+		setLocked(locked);
+	}
+	
+	React.useEffect(()=>  {
+		updateState();
 	},[botNumberSelected, botInfo])
 	
+	const handleClick = () => {
+		dispatch(addTech(botNumberSelected, index ))
+	}
+
 	let icon1, icon2 = null;
 	switch (tech.affect) {
 		case 'aimCost' : {
@@ -131,6 +147,7 @@ const TechCellProvider = ({ availableStars, availableBlueStars, tech, size, trim
 		icon2 = {icon2}
 		size = {size}
 		trimSize = {trimSize}
+		handleClick = {handleClick}
 		/>
   )
 }
