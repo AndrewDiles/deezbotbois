@@ -26,7 +26,7 @@ const BotTechTree = ({ botNumberSelected}) => {
 	useEffect(()=>{
 		if (botNumberSelected === null || botNumberSelected === undefined) return;
 		setTreeInfo(baseBotAttributes[botInfo[botNumberSelected].model].TechTree);
-	},[botNumberSelected])
+	},[botNumberSelected, botInfo[botNumberSelected].model])
 
 	useEffect(()=>{
 		if (botNumberSelected === null || botNumberSelected === undefined) return;

@@ -22,6 +22,7 @@ Intentions with the GUI include:
 
 
 ## ACTIVE BUGS
+- Log out from profile tab does not refresh current url to home?
 
 - Need to return to Nav bar and correct the size of buttons/their content, based on @media screen query so they fit in the bar while the screen is more narrow
 
@@ -53,6 +54,8 @@ Intentions with the GUI include:
 # Solution: Set navlink's tabindex="-1"
 
 # Potential Improvements
+
+- HIGH PRIORITY: improve import method and method of gathering icons for attributes and tech tree.  Current system is clunky
 
 - In Assembly: Add drag and drop for equipping
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
+import { unequipItem } from'../../../Redux/actions';
 import baseBotAttributes, {attributeInfo} from '../../../Constants/attributes';
 import ItemEquipped from './ItemEquipped';
 import StyledButton from '../../StyledButton/StyledButton';
@@ -13,17 +14,34 @@ import {arrowDown} from 'react-icons-kit/icomoon/arrowDown';
 const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging}) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
+	const dispatch = useDispatch();
 	const [slots, setSlots] = useState({weapons: 0, accessories: 0});
 	const [typeViewing, setTypeViewing] = useState('weapons');
 	const [inventoryIndexRange, setInventoryIndexRange] = useState({min:0, max:5});
 
 	React.useEffect(()=>{
 		if (botNumberSelected === null || botNumberSelected === undefined) return;
+		// only array index 21 can increase wep / acc count
+		let wepSlots = baseBotAttributes[botInfo[botNumberSelected].model].WeaponSlots;
+		let accSlots = baseBotAttributes[botInfo[botNumberSelected].model].AccessorySlots;
+		// console.log(baseBotAttributes[botInfo[botNumberSelected].model].TechTree[21].affect)
+		if (baseBotAttributes[botInfo[botNumberSelected].model].TechTree[21] && baseBotAttributes[botInfo[botNumberSelected].model].TechTree[21].affect === 'accessorySlot' &&
+		botInfo[botNumberSelected].techTree[21]
+		) accSlots ++
+		else {
+			dispatch(unequipItem(botNumberSelected,`acc${accSlots+1}`));
+		}
+		if (baseBotAttributes[botInfo[botNumberSelected].model].TechTree[21] && baseBotAttributes[botInfo[botNumberSelected].model].TechTree[21].affect === 'weaponSlot' &&
+		botInfo[botNumberSelected].techTree[21]
+		) wepSlots ++
+		else {
+			dispatch(unequipItem(botNumberSelected,`arm${wepSlots+1}`));
+		}
 		setSlots({
-			weapons: baseBotAttributes[botInfo[botNumberSelected].model].WeaponSlots, 
-			accessories: baseBotAttributes[botInfo[botNumberSelected].model].AccessorySlots, 
+			weapons: wepSlots,
+			accessories: accSlots,
 		});
-	},[ botNumberSelected, botInfo[botNumberSelected].model ])
+	},[ botNumberSelected, botInfo[botNumberSelected].model, botInfo[botNumberSelected].techTree[21] ])
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}

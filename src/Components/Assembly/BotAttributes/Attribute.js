@@ -13,7 +13,9 @@ import {u1F3AF} from 'react-icons-kit/noto_emoji_regular/u1F3AF'
 // import {target} from 'react-icons-kit/icomoon/target'				// Accuracy
 // import {hammer} from 'react-icons-kit/icomoon/hammer' 			
 import {u1F529} from 'react-icons-kit/noto_emoji_regular/u1F529'// Power
-import {ic_battery_full} from 'react-icons-kit/md/ic_battery_full' 
+// import {ic_battery_full} from 'react-icons-kit/md/ic_battery_full'
+import {battery} from 'react-icons-kit/entypo/battery'
+// import {u1F50B} from 'react-icons-kit/noto_emoji_regular/u1F50B'
 // Capacitor
 
 import {ic_battery_charging_50} from 'react-icons-kit/md/ic_battery_charging_50' 
@@ -50,17 +52,26 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 		else {
 			setBaseAttributeValue(baseBotAttributes[userInfo.botBuilds[botNumberSelected].model][attribute]);
 			// setequipmentAttributeValue(0);
-			let sum = 0;
+			let equipmentSum = 0;
 			equipmentSlots.forEach((slot)=>{
 				if (accessoryStats[userInfo.botBuilds[botNumberSelected].equipment[slot]] && accessoryStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute]
 					) {
-					sum += accessoryStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute];
+						equipmentSum += accessoryStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute];
 				}
 				else if (weaponStats[userInfo.botBuilds[botNumberSelected].equipment[slot]] && weaponStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute]) {
-					sum += weaponStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute];
+					equipmentSum += weaponStats[userInfo.botBuilds[botNumberSelected].equipment[slot]][attribute];
 				}
 			})
-			setEquipmentAttributeValue(sum);
+			setEquipmentAttributeValue(equipmentSum);
+			let techSum = 0;
+			userInfo.botBuilds[botNumberSelected].techTree.forEach((techPurchased, purchaseIndex)=>{
+				if (techPurchased === true) {
+					if (baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].TechTree[purchaseIndex].affect === attribute){
+						techSum += baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].TechTree[purchaseIndex].magnitude;
+					}
+				}
+			})
+			setTechAttributeValue(techSum);
 		}
 	},[userInfo.botBuilds, botNumberSelected]);
 	useEffect(()=>{
@@ -120,7 +131,7 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 			break;
 		}
 		case 'Capacitor' : {
-			iconImport = ic_battery_full;
+			iconImport = battery;
 			break;
 		}
 		case 'Reactor' : {

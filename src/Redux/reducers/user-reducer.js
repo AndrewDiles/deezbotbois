@@ -130,6 +130,7 @@ export default function userInfo(
 				}
 			}
 			case 'RESET_TECH_TREE' : {
+				// needs to remove excess arms / weps... ?
 				let botBuilds = [...state.botBuilds];
 				botBuilds[action.index].techTree = [
 					null, false, false, null,
@@ -153,7 +154,7 @@ export default function userInfo(
 				}
 			}
 			case 'REMOVE_TECHS' : {
-				console.log('action.techIndexArray',action.techIndexArray)
+				// needs to remove excess arms / weps... ?
 				let botBuilds = [...state.botBuilds];
 				action.techIndexArray.forEach((indexToChange)=>{
 					botBuilds[action.index].techTree[indexToChange] = false;

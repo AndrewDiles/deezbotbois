@@ -1,5 +1,8 @@
+import BotBiggey from "../Components/Bots/BotBiggey";
+
 const baseBotAttributes = {
 	BotBiggey: {
+		Name: 'Biggey',
 		Durability: 30,
 		Armor: 4,
 		Shield: 2,
@@ -20,121 +23,136 @@ const baseBotAttributes = {
 		Special1: "+1 Weapon slot",
 		Special2: "+1 Scan distance",
 		Special3: "+50% Movement energy cost",
-		BlueStarConversionRate: 2,
+		BlueStarConversionRate: 1.5,
 		TechTree: [
 			null,
 			{
-				affect: 'Durability',
-				magnitude: 1,
-				cost: 1,
-				techMessage: "Inceases Durability by 1 at a cost of 1 Bit"
-			},
-			{
-				affect: 'aimCost',
-				magnitude: -1,
-				cost: 1,
-				techMessage: "Reduces Aim's Energy Cost by 1 at a cost of 1 Bit"
-			},
-			null,
-			{
 				affect: 'Armor',
-				magnitude: 1,
-				cost: 2,
-				techMessage: "Inceases Armor by 1 at a cost of 2 Bits"
-			},
-			{
-				affect: 'Durability',
 				magnitude: 2,
-				cost: 2,
-				techMessage: "Inceases Durability by 2 at a cost of 2 Bits"
-			},
-			{
-				affect: 'attackCost',
-				magnitude: -2,
-				cost: 3,
-				techMessage: "Reduces Attack's Energy Cost by 2 at a cost of 3 Bits"
-			},
-			{
-				affect: 'ScanCost',
-				magnitude: -1,
-				cost: 2,
-				techMessage: "Reduces Scan's Energy Cost by 1 at a cost of 2 Bits"
+				cost: 5,
+				techMessage: "Inceases Armor by 2 at a cost of 5 Bits"
 			},
 			{
 				affect: 'Shield',
-				magnitude: 1,
-				cost: 2,
-				techMessage: "Inceases Shield by 1 at a cost of 2 Bits"
-			},
-			{
-				affect: 'MovementDistance',
-				magnitude: 1,
-				cost: 4,
-				techMessage: "Inceases Movement Distance by 1 at a cost of 4 Bits"
-			},
-			{
-				affect: 'Damage',
-				magnitude: 1,
-				cost: 4,
-				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
-			},
-			{
-				affect: 'reloadTime',
-				magnitude: -1,
-				cost: 5,
-				techMessage: "Reduces weapon Reload Time by 1 tick at a cost of 5 Bits"
-			},
-			{
-				affect: 'ArmorVsPiercingMultiplier',
 				magnitude: 2,
 				cost: 5,
-				techMessage: "Inceases Armor by 100% against Piercing attacks at a cost of 5 Bits"
+				techMessage: "Inceases Shield by 2 at a cost of 5 Bits"
 			},
-			{
-				affect: 'chargeAction',
-				magnitude: true,
-				cost: 5,
-				techMessage: "Unlocks the CHARGE command at a cost of 5 Bits"
-			},
-			{
-				affect: 'AutoRepair',
-				magnitude: .1,
-				cost: 6,
-				techMessage: "Increases Auto Repair by 0.1 at a cost of 6 Bits"
-			},
+			null,
 			{
 				affect: 'ScanDistance',
 				magnitude: 1,
-				cost: 2,
-				techMessage: "Increases Scan Distance by 1 at a cost of 2 Bits"
+				cost: 5,
+				techMessage: "Increases Scan Distance by 1 at a cost of 5 Bits"
 			},
 			{
-				affect: 'CollisionDamageMultipliter',
-				magnitude: 0.5,
-				cost: 7,
-				techMessage: "Increases damage dealt in Collisions by 50% at a cost of 7 Bits"
+				affect: 'Capacitor',
+				magnitude: -10,
+				cost: 0,
+				techMessage: "Reduces Capacitor by 10 at no Bit cost"
 			},
 			{
-				affect: 'MeleeDamageMultiplier',
+				affect: 'Capacitor',
+				magnitude: -10,
+				cost: 0,
+				techMessage: "Reduces Capacitor by 10 at no Bit cost"
+			},
+			{
+				affect: 'ShieldVsEnergyMultiplier',
+				magnitude: 2,
+				cost: 5,
+				techMessage: "Inceases Shield by 100% against Energy attacks at a cost of 5 Bits"
+			},
+			{
+				affect: 'Power',
 				magnitude: 2,
 				cost: 7,
-				techMessage: "Increases Melee Damage by 100% at a cost of 7 Bits"
+				techMessage: "Inceases Power by 2 at a cost of 7 Bits"
 			},
 			{
-				affect: 'RangedDamageMultiplier',
-				magnitude: 1.5,
-				cost: 10,
-				techMessage: "Increases Ranged Damage by 50% at a cost of 10 Bits"
+				affect: 'Durability',
+				magnitude: 5,
+				cost: 3,
+				techMessage: "Inceases Durability by 5 at a cost of 3 Bits"
+			},
+			{
+				affect: 'Reactor',
+				magnitude: 1,
+				cost: 8,
+				techMessage: "Inceases Reactor by 1 at a cost of 8 Bits"
+			},
+			{
+				affect: 'Accuracy',
+				magnitude: 2,
+				cost: 9,
+				techMessage: "Increases Accuracy by 2 at a cost of 9 Bits"
+			},
+			{
+				affect: 'ScanCost',
+				magnitude: 2,
+				cost: 0,
+				techMessage: "Increases Scan's Energy Cost by 2 at no Bit cost"
+			},
+			{
+				affect: 'AttackCost',
+				magnitude: 2,
+				cost: 0,
+				techMessage: "Increases Attack's Energy Cost by 2 at no Bit cost"
+			},
+			{
+				affect: 'MovementCost',
+				magnitude: 10,
+				cost: 0,
+				techMessage: "Increases Movement's Cost by 10 at no Bit cost"
+			},
+			{
+				affect: 'aimCost',
+				magnitude: 2,
+				cost: 0,
+				techMessage: "Increases Aim's Cost by 2 at no Bit cost"
+			},
+			{
+				affect: 'MeleeArmorPenetration',
+				magnitude: 0.5,
+				cost: 12,
+				techMessage: "Reduces opponent's Armor by 50% against your Melee attacks at a cost of 12 Bits"
+			},
+			{
+				affect: 'Reactor',
+				magnitude: 2,
+				cost: 15,
+				techMessage: "Inceases Reactor by 2 at a cost of 15 Bits"
 			},
 			{
 				affect: 'MovementDistance',
 				magnitude: 1,
-				cost: 4,
-				techMessage: "Inceases Movement Distance by 1 at a cost of 4 Bits"
-			}
+				cost: 6,
+				techMessage: "Inceases Movement Distance by 1 at a cost of 6 Bits"
+			},
+			{
+				affect: 'RangedShieldPenetration',
+				magnitude: 0.5,
+				cost: 15,
+				techMessage: "Reduces opponent's Shield by 50% against your Ranged attacks at a cost of 15 Bits"
+			},
+			null,
+			{
+				affect: 'weaponSlot',
+				magnitude: 1,
+				cost: 2,
+				techMessage: "Unlocks an additional weapon slot at the cost of 2 Bits"
+			},
+			{
+				affect: 'guardCommand',
+				magnitude: true,
+				cost: 2,
+				techMessage: "Unlocks the GUARD command at a cost of 2 Bits"
+			},
+			null
 		]
 	},
   BotBoxey: {
+		Name: 'Boxey',
 		Durability: 20,
 		Armor: 3,
 		Shield: 3,
@@ -214,10 +232,10 @@ const baseBotAttributes = {
 				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
 			},
 			{
-				affect: 'reloadTime',
-				magnitude: -1,
-				cost: 5,
-				techMessage: "Reduces weapon Reload Time by 1 tick at a cost of 5 Bits"
+				affect: 'ScanDistance',
+				magnitude: 1,
+				cost: 3,
+				techMessage: "Increases Scan Distance by 1 at a cost of 3 Bits"
 			},
 			{
 				affect: 'ArmorVsPiercingMultiplier',
@@ -226,7 +244,7 @@ const baseBotAttributes = {
 				techMessage: "Inceases Armor by 100% against Piercing attacks at a cost of 5 Bits"
 			},
 			{
-				affect: 'chargeAction',
+				affect: 'chargeCommand',
 				magnitude: true,
 				cost: 5,
 				techMessage: "Unlocks the CHARGE command at a cost of 5 Bits"
@@ -238,10 +256,10 @@ const baseBotAttributes = {
 				techMessage: "Increases Auto Repair by 0.1 at a cost of 6 Bits"
 			},
 			{
-				affect: 'ScanDistance',
+				affect: 'MovementDistance',
 				magnitude: 1,
-				cost: 2,
-				techMessage: "Increases Scan Distance by 1 at a cost of 2 Bits"
+				cost: 4,
+				techMessage: "Inceases Movement Distance by 1 at a cost of 4 Bits"
 			},
 			{
 				affect: 'CollisionDamageMultipliter',
@@ -251,9 +269,9 @@ const baseBotAttributes = {
 			},
 			{
 				affect: 'MeleeDamageMultiplier',
-				magnitude: 2,
+				magnitude: 1.5,
 				cost: 7,
-				techMessage: "Increases Melee Damage by 100% at a cost of 7 Bits"
+				techMessage: "Increases Melee Damage by 50% at a cost of 7 Bits"
 			},
 			{
 				affect: 'RangedDamageMultiplier',
@@ -262,11 +280,25 @@ const baseBotAttributes = {
 				techMessage: "Increases Ranged Damage by 50% at a cost of 10 Bits"
 			},
 			{
-				affect: 'MovementDistance',
+				affect: 'reloadTime',
+				magnitude: -1,
+				cost: 5,
+				techMessage: "Reduces weapon Reload Time by 1 tick at a cost of 5 Bits"
+			},
+			null,
+			{
+				affect: 'accessorySlot',
 				magnitude: 1,
-				cost: 4,
-				techMessage: "Inceases Movement Distance by 1 at a cost of 4 Bits"
-			}
+				cost: 8,
+				techMessage: "Unlocks an additional accessory slot at the cost of 8 Bits"
+			},
+			{
+				affect: 'repairCommand',
+				magnitude: true,
+				cost: 12,
+				techMessage: "Unlocks the REPAIR command at a cost of 12 Bits"
+			},
+			null
 		]
 	},
 	BotJager: {

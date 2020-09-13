@@ -198,7 +198,7 @@ html {
 	}
 	100% {
 		width: 100%;
-		height: 60px;
+		height: 75px;
 	}
 }
 @keyframes glowUserImg {
