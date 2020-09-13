@@ -80,15 +80,15 @@ const AltLogin = () => {
 		return (false)
 	}
 	
-	const testForInvalidNewAccountData = () => {
-		if (handle === null || handle === '' || !emailEntry || 
-		password1 === null || password1 === '' || 
-		password2 === null || password2 === ''
-		) return true;
-		if (password1 !== password2) return true;
-		if (!testForValidEmail(emailEntry)) return true;
-		return false;
-	}
+	// const testForInvalidNewAccountData = () => {
+	// 	if (handle === null || handle === '' || !emailEntry || 
+	// 	password1 === null || password1 === '' || 
+	// 	password2 === null || password2 === ''
+	// 	) return true;
+	// 	if (password1 !== password2) return true;
+	// 	if (!testForValidEmail(emailEntry)) return true;
+	// 	return false;
+	// }
 	const testForInvalidLoginData = () => {
 		if (!testForValidEmail(emailEntry)) return true;
 		if (password1 === null || password1 === '') return true;

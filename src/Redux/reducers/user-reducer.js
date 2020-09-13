@@ -144,7 +144,7 @@ export default function userInfo(
 				}
 			}
 			case 'ADD_TECH' : {
-				console.log(action)
+				console.log('adding tech')
 				let botBuilds = [...state.botBuilds];
 				botBuilds[action.index].techTree[action.techIndex] = true;
 				return {
@@ -152,7 +152,18 @@ export default function userInfo(
 					botBuilds : botBuilds,
 				}
 			}
-
+			case 'REMOVE_TECHS' : {
+				console.log('action.techIndexArray',action.techIndexArray)
+				let botBuilds = [...state.botBuilds];
+				action.techIndexArray.forEach((indexToChange)=>{
+					botBuilds[action.index].techTree[indexToChange] = false;
+				})
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
+			
       default:{
         return state;
       }

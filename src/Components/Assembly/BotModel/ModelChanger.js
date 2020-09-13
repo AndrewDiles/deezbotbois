@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-import { changeBotModel } from '../../../Redux/actions';
+import { changeBotModel, resetTechTree } from '../../../Redux/actions';
 
 import styled from 'styled-components';
 import StyledIcon from '../../StyledIcon/StyledIcon';
@@ -33,7 +33,7 @@ const ModelChanger = ({ botNumberSelected }) => {
 					baseBotAttributes[userInfo.availableBots[indexOfSelectedModel-1]].AccessorySlots,
 				));
 				setIndexOfSelectedModel(indexOfSelectedModel-1);
-				
+				dispatch(resetTechTree(botNumberSelected));
 			}
 		}
 		else if (direction === 'right'){
@@ -46,6 +46,7 @@ const ModelChanger = ({ botNumberSelected }) => {
 					baseBotAttributes[userInfo.availableBots[indexOfSelectedModel+1]].AccessorySlots,
 				));
 				setIndexOfSelectedModel(indexOfSelectedModel+1);
+				dispatch(resetTechTree(botNumberSelected));
 			}
 		}
 		else {

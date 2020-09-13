@@ -10,9 +10,9 @@ const Home = () => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	const dispatch = useDispatch();
-	React.useEffect(()=>{
-		dispatch(updateUrl('home'));
-	},[])
+	// React.useEffect(()=>{
+	// 	dispatch(updateUrl('home'));
+	// },[dispatch])
 	
   return (
     <Wrapper

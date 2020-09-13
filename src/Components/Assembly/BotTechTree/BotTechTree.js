@@ -4,13 +4,15 @@ import styled from 'styled-components';
 import baseBotAttributes from '../../../Constants/attributes';
 
 import SvgDefs from './SvgDefs';
+import TechDisplay from './TechDisplay';
 import TechCellProvider from './TechCellProvider';
+import StarAndReset from './StarAndReset';
 
 const BotTechTree = ({ botNumberSelected}) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
-	const defaultTechDisplay = 'Obtain daily Battle Bits and ';
-	const [techDisplay, setTechDisplay] = useState('');
+	const defaultTechDisplay = "Spend Battle Bits on your build's tech tree below";
+	const [techDisplay, setTechDisplay] = useState(defaultTechDisplay);
 	const [treeInfo, setTreeInfo] = useState(null);
 	const [starInfo, setStarInfo] = useState({
 		maxBlue: 0,
@@ -71,7 +73,7 @@ const BotTechTree = ({ botNumberSelected}) => {
 		return (<></>)
 	}
 
-// REMINDER: RESET TREE ON MODEL CHANGE.  CREATE A RESET BUTTON.
+// REMINDER: CREATE A RESET BUTTON.
 
   return (
     <div
@@ -81,9 +83,9 @@ const BotTechTree = ({ botNumberSelected}) => {
 			<h3>
 			TECH TREE
 			</h3>
-			<TechDisplay
-			
-			/>
+			<TechDisplay>
+				{techDisplay}
+			</TechDisplay>
 			<TechGridWrapper>
 				{treeInfo.map((tech, index)=>(
 					
@@ -95,6 +97,7 @@ const BotTechTree = ({ botNumberSelected}) => {
 							availableStars = {starInfo.availableGold}
 							availableBlueStars = {starInfo.availableBlue}
 							botNumberSelected = {botNumberSelected}
+							setTechDisplay = {setTechDisplay}
 							tech = {tech}
 							size = {48}
 							trimSize = {2}
@@ -104,6 +107,10 @@ const BotTechTree = ({ botNumberSelected}) => {
 					</div>
 				))}
 			</TechGridWrapper>
+			<StarAndReset
+			starInfo = {starInfo}
+			botNumberSelected = {botNumberSelected}
+			/>
     </div>
   )
 }
@@ -114,8 +121,4 @@ const TechGridWrapper = styled.div`
   grid-template-rows: repeat(5,50px);
 	grid-gap: 25px 10px;
 	padding: 10px;
-`
-const TechDisplay = styled.div`
-	height: 50px;
-	width: 100px;
 `

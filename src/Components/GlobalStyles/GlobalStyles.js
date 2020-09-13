@@ -188,7 +188,17 @@ html {
   }
 	100% {
 		width: 200px;
-		height: 50px;
+		height: 75px;
+	}
+}
+@keyframes expandTechdisplay {
+	0% {
+		width: 100%;
+		height: 0px;
+	}
+	100% {
+		width: 100%;
+		height: 60px;
 	}
 }
 @keyframes glowUserImg {

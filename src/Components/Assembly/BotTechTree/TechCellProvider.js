@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { techTreeRequirements } from '../../../Constants/helperFunctions';
+import { techTreeRequirements, inverseTechTreeRequirements } from '../../../Constants/helperFunctions';
 import baseBotAttributes from '../../../Constants/attributes';
 
 import TechCell from './TechCell';
@@ -26,17 +26,18 @@ import {sphere} from 'react-icons-kit/icomoon/sphere'
 
 import {
 	addTech,
+	removeTechs
 } from '../../../Redux/actions';
 
-const TechCellProvider = ({ availableStars, availableBlueStars, tech, size, trimSize, botNumberSelected, index }) => {
+const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, tech, size, trimSize, botNumberSelected, index }) => {
 	const botInfo = useSelector((state) => state.userInfo.botBuilds);
 	const dispatch = useDispatch();
 	const [locked, setLocked] = useState('locked');
-	
+		
 	const updateState = () => {
 		let techRequirement = techTreeRequirements(index);
-		console.log('tech requirement on index', index, techRequirement)
-		console.log(index, '<-index, Evaluation of its requirement->',botInfo[botNumberSelected].techTree[techRequirement])
+		// console.log('tech requirement on index', index, techRequirement)
+		// console.log(index, '<-index, Evaluation of its requirement->',botInfo[botNumberSelected].techTree[techRequirement])
 		let techRequirementMet = null;
 		if (techRequirement === null || techRequirement === undefined) techRequirementMet = true;
 		else if (botInfo[botNumberSelected].techTree[techRequirement]) techRequirementMet = true;
@@ -52,12 +53,17 @@ const TechCellProvider = ({ availableStars, availableBlueStars, tech, size, trim
 		else locked = 'unlocked';
 		setLocked(locked);
 	}
-	
+
 	React.useEffect(()=>  {
 		updateState();
-	},[botNumberSelected, botInfo])
+	},[botNumberSelected, botInfo, availableStars, availableBlueStars] )
 	
-	const handleClick = () => {
+	const handleClick = (purchased, disabled) => {
+		console.log('index, purchased, disabled',index, purchased, disabled)
+		if (purchased) {
+			dispatch(removeTechs(botNumberSelected, inverseTechTreeRequirements(index)))
+		}
+		else if (!disabled)
 		dispatch(addTech(botNumberSelected, index ))
 	}
 
@@ -116,6 +122,7 @@ const TechCellProvider = ({ availableStars, availableBlueStars, tech, size, trim
 		case 'RangedDamageMultiplier' : {
 			icon1 = u1F52B;
 			icon2 = x;
+			break;
 		}
 		case 'reloadTime' : {
 			icon1 = loop2;
@@ -140,7 +147,9 @@ const TechCellProvider = ({ availableStars, availableBlueStars, tech, size, trim
 
   return (
 		<TechCell
-		index = {index} // to be removed?
+		index = {index}
+		techMessage = {baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index].techMessage}
+		setTechDisplay = {setTechDisplay}
 		purchased = {botInfo[botNumberSelected].techTree[index]}
 		locked = {locked}
 		icon1 = {icon1}

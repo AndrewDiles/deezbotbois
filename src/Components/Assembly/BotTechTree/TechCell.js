@@ -1,10 +1,11 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { Icon } from 'react-icons-kit';
 
-const TechCell = ({ handleClick, icon1, icon2, locked, purchased, size, trimSize
-,index
-}) => {
+const TechCell = ({ techMessage, setTechDisplay, handleClick, icon1, icon2, locked, purchased, size, trimSize, index }) => {
+	const botInfo = useSelector((state) => state.userInfo.botBuilds);
+	const defaultTechDisplay = "Spend Battle Bits on your build's tech tree below";
 	const [trimColor, setTrimColor] = React.useState('rgba(0,0,125,0.6)');
 	const [radialUrl, setRadialUrl] = React.useState('GradientLocked');
 	React.useEffect(()=>{
@@ -25,9 +26,29 @@ const TechCell = ({ handleClick, icon1, icon2, locked, purchased, size, trimSize
 			setRadialUrl('GradientLocked');
 		}
 	},[locked,purchased])
+	React.useEffect(()=>{
+		const target = document.getElementById(`TechCell${index}`)
+		const onMouseEnter = (ev) => {
+			if (ev.target === target) 
+			setTechDisplay(techMessage);
+		}
+		const onMouseLeave = (ev) => {
+			if (ev.target === target) 
+			setTechDisplay(defaultTechDisplay);
+		}
+		if (target) {
+			target.addEventListener('mouseenter',onMouseEnter);
+			target.addEventListener('mouseleave',onMouseLeave);
+		}
+		return ()=>{
+			if (!target) return;
+			target.removeEventListener('mouseenter',onMouseEnter);
+			target.removeEventListener('mouseleave',onMouseLeave);
+		}
+	},[botInfo])
 
-	console.log('locked test:', `index ${index} is ${locked}`);
-	console.log('purchased test:', `index ${index} is ${purchased}`);
+	// console.log('locked test:', `index ${index} is ${locked}`);
+	// console.log('purchased test:', `index ${index} is ${purchased}`);
 
 	if (!handleClick) {
 		handleClick = () => {
@@ -70,12 +91,12 @@ const TechCell = ({ handleClick, icon1, icon2, locked, purchased, size, trimSize
 				/>
 			}
 			<Svg
-
+			id = {`TechCell${index}`}
 			svgSize = {size + trimSize}
 			top = {top}
 			locked = {locked}
 			purchased = {purchased}
-			onClick = {handleClick || null}
+			onClick = {e => {handleClick(purchased,locked !== 'unlocked')}}
 			>
 				<Polygon 
 				points = {points}

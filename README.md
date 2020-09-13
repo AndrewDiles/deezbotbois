@@ -29,6 +29,8 @@ Intentions with the GUI include:
 
 - ToolTips on weapons / accessories in inventory bounces window up and down once enough items make scrolling possible.  Going to make up and down arrows to navigate.
 
+- Excess equipment causes flutter in scroll on Tool Tip's mouse over.  Solution will likely involve pagenating number of displayed equipment
+
 
 
 ## PAST BUGS
@@ -52,9 +54,11 @@ Intentions with the GUI include:
 
 # Potential Improvements
 
-- Add drag and drop for equipping
+- In Assembly: Add drag and drop for equipping
 
-- In Assembly add ability to click and expand each section
+- In Assembly: Add ability to click and expand each section
+
+- In Assembly: Add ability to click further down line of techs and purchase it and all required techs 
 
 - Change log in to only request confirmation code once an attempt to login for the first time has been made, instead of asking user if they need to input one.
 

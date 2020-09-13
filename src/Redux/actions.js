@@ -115,6 +115,11 @@ export const addTech = (index, techIndex) => ({
 	index: index,
 	techIndex: techIndex
 })
+export const removeTechs = (index, techIndexArray) => ({
+	type: 'REMOVE_TECHS',
+	index: index,
+	techIndexArray: techIndexArray
+})
 export const replaceUserInfo = (newUserInfo) => ({
 	type: 'REPLACE_USER_INFO',
 	newUserInfo: newUserInfo,
