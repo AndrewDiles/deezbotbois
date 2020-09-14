@@ -94,7 +94,7 @@ const baseBotAttributes = {
 				techMessage: "Increases Scan's Energy Cost by 2 at no Bit cost"
 			},
 			{
-				affect: 'AttackCost',
+				affect: 'attackCost',
 				magnitude: 2,
 				cost: 0,
 				techMessage: "Increases Attack's Energy Cost by 2 at no Bit cost"

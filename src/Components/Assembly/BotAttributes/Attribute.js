@@ -28,7 +28,8 @@ import {ic_wifi_tethering} from 'react-icons-kit/md/ic_wifi_tethering'
 
 // import {iosSpeedometer} from 'react-icons-kit/ionicons/iosSpeedometer'
 import {ic_timeline} from 'react-icons-kit/md/ic_timeline'	// MovementDistance
-import {ic_format_list_numbered} from 'react-icons-kit/md/ic_format_list_numbered'
+// import {ic_format_list_numbered} from 'react-icons-kit/md/ic_format_list_numbered'
+import {listOl as initiative} from 'react-icons-kit/fa/listOl'
 // Initiative
 import {power} from 'react-icons-kit/icomoon/power'					// Costs
 import ToolTipIcon from '../../ToolTip/ToolTipIcon';
@@ -159,7 +160,7 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 			break;
 		}
 		case 'Initiative' : {
-			iconImport = ic_format_list_numbered;
+			iconImport = initiative;
 			break;
 		}
 		default :{}

@@ -97,7 +97,6 @@ const Assembly = () => {
 				setSuccessMsg = {setSuccessMsg}
 				setBotSnapshot = {setBotSnapshot}
 				/>
-				{/* Delete bot? */}
 			</RowDivSpace>
 			<br/>
 			{botInfo.length > 0 &&
