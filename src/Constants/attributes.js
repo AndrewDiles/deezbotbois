@@ -302,6 +302,7 @@ const baseBotAttributes = {
 		]
 	},
 	BotJager: {
+		Name: 'Jager',
 		Durability: 20,
 		Armor: 2,
 		Shield: 4,
@@ -324,6 +325,7 @@ const baseBotAttributes = {
 		Special3: "+100% Scan energy cost"
 	},
 	BotLumpey: {
+		Name: 'Lumpey',
 		Durability: 40,
 		Armor: 5,
 		Shield: 4,
@@ -346,6 +348,7 @@ const baseBotAttributes = {
 		Special3: "+.1 AutoRepair"
 	},
 	BotRobbey: {
+		Name: 'Robbey',
 		Durability: 14,
 		Armor: 3,
 		Shield: 2,
@@ -368,6 +371,7 @@ const baseBotAttributes = {
 		Special3: "Warning: Weak Reactor!"
 	},
 	BotSpikey: {
+		Name: 'Spikey',
 		Durability: 20,
 		Armor: 5,
 		Shield: 1,
@@ -390,6 +394,7 @@ const baseBotAttributes = {
 		Special3: "+100% Ram damage"
 	},
 	BotZippey: {
+		Name: 'Zippey',
 		Durability: 10,
 		Armor: 2,
 		Shield: 2,

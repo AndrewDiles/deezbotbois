@@ -37,7 +37,7 @@ import Sword1 from '../Arms/Sword1';
 
 
 
-const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeBotSize, faded } ) => {
+const Bot = ( { model, arm1, arm2, arm3, botColors, arm1Angle, arm2Angle, arm3Angle, alternativeBotSize, faded } ) => {
   const settings = useSelector((state) => state.settings);
 	if (!model) {
 		return (
@@ -111,7 +111,8 @@ const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeB
     }
   }
   armsSelection(arm1, 1);
-  armsSelection(arm2, 2);
+	armsSelection(arm2, 2);
+	armsSelection(arm3, 3);
 
   return (
     <Wrapper
@@ -136,6 +137,14 @@ const Bot = ( { model, arm1, arm2, botColors, arm1Angle, arm2Angle, alternativeB
           armAngle = {arm2Angle}
           >
           </SelectedArm2>
+        }
+				{SelectedArm3 &&
+          <SelectedArm3
+          botColors = {botColors}
+          cellSize = {alternativeBotSize || settings.cellSize}
+          armAngle = {arm3Angle}
+          >
+          </SelectedArm3>
         }
       </SelectedBot>
     </Wrapper>

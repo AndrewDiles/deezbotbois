@@ -2,39 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
+import iconImporter from '../../../Constants/iconImporter';
 
-import {heart} from 'react-icons-kit/icomoon/heart' 				// Durability 
-import {shield} from 'react-icons-kit/icomoon/shield' 			// Armor
-import {sphere} from 'react-icons-kit/icomoon/sphere' 			// Shield
-// import {ic_gps_fixed} from 'react-icons-kit/md/ic_gps_fixed'
-// import {target} from 'react-icons-kit/ikons/target'
-// import {bullseye} from 'react-icons-kit/ikons/bullseye'
-import {u1F3AF} from 'react-icons-kit/noto_emoji_regular/u1F3AF'
-// import {target} from 'react-icons-kit/icomoon/target'				// Accuracy
-// import {hammer} from 'react-icons-kit/icomoon/hammer' 			
-import {u1F529} from 'react-icons-kit/noto_emoji_regular/u1F529'// Power
-// import {ic_battery_full} from 'react-icons-kit/md/ic_battery_full'
-import {battery} from 'react-icons-kit/entypo/battery'
-// import {u1F50B} from 'react-icons-kit/noto_emoji_regular/u1F50B'
-// Capacitor
-
-import {ic_battery_charging_50} from 'react-icons-kit/md/ic_battery_charging_50' 
-// Reactor
-
-import {wrench} from 'react-icons-kit/icomoon/wrench' 			// AutoRepair
-// import {binoculars} from 'react-icons-kit/icomoon/binoculars'
-import {ic_wifi_tethering} from 'react-icons-kit/md/ic_wifi_tethering'
-// ScanDistance
-
-// import {iosSpeedometer} from 'react-icons-kit/ionicons/iosSpeedometer'
-import {ic_timeline} from 'react-icons-kit/md/ic_timeline'	// MovementDistance
-// import {ic_format_list_numbered} from 'react-icons-kit/md/ic_format_list_numbered'
-import {listOl as initiative} from 'react-icons-kit/fa/listOl'
-// Initiative
-import {power} from 'react-icons-kit/icomoon/power'					// Costs
 import ToolTipIcon from '../../ToolTip/ToolTipIcon';
 
-import baseBotAttributes, {attributeInfo} from '../../../Constants/attributes';
+import baseBotAttributes from '../../../Constants/attributes';
 import { accessoryStats, weaponStats, equipmentSlots } from '../../../Constants/equipment';
 
 
@@ -109,62 +81,10 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 			}
 		}
 	},[equipmentStaging])
+	let icons = iconImporter(attribute);
 	let iconImport = null;
-	switch(attribute) {
-		case 'Durability' : {
-			iconImport = heart;
-			break;
-		}
-		case 'Armor' : {
-			iconImport = shield;
-			break;
-		}
-		case 'Shield' : {
-			iconImport = sphere;
-			break;
-		}
-		case 'Accuracy' : {
-			iconImport = u1F3AF;
-			break;
-		}
-		case 'Power' : {
-			iconImport = u1F529;
-			break;
-		}
-		case 'Capacitor' : {
-			iconImport = battery;
-			break;
-		}
-		case 'Reactor' : {
-			iconImport = ic_battery_charging_50;
-			break;
-		}
-		case 'AutoRepair' : {
-			iconImport = wrench;
-			break;
-		}
-		case 'ScanDistance' : {
-			iconImport = ic_wifi_tethering;
-			break;
-		}
-		case 'ScanCost' : {
-			iconImport = power;
-			break;
-		}
-		case 'MovementDistance' : {
-			iconImport = ic_timeline;
-			break;
-		}
-		case 'MovementCost' : {
-			iconImport = power;
-			break;
-		}
-		case 'Initiative' : {
-			iconImport = initiative;
-			break;
-		}
-		default :{}
-	}
+	if (attribute.includes('Cost')) iconImport = icons.icon2;
+	else iconImport = icons.icon1;
 
 	// if (!userInfo.botBuilds) {
 	// 	return (<></>)
@@ -200,6 +120,7 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 			</NumberCell>
 			<NumberCell className = 'centeredFlex'
 			type = 'sum'
+			backgroundColor = {colors.secondary}
 			>
 				{grandSum}
 			</NumberCell>
@@ -234,6 +155,7 @@ const NumberCell = styled.div`
 	width: 100%;
 	font-size: ${props => props.type === 'sum' ? '0.7em' : props.type === 'percent' ? '0.4em' :'0.5em'};
 	color: ${props => props.change > 0 ? 'limegreen' : props.change < 0 ? 'darkred' : ''};
+	background-color: ${props => props.type === 'sum' && props.backgroundColor};
 	/* line-height: 32px;
 	text-align: center; */
 	/* align-content: center;

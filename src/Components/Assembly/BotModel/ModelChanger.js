@@ -64,7 +64,7 @@ const ModelChanger = ({ botNumberSelected }) => {
     <Wrapper>
 			CHANGE MODEL
 			<br/>
-			{userInfo.botBuilds[botNumberSelected].model}
+			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Name}
 			<RowDivSpace>
 				<Bot
 				alternativeBotSize = {40}
@@ -84,6 +84,9 @@ const ModelChanger = ({ botNumberSelected }) => {
 				arm1 = {userInfo.botBuilds[botNumberSelected].equipment.arm1}
 				arm2 = {userInfo.botBuilds[botNumberSelected].equipment.arm2}
 				arm3 = {userInfo.botBuilds[botNumberSelected].equipment.arm3}
+				arm1Angle = '-45'
+				arm2Angle = '45'
+				arm3Angle = '235'
 				botColors ={colorsToSendToBotComponent}
 				/>
 				<StyledIcon

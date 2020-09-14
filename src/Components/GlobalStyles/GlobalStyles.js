@@ -172,7 +172,7 @@ html {
   }
   99% {
     width: 240px;
-    height: 50px;
+    height: 60px;
 		/* min-height: 0px; */
   }
 	100% {
@@ -184,11 +184,11 @@ html {
 @keyframes attributeExpandxAxis {
   0% {
 		width: 5px;
-		height: 50px;
+		height: 37px;
   }
 	100% {
-		width: 200px;
-		height: 75px;
+		width: 240px;
+		height: 37px;
 	}
 }
 @keyframes expandTechdisplay {

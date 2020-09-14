@@ -28,7 +28,8 @@ const AccessoryContents = ({ accessoryInfo }) => {
 export default AccessoryContents;
 
 const ToolTipContents = styled.div`
-	height: 100%;
+	/* height: 100%; */
+	height: 60px;
 	width: 100%;
 	font-size: 10px;
 	display: grid;
@@ -88,12 +89,13 @@ const Effect2Value = styled.div`
 	justify-self: center;
 `
 const Description = styled.div`
-	font-size: 0.5em;
-	grid-column-start: 2;
-  grid-column-end: 2;
+	font-size: 0.65em;
+	/* grid-column-start: 2;
+  grid-column-end: 2; */
+	grid-column: 1 / last-line;
   grid-row-start: 2;
   grid-row-end: 2;
 	align-self: center;
 	justify-self: center;
-	white-space: nowrap;
+	/* white-space: nowrap; */
 `

@@ -63,7 +63,8 @@ const WeaponContents = ({ weaponInfo }) => {
 export default WeaponContents;
 
 const ToolTipContents = styled.div`
-	height: 100%;
+	/* height: 100%; */
+	height: 60px;
 	width: 100%;
 	font-size: 10px;
 	display: grid;

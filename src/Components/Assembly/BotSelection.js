@@ -50,6 +50,9 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				arm1 = {botInfo[botNumberSelected-1] && userInfo.botBuilds[botNumberSelected-1].equipment.arm1}
 				arm2 = {botInfo[botNumberSelected-1] && userInfo.botBuilds[botNumberSelected-1].equipment.arm2}
 				arm3 = {botInfo[botNumberSelected-1] && userInfo.botBuilds[botNumberSelected-1].equipment.arm3}
+				arm1Angle = '-45'
+				arm2Angle = '45'
+				arm3Angle = '235'
 				/>
 				<StyledIcon
 				handleClick = {()=>{handleRotateBot('left')}}
@@ -64,6 +67,9 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				arm1 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm1}
 				arm2 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm2}
 				arm3 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm3}
+				arm1Angle = '-45'
+				arm2Angle = '45'
+				arm3Angle = '235'
 				/>
 				<StyledIcon
 				handleClick = {()=>{handleRotateBot('right')}}
@@ -80,6 +86,9 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				arm1 = {botInfo[botNumberSelected+1] && userInfo.botBuilds[botNumberSelected+1].equipment.arm1}
 				arm2 = {botInfo[botNumberSelected+1] && userInfo.botBuilds[botNumberSelected+1].equipment.arm2}
 				arm3 = {botInfo[botNumberSelected+1] && userInfo.botBuilds[botNumberSelected+1].equipment.arm3}
+				arm1Angle = '-45'
+				arm2Angle = '45'
+				arm3Angle = '235'
 				/>
 			</RowDivSpace>
     </Wrapper>

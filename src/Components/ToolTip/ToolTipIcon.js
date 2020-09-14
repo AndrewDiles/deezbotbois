@@ -44,9 +44,10 @@ const ToolTipIcon = ({ name, iconImport, selfLocation, animated }) => {
 				<ToolTip
 				messageHovered = {messageHovered}
 				setMessageHovered = {setMessageHovered}
-				fontSize = '0.6em'
+				fontSize = '0.55em'
 				selfLocation = {selfLocation}
 				animated = {animated}
+				height = '37'
 				>
 					{attributeInfo[name]}
 				</ToolTip>

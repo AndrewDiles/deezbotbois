@@ -24,6 +24,9 @@ const Rules = () => {
 			- The order of resolution of action types / bot priority cycling:
 			<ol>
 				<li>
+					GUARD, REPAIR and AUTO-REPAIR
+				</li>
+				<li>
 					Melee Attacks
 				</li>
 				<li>
@@ -33,16 +36,19 @@ const Rules = () => {
 					Test for projectile / cell damage
 				</li>
 				<li>
+					Aim, AimAndAttack
+				</li>
+				<li>
 					Ranged Attacks and Projectiles movement
 				</li>
 				<li>
 					Test for projectile / cell damage
 				</li>
 				<li>
-					Aim. Scan. Detect adjacent.
+					Scan. Free info: Detect adjacent.
 				</li>
 				<li>
-					Internal: reload, refresh collision potentials
+					Internal updates/cleanup: reload, refresh collision potentials, remove destroyed bots from lists.  Test for game win / loss conditions
 				</li>
 			</ol>
 			<br/>

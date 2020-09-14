@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMessageHovered, fontSize, selfLocation, width, animated}) => {
+const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMessageHovered, fontSize, selfLocation, width, height, animated}) => {
 	const colors = useSelector(getThemeColors);
 	React.useEffect(()=>{
 		const target = document.getElementById(`MessageWindow${children}`);
@@ -33,6 +33,7 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
 		fontSize = {fontSize}
 		selfLocation = {selfLocation}
 		width = {width}
+		height = {height}
 		animated = {animated}
 		// location = {location}
 		>
@@ -43,8 +44,8 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
 export default ToolTip;
 
 const Message = styled.div`
-	width: ${props => props.width ? `${props.width}px` : '200px'};
-	height: auto;
+	width: ${props => props.width ? `${props.width}px` : '240px'};
+	height: ${props => props.height ? `${props.height}px` : 'auto'};
 	/* min-height: 50px; */
 	font-size: 1em;
 	position: relative;
@@ -59,8 +60,8 @@ const Message = styled.div`
 	cursor: pointer;
 	border: 1px solid rgba(0,0,0,0.1);
 	z-index: 15;
-	animation: ${props => props.animated === 'equipment' ? '.75s ease-out 1 openFromTopToBottom' 
-	: props.animated === 'attribute' ? '.75s ease-out 1 attributeExpandxAxis'
+	animation: ${props => props.animated === 'equipment' ? '.5s ease-out 1 openFromTopToBottom' 
+	: props.animated === 'attribute' ? '.5s ease-out 1 attributeExpandxAxis'
 	:''};
 	overflow: hidden;
 `

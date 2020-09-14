@@ -74,13 +74,22 @@ export const weaponStats = {
 		subTypes: ['Piercing', 'Power'],
 		attackShape: 'adjacentCell',
 		attackCost: 20,
+	},
+	Hammer1: {
+		name: "Bambam",
+		description: "Primitive doesn't always mean inferior.",
+		damage: 13,
+		superTypes: ['Melee'],
+		subTypes: ['Crushing', 'Power'],
+		attackShape: 'adjacentCell',
+		attackCost: 25,
 	}
 }
 export const attackShapes = {
 	adjacentCell : [
 		null, null, null, null, null, null,
 		null, null, null, null, null, null,
-		null, null, 'violet', null, null, null,
+		null, 'violet', null, null, null, null,
 		null, null, 'lime', 'red', null, null,
 		null, null, null, null, null, null,
 		null, null, null, null, null, null,
