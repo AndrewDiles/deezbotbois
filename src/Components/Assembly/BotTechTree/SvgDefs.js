@@ -6,7 +6,7 @@ const SvgDefs = () => {
 			<defs>
 				<radialGradient id="GradientPurchased">
       		<stop offset="0%" stopColor='rgba(255,238,0,0.4)'/>
-      		<stop offset="100%" stopColor='rgba(255,238,0,0.6)'/>
+      		<stop offset="100%" stopColor='rgba(255,238,0,0.9)'/>
     		</radialGradient>
 				<radialGradient id="GradientUnlocked">
       		<stop offset="0%" stopColor='rgba(0,0,0,0.4)'/>

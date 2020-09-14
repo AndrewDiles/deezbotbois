@@ -57,7 +57,53 @@ const Assembly = () => {
 		profileTab = {settings.profileTab}
 		colors = {colors}
 		>
-			<RowDivSpace>
+			<RowDivSpace
+			className = 'centeredFlex'
+			>
+				<h2>
+					BUILD-EM
+				</h2>
+			</RowDivSpace>
+
+			<RowDivSpace
+			className = 'centeredFlex'
+			>
+				{successMsg &&
+					<MessageDisplay
+					type = {'success'}
+					msg = {successMsg}
+					setMsg = {setSuccessMsg}
+					textSize = {'1.7em'}
+					margin = '1'
+					/>
+				}
+				{errorMsg &&
+					<MessageDisplay
+					type = {'error'}
+					msg = {errorMsg}
+					setMsg = {setErrorMsg}
+					textSize = {'1.7em'}
+					margin = '1'
+					/>
+				}
+				{!errorMsg && !successMsg &&
+					<>
+						<CreateNewBot
+						setBotNumberSelected = {setBotNumberSelected}
+						setErrorMsg = {setErrorMsg}
+						setSuccessMsg = {setSuccessMsg}
+						/>
+						<SaveBots
+						disabled = {JSON.stringify(botSnapshot) === JSON.stringify(botInfo)}
+						setErrorMsg = {setErrorMsg}
+						setSuccessMsg = {setSuccessMsg}
+						setBotSnapshot = {setBotSnapshot}
+						/>
+					</>
+				}
+			</RowDivSpace>
+
+			{/* <RowDivSpace>
 				<ColDivCenter
 				className = 'centeredFlex'
 				>
@@ -83,22 +129,9 @@ const Assembly = () => {
 					</h2>
 					}
 				</ColDivCenter>
-			</RowDivSpace>
-			
-			<RowDivSpace>
-				<CreateNewBot
-				setBotNumberSelected = {setBotNumberSelected}
-				setErrorMsg = {setErrorMsg}
-				setSuccessMsg = {setSuccessMsg}
-				/>
-				<SaveBots
-				disabled = {JSON.stringify(botSnapshot) === JSON.stringify(botInfo)}
-				setErrorMsg = {setErrorMsg}
-				setSuccessMsg = {setSuccessMsg}
-				setBotSnapshot = {setBotSnapshot}
-				/>
-			</RowDivSpace>
+			</RowDivSpace> */}
 			<br/>
+
 			{botInfo.length > 0 &&
 				<RowDivSpace>
 					<BotSelection
@@ -107,6 +140,7 @@ const Assembly = () => {
 					/>
 				</RowDivSpace>
 			}
+
 			{botInfo.length > 0 &&
 				<DeleteBot
 				setBotNumberSelected = {setBotNumberSelected}
@@ -116,7 +150,8 @@ const Assembly = () => {
 				setBotSnapshot = {setBotSnapshot}
 				/>
 			}
-				<br/>
+			<br/>
+
 			{botInfo.length > 0 &&
 				<AssemblyGrid
 				navLocation = {settings.navLocation}

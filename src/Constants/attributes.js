@@ -15,14 +15,14 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 1,
 		MovementCost: 30,
-		CollisionAmplifier: 1,
+		CollisionMultiplier: 1,
 		WeaponSlots: 2,
 		AccessorySlots: 3,
 		Initiative: 7,
 		Description: "Dicephalous heavy unit.",
 		Special1: "+1 Weapon slot",
 		Special2: "+1 Scan distance",
-		Special3: "+50% Movement energy cost",
+		Special3: "+10 Movement cost",
 		BlueStarConversionRate: 1.5,
 		TechTree: [
 			null,
@@ -165,7 +165,7 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 1,
 		MovementCost: 20,
-		CollisionAmplifier: 1,
+		CollisionMultiplier: 1,
 		WeaponSlots: 1,
 		AccessorySlots: 4,
 		Initiative: 9,
@@ -262,7 +262,7 @@ const baseBotAttributes = {
 				techMessage: "Inceases Movement Distance by 1 at a cost of 4 Bits"
 			},
 			{
-				affect: 'CollisionDamageMultipliter',
+				affect: 'CollisionMultiplier',
 				magnitude: 0.5,
 				cost: 7,
 				techMessage: "Increases damage dealt in Collisions by 50% at a cost of 7 Bits"
@@ -315,14 +315,141 @@ const baseBotAttributes = {
 		ScanCost: 20,
 		MovementDistance: 2,
 		MovementCost: 30,
-		CollisionAmplifier: 1,
+		CollisionMultiplier: 1,
 		WeaponSlots: 1,
 		AccessorySlots: 3,
 		Initiative: 15,
 		Description: "Monocular versatile unit.",
 		Special1: "+1 Movement distance",
-		Special2: "+50% Movement cost",
-		Special3: "+100% Scan energy cost"
+		Special2: "+10 Movement cost",
+		Special3: "+10 Scan cost",
+		BlueStarConversionRate: 1,
+		TechTree: [
+			null,
+			{
+				affect: 'Durability',
+				magnitude: 2,
+				cost: 2,
+				techMessage: "Inceases Durability by 2 at a cost of 2 Bits"
+			},
+			{
+				affect: 'Capacitor',
+				magnitude: 10,
+				cost: 2,
+				techMessage: "Inceases Capacitor by 10 at a cost of 2 Bits"
+			},
+			null,
+			{
+				affect: 'ScanDistance',
+				magnitude: 1,
+				cost: 5,
+				techMessage: "Increases Scan Distance by 1 at a cost of 5 Bits"
+			},
+			{
+				affect: 'MovementDistance',
+				magnitude: 1,
+				cost: 5,
+				techMessage: "Inceases Movement Distance by 1 at a cost of 5 Bits"
+			},
+			{
+				affect: 'Reactor',
+				magnitude: 1,
+				cost: 8,
+				techMessage: "Inceases Reactor by 1 at a cost of 8 Bits"
+			},
+			{
+				affect: 'Power',
+				magnitude: 1,
+				cost: 3,
+				techMessage: "Inceases Power by 1 at a cost of 3 Bits"
+			},
+			{
+				affect: 'ArmorVsCrushingMultiplier',
+				magnitude: 2,
+				cost: 9,
+				techMessage: "Inceases Armor by 100% against Crushing attacks at a cost of 9 Bits"
+			},
+			{
+				affect: 'CrushingDamageMultiplier',
+				magnitude: 1.5,
+				cost: 6,
+				techMessage: "Increases Crushing Damage by 50% at a cost of 6 Bits"
+			},
+			{
+				affect: 'FireDamageMultiplier',
+				magnitude: 1.5,
+				cost: 3,
+				techMessage: "Increases Fire Damage by 50% at a cost of 3 Bits"
+			},
+			{
+				affect: 'ShieldVsFireMultiplier',
+				magnitude: 1.5,
+				cost: 3,
+				techMessage: "Inceases Shield by 50% against Energy attacks at a cost of 3 Bits"
+			},
+			{
+				affect: 'MovementDistance',
+				magnitude: 1,
+				cost: 5,
+				techMessage: "Inceases Movement Distance by 1 at a cost of 5 Bits"
+			},
+			{
+				affect: 'Reactor',
+				magnitude: 1,
+				cost: 7,
+				techMessage: "Inceases Reactor by 1 at a cost of 7 Bits"
+			},
+			{
+				affect: 'Accuracy',
+				magnitude: 2,
+				cost: 10,
+				techMessage: "Inceases Accuracy by 2 at a cost of 10 Bits"
+			},
+			{
+				affect: 'Initiative',
+				magnitude: 2,
+				cost: 2,
+				techMessage: "Increases Initiative by 2 at a cost of 2 Bits"
+			},
+			{
+				affect: 'Armor',
+				magnitude: 2,
+				cost: 5,
+				techMessage: "Increases Armor by 2 at a cost of 5 Bits"
+			},
+			{
+				affect: 'chargeCommand',
+				magnitude: true,
+				cost: 5,
+				techMessage: "Unlocks the CHARGE command at a cost of 5 Bits"
+			},
+			{
+				affect: 'Damage',
+				magnitude: 2,
+				cost: 10,
+				techMessage: "Inceases Damage by 2 at a cost of 10 Bits"
+			},
+			{
+				affect: 'Shield',
+				magnitude: 2,
+				cost: 7,
+				techMessage: "Increases Shield by 2 at a cost of 7 Bits"
+			},
+			null,
+			{
+				affect: 'Reactor',
+				magnitude: 3,
+				cost: 20,
+				techMessage: "Inceases Reactor by 3 at a cost of 20 Bits"
+			},
+			{
+				affect: 'reachargeCommand',
+				magnitude: true,
+				cost: 20,
+				techMessage: "Unlocks the RECHARGE command at a cost of 20 Bits"
+			},
+			null
+		]
 	},
 	BotLumpey: {
 		Name: 'Lumpey',
@@ -338,14 +465,15 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 0,
 		MovementCost: 255,
-		CollisionAmplifier: 1,
+		CollisionMultiplier: 1,
 		WeaponSlots: 2,
 		AccessorySlots: 0,
 		Initiative: 3,
 		Description: "Immobile war machine!",
 		Special1: "+1 Weapon slot",
 		Special2: "-3 Accessory slots",
-		Special3: "+.1 AutoRepair"
+		Special3: "+.1 AutoRepair",
+		BlueStarConversionRate: 1,
 	},
 	BotRobbey: {
 		Name: 'Robbey',
@@ -361,14 +489,15 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 2,
 		MovementCost: 20,
-		CollisionAmplifier: 1,
+		CollisionMultiplier: 1,
 		WeaponSlots: 2,
 		AccessorySlots: 3,
 		Initiative: 11,
 		Description: "Advanced glass cannon.",
 		Special1: "+1 Weapon slot",
 		Special2: "+1 Movement distance",
-		Special3: "Warning: Weak Reactor!"
+		Special3: "Warning: Weak Reactor!",
+		BlueStarConversionRate: 2.5,
 	},
 	BotSpikey: {
 		Name: 'Spikey',
@@ -384,14 +513,15 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 3,
 		MovementCost: 20,
-		CollisionAmplifier: 2,
+		CollisionMultiplier: 1.5,
 		WeaponSlots: 1,
 		AccessorySlots: 3,
 		Initiative: 13,
 		Description: "Inescapable suicide unit.",
 		Special1: "+1 Scan distance",
 		Special2: "+2 Movement Distance",
-		Special3: "+100% Ram damage"
+		Special3: "+50% Collision damage",
+		BlueStarConversionRate: 1.5,
 	},
 	BotZippey: {
 		Name: 'Zippey',
@@ -407,34 +537,35 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 2,
 		MovementCost: 10,
-		CollisionAmplifier: 1,
+		CollisionMultiplier: 1,
 		WeaponSlots: 1,
 		AccessorySlots: 3,
 		Initiative: 20,
 		Description: "Frail run and gunner.",
 		Special1: "+1 Movement distance",
 		Special2: "Highest initiative",
-		Special3: "Warning: Low Durability!"
+		Special3: "Warning: Low Durability!",
+		BlueStarConversionRate: 2,
 	}
 }
 export default baseBotAttributes;
 export const attributeInfo = {
-	Durability: 'Durability: Maximum sustainable damage +1',
-	Armor: 'Armor: Provides damage reduction from everything but "Energy" attacks',
-	Shield: 'Shield: Provides damage reduction from everything but "Piercing Melee" attacks',
-	Accuracy: 'Accuracy: Increases damage from weapons with subType "Accuracy"',
-	Power: 'Power: Increases damage from weapons with subType "Power"',
+	Durability: 'Durability: Maximum sustainable damage',
+	Armor: 'Armor: Damage Reduction; ignored by Energy attacks',
+	Shield: 'Shield: Damage Reduction; ignored by Piercing attacks',
+	Accuracy: 'Accuracy: Increases subType Accuracy damage dealt',
+	Power: 'Power: Increases subType Power damage dealt',
 	Capacitor: 'Capacitor: Maximum energy stored [kJ]',
-	Reactor: 'Reactor: Maximum energy recharged [kW]',
-	AutoRepair: 'Auto Repair: Total durability recovered over each tick',
-	ScanDistance: 'Scan Distance: Maximum distance that bots will be detected using a scan',
-	ScanCost: 'Scan Cost: Energy cost to scan [kJ]',
-	MovementDistance: 'Movement Distance: Maximum traversable distance in one tick',
-	MovementCost: 'Movement Cost: Energy cost to move up to Movement Distance [kJ]',
-	CollisionAmplifier: 'Collision Amplifier: Multiplier on damage dealt during a collision',
+	Reactor: 'Reactor: Maximum energy recharged per tick [kW]',
+	AutoRepair: 'Auto Repair: Total Durability recovered per tick',
+	ScanDistance: "Scan Distance: Scan Command's maximum detection distance",
+	ScanCost: 'Scan Cost: Cost to execute a Scan Command [kJ]',
+	MovementDistance: "Movement Distance: Movement Command's maximum traversable distance",
+	MovementCost: 'Movement Cost: Cost to execute a Movement Command [kJ]',
+	CollisionMultiplier: 'Collision Multiplier: Multiplier on damage dealt during a collision',
 	WeaponSlots: 'Weapon Slots: Maximum number of equipable weapons',
 	AccessorySlots: 'Accessory Slots: Maximum number of equipable accessories',
-	Initiative: 'Initiative: Helps determine action priority when multiple bots perform the same action',
+	Initiative: 'Initiative: First action priority tie breaker - See RULES',
 
 	// Below are technically not attributes, but are useful for the AttributeHeader
 	Attribute: 'Column of associated attributes',
@@ -459,5 +590,6 @@ export const displayedAttributes = [
 	'ScanCost',
 	'MovementDistance',
 	'MovementCost',
+	'CollisionMultiplier',
 	'Initiative'
 ]

@@ -1,21 +1,22 @@
-import React from 'react';
-
 import {u1F48D as accessory} from 'react-icons-kit/noto_emoji_regular/u1F48D'
 import {u1F3AF as accuracy} from 'react-icons-kit/noto_emoji_regular/u1F3AF'
-import {lab as acid} from 'react-icons-kit/icomoon/lab'
+// import {lab as acid} from 'react-icons-kit/icomoon/lab'
+import {beaker as acid} from 'react-icons-kit/oct/beaker'
 import {target as aim} from 'react-icons-kit/ikons/target'
 import {shield as armor} from 'react-icons-kit/icomoon/shield'
 import {u1F52A as armorPenetration} from 'react-icons-kit/noto_emoji_regular/u1F52A'
 import {u1F4A5 as attack} from 'react-icons-kit/noto_emoji_regular/u1F4A5'
 // import {ic_pages as attack} from 'react-icons-kit/md/ic_pages'
-import {battery as capacitor} from 'react-icons-kit/entypo/battery'
+// import {battery as capacitor} from 'react-icons-kit/entypo/battery'
+import {batteryFull as capacitor} from 'react-icons-kit/ionicons/batteryFull'
 import {u1F320 as charge} from 'react-icons-kit/noto_emoji_regular/u1F320'
 import {arrowMinimiseOutline as collision} from 'react-icons-kit/typicons/arrowMinimiseOutline'
 import {news as command} from 'react-icons-kit/typicons/news'
 import {power as cost} from 'react-icons-kit/icomoon/power'
 import {legal as crushing} from 'react-icons-kit/fa/legal'
 import {heart as durability} from 'react-icons-kit/icomoon/heart'
-import {fire} from 'react-icons-kit/icomoon/fire'
+// import {fire} from 'react-icons-kit/icomoon/fire'
+import {flame as fire} from 'react-icons-kit/oct/flame'
 import {shield as guard} from 'react-icons-kit/entypo/shield'
 import {listOl as initiative} from 'react-icons-kit/fa/listOl'
 import {hammer as melee} from 'react-icons-kit/icomoon/hammer'
@@ -25,6 +26,7 @@ import {u1F529 as power} from 'react-icons-kit/noto_emoji_regular/u1F529'
 import {u1F52B as ranged} from 'react-icons-kit/noto_emoji_regular/u1F52B'
 // import {ic_battery_charging_50 as reactor} from 'react-icons-kit/md/ic_battery_charging_50'
 import {nuclear as reactor} from 'react-icons-kit/ionicons/nuclear';
+import {batteryCharging as recharge} from 'react-icons-kit/ionicons/batteryCharging'
 import {loop2 as reload} from 'react-icons-kit/icomoon/loop2'
 import {wrench as repair} from 'react-icons-kit/icomoon/wrench'
 import {ic_wifi_tethering as scan} from 'react-icons-kit/md/ic_wifi_tethering'
@@ -63,6 +65,11 @@ const iconImporter = (stringToConvert) => {
 			icon2 = multiplier;
 			break;
 		}
+		case 'ArmorVsCrushingMultiplier' : {
+			icon1 = typedArmor;
+			icon2 = multiplier;
+			break;
+		}
 		case 'attackCost' : {
 			icon1 = attack;
 			icon2 = cost;
@@ -81,8 +88,13 @@ const iconImporter = (stringToConvert) => {
 			icon2 = command
 			break;
 		}
-		case 'CollisionDamageMultipliter' : {
+		case 'CollisionMultiplier' : {
 			icon1 = collision;
+			icon2 = multiplier;
+			break;
+		}
+		case 'CrushingDamageMultiplier' : {
+			icon1 = crushing;
 			icon2 = multiplier;
 			break;
 		}
@@ -92,6 +104,11 @@ const iconImporter = (stringToConvert) => {
 		}
 		case 'Durability' : {
 			icon1 = durability;
+			break;
+		}
+		case 'FireDamageMultiplier' : {
+			icon1 = fire;
+			icon2 = multiplier;
 			break;
 		}
 		case 'guardCommand' : {
@@ -140,6 +157,11 @@ const iconImporter = (stringToConvert) => {
 			icon1 = power;
 			break;
 		}
+		case 'reachargeCommand' : {
+			icon1 = recharge;
+			icon2 = command;
+			break;
+		}
 		case 'reloadTime' : {
 			icon1 = reload;
 			break;
@@ -163,6 +185,11 @@ const iconImporter = (stringToConvert) => {
 			break;
 		}
 		case 'ShieldVsEnergyMultiplier' : {
+			icon1 = typedShield;
+			icon2 = multiplier;
+			break;
+		}
+		case 'ShieldVsFireMultiplier' : {
 			icon1 = typedShield;
 			icon2 = multiplier;
 			break;

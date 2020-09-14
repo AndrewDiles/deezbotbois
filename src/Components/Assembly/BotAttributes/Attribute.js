@@ -22,7 +22,7 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 	
 	useEffect(()=>{
 		if (botNumberSelected === undefined) return;
-		else {
+		else if (userInfo.botBuilds[botNumberSelected]){
 			setBaseAttributeValue(baseBotAttributes[userInfo.botBuilds[botNumberSelected].model][attribute]);
 			// setequipmentAttributeValue(0);
 			let equipmentSum = 0;

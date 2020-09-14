@@ -1,8 +1,5 @@
 import React from 'react';
-
 import { useSelector, useDispatch } from "react-redux";
-import { getThemeColors } from '../../Redux/reducers/user-reducer';
-
 import StyledButton from '../StyledButton/StyledButton';
 
 import {

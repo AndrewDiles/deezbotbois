@@ -7,6 +7,7 @@ import SvgDefs from './SvgDefs';
 import TechDisplay from './TechDisplay';
 import TechCellProvider from './TechCellProvider';
 import StarAndReset from './StarAndReset';
+import PurchaseBranches from './PurchaseBranches';
 
 const BotTechTree = ({ botNumberSelected}) => {
 	const userInfo = useSelector((state) => state.userInfo);
@@ -24,12 +25,12 @@ const BotTechTree = ({ botNumberSelected}) => {
 	})
 
 	useEffect(()=>{
-		if (botNumberSelected === null || botNumberSelected === undefined) return;
+		if (!botInfo[botNumberSelected]) return;
 		setTreeInfo(baseBotAttributes[botInfo[botNumberSelected].model].TechTree);
-	},[botNumberSelected, botInfo[botNumberSelected].model])
+	},[botNumberSelected, botInfo[botNumberSelected]])
 
 	useEffect(()=>{
-		if (botNumberSelected === null || botNumberSelected === undefined) return;
+		if (!botInfo[botNumberSelected]) return;
 		let blueRate = baseBotAttributes[botInfo[botNumberSelected].model].BlueStarConversionRate;
 		let battleBits = userInfo.battleBits;
 		let maxBlue = Math.floor(battleBits/blueRate);
@@ -86,6 +87,9 @@ const BotTechTree = ({ botNumberSelected}) => {
 			<TechDisplay>
 				{techDisplay}
 			</TechDisplay>
+			<PurchaseBranches
+			botNumberSelected = {botNumberSelected}
+			/>
 			<TechGridWrapper>
 				{treeInfo.map((tech, index)=>(
 					

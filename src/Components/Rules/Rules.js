@@ -24,10 +24,13 @@ const Rules = () => {
 			- The order of resolution of action types / bot priority cycling:
 			<ol>
 				<li>
-					GUARD, REPAIR and AUTO-REPAIR
+					GUARD
 				</li>
 				<li>
 					Melee Attacks
+				</li>
+				<li>
+					RAM
 				</li>
 				<li>
 					Movement / test for collisions
@@ -48,7 +51,13 @@ const Rules = () => {
 					Scan. Free info: Detect adjacent.
 				</li>
 				<li>
-					Internal updates/cleanup: reload, refresh collision potentials, remove destroyed bots from lists.  Test for game win / loss conditions
+					AUTO-REPAIR, RECHARGE
+				</li>
+				<li>
+					internal bot updates: reload, repair from nano-bots
+				</li>
+				<li>
+					Internal cleanup: refresh collision potentials, remove destroyed bots from lists.  Test for game win / loss conditions
 				</li>
 			</ol>
 			<br/>

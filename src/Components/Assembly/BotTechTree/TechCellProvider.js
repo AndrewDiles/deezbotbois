@@ -17,6 +17,7 @@ const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, 
 	const [locked, setLocked] = useState('locked');
 		
 	const updateState = () => {
+		if (!botInfo[botNumberSelected]) return;
 		let techRequirement = techTreeRequirements(index);
 		// console.log('tech requirement on index', index, techRequirement)
 		// console.log(index, '<-index, Evaluation of its requirement->',botInfo[botNumberSelected].techTree[techRequirement])
@@ -65,9 +66,9 @@ const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, 
   return (
 		<TechCell
 		index = {index}
-		techMessage = {baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index] && baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index].techMessage}
+		techMessage = {botInfo[botNumberSelected] && baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index] && baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index].techMessage}
 		setTechDisplay = {setTechDisplay}
-		purchased = {botInfo[botNumberSelected].techTree[index]}
+		purchased = {botInfo[botNumberSelected] && botInfo[botNumberSelected].techTree[index]}
 		locked = {locked}
 		icon1 = {icon1}
 		icon2 = {icon2}

@@ -124,6 +124,18 @@ html {
 	border-radius: 5px;
   border: 1px solid transparent;
 }
+.techBranchHeight27 {
+	background-image: linear-gradient(to right, rgba(255,238,0,0), rgba(255,238,0,0.75),rgba(255,238,0,0));
+	animation: .3s ease-out 1 growBranchHeight27;
+	height: 27px;
+	width: 10px;
+}
+.techBranchAngle {
+	background-image: linear-gradient(to right, rgba(255,238,0,0), rgba(255,238,0,0.75),rgba(255,238,0,0));
+	height: 50px;
+	width: 10px;
+	position: relative;
+}
 
 /* former load in:
 @keyframes loadInScreen {
@@ -199,6 +211,68 @@ html {
 	100% {
 		width: 100%;
 		height: 75px;
+	}
+}
+@keyframes growBranchHeight27 {
+	0% {
+		height: 0px;
+		transform: skewY(0);
+	}
+	100% {
+		height: 27px;
+		transform: skewY(1);
+	}
+}
+@keyframes growBranch4 {
+	0% {
+		height: 0px;
+		/* transform: skewY(0) skewX(0); */
+		left: 72px;
+		top: 5px;
+	}
+	100% {
+		height: 50px;
+		/* transform: skewY(1) skewX(1); */
+		left: 60px;
+		top: 0px;
+	}
+}
+@keyframes growBranch7 {
+	0% {
+		height: 0px;
+		/* transform: skewY(0); */
+		left: -18px;
+		top: 3px;
+	}
+	100% {
+		height: 50px;
+		/* transform: skewY(1); */
+		left: -7px;
+		top: -3px;
+	}
+}
+@keyframes growBranch16 {
+	0% {
+		height: 0px;
+		left: 43px;
+		top: 0px;
+	}
+	100% {
+		height: 50px;
+		left: 55px;
+		top: -6px;
+	}
+}
+@keyframes growBranch19 {
+	0% {
+		height: 0px;
+		left: 7px;
+		top: 0px;
+	}
+	100% {
+		height: 50px;
+		left: -5px;
+		top: -6px;
 	}
 }
 @keyframes glowUserImg {

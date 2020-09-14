@@ -55,7 +55,7 @@ Intentions with the GUI include:
 
 # Potential Improvements
 
-- HIGH PRIORITY: improve import method and method of gathering icons for attributes and tech tree.  Current system is clunky
+- Add nite navigation using arrows via keyboard listeners and focus direction
 
 - In Assembly: Add drag and drop for equipping
 
@@ -65,13 +65,15 @@ Intentions with the GUI include:
 
 - Change log in to only request confirmation code once an attempt to login for the first time has been made, instead of asking user if they need to input one.
 
-
 - Refactor fetch functions into re-useable, importable functions.
 
 - Include a link in the confirmation email that auto fills the confirmationCode
 
 
 ## Potential Improvements Met
+
+- HIGH PRIORITY: improve import method and method of gathering icons for attributes and tech tree.  Current system is clunky
+# DONE - Created a function that handles icon imports
 
 - encrypt passwords
 # DONE

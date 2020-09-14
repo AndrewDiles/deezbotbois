@@ -49,7 +49,16 @@ const ToolTipIcon = ({ name, iconImport, selfLocation, animated }) => {
 				animated = {animated}
 				height = '37'
 				>
-					{attributeInfo[name]}
+					{attributeInfo[name].indexOf(":") > 0 ? (
+						<>
+							<b>{attributeInfo[name].slice(0,attributeInfo[name].indexOf(":"))}</b>
+							{attributeInfo[name].slice(2+attributeInfo[name].indexOf(":"),attributeInfo[name].length)}
+						</>
+
+					) : (
+						attributeInfo[name]
+					)}
+					
 				</ToolTip>
 			):(
 				<StyledIcon

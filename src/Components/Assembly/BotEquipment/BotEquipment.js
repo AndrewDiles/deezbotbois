@@ -20,7 +20,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 	const [inventoryIndexRange, setInventoryIndexRange] = useState({min:0, max:5});
 
 	React.useEffect(()=>{
-		if (botNumberSelected === null || botNumberSelected === undefined) return;
+		if (!botInfo[botNumberSelected]) return;
 		// only array index 21 can increase wep / acc count
 		let wepSlots = baseBotAttributes[botInfo[botNumberSelected].model].WeaponSlots;
 		let accSlots = baseBotAttributes[botInfo[botNumberSelected].model].AccessorySlots;
@@ -41,8 +41,10 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			weapons: wepSlots,
 			accessories: accSlots,
 		});
-	},[ botNumberSelected, botInfo[botNumberSelected].model, botInfo[botNumberSelected].techTree[21] ])
-	if (!userInfo.botBuilds) {
+	},[ botNumberSelected, botInfo[botNumberSelected]
+		// botInfo[botNumberSelected].model, botInfo[botNumberSelected].techTree[21] 
+	])
+	if (!userInfo.botBuilds || !userInfo.botBuilds[botNumberSelected]) {
 		return (<></>)
 	}
 	const clickUp = () => {
