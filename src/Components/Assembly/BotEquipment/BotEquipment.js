@@ -54,7 +54,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 		setInventoryIndexRange({min:inventoryIndexRange.min+1,max:inventoryIndexRange.max+1})
 	}
   return (
-    <div
+    <Wrapper
 		className = "assemblyGridChild" 
 		>
 			<h3>
@@ -225,10 +225,13 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			icon = {arrowDown}
 			/> */}
 			{/* DOWN ARROW only clickable if index.max < Object.keys.length*/}
-    </div>
+    </Wrapper>
   )
 }
 export default BotEquipment;
+const Wrapper = styled.div`
+	width: 249px;
+`
 const ColDiv = styled.div`
 	flex-direction: column;
 `

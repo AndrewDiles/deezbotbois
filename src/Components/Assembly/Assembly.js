@@ -11,6 +11,7 @@ import CreateNewBot from './CreateNewBot';
 import SaveBots from './SaveBots';
 import DeleteBot from './DeleteBot';
 import BotSelection from './BotSelection';
+import AssemblyTabControl from './AssemblyTabControl';
 import BotModel from './BotModel/BotModel';
 import BotEquipment from './BotEquipment/BotEquipment';
 import BotAttributes from './BotAttributes/BotAttributes';
@@ -26,13 +27,21 @@ const Assembly = () => {
 	const [successMsg, setSuccessMsg] = useState(null);
 	const [botNumberSelected, setBotNumberSelected] = useState(0);
 	const [equipmentStaging, setEquipmentStaging] = useState({from: null, to: null})
-	// const [botLoaded, setBotLoaded] = useState(false);
+	const [tabsDisplayed, setTabsDisplayed] = useState({model: true, equipment: false, attributes: false, techTree: false, ai: false, scripts: false});
+	const [tabsOpened, setTabsOpened] = useState(1);
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
 
-	// useEffect(() => {
-	// 		setBotNumberSelected(0);
-	// }, [userInfo.botBuilds.length]);
+	useEffect(() => {
+		if (userInfo.botBuilds.length > 0) setTabsDisplayed({model: true, equipment: true, attributes: true, techTree: true, ai: true, scripts: true});
+	}, []);
+	useEffect(() => {
+		let newTabCount = 0;
+		Object.keys(tabsDisplayed).forEach((tab)=>{
+			if (tabsDisplayed[tab]) newTabCount ++
+		})
+		setTabsOpened(newTabCount)
+	}, [tabsDisplayed]);
 	useEffect(() => {
 		let eraseSuccessMsg;
 		if (successMsg) {
@@ -50,6 +59,7 @@ const Assembly = () => {
       <Redirect to="/home" />
     )
 	}
+		console.log('tabsOpened',tabsOpened)
 	
   return (
     <Wrapper
@@ -102,37 +112,8 @@ const Assembly = () => {
 					</>
 				}
 			</RowDivSpace>
-
-			{/* <RowDivSpace>
-				<ColDivCenter
-				className = 'centeredFlex'
-				>
-					{successMsg &&
-						<MessageDisplay
-						type = {'success'}
-						msg = {successMsg}
-						setMsg = {setSuccessMsg}
-						textSize = {'1.5em'}
-						/>
-					}
-					{errorMsg &&
-						<MessageDisplay
-						type = {'error'}
-						msg = {errorMsg}
-						setMsg = {setErrorMsg}
-						textSize = {'1.5em'}
-						/>
-					}
-					{!successMsg && !errorMsg &&
-					<h2>
-						BUILD-EM
-					</h2>
-					}
-				</ColDivCenter>
-			</RowDivSpace> */}
 			<br/>
-
-			{botInfo.length > 0 &&
+			{botInfo.length > 1 &&
 				<RowDivSpace>
 					<BotSelection
 					setBotNumberSelected = {setBotNumberSelected}
@@ -151,33 +132,55 @@ const Assembly = () => {
 				/>
 			}
 			<br/>
+			{userInfo.botBuilds.length > 0 &&
+				<>
+					<AssemblyTabControl
+					tabsDisplayed = {tabsDisplayed}
+					setTabsDisplayed = {setTabsDisplayed}
+					/>
+					<br/>
+				</>
+			}
 
 			{botInfo.length > 0 &&
 				<AssemblyGrid
 				navLocation = {settings.navLocation}
+				tabsOpened = {tabsOpened}
 				>
-					<BotModel
-					botNumberSelected = {botNumberSelected}
-					/>
-					<BotEquipment
-					botNumberSelected = {botNumberSelected}
-					equipmentStaging = {equipmentStaging} 
-					setEquipmentStaging = {setEquipmentStaging}
-					/>
-					<BotAttributes
-					botNumberSelected = {botNumberSelected}
-					equipmentStaging = {equipmentStaging}
-					setEquipmentStaging = {setEquipmentStaging}
-					/>
-					<BotTechTree
-					botNumberSelected = {botNumberSelected}
-					/>
-					<BotAI
-					botNumberSelected = {botNumberSelected}
-					/>
-					<BotScripts
-					botNumberSelected = {botNumberSelected}
-					/>
+					{tabsDisplayed.model &&
+						<BotModel
+						botNumberSelected = {botNumberSelected}
+						/>
+					}
+					{tabsDisplayed.equipment &&
+						<BotEquipment
+						botNumberSelected = {botNumberSelected}
+						equipmentStaging = {equipmentStaging} 
+						setEquipmentStaging = {setEquipmentStaging}
+						/>
+					}
+					{tabsDisplayed.attributes &&
+						<BotAttributes
+						botNumberSelected = {botNumberSelected}
+						equipmentStaging = {equipmentStaging}
+						setEquipmentStaging = {setEquipmentStaging}
+						/>
+					}
+					{tabsDisplayed.techTree &&
+						<BotTechTree
+						botNumberSelected = {botNumberSelected}
+						/>
+					}
+					{tabsDisplayed.ai &&
+						<BotAI
+						botNumberSelected = {botNumberSelected}
+						/>
+					}
+					{tabsDisplayed.scripts &&
+						<BotScripts
+						botNumberSelected = {botNumberSelected}
+						/>
+					}
       	</AssemblyGrid>
 			}
     </Wrapper>
@@ -205,24 +208,31 @@ const Wrapper = styled.div`
 const AssemblyGrid = styled.div`
 	display: grid;
 	grid-gap: 10px;
-	grid-template-columns: repeat(6, 1fr);
-	width: 1550px;
+	/* grid-template-columns: repeat(6, 1fr); */
+	grid-template-columns: ${props => props.tabsOpened ? `repeat(${Math.min(props.tabsOpened,6)}, 1fr)` : 'repeat(6, 1fr)'};
+	/* width: 1550px; */
+	width: 100%;
 	margin-left: auto;
   margin-right: auto;
+	/* grid-auto-flow: dense; */
+	justify-content: center;
+	justify-items: center;
 	/* overflow-y: auto; */
 	@media screen and 
 	(max-width: ${props => props.navLocation === 'top' ? '1600px' : '1730px'}) {
-		width: 1030px;
-		grid-template-columns: repeat(4, 1fr);
+		/* width: 1030px; */
+		/* grid-template-columns: repeat(4, 1fr); */
+		grid-template-columns: ${props => props.tabsOpened ? `repeat(${Math.min(props.tabsOpened,4)}, 1fr)` : 'repeat(4, 1fr)'};
   }
 	@media screen and 
 	(max-width: ${props => props.navLocation === 'top' ? '1150px' : '1280px'}) {
-    width: 510px;
-		grid-template-columns: 1fr 1fr;
+    /* width: 510px; */
+		/* grid-template-columns: 1fr 1fr; */
+		grid-template-columns: ${props => props.tabsOpened ? `repeat(${Math.min(props.tabsOpened,2)}, 1fr)` : 'repeat(2, 1fr)'};
   }
 	@media screen and
 	(max-width: ${props => props.navLocation === 'top' ? '700px' : '830px'}) {
-    width: 250px;
+    /* width: 250px; */
 		grid-template-columns: 1fr;
   }
 

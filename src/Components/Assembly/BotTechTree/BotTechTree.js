@@ -77,7 +77,7 @@ const BotTechTree = ({ botNumberSelected}) => {
 // REMINDER: CREATE A RESET BUTTON.
 
   return (
-    <div
+    <Wrapper
 		className = "assemblyGridChild" 
 		>
 			<SvgDefs/>
@@ -115,10 +115,13 @@ const BotTechTree = ({ botNumberSelected}) => {
 			starInfo = {starInfo}
 			botNumberSelected = {botNumberSelected}
 			/>
-    </div>
+    </Wrapper>
   )
 }
 export default BotTechTree;
+const Wrapper = styled.div`
+	width: 252px;
+`
 const TechGridWrapper = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4,50px);

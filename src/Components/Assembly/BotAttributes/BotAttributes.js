@@ -9,28 +9,11 @@ import Attribute from './Attribute';
 
 const BotAttributes = ({ botNumberSelected, equipmentStaging, setEquipmentStaging }) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	// const displayedAttributes = [
-	// 	'BAR',
-	// 	'Durability',
-	// 	'Armor',
-	// 	'Shield',
-	// 	'Accuracy',
-	// 	'Power',
-	// 	'Capacitor',
-	// 	'Reactor',
-	// 	'AutoRepair',
-	// 	'ScanDistance',
-	// 	'ScanCost',
-	// 	'MovementDistance',
-	// 	'MovementCost',
-	// 	'Initiative'
-	// ];
-
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}
   return (
-    <div
+    <Wrapper
 		className = "assemblyGridChild" 
 		>
 			<h3>
@@ -50,10 +33,13 @@ const BotAttributes = ({ botNumberSelected, equipmentStaging, setEquipmentStagin
 					)
 				})}
 			</AttributeWrapper>
-    </div>
+    </Wrapper>
   )
 }
 export default BotAttributes;
+const Wrapper = styled.div`
+	width: 249px;
+`
 const AttributeWrapper = styled.div`
 	width: 100%;
 	display: flex;

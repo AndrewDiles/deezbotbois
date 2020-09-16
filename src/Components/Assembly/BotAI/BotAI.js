@@ -10,11 +10,14 @@ const BotAI = ({ botNumberSelected}) => {
 		return (<></>)
 	}
   return (
-    <div
+    <Wrapper
 		className = "assemblyGridChild" 
 		>
 			Bot ai
-    </div>
+    </Wrapper>
   )
 }
 export default BotAI;
+const Wrapper = styled.div`
+	width: 250px;
+`

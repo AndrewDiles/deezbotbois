@@ -10,11 +10,14 @@ const BotScripts = ({ botNumberSelected}) => {
 		return (<></>)
 	}
   return (
-    <div
+    <Wrapper
 		className = "assemblyGridChild" 
 		>
 			Bot scripts
-    </div>
+    </Wrapper>
   )
 }
 export default BotScripts;
+const Wrapper = styled.div`
+	width: 250px;
+`

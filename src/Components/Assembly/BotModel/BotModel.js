@@ -21,15 +21,17 @@ const BotModel = ({ botNumberSelected}) => {
 
 	if (!botInfo[botNumberSelected]) return (<></>)
   return (
-    <div
+    <Wrapper
 		className = "assemblyGridChild" 
 		>
 			<h3>
 				MODEL
 			</h3>
-			<ModelChanger
-			botNumberSelected = {botNumberSelected}
-			/>
+			{userInfo.availableBots.length > 1 &&
+				<ModelChanger
+				botNumberSelected = {botNumberSelected}
+				/>
+			}
 			NAME
 			<RowDivCenter
 			className = 'centeredFlex'
@@ -70,11 +72,14 @@ const BotModel = ({ botNumberSelected}) => {
 			<SpecialDiv>
 				{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Special3}
 			</SpecialDiv>
-    </div>
+    </Wrapper>
   )
 }
 export default BotModel;
 
+const Wrapper = styled.div`
+	width: 252px;
+`
 const StyledInput = styled.input`
 	background-color: ${props => props.colors.secondary};
 	color: ${props => props.colors.textColor};
