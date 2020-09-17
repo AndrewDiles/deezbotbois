@@ -66,5 +66,5 @@ const RowDiv = styled.div`
 `
 const ColDiv = styled.div`
 	flex-direction: column;
-	font-size: 10px;
+	font-size: 8px;
 `

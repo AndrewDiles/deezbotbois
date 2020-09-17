@@ -9,7 +9,7 @@ const AssemblyTabControl = ({ tabsDisplayed, setTabsDisplayed }) => {
 		let newState = {...state};
 		newState[keyToChange] = !state[keyToChange];
 		setState(newState);
-		console.log('clicked, changed to:',newState)
+		// console.log('clicked, changed to:',newState)
 	}
 	return (
 		<Wrapper>

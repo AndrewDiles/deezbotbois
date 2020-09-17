@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { Icon } from 'react-icons-kit';
 
-const TechCell = ({ techMessage, setTechDisplay, handleClick, icon1, icon2, locked, purchased, size, trimSize, index }) => {
+const TechCell = ({ botNumberSelected, techMessage, setTechDisplay, handleClick, icon1, icon2, locked, purchased, size, trimSize, index }) => {
 	const botInfo = useSelector((state) => state.userInfo.botBuilds);
 	const defaultTechDisplay = "Spend Battle Bits on your build's tech tree below";
 	const [trimColor, setTrimColor] = React.useState('rgba(0,0,125,0.6)');
@@ -27,6 +27,7 @@ const TechCell = ({ techMessage, setTechDisplay, handleClick, icon1, icon2, lock
 		}
 	},[locked,purchased])
 	React.useEffect(()=>{
+		index === 2 && console.log('resetting setTechDisplay to:', techMessage)
 		const target = document.getElementById(`TechCell${index}`)
 		const onMouseEnter = (ev) => {
 			if (ev.target === target) 
@@ -45,7 +46,7 @@ const TechCell = ({ techMessage, setTechDisplay, handleClick, icon1, icon2, lock
 			target.removeEventListener('mouseenter',onMouseEnter);
 			target.removeEventListener('mouseleave',onMouseLeave);
 		}
-	},[botInfo])
+	},[botInfo, botNumberSelected] )
 
 	// console.log('locked test:', `index ${index} is ${locked}`);
 	// console.log('purchased test:', `index ${index} is ${purchased}`);

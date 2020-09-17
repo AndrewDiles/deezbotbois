@@ -59,7 +59,6 @@ const Assembly = () => {
       <Redirect to="/home" />
     )
 	}
-		console.log('tabsOpened',tabsOpened)
 	
   return (
     <Wrapper

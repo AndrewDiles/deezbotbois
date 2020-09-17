@@ -15,7 +15,7 @@ const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, 
 	const botInfo = useSelector((state) => state.userInfo.botBuilds);
 	const dispatch = useDispatch();
 	const [locked, setLocked] = useState('locked');
-		
+	
 	const updateState = () => {
 		if (!botInfo[botNumberSelected]) return;
 		let techRequirement = techTreeRequirements(index);
@@ -32,7 +32,6 @@ const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, 
 		) techRequirementMet = true;
 		else techRequirementMet = false;
 		let starRequirementMet = false;
-		// console.log('tech requirementMet on index', index, techRequirementMet)
 		let starRequirement = 0;
 		if (baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index]) {
 			starRequirement = baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index].cost;
@@ -48,7 +47,7 @@ const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, 
 
 	React.useEffect(()=>  {
 		updateState();
-	},[botNumberSelected, botInfo, availableStars, availableBlueStars] )
+	},[botNumberSelected, botInfo, botInfo[botNumberSelected] && botInfo[botNumberSelected].model, availableStars, availableBlueStars] )
 	
 	const handleClick = (purchased, disabled) => {
 		// console.log('index, purchased, disabled',index, purchased, disabled)
@@ -62,9 +61,12 @@ const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, 
 	let icons = iconImporter(tech.affect);
 	let icon1 = icons.icon1;
 	let icon2 = icons.icon2;
+	
+	index === 2 && console.log(baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index].techMessage)
 
   return (
 		<TechCell
+		botNumberSelected = {botNumberSelected}
 		index = {index}
 		techMessage = {botInfo[botNumberSelected] && baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index] && baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index].techMessage}
 		setTechDisplay = {setTechDisplay}

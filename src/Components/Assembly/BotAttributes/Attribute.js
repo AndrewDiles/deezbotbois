@@ -133,20 +133,27 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 			change = {percentChanges}
 			type = 'percent'
 			>
-				{percentChanges === 0 ? '' : `${Math.abs(percentChanges)}%`}
+				{percentChanges === 0 ? '' : Number.isNaN(percentChanges) ? '' : isFinite(percentChanges) ? `${Math.abs(percentChanges)}%` : 
+					<InfinityDiv className='enlargen centeredFlex'>∞</InfinityDiv>
+				}
 			</NumberCell>
     </AttributeRow>
   )
 }
 export default Attribute;
-
+const InfinityDiv = styled.div`
+  position: relative;
+  height: 0px;
+	width: 0px;
+  top: -6px;
+`
 const AttributeRow = styled.div`
 	display: grid;
 	grid-template-columns: repeat(7,35px);
 	border-bottom: ${props => `1px solid ${props.color}`}
 `
 const Bar = styled.div`
-	width: 248px;
+	width: 246px;
 	height: 4px;
 	background: ${props => props.color};
 `

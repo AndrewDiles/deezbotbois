@@ -11,21 +11,23 @@ import {u1F44A as attack} from 'react-icons-kit/noto_emoji_regular/u1F44A'
 // import {battery as capacitor} from 'react-icons-kit/entypo/battery'
 import {batteryFull as capacitor} from 'react-icons-kit/ionicons/batteryFull'
 import {u1F320 as charge} from 'react-icons-kit/noto_emoji_regular/u1F320'
-import {arrowMinimiseOutline as collision} from 'react-icons-kit/typicons/arrowMinimiseOutline'
+import {exit as collision} from 'react-icons-kit/iconic/exit'
 import {news as command} from 'react-icons-kit/typicons/news'
 import {power as cost} from 'react-icons-kit/icomoon/power'
 import {legal as crushing} from 'react-icons-kit/fa/legal'
 import {u1F4A5 as damage} from 'react-icons-kit/noto_emoji_regular/u1F4A5'
 import {shield as damageReduction} from 'react-icons-kit/fa/shield'  // used to be typedArmor
 import {heart as durability} from 'react-icons-kit/icomoon/heart'
-import {ionic as energy} from 'react-icons-kit/ionicons/ionic'
+// import {ionic as energy} from 'react-icons-kit/ionicons/ionic'
+import {flashlight as energy} from 'react-icons-kit/entypo/flashlight'
 // import {fire} from 'react-icons-kit/icomoon/fire'
 import {flame as fire} from 'react-icons-kit/oct/flame'
 import {shield as guard} from 'react-icons-kit/entypo/shield'
 import {listOl as initiative} from 'react-icons-kit/fa/listOl'
 import {hammer as melee} from 'react-icons-kit/icomoon/hammer'
-import {ic_timeline as movement} from 'react-icons-kit/md/ic_timeline'
-import {x as multiplier} from 'react-icons-kit/oct/x'
+// import {ic_timeline as movement} from 'react-icons-kit/md/ic_timeline'
+import {graph_rise as movement} from 'react-icons-kit/ikons/graph_rise'
+// import {x as multiplier} from 'react-icons-kit/oct/x'
 import {u1F52A as piercing} from 'react-icons-kit/noto_emoji_regular/u1F52A' // used to be armorPenetration
 import {u1F529 as power} from 'react-icons-kit/noto_emoji_regular/u1F529'
 import {u1F52B as ranged} from 'react-icons-kit/noto_emoji_regular/u1F52B'
@@ -83,6 +85,9 @@ const iconImporter = (stringToConvert) => {
 		}
 		case 'AutoRepair' : {
 			icon1 = repair;
+			break;
+		}
+		case 'BAR' : {
 			break;
 		}
 		case 'Capacitor' : {
@@ -243,8 +248,8 @@ const iconImporter = (stringToConvert) => {
 		}
 		default :{icon1 = null; icon2 = null}
 	}
-	if (!icon1)
-	console.log('the following string failed to load icons:', stringToConvert)
+	// if (!icon1)
+	// console.log('the following string failed to load icons:', stringToConvert)
 	return {icon1: icon1, icon2: icon2}
 }
 export default iconImporter;

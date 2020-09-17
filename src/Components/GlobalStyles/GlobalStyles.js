@@ -136,6 +136,9 @@ html {
 	width: 10px;
 	position: relative;
 }
+.enlargen {
+	font-size: 400%;
+}
 
 /* former load in:
 @keyframes loadInScreen {
