@@ -41,8 +41,8 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			weapons: wepSlots,
 			accessories: accSlots,
 		});
-	},[ botNumberSelected, botInfo[botNumberSelected]
-		// botInfo[botNumberSelected].model, botInfo[botNumberSelected].techTree[21] 
+	},[ botNumberSelected, botInfo[botNumberSelected],
+	botInfo[botNumberSelected] && botInfo[botNumberSelected].model, botInfo[botNumberSelected] && botInfo[botNumberSelected].techTree[21] 
 	])
 	if (!userInfo.botBuilds || !userInfo.botBuilds[botNumberSelected]) {
 		return (<></>)

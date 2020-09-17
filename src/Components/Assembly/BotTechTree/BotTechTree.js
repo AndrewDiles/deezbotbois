@@ -27,7 +27,9 @@ const BotTechTree = ({ botNumberSelected}) => {
 	useEffect(()=>{
 		if (!botInfo[botNumberSelected]) return;
 		setTreeInfo(baseBotAttributes[botInfo[botNumberSelected].model].TechTree);
-	},[botNumberSelected, botInfo[botNumberSelected]])
+	},[botNumberSelected, botInfo
+		// botInfo[botNumberSelected]], botInfo[botNumberSelected] && botInfo[botNumberSelected].model 
+	])
 
 	useEffect(()=>{
 		if (!botInfo[botNumberSelected]) return;
@@ -73,8 +75,6 @@ const BotTechTree = ({ botNumberSelected}) => {
 	if (!userInfo.botBuilds || !treeInfo) {
 		return (<></>)
 	}
-
-// REMINDER: CREATE A RESET BUTTON.
 
   return (
     <Wrapper

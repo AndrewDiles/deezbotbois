@@ -59,7 +59,7 @@ Intentions with the GUI include:
 
 - In Assembly: Add drag and drop for equipping
 
-- In Assembly: Add ability to click and expand each section
+- In Assembly allow staging to display upcoming changes even if only one end of it is done.
 
 - In Assembly: Add ability to click further down line of techs and purchase it and all required techs 
 
@@ -71,6 +71,9 @@ Intentions with the GUI include:
 
 
 ## Potential Improvements Met
+
+- In Assembly: Add ability to click and expand each section
+# DONE
 
 - HIGH PRIORITY: improve import method and method of gathering icons for attributes and tech tree.  Current system is clunky
 # DONE - Created a function that handles icon imports
