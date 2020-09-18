@@ -196,6 +196,7 @@ const Wrapper = styled.div`
 	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
+	padding-bottom: 100px;
 	display : flex;
 	flex-direction: column;
 	/* justify-content: center; */

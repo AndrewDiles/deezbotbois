@@ -27,7 +27,7 @@ const TechCell = ({ botNumberSelected, techMessage, setTechDisplay, handleClick,
 		}
 	},[locked,purchased])
 	React.useEffect(()=>{
-		index === 2 && console.log('resetting setTechDisplay to:', techMessage)
+		// index === 2 && console.log('resetting setTechDisplay to:', techMessage)
 		const target = document.getElementById(`TechCell${index}`)
 		const onMouseEnter = (ev) => {
 			if (ev.target === target) 

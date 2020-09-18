@@ -15,10 +15,46 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 1,
 		MovementCost: 30,
-		CollisionDamageMultiplier: 1,
 		WeaponSlots: 2,
 		AccessorySlots: 3,
 		Initiative: 7,
+
+		aimCostModifier: 0,
+		reloadTimeModifier: 0,
+		attackCostModifier: 0,
+		DamageBonus: 0,
+		DamageReduction: 0,
+
+		CrushingDamageMultiplier: 1,
+		CrushingDamageReductionMultiplier: 1,
+		PiercingDamageMultiplier: 1,
+		PiercingDamageReductionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
+		CollisionDamageReductionMultiplier: 1,
+		AcidDamageMultiplier: 1,
+		AcidDamageReductionMultiplier: 1,
+		FireDamageMultiplier: 1,
+		FireDamageReductionMultiplier: 1,
+		EnergyDamageMultiplier: 1,
+		EnergyDamageReductionMultiplier: 1,
+
+		MeleeDamageMultiplier: 1,
+		MeleeDamageReductionMultiplier: 1,
+		RangedDamageMultiplier: 1,
+		RangedDamageReductionMultiplier: 1,
+		MeleeArmorPenetration: 1,
+		RangedShieldPenetration: 1,
+
+		BurnAndCorrosionBoost: false,
+		ElevenAttackCommand: false,
+		chargeCommand: false,
+		counterCommand: false,
+		guardCommand: false,
+		ramCommand: false,
+		rechargeCommand: false,
+		redirectCommand: false,
+		repairCommand: false,
+		
 		Description: "Dicephalous heavy unit.",
 		Special1: "+1 Weapon slot",
 		Special2: "+1 Scan distance",
@@ -94,7 +130,7 @@ const baseBotAttributes = {
 				techMessage: "Increases Scan's Energy Cost by 2 at no Bit cost"
 			},
 			{
-				affect: 'attackCost',
+				affect: 'attackCostModifier',
 				magnitude: 2,
 				cost: 0,
 				techMessage: "Increases Attack's Energy Cost by 2 at no Bit cost"
@@ -106,7 +142,7 @@ const baseBotAttributes = {
 				techMessage: "Increases Movement's Cost by 10 at no Bit cost"
 			},
 			{
-				affect: 'aimCost',
+				affect: 'aimCostModifier',
 				magnitude: 2,
 				cost: 0,
 				techMessage: "Increases Aim's Cost by 2 at no Bit cost"
@@ -165,10 +201,46 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 1,
 		MovementCost: 20,
-		CollisionDamageMultiplier: 1,
 		WeaponSlots: 1,
 		AccessorySlots: 4,
 		Initiative: 9,
+
+		aimCostModifier: 0,
+		reloadTimeModifier: 0,
+		attackCostModifier: 0,
+		DamageBonus: 0,
+		DamageReduction: 0,
+
+		CrushingDamageMultiplier: 1,
+		CrushingDamageReductionMultiplier: 1,
+		PiercingDamageMultiplier: 1,
+		PiercingDamageReductionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
+		CollisionDamageReductionMultiplier: 1,
+		AcidDamageMultiplier: 1,
+		AcidDamageReductionMultiplier: 1,
+		FireDamageMultiplier: 1,
+		FireDamageReductionMultiplier: 1,
+		EnergyDamageMultiplier: 1,
+		EnergyDamageReductionMultiplier: 1,
+
+		MeleeDamageMultiplier: 1,
+		MeleeDamageReductionMultiplier: 1,
+		RangedDamageMultiplier: 1,
+		RangedDamageReductionMultiplier: 1,
+		MeleeArmorPenetration: 1,
+		RangedShieldPenetration: 1,
+
+		BurnAndCorrosionBoost: false,
+		ElevenAttackCommand: false,
+		chargeCommand: false,
+		counterCommand: false,
+		guardCommand: false,
+		ramCommand: false,
+		rechargeCommand: false,
+		redirectCommand: false,
+		repairCommand: false,
+		
 		Description: "Jack of all trades, master of none.",
 		Special1: "+1 Accessory slot",
 		Special2: "-",
@@ -183,7 +255,7 @@ const baseBotAttributes = {
 				techMessage: "Inceases Durability by 1 at a cost of 1 Bit"
 			},
 			{
-				affect: 'aimCost',
+				affect: 'aimCostModifier',
 				magnitude: -1,
 				cost: 1,
 				techMessage: "Reduces Aim's Energy Cost by 1 at a cost of 1 Bit"
@@ -202,7 +274,7 @@ const baseBotAttributes = {
 				techMessage: "Inceases Durability by 2 at a cost of 2 Bits"
 			},
 			{
-				affect: 'attackCost',
+				affect: 'attackCostModifier',
 				magnitude: -2,
 				cost: 3,
 				techMessage: "Reduces Attack's Energy Cost by 2 at a cost of 3 Bits"
@@ -226,7 +298,7 @@ const baseBotAttributes = {
 				techMessage: "Inceases Movement Distance by 1 at a cost of 4 Bits"
 			},
 			{
-				affect: 'Damage',
+				affect: 'DamageBonus',
 				magnitude: 1,
 				cost: 4,
 				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
@@ -280,7 +352,7 @@ const baseBotAttributes = {
 				techMessage: "Increases Ranged Damage by 50% at a cost of 10 Bits"
 			},
 			{
-				affect: 'reloadTime',
+				affect: 'reloadTimeModifier',
 				magnitude: -1,
 				cost: 5,
 				techMessage: "Reduces weapon Reload Time by 1 tick at a cost of 5 Bits"
@@ -315,10 +387,46 @@ const baseBotAttributes = {
 		ScanCost: 20,
 		MovementDistance: 2,
 		MovementCost: 30,
-		CollisionDamageMultiplier: 1,
 		WeaponSlots: 1,
 		AccessorySlots: 3,
 		Initiative: 15,
+
+		aimCostModifier: 0,
+		reloadTimeModifier: 0,
+		attackCostModifier: 0,
+		DamageBonus: 0,
+		DamageReduction: 0,
+
+		CrushingDamageMultiplier: 1,
+		CrushingDamageReductionMultiplier: 1,
+		PiercingDamageMultiplier: 1,
+		PiercingDamageReductionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
+		CollisionDamageReductionMultiplier: 1,
+		AcidDamageMultiplier: 1,
+		AcidDamageReductionMultiplier: 1,
+		FireDamageMultiplier: 1,
+		FireDamageReductionMultiplier: 1,
+		EnergyDamageMultiplier: 1,
+		EnergyDamageReductionMultiplier: 1,
+
+		MeleeDamageMultiplier: 1,
+		MeleeDamageReductionMultiplier: 1,
+		RangedDamageMultiplier: 1,
+		RangedDamageReductionMultiplier: 1,
+		MeleeArmorPenetration: 1,
+		RangedShieldPenetration: 1,
+
+		BurnAndCorrosionBoost: false,
+		ElevenAttackCommand: false,
+		chargeCommand: false,
+		counterCommand: false,
+		guardCommand: false,
+		ramCommand: false,
+		rechargeCommand: false,
+		redirectCommand: false,
+		repairCommand: false,
+		
 		Description: "Monocular versatile unit.",
 		Special1: "+1 Movement distance",
 		Special2: "+10 Movement cost",
@@ -424,7 +532,7 @@ const baseBotAttributes = {
 				techMessage: "Unlocks the CHARGE command at a cost of 5 Bits"
 			},
 			{
-				affect: 'Damage',
+				affect: 'DamageBonus',
 				magnitude: 2,
 				cost: 10,
 				techMessage: "Inceases Damage by 2 at a cost of 10 Bits"
@@ -443,7 +551,7 @@ const baseBotAttributes = {
 				techMessage: "Inceases Reactor by 3 at a cost of 20 Bits"
 			},
 			{
-				affect: 'reachargeCommand',
+				affect: 'rechargeCommand',
 				magnitude: true,
 				cost: 20,
 				techMessage: "Unlocks the RECHARGE command at a cost of 20 Bits"
@@ -465,10 +573,46 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 0,
 		MovementCost: 255,
-		CollisionDamageMultiplier: 1,
 		WeaponSlots: 2,
 		AccessorySlots: 0,
 		Initiative: 3,
+
+		aimCostModifier: 0,
+		reloadTimeModifier: 0,
+		attackCostModifier: 0,
+		DamageBonus: 0,
+		DamageReduction: 0,
+
+		CrushingDamageMultiplier: 1,
+		CrushingDamageReductionMultiplier: 1,
+		PiercingDamageMultiplier: 1,
+		PiercingDamageReductionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
+		CollisionDamageReductionMultiplier: 1,
+		AcidDamageMultiplier: 1,
+		AcidDamageReductionMultiplier: 1,
+		FireDamageMultiplier: 1,
+		FireDamageReductionMultiplier: 1,
+		EnergyDamageMultiplier: 1,
+		EnergyDamageReductionMultiplier: 1,
+
+		MeleeDamageMultiplier: 1,
+		MeleeDamageReductionMultiplier: 1,
+		RangedDamageMultiplier: 1,
+		RangedDamageReductionMultiplier: 1,
+		MeleeArmorPenetration: 1,
+		RangedShieldPenetration: 1,
+
+		BurnAndCorrosionBoost: false,
+		ElevenAttackCommand: false,
+		chargeCommand: false,
+		counterCommand: false,
+		guardCommand: false,
+		ramCommand: false,
+		rechargeCommand: false,
+		redirectCommand: false,
+		repairCommand: false,
+		
 		Description: "Immobile war machine!",
 		Special1: "+1 Weapon slot",
 		Special2: "-3 Accessory slots",
@@ -544,7 +688,7 @@ const baseBotAttributes = {
 				techMessage: "Inceases Reactor by 1 at a cost of 8 Bits"
 			},
 			{
-				affect: 'Damage',
+				affect: 'DamageBonus',
 				magnitude: 1,
 				cost: 4,
 				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
@@ -615,10 +759,46 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 2,
 		MovementCost: 20,
-		CollisionDamageMultiplier: 1,
 		WeaponSlots: 2,
 		AccessorySlots: 3,
 		Initiative: 11,
+
+		aimCostModifier: 0,
+		reloadTimeModifier: 0,
+		attackCostModifier: 0,
+		DamageBonus: 0,
+		DamageReduction: 0,
+
+		CrushingDamageMultiplier: 1,
+		CrushingDamageReductionMultiplier: 1,
+		PiercingDamageMultiplier: 1,
+		PiercingDamageReductionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
+		CollisionDamageReductionMultiplier: 1,
+		AcidDamageMultiplier: 1,
+		AcidDamageReductionMultiplier: 1,
+		FireDamageMultiplier: 1,
+		FireDamageReductionMultiplier: 1,
+		EnergyDamageMultiplier: 1,
+		EnergyDamageReductionMultiplier: 1,
+
+		MeleeDamageMultiplier: 1,
+		MeleeDamageReductionMultiplier: 1,
+		RangedDamageMultiplier: 1,
+		RangedDamageReductionMultiplier: 1,
+		MeleeArmorPenetration: 1,
+		RangedShieldPenetration: 1,
+
+		BurnAndCorrosionBoost: false,
+		ElevenAttackCommand: false,
+		chargeCommand: false,
+		counterCommand: false,
+		guardCommand: false,
+		ramCommand: false,
+		rechargeCommand: false,
+		redirectCommand: false,
+		repairCommand: false,
+		
 		Description: "Advanced glass cannon.",
 		Special1: "+1 Weapon slot",
 		Special2: "+1 Movement distance",
@@ -627,7 +807,7 @@ const baseBotAttributes = {
 		TechTree: [
 			null,
 			{
-				affect: 'aimCost',
+				affect: 'aimCostModifier',
 				magnitude: -2,
 				cost: 3,
 				techMessage: "Reduces Aim's Energy Cost by 2 at a cost of 3 Bit"
@@ -640,13 +820,13 @@ const baseBotAttributes = {
 			},
 			null,
 			{
-				affect: 'attackCost',
+				affect: 'attackCostModifier',
 				magnitude: -2,
 				cost: 4,
 				techMessage: "Reduces Attack's Energy Cost by 2 at a cost of 4 Bits"
 			},
 			{
-				affect: 'attackCost',
+				affect: 'attackCostModifier',
 				magnitude: -2,
 				cost: 4,
 				techMessage: "Reduces Attack's Energy Cost by 2 at a cost of 4 Bits"
@@ -725,7 +905,7 @@ const baseBotAttributes = {
 				techMessage: "Reduces opponent's Armor by 50% against your Melee attacks at a cost of 10 Bits"
 			},
 			{
-				affect: 'reloadTime',
+				affect: 'reloadTimeModifier',
 				magnitude: -1,
 				cost: 5,
 				techMessage: "Reduces weapon Reload Time by 1 tick at a cost of 5 Bits"
@@ -744,7 +924,7 @@ const baseBotAttributes = {
 				techMessage: "Unlocks an additional accessory slot at a cost of 12 Bits"
 			},
 			{
-				affect: '11AttackCommand',
+				affect: 'ElevenAttackCommand',
 				magnitude: true,
 				cost: 10,
 				techMessage: "Unlocks the 11ATTACK command at a cost of 10 Bits"
@@ -766,10 +946,46 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 3,
 		MovementCost: 20,
-		CollisionDamageMultiplier: 1.5,
 		WeaponSlots: 1,
 		AccessorySlots: 3,
 		Initiative: 13,
+
+		aimCostModifier: 0,
+		reloadTimeModifier: 0,
+		attackCostModifier: 0,
+		DamageBonus: 0,
+		DamageReduction: 0,
+
+		CrushingDamageMultiplier: 1,
+		CrushingDamageReductionMultiplier: 1,
+		PiercingDamageMultiplier: 1,
+		PiercingDamageReductionMultiplier: 1,
+		CollisionDamageMultiplier: 1.5,
+		CollisionDamageReductionMultiplier: 1,
+		AcidDamageMultiplier: 1,
+		AcidDamageReductionMultiplier: 1,
+		FireDamageMultiplier: 1,
+		FireDamageReductionMultiplier: 1,
+		EnergyDamageMultiplier: 1,
+		EnergyDamageReductionMultiplier: 1,
+
+		MeleeDamageMultiplier: 1,
+		MeleeDamageReductionMultiplier: 1,
+		RangedDamageMultiplier: 1,
+		RangedDamageReductionMultiplier: 1,
+		MeleeArmorPenetration: 1,
+		RangedShieldPenetration: 1,
+
+		BurnAndCorrosionBoost: false,
+		ElevenAttackCommand: false,
+		chargeCommand: false,
+		counterCommand: false,
+		guardCommand: false,
+		ramCommand: false,
+		rechargeCommand: false,
+		redirectCommand: false,
+		repairCommand: false,
+		
 		Description: "Inescapable suicide unit.",
 		Special1: "+1 Scan distance",
 		Special2: "+2 Movement Distance",
@@ -839,7 +1055,7 @@ const baseBotAttributes = {
 				techMessage: "Increases Auto Repair by 0.1 at a cost of 6 Bits"
 			},
 			{
-				affect: 'Damage',
+				affect: 'DamageBonus',
 				magnitude: 1,
 				cost: 4,
 				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
@@ -916,10 +1132,46 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 2,
 		MovementCost: 10,
-		CollisionDamageMultiplier: 1,
 		WeaponSlots: 1,
 		AccessorySlots: 3,
 		Initiative: 20,
+
+		aimCostModifier: 0,
+		reloadTimeModifier: 0,
+		attackCostModifier: 0,
+		DamageBonus: 0,
+		DamageReduction: 0,
+
+		CrushingDamageMultiplier: 1,
+		CrushingDamageReductionMultiplier: 1,
+		PiercingDamageMultiplier: 1,
+		PiercingDamageReductionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
+		CollisionDamageReductionMultiplier: 1,
+		AcidDamageMultiplier: 1,
+		AcidDamageReductionMultiplier: 1,
+		FireDamageMultiplier: 1,
+		FireDamageReductionMultiplier: 1,
+		EnergyDamageMultiplier: 1,
+		EnergyDamageReductionMultiplier: 1,
+
+		MeleeDamageMultiplier: 1,
+		MeleeDamageReductionMultiplier: 1,
+		RangedDamageMultiplier: 1,
+		RangedDamageReductionMultiplier: 1,
+		MeleeArmorPenetration: 1,
+		RangedShieldPenetration: 1,
+
+		BurnAndCorrosionBoost: false,
+		ElevenAttackCommand: false,
+		chargeCommand: false,
+		counterCommand: false,
+		guardCommand: false,
+		ramCommand: false,
+		rechargeCommand: false,
+		redirectCommand: false,
+		repairCommand: false,
+		
 		Description: "Frail run and gunner.",
 		Special1: "+1 Movement distance",
 		Special2: "Highest initiative",
@@ -928,7 +1180,7 @@ const baseBotAttributes = {
 		TechTree: [
 			null,
 			{
-				affect: 'Damage',
+				affect: 'DamageBonus',
 				magnitude: 1,
 				cost: 4,
 				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
@@ -941,7 +1193,7 @@ const baseBotAttributes = {
 			},
 			null,
 			{
-				affect: 'aimCost',
+				affect: 'aimCostModifier',
 				magnitude: 1,
 				cost: 2,
 				techMessage: "Increases Aim's Cost by 1 at a cost of 2 Bits"
@@ -965,7 +1217,7 @@ const baseBotAttributes = {
 				techMessage: "Reduces 50% of damage taken from Fire attacks at a cost of 5 Bits"
 			},
 			{
-				affect: 'attackCost',
+				affect: 'attackCostModifier',
 				magnitude: -2,
 				cost: 3,
 				techMessage: "Reduces Attack's Energy Cost by 2 at a cost of 3 Bits"
@@ -989,7 +1241,7 @@ const baseBotAttributes = {
 				techMessage: "Increases Fire Damage by 50% at a cost of 6 Bits"
 			},
 			{
-				affect: 'Damage',
+				affect: 'DamageBonus',
 				magnitude: 1,
 				cost: 4,
 				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
@@ -1097,4 +1349,60 @@ export const displayedAttributes = [
 	'MovementCost',
 	'CollisionDamageMultiplier',
 	'Initiative'
+]
+
+export const comprehensiveStatsAdditive = [
+	'Durability',
+	'Armor',
+	'Shield',
+	'Accuracy',
+	'Power',
+	'Capacitor',
+	'Reactor',
+	'AutoRepair',
+	'ScanDistance',
+	'ScanCost',
+	'MovementDistance',
+	'MovementCost',
+	'WeaponSlots',
+	'AccessorySlots',
+	'Initiative',
+	'aimCostModifier',
+	'reloadTimeModifier',
+	'attackCostModifier',
+	'DamageBonus',
+	'DamageReduction'
+]
+
+export const comprehensiveStatsMultiplicative = [
+	'CrushingDamageMultiplier',
+	'CrushingDamageReductionMultiplier',
+	'PiercingDamageMultiplier',
+	'PiercingDamageReductionMultiplier',
+	'CollisionDamageMultiplier',
+	'CollisionDamageReductionMultiplier',
+	'AcidDamageMultiplier',
+	'AcidDamageReductionMultiplier',
+	'FireDamageMultiplier',
+	'FireDamageReductionMultiplier',
+	'EnergyDamageMultiplier',
+	'EnergyDamageReductionMultiplier',
+	'MeleeDamageMultiplier',
+	'MeleeDamageReductionMultiplier',
+	'RangedDamageMultiplier',
+	'RangedDamageReductionMultiplier',
+	'MeleeArmorPenetration',
+	'RangedShieldPenetration'
+]
+
+export const comprehensiveStatsBool = [
+	'BurnAndCorrosionBoost',
+	'ElevenAttackCommand',
+	'chargeCommand',
+	'counterCommand',
+	'guardCommand',
+	'ramCommand',
+	'rechargeCommand',
+	'redirectCommand',
+	'repairCommand'
 ]

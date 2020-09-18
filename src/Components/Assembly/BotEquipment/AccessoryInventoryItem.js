@@ -36,7 +36,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 	if (!userInfo.botBuilds || botNumberSelected === null) {
 		return (<></>)
 	}
-	
+
 	const stage = () => {
 		setEquipmentStaging(
 			{
@@ -61,7 +61,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 	}
 	const equip = () => {
 		dispatch(equipItem(botNumberSelected, equipmentStaging.from.slot, equipmentStaging.to.name))
-		unstage();
+		fullUnstage();
 	}
 	
   return (
@@ -153,7 +153,9 @@ export default AccessoryInventoryItem;
 
 const RowDiv = styled.div`
 	flex-direction: row;
+	margin-bottom: 1px;
 `
 const ColDiv = styled.div`
 	flex-direction: column;
+	margin-bottom: 1px;
 `

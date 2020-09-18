@@ -40,7 +40,7 @@ export const accessoryStats = {
 	batteryPack: {
 		name: 'Battery Pack',
 		description: 'Ghetto add-on to aid with energy "production".',
-		Reactor: 2,
+		Reactor: 1,
 	},
 	powerGlove: {
 		name: 'Power Glove',

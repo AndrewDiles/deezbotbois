@@ -61,7 +61,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 	}
 	const equip = () => {
 		dispatch(equipItem(botNumberSelected, equipmentStaging.from.slot, equipmentStaging.to.name))
-		unstage();
+		fullUnstage();
 	}
 	
   return (
@@ -150,7 +150,9 @@ export default WeaponInventoryItem;
 
 const RowDiv = styled.div`
 	flex-direction: row;
+	margin-bottom: 1px;
 `
 const ColDiv = styled.div`
 	flex-direction: column;
+	margin-bottom: 1px;
 `

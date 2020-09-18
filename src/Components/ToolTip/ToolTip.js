@@ -6,7 +6,7 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMessageHovered, fontSize, selfLocation, width, height, animated}) => {
 	const colors = useSelector(getThemeColors);
 	React.useEffect(()=>{
-		const target = document.getElementById(`MessageWindow${children}`);
+		const target = document.getElementById(`MessageWindow${children}`);		
 		let onMouseLeave = () => {
 			if (setMessageHovered)setMessageHovered(false);
 			if (setMessageOpen) setMessageOpen(false)}
@@ -18,6 +18,7 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
 			target.removeEventListener('mouseleave',onMouseLeave);
 		}
 	})
+
 	const handleClose = () => {
 		if (setMessageOpen) setMessageOpen(false);
 		if (setMessageHovered) setMessageHovered(false);
@@ -26,6 +27,7 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
   return (
     <Message
 		id = {`MessageWindow${children}`}
+		className = 'ToolTip'
 		onClick = {()=>handleClose()}
 		messageOpen = {messageOpen}
 		colors = {colors}

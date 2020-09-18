@@ -258,7 +258,12 @@ try {
 			else {
 				// Case no account - create one
 				// First add info to Auth collection
-				let randomConfirmationCode = Math.floor(100000*Math.random());
+				function getRandomInt(min, max) {
+					min = Math.ceil(min);
+					max = Math.floor(max);
+					return Math.floor(Math.random() * (max - min + 1)) + min;
+				}
+				let randomConfirmationCode = getRandomInt(1000,9999);
         let newUserAuthData = {
           email : email,
 					password : password,

@@ -69,7 +69,7 @@ const ItemEquipped = ({ slotKey, type, equipmentStaging, setEquipmentStaging, bo
 	}
 	const unequip = () => {
 		dispatch(unequipItem(botNumberSelected, slotKey))
-		unstage();
+		fullUnstage();
 	}
 	const handleClickSlot = () => {
 		if (equipmentStaging.from && equipmentStaging.from.slot === slotKey) {
@@ -137,7 +137,9 @@ export default ItemEquipped;
 
 const RowDiv = styled.div`
 	flex-direction: row;
+	margin-bottom: 1px;
 `
 const ColDiv= styled.div`
 	flex-direction: column;
+	margin-bottom: 1px;
 `

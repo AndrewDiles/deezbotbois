@@ -49,18 +49,13 @@ import {sphere as shield} from 'react-icons-kit/icomoon/sphere'
 // import {rocket as shieldPenetration} from 'react-icons-kit/oct/rocket'
 // import {list as slot} from 'react-icons-kit/iconic/list'
 
-import {iosWorld as typedShield} from 'react-icons-kit/ionicons/iosWorld'
+// import {iosWorld as typedShield} from 'react-icons-kit/ionicons/iosWorld'
 import {unlocked} from 'react-icons-kit/icomoon/unlocked'
 import {u1F528 as weapon} from 'react-icons-kit/noto_emoji_regular/u1F528'
 
 const iconImporter = (stringToConvert) => {
 	let icon1, icon2
 	switch (stringToConvert) {
-		case '11AttackCommand' : {
-			icon1 = elevenAttack;
-			icon2 = command;
-			break;
-		}
 		case 'accessorySlot' : {
 			icon1 = accessory;
 			// icon2 = slot;
@@ -81,7 +76,7 @@ const iconImporter = (stringToConvert) => {
 			icon2 = damageReduction;
 			break;
 		}
-		case 'aimCost' : {
+		case 'aimCostModifier' : {
 			icon1 = aim;
 			icon2 = cost;
 			break;
@@ -100,7 +95,7 @@ const iconImporter = (stringToConvert) => {
 		// 	icon2 = multiplier;
 		// 	break;
 		// }
-		case 'attackCost' : {
+		case 'attackCostModifier' : {
 			icon1 = attack;
 			icon2 = cost;
 			break;
@@ -151,7 +146,7 @@ const iconImporter = (stringToConvert) => {
 			icon2 = damageReduction;
 			break;
 		}
-		case 'Damage' : {
+		case 'DamageBonus' : {
 			icon1 = damage;
 			break;
 		}
@@ -161,6 +156,11 @@ const iconImporter = (stringToConvert) => {
 		}
 		case 'Durability' : {
 			icon1 = durability;
+			break;
+		}
+		case 'ElevenAttackCommand' : {
+			icon1 = elevenAttack;
+			icon2 = command;
 			break;
 		}
 		case 'EnergyDamageMultiplier' : {
@@ -226,6 +226,24 @@ const iconImporter = (stringToConvert) => {
 			icon2 = damageReduction;
 			break;
 		}
+		case 'Power' : {
+			icon1 = power;
+			break;
+		}
+		case 'Reactor' : {
+			icon1 = reactor;
+			break;
+		}
+		case 'redirectCommand' : {
+			icon1 = redirect;
+			icon2 = command;
+			break;
+		}
+		case 'ramCommand' : {
+			icon1 = ram;
+			icon2 = command;
+			break;
+		}
 		case 'RangedDamageMultiplier' : {
 			icon1 = ranged;
 			icon2 = damage;
@@ -241,30 +259,12 @@ const iconImporter = (stringToConvert) => {
 			icon2 = shield;
 			break;
 		}
-		case 'Reactor' : {
-			icon1 = reactor;
-			break;
-		}
-		case 'redirectCommand' : {
-			icon1 = redirect;
-			icon2 = command;
-			break;
-		}
-		case 'Power' : {
-			icon1 = power;
-			break;
-		}
-		case 'ramCommand' : {
-			icon1 = ram;
-			icon2 = command;
-			break;
-		}
-		case 'reachargeCommand' : {
+		case 'rechargeCommand' : {
 			icon1 = recharge;
 			icon2 = command;
 			break;
 		}
-		case 'reloadTime' : {
+		case 'reloadTimeModifier' : {
 			icon1 = reload;
 			break;
 		}

@@ -55,6 +55,9 @@ Intentions with the GUI include:
 
 # Potential Improvements
 
+- Change error codes for incorrect passwords to 403, make sure front end does not break with change from 401
+- Change error code from 206 to 422 or 400.  (same testing as above)
+
 - Add nite navigation using arrows via keyboard listeners and focus direction
 
 - In Assembly: Add drag and drop for equipping

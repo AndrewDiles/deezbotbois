@@ -52,15 +52,26 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 	},[ baseAttributeValue, equipmentAttributeValue, techAttributeValue]);
 	useEffect(()=>{
 		if (attribute === 'BAR') return;
-		if (!equipmentStaging.from || !equipmentStaging.to || !equipmentStaging.from.name || !equipmentStaging.to.name) {
+		if (
+				// !equipmentStaging.from ||
+				!equipmentStaging.to ||
+				// !equipmentStaging.from.name ||
+				!equipmentStaging.to.name) {
 			setChanges(0);
 			setPercentChanges(0);
 		}
 		else {
 			// console.log('from name',equipmentStaging.from.name, 'to name',equipmentStaging.to.name)
 			let sum = 0;
-			if(equipmentStaging.from.slot.includes('acc')) {
+			if(equipmentStaging.from && equipmentStaging.from.name && equipmentStaging.from.slot.includes('acc')) {
 				if (accessoryStats[equipmentStaging.from.name][attribute]) sum -= accessoryStats[equipmentStaging.from.name][attribute];
+				
+			}
+			else if (equipmentStaging.from && equipmentStaging.from.name && equipmentStaging.from.slot.includes('arm')) {
+				if (weaponStats[equipmentStaging.from.name][attribute]) sum -= weaponStats[equipmentStaging.from.name][attribute];
+				
+			}
+			if (accessoryStats[equipmentStaging.to.name]) {
 				if (accessoryStats[equipmentStaging.to.name][attribute]) sum += accessoryStats[equipmentStaging.to.name][attribute];
 				setChanges(sum);
 				let percent = 100*((((sum+grandSum)/grandSum))-1);
@@ -68,16 +79,12 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 				let formattedPercent = (Math.round(percent));
 				setPercentChanges(formattedPercent);
 			}
-			else if (equipmentStaging.from.slot.includes('arm')) {
-				if (weaponStats[equipmentStaging.from.name][attribute]) sum -= weaponStats[equipmentStaging.from.name][attribute];
+			else if (weaponStats[equipmentStaging.to.name]) {
 				if (weaponStats[equipmentStaging.to.name][attribute]) sum += weaponStats[equipmentStaging.to.name][attribute];
 				setChanges(sum);
 				let percent = 100*((((sum+grandSum)/grandSum))-1);
 				let formattedPercent = (Math.round(percent));
 				setPercentChanges(formattedPercent);
-			}
-			else {
-				console.log('This condition should not have been reached')
 			}
 		}
 	},[equipmentStaging])

@@ -98,17 +98,16 @@ const AltLogin = () => {
 		let result;
 		result = testForInvalidLoginData();
 		if (result) return result
-
-		if (confirmationCode === null || confirmationCode === '') return true;
+		if (confirmationCode === null || confirmationCode === '' || confirmationCode.length !== 4) return true;
 		let charTest = false;
-		let i = 0;
-		Array.from(confirmationCode).forEach((character)=> {
-			i ++;
+		const confirmationCodeArray = Array.from(confirmationCode);
+		confirmationCodeArray.forEach((character)=> {
 			if (!charTest) {
-				if (!(character >= 0 && character <= 9)) charTest = true;
+				if (!(+character >= 0 && +character <= 9)) {
+					charTest = true;
+				}
 			}
 		})
-		if (i !== 5) charTest = true;
 		return charTest;
 	}
 	const handleSubmitNewAccount = () => {

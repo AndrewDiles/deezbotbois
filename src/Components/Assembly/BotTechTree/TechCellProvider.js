@@ -57,12 +57,10 @@ const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, 
 		else if (!disabled)
 		dispatch(addTech(botNumberSelected, index ))
 	}
-
 	let icons = iconImporter(tech.affect);
 	let icon1 = icons.icon1;
 	let icon2 = icons.icon2;
-	
-	index === 2 && console.log(baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index].techMessage)
+	// index === 2 && console.log(baseBotAttributes[botInfo[botNumberSelected].model].TechTree[index].techMessage)
 
   return (
 		<TechCell
