@@ -125,16 +125,19 @@ html {
   border: 1px solid transparent;
 }
 .techBranchHeight27 {
-	background-image: linear-gradient(to right, rgba(255,238,0,0), rgba(255,238,0,0.75),rgba(255,238,0,0));
-	animation: .3s ease-out 1 growBranchHeight27;
 	height: 27px;
 	width: 10px;
 }
 .techBranchAngle {
-	background-image: linear-gradient(to right, rgba(255,238,0,0), rgba(255,238,0,0.75),rgba(255,238,0,0));
 	height: 50px;
 	width: 10px;
 	position: relative;
+}
+.techGold {
+	background-image: linear-gradient(to right, rgba(255,238,0,0), rgba(255,238,0,0.75),rgba(255,238,0,0));
+}
+.techGrey {
+	background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.3),rgba(0,0,0,0));
 }
 .enlargen {
 	font-size: 400%;

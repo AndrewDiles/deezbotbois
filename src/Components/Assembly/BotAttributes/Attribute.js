@@ -48,7 +48,7 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 		}
 	},[userInfo.botBuilds, botNumberSelected]);
 	useEffect(()=>{
-		setGrandSum(baseAttributeValue + equipmentAttributeValue + techAttributeValue)
+		setGrandSum((Math.floor(10*(baseAttributeValue + equipmentAttributeValue + techAttributeValue)))/10)
 	},[ baseAttributeValue, equipmentAttributeValue, techAttributeValue]);
 	useEffect(()=>{
 		if (attribute === 'BAR') return;

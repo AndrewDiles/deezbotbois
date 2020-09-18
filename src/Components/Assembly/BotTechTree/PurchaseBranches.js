@@ -9,23 +9,31 @@ const PurchaseBranches = ({botNumberSelected}) => {
 		<Wrapper>
 			<RowOne>
 				<FirstRowQuarterBlock>
-					{botInfo[botNumberSelected].techTree[4] &&
-						<OneToFour className = 'techBranchAngle'/>
+					{botInfo[botNumberSelected].techTree[4] ?
+						<OneToFour animated ={true} className = 'techBranchAngle techGold'/>
+						:
+						<OneToFour className = 'techBranchAngle techGrey'/>
 					}
 				</FirstRowQuarterBlock>
 				<FirstRowQuarterBlock>
-					{botInfo[botNumberSelected].techTree[5] &&
-						<OneToFive className = 'techBranchHeight27'/>
+					{botInfo[botNumberSelected].techTree[5] ?
+						<OneToFive animated ={true} className = 'techBranchHeight27 techGold'/>
+						:
+						<OneToFive className = 'techBranchHeight27 techGrey'/>
 					}
 				</FirstRowQuarterBlock>
 				<FirstRowQuarterBlock>
-					{botInfo[botNumberSelected].techTree[6] &&
-						<TwoToSix className = 'techBranchHeight27'/>
+					{botInfo[botNumberSelected].techTree[6] ?
+						<TwoToSix animated ={true} className = 'techBranchHeight27 techGold'/>
+						:
+						<TwoToSix className = 'techBranchHeight27 techGrey'/>
 					}
 				</FirstRowQuarterBlock>
 				<FirstRowQuarterBlock>
-					{botInfo[botNumberSelected].techTree[7] &&
-						<TwoToSeven className = 'techBranchAngle'/>
+					{botInfo[botNumberSelected].techTree[7] ?
+						<TwoToSeven animated ={true} className = 'techBranchAngle techGold'/>
+						:
+						<TwoToSeven className = 'techBranchAngle techGrey'/>
 					}
 				</FirstRowQuarterBlock>
 			</RowOne>
@@ -35,8 +43,10 @@ const PurchaseBranches = ({botNumberSelected}) => {
 						{[4+4*rowNumber,5+4*rowNumber,6+4*rowNumber,7+4*rowNumber].map((index)=>{
 						return(
 							<QuarterBlock key = {index}>
-								{botInfo[botNumberSelected].techTree[index] &&
-									<Branch className = 'techBranchHeight27'/>
+								{botInfo[botNumberSelected].techTree[index] ?
+									<Branch animated ={true} className = 'techBranchHeight27 techGold'/>
+									:
+									<Branch className = 'techBranchHeight27 techGrey'/>
 								}
 							</QuarterBlock>
 						)})}
@@ -45,23 +55,31 @@ const PurchaseBranches = ({botNumberSelected}) => {
 			})}
 			<Row>
 			<QuarterBlock>
-				{botInfo[botNumberSelected].techTree[21] &&
-					<SixteenToTwentyOne className = 'techBranchAngle'/>
+				{botInfo[botNumberSelected].techTree[21] ?
+					<SixteenToTwentyOne animated ={true} className = 'techBranchAngle techGold'/>
+					:
+					<SixteenToTwentyOne className = 'techBranchAngle techGrey'/>
 				}
 			</QuarterBlock>
 			<QuarterBlock>
-				{botInfo[botNumberSelected].techTree[21] &&
-					<Branch className = 'techBranchHeight27'/>
+				{botInfo[botNumberSelected].techTree[21] ?
+					<Branch animated ={true} className = 'techBranchHeight27 techGold'/>
+					:
+					<Branch className = 'techBranchHeight27 techGrey'/>
 				}
 			</QuarterBlock>
 			<QuarterBlock>
-				{botInfo[botNumberSelected].techTree[22] &&
-					<Branch className = 'techBranchHeight27'/>
+				{botInfo[botNumberSelected].techTree[22] ?
+					<Branch animated ={true} className = 'techBranchHeight27 techGold'/>
+					:
+					<Branch className = 'techBranchHeight27 techGrey'/>
 				}
 			</QuarterBlock>
 			<QuarterBlock>
-				{botInfo[botNumberSelected].techTree[22] &&
-					<NineteenToTwentyTwo className = 'techBranchAngle'/>
+				{botInfo[botNumberSelected].techTree[22] ?
+					<NineteenToTwentyTwo animated ={true} className = 'techBranchAngle techGold'/>
+					:
+					<NineteenToTwentyTwo className = 'techBranchAngle techGrey'/>
 				}
 			</QuarterBlock>
 			</Row>
@@ -98,39 +116,42 @@ const Row = styled.div`
 
 `
 const OneToFour = styled.div`
-	animation: .5s ease-out 1 growBranch4;
+	animation: ${props => props.animated && '.5s ease-out 1 growBranch4'};
 	transform: rotate(30deg);
 	left: 60px;
 `
 const OneToFive = styled.div`
+	animation: ${props => props.animated && '.3s ease-out 1 growBranchHeight27'};
 	position: relative;
 	left: 26px;
 	top: 10px;
 `
 const TwoToSix = styled.div`
+	animation: ${props => props.animated && '.3s ease-out 1 growBranchHeight27'};
 	position: relative;
 	left: 25px;
 	top: 10px;
 `
 const TwoToSeven = styled.div`
-	animation: .5s ease-out 1 growBranch7;
+	animation: ${props => props.animated && '.5s ease-out 1 growBranch7'};
 	transform: rotate(-30deg);
 	left: -7px;
 	top: -3px;
 `
 const Branch = styled.div`
+	animation: ${props => props.animated && '.3s ease-out 1 growBranchHeight27'};
 	position: relative;
 	left: 25px;
 	top: 5px;
 `
 const SixteenToTwentyOne = styled.div`
-	animation: .5s ease-out 1 growBranch16;
+	animation: ${props => props.animated && '.5s ease-out 1 growBranch16'};
 	transform: rotate(-30deg);
 	left: 55px;
 	top: -6px;
 `
 const NineteenToTwentyTwo = styled.div`
-	animation: .5s ease-out 1 growBranch19;
+	animation: ${props => props.animated && '.5s ease-out 1 growBranch19'};
 	transform: rotate(30deg);
 	left: -5px;
 	top: -6px;

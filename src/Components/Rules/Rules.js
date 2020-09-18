@@ -27,10 +27,10 @@ const Rules = () => {
 					GUARD
 				</li>
 				<li>
-					Melee Attacks
+					Melee Attacks 11AttackMelee
 				</li>
 				<li>
-					RAM
+					RAM / Charge
 				</li>
 				<li>
 					Movement / test for collisions
@@ -39,10 +39,10 @@ const Rules = () => {
 					Test for projectile / cell damage
 				</li>
 				<li>
-					Aim, AimAndAttack
+					Aim, AimAndRangedAttack
 				</li>
 				<li>
-					Ranged Attacks and Projectiles movement
+					Ranged Attacks, 11AttackRanged and Projectiles movement
 				</li>
 				<li>
 					Test for projectile / cell damage

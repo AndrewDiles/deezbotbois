@@ -10,11 +10,13 @@ import {u1F44A as attack} from 'react-icons-kit/noto_emoji_regular/u1F44A'
 // import {ic_pages as attack} from 'react-icons-kit/md/ic_pages'
 // import {battery as capacitor} from 'react-icons-kit/entypo/battery'
 import {batteryFull as capacitor} from 'react-icons-kit/ionicons/batteryFull'
+// import {basic_battery_full as capacitor} from 'react-icons-kit/linea/basic_battery_full'
 import {u1F320 as charge} from 'react-icons-kit/noto_emoji_regular/u1F320'
 import {exit as collision} from 'react-icons-kit/iconic/exit'
 import {news as command} from 'react-icons-kit/typicons/news'
 import {power as cost} from 'react-icons-kit/icomoon/power'
 import {legal as crushing} from 'react-icons-kit/fa/legal'
+import {club as counter} from 'react-icons-kit/entypo/club'
 import {u1F4A5 as damage} from 'react-icons-kit/noto_emoji_regular/u1F4A5'
 import {shield as damageReduction} from 'react-icons-kit/fa/shield'  // used to be typedArmor
 import {heart as durability} from 'react-icons-kit/icomoon/heart'
@@ -35,9 +37,12 @@ import {u1F682 as ram} from 'react-icons-kit/noto_emoji_regular/u1F682'
 // import {ic_battery_charging_50 as reactor} from 'react-icons-kit/md/ic_battery_charging_50'
 import {nuclear as reactor} from 'react-icons-kit/ionicons/nuclear';
 import {batteryCharging as recharge} from 'react-icons-kit/ionicons/batteryCharging'
+// import {basic_battery_charge as recharge} from 'react-icons-kit/linea/basic_battery_charge'
+import {loop as redirect} from 'react-icons-kit/iconic/loop'
 import {loop2 as reload} from 'react-icons-kit/icomoon/loop2'
 import {wrench as repair} from 'react-icons-kit/icomoon/wrench'
-import {ic_wifi_tethering as scan} from 'react-icons-kit/md/ic_wifi_tethering'
+// import {ic_wifi_tethering as scan} from 'react-icons-kit/md/ic_wifi_tethering'
+import {basic_target as scan} from 'react-icons-kit/linea/basic_target'
 import {sphere as shield} from 'react-icons-kit/icomoon/sphere'
 // import {rocket as shieldPenetration} from 'react-icons-kit/oct/rocket'
 // import {list as slot} from 'react-icons-kit/iconic/list'
@@ -57,6 +62,16 @@ const iconImporter = (stringToConvert) => {
 		}
 		case 'Accuracy' : {
 			icon1 = accuracy;
+			break;
+		}
+		case 'AcidDamageMultiplier' : {
+			icon1 = acid;
+			icon2 = damage;
+			break;
+		}
+		case 'AcidDamageReductionMultiplier' : {
+			icon1 = acid;
+			icon2 = damageReduction;
 			break;
 		}
 		case 'aimCost' : {
@@ -90,6 +105,11 @@ const iconImporter = (stringToConvert) => {
 		case 'BAR' : {
 			break;
 		}
+		case 'BurnAndCorrosionBoost' : {
+			icon1 = fire;
+			icon2 = acid;
+			break;
+		}
 		case 'Capacitor' : {
 			icon1 = capacitor;
 			break;
@@ -99,7 +119,7 @@ const iconImporter = (stringToConvert) => {
 			icon2 = command
 			break;
 		}
-		case 'CollisionMultiplier' : {
+		case 'CollisionDamageMultiplier' : {
 			icon1 = collision;
 			icon2 = damage;
 			break;
@@ -107,6 +127,11 @@ const iconImporter = (stringToConvert) => {
 		case 'CollisionDamageReductionMultiplier' : {
 			icon1 = collision;
 			icon2 = damageReduction;
+			break;
+		}
+		case 'counterCommand' : {
+			icon1 = counter;
+			icon2 = command;
 			break;
 		}
 		case 'CrushingDamageMultiplier' : {
@@ -121,6 +146,10 @@ const iconImporter = (stringToConvert) => {
 		}
 		case 'Damage' : {
 			icon1 = damage;
+			break;
+		}
+		case 'DamageReduction' : {
+			icon1 = damageReduction;
 			break;
 		}
 		case 'Durability' : {
@@ -175,6 +204,11 @@ const iconImporter = (stringToConvert) => {
 			icon1 = movement;
 			break;
 		}
+		case 'PiercingDamageMultiplier' : {
+			icon1 = piercing;
+			icon2 = damage;
+			break;
+		}
 		case 'PiercingDamageReductionMultiplier' : {
 			icon1 = piercing;
 			icon2 = damageReduction;
@@ -185,6 +219,11 @@ const iconImporter = (stringToConvert) => {
 			icon2 = damage;
 			break;
 		}
+		case 'RangedDamageReductionMultiplier' : {
+			icon1 = ranged;
+			icon2 = damageReduction;
+			break;
+		}
 		case 'RangedShieldPenetration' : {
 			icon1 = ranged;
 			icon2 = shield;
@@ -192,6 +231,11 @@ const iconImporter = (stringToConvert) => {
 		}
 		case 'Reactor' : {
 			icon1 = reactor;
+			break;
+		}
+		case 'redirectCommand' : {
+			icon1 = redirect;
+			icon2 = command;
 			break;
 		}
 		case 'Power' : {

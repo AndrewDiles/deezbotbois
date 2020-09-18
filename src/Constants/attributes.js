@@ -15,7 +15,7 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 1,
 		MovementCost: 30,
-		CollisionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
 		WeaponSlots: 2,
 		AccessorySlots: 3,
 		Initiative: 7,
@@ -140,7 +140,7 @@ const baseBotAttributes = {
 				affect: 'weaponSlot',
 				magnitude: 1,
 				cost: 2,
-				techMessage: "Unlocks an additional weapon slot at the cost of 2 Bits"
+				techMessage: "Unlocks an additional weapon slot at a cost of 2 Bits"
 			},
 			{
 				affect: 'guardCommand',
@@ -165,7 +165,7 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 1,
 		MovementCost: 20,
-		CollisionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
 		WeaponSlots: 1,
 		AccessorySlots: 4,
 		Initiative: 9,
@@ -262,7 +262,7 @@ const baseBotAttributes = {
 				techMessage: "Inceases Movement Distance by 1 at a cost of 4 Bits"
 			},
 			{
-				affect: 'CollisionMultiplier',
+				affect: 'CollisionDamageMultiplier',
 				magnitude: 1.5,
 				cost: 7,
 				techMessage: "Increases damage dealt in Collisions by 50% at a cost of 7 Bits"
@@ -290,7 +290,7 @@ const baseBotAttributes = {
 				affect: 'accessorySlot',
 				magnitude: 1,
 				cost: 8,
-				techMessage: "Unlocks an additional accessory slot at the cost of 8 Bits"
+				techMessage: "Unlocks an additional accessory slot at a cost of 8 Bits"
 			},
 			{
 				affect: 'repairCommand',
@@ -315,7 +315,7 @@ const baseBotAttributes = {
 		ScanCost: 20,
 		MovementDistance: 2,
 		MovementCost: 30,
-		CollisionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
 		WeaponSlots: 1,
 		AccessorySlots: 3,
 		Initiative: 15,
@@ -465,7 +465,7 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 0,
 		MovementCost: 255,
-		CollisionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
 		WeaponSlots: 2,
 		AccessorySlots: 0,
 		Initiative: 3,
@@ -474,6 +474,132 @@ const baseBotAttributes = {
 		Special2: "-3 Accessory slots",
 		Special3: "+.1 AutoRepair",
 		BlueStarConversionRate: 1,
+		TechTree: [
+			null,
+			{
+				affect: 'Capacitor',
+				magnitude: 5,
+				cost: 2,
+				techMessage: "Inceases Capacitor by 5 at a cost of 2 Bits"
+			},
+			{
+				affect: 'AcidDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 3,
+				techMessage: "Reduces 25% of damage taken from Acid attacks at a cost of 3 Bits"
+			},
+			null,
+			{
+				affect: 'Shield',
+				magnitude: 1,
+				cost: 2,
+				techMessage: "Inceases Shield by 1 at a cost of 2 Bits"
+			},
+			{
+				affect: 'ScanDistance',
+				magnitude: 1,
+				cost: 5,
+				techMessage: "Increases Scan Distance by 1 at a cost of 5 Bits"
+			},
+			{
+				affect: 'FireDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 3,
+				techMessage: "Reduces 25% of damage taken from Fire attacks at a cost of 3 Bits"
+			},
+			{
+				affect: 'PiercingDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 3,
+				techMessage: "Reduces 25% of damage taken from Piercing attacks at a cost of 3 Bits"
+			},
+			{
+				affect: 'Armor',
+				magnitude: 1,
+				cost: 2,
+				techMessage: "Inceases Armor by 1 at a cost of 2 Bits"
+			},
+			{
+				affect: 'DamageReduction',
+				magnitude: 1,
+				cost: 5,
+				techMessage: "Reduces Damage taken by 1 at a cost of 5 Bits"
+			},
+			{
+				affect: 'EnergyDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 3,
+				techMessage: "Reduces 25% of damage taken from Energy attacks at a cost of 3 Bits"
+			},
+			{
+				affect: 'CrushingDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 4,
+				techMessage: "Reduces 25% of damage taken from Crushing attacks at a cost of 4 Bits"
+			},
+			{
+				affect: 'Reactor',
+				magnitude: 1,
+				cost: 8,
+				techMessage: "Inceases Reactor by 1 at a cost of 8 Bits"
+			},
+			{
+				affect: 'Damage',
+				magnitude: 1,
+				cost: 4,
+				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
+			},
+			{
+				affect: 'AcidDamageReductionMultiplier',
+				magnitude: 0.65,
+				cost: 4,
+				techMessage: "Reduces 35% of damage taken from Acid attacks at a cost of 4 Bits"
+			},
+			{
+				affect: 'CollisionDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 3,
+				techMessage: "Reduces 25% of damage taken from Collisions at a cost of 3 Bits"
+			},
+			{
+				affect: 'AutoRepair',
+				magnitude: .2,
+				cost: 15,
+				techMessage: "Increases Auto Repair by 0.2 at a cost of 15 Bits"
+			},
+			{
+				affect: 'ScanDistance',
+				magnitude: 1,
+				cost: 6,
+				techMessage: "Increases Scan Distance by 1 at a cost of 6 Bits"
+			},
+			{
+				affect: 'RangedDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 6,
+				techMessage: "Reduces 25% of damage taken from Ranged attacks at a cost of 6 Bits"
+			},
+			{
+				affect: 'MeleeDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 6,
+				techMessage: "Reduces 25% of damage taken from Melee attacks at a cost of 6 Bits"
+			},
+			null,
+			{
+				affect: 'counterCommand',
+				magnitude: true,
+				cost: 25,
+				techMessage: "Unlocks the COUNTER command at a cost of 25 Bits"
+			},
+			{
+				affect: 'redirectCommand',
+				magnitude: true,
+				cost: 25,
+				techMessage: "Unlocks the REDIRECT command at a cost of 25 Bits"
+			},
+			null
+		]
 	},
 	BotRobbey: {
 		Name: 'Robbey',
@@ -489,7 +615,7 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 2,
 		MovementCost: 20,
-		CollisionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
 		WeaponSlots: 2,
 		AccessorySlots: 3,
 		Initiative: 11,
@@ -498,6 +624,133 @@ const baseBotAttributes = {
 		Special2: "+1 Movement distance",
 		Special3: "Warning: Weak Reactor!",
 		BlueStarConversionRate: 2.5,
+		TechTree: [
+			null,
+			{
+				// TBD
+				affect: 'MovementDistance',
+				magnitude: 1,
+				cost: 6,
+				techMessage: "Inceases Movement Distance by 1 at a cost of 6 Bits"
+			},
+			{
+				affect: 'ScanDistance',
+				magnitude: 1,
+				cost: 3,
+				techMessage: "Increases Scan Distance by 1 at a cost of 3 Bits"
+			},
+			null,
+			{
+				affect: 'Durability',
+				magnitude: 2,
+				cost: 4,
+				techMessage: "Inceases Durability by 2 at a cost of 4 Bits"
+			},
+			{
+				affect: 'Capacitor',
+				magnitude: 10,
+				cost: 2,
+				techMessage: "Inceases Capacitor by 10 at a cost of 2 Bits"
+			},
+			{
+				affect: 'ScanCost',
+				magnitude: -1,
+				cost: 3,
+				techMessage: "Reduces Scan's Energy Cost by 1 at a cost of 3 Bits"
+			},
+			{
+				affect: 'Durability',
+				magnitude: 2,
+				cost: 4,
+				techMessage: "Inceases Durability by 2 at a cost of 4 Bits"
+			},
+			{
+				affect: 'Power',
+				magnitude: 2,
+				cost: 6,
+				techMessage: "Inceases Power by 2 at a cost of 6 Bits"
+			},
+			{
+				affect: 'Shield',
+				magnitude: 1,
+				cost: 2,
+				techMessage: "Increases Shield by 1 at a cost of 2 Bits"
+			},
+			{
+				affect: 'Reactor',
+				magnitude: 1,
+				cost: 10,
+				techMessage: "Increases Reactor by 1 at a cost of 10 Bits"
+			},
+			{
+				affect: 'AutoRepair',
+				magnitude: .1,
+				cost: 6,
+				techMessage: "Increases Auto Repair by 0.1 at a cost of 6 Bits"
+			},
+			{
+				affect: 'Damage',
+				magnitude: 1,
+				cost: 4,
+				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
+			},
+			{
+				affect: 'Shield',
+				magnitude: 1,
+				cost: 3,
+				techMessage: "Increases Shield by 1 at a cost of 3 Bits"
+			},
+			{
+				affect: 'MeleeDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 8,
+				techMessage: "Reduces Melee Damage taken by 25% at a cost of 8 Bits"
+			},
+			{
+				affect: 'Initiative',
+				magnitude: 3,
+				cost: 3,
+				techMessage: "Increases Initiative by 3 at a cost of 3 Bits"
+			},
+			{
+				affect: 'CollisionDamageMultiplier',
+				magnitude: 1.5,
+				cost: 12,
+				techMessage: "Increases damage dealt in Collisions by 50% at a cost of 12 Bits"
+			},
+			{
+				affect: 'CollisionDamageReductionMultiplier',
+				magnitude: 0.5,
+				cost: 8,
+				techMessage: "Reduces 50% of damage taken from Collisions at a cost of 8 Bits"
+			},
+			{
+				affect: 'MovementDistance',
+				magnitude: 1,
+				cost: 6,
+				techMessage: "Inceases Movement Distance by 1 at a cost of 6 Bits"
+			},
+			{
+				affect: 'MovementCost',
+				magnitude: -5,
+				cost: 7,
+				techMessage: "Decreases Movement Cost by 5 at a cost of 7 Bits"
+			},
+			null,
+			{
+				affect: 'CrushingDamageMultiplier',
+				magnitude: 1.5,
+				cost: 10,
+				techMessage: "Increases Crushing Damage by 50% at a cost of 10 Bits"
+			},
+			{
+				affect: 'ramCommand',
+				magnitude: true,
+				cost: 20,
+				techMessage: "Unlocks the RAM command at a cost of 20 Bits"
+			},
+			null
+		]
 	},
 	BotSpikey: {
 		Name: 'Spikey',
@@ -513,7 +766,7 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 3,
 		MovementCost: 20,
-		CollisionMultiplier: 1.5,
+		CollisionDamageMultiplier: 1.5,
 		WeaponSlots: 1,
 		AccessorySlots: 3,
 		Initiative: 13,
@@ -610,7 +863,7 @@ const baseBotAttributes = {
 				techMessage: "Increases Initiative by 3 at a cost of 3 Bits"
 			},
 			{
-				affect: 'CollisionMultiplier',
+				affect: 'CollisionDamageMultiplier',
 				magnitude: 1.5,
 				cost: 12,
 				techMessage: "Increases damage dealt in Collisions by 50% at a cost of 12 Bits"
@@ -619,7 +872,7 @@ const baseBotAttributes = {
 				affect: 'CollisionDamageReductionMultiplier',
 				magnitude: 0.5,
 				cost: 8,
-				techMessage: "Decreases damage taken from Collisions by 50% at a cost of 8 Bits"
+				techMessage: "Reduces 50% of damage taken from Collisions at a cost of 8 Bits"
 			},
 			{
 				affect: 'MovementDistance',
@@ -663,7 +916,7 @@ const baseBotAttributes = {
 		ScanCost: 10,
 		MovementDistance: 2,
 		MovementCost: 10,
-		CollisionMultiplier: 1,
+		CollisionDamageMultiplier: 1,
 		WeaponSlots: 1,
 		AccessorySlots: 3,
 		Initiative: 20,
@@ -672,6 +925,132 @@ const baseBotAttributes = {
 		Special2: "Highest initiative",
 		Special3: "Warning: Low Durability!",
 		BlueStarConversionRate: 2,
+		TechTree: [
+			null,
+			{
+				affect: 'Damage',
+				magnitude: 1,
+				cost: 4,
+				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
+			},
+			{
+				affect: 'ScanCost',
+				magnitude: -1,
+				cost: 3,
+				techMessage: "Reduces Scan's Energy Cost by 1 at a cost of 3 Bits"
+			},
+			null,
+			{
+				affect: 'aimCost',
+				magnitude: 1,
+				cost: 2,
+				techMessage: "Increases Aim's Cost by 1 at a cost of 2 Bits"
+			},
+			{
+				affect: 'MovementCost',
+				magnitude: -1,
+				cost: 3,
+				techMessage: "Decreases Movement Cost by 1 at a cost of 3 Bits"
+			},
+			{
+				affect: 'ScanDistance',
+				magnitude: 1,
+				cost: 3,
+				techMessage: "Increases Scan Distance by 1 at a cost of 3 Bits"
+			},
+			{
+				affect: 'FireDamageReductionMultiplier',
+				magnitude: 0.5,
+				cost: 5,
+				techMessage: "Reduces 50% of damage taken from Fire attacks at a cost of 5 Bits"
+			},
+			{
+				affect: 'attackCost',
+				magnitude: -2,
+				cost: 3,
+				techMessage: "Reduces Attack's Energy Cost by 2 at a cost of 3 Bits"
+			},
+			{
+				affect: 'MovementDistance',
+				magnitude: 1,
+				cost: 6,
+				techMessage: "Inceases Movement Distance by 1 at a cost of 6 Bits"
+			},
+			{
+				affect: 'Durability',
+				magnitude: 2,
+				cost: 4,
+				techMessage: "Inceases Durability by 2 at a cost of 4 Bits"
+			},
+			{
+				affect: 'FireDamageMultiplier',
+				magnitude: 1.5,
+				cost: 6,
+				techMessage: "Increases Fire Damage by 50% at a cost of 6 Bits"
+			},
+			{
+				affect: 'Damage',
+				magnitude: 1,
+				cost: 4,
+				techMessage: "Inceases Damage by 1 at a cost of 4 Bits"
+			},
+			{
+				affect: 'Accuracy',
+				magnitude: 2,
+				cost: 7,
+				techMessage: "Inceases Accuracy by 2 at a cost of 7 Bits"
+			},
+			{
+				affect: 'AutoRepair',
+				magnitude: .1,
+				cost: 6,
+				techMessage: "Increases Auto Repair by 0.1 at a cost of 6 Bits"
+			},
+			{
+				affect: 'AcidDamageReductionMultiplier',
+				magnitude: 0.5,
+				cost: 5,
+				techMessage: "Reduces 50% of damage taken from Acid attacks at a cost of 5 Bits"
+			},
+			{
+				affect: 'PiercingDamageMultiplier',
+				magnitude: 1.5,
+				cost: 12,
+				techMessage: "Increases Piercing Damage by 50% at a cost of 12 Bits"
+			},
+			{
+				affect: 'RangedDamageMultiplier',
+				magnitude: 1.5,
+				cost: 10,
+				techMessage: "Increases Ranged Damage by 50% at a cost of 10 Bits"
+			},
+			{
+				affect: 'CollisionDamageReductionMultiplier',
+				magnitude: 0.5,
+				cost: 6,
+				techMessage: "Reduces 50% of damage taken from Collisions at a cost of 6 Bits"
+			},
+			{
+				affect: 'AcidDamageMultiplier',
+				magnitude: 1.5,
+				cost: 6,
+				techMessage: "Increases Acid Damage by 50% at a cost of 6 Bits"
+			},
+			null,
+			{
+				affect: 'weaponSlot',
+				magnitude: 1,
+				cost: 8,
+				techMessage: "Unlocks an additional weapon slot at a cost of 8 Bits"
+			},
+			{
+				affect: 'BurnAndCorrosionBoost',
+				magnitude: true,
+				cost: 12,
+				techMessage: "Doubles the effects of Burn and Corrosion at a cost of 12 Bits"
+			},
+			null
+		]
 	}
 }
 export default baseBotAttributes;
@@ -688,7 +1067,7 @@ export const attributeInfo = {
 	ScanCost: 'Scan Cost: Cost to execute a Scan Command [kJ]',
 	MovementDistance: "Movement Distance: Movement Command's maximum traversable distance",
 	MovementCost: 'Movement Cost: Cost to execute a Movement Command [kJ]',
-	CollisionMultiplier: 'Collision Multiplier: Multiplier on damage dealt during a collision',
+	CollisionDamageMultiplier: 'Collision Damage: Multiplier on damage dealt during a collision',
 	WeaponSlots: 'Weapon Slots: Maximum number of equipable weapons',
 	AccessorySlots: 'Accessory Slots: Maximum number of equipable accessories',
 	Initiative: 'Initiative: First action priority tie breaker - See RULES',
@@ -716,6 +1095,6 @@ export const displayedAttributes = [
 	'ScanCost',
 	'MovementDistance',
 	'MovementCost',
-	'CollisionMultiplier',
+	'CollisionDamageMultiplier',
 	'Initiative'
 ]
