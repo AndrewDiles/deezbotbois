@@ -208,7 +208,7 @@ const AssemblyGrid = styled.div`
 	display: grid;
 	grid-gap: 10px;
 	/* grid-template-columns: repeat(6, 1fr); */
-	grid-template-columns: ${props => props.tabsOpened ? `repeat(${Math.min(props.tabsOpened,6)}, 1fr)` : 'repeat(6, 1fr)'};
+	grid-template-columns: ${props => `repeat(${props.tabsOpened ? Math.min(props.tabsOpened,6) : 6}, 252px)`};
 	/* width: 1550px; */
 	width: 100%;
 	margin-left: auto;
@@ -221,18 +221,18 @@ const AssemblyGrid = styled.div`
 	(max-width: ${props => props.navLocation === 'top' ? '1600px' : '1730px'}) {
 		/* width: 1030px; */
 		/* grid-template-columns: repeat(4, 1fr); */
-		grid-template-columns: ${props => props.tabsOpened ? `repeat(${Math.min(props.tabsOpened,4)}, 1fr)` : 'repeat(4, 1fr)'};
+		grid-template-columns: ${props => `repeat(${props.tabsOpened ? Math.min(props.tabsOpened,4) : 4}, 252px)`};
   }
 	@media screen and 
 	(max-width: ${props => props.navLocation === 'top' ? '1150px' : '1280px'}) {
     /* width: 510px; */
 		/* grid-template-columns: 1fr 1fr; */
-		grid-template-columns: ${props => props.tabsOpened ? `repeat(${Math.min(props.tabsOpened,2)}, 1fr)` : 'repeat(2, 1fr)'};
+		grid-template-columns: ${props => `repeat(${props.tabsOpened ? Math.min(props.tabsOpened,2) : 2}, 252px)`};
   }
 	@media screen and
 	(max-width: ${props => props.navLocation === 'top' ? '700px' : '830px'}) {
     /* width: 250px; */
-		grid-template-columns: 1fr;
+		grid-template-columns: 252px;
   }
 
 `

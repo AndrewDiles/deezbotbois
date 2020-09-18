@@ -1,3 +1,4 @@
+import {music_loudspeaker as elevenAttack} from 'react-icons-kit/linea/music_loudspeaker'
 import {u1F48D as accessory} from 'react-icons-kit/noto_emoji_regular/u1F48D'
 import {u1F3AF as accuracy} from 'react-icons-kit/noto_emoji_regular/u1F3AF'
 // import {lab as acid} from 'react-icons-kit/icomoon/lab'
@@ -21,6 +22,7 @@ import {u1F4A5 as damage} from 'react-icons-kit/noto_emoji_regular/u1F4A5'
 import {shield as damageReduction} from 'react-icons-kit/fa/shield'  // used to be typedArmor
 import {heart as durability} from 'react-icons-kit/icomoon/heart'
 // import {ionic as energy} from 'react-icons-kit/ionicons/ionic'
+// import {ecommerce_megaphone as energy} from 'react-icons-kit/linea/ecommerce_megaphone'
 import {flashlight as energy} from 'react-icons-kit/entypo/flashlight'
 // import {fire} from 'react-icons-kit/icomoon/fire'
 import {flame as fire} from 'react-icons-kit/oct/flame'
@@ -54,6 +56,11 @@ import {u1F528 as weapon} from 'react-icons-kit/noto_emoji_regular/u1F528'
 const iconImporter = (stringToConvert) => {
 	let icon1, icon2
 	switch (stringToConvert) {
+		case '11AttackCommand' : {
+			icon1 = elevenAttack;
+			icon2 = command;
+			break;
+		}
 		case 'accessorySlot' : {
 			icon1 = accessory;
 			// icon2 = slot;
@@ -154,6 +161,11 @@ const iconImporter = (stringToConvert) => {
 		}
 		case 'Durability' : {
 			icon1 = durability;
+			break;
+		}
+		case 'EnergyDamageMultiplier' : {
+			icon1 = energy;
+			icon2 = damage;
 			break;
 		}
 		case 'EnergyDamageReductionMultiplier' : {
