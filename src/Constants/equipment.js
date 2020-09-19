@@ -14,45 +14,145 @@ export const accessoryStats = {
 		name: 'Thick Paint',
 		description: 'Poor workmanship has its upsides.',
 		Durability: 1,
+		potency: 1,
 	},
 	antenna : {
 		name: 'Antenna',
 		description: 'A thin metal rod and old chewing gum.',
 		ScanDistance: 1,
+		potency: 3,
 	},
 	minorShieldBooster : {
 		name: 'Minor Shield Booster',
 		description: 'Attachment that reroutes energy to your shield.',
 		Shield: 1,
 		Capacitor: -5,
+		potency: 1,
 	},
 	plateCoat : {
 		name: 'Plate Coat',
 		description: 'A coat of metal to protect metal...',
 		Armor: 1,
 		MovementCost: 2,
+		potency: 1,
 	},
 	solderingNanobots: {
 		name: 'Soldering Nanobots',
 		description: 'Miniscule metal miracle workers.',
 		AutoRepair: .1,
+		potency: 3,
 	},
 	batteryPack: {
 		name: 'Battery Pack',
 		description: 'Ghetto add-on to aid with energy "production".',
 		Reactor: 1,
+		potency: 3,
 	},
 	powerGlove: {
 		name: 'Power Glove',
 		description: "Now you're swinging with power!",
 		Power: 2,
+		potency: 5,
 	},
 	wd40 : {
 		name: "WD-40",
 		description: "Mistaken for a lubricant, but it works...",
 		MovementCost: -2,
-	}
+		potency: 1,
+	},
+	weldOnGenerator : {
+		name: "Weld-on Generator",
+		description: "Weld-on, weld-off.",
+		Reactor: 2,
+		potency: 6,
+	},
+	laserSight : {
+		name: "Laser Sight",
+		description: "Weak beam of energy that aids in gauging trajectories.",
+		Accuracy: 1,
+		potency: 2,
+	},
+	powerThimble : {
+		name: "Power Thimble",
+		description: "Lesser known 80's peripheral.",
+		Power: 1,
+		potency: 2,
+	},
+	coldFusionCell : {
+		name: "Cold Fusion Cell",
+		description: "Extraordinarily unlikely milestone of energy transference!",
+		Reactor: 4,
+		potency: 9,
+	},
+	hudEnhancement : {
+		name: "HUD Enhancement",
+		description: "Hardware that contains software that can't be firmware.",
+		Accuracy: 2,
+		potency: 5,
+	},
+	resistanceModulator : {
+		name: "Resistance Modulator",
+		description: "State-of-the-art R.E. mod - it's in the name.",
+		ScanCost: -1,
+		aimCostModifier: -1,
+		potency: 2,
+	},
+	titaniumShell : {
+		name: "Titanium Shell",
+		description: "Melchoir is proud of its anodized polychromatism.",
+		Armor: 5,
+		MovementDistance: -1,
+		potency: 7,
+	},
+	forceField : {
+		name: "Force Field",
+		description: "The future is now old man.",
+		Shield: 5,
+		Capacitor: -15,
+		potency: 7,
+	},
+	hydraulicExoskeleton : {
+		name: "Hydraulic Exoskeleton",
+		description: "What every young robot wants for their assemblyday",
+		Power: 2,
+		Durability: 3,
+		potency: 8,
+	},
+	liquidMetalCoating : {
+		name: "Liquid Metal Coating",
+		description: "Tattoo removal is a walk in the park.",
+		Armor: 1,
+		Durability: 4,
+		potency: 4,
+	},
+	kevlarInsulation : {
+		name: "Kevlar Insulation",
+		description: "Whatever takes the edge off.",
+		DamageReduction: 1,
+		potency: 5,
+	},
+	hypersonicReverberator : {
+		name: "Hypersonic Reverberator",
+		description: "Pinpoints anomalous density points prone to failure.",
+		DamageBonus: 2,
+		potency: 5,
+	},
+	rocketPropulsion : {
+		name: "Rocket Propulsion",
+		description: "Fear is for those with flesh.",
+		Movement: 1,
+		CollisionDamageMultiplier: 1.25,
+		potency: 5,
+	},
+	martialArtsEnhancementKit : {
+		name: "Martial Arts Enhancement Kit",
+		description: "Now you know kung fu, for now.",
+		MeleeDamageMultiplier: 1.1,
+		MeleeDamageReductionMultiplier: 1.1,
+		potency: 6,
+	},
 }
+
 export const weaponStats = {
 	Gun1: {
 		name: "Pewpew",
@@ -65,6 +165,7 @@ export const weaponStats = {
 		reloadTime: 2,
 		attackCost: 20,
 		aimCost: 5,
+		potency: 1,
 	},
 	Sword1: {
 		name: "Busted Sword",
@@ -74,6 +175,7 @@ export const weaponStats = {
 		subTypes: ['Piercing', 'Power'],
 		attackShape: 'adjacentCell',
 		attackCost: 20,
+		potency: 1,
 	},
 	Hammer1: {
 		name: "Bambam",
@@ -83,6 +185,7 @@ export const weaponStats = {
 		subTypes: ['Crushing', 'Power'],
 		attackShape: 'adjacentCell',
 		attackCost: 25,
+		potency: 2,
 	}
 }
 export const attackShapes = {
