@@ -144,6 +144,7 @@ const Assembly = () => {
 			{botInfo.length > 0 &&
 				<AssemblyGrid
 				navLocation = {settings.navLocation}
+				profileTab = {settings.profileTab}
 				tabsOpened = {tabsOpened}
 				>
 					{tabsDisplayed.model &&
@@ -196,7 +197,7 @@ const Wrapper = styled.div`
 	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
-	padding-bottom: 100px;
+	padding-bottom: 250px;
 	display : flex;
 	flex-direction: column;
 	/* justify-content: center; */
@@ -207,7 +208,7 @@ const Wrapper = styled.div`
 `
 const AssemblyGrid = styled.div`
 	display: grid;
-	grid-gap: 10px;
+	grid-gap: 60px 10px;
 	/* grid-template-columns: repeat(6, 1fr); */
 	grid-template-columns: ${props => `repeat(${props.tabsOpened ? Math.min(props.tabsOpened,6) : 6}, 252px)`};
 	/* width: 1550px; */
@@ -218,21 +219,22 @@ const AssemblyGrid = styled.div`
 	justify-content: center;
 	justify-items: center;
 	/* overflow-y: auto; */
-	@media screen and 
-	(max-width: ${props => props.navLocation === 'top' ? '1600px' : '1730px'}) {
-		/* width: 1030px; */
-		/* grid-template-columns: repeat(4, 1fr); */
+	@media screen and (max-width: ${props => props.navLocation === 'top' ? 
+		props.profileTab === 'active' ? '1735px' : '1600px' :
+		props.profileTab === 'active' ? '1865px' : '1730px'}
+	) {
 		grid-template-columns: ${props => `repeat(${props.tabsOpened ? Math.min(props.tabsOpened,4) : 4}, 252px)`};
   }
-	@media screen and 
-	(max-width: ${props => props.navLocation === 'top' ? '1150px' : '1280px'}) {
-    /* width: 510px; */
-		/* grid-template-columns: 1fr 1fr; */
+	@media screen and (max-width: ${props => props.navLocation === 'top' ? 
+		props.profileTab === 'active' ? '1285px' : '1150px' :
+		props.profileTab === 'active' ? '1415px' : '1280px'}
+	) {
 		grid-template-columns: ${props => `repeat(${props.tabsOpened ? Math.min(props.tabsOpened,2) : 2}, 252px)`};
   }
-	@media screen and
-	(max-width: ${props => props.navLocation === 'top' ? '700px' : '830px'}) {
-    /* width: 250px; */
+	@media screen and (max-width: ${props => props.navLocation === 'top' ? 
+		props.profileTab === 'active' ? '835px' : '700px' :
+		props.profileTab === 'active' ? '965px' : '830px'}
+	) {
 		grid-template-columns: 252px;
   }
 

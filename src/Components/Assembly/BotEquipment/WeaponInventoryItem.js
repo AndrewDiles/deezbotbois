@@ -5,9 +5,9 @@ import StyledButton from '../../StyledButton/StyledButton';
 import ToolTip from '../../ToolTip/ToolTip';
 import WeaponContents from '../../ToolTip/WeaponContents';
 import { weaponStats } from '../../../Constants/equipment';
-import { equipItem } from '../../../Redux/actions';
+import { equipItem, unequipItem } from '../../../Redux/actions';
 
-const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected  }) => {
+const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
@@ -36,7 +36,6 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 	if (!userInfo.botBuilds || botNumberSelected === null) {
 		return (<></>)
 	}
-	// console.log('weapon from wepinvitem', weapon)
 	const stage = () => {
 		setEquipmentStaging(
 			{
@@ -63,7 +62,33 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 		dispatch(equipItem(botNumberSelected, equipmentStaging.from.slot, equipmentStaging.to.name))
 		fullUnstage();
 	}
-	
+	const unequip = () => {
+		dispatch(unequipItem(botNumberSelected, null, weapon))
+		fullUnstage();
+	}
+
+	if (alreadyEquipped) return (
+		<ColDiv className = 'centeredFlex'>
+			<RowDiv className = 'centeredFlex'>
+				<StyledButton
+					id = {`${weapon}Button`}
+					width = '180'
+					handleClick = {null}
+					selected = {true}
+					disabled = {true}
+					>
+						{weaponStats[weapon].name}
+    			</StyledButton>
+					<StyledButton
+					handleClick = {unequip}
+					width = '60'
+					fontSize = '6'
+					>
+						UNEQUIP
+					</StyledButton>
+			</RowDiv>
+		</ColDiv>
+	)
   return (
 		<ColDiv className = 'centeredFlex'>
 			<RowDiv className = 'centeredFlex'>

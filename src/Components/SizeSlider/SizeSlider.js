@@ -70,12 +70,14 @@ const SizeSlider = ({ disabled }) => {
 		dialClicked = {dialClicked}
     >
       <Bar
-      id = 'bar'
+			id = 'bar'
+			colors = {colors}
+			dialClicked = {dialClicked}
       >
         <Dial
         id = 'dial'
         color = {colors.secondary}
-        hoverColor = {colors.hovered}
+        hoverColor = {colors.hoveredText}
         border = {colors.textColor}
         disabled = {disabled}
 				left = {left}
@@ -116,6 +118,9 @@ const Bar = styled.div`
   justify-content: left;
   text-align: center;
   align-items: center;
+	&:hover {
+		background-color: ${props => !props.dialClicked && props.colors.hoveredText};
+	}
 `
 const Dial = styled.div`
 position: relative;

@@ -118,7 +118,28 @@ export default function userInfo(
 			}
 			case 'UNEQUIP_ITEM' : {
 				let botBuilds = [...state.botBuilds];
-				botBuilds[action.index].equipment[action.slotKey] = null;
+				if (action.slotKey) {
+					botBuilds[action.index].equipment[action.slotKey] = null;
+				}
+				else {
+					console.log('looking for :',action.equipmentName)
+					let slotKeys = Object.keys(botBuilds[action.index].equipment);
+					let foundSlotName = null;
+					slotKeys.forEach((slot, testIndex)=>{
+						console.log({slot})
+						console.log(botBuilds[action.index].equipment[slot])
+						if (botBuilds[action.index].equipment[slot] === action.equipmentName) {
+							foundSlotName = Object.keys(botBuilds[action.index].equipment)[testIndex];
+						}
+					})
+					console.log({foundSlotName})
+					if (foundSlotName) {
+						botBuilds[action.index].equipment[foundSlotName] = null;
+					}
+					else {
+						console.log('Supposedly equipped item was not found in equipment slots')
+					}
+				}
 				return {
 					...state,
 					botBuilds : botBuilds,

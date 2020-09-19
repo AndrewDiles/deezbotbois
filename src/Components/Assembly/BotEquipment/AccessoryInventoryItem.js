@@ -5,9 +5,9 @@ import StyledButton from '../../StyledButton/StyledButton';
 import ToolTip from '../../ToolTip/ToolTip';
 import AccessoryContents from '../../ToolTip/AccessoryContents';
 import { accessoryStats } from '../../../Constants/equipment';
-import { equipItem } from '../../../Redux/actions';
+import { equipItem, unequipItem } from '../../../Redux/actions';
 
-const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStaging, botNumberSelected  }) => {
+const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped  }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
@@ -63,9 +63,55 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 		dispatch(equipItem(botNumberSelected, equipmentStaging.from.slot, equipmentStaging.to.name))
 		fullUnstage();
 	}
+	const unequip = () => {
+		dispatch(unequipItem(botNumberSelected, null, 
+			accessory
+			// Object.keys(accessoryStats[accessory])[0]
+			))
+		fullUnstage();
+	}
 	
+	if (alreadyEquipped) return (
+		<ColDiv className = 'centeredFlex'>
+			<RowDiv className = 'centeredFlex'>
+				<StyledButton
+					id = {`${accessory}Button`}
+					width = '180'
+					handleClick = {null}
+					selected = {true}
+					disabled = {true}
+					>
+						{accessoryStats[accessory].name}
+						
+    			</StyledButton>
+					<StyledButton
+					handleClick = {unequip}
+					width = '60'
+					fontSize = '6'
+					>
+						UNEQUIP
+					</StyledButton>
+			</RowDiv>
+			{messageHovered &&
+				<ToolTip
+				messageHovered = {messageHovered}
+				setMessageHovered = {setMessageHovered}
+				width= '240'
+				animated = {'equipment'}
+				>
+					{accessoryStats[accessory] &&
+						<AccessoryContents
+						accessoryInfo = {accessoryStats[accessory]}
+						/>
+					}
+				</ToolTip>
+			}
+		</ColDiv>
+	)
+
   return (
 		<ColDiv className = 'centeredFlex'>
+
 			<RowDiv className = 'centeredFlex'>
 				{(equipmentStaging.to && equipmentStaging.to.name === accessory) ? (
 					<StyledButton

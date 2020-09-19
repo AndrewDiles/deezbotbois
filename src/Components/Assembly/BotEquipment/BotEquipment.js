@@ -17,7 +17,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 	const dispatch = useDispatch();
 	const [slots, setSlots] = useState({weapons: 0, accessories: 0});
 	const [typeViewing, setTypeViewing] = useState('weapons');
-	const [inventoryIndexRange, setInventoryIndexRange] = useState({min:0, max:5});
+	const [inventoryIndexRange, setInventoryIndexRange] = useState({min:0, max:3});
 
 	React.useEffect(()=>{
 		if (!botInfo[botNumberSelected]) return;
@@ -62,7 +62,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			</h3>
 			<RowDiv className = 'centeredFlex'>
 				<StyledButton
-				handleClick = {e=> {setInventoryIndexRange({min:0, max:5});setTypeViewing('weapons');setEquipmentStaging({from: null, to: null})}}
+				handleClick = {e=> {setInventoryIndexRange({min:0, max:3});setTypeViewing('weapons');setEquipmentStaging({from: null, to: null})}}
 				selected = {typeViewing === 'weapons'}
 				disabled = {typeViewing === 'weapons'}
 				width = '120'
@@ -71,7 +71,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 					WEAPONS
 				</StyledButton>
 				<StyledButton
-				handleClick = {e=> {setInventoryIndexRange({min:0, max:5});setTypeViewing('accessories');setEquipmentStaging({from: null, to: null})}}
+				handleClick = {e=> {setInventoryIndexRange({min:0, max:3});setTypeViewing('accessories');setEquipmentStaging({from: null, to: null})}}
 				selected = {typeViewing === 'accessories'}
 				disabled = {typeViewing === 'accessories'}
 				width = '120'
@@ -82,10 +82,12 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			</RowDiv>
 			{typeViewing === 'weapons' &&
 				<>
-					<h4>
+					<p>
 						WEAPONS
-					</h4>
-					<ColDiv className = 'centeredFlex'>
+					</p>
+					<ColDiv 
+					numberOfSlots = {slots.weapons}
+					>
 						{slots.weapons>0 &&
 							<ItemEquipped
 							slotKey = 'arm1'
@@ -118,10 +120,12 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			}
 			{typeViewing === 'accessories' &&
 				<>
-					<h4>
+					<p>
 						ACCESSORIES
-					</h4>
-					<ColDiv className = 'centeredFlex'>
+					</p>
+					<ColDiv 
+					numberOfSlots = {slots.accessories}
+					>
 						{slots.accessories>0 &&
 							<ItemEquipped
 							slotKey = 'acc1'
@@ -170,20 +174,23 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 					</ColDiv>
 				</>
 			}
-			<h4>
+			<p>
 				INVENTORY
-			</h4>
-			{/* <StyledIcon
-			handleClick = {clickUp}
-			disabled = {inventoryIndexRange.min === 0}
-			icon = {arrowUp}
-			/> */}
+			</p>
+			{(typeViewing === 'weapons' && Object.keys(userInfo.availableArms).length > 4) ||
+				(typeViewing === 'accessories' && Object.keys(userInfo.availableAcc).length > 4) &&
+				<StyledIcon
+				handleClick = {clickUp}
+				disabled = {inventoryIndexRange.min === 0}
+				icon = {arrowUp}
+				/>
+			}
 			{/* UP ARROW only clickable if index.min > 0*/}
 			{typeViewing === 'weapons' &&
 				<InventoryWrapper className = 'centeredFlex'>
 					{userInfo.availableArms.map((weapon, index)=>{
 						// Only display if it is not equipped
-						if (!Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(weapon)){
+						// if (!Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(weapon)){
 							// Only display if index is window the viewing range
 							if (index <= inventoryIndexRange.max && index >= inventoryIndexRange.min) {
 								return(
@@ -193,17 +200,18 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 									equipmentStaging = {equipmentStaging}
 									setEquipmentStaging = {setEquipmentStaging}
 									botNumberSelected = {botNumberSelected}
+									alreadyEquipped = {Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(weapon)}
 									/>
 								)
 							}
-						}
+						// }
 					})}
 				</InventoryWrapper>
 			}
 			{typeViewing === 'accessories' &&
 				<InventoryWrapper className = 'centeredFlex'>
 						{userInfo.availableAcc.map((accessory, index)=>{
-						if (!Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(accessory)){
+						// if (!Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(accessory)){
 							if (index <= inventoryIndexRange.max && index >= inventoryIndexRange.min) {	
 								return(
 										<AccessoryInventoryItem
@@ -212,18 +220,22 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 										equipmentStaging = {equipmentStaging}
 										setEquipmentStaging = {setEquipmentStaging}
 										botNumberSelected = {botNumberSelected}
+										alreadyEquipped = {Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(accessory)}
 										/>
 								)
-							}
+							// }
 						}
 					})}
 				</InventoryWrapper>
 			}
-			{/* <StyledIcon
-			handleClick = {clickDown}
-			disabled = {inventoryIndexRange.max === Object.keys(userInfo.availableAcc).length}
-			icon = {arrowDown}
-			/> */}
+			{(typeViewing === 'weapons' && Object.keys(userInfo.availableArms).length > 4) ||
+				(typeViewing === 'accessories' && Object.keys(userInfo.availableAcc).length > 4) &&
+				<StyledIcon
+				handleClick = {clickDown}
+				disabled = {inventoryIndexRange.max+1 === Object.keys(userInfo.availableAcc).length}
+				icon = {arrowDown}
+				/>
+			}
 			{/* DOWN ARROW only clickable if index.max < Object.keys.length*/}
     </Wrapper>
   )
@@ -233,7 +245,12 @@ const Wrapper = styled.div`
 	width: 249px;
 `
 const ColDiv = styled.div`
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	text-align: center;
 	flex-direction: column;
+	height: ${props => props.numberOfSlots && `${60+(42*props.numberOfSlots)}px`};
 `
 const RowDiv = styled.div`
 	display: flex;

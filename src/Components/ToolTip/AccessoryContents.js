@@ -7,20 +7,23 @@ const AccessoryContents = ({ accessoryInfo }) => {
 			<Name>
 				{accessoryInfo.name}
 			</Name>
+			<Potency>
+				{accessoryInfo.potency}
+			</Potency>
 			<Description>
 				{accessoryInfo.description}
 			</Description>
 			<Effect1Type>
-				{Object.keys(accessoryInfo)[2]}
+				{Object.keys(accessoryInfo)[3]}
 			</Effect1Type>
 			<Effect1Value>
-				{accessoryInfo[Object.keys(accessoryInfo)[2]]}
+				{accessoryInfo[Object.keys(accessoryInfo)[3]]}
 			</Effect1Value>
 			<Effect2Type>
-				{Object.keys(accessoryInfo)[3]}
+				{Object.keys(accessoryInfo)[4]}
 			</Effect2Type>
 			<Effect2Value>
-				{accessoryInfo[Object.keys(accessoryInfo)[3]]}
+				{accessoryInfo[Object.keys(accessoryInfo)[4]]}
 			</Effect2Value>
 		</ToolTipContents>
 	)
@@ -36,6 +39,16 @@ const ToolTipContents = styled.div`
 	grid-template-columns: 45% 10% 45%;
   grid-template-rows: 30% 30% 20% 20%;
 	padding: 2px;
+`
+const Potency = styled.div`
+	font-size: 0.6em;
+	font-weight: 200;
+	grid-column-start: 3;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+	align-self: start;
+	justify-self: end;
 `
 const Name = styled.div`
 	font-size: 1.1em;

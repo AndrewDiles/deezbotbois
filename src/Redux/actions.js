@@ -101,10 +101,11 @@ export const equipItem = (index, slotKey, name) => ({
 	slotKey: slotKey,
 	name: name
 })
-export const unequipItem = (index, slotKey) => ({
+export const unequipItem = (index, slotKey, equipmentName) => ({
 	type: 'UNEQUIP_ITEM',
 	index: index,
-	slotKey: slotKey
+	slotKey: slotKey,
+	equipmentName: equipmentName
 })
 export const resetTechTree = (index) => ({
 	type: 'RESET_TECH_TREE',

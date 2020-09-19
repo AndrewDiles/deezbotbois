@@ -22,7 +22,6 @@ Intentions with the GUI include:
 
 
 ## ACTIVE BUGS
-- Log out from profile tab does not refresh current url to home?
 
 - Need to return to Nav bar and correct the size of buttons/their content, based on @media screen query so they fit in the bar while the screen is more narrow
 
@@ -47,6 +46,9 @@ Intentions with the GUI include:
 - If user swaps between color schemes and tries to update, mongo will throw error
 # Solution: verify if new user object is the same as the old using JSON.stringify
 
+- Log out from profile tab does not refresh current url to home
+# Corrected - useEffect required an additional dependency
+
 - NavLinks and StyledButtons are not perfectly aligned.
 # Solution: upon correcting their stylings, the profile tab gained an unfortunate "bad looking" layout.  Sub hacky solution was to put all the buttons inside Nav Links.  For buttons that were not supposed to be links, I sent them to where the user already was (which does not occur).
 
@@ -58,7 +60,8 @@ Intentions with the GUI include:
 - Change error codes for incorrect passwords to 403, make sure front end does not break with change from 401
 - Change error code from 206 to 422 or 400.  (same testing as above)
 
-- Add nite navigation using arrows via keyboard listeners and focus direction
+
+- Add site navigation using arrows via keyboard listeners and focus direction
 
 - In Assembly: Add drag and drop for equipping
 
@@ -76,6 +79,9 @@ Intentions with the GUI include:
 ## Potential Improvements Met
 
 - In Assembly: Add ability to click and expand each section
+# DONE
+
+- In Assembly - Attributes: +/- and % change shouldn't be red for negative cost changes, as this is an improvement
 # DONE
 
 - HIGH PRIORITY: improve import method and method of gathering icons for attributes and tech tree.  Current system is clunky

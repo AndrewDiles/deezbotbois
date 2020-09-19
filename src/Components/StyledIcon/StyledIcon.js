@@ -16,7 +16,7 @@ const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing,
       <IconStylings
 			id = {id}
       disabled = {disabled || null}
-      onClick = {(ev)=> {handleClick(ev)}}
+      onClick = {(ev)=> {!disabled && handleClick(ev)}}
       icon = {icon}
       selected = {selected}
       children = {children}

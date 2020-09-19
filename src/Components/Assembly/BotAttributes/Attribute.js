@@ -133,12 +133,15 @@ const Attribute = ({ botNumberSelected, attribute, equipmentStaging }) => {
 			</NumberCell>
 			<NumberCell className = 'centeredFlex'
 			change = {changes}
+			type = 'change'
+			name = {attribute}
 			>
 				{changes === 0 ? '' : Math.abs(changes)}
 			</NumberCell>
 			<NumberCell className = 'centeredFlex'
 			change = {percentChanges}
 			type = 'percent'
+			name = {attribute}
 			>
 				{percentChanges === 0 ? '' : Number.isNaN(percentChanges) ? '' : isFinite(percentChanges) ? `${Math.abs(percentChanges)}%` : 
 					<InfinityDiv className='enlargen centeredFlex'>∞</InfinityDiv>
@@ -168,7 +171,12 @@ const NumberCell = styled.div`
 	height: 100%;
 	width: 100%;
 	font-size: ${props => props.type === 'sum' ? '0.7em' : props.type === 'percent' ? '0.4em' :'0.5em'};
-	color: ${props => props.change > 0 ? 'limegreen' : props.change < 0 ? 'darkred' : ''};
+	color: ${props => 
+	props.name && props.name.includes('Cost') ? 
+	props.change > 0 ? 'darkred' : props.change < 0 ? 'limegreen' : ''
+	: props.change > 0 ? 'limegreen' : props.change < 0 ? 'darkred' : ''
+	};
+
 	background-color: ${props => props.type === 'sum' && props.backgroundColor};
 	/* line-height: 32px;
 	text-align: center; */

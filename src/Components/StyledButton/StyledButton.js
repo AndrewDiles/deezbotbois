@@ -11,9 +11,9 @@ const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSam
 	if (colorSampling) colors = colorSampling;
 	
   
-  if (handleClick === undefined) {
+  if (handleClick === undefined || handleClick === null) {
     handleClick = () => {
-      console.log('clicked styled button without a handle click function')
+      // console.log('clicked styled button without a handle click function')
     }
   }
   return (
