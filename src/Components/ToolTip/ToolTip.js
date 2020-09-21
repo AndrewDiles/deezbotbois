@@ -57,8 +57,8 @@ const Message = styled.div`
 	justify-content: center;
 	justify-self: ${props => props.selfLocation && props.selfLocation};
 	align-items: center;
-	background-color: ${props => props.colors.secondary};
-	color: ${props => props.colors.textColor};
+	background-color: ${props => props.colors.hovered};
+	color: ${props => props.colors.hoveredText};
 	cursor: pointer;
 	border: 1px solid rgba(0,0,0,0.1);
 	z-index: 15;

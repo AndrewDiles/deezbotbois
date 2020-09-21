@@ -1,9 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from "react-redux";
+import { getThemeColors } from '../../Redux/reducers/user-reducer';
+
 
 const AccessoryContents = ({ accessoryInfo }) => {
+	const colors = useSelector(getThemeColors);
 	return (
-		<ToolTipContents>
+		<ToolTipContents
+		color = {colors.hoveredText}
+		>
 			<Name>
 				{accessoryInfo.name}
 			</Name>
@@ -32,6 +38,7 @@ export default AccessoryContents;
 
 const ToolTipContents = styled.div`
 	/* height: 100%; */
+	color: ${props => props.color};
 	height: 60px;
 	width: 100%;
 	font-size: 10px;

@@ -5,7 +5,7 @@ export const paleGreen = {
   notSelected: '#C8DB8C',
   hovered: '#6B754B',
 	textColor : '#313622',
-	hoveredText : '#C8DB8C',
+	hoveredText : '#A8ED62',
 };
 export const vibrant = {
   primary: '#F6D9D6',
@@ -33,7 +33,7 @@ export const vanilla = {
   notSelected: 'rgba(255,255,255,0.3)',
   hovered: 'silver',
 	textColor : 'rgba(0, 0, 0, 0.54)',
-	hoveredText : 'white',
+	hoveredText : 'rgba(0, 0, 0, 0.75)',
 };
 export const defaultBotColors = {
   primary: 'lime',

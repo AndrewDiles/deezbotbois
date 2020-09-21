@@ -185,45 +185,42 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				icon = {arrowUp}
 				/>
 			}
-			{/* UP ARROW only clickable if index.min > 0*/}
 			{typeViewing === 'weapons' &&
-				<InventoryWrapper className = 'centeredFlex'>
+				<InventoryWrapper
+				heightMultiplier = {Object.keys(userInfo.availableAcc).length}
+				>
 					{userInfo.availableArms.map((weapon, index)=>{
-						// Only display if it is not equipped
-						// if (!Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(weapon)){
-							// Only display if index is window the viewing range
-							if (index <= inventoryIndexRange.max && index >= inventoryIndexRange.min) {
-								return(
-									<WeaponInventoryItem
-									key = {weapon}
-									weapon = {weapon}
-									equipmentStaging = {equipmentStaging}
-									setEquipmentStaging = {setEquipmentStaging}
-									botNumberSelected = {botNumberSelected}
-									alreadyEquipped = {Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(weapon)}
-									/>
-								)
-							}
-						// }
+						if (index <= inventoryIndexRange.max && index >= inventoryIndexRange.min) {
+							return(
+								<WeaponInventoryItem
+								key = {weapon}
+								weapon = {weapon}
+								equipmentStaging = {equipmentStaging}
+								setEquipmentStaging = {setEquipmentStaging}
+								botNumberSelected = {botNumberSelected}
+								alreadyEquipped = {Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(weapon)}
+								/>
+							)
+						}
 					})}
 				</InventoryWrapper>
 			}
 			{typeViewing === 'accessories' &&
-				<InventoryWrapper className = 'centeredFlex'>
-						{userInfo.availableAcc.map((accessory, index)=>{
-						// if (!Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(accessory)){
-							if (index <= inventoryIndexRange.max && index >= inventoryIndexRange.min) {	
-								return(
-										<AccessoryInventoryItem
-										key = {accessory}
-										accessory = {accessory}
-										equipmentStaging = {equipmentStaging}
-										setEquipmentStaging = {setEquipmentStaging}
-										botNumberSelected = {botNumberSelected}
-										alreadyEquipped = {Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(accessory)}
-										/>
-								)
-							// }
+				<InventoryWrapper
+				heightMultiplier = {Object.keys(userInfo.availableAcc).length}
+				>
+					{userInfo.availableAcc.map((accessory, index)=>{
+						if (index <= inventoryIndexRange.max && index >= inventoryIndexRange.min) {	
+							return(
+								<AccessoryInventoryItem
+								key = {accessory}
+								accessory = {accessory}
+								equipmentStaging = {equipmentStaging}
+								setEquipmentStaging = {setEquipmentStaging}
+								botNumberSelected = {botNumberSelected}
+								alreadyEquipped = {Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(accessory)}
+								/>
+							)
 						}
 					})}
 				</InventoryWrapper>
@@ -236,7 +233,6 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				icon = {arrowDown}
 				/>
 			}
-			{/* DOWN ARROW only clickable if index.max < Object.keys.length*/}
     </Wrapper>
   )
 }
@@ -250,14 +246,19 @@ const ColDiv = styled.div`
 	align-items: center;
 	text-align: center;
 	flex-direction: column;
-	height: ${props => props.numberOfSlots && `${60+(42*props.numberOfSlots)}px`};
+	height: ${props => props.numberOfSlots && `${/* 60 + */(42*props.numberOfSlots)}px`};
 `
 const RowDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 `
 const InventoryWrapper = styled.div`
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	text-align: center;
 	flex-direction: column;
 	max-height: 300px;
+	height: ${props => props.heightMultiplier > 3 ? '167px' : `${(props.heightMultiplier*41)}px`};
 	/* overflow-y: scroll; */
 `

@@ -12,6 +12,17 @@ const BotAI = ({ botNumberSelected}) => {
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}
+
+	// cells will have both a row and col number.
+	// cells will have a height / width = `${cellSize}px`
+	// bots will have a cell location, represented by the row / col numbers
+
+	// helper functions needed:
+	
+	// determine path from CENTER CELL to center of another cell
+	// determine actual distance from center of one cell to center of another
+	// scan: given CENTER CELL, a distance and array of all object locations, returns an array with all objects within distance and the path to them (UDLR)
+	// auto scan: given 
   return (
     <Wrapper
 		className = "assemblyGridChild" 

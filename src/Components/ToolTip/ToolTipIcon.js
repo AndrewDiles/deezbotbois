@@ -7,40 +7,6 @@ import {attributeInfo} from '../../Constants/attributes';
 
 const ToolTipIcon = ({ name, iconImport, selfLocation, animated }) => {
 	const [messageHovered, setMessageHovered] = useState(false);
-
-	// React.useEffect(()=>{
-	// 	let targetIcon = document.getElementById(`${name}Icon`);
-	// 	let onMouseEnter = (ev) => {
-	// 		// Below test will prevent multiple ToolTips pooping up by triggering mouseenter through divs
-	// 		if (ev.target === targetIcon) setMessageHovered(true);
-	// 	}
-	// 	// let onMouseLeave = (ev) => {
-	// 		// console.log('ev.target',ev.target,attributeInfo[name])
-	// 		// if (ev.target.id !== attributeInfo[name]) {
-	// 			// setMessageHovered(false)
-	// 		// }
-	// 	// }
-	// 	// if (messageHovered) {
-	// 	// 	document.getElementById('root').addEventListener('mousemove', onMouseLeave);
-	// 	// }
-	// 		// const closeWindow = () => {
-	// 		// 	if (messageHovered) setMessageHovered(false);
-	// 		// }
-	// 	// if (messageHovered) {
-	// 	// 	setTimeout(closeWindow,5000)
-	// 	// }
-	// 	if (targetIcon) {
-	// 		targetIcon.addEventListener('mouseenter',onMouseEnter);
-	// 		// targetIcon.addEventListener('mouseleave',onMouseLeave);
-	// 	}
-	// 	return ()=>{
-	// 		if (!targetIcon) return;
-	// 		targetIcon.removeEventListener('mouseenter',onMouseEnter);
-	// 		// targetIcon.removeEventListener('mouseleave',onMouseLeave);
-	// 		// document.getElementById('root').removeEventListener('mousemove', onMouseLeave);
-  //   }
-	// },[name, messageHovered]);
-
 	const handleClick = () => {
 		setMessageHovered(!messageHovered);
 	}
@@ -49,7 +15,8 @@ const ToolTipIcon = ({ name, iconImport, selfLocation, animated }) => {
 				<ToolTip
 				messageHovered = {messageHovered}
 				setMessageHovered = {setMessageHovered}
-				fontSize = '0.55em'
+				// fontSize = '0.35em'
+				fontSize = '8px'
 				selfLocation = {selfLocation}
 				animated = {animated}
 				height = '37'

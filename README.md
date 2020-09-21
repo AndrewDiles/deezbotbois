@@ -60,6 +60,12 @@ Intentions with the GUI include:
 - Change error codes for incorrect passwords to 403, make sure front end does not break with change from 401
 - Change error code from 206 to 422 or 400.  (same testing as above)
 
+- Add ability to filter and sort inventory: 
+- - Weapons Filters : All || Melee / Ranged || Piercing, Crushing, Fire, Acid, Energy
+- - Weapons Sort : A-Z, Z-A, dmg up, dmg down, Potency up, potency down 
+- - Accessories Filters : All || Offence || Defence || Utility
+- - Accessories Sort : A-Z, Z-A, Potency up, potency down
+
 
 - Add site navigation using arrows via keyboard listeners and focus direction
 

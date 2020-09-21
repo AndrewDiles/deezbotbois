@@ -1329,8 +1329,8 @@ export const attributeInfo = {
 	Base: 'Base attribute value from model',
 	Equipment: 'Net attribute change from equipment',
 	Tech: 'Net attribute change from tech tree',
-	PlusMinus: 'Increase/decrease from upcoming change',
-	PercentChange: 'Increase/decrease from upcoming change as a percent',
+	PlusMinus: '+/- from upcoming change',
+	PercentChange: "Upcoming change's +/- as a %",
 	Sum: "Build's total attribute value"
 }
 export const displayedAttributes = [
