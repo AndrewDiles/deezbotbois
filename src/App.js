@@ -17,6 +17,7 @@ import Assembly from "./Components/Assembly/Assembly";
 import Levels from "./Components/Levels/Levels";
 import Rules from "./Components/Rules/Rules"
 import Test from "./Components/Test/Test";
+import Test2 from "./Components/Test/Test2";
 import Settings from "./Components/Settings/Settings";
 import Account from "./Components/Account/Account";
 import AltLogin from "./Components/NavBar/AltLogin";
@@ -78,15 +79,11 @@ function App() {
 						<Route exact path="/rules">
               <Rules />
             </Route>
-            {/* <Route exact path="/view-lobby">
-              {userInfo.user? (
-                <Lobby/>
-              ) : (
-                <Redirect to="/home" />
-              )}
-            </Route> */}
-            <Route path="/test">
+						<Route path="/test">
               <Test/>
+            </Route>
+						<Route path="/test2">
+              <Test2/>
             </Route>
             <Route path="/:">{/* <NotFound/> */}</Route>
           </Switch>

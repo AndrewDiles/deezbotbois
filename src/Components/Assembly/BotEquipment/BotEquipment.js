@@ -259,6 +259,7 @@ const InventoryWrapper = styled.div`
 	text-align: center;
 	flex-direction: column;
 	max-height: 300px;
+	/* z-index: 5; */
 	height: ${props => props.heightMultiplier > 3 ? '167px' : `${(props.heightMultiplier*41)}px`};
 	/* overflow-y: scroll; */
 `

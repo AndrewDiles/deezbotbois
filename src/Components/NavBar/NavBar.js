@@ -153,6 +153,16 @@ function NavBar() {
         </StyledButton>
       </StyledNavLink>
 
+			<StyledNavLink to="/test2" tabIndex="-1">
+        <StyledButton
+					handleClick = {() => {dispatch(updateUrl('test2'))}}
+					selected = {settings.currentUrl === 'test2'}
+					disabled = {settings.currentUrl === 'test2'}
+          >
+          TEST2
+        </StyledButton>
+      </StyledNavLink>
+
       <UserDiv
 			id = 'userDiv'
 			>

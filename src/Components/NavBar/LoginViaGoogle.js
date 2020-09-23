@@ -25,7 +25,7 @@ function LoginViaGoogle() {
 		fetch('server/googleLogIn', {
 			method: "POST",
       headers: {
-        "Content-Type": "application/json",
+				"Content-Type": "application/json",
       },
       body: JSON.stringify({ 
         email: googleRes.email,
@@ -61,7 +61,7 @@ function LoginViaGoogle() {
       clientId = {REACT_APP_AUTH0_CLIENT_ID}
       onSuccess = {(res)=>{handleSuccessfulGoogleLogin(res)}}
       onFailure = {(res)=>{console.log(res)}}
-      cookiePolicy = {"single_host_origin"} 
+			cookiePolicy = {"single_host_origin"}
       >
     </StyledGoogleLogin>
   );

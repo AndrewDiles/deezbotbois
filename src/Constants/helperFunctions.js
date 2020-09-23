@@ -28,6 +28,14 @@ export const inverseTechTreeRequirements = (index) => {
 	else if (index === 2) return [index, index+5, index+9, index+13, index+17, index+4, index+8, index+12, index+16, 22]
 }
 
+export function incrementerArrayGenerator (numberOfEntries) {
+	let newArray = [];
+	for(let index = 1; index <= numberOfEntries; index ++) {
+		newArray.push(index);
+	}
+	return newArray;
+}
+
 // The calling of this function is for testing purposes and should be removed upon deployment
 export function testValidityOfLocationInput (location) {
 	if (location === undefined || location === null) {
@@ -56,14 +64,18 @@ export function testValidityOfLocationInput (location) {
 	}
 	return true
 }
-// function below determines distance (cell count) from a CENTER CELL
-export function distBetweenCells (startLocation, finishLocation) {
+// function below determines distance (cell count) from a cell
+export function straightDistanceBetweenCells (startLocation, finishLocation) {
 	if (!testValidityOfLocationInput(startLocation) || !testValidityOfLocationInput(finishLocation)) return
-	// Below is result if every diagonal move cost the same as horizontal and vertical movement
+	if (startLocation.col === finishLocation.col || startLocation.row === finishLocation.row) {
 	return ( Math.abs(startLocation.col-finishLocation.col) + Math.abs(startLocation.row-finishLocation.row) )
+	}
+	else {
+		return ( Math.abs(startLocation.col-finishLocation.col) + Math.abs(startLocation.row-finishLocation.row) -1 )
+	}
 }
 // function below creates an array that contains the movements requires to move beside the finish location
-export function pathToCell (startLocation, finishLocation) {
+export function pathToAdjacentCell (startLocation, finishLocation) {
 	if (!testValidityOfLocationInput(startLocation) || !testValidityOfLocationInput(finishLocation)) return
 	if (startLocation.col === finishLocation.col && startLocation.row === finishLocation.row) {
 		console.log(' two tested locations are already on the same cell')
@@ -71,7 +83,7 @@ export function pathToCell (startLocation, finishLocation) {
 	}
 	let path = [];
 	function straightLineMovement (moveDirection, location) {
-		for (let moves = 1; moves < distBetweenCells(location,finishLocation); moves ++) {
+		for (let moves = 1; moves < straightDistanceBetweenCells(location,finishLocation); moves ++) {
 			path.push(moveDirection)
 		}
 	}
@@ -100,12 +112,13 @@ export function pathToCell (startLocation, finishLocation) {
 		while ((i-1 !== finishLocation.col && j-1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
 			i--;
 			j--;
-			path.push('DR');
+			path.push('UL');
 		}
-		if (i === finishLocation.col) {
-			straightLineMovement('D', {col:i, row:j});
+		console.log(i, j, finishLocation.col, finishLocation.row)
+		if (i === finishLocation.col || i-1 === finishLocation.col) {
+			straightLineMovement('U', {col:i, row:j});
 		}
-		else straightLineMovement('R', {col:i, row:j});
+		else straightLineMovement('L', {col:i, row:j});
 	}
 	// Case: finish location is DL of start location
 	else if (i > finishLocation.col && j < finishLocation.row) {
@@ -114,7 +127,7 @@ export function pathToCell (startLocation, finishLocation) {
 			j++;
 			path.push('DL');
 		}
-		if (i === finishLocation.col) {
+		if (i === finishLocation.col || i-1 === finishLocation.col) {
 			straightLineMovement('D', {col:i, row:j});
 		}
 		else straightLineMovement('L', {col:i, row:j});
@@ -124,12 +137,12 @@ export function pathToCell (startLocation, finishLocation) {
 		while ((i+1 !== finishLocation.col && j+1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
 			i++;
 			j++;
-			path.push('UL');
+			path.push('DR');
 		}
-		if (i === finishLocation.col) {
-			straightLineMovement('U', {col:i, row:j});
+		if (i === finishLocation.col || i+1 === finishLocation.col) {
+			straightLineMovement('D', {col:i, row:j});
 		}
-		else straightLineMovement('L', {col:i, row:j});
+		else straightLineMovement('R', {col:i, row:j});
 	}
 	// Case: finish location is UR of start location
 	else if (i < finishLocation.col && j > finishLocation.row) {
@@ -138,7 +151,7 @@ export function pathToCell (startLocation, finishLocation) {
 			j--;
 			path.push('UR');
 		}
-		if (i === finishLocation.col) {
+		if (i === finishLocation.col || i+1 === finishLocation.col) {
 			straightLineMovement('U', {col:i, row:j});
 		}
 		else straightLineMovement('R', {col:i, row:j});
@@ -149,25 +162,94 @@ export function pathToCell (startLocation, finishLocation) {
 	}
 	return path
 }
-
+// function below creates an array that contains the movements requires to move beside the finish location
+export function pathToCell (startLocation, finishLocation) {
+	if (!testValidityOfLocationInput(startLocation) || !testValidityOfLocationInput(finishLocation)) return
+	if (startLocation.col === finishLocation.col && startLocation.row === finishLocation.row) {
+		console.log(' two tested locations are already on the same cell')
+		return []
+	}
+	let path = [];
+	function straightLineMovement (moveDirection, location) {
+		for (let moves = 1; moves < straightDistanceBetweenCells(location,finishLocation); moves ++) {
+			path.push(moveDirection)
+		}
+	}
+	if (startLocation.col === finishLocation.col) {
+		if (startLocation.row > finishLocation.row) {
+			straightLineMovement('U', startLocation);
+		}
+		else {
+			straightLineMovement('D', startLocation);
+		}
+		return path
+	}
+	else if (startLocation.row === finishLocation.row) {
+		if (startLocation.col > finishLocation.col) {
+			straightLineMovement('L', startLocation);
+		}
+		else {
+			straightLineMovement('R', startLocation);
+		}
+		return path
+	}
+	let i = startLocation.col;
+	let j = startLocation.row;
+	// Case: finish location is DR of start location
+	if (i > finishLocation.col && j > finishLocation.row) {
+		while ((i-1 !== finishLocation.col && j-1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
+			i--;
+			j--;
+			path.push('UL');
+		}
+		if (i === finishLocation.col) {
+			straightLineMovement('U', {col:i, row:j});
+		}
+		else straightLineMovement('L', {col:i, row:j});
+	}
+	// Case: finish location is DL of start location
+	else if (i > finishLocation.col && j < finishLocation.row) {
+		while ((i-1 !== finishLocation.col && j+1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
+			i--;
+			j++;
+			path.push('UR');
+		}
+		if (i === finishLocation.col) {
+			straightLineMovement('U', {col:i, row:j});
+		}
+		else straightLineMovement('R', {col:i, row:j});
+	}
+	// Case: finish location is UL of start location
+	else if (i < finishLocation.col && j < finishLocation.row) {
+		while ((i+1 !== finishLocation.col && j+1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
+			i++;
+			j++;
+			path.push('DR');
+		}
+		if (i === finishLocation.col) {
+			straightLineMovement('D', {col:i, row:j});
+		}
+		else straightLineMovement('R', {col:i, row:j});
+	}
+	// Case: finish location is UR of start location
+	else if (i < finishLocation.col && j > finishLocation.row) {
+		while ((i+1 !== finishLocation.col && j-1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
+			i++;
+			j--;
+			path.push('DL');
+		}
+		if (i === finishLocation.col) {
+			straightLineMovement('D', {col:i, row:j});
+		}
+		else straightLineMovement('L', {col:i, row:j});
+	}
+	else {
+		console.log('pathToCell function encountered an unexpected condition')
+		return
+	}
+	return path
+}
 export function distToMoveBesideCell (startLocation, finishLocation) {
 	// below is only true for straight lines
 	return pathToCell(startLocation, finishLocation).length
 }
-
-const A = {col: 3, row:5}
-const B = {col: 3, row:5}
-const C = {col: 2, row:5}
-const D = {col: 2, row:9}
-const E = {col: 4, row:6}
-const F = {col: 1, row:1}
-const t1 = {col: 3, row:5}
-const t2 = {col: 3, row:6}
-const t3 = {col: 3, row:10}
-const t4 = {col: 3, row:4}
-// const fA = {};
-// const fB = [];
-// const fC = 'col';
-// const fD = 4;
-
-// distBetweenCells(A,B)

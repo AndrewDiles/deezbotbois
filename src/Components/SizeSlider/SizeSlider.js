@@ -112,7 +112,7 @@ const Wrapper = styled.div`
 const Bar = styled.div`
   width: 100%;
   height: 3px;
-  background-color: rgba(0,0,0,0.5);
+  background-color: ${props => props.colors ? props.colors.textColor : 'rgba(0,0,0,0.5)'};
   border-radius: 6px;
   display: flex;
   justify-content: left;
