@@ -5,8 +5,18 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import BattleGrid from '../Levels/BattleGrid';
 import GridPopulator from '../Levels/GridPopulator';
+import StyledButton from '../StyledButton/StyledButton'
 
-import { pathToCell, pathToAdjacentCell, distanceToCell, distanceToAdjacentToCell } from '../../Constants/helperFunctions';
+import { 
+	pathToCell,
+	pathToAdjacentCell,
+	distanceToCell,
+	distanceToAdjacentToCell,
+	nextStepGenerator,
+	collisionVerification,
+	convertPxStringToNum,
+	convertNumToPxstring
+} from '../../Constants/helperFunctions';
 
 const Test2 = () => {
 	const settings = useSelector((state) => state.settings);
@@ -15,7 +25,7 @@ const Test2 = () => {
 	let rows = 9;
 	let columns = 10
 	let bot1Location = {col: 5, row:5};
-	let bot2Location = {col: 1, row:8};
+	let bot2Location = {col: 4, row:7};
 
 	let objectsToBePlaced = [
 		{
@@ -38,17 +48,66 @@ const Test2 = () => {
 		}
 	]
 
-	console.log('cellClicked',cellClicked)
-	console.log('pathToCell',pathToCell(bot1Location,cellClicked))
-	console.log('distanceToCell', distanceToCell(bot1Location,cellClicked))
-	console.log('pathToAdjacentCell',pathToAdjacentCell(bot1Location,cellClicked));
-	console.log('distanceToAdjacentToCell', distanceToAdjacentToCell(bot1Location,cellClicked))
+	// console.log('cellClicked',cellClicked);
+	// console.log('pathToCell',pathToCell(bot1Location,cellClicked));
+	// console.log('distanceToCell', distanceToCell(bot1Location,cellClicked));
+	// console.log('pathToAdjacentCell',pathToAdjacentCell(bot1Location,cellClicked));
+	// console.log('distanceToAdjacentToCell', distanceToAdjacentToCell(bot1Location,cellClicked));
+
+	function handleMoveAdj (objectsArray, indexToBeMoved, locationToMoveTo) {
+		let objectBeingMoved = objectsArray[indexToBeMoved];
+		let currentLandingSpot = objectBeingMoved.location;
+		const path = pathToAdjacentCell(currentLandingSpot,locationToMoveTo);
+		console.log({path});
+		if (!path || path.length === 0) return;
+		let pathObstructed = false;
+		let nextStep;
+		path.forEach((move)=>{
+			if (!pathObstructed) {
+				nextStep = nextStepGenerator(currentLandingSpot, move);
+				pathObstructed = collisionVerification(nextStep, objectsArray)
+				if (!pathObstructed) currentLandingSpot = nextStep;
+			}
+		})
+		console.log({pathObstructed})
+	}
+
+	function handleMoveOnto (objectsArray, indexToBeMoved, locationToMoveTo) {
+		let objectBeingMoved = objectsArray[indexToBeMoved];
+		let currentLandingSpot = objectBeingMoved.location;
+		const path = pathToCell(currentLandingSpot,locationToMoveTo);
+		console.log({path});
+		if (!path || path.length === 0) return;
+		let pathObstructed = false;
+		let nextStep;
+		path.forEach((move)=>{
+			if (!pathObstructed) {
+				nextStep = nextStepGenerator(currentLandingSpot, move);
+				pathObstructed = collisionVerification(nextStep, objectsArray)
+				if (!pathObstructed) currentLandingSpot = nextStep;
+			}
+		})
+		console.log({pathObstructed})
+	}
+
   return (
     <Wrapper
 		navLocation = {settings.navLocation}
 		profileTab = {settings.profileTab}
 		colors = {colors}
 		>
+			<ColDiv className = 'centeredFlex'>
+			<StyledButton
+			handleClick = {(e) => {handleMoveAdj(objectsToBePlaced,0,cellClicked)}}
+			>
+				Move ADJ
+			</StyledButton>
+			<StyledButton
+			handleClick = {(e) => {handleMoveOnto(objectsToBePlaced,0,cellClicked)}}
+			>
+				Move ONTO
+			</StyledButton>
+			</ColDiv>
 			<BattleGrid
 			rows = {rows}
 			columns = {columns}
@@ -94,4 +153,8 @@ const ShiftedWrapper = styled.div`
 	width: ${props => `${props.cellSize*props.columns}px`};
 	position: relative;
 	left: ${props => `-${props.cellSize*props.columns}px`};
+`
+
+const ColDiv = styled.div`
+	flex-direction: column;
 `

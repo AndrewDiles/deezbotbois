@@ -49,6 +49,7 @@ const Extension = styled.div`
   left: 46%;
   background: ${props => props.color};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
+	z-index:2;
 `
 const Roller = styled.div`
   position: relative;
@@ -58,6 +59,7 @@ const Roller = styled.div`
   left: 42.5%;
   background: ${props => props.color};
   border-radius: 40%;
+	z-index:2;
 `
 
 const Body = styled.div`
@@ -70,7 +72,7 @@ const Body = styled.div`
   background: ${props => props.color};
   background-image: ${props => `radial-gradient(${props.color},${props.trim})`};
   border-radius: 20%;
-  z-index:2;
+  z-index:4;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -89,10 +91,12 @@ const Head = styled.div`
   justify-content: space-evenly;
   align-items: top;
   align-content: center;
+	z-index:2;
 `
 const Eye = styled.div`
   height: 10%;
   width: 20%;
   background-color: ${props => props.color};
   border-radius: 50%;
+	z-index:2;
 `

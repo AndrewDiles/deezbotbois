@@ -9,11 +9,12 @@ const GridPopulator = ({ objectsToBePlaced }) => {
 	
   return (
 		<>
-			{objectsToBePlaced.map((object)=>(
-				<ZeroSizedWrapper>
+			{objectsToBePlaced.map((object, index)=>(
+				<ZeroSizedWrapper key = {`ZeroSizedWrapper${index}`}>
 					<ObjectPlacer
 					cellSize = {settings.cellSize}
 					location = {object.location}
+					id = {`placer${index}`}
 					>
 						{object.type === 'Bot' &&
 							<Bot

@@ -60,12 +60,36 @@ const ModelChanger = ({ botNumberSelected }) => {
 	if (botNumberSelected !== null) {
 		colorsToSendToBotComponent = userInfo.botBuilds[botNumberSelected].colors;
 	}
+	if (userInfo.availableBots.length === 1) {
+		return (
+			<Wrapper>
+				{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Name}
+				<RowDivSpace
+				justifyContent = 'center'
+				>
+					<Bot
+					alternativeBotSize = {70}
+					model = {userInfo.botBuilds[botNumberSelected].model}
+					arm1 = {userInfo.botBuilds[botNumberSelected].equipment.arm1}
+					arm2 = {userInfo.botBuilds[botNumberSelected].equipment.arm2}
+					arm3 = {userInfo.botBuilds[botNumberSelected].equipment.arm3}
+					arm1Angle = '-45'
+					arm2Angle = '45'
+					arm3Angle = '235'
+					botColors ={colorsToSendToBotComponent}
+					/>
+				</RowDivSpace>
+			</Wrapper>
+		)
+	}
   return (
     <Wrapper>
 			CHANGE MODEL
 			<br/>
 			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Name}
-			<RowDivSpace>
+			<RowDivSpace
+			justifyContent = 'space-between'
+			>
 				<Bot
 				alternativeBotSize = {40}
 				model = {userInfo.availableBots[indexOfSelectedModel-1]}
@@ -121,7 +145,7 @@ const RowDivSpace = styled.div`
 	height: 100%;
 	display : flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: ${props => props.justifyContent};
 	align-content: center;
 	align-items: center;
 `

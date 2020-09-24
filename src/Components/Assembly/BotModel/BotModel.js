@@ -27,11 +27,11 @@ const BotModel = ({ botNumberSelected}) => {
 			<h3>
 				MODEL
 			</h3>
-			{userInfo.availableBots.length > 1 &&
+			{/* {userInfo.availableBots.length > 1 && */}
 				<ModelChanger
 				botNumberSelected = {botNumberSelected}
 				/>
-			}
+			{/* } */}
 			NAME
 			<RowDivCenter
 			className = 'centeredFlex'

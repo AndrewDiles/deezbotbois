@@ -75,6 +75,7 @@ const Roller = styled.div`
   width: 25%;
   background: ${props => props.color};
   border-radius: 50%;
+	z-index:2;
 `
 const RollerWrapper = styled.div`
   position: relative;
@@ -85,6 +86,7 @@ const RollerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+	z-index:2;
 `
 const Body = styled.div`
   position: relative;
@@ -96,7 +98,7 @@ const Body = styled.div`
   background: ${props => props.color};
   background-image: ${props => `radial-gradient(${props.color},${props.trim})`};
   border-radius: 10% 10% 0 0;
-  z-index:2;
+  z-index:4;
   display: flex;
   justify-content: space-evenly;
   align-content: center;
@@ -110,6 +112,7 @@ const Neck = styled.div`
   left: ${props => props.location === 'left' ? '15%' : '80%'};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   background: ${props => props.color};
+	z-index:2;
 `
 const Head = styled.div`
   position: relative;
@@ -122,11 +125,13 @@ const Head = styled.div`
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
+	z-index:2;
 `
 const Eye = styled.div`
   height: 40%;
   width: 40%;
   background-color: ${props => props.color};
+	z-index:2;
 `
 const HeadWrapper = styled.div`
   position: relative;
@@ -138,4 +143,5 @@ const HeadWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+	z-index:2;
 `

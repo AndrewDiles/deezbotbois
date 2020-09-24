@@ -23,7 +23,7 @@ const BattleGrid = ({ rows, columns, setCellClicked, cellClicked}) => {
 		columns = {columns}
 		>
 			{rowArray.map((row)=>(
-				<>
+				<CellWrapper key = {row}>
 					{colArray.map((col)=>{
 						// console.log('making a cell')
 						return (
@@ -39,7 +39,7 @@ const BattleGrid = ({ rows, columns, setCellClicked, cellClicked}) => {
 							/>
 						)
 					})}
-				</>
+				</CellWrapper>
 			))}
     </Grid>
   )
@@ -64,12 +64,13 @@ const Grid = styled.div`
 	grid-template-columns: ${props => `repeat(${props.columns}, ${props.cellSize}px)`};
 	/* overflow: auto; */
 `
+const CellWrapper = styled.div`
+	z-index:1;
+`
 const Cell = styled.div`
 	height: ${props => `${props.cellSize}px`};
 	width: ${props => `${props.cellSize}px`};
 	border: ${props => props.colors && `1px solid ${props.colors.secondary}`};
-	/* background-color: purple; */
 	background-image: ${props => props.colors && `radial-gradient(${props.colors.primary},${props.colors.secondary})`};
 	border-color: ${props => props.cellClicked && props.cellClicked.row === props.row && props.cellClicked.col === props.col && 'orange'};
-	z-index: 1; /*remove this later*/
 `

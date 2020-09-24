@@ -7,7 +7,7 @@ import AccessoryContents from '../../ToolTip/AccessoryContents';
 import { accessoryStats } from '../../../Constants/equipment';
 import { equipItem, unequipItem } from '../../../Redux/actions';
 
-const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped  }) => {
+const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped, setMessageDisplayed  }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
@@ -18,10 +18,12 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 		const onMouseEnter = (ev) => {
 			// if (ev.target === target) 
 			setMessageHovered(true);
+			setMessageDisplayed(true);
 		}
 		const onMouseLeave = (ev) => {
 			// if (ev.target === target) 
 			setMessageHovered(false);
+			setMessageDisplayed(false);
 		}
 		if (target) {
 			target.addEventListener('mouseenter',onMouseEnter);

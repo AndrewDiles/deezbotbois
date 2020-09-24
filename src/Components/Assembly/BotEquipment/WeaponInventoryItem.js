@@ -7,7 +7,7 @@ import WeaponContents from '../../ToolTip/WeaponContents';
 import { weaponStats } from '../../../Constants/equipment';
 import { equipItem, unequipItem } from '../../../Redux/actions';
 
-const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped }) => {
+const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped, setMessageDisplayed }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
@@ -18,10 +18,12 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 		const onMouseEnter = (ev) => {
 			// if (ev.target === target) 
 			setMessageHovered(true);
+			setMessageDisplayed(true);
 		}
 		const onMouseLeave = (ev) => {
 			// if (ev.target === target) 
 			setMessageHovered(false);
+			setMessageDisplayed(true);
 		}
 		if (target) {
 			target.addEventListener('mouseenter',onMouseEnter);

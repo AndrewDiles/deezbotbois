@@ -90,6 +90,7 @@ const Extension = styled.div`
   background: ${props => props.color};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   transform: ${props => props.location === 'left' ? 'rotate(30deg)' : props.location === 'right' ? 'rotate(-30deg)' : ''};
+	z-index:2;
 `
 const ExtensionWrapper = styled.div`
   position: relative;
@@ -101,12 +102,14 @@ const ExtensionWrapper = styled.div`
   justify-content: space-between;
   padding: 0 10%;
   overflow: hidden;
+	z-index:2;
 `
 const Roller = styled.div`
   height: 100%;
   width: 20%;
   background: ${props => props.color};
   border-radius: 50%;
+	z-index:2;
 `
 const RollerWrapper = styled.div`
   position: relative;
@@ -117,6 +120,7 @@ const RollerWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   overflow: hidden;
+	z-index:2;
 `
 const SpikeWrapper = styled.div`
   position: relative;
@@ -127,6 +131,7 @@ const SpikeWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 3%;
+	z-index:2;
   /* overflow: hidden; */
 `
 const Spike = styled.div`
@@ -135,6 +140,7 @@ const Spike = styled.div`
   background: ${props => props.color};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   transform: rotate(45deg);
+	z-index:2;
 `
 
 const Body = styled.div`
@@ -147,7 +153,7 @@ const Body = styled.div`
   background: ${props => props.color};
   background-image: ${props => `radial-gradient(${props.color},${props.trim})`};
   border-radius: 40%;
-  z-index:2;
+  z-index:4;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -161,6 +167,7 @@ const Neck = styled.div`
   left: 45%;
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   background: ${props => props.color};
+	z-index:2;
 `
 const Head = styled.div`
   position: relative;
@@ -174,9 +181,11 @@ const Head = styled.div`
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
+	z-index:2;
 `
 const Eye = styled.div`
   height: 20%;
   width: 20%;
   background-color: ${props => props.color};
+	z-index:2;
 `

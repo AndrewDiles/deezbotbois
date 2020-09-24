@@ -18,6 +18,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 	const [slots, setSlots] = useState({weapons: 0, accessories: 0});
 	const [typeViewing, setTypeViewing] = useState('weapons');
 	const [inventoryIndexRange, setInventoryIndexRange] = useState({min:0, max:3});
+	const [messageDisplayed, setMessageDisplayed] = React.useState(false);
 
 	React.useEffect(()=>{
 		if (!botInfo[botNumberSelected]) return;
@@ -199,6 +200,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 								setEquipmentStaging = {setEquipmentStaging}
 								botNumberSelected = {botNumberSelected}
 								alreadyEquipped = {Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(weapon)}
+								setMessageDisplayed = {setMessageDisplayed}
 								/>
 							)
 						}
@@ -219,6 +221,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 								setEquipmentStaging = {setEquipmentStaging}
 								botNumberSelected = {botNumberSelected}
 								alreadyEquipped = {Object.values(userInfo.botBuilds[botNumberSelected].equipment).includes(accessory)}
+								setMessageDisplayed = {setMessageDisplayed}
 								/>
 							)
 						}
@@ -226,7 +229,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				</InventoryWrapper>
 			}
 			{(typeViewing === 'weapons' && Object.keys(userInfo.availableArms).length > 4) ||
-				(typeViewing === 'accessories' && Object.keys(userInfo.availableAcc).length > 4) &&
+				(typeViewing === 'accessories' && Object.keys(userInfo.availableAcc).length > 4) && !messageDisplayed &&
 				<StyledIcon
 				handleClick = {clickDown}
 				disabled = {inventoryIndexRange.max+1 === Object.keys(userInfo.availableAcc).length}

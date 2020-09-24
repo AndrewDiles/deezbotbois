@@ -70,6 +70,7 @@ const ExtensionWrapper = styled.div`
   justify-content: space-between;
   padding: 0 10%;
   overflow: hidden;
+	z-index:2;
 `
 
 const Extension = styled.div`
@@ -79,6 +80,7 @@ const Extension = styled.div`
   background: ${props => props.color};
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   transform: ${props => props.location === 'left' ? 'rotate(45deg)' : 'rotate(-45deg)'};
+	z-index:2;
 `
 const RollerWrapper = styled.div`
   position: relative;
@@ -89,6 +91,7 @@ const RollerWrapper = styled.div`
   justify-content: space-between;
   overflow: hidden;
   padding: 0 10%;
+	z-index:2;
 `
 const Roller = styled.div`
   position: relative;
@@ -97,6 +100,7 @@ const Roller = styled.div`
   top: 0%;
   background: ${props => props.color};
   border-radius: 50%;
+	z-index:2;
 `
 
 const Body = styled.div`
@@ -109,7 +113,7 @@ const Body = styled.div`
   background: ${props => props.color};
   background-image: ${props => `radial-gradient(${props.color},${props.trim})`};
   transform: rotate(45deg);
-  z-index:2;
+  z-index:4;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -123,6 +127,7 @@ const Neck = styled.div`
   left: 45%;
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   background: ${props => props.color};
+	z-index:2;
 `
 
 const Head = styled.div`
@@ -138,10 +143,12 @@ const Head = styled.div`
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
+	z-index:2;
 `
 const Eye = styled.div`
   height: 25%;
   width: 25%;
   background-color: ${props => props.color};
   border-radius: 50%;
+	z-index:2;
 `

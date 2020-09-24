@@ -283,3 +283,112 @@ export function pathToCell (startLocation, finishLocation) {
 export function distanceToCell (startLocation, finishLocation) {
 	return movesAlongPath(pathToCell(startLocation, finishLocation))
 }
+// function returns the next location to move to given a start location and a move direction
+export function nextStepGenerator (startLocation, move) {
+	if (!testValidityOfLocationInput(startLocation)) return
+	let nextStep = null;
+	switch(move) {
+		case 'R' : {
+			nextStep = {col: startLocation.col+1, row: startLocation.row}
+			break;
+		}
+		case 'L' : {
+			nextStep = {col: startLocation.col-1, row: startLocation.row}
+			break;
+		}
+		case 'U' : {
+			nextStep = {col: startLocation.col, row: startLocation.row-1}
+			break;
+		}
+		case 'D' : {
+			nextStep = {col: startLocation.col, row: startLocation.row+1}
+			break;
+		}
+		case 'UR' : {
+			nextStep = {col: startLocation.col+1, row: startLocation.row-1}
+			break;
+		}
+		case 'UL' : {
+			nextStep = {col: startLocation.col-1, row: startLocation.row-1}
+			break;
+		}
+		case 'DL' : {
+			nextStep = {col: startLocation.col-1, row: startLocation.row+1}
+			break;
+		}
+		case 'DR' : {
+			nextStep = {col: startLocation.col+1, row: startLocation.row+1}
+			break;
+		}
+		default:{
+			console.log('no move detected')
+		}
+	}
+	return nextStep
+}
+
+// The calling of this function is for testing purposes and should be removed upon deployment
+export function testValidityOfObjectsArrayInput (objectsArray) {
+	if (objectsArray === undefined || objectsArray === null) {
+		console.log('objectsArray not entered')
+		return false
+	}
+	if (typeof(objectsArray) !== 'object') {
+		console.log('objectsArray is not an object')
+		return false
+	}
+	let caseTest = true;
+	objectsArray.forEach((object)=>{
+		if (caseTest) {
+			if (!object.location) {
+				console.log(`object ${object} has no location`)
+				caseTest = false;
+			}
+			else {
+				caseTest= testValidityOfLocationInput(object.location)
+			}
+		}
+	})
+	return caseTest
+}
+
+// function tests if a collision occurs given a location to move to and all the objects
+export function collisionVerification (cellLocation, objectsArray) {
+	if (!testValidityOfLocationInput(cellLocation) || !testValidityOfObjectsArrayInput(objectsArray)) return
+	let collision = false;
+	objectsArray.forEach((object)=>{
+		if (!collision) {
+			console.log('testing colision potential between', cellLocation, ' and ', object.location)
+			if (object.location.col === cellLocation.col && object.location.row === cellLocation.row) {
+				collision = true;
+				console.log(`Impending impact with ${object}`)
+			}
+		}
+	})
+	return collision
+}
+
+// function below takes in a string and returns the number contained inside it as a number without 'px'
+export function convertPxStringToNum (string) {
+	if (typeof(string) !== 'string' || !string.includes('px')) {
+		console.log(`string ${string} is not a string or does not include px`);
+		return
+	}
+	let pxlessString = string.replace("px", "");
+	let result;
+	pxlessString === '' ? result = 0 : result = parseFloat(pxlessString);
+	if (result !== 0 && !result) {
+		console.log(`conversion to number of ${string} does not produce a number`);
+		return
+	}
+	return result
+}
+
+// function below takesin a number and returns a string with 'px' added to the end
+export function convertNumToPxstring (number) {
+	if (typeof(number) !== 'number') {
+		console.log(`number ${number} is not a number`);
+		return;
+	}
+	return `${number}px`
+}
