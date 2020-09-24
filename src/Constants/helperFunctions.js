@@ -114,7 +114,7 @@ export function pathToAdjacentCell (startLocation, finishLocation) {
 			j--;
 			path.push('UL');
 		}
-		console.log(i, j, finishLocation.col, finishLocation.row)
+		// console.log(i, j, finishLocation.col, finishLocation.row)
 		if (i === finishLocation.col || i-1 === finishLocation.col) {
 			straightLineMovement('U', {col:i, row:j});
 		}
@@ -162,6 +162,36 @@ export function pathToAdjacentCell (startLocation, finishLocation) {
 	}
 	return path
 }
+// utility function to test if a move was diagonal
+function diagonalMovementTest (move) {
+	if (move === 'UR' || move === 'UL' || move === 'DR' || move === 'DL') return true
+	return false
+}
+// utility function to determine number of moves along a path
+function movesAlongPath (path) {
+	if (path === undefined || path === null) return
+	if (path.length < 2 || !diagonalMovementTest(path[1])) {
+		return path.length
+	}
+	else {
+		let secondDiagonal = false;
+		let moveCounter = 0;
+		path.forEach((move)=>{
+			if (diagonalMovementTest(move)) {
+				secondDiagonal ? moveCounter += 2 : moveCounter ++;
+				secondDiagonal = !secondDiagonal;
+			}
+			else {
+				moveCounter ++;
+			}
+		})
+		return moveCounter
+	}
+}
+// function calcualtes number of moves required to travel to a cell
+export function distanceToAdjacentToCell (startLocation, finishLocation) {
+	return movesAlongPath(pathToAdjacentCell(startLocation, finishLocation))
+}
 // function below creates an array that contains the movements requires to move beside the finish location
 export function pathToCell (startLocation, finishLocation) {
 	if (!testValidityOfLocationInput(startLocation) || !testValidityOfLocationInput(finishLocation)) return
@@ -171,7 +201,7 @@ export function pathToCell (startLocation, finishLocation) {
 	}
 	let path = [];
 	function straightLineMovement (moveDirection, location) {
-		for (let moves = 1; moves < straightDistanceBetweenCells(location,finishLocation); moves ++) {
+		for (let moves = 1; moves <= straightDistanceBetweenCells(location,finishLocation); moves ++) {
 			path.push(moveDirection)
 		}
 	}
@@ -197,7 +227,7 @@ export function pathToCell (startLocation, finishLocation) {
 	let j = startLocation.row;
 	// Case: finish location is DR of start location
 	if (i > finishLocation.col && j > finishLocation.row) {
-		while ((i-1 !== finishLocation.col && j-1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
+		while (!(i === finishLocation.col || j === finishLocation.row)) {
 			i--;
 			j--;
 			path.push('UL');
@@ -209,19 +239,19 @@ export function pathToCell (startLocation, finishLocation) {
 	}
 	// Case: finish location is DL of start location
 	else if (i > finishLocation.col && j < finishLocation.row) {
-		while ((i-1 !== finishLocation.col && j+1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
+		while (!(i === finishLocation.col || j === finishLocation.row)) {
 			i--;
 			j++;
-			path.push('UR');
+			path.push('DL');
 		}
 		if (i === finishLocation.col) {
-			straightLineMovement('U', {col:i, row:j});
+			straightLineMovement('D', {col:i, row:j});
 		}
-		else straightLineMovement('R', {col:i, row:j});
+		else straightLineMovement('L', {col:i, row:j});
 	}
 	// Case: finish location is UL of start location
 	else if (i < finishLocation.col && j < finishLocation.row) {
-		while ((i+1 !== finishLocation.col && j+1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
+		while (!(i === finishLocation.col || j === finishLocation.row)) {
 			i++;
 			j++;
 			path.push('DR');
@@ -233,15 +263,15 @@ export function pathToCell (startLocation, finishLocation) {
 	}
 	// Case: finish location is UR of start location
 	else if (i < finishLocation.col && j > finishLocation.row) {
-		while ((i+1 !== finishLocation.col && j-1 !== finishLocation.row) && !(i === finishLocation.col || j === finishLocation.row)) {
+		while (!(i === finishLocation.col || j === finishLocation.row)) {
 			i++;
 			j--;
-			path.push('DL');
+			path.push('UR');
 		}
 		if (i === finishLocation.col) {
-			straightLineMovement('D', {col:i, row:j});
+			straightLineMovement('U', {col:i, row:j});
 		}
-		else straightLineMovement('L', {col:i, row:j});
+		else straightLineMovement('R', {col:i, row:j});
 	}
 	else {
 		console.log('pathToCell function encountered an unexpected condition')
@@ -249,7 +279,7 @@ export function pathToCell (startLocation, finishLocation) {
 	}
 	return path
 }
-export function distToMoveBesideCell (startLocation, finishLocation) {
-	// below is only true for straight lines
-	return pathToCell(startLocation, finishLocation).length
+// function calcualtes number of moves required to travel to adjacent cell
+export function distanceToCell (startLocation, finishLocation) {
+	return movesAlongPath(pathToCell(startLocation, finishLocation))
 }

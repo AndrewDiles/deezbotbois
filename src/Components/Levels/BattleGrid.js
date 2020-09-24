@@ -45,17 +45,7 @@ const BattleGrid = ({ rows, columns, setCellClicked, cellClicked}) => {
   )
 }
 
-
-// {shape.map((cell, index)=>(
-// 	<Cell
-// 	key = {index}
-// 	color = {cell || colors.primary}
-// 	cellSize = {cellSize}
-// 	/>
-// ))}
-
 export default BattleGrid;
-
 const Grid = styled.div`
 	display: grid;
 	grid-gap: 0px;
@@ -63,14 +53,15 @@ const Grid = styled.div`
 	grid-template-rows: ${props => `repeat(${props.rows}, minmax(${props.cellSize}px, auto)`}; */
 	/* grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, auto))`};
 	grid-template-rows: ${props => `repeat(${props.rows}, minmax(${props.cellSize}px, auto))`}; */
-	grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, 1fr))`};
-	grid-template-rows: ${props => `repeat(${props.rows}, minmax(${props.cellSize}px, 1fr))`};
 	/* grid-template-columns: repeat(8, minmax(75px, 1fr));
 	grid-template-rows: repeat(8, minmax(75px, 1fr)); */
 	/* grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, ${100/props.columns}vw))`};
 	grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, ${100/props.rows}vh))`}; */
-	/* grid-template-rows: ${props => `repeat(${props.rows}, ${props.cellSize}px)`};
-	grid-template-columns: ${props => `repeat(${props.columns}, ${props.cellSize}px)`}; */
+
+	/* grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, 1fr))`};
+	grid-template-rows: ${props => `repeat(${props.rows}, minmax(${props.cellSize}px, 1fr))`}; */
+	grid-template-rows: ${props => `repeat(${props.rows}, ${props.cellSize}px)`};
+	grid-template-columns: ${props => `repeat(${props.columns}, ${props.cellSize}px)`};
 	/* overflow: auto; */
 `
 const Cell = styled.div`
@@ -80,4 +71,5 @@ const Cell = styled.div`
 	/* background-color: purple; */
 	background-image: ${props => props.colors && `radial-gradient(${props.colors.primary},${props.colors.secondary})`};
 	border-color: ${props => props.cellClicked && props.cellClicked.row === props.row && props.cellClicked.col === props.col && 'orange'};
+	z-index: 1; /*remove this later*/
 `
