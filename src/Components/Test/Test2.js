@@ -28,6 +28,7 @@ const Test2 = () => {
 	const [cellColors, setCellColors] = React.useState({});
 	const bot1Location = {col: 5, row:5};
 	const bot2Location = {col: 4, row:7};
+	const bot3Location = {col: 7, row:5};
 	const startingPositions = [
 		{
 			type: 'Bot',
@@ -50,6 +51,18 @@ const Test2 = () => {
       arm1: 'Hammer1',
       botColors: null,
 			arm1Angle: 180,
+			techTree: [],
+			script: {},
+			attributes: {},
+			events: []
+		},
+		{
+			type: 'Bot',
+			location: bot3Location,
+			model: 'BotZippey',
+      arm1: 'Sword1',
+      botColors: null,
+			arm1Angle: -45,
 			techTree: [],
 			script: {},
 			attributes: {},
