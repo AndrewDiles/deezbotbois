@@ -22,7 +22,10 @@ import {
 const Test2 = () => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
-	const [cellClicked, setCellClicked] = React.useState({row: 1, col:1})
+	const [cellClicked, setCellClicked] = React.useState({row: 1, col:1});
+	let rows = 8;
+	let columns = 12;
+	const [cellColors, setCellColors] = React.useState({});
 	const bot1Location = {col: 5, row:5};
 	const bot2Location = {col: 4, row:7};
 	const startingPositions = [
@@ -34,7 +37,11 @@ const Test2 = () => {
       arm2: 'Gun1',
       botColors: null,
       arm1Angle: 180,
-      arm2Angle: 45,
+			arm2Angle: 45,
+			techTree: [],
+			script: {},
+			attributes: {},
+			events: []
 		},
 		{
 			type: 'Bot',
@@ -42,12 +49,15 @@ const Test2 = () => {
 			model: 'BotLumpey',
       arm1: 'Hammer1',
       botColors: null,
-      arm1Angle: 180,
+			arm1Angle: 180,
+			techTree: [],
+			script: {},
+			attributes: {},
+			events: []
 		}
 	];
 	const [objectsToBePlaced, setObjectsToBePlaced] = React.useState(startingPositions)
-	let rows = 8;
-	let columns = 12
+	
 
 	// console.log('cellClicked',cellClicked);
 	// console.log('pathToCell',pathToCell(bot1Location,cellClicked));
@@ -65,13 +75,23 @@ const Test2 = () => {
 		let pathObstructed = false;
 		let nextStep;
 		let pathToTake = [];
+		let cellColorsObject = {};
 		path.forEach((move)=>{
 			if (!pathObstructed) {
+				
 				nextStep = nextStepGenerator(currentLandingSpot, move);
+
+				console.log({nextStep})
+
 				pathObstructed = collisionVerification(nextStep, objectsArray)
+
 				if (!pathObstructed) {
 					currentLandingSpot = nextStep;
 					pathToTake.push(move);
+					cellColorsObject[`row${nextStep.row}col${nextStep.col}`] = 'rgba(0,255,0,0.5)';
+				}
+				else {
+					cellColorsObject[`row${nextStep.row}col${nextStep.col}`] = 'rgba(255,0,0,0.5)';
 				}
 			}
 		})
@@ -79,6 +99,7 @@ const Test2 = () => {
 		const botToMove = document.getElementById(`placer${indexToBeMoved}`);
 		if (botToMove) {
 			botToMove.style.transition = `transform ${settings.executionSpeed}s cubic-bezier(.8,.15,.65,.9)`;
+			setCellColors(cellColorsObject);
 		}
 		
 		setTimeout(()=>{
@@ -103,6 +124,7 @@ const Test2 = () => {
 				let newObjectsPlacement = [...objectsToBePlaced];
 				newObjectsPlacement[indexToBeMoved].location = currentLandingSpot;
 				setObjectsToBePlaced(newObjectsPlacement);
+				setCellColors({});
 			}
 		},settings.executionSpeed*1000)
 	}
@@ -170,6 +192,7 @@ const Test2 = () => {
 			columns = {columns}
 			setCellClicked = {setCellClicked}
 			cellClicked = {cellClicked}
+			cellColors = {cellColors}
 			/>
 			<ShiftedWrapper
 			rows = {rows}

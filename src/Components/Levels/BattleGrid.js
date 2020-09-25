@@ -4,7 +4,7 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import { incrementerArrayGenerator } from '../../Constants/helperFunctions';
 
-const BattleGrid = ({ rows, columns, setCellClicked, cellClicked}) => {
+const BattleGrid = ({ rows, columns, setCellClicked, cellClicked, cellColors}) => {
 	// const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
@@ -36,6 +36,7 @@ const BattleGrid = ({ rows, columns, setCellClicked, cellClicked}) => {
 							cellClicked = {cellClicked}
 							colors = {colors}
 							onClick = {() => setCellClicked({col: col, row: row})}
+							cellColors = {cellColors}
 							/>
 						)
 					})}
@@ -60,5 +61,8 @@ const Cell = styled.div`
 	width: ${props => `${props.cellSize}px`};
 	border: ${props => props.colors && `1px solid ${props.colors.secondary}`};
 	background-image: ${props => props.colors && `radial-gradient(${props.colors.primary},${props.colors.secondary})`};
+	background: ${props => props.row && props.col && props.cellColors && props.cellColors[`row${props.row}col${props.col}`] && props.cellColors[`row${props.row}col${props.col}`]};
+	/* background: rgba(0,255,0,0.5);
+	background: rgba(255,0,0,0.5); */
 	border-color: ${props => props.cellClicked && props.cellClicked.row === props.row && props.cellClicked.col === props.col && 'orange'};
 `
