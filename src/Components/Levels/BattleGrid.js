@@ -22,9 +22,9 @@ const BattleGrid = ({ rows, columns, setCellClicked, cellClicked}) => {
 		rows = {rows}
 		columns = {columns}
 		>
-			{rowArray.map((row)=>(
-				<CellWrapper key = {row}>
-					{colArray.map((col)=>{
+			{colArray.map((col)=>(
+				<CellWrapper key = {col}>
+					{rowArray.map((row)=>{
 						// console.log('making a cell')
 						return (
 							<Cell
@@ -49,17 +49,6 @@ export default BattleGrid;
 const Grid = styled.div`
 	display: grid;
 	grid-gap: 0px;
-	/* grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, auto)`};
-	grid-template-rows: ${props => `repeat(${props.rows}, minmax(${props.cellSize}px, auto)`}; */
-	/* grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, auto))`};
-	grid-template-rows: ${props => `repeat(${props.rows}, minmax(${props.cellSize}px, auto))`}; */
-	/* grid-template-columns: repeat(8, minmax(75px, 1fr));
-	grid-template-rows: repeat(8, minmax(75px, 1fr)); */
-	/* grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, ${100/props.columns}vw))`};
-	grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, ${100/props.rows}vh))`}; */
-
-	/* grid-template-columns: ${props => `repeat(${props.columns}, minmax(${props.cellSize}px, 1fr))`};
-	grid-template-rows: ${props => `repeat(${props.rows}, minmax(${props.cellSize}px, 1fr))`}; */
 	grid-template-rows: ${props => `repeat(${props.rows}, ${props.cellSize}px)`};
 	grid-template-columns: ${props => `repeat(${props.columns}, ${props.cellSize}px)`};
 `

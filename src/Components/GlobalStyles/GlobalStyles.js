@@ -142,6 +142,12 @@ html {
 .enlargen {
 	font-size: 400%;
 }
+.disabledTransition {
+	transition: '';
+}
+/* .enabledTransition {
+	transition: ${props => `transform ${props.executionSpeed}s  cubic-bezier(.8,.15,.65,.9)`};
+} */
 
 /* former load in:
 @keyframes loadInScreen {

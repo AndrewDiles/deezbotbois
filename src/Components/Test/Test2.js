@@ -23,12 +23,9 @@ const Test2 = () => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	const [cellClicked, setCellClicked] = React.useState({row: 1, col:1})
-	let rows = 9;
-	let columns = 10
-	let bot1Location = {col: 5, row:5};
-	let bot2Location = {col: 4, row:7};
-
-	let objectsToBePlaced = [
+	const bot1Location = {col: 5, row:5};
+	const bot2Location = {col: 4, row:7};
+	const startingPositions = [
 		{
 			type: 'Bot',
 			location: bot1Location,
@@ -47,7 +44,10 @@ const Test2 = () => {
       botColors: null,
       arm1Angle: 180,
 		}
-	]
+	];
+	const [objectsToBePlaced, setObjectsToBePlaced] = React.useState(startingPositions)
+	let rows = 8;
+	let columns = 12
 
 	// console.log('cellClicked',cellClicked);
 	// console.log('pathToCell',pathToCell(bot1Location,cellClicked));
@@ -58,8 +58,9 @@ const Test2 = () => {
 	function handleMoveAdj (objectsArray, indexToBeMoved, locationToMoveTo) {
 		let objectBeingMoved = objectsArray[indexToBeMoved];
 		let currentLandingSpot = objectBeingMoved.location;
+		// console.log({currentLandingSpot},{locationToMoveTo});
 		const path = pathToAdjacentCell(currentLandingSpot,locationToMoveTo);
-		console.log({path});
+		// console.log({path});
 		if (!path || path.length === 0) return;
 		let pathObstructed = false;
 		let nextStep;
@@ -74,23 +75,36 @@ const Test2 = () => {
 				}
 			}
 		})
+		// console.log({pathObstructed}, {currentLandingSpot})
+		const botToMove = document.getElementById(`placer${indexToBeMoved}`);
+		if (botToMove) {
+			botToMove.style.transition = `transform ${settings.executionSpeed}s cubic-bezier(.8,.15,.65,.9)`;
+		}
 		
-		console.log({pathObstructed}, {currentLandingSpot})
-		const botDivToBeMoved = document.getElementById(`placer${indexToBeMoved}`);
-		console.log('top:',botDivToBeMoved.style)
-		// botDivToBeMoved.style.transform = `translate3d(100px,50px,0px)`;
-		console.log('translation', translationGenerator(pathToTake,settings.cellSize))
-		botDivToBeMoved.style.transform = translationGenerator(pathToTake,settings.cellSize);
+		setTimeout(()=>{
+			const botToMove = document.getElementById(`placer${indexToBeMoved}`);
+			if (botToMove) {
+				botToMove.style.transform = translationGenerator(pathToTake,settings.cellSize);
+			}
+		},25)
 		
-		// botDivToBeMoved.style.transform = `translateX(100px)`;
-		// botDivToBeMoved.style.transform = `translateY(50px)`;
-		// botDivToBeMoved.style.transform = `translate(200px, 50px)`;
-		
-		// botDivToBeMoved.style.top = '50px';
-		// setTimeout(()=>{
-		// 	console.log('secondmove')
-		// 	botDivToBeMoved.style.top = '100px';
-		// },2000)
+		setTimeout(()=>{
+			const botMoved = document.getElementById(`placer${indexToBeMoved}`);
+			if (botMoved) {
+				botMoved.style.transition = '0s';
+			}
+			
+		},settings.executionSpeed*975)
+
+		setTimeout(()=>{
+			const botMoved = document.getElementById(`placer${indexToBeMoved}`);
+			if (botMoved) {
+				botMoved.style.transform = 'translate3d(0px,0px,0px)';
+				let newObjectsPlacement = [...objectsToBePlaced];
+				newObjectsPlacement[indexToBeMoved].location = currentLandingSpot;
+				setObjectsToBePlaced(newObjectsPlacement);
+			}
+		},settings.executionSpeed*1000)
 	}
 
 
@@ -123,22 +137,22 @@ const Test2 = () => {
 			<StyledButton
 			handleClick = {(e) => {setCellClicked({row: cellClicked.row-1, col: cellClicked.col})}}
 			>
-				COL LEFT
+				ROW UP
 			</StyledButton>
 			<StyledButton
 			handleClick = {(e) => {setCellClicked({row: cellClicked.row+1, col: cellClicked.col})}}
 			>
-				COL RIGHT
+				ROW DOWN
 			</StyledButton>
 			<StyledButton
 			handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col+1})}}
 			>
-				ROW DOWN
+				COL LEFT
 			</StyledButton>
 			<StyledButton
 			handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col-1})}}
 			>
-				ROW UP
+				COL RIGHT
 			</StyledButton>
 			<StyledButton
 			handleClick = {(e) => {handleMoveAdj(objectsToBePlaced,0,cellClicked)}}
@@ -190,8 +204,8 @@ const Wrapper = styled.div`
 	margin: 10px;
 `
 const ShiftedWrapper = styled.div`
-	height: ${props => `${props.cellSize*props.rows}px`};
-	width: ${props => `${props.cellSize*props.columns}px`};
+	/* height: ${props => `${props.cellSize*props.rows}px`};
+	width: ${props => `${props.cellSize*props.columns}px`}; */
 	position: relative;
 	left: ${props => `-${props.cellSize*props.columns}px`};
 	overflow: visible;

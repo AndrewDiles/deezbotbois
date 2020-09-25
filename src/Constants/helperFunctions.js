@@ -358,7 +358,7 @@ export function collisionVerification (cellLocation, objectsArray) {
 	let collision = false;
 	objectsArray.forEach((object)=>{
 		if (!collision) {
-			console.log('testing colision potential between', cellLocation, ' and ', object.location)
+			// console.log('testing colision potential between', cellLocation, ' and ', object.location)
 			if (object.location.col === cellLocation.col && object.location.row === cellLocation.row) {
 				collision = true;
 				console.log(`Impending impact with ${object}`)
@@ -396,10 +396,9 @@ export function convertNumToPxstring (number) {
 // function takes in an array of moves and the cell size and outputs the translation needed to move an element
 export function translationGenerator (movementArray, cellSize) {
 	if (typeof(movementArray) !== 'object' || movementArray.length <1 || typeof(cellSize) !== 'number') {
-		console.log(typeof(cellSize))
-		console.log(movementArray,cellSize,'bailing')
 		return;
 	}
+	console.log({movementArray})
 	let xDisplacement = 0;
 	let yDisplacement = 0;
 

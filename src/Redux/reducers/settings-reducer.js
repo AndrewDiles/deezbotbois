@@ -6,6 +6,7 @@ const initialState = {
 	profileTab: 'inactive',
 	cellSize : 75,
 	colorsTesting: null,
+	executionSpeed: 1,
 }
 
 export default function settings(
