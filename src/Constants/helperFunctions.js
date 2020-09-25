@@ -392,3 +392,59 @@ export function convertNumToPxstring (number) {
 	}
 	return `${number}px`
 }
+
+// function takes in an array of moves and the cell size and outputs the translation needed to move an element
+export function translationGenerator (movementArray, cellSize) {
+	if (typeof(movementArray) !== 'object' || movementArray.length <1 || typeof(cellSize) !== 'number') {
+		console.log(typeof(cellSize))
+		console.log(movementArray,cellSize,'bailing')
+		return;
+	}
+	let xDisplacement = 0;
+	let yDisplacement = 0;
+
+	movementArray.forEach((move)=>{
+		switch(move) {
+			case 'R' : {
+				xDisplacement +=cellSize;
+				break;
+			}
+			case 'L' : {
+				xDisplacement -=cellSize;
+				break;
+			}
+			case 'U' : {
+				yDisplacement -=cellSize;
+				break;
+			}
+			case 'D' : {
+				yDisplacement +=cellSize;
+				break;
+			}
+			case 'UR' : {
+				xDisplacement +=cellSize;
+				yDisplacement -=cellSize;
+				break;
+			}
+			case 'DR' : {
+				xDisplacement +=cellSize;
+				yDisplacement +=cellSize;
+				break;
+			}
+			case 'DL' : {
+				xDisplacement -=cellSize;
+				yDisplacement +=cellSize;
+				break;
+			}
+			case 'UL' : {
+				xDisplacement -=cellSize;
+				yDisplacement -=cellSize;
+				break;
+			}
+			default: {}
+		}
+	})
+	// `translate3d(100px,50px,0px)`;
+	let result = `translate3d(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)},0px)`;
+	return result
+}

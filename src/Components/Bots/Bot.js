@@ -155,6 +155,7 @@ const Wrapper = styled.div`
   height: ${props => `${props.cellSize}px`};
   width: ${props => `${props.cellSize}px`};
 	opacity: ${props => props.faded === true && 0.5};
+	overflow: visible;
 `
 const NoBot = styled.div`
 	height: ${props => `${props.cellSize}px`};

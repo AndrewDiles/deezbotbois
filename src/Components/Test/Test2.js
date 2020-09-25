@@ -15,13 +15,14 @@ import {
 	nextStepGenerator,
 	collisionVerification,
 	convertPxStringToNum,
-	convertNumToPxstring
+	convertNumToPxstring,
+	translationGenerator
 } from '../../Constants/helperFunctions';
 
 const Test2 = () => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
-	const [cellClicked, setCellClicked] = React.useState(null)
+	const [cellClicked, setCellClicked] = React.useState({row: 1, col:1})
 	let rows = 9;
 	let columns = 10
 	let bot1Location = {col: 5, row:5};
@@ -62,15 +63,37 @@ const Test2 = () => {
 		if (!path || path.length === 0) return;
 		let pathObstructed = false;
 		let nextStep;
+		let pathToTake = [];
 		path.forEach((move)=>{
 			if (!pathObstructed) {
 				nextStep = nextStepGenerator(currentLandingSpot, move);
 				pathObstructed = collisionVerification(nextStep, objectsArray)
-				if (!pathObstructed) currentLandingSpot = nextStep;
+				if (!pathObstructed) {
+					currentLandingSpot = nextStep;
+					pathToTake.push(move);
+				}
 			}
 		})
-		console.log({pathObstructed})
+		
+		console.log({pathObstructed}, {currentLandingSpot})
+		const botDivToBeMoved = document.getElementById(`placer${indexToBeMoved}`);
+		console.log('top:',botDivToBeMoved.style)
+		// botDivToBeMoved.style.transform = `translate3d(100px,50px,0px)`;
+		console.log('translation', translationGenerator(pathToTake,settings.cellSize))
+		botDivToBeMoved.style.transform = translationGenerator(pathToTake,settings.cellSize);
+		
+		// botDivToBeMoved.style.transform = `translateX(100px)`;
+		// botDivToBeMoved.style.transform = `translateY(50px)`;
+		// botDivToBeMoved.style.transform = `translate(200px, 50px)`;
+		
+		// botDivToBeMoved.style.top = '50px';
+		// setTimeout(()=>{
+		// 	console.log('secondmove')
+		// 	botDivToBeMoved.style.top = '100px';
+		// },2000)
 	}
+
+
 
 	function handleMoveOnto (objectsArray, indexToBeMoved, locationToMoveTo) {
 		let objectBeingMoved = objectsArray[indexToBeMoved];
@@ -97,6 +120,26 @@ const Test2 = () => {
 		colors = {colors}
 		>
 			<ColDiv className = 'centeredFlex'>
+			<StyledButton
+			handleClick = {(e) => {setCellClicked({row: cellClicked.row-1, col: cellClicked.col})}}
+			>
+				COL LEFT
+			</StyledButton>
+			<StyledButton
+			handleClick = {(e) => {setCellClicked({row: cellClicked.row+1, col: cellClicked.col})}}
+			>
+				COL RIGHT
+			</StyledButton>
+			<StyledButton
+			handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col+1})}}
+			>
+				ROW DOWN
+			</StyledButton>
+			<StyledButton
+			handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col-1})}}
+			>
+				ROW UP
+			</StyledButton>
 			<StyledButton
 			handleClick = {(e) => {handleMoveAdj(objectsToBePlaced,0,cellClicked)}}
 			>
@@ -145,14 +188,14 @@ const Wrapper = styled.div`
 	align-content: center;
 	align-items: start;
 	margin: 10px;
-	/* flex-wrap: none;
-	overflow: auto; */
 `
 const ShiftedWrapper = styled.div`
 	height: ${props => `${props.cellSize*props.rows}px`};
 	width: ${props => `${props.cellSize*props.columns}px`};
 	position: relative;
 	left: ${props => `-${props.cellSize*props.columns}px`};
+	overflow: visible;
+	pointer-events:none;
 `
 
 const ColDiv = styled.div`

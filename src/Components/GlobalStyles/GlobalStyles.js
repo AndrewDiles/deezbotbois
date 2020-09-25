@@ -340,6 +340,17 @@ html {
 		color:rgba(220, 220, 255, 0.1);
 	}
 }
+
+/* @keyframes moveBot {
+	0% {
+		top: 0px;
+		left: 0px;
+	}
+	100% {
+		top: --top;
+		left: --left;
+	}
+} */
 `
 ;
 

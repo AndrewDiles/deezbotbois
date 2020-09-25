@@ -62,10 +62,9 @@ const Grid = styled.div`
 	grid-template-rows: ${props => `repeat(${props.rows}, minmax(${props.cellSize}px, 1fr))`}; */
 	grid-template-rows: ${props => `repeat(${props.rows}, ${props.cellSize}px)`};
 	grid-template-columns: ${props => `repeat(${props.columns}, ${props.cellSize}px)`};
-	/* overflow: auto; */
 `
 const CellWrapper = styled.div`
-	z-index:1;
+	/* z-index:1; */
 `
 const Cell = styled.div`
 	height: ${props => `${props.cellSize}px`};
