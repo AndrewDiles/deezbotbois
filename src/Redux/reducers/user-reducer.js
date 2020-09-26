@@ -122,12 +122,12 @@ export default function userInfo(
 					botBuilds[action.index].equipment[action.slotKey] = null;
 				}
 				else {
-					console.log('looking for :',action.equipmentName)
+					// console.log('looking for :',action.equipmentName)
 					let slotKeys = Object.keys(botBuilds[action.index].equipment);
 					let foundSlotName = null;
 					slotKeys.forEach((slot, testIndex)=>{
-						console.log({slot})
-						console.log(botBuilds[action.index].equipment[slot])
+						// console.log({slot})
+						// console.log(botBuilds[action.index].equipment[slot])
 						if (botBuilds[action.index].equipment[slot] === action.equipmentName) {
 							foundSlotName = Object.keys(botBuilds[action.index].equipment)[testIndex];
 						}

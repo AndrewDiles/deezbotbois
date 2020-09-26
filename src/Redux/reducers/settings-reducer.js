@@ -7,6 +7,7 @@ const initialState = {
 	cellSize : 75,
 	colorsTesting: null,
 	executionSpeed: 1,
+	borderDisabled: false,
 }
 
 export default function settings(
@@ -77,6 +78,12 @@ export default function settings(
 				return {
 					...state,
 					profileTab : 'hovering'
+				}
+			}
+			case 'TOGGLE_BORDER' : {
+				return {
+					...state,
+					borderDisabled: !state.borderDisabled
 				}
 			}
       default:{

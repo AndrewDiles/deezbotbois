@@ -19,6 +19,10 @@ export const setColorTesting = (colors) => ({
 	type: 'SET_COLORS_TESTING',
 	colors: colors
 })
+// settings border disabled for BattleGrid
+export const toggleBorder = () => ({
+	type: 'TOGGLE_BORDER'
+})
 // retruns color testing scheme to null after log out
 export const resetColorTesting = () => ({
 	type: 'SET_COLORS_TESTING_DEFAULT',

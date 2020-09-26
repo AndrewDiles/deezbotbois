@@ -156,6 +156,7 @@ const Wrapper = styled.div`
   width: ${props => `${props.cellSize}px`};
 	opacity: ${props => props.faded === true && 0.5};
 	overflow: visible;
+	/* add border based on active? */
 `
 const NoBot = styled.div`
 	height: ${props => `${props.cellSize}px`};

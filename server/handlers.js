@@ -11,6 +11,12 @@ const { encryptomancer, recnamotpyrcne } = require('./encryptomancer.js');
 const { magic } = require('./magicUser');
 const { isNull } = require('util');
 const myEmailAddress = 'a_diles@hotmail.com';
+const {
+	userInfoSchema
+} = require('./schemas');
+const { 
+	generateNewUser
+} = require('./helpferFunctions');
 
 const uri = `mongodb+srv://botMaster:${password}@botboicluster.imeos.azure.mongodb.net/test`;
 
@@ -83,42 +89,42 @@ try {
         const test1 = await db.collection('userAuth').insertOne(newUserAuthData);
 				assert.equal(1, test1.insertedCount);
 				// Second add info to Data collection
-				
-        let newUserData = {
-					email : email,
-					handle : name,
-					navLocationPreference : navLocation,
-					cellSizePreference : cellSize,
-					imageUrl : imageUrl,
-					googleImageUrl : imageUrl,
-					colorTheme : {
-						primary: 'white',
-						secondary: 'white',
-						selected: 'rgba(170, 170, 170, 0.45)',
-						notSelected: 'rgba(255,255,255,0.3)',
-						hovered: 'silver',
-						textColor : 'rgba(0, 0, 0, 0.54)',
-					},
-					availableBots : ['BotBoxey'],
-					availableArms : ["Gun1", "Sword1"],
-					availableAcc : ["thickPaint"],
-					availableBotColors : {
-						primary: ['lime', 'khaki'],
-  					secondary: ['turquoise','tomato'],
-  					trim: ['green','darkkhaki'],
-  					extensions: ['silver','steelblue'],
-  					rollers: ['black','orchid'],
-  					eyes: ['orange', 'dodgerblue'],
-  					armTrim: ['steelblue', 'darkmagenta'],
-  					armPrimary: ['silver', 'pink'],
-  					armSecondary: ['deepskyblue', 'firebrick']
-					},
-					botBuilds : [],
-					battleBits: 0,
-					levelProgress : [[]],
-					tournamentHistory : null,
-					lastLogInBitsReceived: 0
-        }
+				let newUserData = generateNewUser(email, name, navLocation, cellSize, imageUrl, imageUrl);
+        // let newUserData = {
+				// 	email : email,
+				// 	handle : name,
+				// 	navLocationPreference : navLocation,
+				// 	cellSizePreference : cellSize,
+				// 	imageUrl : imageUrl,
+				// 	googleImageUrl : imageUrl,
+				// 	colorTheme : {
+				// 		primary: 'white',
+				// 		secondary: 'white',
+				// 		selected: 'rgba(170, 170, 170, 0.45)',
+				// 		notSelected: 'rgba(255,255,255,0.3)',
+				// 		hovered: 'silver',
+				// 		textColor : 'rgba(0, 0, 0, 0.54)',
+				// 	},
+				// 	availableBots : ['BotBoxey'],
+				// 	availableArms : ["Gun1", "Sword1"],
+				// 	availableAcc : ["thickPaint"],
+				// 	availableBotColors : {
+				// 		primary: ['lime', 'khaki'],
+  			// 		secondary: ['turquoise','tomato'],
+  			// 		trim: ['green','darkkhaki'],
+  			// 		extensions: ['silver','steelblue'],
+  			// 		rollers: ['black','orchid'],
+  			// 		eyes: ['orange', 'dodgerblue'],
+  			// 		armTrim: ['steelblue', 'darkmagenta'],
+  			// 		armPrimary: ['silver', 'pink'],
+  			// 		armSecondary: ['deepskyblue', 'firebrick']
+				// 	},
+				// 	botBuilds : [],
+				// 	battleBits: 0,
+				// 	levelProgress : [[]],
+				// 	tournamentHistory : [],
+				// 	lastLogInBitsReceived: 0
+        // }
         const test2 = await db.collection('userData').insertOne(newUserData);
 				assert.equal(1, test2.insertedCount);
 				res.status(200).json({ status: 200, userInfo: newUserData })
@@ -293,41 +299,42 @@ try {
 				});
 
 				// Second add info to Data collection
-        let newUserData = {
-					email : email,
-					handle : handle,
-					navLocationPreference : navLocation,
-					cellSizePreference : cellSize,
-					imageUrl : 'BotBoxey',
-					googleImageUrl : null,
-					colorTheme : {
-						primary: 'white',
-						secondary: 'white',
-						selected: 'rgba(170, 170, 170, 0.45)',
-						notSelected: 'rgba(255,255,255,0.3)',
-						hovered: 'silver',
-						textColor : 'rgba(0, 0, 0, 0.54)',
-					},
-					availableBots : ['BotBoxey'],
-					availableArms : ["Gun1", "Sword1"],
-					availableAcc : ["thickPaint"],
-					availableBotColors : {
-						primary: ['lime', 'khaki'],
-  					secondary: ['turquoise','tomato'],
-  					trim: ['green','darkkhaki'],
-  					extensions: ['silver','steelblue'],
-  					rollers: ['black','orchid'],
-  					eyes: ['orange', 'dodgerblue'],
-  					armTrim: ['steelblue', 'darkmagenta'],
-  					armPrimary: ['silver', 'pink'],
-  					armSecondary: ['deepskyblue', 'firebrick']
-					},
-					botBuilds : [],
-					battleBits: 0,
-					levelProgress : [[]],
-					tournamentHistory : null,
-					lastLogInBitsReceived: 0
-        }
+				let newUserData = generateNewUser(email, handle, navLocation, cellSize, imageUrl, null);
+        // let newUserData = {
+				// 	email : email,
+				// 	handle : handle,
+				// 	navLocationPreference : navLocation,
+				// 	cellSizePreference : cellSize,
+				// 	imageUrl : 'BotBoxey',
+				// 	googleImageUrl : null,
+				// 	colorTheme : {
+				// 		primary: 'white',
+				// 		secondary: 'white',
+				// 		selected: 'rgba(170, 170, 170, 0.45)',
+				// 		notSelected: 'rgba(255,255,255,0.3)',
+				// 		hovered: 'silver',
+				// 		textColor : 'rgba(0, 0, 0, 0.54)',
+				// 	},
+				// 	availableBots : ['BotBoxey'],
+				// 	availableArms : ["Gun1", "Sword1"],
+				// 	availableAcc : ["thickPaint"],
+				// 	availableBotColors : {
+				// 		primary: ['lime', 'khaki'],
+  			// 		secondary: ['turquoise','tomato'],
+  			// 		trim: ['green','darkkhaki'],
+  			// 		extensions: ['silver','steelblue'],
+  			// 		rollers: ['black','orchid'],
+  			// 		eyes: ['orange', 'dodgerblue'],
+  			// 		armTrim: ['steelblue', 'darkmagenta'],
+  			// 		armPrimary: ['silver', 'pink'],
+  			// 		armSecondary: ['deepskyblue', 'firebrick']
+				// 	},
+				// 	botBuilds : [],
+				// 	battleBits: 0,
+				// 	levelProgress : [[]],
+				// 	tournamentHistory : [],
+				// 	lastLogInBitsReceived: 0
+        // }
         const test2 = await db.collection('userData').insertOne(newUserData);
 				assert.equal(1, test2.insertedCount);
 				// res.status(200).json({ status: 200, userInfo: newUserData })

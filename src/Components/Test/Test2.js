@@ -1,7 +1,7 @@
 import React from 'react';
-
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
+
 import styled from 'styled-components';
 import BattleGrid from '../Levels/BattleGrid';
 import GridPopulator from '../Levels/GridPopulator';
@@ -16,10 +16,17 @@ import {
 	collisionVerification,
 	convertPxStringToNum,
 	convertNumToPxstring,
-	translationGenerator
+	translationGenerator,
+	generateScanResults,
+	illuminateScannedCells
 } from '../../Constants/helperFunctions';
 
+import {
+	toggleBorder
+} from '../../Redux/actions';
+
 const Test2 = () => {
+	const dispatch = useDispatch();
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	const [cellClicked, setCellClicked] = React.useState({row: 1, col:1});
@@ -41,7 +48,10 @@ const Test2 = () => {
 			arm2Angle: 45,
 			techTree: [],
 			script: {},
-			attributes: {},
+			attributes: {
+				ScanDistance: 3,
+			},
+			team: 1,
 			events: []
 		},
 		{
@@ -53,7 +63,10 @@ const Test2 = () => {
 			arm1Angle: 180,
 			techTree: [],
 			script: {},
-			attributes: {},
+			attributes: {
+				ScanDistance: 3,
+			},
+			team: 2,
 			events: []
 		},
 		{
@@ -65,25 +78,19 @@ const Test2 = () => {
 			arm1Angle: -45,
 			techTree: [],
 			script: {},
-			attributes: {},
+			attributes: {
+				ScanDistance: 3,
+			},
+			team: 1,
 			events: []
 		}
 	];
 	const [objectsToBePlaced, setObjectsToBePlaced] = React.useState(startingPositions)
 	
-
-	// console.log('cellClicked',cellClicked);
-	// console.log('pathToCell',pathToCell(bot1Location,cellClicked));
-	// console.log('distanceToCell', distanceToCell(bot1Location,cellClicked));
-	// console.log('pathToAdjacentCell',pathToAdjacentCell(bot1Location,cellClicked));
-	// console.log('distanceToAdjacentToCell', distanceToAdjacentToCell(bot1Location,cellClicked));
-
-	function handleMoveAdj (objectsArray, indexToBeMoved, locationToMoveTo) {
+	function handleMove (objectsArray, indexToBeMoved, locationToMoveTo, pathFunction) {
 		let objectBeingMoved = objectsArray[indexToBeMoved];
 		let currentLandingSpot = objectBeingMoved.location;
-		// console.log({currentLandingSpot},{locationToMoveTo});
-		const path = pathToAdjacentCell(currentLandingSpot,locationToMoveTo);
-		// console.log({path});
+		const path = pathFunction(currentLandingSpot,locationToMoveTo);
 		if (!path || path.length === 0) return;
 		let pathObstructed = false;
 		let nextStep;
@@ -91,13 +98,8 @@ const Test2 = () => {
 		let cellColorsObject = {};
 		path.forEach((move)=>{
 			if (!pathObstructed) {
-				
 				nextStep = nextStepGenerator(currentLandingSpot, move);
-
-				console.log({nextStep})
-
 				pathObstructed = collisionVerification(nextStep, objectsArray)
-
 				if (!pathObstructed) {
 					currentLandingSpot = nextStep;
 					pathToTake.push(move);
@@ -108,58 +110,55 @@ const Test2 = () => {
 				}
 			}
 		})
-		// console.log({pathObstructed}, {currentLandingSpot})
-		const botToMove = document.getElementById(`placer${indexToBeMoved}`);
-		if (botToMove) {
-			botToMove.style.transition = `transform ${settings.executionSpeed}s cubic-bezier(.8,.15,.65,.9)`;
-			setCellColors(cellColorsObject);
-		}
-		
-		setTimeout(()=>{
+		if (settings.executionSpeed > 0) {
 			const botToMove = document.getElementById(`placer${indexToBeMoved}`);
 			if (botToMove) {
-				botToMove.style.transform = translationGenerator(pathToTake,settings.cellSize);
+				botToMove.style.transition = `transform ${settings.executionSpeed}s cubic-bezier(.8,.15,.65,.9)`;
+				setCellColors(cellColorsObject);
 			}
-		},25)
-		
-		setTimeout(()=>{
-			const botMoved = document.getElementById(`placer${indexToBeMoved}`);
-			if (botMoved) {
-				botMoved.style.transition = '0s';
-			}
-			
-		},settings.executionSpeed*975)
 
-		setTimeout(()=>{
-			const botMoved = document.getElementById(`placer${indexToBeMoved}`);
-			if (botMoved) {
-				botMoved.style.transform = 'translate3d(0px,0px,0px)';
-				let newObjectsPlacement = [...objectsToBePlaced];
-				newObjectsPlacement[indexToBeMoved].location = currentLandingSpot;
-				setObjectsToBePlaced(newObjectsPlacement);
-				setCellColors({});
-			}
-		},settings.executionSpeed*1000)
+			setTimeout(()=>{
+				const botToMove = document.getElementById(`placer${indexToBeMoved}`);
+				if (botToMove) {
+					botToMove.style.transform = translationGenerator(pathToTake,settings.cellSize);
+				}
+			},25)
+
+			setTimeout(()=>{
+				const botMoved = document.getElementById(`placer${indexToBeMoved}`);
+				if (botMoved) {
+					botMoved.style.transition = '0s';
+				}
+
+			},settings.executionSpeed*975)
+
+			setTimeout(()=>{
+				const botMoved = document.getElementById(`placer${indexToBeMoved}`);
+				if (botMoved) {
+					botMoved.style.transform = 'translate3d(0px,0px,0px)';
+					let newObjectsPlacement = [...objectsToBePlaced];
+					newObjectsPlacement[indexToBeMoved].location = currentLandingSpot;
+					setObjectsToBePlaced(newObjectsPlacement);
+					setCellColors({});
+				}
+			},settings.executionSpeed*1000)
+		}
+		else {
+			let newObjectsPlacement = [...objectsToBePlaced];
+			newObjectsPlacement[indexToBeMoved].location = currentLandingSpot;
+			setObjectsToBePlaced(newObjectsPlacement);
+		}
 	}
+	function handleScan (indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced) {
+		let scanResults = generateScanResults(indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced);
+		console.log({scanResults});
 
+		illuminateScannedCells(scanResults,settings.executionSpeed, setCellColors);
+		setTimeout(()=>{
+			// potential memory leak
+			setCellColors({});
+		},settings.executionSpeed*1000)
 
-
-	function handleMoveOnto (objectsArray, indexToBeMoved, locationToMoveTo) {
-		let objectBeingMoved = objectsArray[indexToBeMoved];
-		let currentLandingSpot = objectBeingMoved.location;
-		const path = pathToCell(currentLandingSpot,locationToMoveTo);
-		console.log({path});
-		if (!path || path.length === 0) return;
-		let pathObstructed = false;
-		let nextStep;
-		path.forEach((move)=>{
-			if (!pathObstructed) {
-				nextStep = nextStepGenerator(currentLandingSpot, move);
-				pathObstructed = collisionVerification(nextStep, objectsArray)
-				if (!pathObstructed) currentLandingSpot = nextStep;
-			}
-		})
-		console.log({pathObstructed})
 	}
 
   return (
@@ -182,22 +181,33 @@ const Test2 = () => {
 			<StyledButton
 			handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col+1})}}
 			>
-				COL LEFT
+				COL RIGHT
 			</StyledButton>
 			<StyledButton
 			handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col-1})}}
 			>
-				COL RIGHT
+				COL LEFT
 			</StyledButton>
 			<StyledButton
-			handleClick = {(e) => {handleMoveAdj(objectsToBePlaced,0,cellClicked)}}
+			handleClick = {(e) => {handleMove(objectsToBePlaced,0,cellClicked, pathToAdjacentCell)}}
 			>
 				Move ADJ
 			</StyledButton>
 			<StyledButton
-			handleClick = {(e) => {handleMoveOnto(objectsToBePlaced,0,cellClicked)}}
+			handleClick = {(e) => {handleMove(objectsToBePlaced,0,cellClicked, pathToCell)}}
 			>
 				Move ONTO
+			</StyledButton>
+			<StyledButton
+			handleClick = {(e) => {dispatch(toggleBorder())}}
+			>
+				TOGGLE BORDER
+			</StyledButton>
+			<StyledButton
+			handleClick = {(e) => {handleScan(0, objectsToBePlaced[0].attributes.ScanDistance, rows, columns, objectsToBePlaced)}}
+			// /(indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced) {
+			>
+				PERFORM SCAN
 			</StyledButton>
 			</ColDiv>
 			<BattleGrid

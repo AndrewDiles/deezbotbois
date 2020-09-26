@@ -37,25 +37,31 @@ Intentions with the GUI include:
 - Accessories and weapons that exceed maximum allowed number based on model are not removed during model changes.
 ### Solution: Manage state variable in reducer by sending it the max allowable values
 
+
 - Main display not scrollable
 ### Solution: Wrapper required css property: overflow-y: auto;
 
+
 - if user's avatar image is a bot, then the onHover to reveal the sample profile tab fails to trigger once they hover over the bot (it only triggers when hovering over the background.)
-### Solution: I incorrectly used mouseout instead of mouseleave ~.~
+### Solution: I incorrectly used mouseout instead of mouseleave -.-
+
 
 - If user swaps between color schemes and tries to update, mongo will throw error
 ### Solution: verify if new user object is the same as the old using JSON.stringify
 
+
 - Log out from profile tab does not refresh current url to home
 ### Corrected - useEffect required an additional dependency
+
 
 - NavLinks and StyledButtons are not perfectly aligned.
 ### Solution: upon correcting their stylings, the profile tab gained an unfortunate "bad looking" layout.  Sub hacky solution was to put all the buttons inside Nav Links.  For buttons that were not supposed to be links, I sent them to where the user already was (which does not occur).
 
+
 - For non-mouse users, selecting optinos in nav links won't bubble to button's click function.
 ### Solution: Set navlink's tabindex="-1"
 
-### Potential Improvements
+# Potential Improvements
 - Add DR and Dmg attributes to be displayed on Attributes of Assembly
 - Change error codes for incorrect passwords to 403, make sure front end does not break with change from 401
 - Change error code from 206 to 422 or 400.  (same testing as above)
@@ -87,21 +93,26 @@ Intentions with the GUI include:
 - In Assembly: Add ability to click and expand each section
 ### DONE
 
+
 - In Assembly - Attributes: +/- and % change shouldn't be red for negative cost changes, as this is an improvement
 ### DONE
+
 
 - HIGH PRIORITY: improve import method and method of gathering icons for attributes and tech tree.  Current system is clunky
 ### DONE - Created a function that handles icon imports
 
+
 - encrypt passwords
 ### DONE
+
 
 - Don't ask user if it is their first time logging in.  Instead, let them try, and then ask for the confirmation code.
 ### DONE
 
-## Reminders
 
-### For bot building:
+# Reminders
+
+### Icon Imports For Bot Assembly:
 import {plus} from 'react-icons-kit/icomoon/plus'
 
 import {tree} from 'react-icons-kit/icomoon/tree'
