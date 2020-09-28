@@ -18,7 +18,8 @@ import {
 	convertNumToPxstring,
 	translationGenerator,
 	generateScanResults,
-	illuminateScannedCells
+	illuminateScannedCells,
+	filterHostileScanResults
 } from '../../Constants/helperFunctions';
 
 import {
@@ -81,7 +82,7 @@ const Test2 = () => {
 			attributes: {
 				ScanDistance: 3,
 			},
-			team: 1,
+			team: 2,
 			events: []
 		}
 	];
@@ -150,9 +151,10 @@ const Test2 = () => {
 			setObjectsToBePlaced(newObjectsPlacement);
 		}
 	}
+
 	function handleScan (indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced) {
 		let scanResults = generateScanResults(indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced);
-		console.log({scanResults});
+		// console.log({scanResults});
 
 		illuminateScannedCells(scanResults,settings.executionSpeed, setCellColors);
 		setTimeout(()=>{
@@ -160,6 +162,8 @@ const Test2 = () => {
 			setCellColors({});
 		},settings.executionSpeed*1000)
 
+		let filteredResults = filterHostileScanResults(scanResults)
+		console.log(filteredResults);
 	}
 
   return (

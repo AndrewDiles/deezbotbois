@@ -35,7 +35,6 @@ export function incrementerArrayGenerator (numberOfEntries) {
 	}
 	return newArray;
 }
-
 // function below verifies that a given input is an Integer
 export function verifyIsInteger (supposedNumber) {
 	if (supposedNumber === null || supposedNumber === undefined) {
@@ -48,7 +47,6 @@ export function verifyIsInteger (supposedNumber) {
 	}
 	else return true
 }
-
 // The calling of this function is for testing purposes and should be removed upon deployment
 export function testValidityOfLocationInput (location) {
 	if (location === undefined || location === null) {
@@ -348,7 +346,6 @@ export function nextStepGenerator (startLocation, move) {
 	}
 	return nextStep
 }
-
 // The calling of this function is for testing purposes and should be removed upon deployment
 export function testValidityOfObjectsArrayInput (objectsArray) {
 	if (objectsArray === undefined || objectsArray === null) {
@@ -373,7 +370,6 @@ export function testValidityOfObjectsArrayInput (objectsArray) {
 	})
 	return caseTest
 }
-
 // function tests if a collision occurs given a location to move to and all the objects
 export function collisionVerification (cellLocation, objectsArray) {
 	if (!testValidityOfLocationInput(cellLocation) || !testValidityOfObjectsArrayInput(objectsArray)) return
@@ -389,7 +385,6 @@ export function collisionVerification (cellLocation, objectsArray) {
 	})
 	return collision
 }
-
 // function below takes in a string and returns the number contained inside it as a number without 'px'
 export function convertPxStringToNum (string) {
 	if (typeof(string) !== 'string' || !string.includes('px')) {
@@ -405,7 +400,6 @@ export function convertPxStringToNum (string) {
 	}
 	return result
 }
-
 // function below takesin a number and returns a string with 'px' added to the end
 export function convertNumToPxstring (number) {
 	if (typeof(number) !== 'number') {
@@ -414,7 +408,6 @@ export function convertNumToPxstring (number) {
 	}
 	return `${number}px`
 }
-
 // function takes in an array of moves and the cell size and outputs the translation needed to move an element
 export function translationGenerator (movementArray, cellSize) {
 	if (typeof(movementArray) !== 'object' || movementArray.length <1 || typeof(cellSize) !== 'number') {
@@ -469,7 +462,6 @@ export function translationGenerator (movementArray, cellSize) {
 	let result = `translate3d(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)},0px)`;
 	return result
 }
-
 // function generates an array of all possible locations
 function generateAllLocation (maxRows, maxCols) {
 	let allPossibleLocations = [];
@@ -481,7 +473,6 @@ function generateAllLocation (maxRows, maxCols) {
 	}
 	return allPossibleLocations
 }
-
 // function verifies that a row/col combination is in bounds
 export function verifyCellIsInBounds (cellLocation, maxRows, maxCols) {
 	if (!testValidityOfLocationInput(cellLocation)) return
@@ -578,194 +569,243 @@ export function illuminateScannedCells (scanResults,executionSpeed, setCellColor
 			}
 		}
 
-		let cellColorsObject0 = {};
-		scanResults[0].forEach((location)=>{
-			generateLocationColor(cellColorsObject0, location, 5)
-		})
-		setCellColors(cellColorsObject0)
+		function cellColorSetter (magnitude5Index, timeMultiplier) {
+			let cellColorsObject = {}
+			for (let i = magnitude5Index; i>=0; i--) {
+				if (i < 6) {
+					if (scanResults[i]) {
+						scanResults[i].forEach((location)=>{
+							let magnitude = 5-magnitude5Index+i;
+							generateLocationColor(cellColorsObject, location, magnitude)
+						})
+					}
+				}
+			}
+			setTimeout(()=>{
+				setCellColors(cellColorsObject)
+			},executionSpeed*timeMultiplier)
+		}
+		for (let n = 0; n < 9; n++) {
+			cellColorSetter(n, ((n+1)*100));
+		}
 
-		let cellColorsObject1 = {};
-		scanResults[0].forEach((location)=>{
-			generateLocationColor(cellColorsObject1, location, 4)
-		})
-		if (scanResults[1]) {
-			scanResults[1].forEach((location)=>{
-				generateLocationColor(cellColorsObject1, location, 5)
-			})
-		}
-		setTimeout(()=>{
-			setCellColors(cellColorsObject1)
-		},executionSpeed*100)
+		// cellColorSetter(0, 100);
+		// cellColorSetter(1, 200);
+		// cellColorSetter(2, 300);
+		// cellColorSetter(3, 400);
+		// cellColorSetter(4, 500);
+		// cellColorSetter(5, 600);
+		// cellColorSetter(6, 700);
+		// cellColorSetter(7, 800);
+		// cellColorSetter(8, 900);
+	
 
-		let cellColorsObject2 = {};
-		scanResults[0].forEach((location)=>{
-			generateLocationColor(cellColorsObject2, location, 3)
-		})
-		if (scanResults[1]) {
-			scanResults[1].forEach((location)=>{
-				generateLocationColor(cellColorsObject2, location, 4)
-			})
-		}
-		if (scanResults[2]) {
-			scanResults[2].forEach((location)=>{
-				generateLocationColor(cellColorsObject2, location, 5)
-			})
-		}
-		setTimeout(()=>{
-			setCellColors(cellColorsObject2)
-		},executionSpeed*200)
+		// Below ~150 lines were replaced by above function and loop
 
-		let cellColorsObject3 = {};
-		scanResults[0].forEach((location)=>{
-			generateLocationColor(cellColorsObject3, location, 2)
-		})
-		if (scanResults[1]) {
-			scanResults[1].forEach((location)=>{
-				generateLocationColor(cellColorsObject3, location, 3)
-			})
-		}
-		if (scanResults[2]) {
-			scanResults[2].forEach((location)=>{
-				generateLocationColor(cellColorsObject3, location, 4)
-			})
-		}
-		if (scanResults[3]) {
-			scanResults[3].forEach((location)=>{
-				generateLocationColor(cellColorsObject3, location, 5)
-			})
-		}
-		setTimeout(()=>{
-			setCellColors(cellColorsObject3)
-		},executionSpeed*300)
+		// let cellColorsObject0 = {};
+		// scanResults[0].forEach((location)=>{
+		// 	generateLocationColor(cellColorsObject0, location, 5)
+		// })
+		// setCellColors(cellColorsObject0)
 
-		let cellColorsObject4 = {};
-		scanResults[0].forEach((location)=>{
-			generateLocationColor(cellColorsObject4, location, 1)
-		})
-		if (scanResults[1]) {
-			scanResults[1].forEach((location)=>{
-				generateLocationColor(cellColorsObject4, location, 2)
-			})
-		}
-		if (scanResults[2]) {
-			scanResults[2].forEach((location)=>{
-				generateLocationColor(cellColorsObject4, location, 3)
-			})
-		}
-		if (scanResults[3]) {
-			scanResults[3].forEach((location)=>{
-				generateLocationColor(cellColorsObject4, location, 4)
-			})
-		}
-		if (scanResults[4]) {
-			scanResults[4].forEach((location)=>{
-				generateLocationColor(cellColorsObject4, location, 5)
-			})
-		}
-		setTimeout(()=>{
-			setCellColors(cellColorsObject4)
-		},executionSpeed*400)
+		// let cellColorsObject1 = {};
+		// scanResults[0].forEach((location)=>{
+		// 	generateLocationColor(cellColorsObject1, location, 4)
+		// })
+		// if (scanResults[1]) {
+		// 	scanResults[1].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject1, location, 5)
+		// 	})
+		// }
+		// setTimeout(()=>{
+		// 	setCellColors(cellColorsObject1)
+		// },executionSpeed*100)
 
-		let cellColorsObject5 = {};
-		if (scanResults[1]) {
-			scanResults[1].forEach((location)=>{
-				generateLocationColor(cellColorsObject5, location, 1)
-			})
-		}
-		if (scanResults[2]) {
-			scanResults[2].forEach((location)=>{
-				generateLocationColor(cellColorsObject5, location, 2)
-			})
-		}
-		if (scanResults[3]) {
-			scanResults[3].forEach((location)=>{
-				generateLocationColor(cellColorsObject5, location, 3)
-			})
-		}
-		if (scanResults[4]) {
-			scanResults[4].forEach((location)=>{
-				generateLocationColor(cellColorsObject5, location, 4)
-			})
-		}
-		if (scanResults[5]) {
-			scanResults[5].forEach((location)=>{
-				generateLocationColor(cellColorsObject5, location, 5)
-			})
-		}
-		setTimeout(()=>{
-			setCellColors(cellColorsObject5)
-		},executionSpeed*500)
+		// let cellColorsObject2 = {};
+		// scanResults[0].forEach((location)=>{
+		// 	generateLocationColor(cellColorsObject2, location, 3)
+		// })
+		// if (scanResults[1]) {
+		// 	scanResults[1].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject2, location, 4)
+		// 	})
+		// }
+		// if (scanResults[2]) {
+		// 	scanResults[2].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject2, location, 5)
+		// 	})
+		// }
+		// setTimeout(()=>{
+		// 	setCellColors(cellColorsObject2)
+		// },executionSpeed*200)
+
+		// let cellColorsObject3 = {};
+		// scanResults[0].forEach((location)=>{
+		// 	generateLocationColor(cellColorsObject3, location, 2)
+		// })
+		// if (scanResults[1]) {
+		// 	scanResults[1].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject3, location, 3)
+		// 	})
+		// }
+		// if (scanResults[2]) {
+		// 	scanResults[2].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject3, location, 4)
+		// 	})
+		// }
+		// if (scanResults[3]) {
+		// 	scanResults[3].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject3, location, 5)
+		// 	})
+		// }
+		// setTimeout(()=>{
+		// 	setCellColors(cellColorsObject3)
+		// },executionSpeed*300)
+
+		// let cellColorsObject4 = {};
+		// scanResults[0].forEach((location)=>{
+		// 	generateLocationColor(cellColorsObject4, location, 1)
+		// })
+		// if (scanResults[1]) {
+		// 	scanResults[1].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject4, location, 2)
+		// 	})
+		// }
+		// if (scanResults[2]) {
+		// 	scanResults[2].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject4, location, 3)
+		// 	})
+		// }
+		// if (scanResults[3]) {
+		// 	scanResults[3].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject4, location, 4)
+		// 	})
+		// }
+		// if (scanResults[4]) {
+		// 	scanResults[4].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject4, location, 5)
+		// 	})
+		// }
+		// setTimeout(()=>{
+		// 	setCellColors(cellColorsObject4)
+		// },executionSpeed*400)
+
+		// let cellColorsObject5 = {};
+		// if (scanResults[1]) {
+		// 	scanResults[1].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject5, location, 1)
+		// 	})
+		// }
+		// if (scanResults[2]) {
+		// 	scanResults[2].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject5, location, 2)
+		// 	})
+		// }
+		// if (scanResults[3]) {
+		// 	scanResults[3].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject5, location, 3)
+		// 	})
+		// }
+		// if (scanResults[4]) {
+		// 	scanResults[4].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject5, location, 4)
+		// 	})
+		// }
+		// if (scanResults[5]) {
+		// 	scanResults[5].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject5, location, 5)
+		// 	})
+		// }
+		// setTimeout(()=>{
+		// 	setCellColors(cellColorsObject5)
+		// },executionSpeed*500)
 		
-		let cellColorsObject6 = {};
-		if (scanResults[2]) {
-			scanResults[2].forEach((location)=>{
-				generateLocationColor(cellColorsObject6, location, 1)
-			})
-		}
-		if (scanResults[3]) {
-			scanResults[3].forEach((location)=>{
-				generateLocationColor(cellColorsObject6, location, 2)
-			})
-		}
-		if (scanResults[4]) {
-			scanResults[4].forEach((location)=>{
-				generateLocationColor(cellColorsObject6, location, 3)
-			})
-		}
-		if (scanResults[5]) {
-			scanResults[5].forEach((location)=>{
-				generateLocationColor(cellColorsObject6, location, 4)
-			})
-		}
-		setTimeout(()=>{
-			setCellColors(cellColorsObject6)
-		},executionSpeed*600)
+		// let cellColorsObject6 = {};
+		// if (scanResults[2]) {
+		// 	scanResults[2].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject6, location, 1)
+		// 	})
+		// }
+		// if (scanResults[3]) {
+		// 	scanResults[3].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject6, location, 2)
+		// 	})
+		// }
+		// if (scanResults[4]) {
+		// 	scanResults[4].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject6, location, 3)
+		// 	})
+		// }
+		// if (scanResults[5]) {
+		// 	scanResults[5].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject6, location, 4)
+		// 	})
+		// }
+		// setTimeout(()=>{
+		// 	setCellColors(cellColorsObject6)
+		// },executionSpeed*600)
 
-		let cellColorsObject7 = {};
-		if (scanResults[3]) {
-			scanResults[3].forEach((location)=>{
-				generateLocationColor(cellColorsObject7, location, 1)
-			})
-		}
-		if (scanResults[4]) {
-			scanResults[4].forEach((location)=>{
-				generateLocationColor(cellColorsObject7, location, 2)
-			})
-		}
-		if (scanResults[5]) {
-			scanResults[5].forEach((location)=>{
-				generateLocationColor(cellColorsObject7, location, 3)
-			})
-		}
-		setTimeout(()=>{
-			setCellColors(cellColorsObject7)
-		},executionSpeed*700)
+		// let cellColorsObject7 = {};
+		// if (scanResults[3]) {
+		// 	scanResults[3].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject7, location, 1)
+		// 	})
+		// }
+		// if (scanResults[4]) {
+		// 	scanResults[4].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject7, location, 2)
+		// 	})
+		// }
+		// if (scanResults[5]) {
+		// 	scanResults[5].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject7, location, 3)
+		// 	})
+		// }
+		// setTimeout(()=>{
+		// 	setCellColors(cellColorsObject7)
+		// },executionSpeed*700)
 
-		let cellColorsObject8 = {};
-		if (scanResults[4]) {
-			scanResults[4].forEach((location)=>{
-				generateLocationColor(cellColorsObject8, location, 1)
-			})
-		}
-		if (scanResults[5]) {
-			scanResults[5].forEach((location)=>{
-				generateLocationColor(cellColorsObject8, location, 2)
-			})
-		}
-		setTimeout(()=>{
-			setCellColors(cellColorsObject8)
-		},executionSpeed*800)
+		// let cellColorsObject8 = {};
+		// if (scanResults[4]) {
+		// 	scanResults[4].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject8, location, 1)
+		// 	})
+		// }
+		// if (scanResults[5]) {
+		// 	scanResults[5].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject8, location, 2)
+		// 	})
+		// }
+		// setTimeout(()=>{
+		// 	setCellColors(cellColorsObject8)
+		// },executionSpeed*800)
 
-		let cellColorsObject9 = {};
-		if (scanResults[5]) {
-			scanResults[5].forEach((location)=>{
-				generateLocationColor(cellColorsObject9, location, 1)
-			})
-		}
-		setTimeout(()=>{
-			setCellColors(cellColorsObject9)
-		},executionSpeed*900)
+		// let cellColorsObject9 = {};
+		// if (scanResults[5]) {
+		// 	scanResults[5].forEach((location)=>{
+		// 		generateLocationColor(cellColorsObject9, location, 1)
+		// 	})
+		// }
+		// setTimeout(()=>{
+		// 	setCellColors(cellColorsObject9)
+		// },executionSpeed*900)
 
 		return
 	}
+}
+// function filters out friendly and empty entries from scan Results.  Contains distances and is ordered from closest to furthest
+export function filterHostileScanResults (scanResults) {
+	if (!verifyScanResults(scanResults)) return
+	let hostiles = [];
+	for (let i = 0; i < scanResults.length; i++) {
+		if (scanResults[i]) {
+			scanResults[i].forEach((result)=>{
+				if (result.cellIs === 'hostile') {
+					result.distance = i;
+					hostiles.push(result)
+				}
+			})
+		}
+	}
+	return hostiles
 }
