@@ -56,4 +56,8 @@ const ButtonStylings = styled.button`
     background-color: ${props => !props.disabled && props.selected ? props.selected : props.colors.hovered};
     color: ${props => !props.disabled && props.colors.hoveredText};
   }
+	&:focus {
+		/* -webkit-appearance:none; */
+		outline-color: ${props => !props.disabled && props.colors.hoveredText};
+	}
 `

@@ -113,7 +113,8 @@ const Test2 = () => {
 		if (settings.executionSpeed > 0) {
 			const botToMove = document.getElementById(`placer${indexToBeMoved}`);
 			if (botToMove) {
-				botToMove.style.transition = `transform ${settings.executionSpeed}s cubic-bezier(.8,.15,.65,.9)`;
+				if (pathObstructed) botToMove.style.transition = `transform ${settings.executionSpeed}s cubic-bezier(.75,.25,1,1.5)`;
+				else botToMove.style.transition = `transform ${settings.executionSpeed}s cubic-bezier(.75,.25,.5,1)`;
 				setCellColors(cellColorsObject);
 			}
 
