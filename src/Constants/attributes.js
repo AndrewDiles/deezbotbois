@@ -46,7 +46,8 @@ const baseBotAttributes = {
 		RangedShieldPenetration: 1,
 
 		BurnAndCorrosionBoost: false,
-		ElevenAttackCommand: false,
+		elevenAttackMeleeCommand: false,
+		elevenAttackRangedCommand: false,
 		chargeCommand: false,
 		counterCommand: false,
 		guardCommand: false,
@@ -232,7 +233,8 @@ const baseBotAttributes = {
 		RangedShieldPenetration: 1,
 
 		BurnAndCorrosionBoost: false,
-		ElevenAttackCommand: false,
+		elevenAttackMeleeCommand: false,
+		elevenAttackRangedCommand: false,
 		chargeCommand: false,
 		counterCommand: false,
 		guardCommand: false,
@@ -418,7 +420,8 @@ const baseBotAttributes = {
 		RangedShieldPenetration: 1,
 
 		BurnAndCorrosionBoost: false,
-		ElevenAttackCommand: false,
+		elevenAttackMeleeCommand: false,
+		elevenAttackRangedCommand: false,
 		chargeCommand: false,
 		counterCommand: false,
 		guardCommand: false,
@@ -604,10 +607,12 @@ const baseBotAttributes = {
 		RangedShieldPenetration: 1,
 
 		BurnAndCorrosionBoost: false,
-		ElevenAttackCommand: false,
+		elevenAttackMeleeCommand: false,
+		elevenAttackRangedCommand: false,
 		chargeCommand: false,
 		counterCommand: false,
 		guardCommand: false,
+		moveCommand: false,
 		ramCommand: false,
 		rechargeCommand: false,
 		redirectCommand: false,
@@ -790,7 +795,8 @@ const baseBotAttributes = {
 		RangedShieldPenetration: 1,
 
 		BurnAndCorrosionBoost: false,
-		ElevenAttackCommand: false,
+		elevenAttackMeleeCommand: false,
+		elevenAttackRangedCommand: false,
 		chargeCommand: false,
 		counterCommand: false,
 		guardCommand: false,
@@ -924,10 +930,10 @@ const baseBotAttributes = {
 				techMessage: "Unlocks an additional accessory slot at a cost of 12 Bits"
 			},
 			{
-				affect: 'ElevenAttackCommand',
+				affect: 'elevenAttackCommand',
 				magnitude: true,
 				cost: 10,
-				techMessage: "Unlocks the 11ATTACK command at a cost of 10 Bits"
+				techMessage: "Unlocks the 11ATTACK commands at a cost of 10 Bits"
 			},
 			null
 		]
@@ -977,7 +983,8 @@ const baseBotAttributes = {
 		RangedShieldPenetration: 1,
 
 		BurnAndCorrosionBoost: false,
-		ElevenAttackCommand: false,
+		elevenAttackMeleeCommand: false,
+		elevenAttackRangedCommand: false,
 		chargeCommand: false,
 		counterCommand: false,
 		guardCommand: false,
@@ -1163,7 +1170,8 @@ const baseBotAttributes = {
 		RangedShieldPenetration: 1,
 
 		BurnAndCorrosionBoost: false,
-		ElevenAttackCommand: false,
+		elevenAttackMeleeCommand: false,
+		elevenAttackRangedCommand: false,
 		chargeCommand: false,
 		counterCommand: false,
 		guardCommand: false,
@@ -1397,7 +1405,9 @@ export const comprehensiveStatsMultiplicative = [
 
 export const comprehensiveStatsBool = [
 	'BurnAndCorrosionBoost',
-	'ElevenAttackCommand',
+	// 'elevenAttackCommand',
+	'elevenAttackMeleeCommand',
+	'elevenAttackRangedCommand',
 	'chargeCommand',
 	'counterCommand',
 	'guardCommand',

@@ -19,7 +19,7 @@ import {
 	translationGenerator,
 	generateScanResults,
 	illuminateScannedCells,
-	filterHostileScanResults
+	filterScanResults
 } from '../../Constants/helperFunctions';
 
 import {
@@ -100,7 +100,7 @@ const Test2 = () => {
 		path.forEach((move)=>{
 			if (!pathObstructed) {
 				nextStep = nextStepGenerator(currentLandingSpot, move);
-				pathObstructed = collisionVerification(nextStep, objectsArray)
+				pathObstructed = collisionVerification(nextStep, objectsArray, rows, columns)
 				if (!pathObstructed) {
 					currentLandingSpot = nextStep;
 					pathToTake.push(move);
@@ -154,7 +154,7 @@ const Test2 = () => {
 
 	function handleScan (indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced) {
 		let scanResults = generateScanResults(indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced);
-		// console.log({scanResults});
+		console.log({scanResults});
 
 		illuminateScannedCells(scanResults,settings.executionSpeed, setCellColors);
 		setTimeout(()=>{
@@ -162,7 +162,7 @@ const Test2 = () => {
 			setCellColors({});
 		},settings.executionSpeed*1000)
 
-		let filteredResults = filterHostileScanResults(scanResults)
+		let filteredResults = filterScanResults(scanResults)
 		console.log(filteredResults);
 	}
 

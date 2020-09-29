@@ -39,10 +39,10 @@ const Rules = () => {
 					Test for projectile / cell damage
 				</li>
 				<li>
-					Aim, AimAndRangedAttack
+					Aim, Ranged Attacks 
 				</li>
 				<li>
-					Ranged Attacks, 11AttackRanged and Projectiles movement
+					AimAndRangedAttack, 11AttackRanged and Projectiles movement
 				</li>
 				<li>
 					Test for projectile / cell damage

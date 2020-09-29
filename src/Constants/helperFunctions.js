@@ -30,7 +30,9 @@ export const inverseTechTreeRequirements = (index) => {
 
 export function incrementerArrayGenerator (numberOfEntries) {
 	let newArray = [];
-	for(let index = 1; index <= numberOfEntries; index ++) {
+	// below was range before barriers were included
+	// for(let index = 1; index <= numberOfEntries; index ++) {
+	for(let index = 0; index <= numberOfEntries+1; index ++) {
 		newArray.push(index);
 	}
 	return newArray;
@@ -83,6 +85,13 @@ export function testValidityOfLocationInput (location) {
 	// 	return false
 	// }
 	return true
+}
+// function verifies that a row/col combination is in bounds
+export function verifyCellIsInBounds (cellLocation, maxRows, maxCols) {
+	if (!testValidityOfLocationInput(cellLocation)) return
+	if (!verifyIsInteger(maxRows) || !verifyIsInteger(maxCols)) return
+	if (cellLocation.col > maxCols || cellLocation.row >maxRows) return false
+	else return true
 }
 // function below determines distance (cell count) from a cell
 export function straightDistanceBetweenCells (startLocation, finishLocation) {
@@ -371,7 +380,7 @@ export function testValidityOfObjectsArrayInput (objectsArray) {
 	return caseTest
 }
 // function tests if a collision occurs given a location to move to and all the objects
-export function collisionVerification (cellLocation, objectsArray) {
+export function collisionVerification (cellLocation, objectsArray, maxRows, maxCols) {
 	if (!testValidityOfLocationInput(cellLocation) || !testValidityOfObjectsArrayInput(objectsArray)) return
 	let collision = false;
 	objectsArray.forEach((object)=>{
@@ -383,6 +392,7 @@ export function collisionVerification (cellLocation, objectsArray) {
 			}
 		}
 	})
+	if (cellLocation.row === 0 || cellLocation.col === 0 || cellLocation.row === maxRows+1 || cellLocation.col === maxCols+1) collision = true
 	return collision
 }
 // function below takes in a string and returns the number contained inside it as a number without 'px'
@@ -465,20 +475,16 @@ export function translationGenerator (movementArray, cellSize) {
 // function generates an array of all possible locations
 function generateAllLocation (maxRows, maxCols) {
 	let allPossibleLocations = [];
-	for (let row = 1; row <= maxRows; row ++) {
-		for (let col = 1; col <= maxCols; col++) {
+	// belwo two lines were before walls were included in range
+	// for (let row = 1; row <= maxRows; row ++) {
+	// 	for (let col = 1; col <= maxCols; col++) {
+	for (let row = 0; row <= maxRows+1; row ++) {
+		for (let col = 0; col <= maxCols+1; col++) {
 			let location = {row:row, col:col}
 			allPossibleLocations.push(location);
 		}
 	}
 	return allPossibleLocations
-}
-// function verifies that a row/col combination is in bounds
-export function verifyCellIsInBounds (cellLocation, maxRows, maxCols) {
-	if (!testValidityOfLocationInput(cellLocation)) return
-	if (!verifyIsInteger(maxRows) || !verifyIsInteger(maxCols)) return
-	if (cellLocation.col > maxCols || cellLocation.row >maxRows) return false
-	else return true
 }
 // function generates an array with results of a scan
 export function generateScanResults (indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced) {
@@ -501,21 +507,27 @@ export function generateScanResults (indexOfScanner, ScanDistance, maxRows, maxC
 			}
 			else if (dist > 0) {
 				let singleResult = testLocation;
-				objectsToBePlaced.forEach((object)=>{
-					// console.log({object})
-					if (object.location.row === testLocation.row && object.location.col === testLocation.col) {
-						console.log('object detected:',{object})
-						if (object.team === objectsToBePlaced[indexOfScanner].team) {
-							console.log('is friendly');
-							singleResult.cellIs = 'friendly';
+				if (testLocation.row === 0 || testLocation.row === maxRows+1 || testLocation.col === 0 || testLocation.col === maxCols+1) {
+					console.log('is wall');
+					singleResult.cellIs = 'wall';
+				}
+				else {
+					objectsToBePlaced.forEach((object)=>{
+						// console.log({object})
+						if (object.location.row === testLocation.row && object.location.col === testLocation.col) {
+							console.log('object detected:',{object})
+							if (object.team === objectsToBePlaced[indexOfScanner].team) {
+								// console.log('is friendly');
+								singleResult.cellIs = 'friendly';
+							}
+							else {
+								// console.log('is hostile');
+								singleResult.cellIs = 'hostile';
+								console.log({singleResult})
+							}
 						}
-						else {
-							// console.log('is hostile');
-							singleResult.cellIs = 'hostile';
-							console.log({singleResult})
-						}
-					}
-				})
+					})
+				}
 				scanResults[dist].push(singleResult)
 			}
 		}
@@ -541,7 +553,7 @@ function verifyScanResults (scanResults) {
 			let noError = true;
 			if (noError) {
 				distanceArray.forEach((supposedLocation)=>{
-					noError = testValidityOfLocationInput(supposedLocation)
+					noError = testValidityOfLocationInput(supposedLocation);
 				})
 			}
 			else {
@@ -558,11 +570,15 @@ export function illuminateScannedCells (scanResults,executionSpeed, setCellColor
 	if (!verifyScanResults(scanResults)) return
 	if (executionSpeed > 0) {
 		function generateLocationColor (objectToFill, location, colorIntensity) {
+			if (colorIntensity <= 0) return
 			if (location.cellIs === 'hostile') {
 				objectToFill[`row${location.row}col${location.col}`] = `rgba(255,0,0,${0.15*colorIntensity})`;
 			}
 			else if (location.cellIs === 'friendly') {
 				objectToFill[`row${location.row}col${location.col}`] = `rgba(0,0,255,${0.1*colorIntensity})`;
+			}
+			else if (location.cellIs === 'wall') {
+				objectToFill[`row${location.row}col${location.col}`] = `rgba(0,0,0,${0.2*colorIntensity})`;
 			}
 			else {
 				objectToFill[`row${location.row}col${location.col}`] = `rgba(0,255,0,${0.1*colorIntensity})`;
@@ -581,6 +597,7 @@ export function illuminateScannedCells (scanResults,executionSpeed, setCellColor
 					}
 				}
 			}
+			// console.log({cellColorsObject})
 			setTimeout(()=>{
 				setCellColors(cellColorsObject)
 			},executionSpeed*timeMultiplier)
@@ -794,18 +811,18 @@ export function illuminateScannedCells (scanResults,executionSpeed, setCellColor
 	}
 }
 // function filters out friendly and empty entries from scan Results.  Contains distances and is ordered from closest to furthest
-export function filterHostileScanResults (scanResults) {
+export function filterScanResults (scanResults) {
 	if (!verifyScanResults(scanResults)) return
-	let hostiles = [];
-	for (let i = 0; i < scanResults.length; i++) {
+	let nonEmprtyCells = [];
+	for (let i = 1; i < scanResults.length; i++) {
 		if (scanResults[i]) {
 			scanResults[i].forEach((result)=>{
-				if (result.cellIs === 'hostile') {
+				if (result.cellIs) {
 					result.distance = i;
-					hostiles.push(result)
+					nonEmprtyCells.push(result)
 				}
 			})
 		}
 	}
-	return hostiles
+	return nonEmprtyCells
 }

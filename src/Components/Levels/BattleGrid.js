@@ -19,8 +19,11 @@ const BattleGrid = ({ rows, columns, setCellClicked, cellClicked, cellColors}) =
     <Grid
 		cellSize = {settings.cellSize}
 		colors = {colors}
-		rows = {rows}
-		columns = {columns}
+		rows = {rows+2}
+		columns = {columns+2}
+		// below was range before barriers were included
+		// rows = {rows}
+		// columns = {columns}
 		>
 			{colArray.map((col)=>(
 				<CellWrapper key = {col}>
@@ -33,6 +36,8 @@ const BattleGrid = ({ rows, columns, setCellClicked, cellClicked, cellColors}) =
 							cellSize = {settings.cellSize}
 							col = {col}
 							row = {row}
+							wallRow = {rows+1}
+							wallColumn = {columns+1}
 							cellClicked = {cellClicked}
 							colors = {colors}
 							onClick = {() => setCellClicked({col: col, row: row})}
@@ -62,9 +67,9 @@ const Cell = styled.div`
 	width: ${props => `${props.cellSize}px`};
 	border: ${props => !props.borderDisabled && props.colors && `1px solid ${props.colors.textColor}`};
 	background-image: ${props => props.colors && `radial-gradient(${props.colors.primary},${props.colors.secondary})`};
-	background: ${props => props.row && props.col && props.cellColors && props.cellColors[`row${props.row}col${props.col}`] && props.cellColors[`row${props.row}col${props.col}`]};
-	/* background: rgba(0,255,0,0.5);
-	background: rgba(255,0,0,0.5); */
+	background: ${props => props.row !== undefined && props.col !== undefined && props.cellColors !== undefined &&
+	props.cellColors[`row${props.row}col${props.col}`] !== undefined ? props.cellColors[`row${props.row}col${props.col}`] :
+	(props.row === 0 || props.col === 0 || props.row === props.wallRow || props.col === props.wallColumn) && 'rgba(80,24,24,.2)'};
 	border-color: ${props => props.cellClicked && props.colors && props.cellClicked.row === props.row && props.cellClicked.col === props.col && props.colors.hoveredText};
 	border-width: ${props => props.cellClicked && props.cellClicked.row === props.row && props.cellClicked.col === props.col && '4px'};
 `

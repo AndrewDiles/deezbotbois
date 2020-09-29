@@ -50,8 +50,11 @@ const ObjectPlacer = styled.div`
 	position: relative;
 	height: ${props => `${props.cellSize}px`};
 	width: ${props => `${props.cellSize}px`};
-	top: ${props => props.location && `${(props.cellSize)*(props.location.row-1)}px`};
-	left: ${props => props.location && `${(props.cellSize)*(props.location.col-1)}px`};
+	top: ${props => props.location && `${(props.cellSize)*(props.location.row)}px`};
+	left: ${props => props.location && `${(props.cellSize)*(props.location.col-2)}px`};
+	/* below was range before barriers were included */
+	/* top: ${props => props.location && `${(props.cellSize)*(props.location.row-1)}px`};
+	left: ${props => props.location && `${(props.cellSize)*(props.location.col-1)}px`}; */
 
 	/* transition: ${props => `transform ${props.executionSpeed}s  cubic-bezier(.8,.15,.65,.9)`}; */
 	/* --top: 0px;
