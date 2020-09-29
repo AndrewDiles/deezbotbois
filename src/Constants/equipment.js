@@ -160,7 +160,6 @@ export const weaponStats = {
 		damage: 8,
 		superTypes: ['Ranged'],
 		subTypes: ['Piercing', 'Accuracy'],
-		projectileSpeed: 4,
 		attackShape: 'line',
 		reloadTime: 2,
 		attackCost: 20,

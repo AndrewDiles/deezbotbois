@@ -810,7 +810,7 @@ export function illuminateScannedCells (scanResults,executionSpeed, setCellColor
 		return
 	}
 }
-// function filters out friendly and empty entries from scan Results.  Contains distances and is ordered from closest to furthest
+// function filters out the scanning bot and empty entries from scan Results.  Contains distances and is ordered from closest to furthest
 export function filterScanResults (scanResults) {
 	if (!verifyScanResults(scanResults)) return
 	let nonEmprtyCells = [];
@@ -818,6 +818,22 @@ export function filterScanResults (scanResults) {
 		if (scanResults[i]) {
 			scanResults[i].forEach((result)=>{
 				if (result.cellIs) {
+					result.distance = i;
+					nonEmprtyCells.push(result)
+				}
+			})
+		}
+	}
+	return nonEmprtyCells
+}
+// function filters out friendly, wall and empty entries from scan Results.  Contains distances and is ordered from closest to furthest
+export function filterHostileScanResults (scanResults) {
+	if (!verifyScanResults(scanResults)) return
+	let nonEmprtyCells = [];
+	for (let i = 1; i < scanResults.length; i++) {
+		if (scanResults[i]) {
+			scanResults[i].forEach((result)=>{
+				if (result.cellIs === 'hostile') {
 					result.distance = i;
 					nonEmprtyCells.push(result)
 				}
