@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
-
+import { generateAttributes } from '../../Constants/attributeObjectGenerator';
 import styled from 'styled-components';
 
 import MessageDisplay from '../MessageDisplay/MessageDisplay';
@@ -12,12 +12,14 @@ import SaveBots from './SaveBots';
 import DeleteBot from './DeleteBot';
 import BotSelection from './BotSelection';
 import AssemblyTabControl from './AssemblyTabControl';
+import ComprehensiveTabControl from './ComprehensiveTabControl';
 import BotModel from './BotModel/BotModel';
 import BotEquipment from './BotEquipment/BotEquipment';
 import BotAttributes from './BotAttributes/BotAttributes';
 import BotTechTree from './BotTechTree/BotTechTree';
 import BotAI from './BotAI/BotAI';
 import BotScripts from './BotScripts/BotScripts';
+import ComprehensiveAttributes from './ComprehensiveAttributes/ComprehensiveAttributes';
 
 const Assembly = () => {
 	const settings = useSelector((state) => state.settings);
@@ -27,13 +29,15 @@ const Assembly = () => {
 	const [successMsg, setSuccessMsg] = useState(null);
 	const [botNumberSelected, setBotNumberSelected] = useState(0);
 	const [equipmentStaging, setEquipmentStaging] = useState({from: null, to: null})
-	const [tabsDisplayed, setTabsDisplayed] = useState({model: true, equipment: false, attributes: false, techTree: false, ai: false, scripts: false});
+	const [tabsDisplayed, setTabsDisplayed] = useState({model: true, equipment: false, attributes: false, techTree: false, ai: false, scripts: false, comprehensive: false});
+	const [comprehensiveTabDisplayed, setComprehensiveTabDisplayed] = useState(false);
 	const [tabsOpened, setTabsOpened] = useState(1);
+	const [attributes, setAttributes] = useState({});
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
 
 	useEffect(() => {
-		if (userInfo.botBuilds.length > 0) setTabsDisplayed({model: true, equipment: true, attributes: true, techTree: true, ai: true, scripts: true});
+		if (userInfo.botBuilds.length > 0) setTabsDisplayed({model: true, equipment: true, attributes: true, techTree: true, ai: true, scripts: true, comprehensive: false});
 	}, []);
 	useEffect(() => {
 		let newTabCount = 0;
@@ -54,6 +58,12 @@ const Assembly = () => {
 	useEffect(()=>{
 		setEquipmentStaging({from: null, to: null})
 	},[botNumberSelected])
+	useEffect(()=>{
+		setEquipmentStaging({from: null, to: null})
+		if (userInfo.botBuilds.length > 0 && userInfo.botBuilds[botNumberSelected]) {
+			setAttributes(generateAttributes(userInfo.botBuilds[botNumberSelected]))
+		}
+	},[botNumberSelected, botInfo[botNumberSelected] && botInfo[botNumberSelected].model])
 	if (userInfo.email === undefined || userInfo.email === null) {
     return (
       <Redirect to="/home" />
@@ -137,10 +147,14 @@ const Assembly = () => {
 					tabsDisplayed = {tabsDisplayed}
 					setTabsDisplayed = {setTabsDisplayed}
 					/>
+					<ComprehensiveTabControl
+					attributes = {attributes}
+					comprehensiveTabDisplayed = {comprehensiveTabDisplayed}
+					setComprehensiveTabDisplayed = {setComprehensiveTabDisplayed}
+					/>
 					<br/>
 				</>
 			}
-
 			{botInfo.length > 0 &&
 				<AssemblyGrid
 				navLocation = {settings.navLocation}
@@ -182,6 +196,11 @@ const Assembly = () => {
 						/>
 					}
       	</AssemblyGrid>
+			}
+			{comprehensiveTabDisplayed && 
+				<ComprehensiveAttributes
+				attributes = {attributes}
+				/>
 			}
     </Wrapper>
   )

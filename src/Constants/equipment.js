@@ -149,7 +149,7 @@ export const accessoryStats = {
 		description: "Now you know kung fu, for now.",
 		potency: 6,
 		MeleeDamageMultiplier: 1.1,
-		MeleeDamageReductionMultiplier: 1.1,
+		MeleeDamageReductionMultiplier: 0.9,
 	},
 }
 
@@ -157,7 +157,7 @@ export const weaponStats = {
 	Gun1: {
 		name: "Pewpew",
 		description: "Handgun of questionable efficacy and naming.",
-		damage: 8,
+		damage: 6,
 		superTypes: ['Ranged'],
 		subTypes: ['Piercing', 'Accuracy'],
 		attackShape: 'line',
@@ -169,7 +169,7 @@ export const weaponStats = {
 	Sword1: {
 		name: "Busted Sword",
 		description: "A sword that was once great.",
-		damage: 11,
+		damage: 9,
 		superTypes: ['Melee'],
 		subTypes: ['Piercing', 'Power'],
 		attackShape: 'adjacentCell',
@@ -179,7 +179,7 @@ export const weaponStats = {
 	Hammer1: {
 		name: "Bambam",
 		description: "Primitive doesn't always mean inferior.",
-		damage: 13,
+		damage: 11,
 		superTypes: ['Melee'],
 		subTypes: ['Crushing', 'Power'],
 		attackShape: 'adjacentCell',
