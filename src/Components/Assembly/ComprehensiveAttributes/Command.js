@@ -5,30 +5,38 @@ import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import iconImporter from '../../../Constants/iconImporter';
 import StyledIcon from '../../StyledIcon/StyledIcon';
 import ToolTip from '../../ToolTip/ToolTip';
-import {attributeInfo} from '../../../Constants/attributes';
+import {commandInfo} from '../../../Constants/attributes';
 
-const Attribute = ({ attribute, value, type }) => {
+import {xCircle} from 'react-icons-kit/feather/xCircle';
+import {xSquare} from 'react-icons-kit/feather/xSquare';
+import {x} from 'react-icons-kit/feather/x';
+import {checkCircle} from 'react-icons-kit/feather/checkCircle';
+import {checkSquare} from 'react-icons-kit/feather/checkSquare';
+import {check} from 'react-icons-kit/feather/check';
+import {alertTriangle} from 'react-icons-kit/feather/alertTriangle';
+import { findAllByTestId } from '@testing-library/react';
+
+const Command = ({ attribute, value }) => {
 	const colors = useSelector(getThemeColors);
 	const [icons, setIcons] = React.useState(null);
 	const [toolTipToggle, setToolTipToggle] = React.useState(false);
 	const [hovered, setHovered] = React.useState(false);
 
 	useEffect(()=>{
-		setIcons(iconImporter(attribute))
+		setIcons(iconImporter(attribute));
 	},[attribute]);
 
 	if (!icons) {
 		return (<></>)
 	}
-	if (!attributeInfo[attribute])
-	console.log(attributeInfo[attribute], 'due to', attribute)
-  return (
-    <AttributeRow
-		className = 'centeredFlex'
+
+	return (
+		<CommandRow
 		onClick = {e=>{setToolTipToggle(!toolTipToggle)}}
 		colors = {colors}
 		onMouseEnter = {()=>{setHovered(true);}}
 		onMouseLeave = {()=>{setToolTipToggle(false);setHovered(false);}}
+		value = {value}
 		>
 			{toolTipToggle ? (
 				<ToolTip
@@ -39,46 +47,50 @@ const Attribute = ({ attribute, value, type }) => {
 				height = '50'
 				animated = {'command'}
 				>
-					{attributeInfo[attribute].indexOf(":") > 0 ? (
+					{commandInfo[attribute].indexOf(":") > 0 ? (
 						<>
-							<b>{attributeInfo[attribute].slice(0,attributeInfo[attribute].indexOf(":"))}</b>
-							{/* {attributeInfo[attribute].slice(2+attributeInfo[attribute].indexOf(":"),attributeInfo[attribute].length)} */}
+							<b>{commandInfo[attribute].slice(0,commandInfo[attribute].indexOf(":"))}</b>
+							{/* {commandInfo[attribute].slice(2+commandInfo[attribute].indexOf(":"),commandInfo[attribute].length)} */}
 						</>
+
 					) : (
-						attributeInfo[attribute]
+						commandInfo[attribute]
 					)}
 				</ToolTip>
 			) : (
-				<AttributeContents 
-				// className = 'centeredFlex'
-				>
+				<>
 					<StyledIcon
 					icon = {icons.icon1}
 					padding = {5}
 					selected = {hovered}
 					/>
-					{icons.icon2 ? (
+					<StyledIcon
+					icon = {icons.icon2}
+					padding = {5}
+					selected = {hovered}
+					/>
+					{value ? (
 						<StyledIcon
-						icon = {icons.icon2}
-						padding = {5}
-						selected = {hovered}
-						/>
+					icon = {checkSquare}
+					padding = {5}
+					selected = {hovered}
+					/>
 					) : (
-						<Spacer/>
+					<StyledIcon
+					icon = {xSquare}
+					padding = {5}
+					selected = {hovered}
+					/>
 					)}
-					<Spacer>
-						<Value>
-							{value}
-						</Value>
-					</Spacer>
-				</AttributeContents>
+				</>
 			)}
-    </AttributeRow>
-  )
+		</CommandRow>
+	)
 }
-export default Attribute;
-const AttributeRow = styled.div`
+export default Command;
+const CommandRow = styled.div`
 	justify-self: center;
+	opacity: ${props => props.value === false && 0.5};
 	width: 300px;
 	height: 50px;
 	transition: color .75s, background-color .75s;
@@ -86,28 +98,5 @@ const AttributeRow = styled.div`
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     background-color: ${props => !props.disabled && props.colors.hovered};
 		color: ${props => !props.disabled && props.colors.hoveredText};
-`
-const AttributeContents = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	text-align: center;
-	width: 150px;
-	height: 50px;
-	margin: 0, 5px;
-`
-const Spacer = styled.div`
-	min-width: 40px;
-	min-height: 40px;
-	width: 40px;
-	height: 40px;
-	
-	display: flex;
-	align-items: center;
-`
-const Value = styled.p`
-	margin: auto 0;
-	/* margin: 0; */
-	white-space: nowrap;
-	text-align: left;
+  }
 `

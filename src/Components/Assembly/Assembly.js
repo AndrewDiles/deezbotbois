@@ -46,6 +46,7 @@ const Assembly = () => {
 		})
 		setTabsOpened(newTabCount)
 	}, [tabsDisplayed]);
+
 	useEffect(() => {
 		let eraseSuccessMsg;
 		if (successMsg) {
@@ -55,15 +56,23 @@ const Assembly = () => {
 		}
 		return () => clearTimeout(eraseSuccessMsg)
 	},[successMsg])
+
 	useEffect(()=>{
 		setEquipmentStaging({from: null, to: null})
 	},[botNumberSelected])
+
+	// useEffect(()=>{
+	// 	setEquipmentStaging({from: null, to: null})
+	// },[botNumberSelected, botInfo[botNumberSelected] && botInfo[botNumberSelected].model])
+
 	useEffect(()=>{
-		setEquipmentStaging({from: null, to: null})
 		if (userInfo.botBuilds.length > 0 && userInfo.botBuilds[botNumberSelected]) {
+			// console.log('updating attributes')
 			setAttributes(generateAttributes(userInfo.botBuilds[botNumberSelected]))
 		}
-	},[botNumberSelected, botInfo[botNumberSelected] && botInfo[botNumberSelected].model])
+	},[botNumberSelected, JSON.stringify(botInfo[botNumberSelected])
+	// , botInfo[botNumberSelected].model, botInfo[botNumberSelected].techTree, botInfo[botNumberSelected].equipment  
+])
 	if (userInfo.email === undefined || userInfo.email === null) {
     return (
       <Redirect to="/home" />

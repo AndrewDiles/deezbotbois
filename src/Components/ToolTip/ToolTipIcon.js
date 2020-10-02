@@ -33,13 +33,15 @@ const ToolTipIcon = ({ name, iconImport, selfLocation, animated }) => {
 					
 				</ToolTip>
 			):(
-				<StyledIcon
-				id = {`${name}Icon`}
-				icon = {iconImport}
-				size = {15}
-				padding = 'mini'
-				handleClick = {handleClick}
-				/>
+				iconImport && (
+					<StyledIcon
+					id = {`${name}Icon`}
+					icon = {iconImport}
+					size = {15}
+					padding = 'mini'
+					handleClick = {handleClick}
+					/>
+				)
 			)
 	)
 }

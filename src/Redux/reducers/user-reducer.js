@@ -166,7 +166,7 @@ export default function userInfo(
 				}
 			}
 			case 'ADD_TECH' : {
-				console.log('adding tech')
+				// console.log('adding tech')
 				let botBuilds = [...state.botBuilds];
 				botBuilds[action.index].techTree[action.techIndex] = true;
 				return {

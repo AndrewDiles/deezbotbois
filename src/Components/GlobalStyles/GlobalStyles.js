@@ -215,6 +215,16 @@ html {
 		height: 37px;
 	}
 }
+@keyframes commandExpand {
+	0% {
+		width: 300px;
+		height: 0;
+  }
+	100% {
+		width: 300px;
+		height: 50px;
+	}
+}
 @keyframes expandTechdisplay {
 	0% {
 		width: 100%;

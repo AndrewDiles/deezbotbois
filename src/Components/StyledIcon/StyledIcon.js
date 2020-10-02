@@ -36,7 +36,7 @@ const IconStylings = styled(Icon)`
   padding: ${props => props.padding && `${props.padding}px`};
 	padding-bottom: ${props => props.padding === 'mini' && '5px'};
   position: ${props => props.absolute ? 'absolute' : 'relative'};
-  color: ${props => !props.glowing && props.colors.textColor};
+  color: ${props => !props.glowing && props.selected ? props.colors.hoveredText : props.colors.textColor};
 	animation: ${props => props.glowing && '1s linear infinite alternate glowGift'};
   margin: 5px;
   border-radius: 5px;
@@ -44,6 +44,7 @@ const IconStylings = styled(Icon)`
   text-align: center;
 	opacity: ${props => props.disabled && 0.5};
   transition: color .75s, background-color .75s;
+	background-color: ${props => props.selected && props.colors.hovered};
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     background-color: ${props => !props.disabled && props.colors.hovered};

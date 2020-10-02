@@ -64,6 +64,7 @@ const Message = styled.div`
 	z-index: 15;
 	animation: ${props => props.animated === 'equipment' ? '.5s ease-out 1 openFromTopToBottom' 
 	: props.animated === 'attribute' ? '.5s ease-out 1 attributeExpandxAxis'
+	: props.animated === 'command' ? '.5s ease-out 1 commandExpand'
 	:''};
 	overflow: hidden;
 `

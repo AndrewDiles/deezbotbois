@@ -2,10 +2,12 @@ import {music_loudspeaker as elevenAttack} from 'react-icons-kit/linea/music_lou
 import {u1F48D as accessory} from 'react-icons-kit/noto_emoji_regular/u1F48D'
 import {u1F3AF as accuracy} from 'react-icons-kit/noto_emoji_regular/u1F3AF'
 // import {lab as acid} from 'react-icons-kit/icomoon/lab'
-// import {beaker as acid} from 'react-icons-kit/oct/beaker'
+import {beaker as corrosion} from 'react-icons-kit/oct/beaker'
 import {erlenmeyerFlaskBubbles as acid} from 'react-icons-kit/ionicons/erlenmeyerFlaskBubbles'
 import {target as aim} from 'react-icons-kit/ikons/target'
+import {compass as aimAndAttack} from 'react-icons-kit/typicons/compass'
 import {shield as armor} from 'react-icons-kit/icomoon/shield'
+import {shieldOff as armorPenetration} from 'react-icons-kit/feather/shieldOff'
 
 import {u1F44A as attack} from 'react-icons-kit/noto_emoji_regular/u1F44A'
 // import {ic_pages as attack} from 'react-icons-kit/md/ic_pages'
@@ -24,7 +26,7 @@ import {heart as durability} from 'react-icons-kit/icomoon/heart'
 // import {ionic as energy} from 'react-icons-kit/ionicons/ionic'
 // import {ecommerce_megaphone as energy} from 'react-icons-kit/linea/ecommerce_megaphone'
 import {flashlight as energy} from 'react-icons-kit/entypo/flashlight'
-// import {fire} from 'react-icons-kit/icomoon/fire'
+import {fire as burn} from 'react-icons-kit/icomoon/fire'
 import {flame as fire} from 'react-icons-kit/oct/flame'
 import {shield as guard} from 'react-icons-kit/entypo/shield'
 import {listOl as initiative} from 'react-icons-kit/fa/listOl'
@@ -47,19 +49,27 @@ import {wrench as repair} from 'react-icons-kit/icomoon/wrench'
 import {basic_target as scan} from 'react-icons-kit/linea/basic_target'
 import {sphere as shield} from 'react-icons-kit/icomoon/sphere'
 // import {rocket as shieldPenetration} from 'react-icons-kit/oct/rocket'
-// import {list as slot} from 'react-icons-kit/iconic/list'
+import {list as slots} from 'react-icons-kit/iconic/list'
 
 // import {iosWorld as typedShield} from 'react-icons-kit/ionicons/iosWorld'
 import {unlocked} from 'react-icons-kit/icomoon/unlocked'
+import {u23F3 as wait} from 'react-icons-kit/noto_emoji_regular/u23F3'
 import {u1F528 as weapon} from 'react-icons-kit/noto_emoji_regular/u1F528'
+
+
+// import {radio as scanCommand} from 'react-icons-kit/feather/radio'
 
 const iconImporter = (stringToConvert) => {
 	let icon1, icon2
 	switch (stringToConvert) {
 		case 'accessorySlot' : {
 			icon1 = accessory;
-			// icon2 = slot;
 			icon2 = unlocked;
+			break;
+		}
+		case 'AccessorySlots' : {
+			icon1 = accessory;
+			icon2 = slots;
 			break;
 		}
 		case 'Accuracy' : {
@@ -74,6 +84,16 @@ const iconImporter = (stringToConvert) => {
 		case 'AcidDamageReductionMultiplier' : {
 			icon1 = acid;
 			icon2 = damageReduction;
+			break;
+		}
+		case 'aimCommand' : {
+			icon1 = aim;
+			icon2 = command;
+			break;
+		}
+		case 'aimAndAttackCommand' : {
+			icon1 = aimAndAttack;
+			icon2 = command;
 			break;
 		}
 		case 'aimCostModifier' : {
@@ -108,8 +128,8 @@ const iconImporter = (stringToConvert) => {
 			break;
 		}
 		case 'BurnAndCorrosionBoost' : {
-			icon1 = fire;
-			icon2 = acid;
+			icon1 = burn;
+			icon2 = corrosion;
 			break;
 		}
 		case 'Capacitor' : {
@@ -158,7 +178,7 @@ const iconImporter = (stringToConvert) => {
 			icon1 = durability;
 			break;
 		}
-		case 'ElevenAttackCommand' : {
+		case 'elevenAttackCommand' : {
 			icon1 = elevenAttack;
 			icon2 = command;
 			break;
@@ -192,6 +212,11 @@ const iconImporter = (stringToConvert) => {
 			icon1 = initiative;
 			break;
 		}
+		case 'meleeAttackCommand' : {
+			icon1 = melee;
+			icon2 = command;
+			break;
+		}
 		case 'MeleeDamageMultiplier' : {
 			icon1 = melee;
 			icon2 = damage;
@@ -204,7 +229,12 @@ const iconImporter = (stringToConvert) => {
 		}
 		case 'MeleeArmorPenetration' : {
 			icon1 = melee;
-			icon2 = armor;
+			icon2 = armorPenetration;
+			break;
+		}
+		case 'moveCommand' : {
+			icon1 = movement;
+			icon2 = command;
 			break;
 		}
 		case 'MovementCost' : {
@@ -241,6 +271,11 @@ const iconImporter = (stringToConvert) => {
 		}
 		case 'ramCommand' : {
 			icon1 = ram;
+			icon2 = command;
+			break;
+		}
+		case 'rangedAttackCommand' : {
+			icon1 = ranged;
 			icon2 = command;
 			break;
 		}
@@ -286,6 +321,11 @@ const iconImporter = (stringToConvert) => {
 			icon1 = shield;
 			break;
 		}
+		case 'waitCommand' : {
+			icon1 = wait;
+			icon2 = command;
+			break;
+		}
 		// case 'ShieldVsEnergyMultiplier' : {
 		// 	icon1 = typedShield;
 		// 	icon2 = multiplier;
@@ -300,6 +340,11 @@ const iconImporter = (stringToConvert) => {
 			icon1 = weapon;
 			// icon2 = slot;
 			icon2 = unlocked;
+			break;
+		}
+		case 'WeaponSlots' : {
+			icon1 = weapon;
+			icon2 = slots;
 			break;
 		}
 		default :{icon1 = null; icon2 = null}
