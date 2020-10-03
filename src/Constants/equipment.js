@@ -151,6 +151,13 @@ export const accessoryStats = {
 		MeleeDamageMultiplier: 1.1,
 		MeleeDamageReductionMultiplier: 0.9,
 	},
+	redBandana : {
+		name: "Red Bandana",
+		description: "The legend lives on.",
+		potency: 5,
+		reloadTimeModifier: -1,
+		RangedDamageMultiplier: 1.1,
+	},
 }
 
 export const weaponStats = {

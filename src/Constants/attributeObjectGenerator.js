@@ -4,9 +4,14 @@ import baseBotAttributes, {
 	comprehensiveStatsBool
 } from './attributes';
 
+import {accessoryStats} from '../Constants/equipment';
+
 // function that calculates all bot attributes given a botBuild object
 export function generateAttributes (botBuild) {
 	const model = botBuild.model;
+	const equipped = botBuild.equipment;
+
+	
 
 	let attributesReturn = {}
 
@@ -36,5 +41,27 @@ export function generateAttributes (botBuild) {
 		}
 	})
 
+	for (let n = 1; n <= 5; n++) {
+		let accNumber = `acc${n}`;
+		if (equipped[accNumber]) {
+			let accessoryInfo = accessoryStats[equipped[accNumber]];
+			delete accessoryInfo.name;
+			delete accessoryInfo.description;
+			delete accessoryInfo.potency;
+			let accKeys = Object.keys(accessoryInfo);
+			accKeys.forEach((key)=>{
+				if (comprehensiveStatsAdditive.includes(key)) {
+					attributesReturn[key] += accessoryInfo[key]
+				}
+				else if (comprehensiveStatsMultiplicative.includes(key)) {
+					attributesReturn[key] *= accessoryInfo[key]
+				}
+				else if (comprehensiveStatsBool.includes(key)) {
+					attributesReturn[key] = true
+				}
+			})
+		}
+	}
+	
 	return attributesReturn
 }
