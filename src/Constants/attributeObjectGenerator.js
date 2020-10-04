@@ -44,7 +44,7 @@ export function generateAttributes (botBuild) {
 	for (let n = 1; n <= 5; n++) {
 		let accNumber = `acc${n}`;
 		if (equipped[accNumber]) {
-			let accessoryInfo = accessoryStats[equipped[accNumber]];
+			let accessoryInfo = {...accessoryStats[equipped[accNumber]]};
 			delete accessoryInfo.name;
 			delete accessoryInfo.description;
 			delete accessoryInfo.potency;

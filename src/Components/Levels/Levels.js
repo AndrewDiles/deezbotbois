@@ -1,19 +1,24 @@
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import { 
+	useSelector, 
+	// useDispatch 
+} from "react-redux";
+import { 
+	// NavLink, 
+	Redirect 
+} from "react-router-dom";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 
-import {
-	updateUrl,
-	deactivateProfileTab,
-} from '../../Redux/actions';
+// import {
+// 	updateUrl,
+// 	deactivateProfileTab,
+// } from '../../Redux/actions';
 
-import StyledButton from '../StyledButton/StyledButton';
-import SizeSlider from '../SizeSlider/SizeSlider';
+// import StyledButton from '../StyledButton/StyledButton';
 
 const Levels = ({ disabled }) => {
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);

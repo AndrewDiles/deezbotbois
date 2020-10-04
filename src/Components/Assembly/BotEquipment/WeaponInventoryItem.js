@@ -33,7 +33,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 			if (!target) return;
 			target.removeEventListener('mouseenter',onMouseEnter);
 		}
-	},[weapon, messageHovered])
+	},[weapon, messageHovered, setMessageDisplayed])
 
 	if (!userInfo.botBuilds || botNumberSelected === null) {
 		return (<></>)

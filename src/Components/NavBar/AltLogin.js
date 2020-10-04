@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import styled from 'styled-components';
 
 import { useSelector, useDispatch } from "react-redux";
-import userInfo, { getThemeColors } from '../../Redux/reducers/user-reducer';
+import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import StyledButton from '../StyledButton/StyledButton';
 
 import {

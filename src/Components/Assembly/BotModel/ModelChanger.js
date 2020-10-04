@@ -19,7 +19,7 @@ const ModelChanger = ({ botNumberSelected }) => {
 	
 	useEffect(()=>{
 		setIndexOfSelectedModel(userInfo.availableBots.indexOf(userInfo.botBuilds[botNumberSelected].model))
-	},[botNumberSelected])
+	},[ botNumberSelected, userInfo.availableBots, userInfo.botBuilds ])
 	
 	const handleSwapModel = (direction) => {
 		if (direction === 'left') {

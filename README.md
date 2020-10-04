@@ -34,6 +34,10 @@ Intentions with the GUI include:
 
 
 # PAST BUGS
+- Previously working accessories in Assembly no longer displayed.
+### Cause: in attributeObjectGenerator, I had deleted the name, description and potency key/values in order to factor the affects of the accessories into the comprehensive attribute totals
+### Solution: Make a shallow copy by using the spread operator before deleting the lines so it is only affecting the local object
+
 - Accessories and weapons that exceed maximum allowed number based on model are not removed during model changes.
 ### Solution: Manage state variable in reducer by sending it the max allowable values
 

@@ -7,11 +7,11 @@ import StyledIcon from '../../StyledIcon/StyledIcon';
 import ToolTip from '../../ToolTip/ToolTip';
 import {attributeInfo} from '../../../Constants/attributes';
 
-const Attribute = ({ attribute, value, type }) => {
+const Attribute = ({ attribute, value }) => {
 	const colors = useSelector(getThemeColors);
-	const [icons, setIcons] = React.useState(null);
-	const [toolTipToggle, setToolTipToggle] = React.useState(false);
-	const [hovered, setHovered] = React.useState(false);
+	const [icons, setIcons] = useState(null);
+	const [toolTipToggle, setToolTipToggle] = useState(false);
+	const [hovered, setHovered] = useState(false);
 
 	useEffect(()=>{
 		setIcons(iconImporter(attribute))
@@ -20,8 +20,6 @@ const Attribute = ({ attribute, value, type }) => {
 	if (!icons) {
 		return (<></>)
 	}
-	if (!attributeInfo[attribute])
-	console.log(attributeInfo[attribute], 'due to', attribute)
   return (
     <AttributeRow
 		className = 'centeredFlex'
@@ -52,11 +50,15 @@ const Attribute = ({ attribute, value, type }) => {
 				<AttributeContents 
 				// className = 'centeredFlex'
 				>
-					<StyledIcon
-					icon = {icons.icon1}
-					padding = {5}
-					selected = {hovered}
-					/>
+					{icons.icon2 ? (
+						<StyledIcon
+						icon = {icons.icon1}
+						padding = {5}
+						selected = {hovered}
+						/>
+					) : (
+						<Spacer/>
+					)}
 					{icons.icon2 ? (
 						<StyledIcon
 						icon = {icons.icon2}
@@ -64,11 +66,15 @@ const Attribute = ({ attribute, value, type }) => {
 						selected = {hovered}
 						/>
 					) : (
-						<Spacer/>
+						<StyledIcon
+						icon = {icons.icon1}
+						padding = {5}
+						selected = {hovered}
+						/>
 					)}
 					<Spacer>
 						<Value>
-							{value}
+							{value % 1 === 0 ? value : value.toFixed(2)}
 						</Value>
 					</Spacer>
 				</AttributeContents>
@@ -97,11 +103,11 @@ const AttributeContents = styled.div`
 	margin: 0, 5px;
 `
 const Spacer = styled.div`
-	min-width: 40px;
-	min-height: 40px;
-	width: 40px;
-	height: 40px;
-	
+	min-width: 50px;
+	min-height: 50px;
+	width: 50px;
+	height: 50px;
+	padding-left: 20px;
 	display: flex;
 	align-items: center;
 `

@@ -11,7 +11,7 @@ const MessageDisplay = ({type, msg, setMsg, textSize, margin}) => {
 			},2000)
 		}
 		return () => clearTimeout(eraseMsg)
-	},[msg])
+	},[msg, setMsg])
 	
   return (
 		<MessageP

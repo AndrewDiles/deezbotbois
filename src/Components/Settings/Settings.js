@@ -26,7 +26,7 @@ import { floppyDisk } from "react-icons-kit/icomoon/floppyDisk";
 import SizeSlider from "../SizeSlider/SizeSlider";
 import Bot from "../Bots/Bot";
 
-const Settings = ({ disabled }) => {
+const Settings = () => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userInfo);
   const settings = useSelector((state) => state.settings);

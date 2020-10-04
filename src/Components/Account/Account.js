@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 import {
-	setNavLocation,
 	communicating,
 	communicationsSuccessful,
 	communicationsFailed,

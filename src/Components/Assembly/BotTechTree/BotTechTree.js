@@ -70,7 +70,7 @@ const BotTechTree = ({ botNumberSelected}) => {
 			availableGold: availableGold,
 			starCost: starCost
 		});
-	},[ userInfo.battleBits, botNumberSelected, botInfo ])
+	},[ userInfo.battleBits, botNumberSelected, botInfo, userInfo.levelProgress ])
 
 	if (!userInfo.botBuilds || !treeInfo) {
 		return (<></>)

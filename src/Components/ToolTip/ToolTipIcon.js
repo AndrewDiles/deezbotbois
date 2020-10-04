@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 
 import StyledIcon from '../StyledIcon/StyledIcon';
 import ToolTip from './ToolTip';

@@ -14,7 +14,6 @@ const DeleteBot = ({ setBotNumberSelected, botNumberSelected, setErrorMsg, setSu
 	const settings = useSelector((state) => state.settings);
 	const userInfo = useSelector((state) => state.userInfo);
 	const [confirmOpen, setConfirmOpen] = React.useState(false);
-	const botInfo = userInfo.botBuilds;
 	const dispatch = useDispatch();
 
 	React.useEffect(() => {

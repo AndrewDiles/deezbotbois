@@ -7,20 +7,18 @@ import StyledIcon from '../../StyledIcon/StyledIcon';
 import ToolTip from '../../ToolTip/ToolTip';
 import {commandInfo} from '../../../Constants/attributes';
 
-import {xCircle} from 'react-icons-kit/feather/xCircle';
+// import {xCircle} from 'react-icons-kit/feather/xCircle';
 import {xSquare} from 'react-icons-kit/feather/xSquare';
-import {x} from 'react-icons-kit/feather/x';
-import {checkCircle} from 'react-icons-kit/feather/checkCircle';
+// import {x} from 'react-icons-kit/feather/x';
+// import {checkCircle} from 'react-icons-kit/feather/checkCircle';
 import {checkSquare} from 'react-icons-kit/feather/checkSquare';
-import {check} from 'react-icons-kit/feather/check';
-import {alertTriangle} from 'react-icons-kit/feather/alertTriangle';
-import { findAllByTestId } from '@testing-library/react';
+// import {check} from 'react-icons-kit/feather/check';
 
 const Command = ({ attribute, value }) => {
 	const colors = useSelector(getThemeColors);
-	const [icons, setIcons] = React.useState(null);
-	const [toolTipToggle, setToolTipToggle] = React.useState(false);
-	const [hovered, setHovered] = React.useState(false);
+	const [icons, setIcons] = useState(null);
+	const [toolTipToggle, setToolTipToggle] = useState(false);
+	const [hovered, setHovered] = useState(false);
 
 	useEffect(()=>{
 		setIcons(iconImporter(attribute));

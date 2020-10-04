@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const BotScripts = ({ botNumberSelected}) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	const botInfo = userInfo.botBuilds;
+	// const botInfo = userInfo.botBuilds;
 
 	if (!userInfo.botBuilds) {
 		return (<></>)

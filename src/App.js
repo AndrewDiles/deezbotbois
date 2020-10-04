@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import styled from "styled-components";
 import { updateUrl } from "./Redux/actions";
-import userInfo, { getThemeColors } from './Redux/reducers/user-reducer';
+import { getThemeColors } from './Redux/reducers/user-reducer';
 
 import GlobalStyles from "./Components/GlobalStyles/GlobalStyles";
 import NavBar from "./Components/NavBar/NavBar";
@@ -16,8 +16,8 @@ import Home from "./Components/Home/Home";
 import Assembly from "./Components/Assembly/Assembly";
 import Levels from "./Components/Levels/Levels";
 import Rules from "./Components/Rules/Rules"
-import Test from "./Components/Test/Test";
-import Test2 from "./Components/Test/Test2";
+import Test from "./Components/Tests/Test";
+import Test2 from "./Components/Tests/Test2";
 import Settings from "./Components/Settings/Settings";
 import Account from "./Components/Account/Account";
 import AltLogin from "./Components/NavBar/AltLogin";

@@ -19,7 +19,7 @@ const ItemEquipped = ({ slotKey, type, equipmentStaging, setEquipmentStaging, bo
 		if (!botInfo[botNumberSelected].equipment[slotKey]) setName(null);
 		else if (type === 'weapon') setName(weaponStats[botInfo[botNumberSelected].equipment[slotKey]].name);
 		else {setName(accessoryStats[botInfo[botNumberSelected].equipment[slotKey]].name)};
-	}, [botNumberSelected, botInfo[botNumberSelected].equipment[slotKey]])
+	}, [botNumberSelected, botInfo[botNumberSelected].equipment[slotKey]], botInfo, slotKey, type)
 
 	React.useEffect(()=>{
 		const target = document.getElementById(`${name}Button`)
