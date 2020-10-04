@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 	grid-gap: 1px;
 	background-color: ${props => props.color ? props.color : 'rgba(0,0,0,0.1)'};
 	grid-template-columns: repeat(6, 1fr);
-	grid-template-rows: repeat(7, 1fr);
+	grid-template-rows: repeat(6, 1fr);
 `
 const Cell = styled.div`
 	height: 100%;

@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import { attackShapes } from '../../Constants/equipment';
 import AttackShape from './AttackShape';
 
+
+import {power as cost} from 'react-icons-kit/icomoon/power';
+import {loop2 as reload} from 'react-icons-kit/icomoon/loop2';
+import {u1F4A5 as damage} from 'react-icons-kit/noto_emoji_regular/u1F4A5';
+import StyledIcon from '../StyledIcon/StyledIcon';
+
 const WeaponContents = ({ weaponInfo }) => {
 	return (
 		<ToolTipContents>
@@ -21,33 +27,43 @@ const WeaponContents = ({ weaponInfo }) => {
 			<SubType2>
 				{weaponInfo.subTypes[1]}
 			</SubType2> */}
-			<Damage>
-				<div>
+			<Damage className = 'centeredFlex'>
+				<StyledIcon
+				padding = {0}
+				size = {25}
+				icon = {damage}
+				selected = {true}
+      	/>
+				{/* <div>
 					DMG
-				</div>
+				</div> */}
 				{weaponInfo.damage}
 			</Damage>
-			<Cost>
-				<div>
+			<Cost className = 'centeredFlex'>
+				<StyledIcon
+				padding = {0}
+				size = {20}
+				icon = {cost}
+				selected = {true}
+      	/>
+				{/* <div>
 					[kJ]
-				</div>
+				</div> */}
 				{weaponInfo.attackCost}
 			</Cost>
 			{weaponInfo.reloadTime &&
-				<Reload>
-					<div>
+				<Reload className = 'centeredFlex'>
+					<StyledIcon
+					padding = {0}
+					size = {20}
+					icon = {reload}
+					selected = {true}
+      		/>
+					{/* <div>
 						RELOAD
-					</div>
+					</div> */}
 					{weaponInfo.reloadTime}
 				</Reload>
-			}
-			{weaponInfo.projectileSpeed &&
-				<Speed>
-					<div>
-						VELOCITY
-					</div>
-					{weaponInfo.projectileSpeed}
-				</Speed>
 			}
 			{weaponInfo.attackShape &&
 				<Shape>
@@ -68,7 +84,7 @@ const ToolTipContents = styled.div`
 	width: 100%;
 	font-size: 10px;
 	display: grid;
-	grid-template-columns: 18.75% 18.75% 18.75% 18.75% 25%; 
+	grid-template-columns: 18.75% 18.75% 25% 18.75% 18.75%; 
   grid-template-rows: 25% 25% 10% 40%;
 	padding: 2px;
 `
@@ -83,15 +99,17 @@ const Name = styled.div`
 	white-space: nowrap;
 `
 const Types = styled.div`
-	font-size: 0.7em;
+	font-size: 0.8em;
 	font-weight: 200;
 	grid-column-start: 1;
   grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 2;
+  grid-row-start: 4;
+  grid-row-end: 4;
 	align-self: end;
 	justify-self: start;
 	white-space: nowrap;
+	position: relative;
+	top: 3px;
 `
 // const SuperType = styled.div`
 // 	font-size: 0.8em;
@@ -122,40 +140,38 @@ const Types = styled.div`
 // 	justify-self: start;
 // `
 const Damage = styled.div`
-	font-size: 0.7em;
+	font-size: 1.1em;
 	grid-column-start: 1;
   grid-column-end: 1;
-  grid-row-start: 4;
+  grid-row-start: 3;
   grid-row-end: 4;
 	align-self: center;
-	justify-self: center;
+	justify-self: start; 
+	justify-items: start;
+	position:relative;
+	left: -10px;
 `
 const Cost = styled.div`
-	font-size: 0.7em;
+	font-size: 1.1em;
 	grid-column-start: 2;
   grid-column-end: 2;
-  grid-row-start: 4;
+  grid-row-start: 3;
   grid-row-end: 4;
 	align-self: center;
 	justify-self: center;
+	position:relative;
+	left: 15px;
 `
 const Reload = styled.div`
-	font-size: 0.5em;
+	font-size: 1.1em;
 	grid-column-start: 3;
   grid-column-end: 3;
-  grid-row-start: 4;
+  grid-row-start: 3;
   grid-row-end: 4;
 	align-self: center;
-	justify-self: center;
-`
-const Speed = styled.div`
-	font-size: 0.5em;
-	grid-column-start: 4;
-  grid-column-end: 4;
-  grid-row-start: 4;
-  grid-row-end: 4;
-	align-self: center;
-	justify-self: center;
+	justify-self: end;
+	position:relative;
+	left: 30px;
 `
 const Shape = styled.div`
 	font-size: 0.7em;
