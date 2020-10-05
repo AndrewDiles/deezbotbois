@@ -29,8 +29,8 @@ const WeaponContents = ({ weaponInfo }) => {
 			</SubType2> */}
 			<Damage className = 'centeredFlex'>
 				<StyledIcon
-				padding = {0}
-				size = {25}
+				padding = {2}
+				size = {24}
 				icon = {damage}
 				selected = {true}
       	/>
@@ -41,7 +41,7 @@ const WeaponContents = ({ weaponInfo }) => {
 			</Damage>
 			<Cost className = 'centeredFlex'>
 				<StyledIcon
-				padding = {0}
+				padding = {4}
 				size = {20}
 				icon = {cost}
 				selected = {true}
@@ -54,7 +54,7 @@ const WeaponContents = ({ weaponInfo }) => {
 			{weaponInfo.reloadTime &&
 				<Reload className = 'centeredFlex'>
 					<StyledIcon
-					padding = {0}
+					padding = {4}
 					size = {20}
 					icon = {reload}
 					selected = {true}

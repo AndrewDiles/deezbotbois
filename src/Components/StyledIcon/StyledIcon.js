@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Icon } from 'react-icons-kit';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
+import {xCircle} from 'react-icons-kit/feather/xCircle'
 
 const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, size, padding, absolute, id} ) => {
 	const settings = useSelector((state) => state.settings);
@@ -11,6 +12,11 @@ const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing,
 	if (settings.serverStatus !== 'idle') disabled = true;
 	if (!handleClick) {
 		handleClick = () => {}
+	}
+	if (!icon) {
+		console.log('An icon was not properly passed down')
+		icon = xCircle;
+		colors.textColor = 'red';
 	}
   return (
       <IconStylings

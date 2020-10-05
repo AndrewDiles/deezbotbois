@@ -81,8 +81,8 @@ export const accessoryStats = {
 	coldFusionCell : {
 		name: "Cold Fusion Cell",
 		description: "Extraordinarily unlikely milestone of energy transference!",
-		Reactor: 4,
 		potency: 9,
+		Reactor: 4,
 	},
 	hudEnhancement : {
 		name: "HUD Enhancement",
@@ -141,7 +141,7 @@ export const accessoryStats = {
 		name: "Rocket Propulsion",
 		description: "Fear is for those with flesh.",
 		potency: 5,
-		Movement: 1,
+		MovementDistance: 1,
 		CollisionDamageMultiplier: 1.25,
 	},
 	martialArtsEnhancementKit : {

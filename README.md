@@ -116,6 +116,15 @@ Intentions with the GUI include:
 
 # Reminders
 
+### Level Goals
+- Melee only: Bushido
+- Ranged only: Hotshot
+- Ram only: Guts
+- No damage taken: Golden Standard
+- No movement: Last stand
+- Win in under x ticks: Speed demon
+- Win with more than x capacitor: Power Hog
+
 ### Icon Imports For Bot Assembly:
 import {plus} from 'react-icons-kit/icomoon/plus'
 
