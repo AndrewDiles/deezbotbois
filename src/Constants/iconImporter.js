@@ -308,6 +308,11 @@ const iconImporter = (stringToConvert) => {
 			icon2 = command;
 			break;
 		}
+		case 'scanCommand' : {
+			icon1 = scan;
+			icon2 = command;
+			break;
+		}
 		case 'ScanCost' : {
 			icon1 = scan;
 			icon2 = cost;

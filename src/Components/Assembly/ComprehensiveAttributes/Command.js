@@ -14,7 +14,7 @@ import {xSquare} from 'react-icons-kit/feather/xSquare';
 import {checkSquare} from 'react-icons-kit/feather/checkSquare';
 // import {check} from 'react-icons-kit/feather/check';
 
-const Command = ({ attribute, value }) => {
+const Command = ({ attribute, value, width }) => {
 	const colors = useSelector(getThemeColors);
 	const [icons, setIcons] = useState(null);
 	const [toolTipToggle, setToolTipToggle] = useState(false);
@@ -35,15 +35,16 @@ const Command = ({ attribute, value }) => {
 		onMouseEnter = {()=>{setHovered(true);}}
 		onMouseLeave = {()=>{setToolTipToggle(false);setHovered(false);}}
 		value = {value}
+		width = {width}
 		>
 			{toolTipToggle ? (
 				<ToolTip
 				messageHovered = {toolTipToggle}
 				setMessageHovered = {setToolTipToggle}
 				// fontSize = '0.6em'
-				width = '300'
+				width = {width || 300}
 				height = '50'
-				animated = {'command'}
+				animated = {width ? 'command200' : 'command300'}
 				>
 					{commandInfo[attribute].indexOf(":") > 0 ? (
 						<>
@@ -89,7 +90,7 @@ export default Command;
 const CommandRow = styled.div`
 	justify-self: center;
 	opacity: ${props => props.value === false && 0.5};
-	width: 300px;
+	width: ${props => props.width ? `${props.width}px` : '300px'};
 	height: 50px;
 	transition: color .75s, background-color .75s;
 	&:hover {

@@ -215,13 +215,23 @@ html {
 		height: 37px;
 	}
 }
-@keyframes commandExpand {
+@keyframes commandExpand300 {
 	0% {
 		width: 300px;
 		height: 0;
   }
 	100% {
 		width: 300px;
+		height: 50px;
+	}
+}
+@keyframes commandExpand200 {
+	0% {
+		width: 200px;
+		height: 0;
+  }
+	100% {
+		width: 200px;
 		height: 50px;
 	}
 }

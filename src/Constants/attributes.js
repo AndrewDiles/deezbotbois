@@ -61,6 +61,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		scanCommand: true,
 		waitCommand: true,
 		
 		Description: "Dicephalous heavy unit.",
@@ -255,6 +256,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		scanCommand: true,
 		waitCommand: true,
 		
 		Description: "Jack of all trades, master of none.",
@@ -449,6 +451,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		scanCommand: true,
 		waitCommand: true,
 		
 		Description: "Monocular versatile unit.",
@@ -643,6 +646,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		scanCommand: true,
 		waitCommand: true,
 		
 		Description: "Immobile war machine!",
@@ -837,6 +841,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		scanCommand: true,
 		waitCommand: true,
 		
 		Description: "Advanced glass cannon.",
@@ -1032,6 +1037,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		scanCommand: true,
 		waitCommand: true,
 		
 		Description: "Inescapable suicide unit.",
@@ -1226,6 +1232,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		scanCommand: true,
 		waitCommand: true,
 		
 		Description: "Frail run and gunner.",
@@ -1421,6 +1428,7 @@ export const attributeInfo = {
 	rechargeCommand: "Enables the execution of the RECHARGE command",
 	redirectCommand: "Enables the execution of the REDIRECT command",
 	repairCommand: "Enables the execution of the REPAIR command",
+	scanCommand: "Enables the execution of the SCAN command",
 	waitCommand: "Enables the execution of the WAIT command",
 
 	// Below are technically not attributes, but are useful for the AttributeHeader
@@ -1447,6 +1455,7 @@ export const commandInfo = {
 	rechargeCommand: "RECHARGE command",
 	redirectCommand: "REDIRECT command",
 	repairCommand: "REPAIR command",
+	scanCommand: "SCAN command",
 	waitCommand: "WAIT command",
 }
 export const displayedAttributes = [
@@ -1526,5 +1535,6 @@ export const comprehensiveStatsBool = [
 	'rechargeCommand',
 	'redirectCommand',
 	'repairCommand',
+	'scanCommand',
 	'waitCommand',
 ]

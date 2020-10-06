@@ -35,7 +35,7 @@ const Attribute = ({ attribute, value }) => {
 				// fontSize = '0.6em'
 				width = '300'
 				height = '50'
-				animated = {'command'}
+				animated = {'command300'}
 				>
 					{attributeInfo[attribute].indexOf(":") > 0 ? (
 						<>

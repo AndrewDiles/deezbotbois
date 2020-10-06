@@ -33,6 +33,7 @@ const Assembly = () => {
 	const [comprehensiveTabDisplayed, setComprehensiveTabDisplayed] = useState(false);
 	const [tabsOpened, setTabsOpened] = useState(1);
 	const [attributes, setAttributes] = useState({});
+	const [aiInesertionPoint, setAiInsertionPoint] = useState(null);
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
 
@@ -197,11 +198,14 @@ const Assembly = () => {
 					{tabsDisplayed.ai &&
 						<BotAI
 						botNumberSelected = {botNumberSelected}
+						aiInesertionPoint = {aiInesertionPoint}
+						setAiInsertionPoint= {setAiInsertionPoint}
 						/>
 					}
 					{tabsDisplayed.scripts &&
 						<BotScripts
-						botNumberSelected = {botNumberSelected}
+						attributes = {attributes}
+						aiInesertionPoint = {aiInesertionPoint}
 						/>
 					}
       	</AssemblyGrid>

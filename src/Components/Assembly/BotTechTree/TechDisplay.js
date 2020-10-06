@@ -11,7 +11,7 @@ const TechDisplay = ({children}) => {
 }
 export default TechDisplay;
 const Wrapper = styled.div`
-	height: 75px;
+	height: 80px;
 	width: 100%;
 `
 const ExpandingDisplay = styled.div`

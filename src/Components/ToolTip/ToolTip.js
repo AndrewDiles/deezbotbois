@@ -23,7 +23,7 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
 		if (setMessageOpen) setMessageOpen(false);
 		if (setMessageHovered) setMessageHovered(false);
 	}
-	
+	console.log(animated);
   return (
     <Message
 		id = {`MessageWindow${children}`}
@@ -64,7 +64,8 @@ const Message = styled.div`
 	z-index: 15;
 	animation: ${props => props.animated === 'equipment' ? '.5s ease-out 1 openFromTopToBottom' 
 	: props.animated === 'attribute' ? '.5s ease-out 1 attributeExpandxAxis'
-	: props.animated === 'command' ? '.5s ease-out 1 commandExpand'
+	: props.animated === 'command300' ? '.5s ease-out 1 commandExpand300'
+	: props.animated === 'command200' ? '.5s ease-out 1 commandExpand200'
 	:''};
 	overflow: hidden;
 `

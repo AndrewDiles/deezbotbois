@@ -4,8 +4,13 @@ import styled from 'styled-components';
 
 // import {moveUp} from 'react-icons-kit/icomoon/moveUp'
 // import {moveDown} from 'react-icons-kit/icomoon/moveDown'
-// import {alertTriangle} from 'react-icons-kit/feather/alertTriangle';
 // import { findAllByTestId } from '@testing-library/react';
+
+// import {alertTriangle} from 'react-icons-kit/feather/alertTriangle';
+import {chevronUp} from 'react-icons-kit/feather/chevronUp';
+import {chevronDown} from 'react-icons-kit/feather/chevronDown';
+import {cornerDownLeft as insertionPointIcon} from 'react-icons-kit/feather/cornerDownLeft';
+import {trash2} from 'react-icons-kit/feather/trash2';
 
 const BotAI = ({ botNumberSelected}) => {
 	const userInfo = useSelector((state) => state.userInfo);
