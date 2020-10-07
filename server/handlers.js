@@ -499,7 +499,7 @@ try {
 						false, false, false, false,
 						false, false, false, false
 					],
-					script: {}
+					script: []
 				};
 				botInfo.push(newBot);
 				const newUserInfo = { $set: { botBuilds: botInfo } };

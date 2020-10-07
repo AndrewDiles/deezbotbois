@@ -92,6 +92,7 @@ const AttributeRow = styled.div`
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     background-color: ${props => !props.disabled && props.colors.hovered};
 		color: ${props => !props.disabled && props.colors.hoveredText};
+	}
 `
 const AttributeContents = styled.div`
 	display: flex;

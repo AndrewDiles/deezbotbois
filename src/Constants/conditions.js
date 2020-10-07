@@ -1,4 +1,4 @@
-const conditionList = [
+const conditionsList = [
 	'adjacentTo',
 	'aimResults',
 	'capacitor',
@@ -10,7 +10,7 @@ const conditionList = [
 	'weaponLoaded',
 ]
 
-export default conditionList;
+export default conditionsList;
 
 export const conditionsData = {
 	adjacentTo: {

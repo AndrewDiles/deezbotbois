@@ -66,6 +66,8 @@ Intentions with the GUI include:
 ### Solution: Set navlink's tabindex="-1"
 
 # Potential Improvements
+- Add a duplicate Bot in the Assembly
+- Disable ability to Save Bots in Assembly after creating a new bot
 - Add DR and Dmg attributes to be displayed on Attributes of Assembly
 - Change error codes for incorrect passwords to 403, make sure front end does not break with change from 401
 - Change error code from 206 to 422 or 400.  (same testing as above)

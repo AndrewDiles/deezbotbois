@@ -35,7 +35,9 @@ const Commands = ({ attributes, aiInesertionPoint }) => {
 						attribute = {commandOption}
 						width = {200}
 						/>
-						<AddIcon/>
+						<AddIcon
+						aiInesertionPoint = {aiInesertionPoint}
+						/>
 					</RowDiv>
 				))}
 			</Options>

@@ -12,7 +12,7 @@ import {chevronDown} from 'react-icons-kit/feather/chevronDown';
 import {cornerDownLeft as insertionPointIcon} from 'react-icons-kit/feather/cornerDownLeft';
 import {trash2} from 'react-icons-kit/feather/trash2';
 
-const BotAI = ({ botNumberSelected}) => {
+const BotAI = ({ botNumberSelected, aiInesertionPoint, setAiInsertionPoint }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	// const botInfo = userInfo.botBuilds;
 
@@ -33,28 +33,56 @@ const BotAI = ({ botNumberSelected}) => {
 	// script object looks like:
 
 	// another condition: lastTurn, case: aimed at scanned target
+
+	// command: {
+	// 	name: 'chargeCommand',
+	// 	direction: 'RRR',
+	// 	// will use either direciton or target but not both
+	// 	// target: 'autoScan1',
+	// 	weapon: 'arm1'
+	// },
+
+
 	const script = [
 		{
-			command: {
-				name: 'chargeCommand',
-				direction: 'RRR',
-				// will use either direciton or target but not both
-				// target: 'autoScan1',
-				weapon: 'arm1'
-			},
-			conditionDepth: 3,
+			conditionDepth: 1,
 			condition: {
 				name: 'damageTaken',
-				magnitude: '>2',
+				test: {
+					evaluationType: '>',
+					threshold: '2',
+				},
 				conditionMet: [
 					{
-						command: {
-							name: 'moveCommand',
-							direction: 'DD',
-							// will use either direciton or target but not both
-							target: 'corner', // or nearestWall, farthestWall or autoScan2
-							type: 'onto', //or adjacent
-						}
+						conditionDepth: 2,
+						condition: {
+							name: 'adjacentTo',
+							test: {
+								testTargets: 'any',
+								evaluationType: '=',
+								testReturn: 'D'
+							},
+						},
+						conditionMet : [
+							{
+								command: {
+									name: 'moveCommand',
+									direction: 'UU',
+									target: null, // src, #
+									type: null, //or onto, adjacent, or null if no target
+								}
+							}
+						],
+						conditionUnmet : [
+							{
+								command: {
+									name: 'moveCommand',
+									direction: 'DD',
+									target: null,
+									type: null,
+								}
+							}
+						],
 					}
 				],
 				conditionUnmet: [
@@ -62,7 +90,11 @@ const BotAI = ({ botNumberSelected}) => {
 						conditionDepth: 2,
 						condition: {
 							name: 'durability',
-							magnitude: '<10',
+							test: {
+								evaluationType: '<',
+								threshold: '10',
+							},
+							
 							conditionMet: [
 								{
 									command: {
@@ -123,7 +155,9 @@ const BotAI = ({ botNumberSelected}) => {
     <Wrapper
 		className = "assemblyGridChild" 
 		>
-			Bot ai
+			<h3>
+				AI
+			</h3>
     </Wrapper>
   )
 }

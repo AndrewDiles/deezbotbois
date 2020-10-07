@@ -27,31 +27,28 @@ const Rules = () => {
 					GUARD
 				</li>
 				<li>
-					Melee Attacks 11AttackMelee
+					Melee Attacks / Ranged Attacks / Aim and Shoot
+				</li>
+				<li>
+					11Attacks
 				</li>
 				<li>
 					RAM / Charge
 				</li>
 				<li>
-					Movement / test for collisions
+					`Movement / test for collisions (not a command)`
 				</li>
 				<li>
-					Test for projectile / cell damage
+					`Test for projectile / cell damage (not commands)`
 				</li>
 				<li>
-					Aim, Ranged Attacks 
+					Aim
 				</li>
 				<li>
-					AimAndRangedAttack, 11AttackRanged and Projectiles movement
+					Scan / Auto-Scan (not a command)
 				</li>
 				<li>
-					Test for projectile / cell damage
-				</li>
-				<li>
-					Scan. Free info: Detect adjacent.
-				</li>
-				<li>
-					AUTO-REPAIR, RECHARGE
+					AUTO-REPAIR, RECHARGE (not commands)
 				</li>
 				<li>
 					internal bot updates: reload, repair from nano-bots

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
-import conditionList, { conditionsData } from '../../../Constants/conditions';
+import conditionsList, { conditionsData } from '../../../Constants/conditions';
 import AddIcon from './AddIcon';
 import styled from 'styled-components';
 
@@ -16,7 +16,7 @@ const Conditions = ({ aiInesertionPoint }) => {
 				CONDITIONS
 			</h3>
 			<Options>
-				{conditionList.map((conditionOption)=>{
+				{conditionsList.map((conditionOption)=>{
 					return (
 					<RowDiv
 					key = {conditionOption}
@@ -53,5 +53,6 @@ const RowDiv = styled.div`
 	align-items: center;
 	text-align: center;
 	flex-direction: row;
-	justify-content: space-between
-l`
+	justify-content: space-between;
+	padding-left: 10px;
+`

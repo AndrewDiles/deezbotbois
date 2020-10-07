@@ -48,7 +48,7 @@ const Test2 = () => {
       arm1Angle: 180,
 			arm2Angle: 45,
 			techTree: [],
-			script: {},
+			script: [],
 			attributes: {
 				ScanDistance: 3,
 			},
@@ -63,7 +63,7 @@ const Test2 = () => {
       botColors: null,
 			arm1Angle: 180,
 			techTree: [],
-			script: {},
+			script: [],
 			attributes: {
 				ScanDistance: 3,
 			},
@@ -78,7 +78,7 @@ const Test2 = () => {
       botColors: null,
 			arm1Angle: -45,
 			techTree: [],
-			script: {},
+			script: [],
 			attributes: {
 				ScanDistance: 3,
 			},
