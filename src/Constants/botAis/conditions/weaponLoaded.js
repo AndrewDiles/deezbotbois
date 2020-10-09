@@ -1,26 +1,24 @@
-class Attribute {
+class WeaponLoaded {
   constructor(depth) {
 		this.depth = depth;
 		this.condition = {
-			name: 'attribute',
+			name: 'weaponLoaded',
 			test: {
-				testTargets: 'durability',
-				evaluationType: '>',
-				threshold: 1
+				threshold: 0,
+				evaluationType: '===',
+				armSlot: 'arm1',
 			},
 			conditionMet: [],
 			conditionUnMet: []
 		}
-
 	}
-	// newTarget can be: durability , capacitor
-	setTarget(newTarget) {
-		this.condition.test.testTargets = newTarget
-	}
-	
-	// comparisonOperator can be: ===, >, <
+	// comparisonOperator can be: ===, !==, >, <
 	setEvaluation(comparisonOperator) {
 		this.condition.test.evaluationType = comparisonOperator
+	}
+	// comparisonOperator can be: arm1, arm2, arm3
+	setSlot(slotName) {
+		this.condition.test.armSlot = slotName
 	}
 	incrementThreshold() {
 		this.condition.test.threshold ++
@@ -29,4 +27,4 @@ class Attribute {
 		this.condition.test.threshold --
 	}
 }
-export default Attribute
+export default WeaponLoaded

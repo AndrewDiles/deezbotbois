@@ -1,24 +1,22 @@
-class Attribute {
+class DistanceToTarget {
   constructor(depth) {
 		this.depth = depth;
 		this.condition = {
-			name: 'attribute',
+			name: 'distanceToTarget',
 			test: {
-				testTargets: 'durability',
-				evaluationType: '>',
-				threshold: 1
+				targetNumber: 1,
+				evaluationType: '<',
+				threshold: 3
 			},
 			conditionMet: [],
 			conditionUnMet: []
 		}
-
 	}
-	// newTarget can be: durability , capacitor
-	setTarget(newTarget) {
-		this.condition.test.testTargets = newTarget
+	// newTarget is the index number +1 of a scan
+	setTargetNumber(newTargetNumber) {
+		this.condition.test.targetNumber = newTargetNumber
 	}
-	
-	// comparisonOperator can be: ===, >, <
+	// comparisonOperator can be: ===, !==, >, <
 	setEvaluation(comparisonOperator) {
 		this.condition.test.evaluationType = comparisonOperator
 	}
@@ -29,4 +27,4 @@ class Attribute {
 		this.condition.test.threshold --
 	}
 }
-export default Attribute
+export default DistanceToTarget

@@ -1,18 +1,17 @@
-class AdjacentTo {
+class AimResults {
   constructor(depth) {
 		this.depth = depth;
 		this.condition = {
-			name: 'adjacentTo',
+			name: 'aimResults',
 			test: {
 				testTargets: 'hostile',
 				evaluationType: '===',
-				testReturn: 'any'
 			},
 			conditionMet: [],
 			conditionUnMet: []
 		}
 	}
-	// newTarget can be: hostile, friend, wall, corner
+	// newTarget can be: hostile, friend
 	setTarget(newTarget) {
 		this.condition.test.testTargets = newTarget
 	}
@@ -20,9 +19,5 @@ class AdjacentTo {
 	setEvaluation(comparisonOperator) {
 		this.condition.test.evaluationType = comparisonOperator
 	}
-	// value can be: any, U, D, L, R, UR, UL, DR, DL
-	setReturn(value) {
-		this.condition.test.testReturn = value;
-	}
 }
-export default AdjacentTo
+export default AimResults

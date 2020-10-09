@@ -1,24 +1,17 @@
-class Attribute {
+class ConsecutiveAims {
   constructor(depth) {
 		this.depth = depth;
 		this.condition = {
-			name: 'attribute',
+			name: 'consecutiveAims',
 			test: {
-				testTargets: 'durability',
+				threshold: 4,
 				evaluationType: '>',
-				threshold: 1
 			},
 			conditionMet: [],
 			conditionUnMet: []
 		}
-
 	}
-	// newTarget can be: durability , capacitor
-	setTarget(newTarget) {
-		this.condition.test.testTargets = newTarget
-	}
-	
-	// comparisonOperator can be: ===, >, <
+	// comparisonOperator can be: ===, !==, >, <
 	setEvaluation(comparisonOperator) {
 		this.condition.test.evaluationType = comparisonOperator
 	}
@@ -29,4 +22,4 @@ class Attribute {
 		this.condition.test.threshold --
 	}
 }
-export default Attribute
+export default ConsecutiveAims

@@ -127,6 +127,17 @@ Intentions with the GUI include:
 - Win in under x ticks: Speed demon
 - Win with more than x capacitor: Power Hog
 
+### Application of Rules
+- Test each tick for changes to bot durability.
+- Set a maximum number of passable Ticks without a change to cause a draw
+
+### Bot ai concepts:
+- Get to a corner and scan 45s.  if hit move to another corner
+- snake ess patterns and ram
+- get to a wall then shoot straigh away from it. then move, shoot, wait, repeat
+- move scan.  oppo: charge, melee attack, none, wait, restart
+- stay stationary and aim about
+
 ### Icon Imports For Bot Assembly:
 import {plus} from 'react-icons-kit/icomoon/plus'
 
