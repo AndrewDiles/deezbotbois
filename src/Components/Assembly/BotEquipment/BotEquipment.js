@@ -65,7 +65,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				<StyledButton
 				handleClick = {e=> {setInventoryIndexRange({min:0, max:3});setTypeViewing('weapons');setEquipmentStaging({from: null, to: null})}}
 				selected = {typeViewing === 'weapons'}
-				disabled = {typeViewing === 'weapons'}
+				// disabled = {typeViewing === 'weapons'}
 				width = '120'
 				fontSize = '10'
 				>
@@ -74,7 +74,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				<StyledButton
 				handleClick = {e=> {setInventoryIndexRange({min:0, max:3});setTypeViewing('accessories');setEquipmentStaging({from: null, to: null})}}
 				selected = {typeViewing === 'accessories'}
-				disabled = {typeViewing === 'accessories'}
+				// disabled = {typeViewing === 'accessories'}
 				width = '120'
 				fontSize = '10'
 				>

@@ -12,6 +12,8 @@ import {chevronDown} from 'react-icons-kit/feather/chevronDown';
 import {cornerDownLeft as insertionPointIcon} from 'react-icons-kit/feather/cornerDownLeft';
 import {trash2} from 'react-icons-kit/feather/trash2';
 
+import { sampleAi } from '../../../Constants/botAis/sampleAi';
+
 const BotAI = ({ botNumberSelected, aiInesertionPoint, setAiInsertionPoint }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	// const botInfo = userInfo.botBuilds;

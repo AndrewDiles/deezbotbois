@@ -57,8 +57,10 @@ const Options = styled.div`
 	overflow-y: auto;
 	width: 250px;
 	height: 500px;
+	border-top: 1px solid rgba(0,0,0,0.24);
 `
 const RowDiv = styled.div`
 	height: 50px;
 	width: 250px;
+	border-bottom: 1px solid rgba(0,0,0,0.24);
 `

@@ -210,7 +210,7 @@ try {
 				}
 				// case: account has been confirmed
     	  else if (result.confirmed === true) {
-					console.log('You the else... ',result.confirmationCode, confirmationCode, result.confimed)
+					// console.log('Account confirmed: ',result.confirmationCode, confirmationCode, result.confimed)
 					try {
 						const userInfo = await db.collection('userData').findOne({ email: email });
 						if (!userInfo) {

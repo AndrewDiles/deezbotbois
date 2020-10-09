@@ -21,7 +21,7 @@ const BotScripts = ({ attributes, aiInesertionPoint }) => {
 				<StyledButton
 				handleClick = {e=> {setTypeViewing('conditions')}}
 				selected = {typeViewing === 'conditions'}
-				disabled = {typeViewing === 'conditions'}
+				// disabled = {typeViewing === 'conditions'}
 				width = '120'
 				fontSize = '10'
 				>
@@ -30,7 +30,7 @@ const BotScripts = ({ attributes, aiInesertionPoint }) => {
 				<StyledButton
 				handleClick = {e=> {setTypeViewing('commands')}}
 				selected = {typeViewing === 'commands'}
-				disabled = {typeViewing === 'commands'}
+				// disabled = {typeViewing === 'commands'}
 				width = '120'
 				fontSize = '10'
 				>

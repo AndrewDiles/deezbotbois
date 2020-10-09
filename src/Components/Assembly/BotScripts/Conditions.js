@@ -21,7 +21,9 @@ const Conditions = ({ aiInesertionPoint }) => {
 					<RowDiv
 					key = {conditionOption}
 					>
-						{conditionsData[conditionOption].name}
+						<ConditionName className = 'centeredFlex'>
+							{conditionsData[conditionOption].name}
+						</ConditionName>
 						<AddIcon
 						aiInesertionPoint = {aiInesertionPoint}
 						/>
@@ -37,6 +39,11 @@ export default Conditions;
 const Wrapper = styled.div`
 	height: 600px;
 `
+const ConditionName = styled.p`
+	height: 40px;
+	width: 200px;
+	margin: 0;
+`
 const Options = styled.div`
 	display: flex;
 	align-items: center;
@@ -44,7 +51,8 @@ const Options = styled.div`
 	flex-direction: column;
 	overflow-y: auto;
 	width: 250px;
-	height: 500px;
+	height: 550px;
+	border-top: 1px solid rgba(0,0,0,0.24);
 `
 const RowDiv = styled.div`
 	height: 50px;
@@ -55,4 +63,6 @@ const RowDiv = styled.div`
 	flex-direction: row;
 	justify-content: space-between;
 	padding-left: 10px;
+	border-bottom: 1px solid rgba(0,0,0,0.24);
+	margin: 5px, 0;
 `

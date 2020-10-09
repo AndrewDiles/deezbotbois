@@ -32,7 +32,11 @@ import {shield as guard} from 'react-icons-kit/entypo/shield'
 import {listOl as initiative} from 'react-icons-kit/fa/listOl'
 import {hammer as melee} from 'react-icons-kit/icomoon/hammer'
 // import {ic_timeline as movement} from 'react-icons-kit/md/ic_timeline'
+
 import {graph_rise as movement} from 'react-icons-kit/ikons/graph_rise'
+// import {meter as movementDistance} from 'react-icons-kit/icomoon/meter'
+import {graph_rise as movementDistance} from 'react-icons-kit/ikons/graph_rise'
+
 // import {x as multiplier} from 'react-icons-kit/oct/x'
 import {u1F52A as piercing} from 'react-icons-kit/noto_emoji_regular/u1F52A' // used to be armorPenetration
 import {u1F529 as power} from 'react-icons-kit/noto_emoji_regular/u1F529'
@@ -243,7 +247,7 @@ const iconImporter = (stringToConvert) => {
 			break;
 		}
 		case 'MovementDistance' : {
-			icon1 = movement;
+			icon1 = movementDistance;
 			break;
 		}
 		case 'PiercingDamageMultiplier' : {

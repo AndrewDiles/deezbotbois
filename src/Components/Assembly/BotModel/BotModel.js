@@ -87,6 +87,9 @@ const StyledInput = styled.input`
 	&:hover {
 		background-color: ${props => props.colors.hovered};
 	}
+	&:focus {
+		outline-color: ${props => !props.disabled && props.colors.hoveredText};
+	}
 `
 const RowDivCenter = styled.div`
 	width: 100%;

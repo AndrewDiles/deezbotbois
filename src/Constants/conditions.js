@@ -1,10 +1,11 @@
 const conditionsList = [
 	'adjacentTo',
 	'aimResults',
-	'capacitor',
+	'attribute',
+	'consecutiveAims',
 	'damageTaken',
 	'distanceToTarget',
-	'durability',
+	'previousCommand',
 	'scanResults',
 	'sufficientEnergy',
 	'weaponLoaded',
@@ -19,11 +20,11 @@ export const conditionsData = {
 	aimResults: {
 		name: 'Aim Results',
 	},
-	aimCounter: {
-		name: 'Aim Counter',
+	attribute: {
+		name: 'Attribute',
 	},
-	capacitor: {
-		name: 'Capacitor',
+	consecutiveAims: {
+		name: 'Consecutive Aims',
 	},
 	damageTaken: {
 		name: 'Damage Taken',
@@ -31,8 +32,8 @@ export const conditionsData = {
 	distanceToTarget: {
 		name: 'Distance to Target'
 	},
-	durability: {
-		name: 'Durability',
+	previousCommand: {
+		name: 'Previous Command'
 	},
 	scanResults: {
 		name: 'Scan Results',
