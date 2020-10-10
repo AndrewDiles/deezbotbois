@@ -1,5 +1,5 @@
 class ScanResults {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'scanResults',
@@ -9,8 +9,8 @@ class ScanResults {
 				threshold: 0,
 				thresholdEvaluationType: '>',
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 	}
 	// newTarget can be: hostile, friend, wall, corner

@@ -1,5 +1,5 @@
 class AdjacentTo {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'adjacentTo',
@@ -8,8 +8,8 @@ class AdjacentTo {
 				evaluationType: '===',
 				testReturn: 'any'
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 	}
 	// newTarget can be: hostile, friend, wall, corner

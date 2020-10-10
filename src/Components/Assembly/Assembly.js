@@ -33,7 +33,8 @@ const Assembly = () => {
 	const [comprehensiveTabDisplayed, setComprehensiveTabDisplayed] = useState(false);
 	const [tabsOpened, setTabsOpened] = useState(1);
 	const [attributes, setAttributes] = useState({});
-	const [aiInesertionPoint, setAiInsertionPoint] = useState(null);
+	const initialAiAndScriptsElements = [ { type:'head', index: 0 } ];
+	const [aiAndScripts, setAiAndScripts] = useState(null);
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
 
@@ -60,7 +61,9 @@ const Assembly = () => {
 
 	useEffect(()=>{
 		setEquipmentStaging({from: null, to: null})
+		setAiAndScripts({ insertion : null, viewing : initialAiAndScriptsElements });
 	},[botNumberSelected])
+	// Need to reset insertion upon navigation and changing of nodes
 
 	// useEffect(()=>{
 	// 	setEquipmentStaging({from: null, to: null})
@@ -198,14 +201,15 @@ const Assembly = () => {
 					{tabsDisplayed.ai &&
 						<BotAI
 						botNumberSelected = {botNumberSelected}
-						aiInesertionPoint = {aiInesertionPoint}
-						setAiInsertionPoint= {setAiInsertionPoint}
+						aiAndScripts = {aiAndScripts}
+						setAiAndScripts= {setAiAndScripts}
 						/>
 					}
 					{tabsDisplayed.scripts &&
 						<BotScripts
 						attributes = {attributes}
-						aiInesertionPoint = {aiInesertionPoint}
+						aiAndScripts = {aiAndScripts}
+						setAiAndScripts= {setAiAndScripts}
 						/>
 					}
       	</AssemblyGrid>

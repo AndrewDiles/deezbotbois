@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import Command from '../ComprehensiveAttributes/Command';
 import AddIcon from './AddIcon';
 
-const Commands = ({ attributes, aiInesertionPoint }) => {
+const Commands = ({ attributes, aiAndScripts }) => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	const [availableCommands, setAvailableCommands] = useState([]);
@@ -21,9 +21,9 @@ const Commands = ({ attributes, aiInesertionPoint }) => {
 	
   return (
     <Wrapper>
-      <h3>
+      <p>
 				COMMANDS
-			</h3>
+			</p>
 			<Options>
 				{availableCommands.map((commandOption)=>(
 					<RowDiv
@@ -34,9 +34,11 @@ const Commands = ({ attributes, aiInesertionPoint }) => {
 						value = {true}
 						attribute = {commandOption}
 						width = {200}
+						excludesCommand = {true}
 						/>
 						<AddIcon
-						aiInesertionPoint = {aiInesertionPoint}
+						aiAndScripts = {aiAndScripts}
+						decisionName = {commandOption}
 						/>
 					</RowDiv>
 				))}

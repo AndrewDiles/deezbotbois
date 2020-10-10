@@ -1,5 +1,5 @@
 class Attribute {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'attribute',
@@ -8,8 +8,8 @@ class Attribute {
 				evaluationType: '>',
 				threshold: 1
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 
 	}

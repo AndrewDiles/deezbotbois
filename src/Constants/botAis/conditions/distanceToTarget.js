@@ -1,5 +1,5 @@
 class DistanceToTarget {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'distanceToTarget',
@@ -8,11 +8,11 @@ class DistanceToTarget {
 				evaluationType: '<',
 				threshold: 3
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 	}
-	// newTarget is the index number +1 of a scan
+	// newTargetNumber is the index number +1 of a scan
 	setTargetNumber(newTargetNumber) {
 		this.condition.test.targetNumber = newTargetNumber
 	}

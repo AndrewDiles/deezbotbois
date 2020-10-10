@@ -6,26 +6,30 @@ import conditionsList, { conditionsData } from '../../../Constants/conditions';
 import AddIcon from './AddIcon';
 import styled from 'styled-components';
 
-const Conditions = ({ aiInesertionPoint }) => {
+const Conditions = ({ aiAndScripts }) => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	
   return (
     <Wrapper>
-      <h3>
+      <p>
 				CONDITIONS
-			</h3>
+			</p>
 			<Options>
 				{conditionsList.map((conditionOption)=>{
 					return (
 					<RowDiv
 					key = {conditionOption}
 					>
-						<ConditionName className = 'centeredFlex'>
+						<ConditionName
+						className = 'centeredFlex'
+						// colors = {colors}
+						>
 							{conditionsData[conditionOption].name}
 						</ConditionName>
 						<AddIcon
-						aiInesertionPoint = {aiInesertionPoint}
+						aiAndScripts = {aiAndScripts}
+						decisionName = {conditionOption}
 						/>
 					</RowDiv>
 					)
@@ -51,7 +55,7 @@ const Options = styled.div`
 	flex-direction: column;
 	overflow-y: auto;
 	width: 250px;
-	height: 550px;
+	height: 555px;
 	border-top: 1px solid rgba(0,0,0,0.24);
 `
 const RowDiv = styled.div`

@@ -1,5 +1,5 @@
 class ConsecutiveAims {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'consecutiveAims',
@@ -7,8 +7,8 @@ class ConsecutiveAims {
 				threshold: 4,
 				evaluationType: '>',
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 	}
 	// comparisonOperator can be: ===, !==, >, <

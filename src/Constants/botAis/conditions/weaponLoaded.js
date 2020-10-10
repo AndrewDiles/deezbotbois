@@ -1,5 +1,5 @@
 class WeaponLoaded {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'weaponLoaded',
@@ -8,8 +8,8 @@ class WeaponLoaded {
 				evaluationType: '===',
 				armSlot: 'arm1',
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 	}
 	// comparisonOperator can be: ===, !==, >, <

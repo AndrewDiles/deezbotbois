@@ -1,5 +1,5 @@
 class DamageTaken {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'damageTaken',
@@ -7,8 +7,8 @@ class DamageTaken {
 				threshold: 0,
 				evaluationType: '>',
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 	}
 	// comparisonOperator can be: ===, !==, >, <

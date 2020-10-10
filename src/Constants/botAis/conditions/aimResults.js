@@ -1,5 +1,5 @@
 class AimResults {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'aimResults',
@@ -7,8 +7,8 @@ class AimResults {
 				testTargets: 'hostile',
 				evaluationType: '===',
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 	}
 	// newTarget can be: hostile, friend

@@ -5,7 +5,7 @@ import StyledButton from '../../StyledButton/StyledButton';
 import Conditions from './Conditions';
 import Commands from './Commands';
 
-const BotScripts = ({ attributes, aiInesertionPoint }) => {
+const BotScripts = ({ attributes, aiAndScripts, setAiAndScripts }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const [typeViewing, setTypeViewing] = useState('conditions');
 
@@ -17,6 +17,9 @@ const BotScripts = ({ attributes, aiInesertionPoint }) => {
     <Wrapper
 		className = "assemblyGridChild" 
 		>
+			<h3>
+				NODE OPTIONS
+			</h3>
 			<RowDiv className = 'centeredFlex'>
 				<StyledButton
 				handleClick = {e=> {setTypeViewing('conditions')}}
@@ -39,13 +42,13 @@ const BotScripts = ({ attributes, aiInesertionPoint }) => {
 			</RowDiv>
 			{typeViewing === 'conditions' &&
 				<Conditions
-				aiInesertionPoint = {aiInesertionPoint}
+				aiAndScripts = {aiAndScripts}
 				/>
 			}
 			{typeViewing === 'commands' && 
 				<Commands
 				attributes = {attributes}
-				aiInesertionPoint = {aiInesertionPoint}
+				aiAndScripts = {aiAndScripts}
 				/>
 			}
     </Wrapper>

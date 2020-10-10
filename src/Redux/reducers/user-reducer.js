@@ -150,6 +150,14 @@ export default function userInfo(
 					...action.newUserInfo,
 				}
 			}
+			case 'REPLACE_SCRIPT' : {
+				let botBuilds = [...state.botBuilds];
+				botBuilds[action.index].script = action.newScript;
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
 			case 'RESET_TECH_TREE' : {
 				// needs to remove excess arms / weps... ?
 				let botBuilds = [...state.botBuilds];

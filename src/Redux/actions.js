@@ -129,3 +129,8 @@ export const replaceUserInfo = (newUserInfo) => ({
 	type: 'REPLACE_USER_INFO',
 	newUserInfo: newUserInfo,
 });
+export const replaceScript = (index, newScript) => ({
+	type: 'REPLACE_SCRIPT',
+	index: index,
+	newScript: newScript,
+})

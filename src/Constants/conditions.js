@@ -5,6 +5,7 @@ const conditionsList = [
 	'consecutiveAims',
 	'damageTaken',
 	'distanceToTarget',
+	'obstructionToTarget',
 	'previousCommand',
 	'scanResults',
 	'sufficientEnergy',
@@ -31,6 +32,9 @@ export const conditionsData = {
 	},
 	distanceToTarget: {
 		name: 'Distance to Target'
+	},
+	obstructionToTarget : {
+		name: 'Obstruction to Target'
 	},
 	previousCommand: {
 		name: 'Previous Command'

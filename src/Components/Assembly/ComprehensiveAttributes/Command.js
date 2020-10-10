@@ -14,7 +14,7 @@ import {xSquare} from 'react-icons-kit/feather/xSquare';
 import {checkSquare} from 'react-icons-kit/feather/checkSquare';
 // import {check} from 'react-icons-kit/feather/check';
 
-const Command = ({ attribute, value, width }) => {
+const Command = ({ attribute, value, width, excludesCommand }) => {
 	const colors = useSelector(getThemeColors);
 	const [icons, setIcons] = useState(null);
 	const [toolTipToggle, setToolTipToggle] = useState(false);
@@ -46,14 +46,14 @@ const Command = ({ attribute, value, width }) => {
 				height = '50'
 				animated = {width ? 'command200' : 'command300'}
 				>
-					{commandInfo[attribute].indexOf(":") > 0 ? (
-						<>
-							<b>{commandInfo[attribute].slice(0,commandInfo[attribute].indexOf(":"))}</b>
-							{/* {commandInfo[attribute].slice(2+commandInfo[attribute].indexOf(":"),commandInfo[attribute].length)} */}
-						</>
-
-					) : (
+					{excludesCommand ? (
 						commandInfo[attribute]
+					) : (
+						commandInfo[attribute].includes('Burn') ? (
+							commandInfo[attribute]
+						) : (
+							`${commandInfo[attribute]} COMMAND`
+						)
 					)}
 				</ToolTip>
 			) : (

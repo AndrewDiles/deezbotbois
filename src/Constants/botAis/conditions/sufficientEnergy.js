@@ -1,5 +1,5 @@
 class SufficientEnergy {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'sufficientEnergy',
@@ -7,8 +7,8 @@ class SufficientEnergy {
 				commandName: 'rangedAttackCommand',
 				armSlot: 'arm1',
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 	}
 	// newCommandName can be any camelCased command name

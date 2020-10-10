@@ -18,12 +18,10 @@ const ToolTip = ({ children, messageOpen, setMessageOpen, messageHovered, setMes
 			target.removeEventListener('mouseleave',onMouseLeave);
 		}
 	})
-
 	const handleClose = () => {
 		if (setMessageOpen) setMessageOpen(false);
 		if (setMessageHovered) setMessageHovered(false);
 	}
-	console.log(animated);
   return (
     <Message
 		id = {`MessageWindow${children}`}

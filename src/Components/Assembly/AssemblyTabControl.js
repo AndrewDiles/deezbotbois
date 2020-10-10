@@ -47,7 +47,7 @@ const AssemblyTabControl = ({ tabsDisplayed, setTabsDisplayed }) => {
 			handleClick = {() => {tabToggler('scripts',tabsDisplayed,setTabsDisplayed)}}
 			fontSize = '12'
 			>
-				{tabsDisplayed.scripts ? 'CLOSE SCRIPTS' : 'OPEN SCRIPTS'}
+				{tabsDisplayed.scripts ? 'CLOSE NODES' : 'OPEN NODES'}
 			</StyledButton>
 		</Wrapper>
 	)

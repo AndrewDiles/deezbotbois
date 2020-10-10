@@ -1,5 +1,5 @@
 class PreviousCommand {
-  constructor(depth) {
+  constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
 		this.condition = {
 			name: 'previousCommand',
@@ -8,8 +8,8 @@ class PreviousCommand {
 				evaluationType: '===',
 				armSlot: null,
 			},
-			conditionMet: [],
-			conditionUnMet: []
+			conditionMet: conditionMet,
+			conditionUnMet: conditionUnMet
 		}
 	}
 	// newCommandName can be any camelCased command name

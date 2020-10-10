@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import {xCircle} from 'react-icons-kit/feather/xCircle'
 
-const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, size, padding, absolute, id} ) => {
+const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, size, padding, absolute, id, rotation} ) => {
 	const settings = useSelector((state) => state.settings);
 	let colors = useSelector(getThemeColors);
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
@@ -31,6 +31,7 @@ const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing,
 			glowing = {glowing}
 			padding = {padding}
 			absolute = {absolute}
+			rotation = {rotation}
       >
         {children}
       </IconStylings>
@@ -45,12 +46,13 @@ const IconStylings = styled(Icon)`
   color: ${props => !props.glowing && props.selected ? props.colors.hoveredText : props.colors.textColor};
 	animation: ${props => props.glowing && '1s linear infinite alternate glowGift'};
   margin: 5px;
+	transform: ${props => props.rotation && `rotate(${props.rotation}deg)`};
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
   text-align: center;
 	opacity: ${props => props.disabled && 0.5};
   transition: color .75s, background-color .75s;
-	background-color: ${props => props.selected && props.colors.hovered};
+	background-color: ${props => props.selected ? props.colors.hovered : props.colors.notSelected};
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     background-color: ${props => !props.disabled && props.colors.hovered};
