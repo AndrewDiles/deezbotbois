@@ -12,4 +12,4 @@ class RamCommand {
 		this.condition.test.targetNumber = newTargetNumber
 	}
 }
-export default RamCommand
+module.exports = RamCommand

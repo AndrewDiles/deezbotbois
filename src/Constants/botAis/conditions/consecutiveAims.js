@@ -1,25 +1,23 @@
 class ConsecutiveAims {
   constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
-		this.condition = {
-			name: 'consecutiveAims',
-			test: {
-				threshold: 4,
-				evaluationType: '>',
-			},
-			conditionMet: conditionMet,
-			conditionUnMet: conditionUnMet
-		}
+		this.name = 'consecutiveAims';
+		this.test = {
+			threshold: 4,
+			evaluationType: '>',
+		};
+		this.conditionMet = conditionMet;
+		this.conditionUnMet = conditionUnMet;
 	}
 	// comparisonOperator can be: ===, !==, >, <
 	setEvaluation(comparisonOperator) {
-		this.condition.test.evaluationType = comparisonOperator
+		this.test.evaluationType = comparisonOperator
 	}
 	incrementThreshold() {
-		this.condition.test.threshold ++
+		this.test.threshold ++
 	}
 	decrementThreshold() {
-		this.condition.test.threshold --
+		this.test.threshold --
 	}
 }
-export default ConsecutiveAims
+module.exports = ConsecutiveAims

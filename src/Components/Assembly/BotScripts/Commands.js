@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 
 import styled from 'styled-components';
-import Command from '../ComprehensiveAttributes/Command';
-import AddIcon from './AddIcon';
+import CommandRow from './CommandRow'
 
-const Commands = ({ attributes, aiAndScripts }) => {
+const Commands = ({ botNumberSelected, attributes, aiAndScripts, activeNodeArray, setActiveNodeArray }) => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	const [availableCommands, setAvailableCommands] = useState([]);
@@ -25,22 +24,16 @@ const Commands = ({ attributes, aiAndScripts }) => {
 				COMMANDS
 			</p>
 			<Options>
-				{availableCommands.map((commandOption)=>(
-					<RowDiv
+				{availableCommands.map((commandOption, index)=>(
+					<CommandRow
 					key = {commandOption}
-					className = 'centeredFlex'
-					>
-						<Command
-						value = {true}
-						attribute = {commandOption}
-						width = {200}
-						excludesCommand = {true}
-						/>
-						<AddIcon
-						aiAndScripts = {aiAndScripts}
-						decisionName = {commandOption}
-						/>
-					</RowDiv>
+					commandOption = {commandOption}
+					aiAndScripts = {aiAndScripts}
+					index = {index}
+					activeNodeArray = {activeNodeArray}
+					setActiveNodeArray = {setActiveNodeArray}
+					botNumberSelected= {botNumberSelected}
+					/>
 				))}
 			</Options>
     </Wrapper>

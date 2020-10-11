@@ -7,4 +7,4 @@ class RechargeCommand {
 		}
 	}
 }
-export default RechargeCommand
+module.exports = RechargeCommand

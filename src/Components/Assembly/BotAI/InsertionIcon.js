@@ -1,32 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 
 import StyledIcon from '../../StyledIcon/StyledIcon';
-import {plus} from 'react-icons-kit/icomoon/plus';
-import {loop as swap} from 'react-icons-kit/icomoon/loop'
+import {download} from 'react-icons-kit/icomoon/download'
 
 import styled from 'styled-components';
-import Command from '../ComprehensiveAttributes/Command';
 
-const InsertionIcon = ({ aiAndScripts, decisionName }) => {
+const InsertionIcon = ({ aiAndScripts, setAiAndScripts }) => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
-	// console.log(decisionName)
+	
+	function handleClick() {
+		let newAiAndScript = {...aiAndScripts};
+		if (newAiAndScript.insertion === newAiAndScript.viewing) {
+			newAiAndScript.insertion = null
+		} else {
+			newAiAndScript.insertion = aiAndScripts.viewing;
+		}
+		setAiAndScripts(newAiAndScript)
+	}
+	// console.log('selected test:',aiAndScripts.viewing === aiAndScripts.insertion)
   return (
     <StyledIcon
-		icon = {plus}
+		icon = {download}
 		padding = '5'
 		disabled = {aiAndScripts === null}
-		>
-
-    </StyledIcon>
+		selected = {aiAndScripts.viewing === aiAndScripts.insertion}
+		rotation = '90'
+		handleClick = {handleClick}
+		/>
   )
 }
 export default InsertionIcon;
-
-const Wrapper = styled.div`
-	width: 250px;
-	height: 80px;
-`

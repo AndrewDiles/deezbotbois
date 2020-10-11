@@ -1,35 +1,33 @@
 class ScanResults {
   constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
-		this.condition = {
-			name: 'scanResults',
-			test: {
-				testTargets: 'hostile',
-				targetEvaluationType: '===',
-				threshold: 0,
-				thresholdEvaluationType: '>',
-			},
-			conditionMet: conditionMet,
-			conditionUnMet: conditionUnMet
-		}
+		this.name = 'scanResults';
+		this.test = {
+			testTargets: 'hostile',
+			targetEvaluationType: '===',
+			threshold: 0,
+			thresholdEvaluationType: '>',
+		};
+		this.conditionMet = conditionMet;
+		this.conditionUnMet = conditionUnMet;
 	}
 	// newTarget can be: hostile, friend, wall, corner
 	setTarget(newTarget) {
-		this.condition.test.testTargets = newTarget
+		this.test.testTargets = newTarget
 	}
 	// comparisonOperator can be: ===, !==
 	setTargetEvaluation(comparisonOperator) {
-		this.condition.test.targetEvaluationType = comparisonOperator
+		this.test.targetEvaluationType = comparisonOperator
 	}
 	// comparisonOperator can be: ===, !==, >, <
 	setThresholdEvaluation(comparisonOperator) {
-		this.condition.test.thresholdEvaluationType = comparisonOperator
+		this.test.thresholdEvaluationType = comparisonOperator
 	}
 	incrementThreshold() {
-		this.condition.test.threshold ++
+		this.test.threshold ++
 	}
 	decrementThreshold() {
-		this.condition.test.threshold --
+		this.test.threshold --
 	}
 }
-export default ScanResults
+module.exports = ScanResults

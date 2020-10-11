@@ -1,25 +1,23 @@
 class DamageTaken {
   constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
-		this.condition = {
-			name: 'damageTaken',
-			test: {
-				threshold: 0,
-				evaluationType: '>',
-			},
-			conditionMet: conditionMet,
-			conditionUnMet: conditionUnMet
-		}
+		this.name = 'damageTaken';
+		this.test = {
+			threshold: 0,
+			evaluationType: '>',
+		};
+		this.conditionMet = conditionMet;
+		this.conditionUnMet = conditionUnMet;
 	}
 	// comparisonOperator can be: ===, !==, >, <
 	setEvaluation(comparisonOperator) {
-		this.condition.test.evaluationType = comparisonOperator
+		this.test.evaluationType = comparisonOperator
 	}
 	incrementThreshold() {
-		this.condition.test.threshold ++
+		this.test.threshold ++
 	}
 	decrementThreshold() {
-		this.condition.test.threshold --
+		this.test.threshold --
 	}
 }
-export default DamageTaken
+module.exports = DamageTaken

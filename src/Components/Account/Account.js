@@ -152,7 +152,7 @@ const Account = () => {
 				handleClick = {saveSettings}
 				padding = {5}
 				disabled = {!changeMade || serverErrorMsg !== null}
-      	icon = {floppyDisk}
+				icon = {floppyDisk}
       />
 			<ErrorP>
 				{serverErrorMsg}

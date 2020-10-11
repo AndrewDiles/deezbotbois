@@ -93,7 +93,7 @@ function NavBar() {
       	<StyledIcon
 				handleClick = {toggleNavLocation}
 				padding = {5}
-      	icon = {settings.navLocation === 'top' ? arrows_move_left : arrows_move_top}
+				icon = {settings.navLocation === 'top' ? arrows_move_left : arrows_move_top}
       	/>
 				{userInfo.imageUrl && settings.navLocation === 'left' &&
 					<BorderDivForUserImg

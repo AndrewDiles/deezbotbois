@@ -29,4 +29,4 @@ class MeleeAttackCommand {
 		this.command.instructions.direction = newDirection;
 	}
 }
-export default MeleeAttackCommand
+module.exports = MeleeAttackCommand

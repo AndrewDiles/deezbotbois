@@ -7,4 +7,4 @@ class ScanCommand {
 		}
 	}
 }
-export default ScanCommand
+module.exports = ScanCommand

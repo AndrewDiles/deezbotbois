@@ -62,4 +62,4 @@ class ElevenAttackCommand {
 		this.command.instructions.meleeDirection = newDirection;
 	}
 }
-export default ElevenAttackCommand
+module.exports = ElevenAttackCommand

@@ -7,4 +7,4 @@ class RedirectCommand {
 		}
 	}
 }
-export default RedirectCommand
+module.exports = RedirectCommand

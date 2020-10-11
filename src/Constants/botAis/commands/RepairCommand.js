@@ -7,4 +7,4 @@ class RepairCommand {
 		}
 	}
 }
-export default RepairCommand
+module.exports = RepairCommand

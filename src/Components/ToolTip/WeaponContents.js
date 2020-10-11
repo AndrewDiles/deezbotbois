@@ -58,6 +58,7 @@ const WeaponContents = ({ weaponInfo }) => {
 					size = {20}
 					icon = {reload}
 					selected = {true}
+					
       		/>
 					{/* <div>
 						RELOAD

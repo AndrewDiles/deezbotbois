@@ -26,8 +26,7 @@ const Command = ({ attribute, value, width, excludesCommand }) => {
 
 	if (!icons) {
 		return (<></>)
-	}
-
+	} 
 	return (
 		<CommandRow
 		onClick = {e=>{setToolTipToggle(!toolTipToggle)}}
@@ -61,24 +60,24 @@ const Command = ({ attribute, value, width, excludesCommand }) => {
 					<StyledIcon
 					icon = {icons.icon1}
 					padding = {5}
-					selected = {hovered}
+					hovered = {hovered ? 1 : 0}
 					/>
 					<StyledIcon
 					icon = {icons.icon2}
 					padding = {5}
-					selected = {hovered}
+					hovered = {hovered ? 1 : 0}
 					/>
 					{value ? (
 						<StyledIcon
 					icon = {checkSquare}
 					padding = {5}
-					selected = {hovered}
+					hovered = {hovered ? 1 : 0}
 					/>
 					) : (
 					<StyledIcon
 					icon = {xSquare}
 					padding = {5}
-					selected = {hovered}
+					hovered = {hovered ? 1 : 0}
 					/>
 					)}
 				</>

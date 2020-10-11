@@ -5,7 +5,7 @@ import StyledButton from '../../StyledButton/StyledButton';
 import Conditions from './Conditions';
 import Commands from './Commands';
 
-const BotScripts = ({ attributes, aiAndScripts, setAiAndScripts }) => {
+const BotScripts = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const [typeViewing, setTypeViewing] = useState('conditions');
 
@@ -43,12 +43,18 @@ const BotScripts = ({ attributes, aiAndScripts, setAiAndScripts }) => {
 			{typeViewing === 'conditions' &&
 				<Conditions
 				aiAndScripts = {aiAndScripts}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 			{typeViewing === 'commands' && 
 				<Commands
 				attributes = {attributes}
 				aiAndScripts = {aiAndScripts}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				botNumberSelected= {botNumberSelected}
 				/>
 			}
     </Wrapper>

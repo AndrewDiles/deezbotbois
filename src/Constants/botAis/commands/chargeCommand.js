@@ -17,4 +17,4 @@ class ChargeCommand {
 		this.condition.test.targetNumber = newTargetNumber
 	}
 }
-export default ChargeCommand
+module.exports = ChargeCommand

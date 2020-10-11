@@ -1,23 +1,21 @@
 class AimResults {
   constructor(depth, conditionMet, conditionUnMet) {
 		this.depth = depth;
-		this.condition = {
-			name: 'aimResults',
-			test: {
-				testTargets: 'hostile',
-				evaluationType: '===',
-			},
-			conditionMet: conditionMet,
-			conditionUnMet: conditionUnMet
-		}
+		this.name = 'aimResults';
+		this.test = {
+			testTargets: 'hostile',
+			evaluationType: '===',
+		};
+		this.conditionMet = conditionMet;
+		this.conditionUnMet = conditionUnMet;
 	}
 	// newTarget can be: hostile, friend
 	setTarget(newTarget) {
-		this.condition.test.testTargets = newTarget
+		this.test.testTargets = newTarget
 	}
 	// comparisonOperator can be: ===, !==
 	setEvaluation(comparisonOperator) {
-		this.condition.test.evaluationType = comparisonOperator
+		this.test.evaluationType = comparisonOperator
 	}
 }
-export default AimResults
+module.exports = AimResults

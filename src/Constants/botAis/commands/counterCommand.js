@@ -12,4 +12,4 @@ class CounterCommand {
 		this.command.instructions.weapon = armSlot;
 	}
 }
-export default CounterCommand
+module.exports = CounterCommand

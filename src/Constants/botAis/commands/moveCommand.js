@@ -29,4 +29,4 @@ class MoveCommand {
 		this.command.instructions.directions = newDirections;
 	}
 }
-export default MoveCommand
+module.exports = MoveCommand

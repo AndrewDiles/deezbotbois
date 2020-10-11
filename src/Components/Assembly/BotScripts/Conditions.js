@@ -5,8 +5,9 @@ import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import conditionsList, { conditionsData } from '../../../Constants/conditions';
 import AddIcon from './AddIcon';
 import styled from 'styled-components';
+import ConditionRow from './ConditionRow';
 
-const Conditions = ({ aiAndScripts }) => {
+const Conditions = ({ botNumberSelected, aiAndScripts, activeNodeArray, setActiveNodeArray }) => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	
@@ -18,20 +19,28 @@ const Conditions = ({ aiAndScripts }) => {
 			<Options>
 				{conditionsList.map((conditionOption)=>{
 					return (
-					<RowDiv
-					key = {conditionOption}
-					>
-						<ConditionName
-						className = 'centeredFlex'
-						// colors = {colors}
-						>
-							{conditionsData[conditionOption].name}
-						</ConditionName>
-						<AddIcon
+						<ConditionRow
+						key = {conditionOption}
+						conditionOption = {conditionOption}
 						aiAndScripts = {aiAndScripts}
-						decisionName = {conditionOption}
+						activeNodeArray = {activeNodeArray}
+						setActiveNodeArray = {setActiveNodeArray}
+						botNumberSelected = {botNumberSelected}
 						/>
-					</RowDiv>
+					// <RowDiv
+					// key = {conditionOption}
+					// >
+					// 	<ConditionName
+					// 	className = 'centeredFlex'
+					// 	// colors = {colors}
+					// 	>
+					// 		{conditionsData[conditionOption].name}
+					// 	</ConditionName>
+					// 	<AddIcon
+					// 	aiAndScripts = {aiAndScripts}
+					// 	decisionName = {conditionOption}
+					// 	/>
+					// </RowDiv>
 					)
 				})}
 			</Options>

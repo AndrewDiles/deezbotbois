@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import { generateAttributes } from '../../Constants/attributeObjectGenerator';
+import getNodeArray from '../../Constants/scriptHelpers/getNodeArray';
 import styled from 'styled-components';
 
 import MessageDisplay from '../MessageDisplay/MessageDisplay';
@@ -34,9 +35,12 @@ const Assembly = () => {
 	const [tabsOpened, setTabsOpened] = useState(1);
 	const [attributes, setAttributes] = useState({});
 	const initialAiAndScriptsElements = [ { type:'head', index: 0 } ];
-	const [aiAndScripts, setAiAndScripts] = useState(null);
+	const [aiAndScripts, setAiAndScripts] = useState({insertion: [], viewing: []});
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
+	const [activeNodeArray, setActiveNodeArray] = React.useState([]); // move this up a level because scripts needs it in the plus button?
+
+	
 
 	useEffect(() => {
 		if (userInfo.botBuilds.length > 0) setTabsDisplayed({model: true, equipment: true, attributes: true, techTree: true, ai: true, scripts: true, comprehensive: false});
@@ -69,6 +73,12 @@ const Assembly = () => {
 	// 	setEquipmentStaging({from: null, to: null})
 	// },[botNumberSelected, botInfo[botNumberSelected] && botInfo[botNumberSelected].model])
 
+	React.useEffect(()=>{
+		if (!userInfo.botBuilds) return
+		setActiveNodeArray(getNodeArray(userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing ))
+	},[setActiveNodeArray, botNumberSelected, userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing])
+
+// Need to reset insertion upon navigation and changing of nodes
 	useEffect(()=>{
 		if (userInfo.botBuilds.length > 0 && userInfo.botBuilds[botNumberSelected]) {
 			// console.log('updating attributes')
@@ -202,7 +212,9 @@ const Assembly = () => {
 						<BotAI
 						botNumberSelected = {botNumberSelected}
 						aiAndScripts = {aiAndScripts}
-						setAiAndScripts= {setAiAndScripts}
+						setAiAndScripts = {setAiAndScripts}
+						activeNodeArray = {activeNodeArray}
+						setActiveNodeArray = {setActiveNodeArray}
 						/>
 					}
 					{tabsDisplayed.scripts &&
@@ -210,6 +222,9 @@ const Assembly = () => {
 						attributes = {attributes}
 						aiAndScripts = {aiAndScripts}
 						setAiAndScripts= {setAiAndScripts}
+						activeNodeArray = {activeNodeArray}
+						setActiveNodeArray = {setActiveNodeArray}
+						botNumberSelected = {botNumberSelected}
 						/>
 					}
       	</AssemblyGrid>

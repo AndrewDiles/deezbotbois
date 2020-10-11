@@ -7,4 +7,4 @@ class GuardCommand {
 		}
 	}
 }
-export default GuardCommand
+module.exports = GuardCommand

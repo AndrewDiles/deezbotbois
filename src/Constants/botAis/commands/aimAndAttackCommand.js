@@ -49,4 +49,4 @@ class AimAndAttackCommand {
 		this.command.instructions.direction = angle;
 	}
 }
-export default AimAndAttackCommand
+module.exports = AimAndAttackCommand

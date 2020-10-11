@@ -12,4 +12,4 @@ class RangedAttackCommand {
 		this.command.instructions.weapon = armSlot;
 	}
 }
-export default RangedAttackCommand
+module.exports = RangedAttackCommand

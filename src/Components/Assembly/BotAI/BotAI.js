@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 
-import getNodeArray from '../../../Constants/scriptHelpers/getNodeArray';
+
 
 import Depth from './Depth';
 import Node from './Node';
@@ -19,17 +19,9 @@ import {trash2} from 'react-icons-kit/feather/trash2';
 
 import { sampleAi } from '../../../Constants/botAis/sampleAi';
 
-const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	// const botInfo = userInfo.botBuilds;
-
-	const [activeNodeArray, setActiveNodeArray] = React.useState([]);
-	React.useEffect(()=>{
-		if (!userInfo.botBuilds) return
-		setActiveNodeArray(getNodeArray(userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing ))
-	},[setActiveNodeArray, botNumberSelected, userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing])
-
-// Need to reset insertion upon navigation and changing of nodes
 
 	if (!userInfo.botBuilds) {
 		return (<></>)
@@ -57,7 +49,7 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 	// 	weapon: 'arm1'
 	// },
 
-	console.log(`${activeNodeArray} from bot AI`)
+	// console.log(`${activeNodeArray} from bot AI`)
 
   return (
     <Wrapper

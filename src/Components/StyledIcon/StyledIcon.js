@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import {xCircle} from 'react-icons-kit/feather/xCircle'
 
-const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, size, padding, absolute, id, rotation} ) => {
+const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing, size, padding, absolute, id, rotation, hovered} ) => {
 	const settings = useSelector((state) => state.settings);
 	let colors = useSelector(getThemeColors);
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
@@ -32,6 +32,7 @@ const StyledIcon = ( { handleClick, disabled, selected, children, icon, glowing,
 			padding = {padding}
 			absolute = {absolute}
 			rotation = {rotation}
+			hovered = {hovered}
       >
         {children}
       </IconStylings>
@@ -43,7 +44,7 @@ const IconStylings = styled(Icon)`
   padding: ${props => props.padding && `${props.padding}px`};
 	padding-bottom: ${props => props.padding === 'mini' && '5px'};
   position: ${props => props.absolute ? 'absolute' : 'relative'};
-  color: ${props => !props.glowing && props.selected ? props.colors.hoveredText : props.colors.textColor};
+  color: ${props => !props.glowing && props.hovered ? props.colors.hoveredText : props.selected ? props.colors.textColor : props.colors.textColor};
 	animation: ${props => props.glowing && '1s linear infinite alternate glowGift'};
   margin: 5px;
 	transform: ${props => props.rotation && `rotate(${props.rotation}deg)`};
@@ -52,10 +53,10 @@ const IconStylings = styled(Icon)`
   text-align: center;
 	opacity: ${props => props.disabled && 0.5};
   transition: color .75s, background-color .75s;
-	background-color: ${props => props.selected ? props.colors.hovered : props.colors.notSelected};
+	background-color: ${props => props.selected ? props.colors.selected : props.colors.notSelected};
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
-    background-color: ${props => !props.disabled && props.colors.hovered};
+    background-color: ${props => !props.disabled && props.selected ? props.selected : props.colors.hovered};
 		color: ${props => !props.disabled && props.colors.hoveredText};
   }
 	> i {
