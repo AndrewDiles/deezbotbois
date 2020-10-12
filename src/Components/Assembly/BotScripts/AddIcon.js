@@ -7,7 +7,7 @@ import getNodeArray from '../../../Constants/scriptHelpers/getNodeArray';
 import {replaceScript} from '../../../Redux/actions';
 // import {loop as swap} from 'react-icons-kit/icomoon/loop'
 
-const AddIcon = ({ botNumberSelected, aiAndScripts, decisionName, index, setHelpNeeded, activeNodeArray, setActiveNodeArray }) => {
+const AddIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionName, index, setHelpNeeded, activeNodeArray, setActiveNodeArray }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
 	// const newNode = new DecisionObject(decisionName, aiAndScripts.viewing.length, [], [])
@@ -29,7 +29,7 @@ const AddIcon = ({ botNumberSelected, aiAndScripts, decisionName, index, setHelp
 			console.log('array?', targetNodeArray)
 			targetNodeArray.push(newNode);
 			dispatch(replaceScript(botNumberSelected, newScript))
-
+			setAiAndScripts({insertion:[], viewing: aiAndScripts.viewing})
 			// console.log('aiAndScripts.insertion',aiAndScripts.insertion[aiAndScripts.insertion.length-1])
 			// let newActiveNodeArray = activeNodeArray.splice(aiAndScripts.insertion[aiAndScripts.insertion.length-1].index, 0, newNode);
 			// console.log(newActiveNodeArray);

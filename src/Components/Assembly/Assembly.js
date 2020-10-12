@@ -67,7 +67,6 @@ const Assembly = () => {
 		setEquipmentStaging({from: null, to: null})
 		setAiAndScripts({ insertion : null, viewing : initialAiAndScriptsElements });
 	},[botNumberSelected])
-	// Need to reset insertion upon navigation and changing of nodes
 
 	// useEffect(()=>{
 	// 	setEquipmentStaging({from: null, to: null})

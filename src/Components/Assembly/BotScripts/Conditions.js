@@ -7,7 +7,7 @@ import AddIcon from './AddIcon';
 import styled from 'styled-components';
 import ConditionRow from './ConditionRow';
 
-const Conditions = ({ botNumberSelected, aiAndScripts, activeNodeArray, setActiveNodeArray }) => {
+const Conditions = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray }) => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	
@@ -23,6 +23,7 @@ const Conditions = ({ botNumberSelected, aiAndScripts, activeNodeArray, setActiv
 						key = {conditionOption}
 						conditionOption = {conditionOption}
 						aiAndScripts = {aiAndScripts}
+						setAiAndScripts = {setAiAndScripts}
 						activeNodeArray = {activeNodeArray}
 						setActiveNodeArray = {setActiveNodeArray}
 						botNumberSelected = {botNumberSelected}

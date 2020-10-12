@@ -43,6 +43,7 @@ const BotScripts = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScrip
 			{typeViewing === 'conditions' &&
 				<Conditions
 				aiAndScripts = {aiAndScripts}
+				setAiAndScripts = {setAiAndScripts}
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				botNumberSelected = {botNumberSelected}
@@ -52,6 +53,7 @@ const BotScripts = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScrip
 				<Commands
 				attributes = {attributes}
 				aiAndScripts = {aiAndScripts}
+				setAiAndScripts = {setAiAndScripts}
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				botNumberSelected= {botNumberSelected}

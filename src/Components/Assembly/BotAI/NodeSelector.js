@@ -7,7 +7,7 @@ import {chevronUp} from 'react-icons-kit/feather/chevronUp';
 import StyledIcon from '../../StyledIcon/StyledIcon';
 import NodeDisplay from './NodeDisplay';
 
-const Node = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray }) => {
+const NodeSelector = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	// const [activeNodeArray, setActiveNodeArray] = React.useState([]);
 	
@@ -51,7 +51,7 @@ const Node = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArra
     </Wrapper>
   )
 }
-export default Node;
+export default NodeSelector;
 const Wrapper = styled.div`
 	width: 250px;
 	display: flex;

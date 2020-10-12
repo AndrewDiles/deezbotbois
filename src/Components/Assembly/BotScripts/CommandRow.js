@@ -5,7 +5,7 @@ import Command from '../ComprehensiveAttributes/Command';
 import AddIcon from './AddIcon';
 import NodeInsersionIndicator from './NodeInsersionIndicator';
 
-const CommandRow = ({ botNumberSelected, commandOption, aiAndScripts, index, activeNodeArray, setActiveNodeArray }) => {
+const CommandRow = ({ botNumberSelected, commandOption, aiAndScripts, setAiAndScripts, index, activeNodeArray, setActiveNodeArray }) => {
 	const [helpNeeded, setHelpNeeded] = React.useState(false);
 	// console.log({setHelpNeeded})
 
@@ -26,6 +26,7 @@ const CommandRow = ({ botNumberSelected, commandOption, aiAndScripts, index, act
 			/>
 			<AddIcon
 			aiAndScripts = {aiAndScripts}
+			setAiAndScripts = {setAiAndScripts}
 			decisionName = {commandOption}
 			index = {index}
 			setHelpNeeded = {setHelpNeeded}

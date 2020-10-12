@@ -6,6 +6,7 @@ import styled from 'styled-components';
 // import {chevronUp} from 'react-icons-kit/feather/chevronUp';
 import StyledIcon from '../../StyledIcon/StyledIcon';
 import InsertionIcon from './InsertionIcon';
+import NodeOptions from './NodeOptions';
 
 const NodeDisplay = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray }) => {
 	const userInfo = useSelector((state) => state.userInfo);
@@ -19,13 +20,13 @@ const NodeDisplay = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeN
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}
-console.log(activeNodeArray)
-console.log(aiAndScripts)
-console.log(aiAndScripts.viewing)
-console.log(activeNodeArray[aiAndScripts.viewing.index])
+// console.log(activeNodeArray)
+// console.log(aiAndScripts)
+// console.log(aiAndScripts.viewing[aiAndScripts.viewing.length-1])
+// console.log(aiAndScripts.viewing[aiAndScripts.viewing.length-1].index)
   return (
     <Wrapper>
-			{activeNodeArray[aiAndScripts.viewing.index] === undefined ? (
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index] === undefined ? (
 				<>
 				NODE EMPTY
 				<InsertionIcon
@@ -34,9 +35,9 @@ console.log(activeNodeArray[aiAndScripts.viewing.index])
 				/>
 				</>
 			) : (
-				<>
-					NODE not empty, fill in its info
-				</>
+				<NodeOptions
+				nodeInfo = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]}
+				/>
 			)}
     </Wrapper>
   )

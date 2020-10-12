@@ -7,7 +7,7 @@ import AddIcon from './AddIcon';
 import styled from 'styled-components';
 import NodeInsersionIndicator from './NodeInsersionIndicator';
 
-const ConditionRow = ({ botNumberSelected, aiAndScripts, conditionOption, activeNodeArray, setActiveNodeArray }) => {
+const ConditionRow = ({ botNumberSelected, aiAndScripts, setAiAndScripts, conditionOption, activeNodeArray, setActiveNodeArray }) => {
 	const [helpNeeded, setHelpNeeded] = React.useState(false);
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
@@ -28,6 +28,7 @@ const ConditionRow = ({ botNumberSelected, aiAndScripts, conditionOption, active
 			</ConditionName>
 			<AddIcon
 			aiAndScripts = {aiAndScripts}
+			setAiAndScripts = {setAiAndScripts}
 			decisionName = {conditionOption}
 			setHelpNeeded = {setHelpNeeded}
 			activeNodeArray = {activeNodeArray}

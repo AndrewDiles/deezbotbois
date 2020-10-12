@@ -6,7 +6,7 @@ import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import CommandRow from './CommandRow'
 
-const Commands = ({ botNumberSelected, attributes, aiAndScripts, activeNodeArray, setActiveNodeArray }) => {
+const Commands = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray }) => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	const [availableCommands, setAvailableCommands] = useState([]);
@@ -29,6 +29,7 @@ const Commands = ({ botNumberSelected, attributes, aiAndScripts, activeNodeArray
 					key = {commandOption}
 					commandOption = {commandOption}
 					aiAndScripts = {aiAndScripts}
+					setAiAndScripts = {setAiAndScripts}
 					index = {index}
 					activeNodeArray = {activeNodeArray}
 					setActiveNodeArray = {setActiveNodeArray}

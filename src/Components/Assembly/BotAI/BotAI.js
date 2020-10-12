@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 
 import Depth from './Depth';
-import Node from './Node';
+import NodeSelector from './NodeSelector';
 import NodeDisplay from './NodeDisplay';
 // import {moveUp} from 'react-icons-kit/icomoon/moveUp'
 // import {moveDown} from 'react-icons-kit/icomoon/moveDown'
@@ -62,7 +62,7 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			/>
-			<Node
+			<NodeSelector
 			botNumberSelected = {botNumberSelected}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
