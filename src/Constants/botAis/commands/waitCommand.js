@@ -1,9 +1,7 @@
 class WaitCommand {
   constructor() {
-		this.command = {
-			name: 'waitCommand',
-			instructions: {
-			}
+		this.name = 'waitCommand';
+		this.instructions = {
 		}
 	}
 }

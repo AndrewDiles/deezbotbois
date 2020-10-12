@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 
-import {moveUp} from 'react-icons-kit/icomoon/moveUp';
+// import {moveUp} from 'react-icons-kit/icomoon/moveUp';
+import {chevronUp} from 'react-icons-kit/feather/chevronUp';
 import StyledIcon from '../../StyledIcon/StyledIcon';
 
 const Depth = ({ aiAndScripts, setAiAndScripts }) => {
@@ -25,7 +26,7 @@ const Depth = ({ aiAndScripts, setAiAndScripts }) => {
 			<StyledIcon
 			handleClick = {handleDecrementDepthLevel}
 			padding = {5}
-			icon = {moveUp}
+			icon = {chevronUp}
 			disabled = {aiAndScripts.viewing.length === 1}
     	/>
     </Wrapper>

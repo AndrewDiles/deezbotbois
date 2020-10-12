@@ -1,9 +1,7 @@
 class RepairCommand {
   constructor() {
-		this.command = {
-			name: 'repairCommand',
-			instructions: {
-			}
+		this.name = 'repairCommand';
+		this.instructions = {
 		}
 	}
 }

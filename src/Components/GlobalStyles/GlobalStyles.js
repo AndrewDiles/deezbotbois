@@ -79,7 +79,7 @@ html {
   display: block;
   margin-right: auto;
   margin-left: auto;
-	text-align:center
+	text-align: center;
 }
 .disableClicks {
   pointer-events: none;

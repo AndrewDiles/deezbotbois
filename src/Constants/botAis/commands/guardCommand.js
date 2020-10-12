@@ -1,9 +1,7 @@
 class GuardCommand {
   constructor() {
-		this.command = {
-			name: 'guardCommand',
-			instructions: {
-			}
+		this.name = 'guardCommand';
+		this.instructions = {
 		}
 	}
 }

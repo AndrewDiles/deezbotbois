@@ -1,15 +1,13 @@
 class RamCommand {
   constructor() {
-		this.command = {
-			name: 'ramCommand',
-			instructions: {
-				targetNumber: 1,
-			}
+		this.name = 'ramCommand';
+		this.instructions = {
+			targetNumber: 1,
 		}
 	}
 	// newTargetNumber is the index number +1 of a scan
 	setTargetNumber(newTargetNumber) {
-		this.condition.test.targetNumber = newTargetNumber
+		this.instructions.targetNumber = newTargetNumber
 	}
 }
 module.exports = RamCommand

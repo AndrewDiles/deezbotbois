@@ -3,7 +3,8 @@ import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import StyledIcon from '../../StyledIcon/StyledIcon';
-import {dice} from 'react-icons-kit/icomoon/dice';
+// import {dice} from 'react-icons-kit/icomoon/dice';
+import {u1F3B2 as dice} from 'react-icons-kit/noto_emoji_regular/u1F3B2'
 import styled from 'styled-components';
 import robotNameGen from '../../../Constants/robotNameGen';
 import ModelChanger from './ModelChanger';

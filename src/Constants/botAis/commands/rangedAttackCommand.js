@@ -1,15 +1,13 @@
 class RangedAttackCommand {
   constructor() {
-		this.command = {
-			name: 'rangedAttackCommand',
-			instructions: {
-				weapon: 'arm1',
-			}
+		this.name = 'rangedAttackCommand';
+		this.instructions = {
+			weapon: 'arm1',
 		}
 	}
 	// armSlot can be: arm1, arm2, arm3. Should only be a ranged weapon
 	setArm(armSlot) {
-		this.command.instructions.weapon = armSlot;
+		this.instructions.weapon = armSlot;
 	}
 }
 module.exports = RangedAttackCommand

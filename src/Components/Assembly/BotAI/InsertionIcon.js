@@ -23,14 +23,21 @@ const InsertionIcon = ({ aiAndScripts, setAiAndScripts }) => {
 	}
 	// console.log('selected test:',aiAndScripts.viewing === aiAndScripts.insertion)
   return (
-    <StyledIcon
-		icon = {download}
-		padding = '5'
-		disabled = {aiAndScripts === null}
-		selected = {aiAndScripts.viewing === aiAndScripts.insertion}
-		rotation = '90'
-		handleClick = {handleClick}
-		/>
+		<IconWrapper>
+    	<StyledIcon
+			icon = {download}
+			padding = '5'
+			disabled = {aiAndScripts === null}
+			selected = {aiAndScripts.viewing === aiAndScripts.insertion}
+			rotation = '90'
+			handleClick = {handleClick}
+			/>
+		</IconWrapper>
   )
 }
 export default InsertionIcon;
+
+const IconWrapper = styled.div`
+	height: 50px;
+	width: 50px;
+`

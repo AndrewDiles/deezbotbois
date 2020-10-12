@@ -1,9 +1,7 @@
 class RedirectCommand {
   constructor() {
-		this.command = {
-			name: 'redirectCommand',
-			instructions: {
-			}
+		this.name = 'redirectCommand';
+		this.instructions = {
 		}
 	}
 }

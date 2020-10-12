@@ -31,6 +31,7 @@ Intentions with the GUI include:
 
 - Excess equipment causes flutter in scroll on Tool Tip's mouse over.  Solution will likely involve pagenating number of displayed equipment
 
+- Foressing a large bug, where people can save illegal scripts by exiting the build-em end point and saving their userInfo via settings changes
 
 
 # PAST BUGS

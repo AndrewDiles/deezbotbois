@@ -1,9 +1,7 @@
 class ScanCommand {
   constructor() {
-		this.command = {
-			name: 'scanCommand',
-			instructions: {
-			}
+		this.name = 'scanCommand';
+		this.instructions = {
 		}
 	}
 }

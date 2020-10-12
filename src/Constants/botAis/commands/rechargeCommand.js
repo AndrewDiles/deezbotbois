@@ -1,9 +1,7 @@
 class RechargeCommand {
   constructor() {
-		this.command = {
-			name: 'rechargeCommand',
-			instructions: {
-			}
+		this.name = 'rechargeCommand';
+		this.instructions = {
 		}
 	}
 }
