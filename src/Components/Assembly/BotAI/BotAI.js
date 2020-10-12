@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 
 import Depth from './Depth';
+import PreviousCondition from './PreviousCondition';
 import NodeSelector from './NodeSelector';
 import NodeDisplay from './NodeDisplay';
 // import {moveUp} from 'react-icons-kit/icomoon/moveUp'
@@ -61,6 +62,9 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 			<Depth
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
+			/>
+			<PreviousCondition
+			aiAndScripts = {aiAndScripts}
 			/>
 			<NodeSelector
 			botNumberSelected = {botNumberSelected}

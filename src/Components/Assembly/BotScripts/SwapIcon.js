@@ -1,14 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import StyledIcon from '../../StyledIcon/StyledIcon';
-import {plus} from 'react-icons-kit/icomoon/plus';
 import {loop} from 'react-icons-kit/ionicons/loop'
 import DecisionObject from '../../../Constants/botAis/optionCreator.js';
 import getNodeArray from '../../../Constants/scriptHelpers/getNodeArray';
 import {replaceScript} from '../../../Redux/actions';
 // import {loop as swap} from 'react-icons-kit/icomoon/loop'
 
-const AddIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionName, index, setHelpNeeded, activeNodeArray, setActiveNodeArray }) => {
+const SwapIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionName, index, setHelpNeeded, activeNodeArray, setActiveNodeArray }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
 	// const newNode = new DecisionObject(decisionName, aiAndScripts.viewing.length, [], [])
@@ -36,11 +35,11 @@ const AddIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionNam
 	}
   return (
     <StyledIcon
-		icon = {plus}
+		icon = {loop}
 		padding = '5'
 		disabled = {aiAndScripts === null } //|| aiAndScripts.insertion === null}
 		handleClick = {handleClick}
 		/>
   )
 }
-export default AddIcon;
+export default SwapIcon;

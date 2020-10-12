@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Command from '../ComprehensiveAttributes/Command';
 import AddIcon from './AddIcon';
+import SwapIcon from './SwapIcon';
 import NodeInsersionIndicator from './NodeInsersionIndicator';
 
 const CommandRow = ({ botNumberSelected, commandOption, aiAndScripts, setAiAndScripts, index, activeNodeArray, setActiveNodeArray }) => {
@@ -24,16 +25,30 @@ const CommandRow = ({ botNumberSelected, commandOption, aiAndScripts, setAiAndSc
 			width = {200}
 			excludesCommand = {true}
 			/>
-			<AddIcon
-			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
-			decisionName = {commandOption}
-			index = {index}
-			setHelpNeeded = {setHelpNeeded}
-			activeNodeArray = {activeNodeArray}
-			setActiveNodeArray = {setActiveNodeArray}
-			botNumberSelected = {botNumberSelected}
-			/>
+			{aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === activeNodeArray.length ? (
+				<AddIcon
+				aiAndScripts = {aiAndScripts}
+				setAiAndScripts = {setAiAndScripts}
+				decisionName = {commandOption}
+				index = {index}
+				setHelpNeeded = {setHelpNeeded}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				botNumberSelected = {botNumberSelected}
+				/>
+			) : (
+				<SwapIcon
+				aiAndScripts = {aiAndScripts}
+				setAiAndScripts = {setAiAndScripts}
+				decisionName = {commandOption}
+				index = {index}
+				setHelpNeeded = {setHelpNeeded}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				botNumberSelected = {botNumberSelected}
+				/>
+			)}
+			
 		</RowDiv>
 }
 export default CommandRow;

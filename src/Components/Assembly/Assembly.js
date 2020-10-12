@@ -35,7 +35,7 @@ const Assembly = () => {
 	const [tabsOpened, setTabsOpened] = useState(1);
 	const [attributes, setAttributes] = useState({});
 	const initialAiAndScriptsElements = [ { type:'head', index: 0 } ];
-	const [aiAndScripts, setAiAndScripts] = useState({insertion: [], viewing: []});
+	const [aiAndScripts, setAiAndScripts] = useState({insertion: false, viewing: []});
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
 	const [activeNodeArray, setActiveNodeArray] = React.useState([]); // move this up a level because scripts needs it in the plus button?
@@ -65,8 +65,14 @@ const Assembly = () => {
 
 	useEffect(()=>{
 		setEquipmentStaging({from: null, to: null})
-		setAiAndScripts({ insertion : null, viewing : initialAiAndScriptsElements });
+		setAiAndScripts({ insertion : false, viewing : initialAiAndScriptsElements });
 	},[botNumberSelected])
+
+	useEffect(()=>{
+		if (aiAndScripts.insertion) {
+			setAiAndScripts({ insertion : false, viewing : aiAndScripts.viewing })
+		}
+	},[JSON.stringify(aiAndScripts.viewing)])
 
 	// useEffect(()=>{
 	// 	setEquipmentStaging({from: null, to: null})

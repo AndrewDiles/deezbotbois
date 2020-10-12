@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
+import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
+import InsertionIcon from './InsertionIcon';
 
 import StyledIcon from '../../StyledIcon/StyledIcon';
 import {moveUp} from 'react-icons-kit/icomoon/moveUp';
@@ -14,6 +16,7 @@ import getNodeArray from '../../../Constants/scriptHelpers/getNodeArray';
 const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
+	let colors = useSelector(getThemeColors);
 	const dispatch = useDispatch();
 	const [deleteActive, setDeleteActive] = React.useState(false);
 
@@ -42,7 +45,7 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
   return (
     <Wrapper>
 			<RowContainer>
-				<IconWrapper>
+				<IconContainer>
 					<StyledIcon
 					handleClick = {handleShiftLeft}
 					padding = {5}
@@ -50,15 +53,15 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 					rotation = '-90'
 					disabled = {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === 0}
     			/>
-				</IconWrapper>
-				<IconWrapper>
+				</IconContainer>
+				<IconContainer>
 					<StyledIcon
 					handleClick = {()=>{setDeleteActive(!deleteActive)}}
 					padding = {5}
 					icon = {iosTrash}
     			/>
-				</IconWrapper>
-				<IconWrapper>
+				</IconContainer>
+				<IconContainer>
 					<StyledIcon
 					handleClick = {handleShiftRight}
 					padding = {5}
@@ -66,11 +69,33 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 					rotation = '90'
 					disabled = {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === activeNodeArray.length-1}
     			/>
-				</IconWrapper>
+				</IconContainer>
 			</RowContainer>
-			<RowContainer>
+			{aiAndScripts.insertion ? (
+				<InsertionMessageContainer
+				set = {true}
+				colors = {colors}
+				>
+					NODE OPTION TYPE 
+					<br/>
+					WILL BE CHANGED
+				</InsertionMessageContainer>
+			) : (
+				<InsertionMessageContainer
+				colors = {colors}
+				>
+					SET INSERTION POINT
+				</InsertionMessageContainer>
+			)}
 				
-			</RowContainer>
+			<IconRow>
+				<IconContainer>
+					<InsertionIcon
+					aiAndScripts = {aiAndScripts}
+					setAiAndScripts = {setAiAndScripts}
+					/>
+				</IconContainer>
+			</IconRow>
     </Wrapper>
   )
 }
@@ -81,17 +106,33 @@ const RowContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 `
+const InsertionMessageContainer = styled.p`
+	width: 100%;
+	height: 35px;
+	font-size: 1.0em;
+	margin: ${props => props.set ? '9px 0 0 0': '0px'};
+	padding-top: ${props => !props.set && '22px'};
+	color: ${props => props.set && props.colors.hoveredText};
+	vertical-align: bottom;
+`
 const Wrapper = styled.div`
 	width: 100%;
-	height: 100px;
+	height: 135px;
 	display: flex;
+	flex-direction: column;
 	justify-content: column;
 	align-items: center;
 	text-align: center;
 	font-size: 0.9em;
 	white-space: nowrap;
 `
-const IconWrapper = styled.div`
+const IconContainer = styled.div`
 	height: 50px;
 	width: 50px;
+`
+const IconRow = styled.div`
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-content: center;
 `

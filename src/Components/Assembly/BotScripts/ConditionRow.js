@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import conditionsList, { conditionsData } from '../../../Constants/conditions';
 import AddIcon from './AddIcon';
+import SwapIcon from './SwapIcon';
 import styled from 'styled-components';
 import NodeInsersionIndicator from './NodeInsersionIndicator';
 
@@ -26,15 +27,28 @@ const ConditionRow = ({ botNumberSelected, aiAndScripts, setAiAndScripts, condit
 			>
 				{conditionsData[conditionOption].name}
 			</ConditionName>
-			<AddIcon
-			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
-			decisionName = {conditionOption}
-			setHelpNeeded = {setHelpNeeded}
-			activeNodeArray = {activeNodeArray}
-			setActiveNodeArray = {setActiveNodeArray}
-			botNumberSelected = {botNumberSelected}
-			/>
+			
+			{aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === activeNodeArray.length ? (
+				<AddIcon
+				aiAndScripts = {aiAndScripts}
+				setAiAndScripts = {setAiAndScripts}
+				decisionName = {conditionOption}
+				setHelpNeeded = {setHelpNeeded}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				botNumberSelected = {botNumberSelected}
+				/>
+			) : (
+				<SwapIcon
+				aiAndScripts = {aiAndScripts}
+				setAiAndScripts = {setAiAndScripts}
+				decisionName = {conditionOption}
+				setHelpNeeded = {setHelpNeeded}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				botNumberSelected = {botNumberSelected}
+				/>
+			)}
 		</Wrapper>
 }
 export default ConditionRow;

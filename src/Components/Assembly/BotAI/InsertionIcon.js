@@ -14,10 +14,10 @@ const InsertionIcon = ({ aiAndScripts, setAiAndScripts }) => {
 	
 	function handleClick() {
 		let newAiAndScript = {...aiAndScripts};
-		if (newAiAndScript.insertion === newAiAndScript.viewing) {
-			newAiAndScript.insertion = null
+		if (newAiAndScript.insertion === true) {
+			newAiAndScript.insertion = false
 		} else {
-			newAiAndScript.insertion = aiAndScripts.viewing;
+			newAiAndScript.insertion = true;
 		}
 		setAiAndScripts(newAiAndScript)
 	}
@@ -27,8 +27,8 @@ const InsertionIcon = ({ aiAndScripts, setAiAndScripts }) => {
     	<StyledIcon
 			icon = {download}
 			padding = '5'
-			disabled = {aiAndScripts === null}
-			selected = {aiAndScripts.viewing === aiAndScripts.insertion}
+			// disabled = {aiAndScripts === null}
+			selected = {aiAndScripts.insertion === true}
 			rotation = '90'
 			handleClick = {handleClick}
 			/>
