@@ -7,7 +7,7 @@ import {chevronUp} from 'react-icons-kit/feather/chevronUp';
 import StyledIcon from '../../StyledIcon/StyledIcon';
 import NodeDisplay from './NodeDisplay';
 
-const NodeSelector = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray }) => {
+const NodeSelector = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setDeleteActive }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	// const [activeNodeArray, setActiveNodeArray] = React.useState([]);
 	
@@ -23,11 +23,13 @@ const NodeSelector = ({ botNumberSelected, aiAndScripts, setAiAndScripts, active
 		let newAiAndScripts = {...aiAndScripts};
 		newAiAndScripts.viewing[newAiAndScripts.viewing.length-1].index --;
 		setAiAndScripts(newAiAndScripts);
+		setDeleteActive(false);
 	}
 	function handleIncrementNodeNumber () {
 		let newAiAndScripts = {...aiAndScripts};
 		newAiAndScripts.viewing[newAiAndScripts.viewing.length-1].index ++;
 		setAiAndScripts(newAiAndScripts);
+		setDeleteActive(false);
 	}
   return (
     <Wrapper>
@@ -39,7 +41,7 @@ const NodeSelector = ({ botNumberSelected, aiAndScripts, setAiAndScripts, active
 			disabled = {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === 0}
     	/>
 			<span>
-				NODE # {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index}
+				NODE # {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index+1}
 			</span>
 			<StyledIcon
 			handleClick = {handleIncrementNodeNumber}

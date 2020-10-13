@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 
 import StyledIcon from '../../StyledIcon/StyledIcon';
-import {download} from 'react-icons-kit/icomoon/download'
+// import {download} from 'react-icons-kit/icomoon/download';
+import {androidExit} from 'react-icons-kit/ionicons/androidExit';
 
 import styled from 'styled-components';
 
@@ -25,11 +26,11 @@ const InsertionIcon = ({ aiAndScripts, setAiAndScripts }) => {
   return (
 		<IconWrapper>
     	<StyledIcon
-			icon = {download}
+			icon = {androidExit}
 			padding = '5'
 			// disabled = {aiAndScripts === null}
 			selected = {aiAndScripts.insertion === true}
-			rotation = '90'
+			rotation = '180'
 			handleClick = {handleClick}
 			/>
 		</IconWrapper>

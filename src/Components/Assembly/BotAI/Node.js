@@ -3,9 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import MacroNodeOptions from './MacroNodeOptions';
 
-const Node = ({ activeNodeArray, nodeInfo, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
-	console.log({nodeInfo})
-	console.log(nodeInfo.condition.name)
+const Node = ({ activeNodeArray, nodeInfo, botNumberSelected, aiAndScripts, setAiAndScripts, setDeleteActive, deleteActive }) => {
+	// console.log({nodeInfo})
+	// console.log(nodeInfo.condition.name)
   return (
     <Wrapper>
 			<MacroNodeOptions
@@ -13,9 +13,16 @@ const Node = ({ activeNodeArray, nodeInfo, botNumberSelected, aiAndScripts, setA
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
+			setDeleteActive = {setDeleteActive}
+			deleteActive = {deleteActive}
 			/>
-			<br/>
-			{nodeInfo.condition.name}
+			{!deleteActive &&
+				<>
+				<br/>
+				{nodeInfo.condition.name}
+				</>
+			}
+			
     </Wrapper>
   )
 }

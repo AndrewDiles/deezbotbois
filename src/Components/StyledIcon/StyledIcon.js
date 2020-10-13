@@ -53,7 +53,7 @@ const IconStylings = styled(Icon)`
   text-align: center;
 	opacity: ${props => props.disabled && 0.5};
   transition: color .75s, background-color .75s;
-	background-color: ${props => props.selected ? props.colors.selected : props.colors.notSelected};
+	background-color: ${props => props.hovered ? props.colors.hovered : props.selected ? props.colors.selected : props.colors.notSelected};
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     background-color: ${props => !props.disabled && props.selected ? props.selected : props.colors.hovered};

@@ -22,6 +22,7 @@ import { sampleAi } from '../../../Constants/botAis/sampleAi';
 
 const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray }) => {
 	const userInfo = useSelector((state) => state.userInfo);
+	const [deleteActive, setDeleteActive] = React.useState(false);
 	// const botInfo = userInfo.botBuilds;
 
 	if (!userInfo.botBuilds) {
@@ -62,6 +63,7 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 			<Depth
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
+			setDeleteActive = {setDeleteActive}
 			/>
 			<PreviousCondition
 			aiAndScripts = {aiAndScripts}
@@ -71,6 +73,7 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			activeNodeArray = {activeNodeArray}
+			setDeleteActive = {setDeleteActive}
 			/>
 			{/* <h5>
 				NODE NUMBER: {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index}
@@ -81,6 +84,8 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			activeNodeArray = {activeNodeArray}
+			setDeleteActive = {setDeleteActive}
+			deleteActive = {deleteActive}
 			/>
     </Wrapper>
   )

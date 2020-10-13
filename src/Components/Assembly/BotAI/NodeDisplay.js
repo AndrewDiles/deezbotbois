@@ -9,7 +9,7 @@ import StyledIcon from '../../StyledIcon/StyledIcon';
 import InsertionIcon from './InsertionIcon';
 import Node from './Node';
 
-const NodeDisplay = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray }) => {
+const NodeDisplay = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setDeleteActive, deleteActive }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	let colors = useSelector(getThemeColors);
 	// const [activeNodeArray, setActiveNodeArray] = React.useState([]);
@@ -62,6 +62,8 @@ const NodeDisplay = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeN
 				aiAndScripts = {aiAndScripts}
 				setAiAndScripts = {setAiAndScripts}
 				botNumberSelected = {botNumberSelected}
+				setDeleteActive = {setDeleteActive}
+				deleteActive = {deleteActive}
 				/>
 			)}
     </Wrapper>

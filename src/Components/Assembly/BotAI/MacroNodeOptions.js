@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import InsertionIcon from './InsertionIcon';
+import DeleteNode from './DeleteNode';
 
 import StyledIcon from '../../StyledIcon/StyledIcon';
 import {moveUp} from 'react-icons-kit/icomoon/moveUp';
+import {moveDown} from 'react-icons-kit/icomoon/moveDown';
 import {iosTrash} from 'react-icons-kit/ionicons/iosTrash';
 
 import {replaceScript} from '../../../Redux/actions';
@@ -13,36 +15,48 @@ import getNodeArray from '../../../Constants/scriptHelpers/getNodeArray';
 
 
 
-const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts, setDeleteActive, deleteActive }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
 	let colors = useSelector(getThemeColors);
 	const dispatch = useDispatch();
-	const [deleteActive, setDeleteActive] = React.useState(false);
 
 // Purpose of this component is to provide buttons to move the Node's array index, delete the Node and set the inserstion point
-
+	console.log({activeNodeArray})
 	function handleShiftLeft () {
-		let temp = activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index];
+		let temp = {...activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]};
 		let newScript = [...botInfo[botNumberSelected].script];
 		let targetNodeArray = getNodeArray(newScript, aiAndScripts.viewing);
-		targetNodeArray[[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]] = targetNodeArray[[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]-1];
-		targetNodeArray[[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]-1] = temp;
+		targetNodeArray[[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]] = targetNodeArray[[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index-1]];
+		targetNodeArray[[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index-1]] = temp;
 		dispatch(replaceScript(botNumberSelected, newScript));
 		let newAiAndScripts = {...aiAndScripts};
 		newAiAndScripts.viewing[aiAndScripts.viewing.length-1].index --;
 		setAiAndScripts(newAiAndScripts);
+		setDeleteActive(false);
 	}
 	function handleShiftRight () {
-
+		let temp = {...activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]};
+		let newScript = [...botInfo[botNumberSelected].script];
+		let targetNodeArray = getNodeArray(newScript, aiAndScripts.viewing);
+		targetNodeArray[[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]] = targetNodeArray[[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index+1]];
+		targetNodeArray[[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index+1]] = temp;
+		dispatch(replaceScript(botNumberSelected, newScript));
+		let newAiAndScripts = {...aiAndScripts};
+		newAiAndScripts.viewing[aiAndScripts.viewing.length-1].index ++;
+		setAiAndScripts(newAiAndScripts);
+		setDeleteActive(false);
 	}
-	function handleDelete () {
-
-	}
-
-
 	
-  return (
+	return deleteActive ? (
+		<DeleteNode
+		setDeleteActive = {setDeleteActive}
+		activeNodeArray = {activeNodeArray}
+		botNumberSelected = {botNumberSelected}
+		aiAndScripts = {aiAndScripts}
+		setAiAndScripts = {setAiAndScripts}
+		/>
+	) : (
     <Wrapper>
 			<RowContainer>
 				<IconContainer>
@@ -65,8 +79,8 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 					<StyledIcon
 					handleClick = {handleShiftRight}
 					padding = {5}
-					icon = {moveUp}
-					rotation = '90'
+					icon = {moveDown}
+					rotation = '-90'
 					disabled = {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === activeNodeArray.length-1}
     			/>
 				</IconContainer>
@@ -110,7 +124,7 @@ const InsertionMessageContainer = styled.p`
 	width: 100%;
 	height: 35px;
 	font-size: 1.0em;
-	margin: ${props => props.set ? '9px 0 0 0': '0px'};
+	margin: ${props => props.set ? '3px 0 0 0': '0px'};
 	padding-top: ${props => !props.set && '22px'};
 	color: ${props => props.set && props.colors.hoveredText};
 	vertical-align: bottom;

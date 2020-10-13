@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import {chevronUp} from 'react-icons-kit/feather/chevronUp';
 import StyledIcon from '../../StyledIcon/StyledIcon';
 
-const Depth = ({ aiAndScripts, setAiAndScripts }) => {
+const Depth = ({ aiAndScripts, setAiAndScripts, setDeleteActive }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	
 	if (!userInfo.botBuilds) {
@@ -16,7 +16,9 @@ const Depth = ({ aiAndScripts, setAiAndScripts }) => {
 		let newAiAndScripts = {...aiAndScripts};
 		newAiAndScripts.viewing = newAiAndScripts.viewing.pop();
 		setAiAndScripts(newAiAndScripts);
+		setDeleteActive(false)
 	}
+	// console.log({aiAndScripts})
   return (
     <Wrapper>
 			<Spacer/>
