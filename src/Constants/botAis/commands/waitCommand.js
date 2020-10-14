@@ -5,4 +5,4 @@ class WaitCommand {
 		}
 	}
 }
-export default WaitCommand
+module.exports = WaitCommand

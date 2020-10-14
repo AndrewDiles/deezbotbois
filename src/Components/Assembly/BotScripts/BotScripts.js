@@ -7,7 +7,7 @@ import Commands from './Commands';
 
 const BotScripts = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray }) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	const [typeViewing, setTypeViewing] = useState('conditions');
+	const [scriptTypeViewing, setScriptTypeViewing] = useState('conditions');
 
 	if (!userInfo.botBuilds || !attributes) {
 		return (<></>)
@@ -22,25 +22,25 @@ const BotScripts = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScrip
 			</h3>
 			<RowDiv className = 'centeredFlex'>
 				<StyledButton
-				handleClick = {e=> {setTypeViewing('conditions')}}
-				selected = {typeViewing === 'conditions'}
-				// disabled = {typeViewing === 'conditions'}
+				handleClick = {e=> {setScriptTypeViewing('conditions')}}
+				selected = {scriptTypeViewing === 'conditions'}
+				// disabled = {scriptTypeViewing === 'conditions'}
 				width = '120'
 				fontSize = '10'
 				>
 					CONDITIONS
 				</StyledButton>
 				<StyledButton
-				handleClick = {e=> {setTypeViewing('commands')}}
-				selected = {typeViewing === 'commands'}
-				// disabled = {typeViewing === 'commands'}
+				handleClick = {e=> {setScriptTypeViewing('commands')}}
+				selected = {scriptTypeViewing === 'commands'}
+				// disabled = {scriptTypeViewing === 'commands'}
 				width = '120'
 				fontSize = '10'
 				>
 					COMMANDS
 				</StyledButton>
 			</RowDiv>
-			{typeViewing === 'conditions' &&
+			{scriptTypeViewing === 'conditions' &&
 				<Conditions
 				aiAndScripts = {aiAndScripts}
 				setAiAndScripts = {setAiAndScripts}
@@ -49,7 +49,7 @@ const BotScripts = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScrip
 				botNumberSelected = {botNumberSelected}
 				/>
 			}
-			{typeViewing === 'commands' && 
+			{scriptTypeViewing === 'commands' && 
 				<Commands
 				attributes = {attributes}
 				aiAndScripts = {aiAndScripts}

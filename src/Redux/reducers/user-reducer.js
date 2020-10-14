@@ -152,10 +152,7 @@ export default function userInfo(
 			}
 			case 'REPLACE_SCRIPT' : {
 				let botBuilds = [...state.botBuilds];
-				console.log('botBuilds from reducer',botBuilds)
-				console.log('incoming newScript from reducer', action.newScript)
 				botBuilds[action.index].script = action.newScript;
-				console.log('botBuilds from reducer',botBuilds)
 				return {
 					...state,
 					botBuilds : botBuilds,

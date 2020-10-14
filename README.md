@@ -67,6 +67,7 @@ Intentions with the GUI include:
 ### Solution: Set navlink's tabindex="-1"
 
 # Potential Improvements
+- Clean up / refactor Ai deletion Component as it contains code duplication
 - Add a duplicate Bot in the Assembly
 - Disable ability to Save Bots in Assembly after creating a new bot
 - Add DR and Dmg attributes to be displayed on Attributes of Assembly

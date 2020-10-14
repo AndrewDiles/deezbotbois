@@ -6,7 +6,7 @@ import AddIcon from './AddIcon';
 import SwapIcon from './SwapIcon';
 import NodeInsersionIndicator from './NodeInsersionIndicator';
 
-const CommandRow = ({ botNumberSelected, commandOption, aiAndScripts, setAiAndScripts, index, activeNodeArray, setActiveNodeArray }) => {
+const CommandRow = ({ botNumberSelected, commandOption, aiAndScripts, setAiAndScripts, index, activeNodeArray, setActiveNodeArray, setLosingNestedNodes }) => {
 	const [helpNeeded, setHelpNeeded] = React.useState(false);
 	// console.log({setHelpNeeded})
 
@@ -46,6 +46,7 @@ const CommandRow = ({ botNumberSelected, commandOption, aiAndScripts, setAiAndSc
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				botNumberSelected = {botNumberSelected}
+				setLosingNestedNodes = {setLosingNestedNodes}
 				/>
 			)}
 			

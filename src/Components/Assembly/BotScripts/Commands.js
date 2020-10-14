@@ -4,12 +4,14 @@ import { useSelector } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 
 import styled from 'styled-components';
-import CommandRow from './CommandRow'
+import CommandRow from './CommandRow';
+import ConfirmLossOfNodes from './ConfirmLossOfNodes';
 
 const Commands = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray }) => {
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	const [availableCommands, setAvailableCommands] = useState([]);
+	const [losingNestedNodes, setLosingNestedNodes] = useState(null);
 	React.useEffect(()=>{
 		let grabbedCommands = [];
 		Object.keys(attributes).forEach((attribute)=>{
@@ -23,20 +25,36 @@ const Commands = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScripts
       <p>
 				COMMANDS
 			</p>
-			<Options>
-				{availableCommands.map((commandOption, index)=>(
-					<CommandRow
-					key = {commandOption}
-					commandOption = {commandOption}
+			{losingNestedNodes ? (
+				<Options>
+					<ConfirmLossOfNodes
+					botNumberSelected = {botNumberSelected}
 					aiAndScripts = {aiAndScripts}
 					setAiAndScripts = {setAiAndScripts}
-					index = {index}
 					activeNodeArray = {activeNodeArray}
 					setActiveNodeArray = {setActiveNodeArray}
-					botNumberSelected= {botNumberSelected}
+					losingNestedNodes = {losingNestedNodes}
+					setLosingNestedNodes = {setLosingNestedNodes}
 					/>
-				))}
-			</Options>
+				</Options>
+			) : (
+				<Options>
+					{availableCommands.map((commandOption, index)=>(
+						<CommandRow
+						key = {commandOption}
+						commandOption = {commandOption}
+						aiAndScripts = {aiAndScripts}
+						setAiAndScripts = {setAiAndScripts}
+						index = {index}
+						activeNodeArray = {activeNodeArray}
+						setActiveNodeArray = {setActiveNodeArray}
+						botNumberSelected= {botNumberSelected}
+						setLosingNestedNodes = {setLosingNestedNodes}
+						/>
+					))}
+				</Options>
+			)}
+			
     </Wrapper>
   )
 }

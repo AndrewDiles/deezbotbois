@@ -21,8 +21,8 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 	let colors = useSelector(getThemeColors);
 	const dispatch = useDispatch();
 
-// Purpose of this component is to provide buttons to move the Node's array index, delete the Node and set the inserstion point
-	console.log({activeNodeArray})
+	// Purpose of this component is to provide buttons to move the Node's array index, delete the Node and set the inserstion point
+	// console.log({activeNodeArray})
 	function handleShiftLeft () {
 		let temp = {...activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]};
 		let newScript = [...botInfo[botNumberSelected].script];
@@ -54,7 +54,6 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 		activeNodeArray = {activeNodeArray}
 		botNumberSelected = {botNumberSelected}
 		aiAndScripts = {aiAndScripts}
-		setAiAndScripts = {setAiAndScripts}
 		/>
 	) : (
     <Wrapper>

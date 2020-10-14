@@ -2,6 +2,7 @@ import React from 'react';
 // import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import MacroNodeOptions from './MacroNodeOptions';
+import MicroNodeOptions from './MicroNodeOptions';
 
 const Node = ({ activeNodeArray, nodeInfo, botNumberSelected, aiAndScripts, setAiAndScripts, setDeleteActive, deleteActive }) => {
 	// console.log({nodeInfo})
@@ -17,10 +18,13 @@ const Node = ({ activeNodeArray, nodeInfo, botNumberSelected, aiAndScripts, setA
 			deleteActive = {deleteActive}
 			/>
 			{!deleteActive &&
-				<>
-				<br/>
-				{nodeInfo.condition.name}
-				</>
+				<MicroNodeOptions
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				aiAndScripts = {aiAndScripts}
+				setAiAndScripts = {setAiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			}
 			
     </Wrapper>

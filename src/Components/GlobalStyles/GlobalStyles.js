@@ -75,6 +75,18 @@ html {
   width: 100vw;
 }
 
+.aiTitle {
+	height: 52px;
+	width: 100%;
+	font-size: 1.3em;
+	white-space: normal;
+	border-top: 1px solid rgba(0,0,0,0.24);
+}
+.aiButtonRow {
+	height: 40px;
+	width: 100%;
+	display:flex;
+}
 .centeredInput {
   display: block;
   margin-right: auto;
@@ -89,6 +101,41 @@ html {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+}
+.innerNodeOptionsWrapper {
+	width: 100%;
+	height: 422px;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	text-align: center;
+	line-height: 0;
+}
+.commandContents {
+	height: 370px;
+	width: 100%;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	text-align: center;
+	white-space: normal;
+	padding: 10px 5px;
+}
+.infoContents {
+	font-size: 0.8em;
+}
+.conditionContents {
+	height: 330px;
+	width: 100%;
+	overflow-y: auto;
+	flex-direction: column;
+	justify-content: column;
+	align-items: center;
+	text-align: center;
+	white-space: normal;
 }
 .assemblyGridChild {
 	/* width: 100%; */
