@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-import WaitCommand from './Commands/WaitCommand';
+import WaitCommandInstructions from './Commands/WaitCommandInstructions';
+import CommandTemplate from './Commands/CommandTemplate';
 
 const MicroCommandsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 console.log(nodeInfo)
@@ -126,8 +127,17 @@ switch(nodeInfo.name) {
 		break;
 	}
 	case 'waitCommand' : {
+		// return (
+		// 	<WaitCommand
+		// 	nodeInfo = {nodeInfo}
+		// 	activeNodeArray = {activeNodeArray}
+		// 	aiAndScripts = {aiAndScripts}
+		// 	setAiAndScripts = {setAiAndScripts}
+		// 	botNumberSelected = {botNumberSelected}
+		// 	/>
+		// )
 		return (
-			<WaitCommand
+			<WaitCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
 			aiAndScripts = {aiAndScripts}

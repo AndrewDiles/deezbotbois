@@ -11,17 +11,12 @@ import {replaceScript} from '../../../Redux/actions';
 const AddIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionName, index, setHelpNeeded, activeNodeArray, setActiveNodeArray }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
-	// const newNode = new DecisionObject(decisionName, aiAndScripts.viewing.length, [], [])
-	// console.log({newNode})
-	// console.log(decisionName)
 	function handleClick() {
 		if (aiAndScripts.insertion === false) {
 			setHelpNeeded(true)
 		}
 		else {
 			let newNode = new DecisionObject(decisionName, aiAndScripts.viewing.length, [], []);
-			// dispatch reducer to update script object
-			// reset aiAndScripts.insertion
 			console.log('newNode to be added:', newNode);
 			let newScript = [...userInfo.botBuilds[botNumberSelected].script];
 			let targetNodeArray = getNodeArray(newScript, aiAndScripts.viewing );
@@ -29,16 +24,13 @@ const AddIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionNam
 			targetNodeArray.push(newNode);
 			dispatch(replaceScript(botNumberSelected, newScript))
 			setAiAndScripts({insertion:false, viewing: aiAndScripts.viewing})
-			// console.log('aiAndScripts.insertion',aiAndScripts.insertion[aiAndScripts.insertion.length-1])
-			// let newActiveNodeArray = activeNodeArray.splice(aiAndScripts.insertion[aiAndScripts.insertion.length-1].index, 0, newNode);
-			// console.log(newActiveNodeArray);
 		}
 	}
   return (
     <StyledIcon
 		icon = {plus}
 		padding = '5'
-		disabled = {aiAndScripts === null } //|| aiAndScripts.insertion === null}
+		disabled = {aiAndScripts === null }
 		handleClick = {handleClick}
 		/>
   )

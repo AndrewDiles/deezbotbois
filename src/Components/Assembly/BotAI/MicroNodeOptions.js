@@ -1,6 +1,6 @@
 import React from 'react';
 import MicroConditionsProvider from './MicroConditionsProvider';
-import MicroCommandsProvider from './MicroCommandsProvider';
+import CommandTemplate from './Commands/CommandTemplate';
 
 const MicroNodeOptions = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 
@@ -22,7 +22,7 @@ const MicroNodeOptions = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndS
 		botNumberSelected = {botNumberSelected}
 		/>
 	) : (
-		<MicroCommandsProvider
+		<CommandTemplate
 		nodeInfo = {nodeInfo.command}
 		activeNodeArray = {activeNodeArray}
 		aiAndScripts = {aiAndScripts}
