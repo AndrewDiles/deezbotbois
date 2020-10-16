@@ -13,8 +13,6 @@ import {iosTrash} from 'react-icons-kit/ionicons/iosTrash';
 import {replaceScript} from '../../../Redux/actions';
 import getNodeArray from '../../../Constants/scriptHelpers/getNodeArray';
 
-
-
 const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts, setDeleteActive, deleteActive }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;

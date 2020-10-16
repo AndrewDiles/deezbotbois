@@ -15,37 +15,37 @@ const AssemblyTabControl = ({ tabsDisplayed, setTabsDisplayed }) => {
 		<Wrapper>
 			<StyledButton
 			handleClick = {() => {tabToggler('model',tabsDisplayed,setTabsDisplayed)}}
-			fontSize = '12'
+			fontSize = '11'
 			>
 				{tabsDisplayed.model ? 'CLOSE MODEL' : 'OPEN MODEL'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('equipment',tabsDisplayed,setTabsDisplayed)}}
-			fontSize = '12'
+			fontSize = '11'
 			>
 				{tabsDisplayed.equipment ? 'CLOSE EQUIPMENT' : 'OPEN EQUIPMENT'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('attributes',tabsDisplayed,setTabsDisplayed)}}
-			fontSize = '12'
+			fontSize = '11'
 			>
 				{tabsDisplayed.attributes ? 'CLOSE ATTRIBUTES' : 'OPEN ATTRIBUTES'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('techTree',tabsDisplayed,setTabsDisplayed)}}
-			fontSize = '12'
+			fontSize = '11'
 			>
 				{tabsDisplayed.techTree ? 'CLOSE TECHTREE' : 'OPEN TECHTREE'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('ai',tabsDisplayed,setTabsDisplayed)}}
-			fontSize = '12'
+			fontSize = '11'
 			>
 				{tabsDisplayed.ai ? 'CLOSE AI.' : 'OPEN AI.'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('scripts',tabsDisplayed,setTabsDisplayed)}}
-			fontSize = '12'
+			fontSize = '11'
 			>
 				{tabsDisplayed.scripts ? 'CLOSE NODES' : 'OPEN NODES'}
 			</StyledButton>

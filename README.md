@@ -95,6 +95,7 @@ Intentions with the GUI include:
 
 - Include a link in the confirmation email that auto fills the confirmationCode
 
+- Correct box shadow on rotated buttons / icons so that they are all the same
 
 # Potential Improvements Met
 
@@ -140,27 +141,15 @@ Intentions with the GUI include:
 - move scan.  oppo: charge, melee attack, none, wait, restart
 - stay stationary and aim about
 
+- after being hit, see if last turn was a scan, if not scan or move (provided no auto-scanned hostile is detected)
+
+## Declared strategy names
+- stationary-ranged
+- forced-melee
+
 ### Icon Imports For Bot Assembly:
-import {plus} from 'react-icons-kit/icomoon/plus'
-
-import {tree} from 'react-icons-kit/icomoon/tree'
-
-import {android} from 'react-icons-kit/icomoon/android'
-
-import {newspaper} from 'react-icons-kit/icomoon/newspaper'
-
-import {calculator} from 'react-icons-kit/icomoon/calculator'
-
-import {listNumbered} from 'react-icons-kit/icomoon/listNumbered'
-
-import {moveUp} from 'react-icons-kit/icomoon/moveUp'
-
-import {moveDown} from 'react-icons-kit/icomoon/moveDown'
-
-import {insertTemplate} from 'react-icons-kit/icomoon/insertTemplate'
-
-import {insertTemplate} from 'react-icons-kit/icomoon/insertTemplate'
-
 import {copy} from 'react-icons-kit/icomoon/copy'
 
 import {eye} from 'react-icons-kit/icomoon/eye'
+
+import {alertTriangle} from 'react-icons-kit/feather/alertTriangle';

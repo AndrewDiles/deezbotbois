@@ -16,7 +16,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					adj to
 				</>
 			)
-			break;
 		}
 		case 'aimResults' : {
 			return (
@@ -24,7 +23,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					aims res
 				</>
 			)
-			break;
 		}
 		case 'attribute' : {
 			return (
@@ -32,7 +30,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					attr
 				</>
 			)
-			break;
 		}
 		case 'consecutiveAims' : {
 			return (
@@ -40,7 +37,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					cons aims
 				</>
 			)
-			break;
 		}
 		case 'damageTaken' : {
 			return (
@@ -48,7 +44,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					damage taken
 				</>
 			)
-			break;
 		}
 		case 'distanceToTarget' : {
 			return (
@@ -56,7 +51,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					dist 2 tar
 				</>
 			)
-			break;
 		}
 		case 'obstructionToTarget' : {
 			return (
@@ -64,7 +58,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					obstr 2 tar
 				</>
 			)
-			break;
 		}
 		case 'previousCommand' : {
 			return (
@@ -72,7 +65,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					prev co
 				</>
 			)
-			break;
 		}
 		case 'scanResults' : {
 			return (
@@ -80,7 +72,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					scan res
 				</>
 			)
-			break;
 		}
 		case 'sufficientEnergy' : {
 			return (
@@ -88,7 +79,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					suff en
 				</>
 			)
-			break;
 		}
 		case 'weaponLoaded' : {
 			return (
@@ -96,7 +86,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 					wep loaded
 				</>
 			)
-			break;
 		}
 		
 		default: {

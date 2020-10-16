@@ -1,27 +1,19 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
-
-
+import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 
 import Depth from './Depth';
 import PreviousCondition from './PreviousCondition';
 import NodeSelector from './NodeSelector';
 import NodeDisplay from './NodeDisplay';
-// import {moveUp} from 'react-icons-kit/icomoon/moveUp'
-// import {moveDown} from 'react-icons-kit/icomoon/moveDown'
-// import { findAllByTestId } from '@testing-library/react';
+import ErrorTitle from './ErrorTitle'; 
 
-// import {alertTriangle} from 'react-icons-kit/feather/alertTriangle';
-import {chevronUp} from 'react-icons-kit/feather/chevronUp';
-import {chevronDown} from 'react-icons-kit/feather/chevronDown';
-import {cornerDownLeft as insertionPointIcon} from 'react-icons-kit/feather/cornerDownLeft';
-import {trash2} from 'react-icons-kit/feather/trash2';
+// import { sampleAi } from '../../../Constants/botAis/sampleAi';
 
-import { sampleAi } from '../../../Constants/botAis/sampleAi';
-
-const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray }) => {
+const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray, aiErrors }) => {
 	const userInfo = useSelector((state) => state.userInfo);
+	const colors = useSelector(getThemeColors);
 	const [deleteActive, setDeleteActive] = React.useState(false);
 	// const botInfo = userInfo.botBuilds;
 
@@ -55,11 +47,19 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 
   return (
     <Wrapper
-		className = "assemblyGridChild" 
+		className = "assemblyGridChild"
+		aiErrors = {aiErrors.length>0}
 		>
-			<h3>
-				AI
-			</h3>
+			{aiErrors.length > 0 ? (
+				<ErrorTitle 
+				aiErrors = {aiErrors}
+				/>
+			) : (
+				<h3>
+					AI
+				</h3>
+			)}
+			
 			<Depth
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
@@ -75,10 +75,6 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 			activeNodeArray = {activeNodeArray}
 			setDeleteActive = {setDeleteActive}
 			/>
-			{/* <h5>
-				NODE NUMBER: {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index}
-			</h5> */}
-			{/* Previous Decision Made Display */}
 			<NodeDisplay
 			botNumberSelected = {botNumberSelected}
 			aiAndScripts = {aiAndScripts}
@@ -93,4 +89,5 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 export default BotAI;
 const Wrapper = styled.div`
 	width: 250px;
+	background: ${props => props.aiErrors ? 'rgba(255, 0, 0, 0.2)' : ''};
 `

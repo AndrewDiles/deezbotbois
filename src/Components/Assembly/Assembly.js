@@ -38,9 +38,8 @@ const Assembly = () => {
 	const [aiAndScripts, setAiAndScripts] = useState({insertion: false, viewing: []});
 	const colors = useSelector(getThemeColors);
 	const botInfo = userInfo.botBuilds;
-	const [activeNodeArray, setActiveNodeArray] = React.useState([]); // move this up a level because scripts needs it in the plus button?
-
-	
+	const [activeNodeArray, setActiveNodeArray] = useState([]);
+	const [aiErrors, setAiErrors] = useState([]);
 
 	useEffect(() => {
 		if (userInfo.botBuilds.length > 0) setTabsDisplayed({model: true, equipment: true, attributes: true, techTree: true, ai: true, scripts: true, comprehensive: false});
@@ -220,6 +219,7 @@ const Assembly = () => {
 						setAiAndScripts = {setAiAndScripts}
 						activeNodeArray = {activeNodeArray}
 						setActiveNodeArray = {setActiveNodeArray}
+						aiErrors = {aiErrors}
 						/>
 					}
 					{tabsDisplayed.scripts &&

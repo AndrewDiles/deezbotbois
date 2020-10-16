@@ -6,14 +6,14 @@ import InstructionsOrInformation from '../InstructionOrInformation';
 import commandDetails from '../../../../Constants/commandDetails';
 import { commandInfo } from '../../../../Constants/attributes';
 
-const WaitCommandInstructions = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const MeleeAttackCommandInstructions = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
 			<span>
-				THIS COMMAND DOES NOT REQUIRE ANY INSTRUCTIONS
+				11attack instructions to come
 			</span>
 		</div>
 	)
 }
-export default WaitCommandInstructions;
+export default MeleeAttackCommandInstructions;

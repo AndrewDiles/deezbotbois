@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
+import StyledIcon from '../../../StyledIcon/StyledIcon';
+import {power as cost} from 'react-icons-kit/icomoon/power'
 import StyledButton from '../../../StyledButton/StyledButton';
 import InstructionsOrInformation from '../InstructionOrInformation';
 import commandDetails from '../../../../Constants/commandDetails';
@@ -30,6 +32,24 @@ const CommandTemplate = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndSc
 			/>
 			{displayInfo ? (
 				<div className = 'commandContents infoContents'>
+					{commandDetails[nodeInfo.name].cost !== undefined &&
+						<span>
+							{typeof commandDetails[nodeInfo.name].cost === 'number' ? (
+								<span style={{fontSize: "2em"}}>
+									<StyledIcon
+									icon={cost}
+									padding="5"
+									hovered={1}
+									keepcursor={1}
+									/>
+									{commandDetails[nodeInfo.name].cost}
+								</span>
+							) : (
+								commandDetails[nodeInfo.name].cost
+							)}
+						</span>
+					}
+					<br/>
 					<span>
 						{commandDetails[nodeInfo.name].affect}
 					</span>
