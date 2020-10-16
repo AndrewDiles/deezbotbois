@@ -153,3 +153,16 @@ import {copy} from 'react-icons-kit/icomoon/copy'
 import {eye} from 'react-icons-kit/icomoon/eye'
 
 import {alertTriangle} from 'react-icons-kit/feather/alertTriangle';
+
+
+1GUARD
+2Melee Attacks / Ranged Attacks / 3Aim and Shoot
+411Attacks
+5RAM / Charge
+6`Movement / test for collisions (not a command)`
+7`Test for projectile / cell damage (not commands)`
+8Aim
+9Scan / Auto-Scan (not a command)
+10AUTO-REPAIR, RECHARGE (not commands)
+internal bot updates: reload, repair from nano-bots
+Internal cleanup: refresh collision potentials, remove destroyed bots from lists. Test for game win / loss conditions

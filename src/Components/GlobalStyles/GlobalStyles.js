@@ -171,6 +171,10 @@ html {
 	border-radius: 5px;
   border: 1px solid transparent;
 }
+.noBullets li {
+	list-style-type: none;
+}
+
 .techBranchHeight27 {
 	height: 27px;
 	width: 10px;

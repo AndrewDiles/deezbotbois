@@ -5,7 +5,10 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import BattleGrid from '../Levels/BattleGrid';
 import GridPopulator from '../Levels/GridPopulator';
-import StyledButton from '../StyledButton/StyledButton'
+import StyledButton from '../StyledButton/StyledButton';
+
+// import {ic_grid_on} from 'react-icons-kit/md/ic_grid_on';
+// import {ic_grid_off} from 'react-icons-kit/md/ic_grid_off'
 
 import { 
 	pathToCell,

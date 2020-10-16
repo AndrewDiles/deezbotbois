@@ -15,57 +15,87 @@ const Rules = () => {
 		profileTab = {settings.profileTab}
 		colors = {colors}
 		>
-      A lot of rules will go here.
-			<br/>
-			Ranging from:
-			<br/>
-			- The nature of the game
-			<br/>
-			- The order of resolution of action types / bot priority cycling:
-			<ol>
-				<li>
-					GUARD
-				</li>
-				<li>
-					Melee Attacks / Ranged Attacks / Aim and Shoot
-				</li>
-				<li>
-					11Attacks
-				</li>
-				<li>
-					RAM / Charge
-				</li>
-				<li>
-					`Movement / test for collisions (not a command)`
-				</li>
-				<li>
-					`Test for projectile / cell damage (not commands)`
-				</li>
-				<li>
-					Aim
-				</li>
-				<li>
-					Scan / Auto-Scan (not a command)
-				</li>
-				<li>
-					AUTO-REPAIR, RECHARGE (not commands)
-				</li>
-				<li>
-					internal bot updates: reload, repair from nano-bots
-				</li>
-				<li>
-					Internal cleanup: refresh collision potentials, remove destroyed bots from lists.  Test for game win / loss conditions
-				</li>
-			</ol>
-			<br/>
-			- Equipment, accessories, skill tree planning
-			<br/>
-			- The script based protocols, Energy costs cannot be reduced to less than 1
-			<br/>
-			- Attributes of bots
-			<br/>
-			- Damage formulas: Damage cannot be reduced to less than 1
+			<h1>
+				Rules and tabs for more information will reside on this endpoint
+			</h1>
+			<Row>
+				- The order of resolution of action types / bot priority cycling:
+			</Row>
+			
+			<ListContainer>
+				<ul className = 'noBullets'>
+					<li>
+						0. WAIT
+					</li>
+					<li>
+						1. GUARD
+					</li>
+					<li>
+						2. COUNTER
+					</li>
+					<li>
+						3. REDIRECT
+					</li>
+					<li>
+						11. MELEE-ATTACK; RANGED-ATTACK; AIM-AND-ATTACK
+					</li>
+					<li>
+						13. 11ATTACK
+					</li>
+					<li>
+						15. RAM; CHARGE
+					</li>
+					<li>
+						17. MOVE; *collision_tests
+					</li>
+					<li>
+						20. *burn; *cell_damage
+					</li>
+					<li>
+						21. AIM
+					</li>
+					<li>
+						22. SCAN
+					</li>
+					<li>
+						23. REPAIR
+					</li>
+					<li>
+						24. RECHARGE
+					</li>
+					<li>
+						32. *auto_scan 
+					</li>
+					<li>
+						33. *auto_repair
+					</li>
+					<li>
+						34. *auto_recharge
+					</li>
+					<li>
+						35. *reload
+					</li>
+					<li>
+						40. *refresh_collision_potentials
+					</li>
+					<li>
+						41. *remove_destroyed_bots
+					</li>
+					<li>
+						42. *test_game_end
+					</li>
 
+				</ul>
+			</ListContainer>
+			<Row>
+				- Equipment, accessories, skill tree planning
+				<br/>
+				- The script based protocols, Energy costs cannot be reduced to less than 1
+				<br/>
+				- Attributes of bots
+				<br/>
+				- Damage formulas: Damage cannot be reduced to less than 1
+			</Row>
     </Wrapper>
   )
 }
@@ -82,16 +112,30 @@ const Wrapper = styled.div`
 	height: 100%;
 	overflow: auto;
 	display : flex;
-	flex-direction: row;
-	justify-content: center;
+	flex-direction: column;
+	overflow-y: auto;
 	align-content: center;
 	align-items: center;
 	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
-	/* display : flex;
+	
+`
+const Row = styled.div`
+	margin: 20px;
+	width: 100%;
+	display : flex;
 	flex-direction: row;
 	justify-content: center;
 	align-content: center;
+	align-items: center;
+`
+const ListContainer = styled.div`
+	margin: 20px;
+	width: 100%;
+	/* display : flex;
+	flex-direction: row;
+	justify-content: flex-start; */
+	/* align-content: center;
 	align-items: center; */
 `

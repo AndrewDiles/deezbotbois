@@ -1,8 +1,9 @@
 const commandDetails = {
 	aimAndAttackCommand: {
 		cost: 'The energy cost is the sum of the costs of an AIM command + a RANGED-ATTACK command.',
+		speed: 11,
 		affect: "The execution of this command will cause the executor to point a ranged weapon and fire it.  Using this command, a weapon may be pointed: by a rotational increment, to a set angle, or at a scanned target.",
-		generalUse: 'This is a tick-efficient command that combinds two commands',
+		generalUse: 'This is a tick-efficient command that combinds two commands.',
 		useWhen: [
 			'has detected the presence of a hostile more than one cell away',
 			'is not both adjacent to a hostile with a melee weapon equipped',
@@ -14,8 +15,9 @@ const commandDetails = {
 	},
 	aimCommand: {
 		cost: "The energy cost depends on the bot's model, equipment and unlocked technologies.",
+		speed: 21,
 		affect: "The execution of this command will cause the executor to point a ranged weapon.  Using this command, a weapon may be pointed by a rotational increment or to a set angle.",
-		generalUse: 'This command allows for incremental sweeping for hostiles at a low energy cost',
+		generalUse: 'This command allows for incremental sweeping for hostiles at a low energy cost.',
 		useWhen: [
 			'has not detected the presence of any hostiles',
 			'has not taken damage in the previous tick',
@@ -27,6 +29,7 @@ const commandDetails = {
 	},
 	chargeCommand: {
 		cost: 'The energy cost is the sum of the costs of a MOVE command + a MELEE-ATTACK command.',
+		speed: 15,
 		affect: "The execution of this command will cause the executor to move adjacent to a target and make a MELEE-ATTACK.",
 		generalUse: 'With enough Scan Distance and Move Distance, a bot desinged for melee conflicts can enter into an effective loop of SCAN and CHARGE or SCAN and MELEE-ATTACK once they locate a hostile.',
 		useWhen: [
@@ -38,9 +41,10 @@ const commandDetails = {
 		]
 	},
 	counterCommand: {
-		cost: 'The same cost as a MELEE-ATTACK with the selected equipment',
-		affect: "For the remainder of the tick, the executor of this command will have their Shield and Armor multiplied twofold against incoming MELEE-ATTACKs, and, upon such an attack, the executor will attack the agressor with a MELEE-ATTACK.",
-		generalUse: 'Great to use repeatdely when an adjacent hostile unit initiated a conflict',
+		cost: 'The same cost as a MELEE-ATTACK with the selected equipment.',
+		speed: 2,
+		affect: "For the remainder of the tick, the executor of this command will have their Armor and Shield multiplied twofold against incoming MELEE-ATTACKs, and, upon such an attack, the executor will attack the agressor with a MELEE-ATTACK.",
+		generalUse: 'Great to use repeatdely when an adjacent hostile unit initiated a conflict.',
 		useWhen: [
 			'has detected the presence of a hostile exactly one cell away',
 			'has not began the conflict'
@@ -50,31 +54,106 @@ const commandDetails = {
 		]
 	},
 	elevenAttackCommand: {
-
+		cost: 'Twice the cost of a MELEE-ATTACK or RANGED-ATTACK with the selected weapon.',
+		speed: 13,
+		affect: "The executor of this command will perform an attack with an energy weapon that deals twice as much damage.",
+		generalUse: 'Best used as a source of burst damage when a hostile has been scanned.',
+		useWhen: [
+			'has detected the presence of a hostile',
+			'has a large amount of energy stored in their Capacitor'
+		],
+		instructionOptions: [
+			
+		]
 	},
 	guardCommand: {
-
+		cost: 7,
+		speed: 1,
+		affect: "The executor of this command will have their Armor and Shield multiplied trifold for the remainder of the tick.",
+		generalUse: 'Best used as a source of burst damage when a hostile has been scanned.',
+		useWhen: [
+			'has detected the presence of a hostile',
+			'has a large amount of energy stored in their Capacitor'
+		],
+		instructionOptions: [
+			
+		]
 	},
 	meleeAttackCommand: {
-
+		cost: ".",
+		speed: 11,
+		affect: ".",
+		generalUse: ".",
+		useWhen: [
+			'',
+		],
+		instructionOptions: [
+			
+		]
 	},
 	moveCommand: {
-
+		cost: ".",
+		speed: 17,
+		affect: ".",
+		generalUse: ".",
+		useWhen: [
+			'',
+		],
+		instructionOptions: [
+			
+		]
 	},
 	ramCommand: {
-
+		cost: ".",
+		speed: 15,
+		affect: ".",
+		generalUse: ".",
+		useWhen: [
+			'',
+		],
+		instructionOptions: [
+			
+		]
 	},
 	rangedAttackCommand: {
-
+		cost: ".",
+		speed: 11,
+		affect: ".",
+		generalUse: ".",
+		useWhen: [
+			'',
+		],
+		instructionOptions: [
+			
+		]
 	},
 	rechargeCommand: {
-
+		cost: ".",
+		speed: 24,
+		affect: ".",
+		generalUse: ".",
+		useWhen: [
+			'',
+		],
+		instructionOptions: [
+			
+		]
 	},
 	redirectCommand: {
-
+		cost: ".",
+		speed: 3,
+		affect: ".",
+		generalUse: ".",
+		useWhen: [
+			'',
+		],
+		instructionOptions: [
+			
+		]
 	},
 	repairCommand: {
 		cost: 12,
+		speed: 23,
 		affect: "The execution of this command will increase the executor's current Durability by 1.  This command cannot increase the current Durability to a value greater than the executor's maximum Durability.",
 		generalUse: 'When it is safe to do so, repairing damage is an excellent form of preparation for the next conflict.',
 		useWhen: [
@@ -87,6 +166,7 @@ const commandDetails = {
 	},
 	scanCommand: {
 		cost: "The energy cost depends on the bot's model, equipment and unlocked technologies.",
+		speed: 22,
 		affect: "The execution of this command will provide the executor with the contents, be it wall, hostile or friendly, of each cell up to a distance of the executor's Scan Distance from the executor.",
 		generalUse: 'This is the primary means through which bots discover where other bots are positioned.',
 		useWhen: [
@@ -100,6 +180,7 @@ const commandDetails = {
 	},
 	waitCommand: {
 		cost: 0,
+		speed: 0,
 		affect: 'The execution of this command will cause the executor to perform no action.',
 		generalUse: 'This can be useful as a means of regathering energy.',
 		useWhen: [
