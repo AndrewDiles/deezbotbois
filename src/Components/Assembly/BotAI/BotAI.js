@@ -11,7 +11,7 @@ import ErrorTitle from './ErrorTitle';
 
 // import { sampleAi } from '../../../Constants/botAis/sampleAi';
 
-const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray, aiErrors }) => {
+const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setActiveNodeArray, aiErrors, attributes }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const colors = useSelector(getThemeColors);
 	const [deleteActive, setDeleteActive] = React.useState(false);
@@ -80,8 +80,10 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			setDeleteActive = {setDeleteActive}
 			deleteActive = {deleteActive}
+			attributes = {attributes}
 			/>
     </Wrapper>
   )

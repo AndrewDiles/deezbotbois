@@ -31,7 +31,8 @@ const Assembly = () => {
 	const [botNumberSelected, setBotNumberSelected] = useState(0);
 	const [equipmentStaging, setEquipmentStaging] = useState({from: null, to: null})
 	const [tabsDisplayed, setTabsDisplayed] = useState({model: true, equipment: false, attributes: false, techTree: false, ai: false, scripts: false, comprehensive: false});
-	const [comprehensiveTabDisplayed, setComprehensiveTabDisplayed] = useState(false);
+	const [masterAttributesTabDisplayed, setMasterAttributesTabDisplayed] = useState(false);
+	const [aiNodeTreeTabDisplayed, setAiNodeTreeTabDisplayed] = useState(false);
 	const [tabsOpened, setTabsOpened] = useState(1);
 	const [attributes, setAttributes] = useState({});
 	const initialAiAndScriptsElements = [ { type:'head', index: 0 } ];
@@ -176,8 +177,10 @@ const Assembly = () => {
 					/>
 					<ComprehensiveTabControl
 					attributes = {attributes}
-					comprehensiveTabDisplayed = {comprehensiveTabDisplayed}
-					setComprehensiveTabDisplayed = {setComprehensiveTabDisplayed}
+					masterAttributesTabDisplayed = {masterAttributesTabDisplayed}
+					setMasterAttributesTabDisplayed = {setMasterAttributesTabDisplayed}
+					aiNodeTreeTabDisplayed = {aiNodeTreeTabDisplayed}
+					setAiNodeTreeTabDisplayed = {setAiNodeTreeTabDisplayed}
 					/>
 					<br/>
 				</>
@@ -220,6 +223,7 @@ const Assembly = () => {
 						activeNodeArray = {activeNodeArray}
 						setActiveNodeArray = {setActiveNodeArray}
 						aiErrors = {aiErrors}
+						attributes = {attributes}
 						/>
 					}
 					{tabsDisplayed.scripts &&
@@ -234,7 +238,7 @@ const Assembly = () => {
 					}
       	</AssemblyGrid>
 			}
-			{comprehensiveTabDisplayed && 
+			{masterAttributesTabDisplayed && 
 				<ComprehensiveAttributes
 				attributes = {attributes}
 				/>

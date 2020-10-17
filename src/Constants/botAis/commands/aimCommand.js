@@ -2,7 +2,7 @@ class AimCommand {
   constructor() {
 		this.name = 'aimCommand';
 		this.instructions = {
-			angleToModify: 'arm1Angle',
+			weapon: 'arm1',
 			rotating: true,
 			rotation: 15,
 			// pointing: false,
@@ -11,8 +11,7 @@ class AimCommand {
 	}
 	// armSlot can be: arm1, arm2, arm3. Should only be a ranged weapon
 	setArm(armSlot) {
-		const armXAngle = `${armSlot}Angle`;
-		this.instructions.angleToModify = armXAngle;
+		this.instructions.weapon = armSlot;
 	}
 	activateRotating() {
 		this.instructions.rotating = true;

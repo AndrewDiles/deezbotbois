@@ -3,10 +3,11 @@ import StyledButton from '../../StyledButton/StyledButton';
 
 const InstructionsOrInformation = ({ setDisplayInfo, displayInfo }) => {
 	return (
-		<div className ='aiButtonRow'>
+		<div className ='aiButtonRow centeredFlex'>
 			<StyledButton
 			handleClick = {()=>setDisplayInfo(false)}
 			selected = {displayInfo === false}
+			width = {120}
 			fontSize = '9'
 			>
 				INSTRUCTIONS
@@ -14,6 +15,7 @@ const InstructionsOrInformation = ({ setDisplayInfo, displayInfo }) => {
 			<StyledButton
 			handleClick = {()=>setDisplayInfo(true)}
 			selected = {displayInfo === true}
+			width = {120}
 			fontSize = '9'
 			>
 				INFORMATION

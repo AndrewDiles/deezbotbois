@@ -54,14 +54,12 @@ const AssemblyTabControl = ({ tabsDisplayed, setTabsDisplayed }) => {
 }
 export default AssemblyTabControl;
 const Wrapper = styled.div`
-	height: 40px;
 	width: 750px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	@media screen and (max-width: 1050px) {
 		flex-wrap: wrap;
-		height: 120px;
 		width: 250px
 	}
 `

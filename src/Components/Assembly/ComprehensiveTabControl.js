@@ -2,23 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 import StyledButton from '../StyledButton/StyledButton';
 
-const ComprehensiveTabControl = ({ comprehensiveTabDisplayed, setComprehensiveTabDisplayed }) => {
+const ComprehensiveTabControl = ({ masterAttributesTabDisplayed, setMasterAttributesTabDisplayed, aiNodeTreeTabDisplayed, setAiNodeTreeTabDisplayed }) => {
 	return (
 		<Wrapper>
-			<StyledButton
-			handleClick = {() => {setComprehensiveTabDisplayed(!comprehensiveTabDisplayed)}}
-			fontSize = '12'
-			width = {250}
-			>
-				{comprehensiveTabDisplayed ? 'CLOSE COMPREHESIVE ATTRIBUTES' : 'VIEW COMPREHESIVE ATTRIBUTES'}
-			</StyledButton>
+			<ButtonWrapper>
+				<StyledButton
+				handleClick = {() => {setMasterAttributesTabDisplayed(!masterAttributesTabDisplayed)}}
+				fontSize = '12'
+				width = {250}
+				>
+					{masterAttributesTabDisplayed ? 'CLOSE COMPREHESIVE ATTRIBUTES' : 'VIEW COMPREHESIVE ATTRIBUTES'}
+				</StyledButton>
+			</ButtonWrapper>
+			<ButtonWrapper>
+				<StyledButton
+				handleClick = {() => {setAiNodeTreeTabDisplayed(!aiNodeTreeTabDisplayed)}}
+				fontSize = '12'
+				width = {250}
+				>
+					{aiNodeTreeTabDisplayed ? 'CLOSE AI DECISION-NODE TREE' : 'VIEW AI DECISION-NODE TREE'}
+				</StyledButton>
+			</ButtonWrapper>
 		</Wrapper>
 	)
 }
 export default ComprehensiveTabControl;
 const Wrapper = styled.div`
-	height: 40px;
-	width: 750px;
+	height: 120px;
+	width: 250px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -28,26 +39,7 @@ const Wrapper = styled.div`
 		width: 250px
 	}
 `
-// const Wrapper = styled.div`
-	/* display: grid;
-	grid-gap: 20px;
-	grid-template-columns: repeat(6, 125px);
-	width: 1550px;
-	margin-left: auto;
-  margin-right: auto;
-	@media screen and 
-	(max-width: ${props => props.navLocation === 'top' ? '1600px' : '1730px'}) {
-		width: 1030px;
-		grid-template-columns: repeat(2, 125px);
-  }
-	@media screen and 
-	(max-width: ${props => props.navLocation === 'top' ? '1150px' : '1280px'}) {
-    width: 510px;
-		grid-template-columns: repeat(2, 1fr);
-  }
-	@media screen and
-	(max-width: ${props => props.navLocation === 'top' ? '700px' : '830px'}) {
-    width: 250px;
-		grid-template-columns: 1fr;
-  } */
-// `
+const ButtonWrapper = styled.div`
+	height: 40px;
+	width: 250px;
+`

@@ -81,11 +81,11 @@ html {
 	font-size: 1.3em;
 	white-space: normal;
 	border-top: 1px solid rgba(0,0,0,0.24);
+	padding: 5px 0;
 }
 .aiButtonRow {
 	height: 40px;
 	width: 100%;
-	display:flex;
 }
 .centeredInput {
   display: block;
@@ -111,18 +111,19 @@ html {
 	align-items: center;
 	text-align: center;
 	line-height: 0;
+	overflow-y: auto;
 }
 .commandContents {
 	height: 370px;
 	width: 100%;
-	overflow-y: auto;
+	/* overflow-y: auto; */
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
 	align-items: center;
 	text-align: center;
 	white-space: normal;
-	padding: 10px 5px;
+	padding: 20px 0;
 }
 .infoContents {
 	font-size: 0.8em;

@@ -5,7 +5,6 @@ import {loop} from 'react-icons-kit/ionicons/loop'
 import DecisionObject from '../../../Constants/botAis/optionCreator.js';
 import getNodeArray from '../../../Constants/scriptHelpers/getNodeArray';
 import {replaceScript} from '../../../Redux/actions';
-// import {loop as swap} from 'react-icons-kit/icomoon/loop'
 
 const SwapIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionName, index, setHelpNeeded, activeNodeArray, setActiveNodeArray, setLosingNestedNodes }) => {
 	const userInfo = useSelector((state) => state.userInfo);

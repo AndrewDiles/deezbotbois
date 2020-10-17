@@ -12,7 +12,7 @@ import MoveAttackCommandInstructions from './Commands/MoveAttackCommandInstructi
 import RamCommandInstructions from './Commands/RamCommandInstructions';
 import RangedAttackCommandInstructions from './Commands/RangedAttackCommandInstructions';
 
-const MicroCommandsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const MicroCommandsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 // console.log(nodeInfo)
 if (!nodeInfo || !nodeInfo.name) {
 	return (
@@ -27,6 +27,7 @@ switch(nodeInfo.name) {
 			<AimAndAttackCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
@@ -38,6 +39,7 @@ switch(nodeInfo.name) {
 			<AimCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
@@ -49,6 +51,7 @@ switch(nodeInfo.name) {
 			<ChargeCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
@@ -60,6 +63,7 @@ switch(nodeInfo.name) {
 			<CounterCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
@@ -71,6 +75,7 @@ switch(nodeInfo.name) {
 			<ElevenAttackCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
@@ -87,6 +92,7 @@ switch(nodeInfo.name) {
 			<MeleeAttackCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
@@ -98,6 +104,7 @@ switch(nodeInfo.name) {
 			<MoveAttackCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
@@ -109,6 +116,7 @@ switch(nodeInfo.name) {
 			<RamCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
@@ -120,6 +128,7 @@ switch(nodeInfo.name) {
 			<RangedAttackCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}

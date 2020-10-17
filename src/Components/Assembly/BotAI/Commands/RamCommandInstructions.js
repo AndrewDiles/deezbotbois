@@ -6,7 +6,7 @@ import InstructionsOrInformation from '../InstructionOrInformation';
 import commandDetails from '../../../../Constants/commandDetails';
 import { commandInfo } from '../../../../Constants/attributes';
 
-const RamCommandInstructions = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const RamCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>

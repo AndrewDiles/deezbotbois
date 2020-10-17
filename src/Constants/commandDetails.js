@@ -50,7 +50,7 @@ const commandDetails = {
 			'has not began the conflict'
 		],
 		instructionOptions: [
-			
+			'Required for execution: A selected equipped melee weapon'
 		]
 	},
 	elevenAttackCommand: {

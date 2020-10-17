@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import MacroNodeOptions from './MacroNodeOptions';
 import MicroNodeOptions from './MicroNodeOptions';
 
-const Node = ({ activeNodeArray, nodeInfo, botNumberSelected, aiAndScripts, setAiAndScripts, setDeleteActive, deleteActive }) => {
+const Node = ({ activeNodeArray, setActiveNodeArray, nodeInfo, botNumberSelected, aiAndScripts, setAiAndScripts, setDeleteActive, deleteActive, attributes }) => {
 	// console.log({nodeInfo})
 	// console.log(nodeInfo.condition.name)
   return (
@@ -21,9 +21,11 @@ const Node = ({ activeNodeArray, nodeInfo, botNumberSelected, aiAndScripts, setA
 				<MicroNodeOptions
 				nodeInfo = {nodeInfo}
 				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
 				setAiAndScripts = {setAiAndScripts}
 				botNumberSelected = {botNumberSelected}
+				attributes = {attributes}
 				/>
 			}
 			

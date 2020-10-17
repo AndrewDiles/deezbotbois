@@ -6,7 +6,7 @@ import InstructionsOrInformation from '../InstructionOrInformation';
 import commandDetails from '../../../../Constants/commandDetails';
 import { commandInfo } from '../../../../Constants/attributes';
 
-const MeleeAttackCommandInstructions = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const MeleeAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
