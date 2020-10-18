@@ -8,11 +8,11 @@ import ChargeCommandInstructions from './Commands/ChargeCommandInstructions';
 import CounterCommandInstructions from './Commands/CounterCommandInstructions';
 import ElevenAttackCommandInstructions from './Commands/ElevenAttackCommandInstructions';
 import MeleeAttackCommandInstructions from './Commands/MeleeAttackCommandInstructions';
-import MoveAttackCommandInstructions from './Commands/MoveAttackCommandInstructions';
+import MoveCommandInstructions from './Commands/MoveCommandInstructions';
 import RamCommandInstructions from './Commands/RamCommandInstructions';
 import RangedAttackCommandInstructions from './Commands/RangedAttackCommandInstructions';
 
-const MicroCommandsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const MicroCommandsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 // console.log(nodeInfo)
 if (!nodeInfo || !nodeInfo.name) {
 	return (
@@ -29,7 +29,6 @@ switch(nodeInfo.name) {
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 		)
@@ -41,7 +40,6 @@ switch(nodeInfo.name) {
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 		)
@@ -53,7 +51,6 @@ switch(nodeInfo.name) {
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 		)
@@ -65,7 +62,6 @@ switch(nodeInfo.name) {
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 		)
@@ -77,7 +73,6 @@ switch(nodeInfo.name) {
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 		)
@@ -94,19 +89,17 @@ switch(nodeInfo.name) {
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 		)
 	}
 	case 'moveCommand' : {
 		return (
-			<MoveAttackCommandInstructions
+			<MoveCommandInstructions
 			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 		)
@@ -118,7 +111,6 @@ switch(nodeInfo.name) {
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 		)
@@ -130,7 +122,6 @@ switch(nodeInfo.name) {
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			setAiAndScripts = {setAiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 		)

@@ -6,12 +6,12 @@ import InstructionsOrInformation from '../InstructionOrInformation';
 import commandDetails from '../../../../Constants/commandDetails';
 import { commandInfo } from '../../../../Constants/attributes';
 
-const RamCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const RamCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
 			<span>
-				11attack instructions to come
+				ram instructions to come
 			</span>
 		</div>
 	)

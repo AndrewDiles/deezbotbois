@@ -1,18 +1,42 @@
 import React from 'react';
-import { useSelector } from "react-redux";
-import styled from 'styled-components';
-import StyledButton from '../../../StyledButton/StyledButton';
-import InstructionsOrInformation from '../InstructionOrInformation';
-import commandDetails from '../../../../Constants/commandDetails';
-import { commandInfo } from '../../../../Constants/attributes';
+import WeaponSelector from '../InstructionsComponents/WeaponSelector';
+import AttackDirectionSetter from '../InstructionsComponents/AttackDirectionSetter';
+import TargettingToggle from '../InstructionsComponents/TargettingToggle';
+import TargetSelector from '../InstructionsComponents/TargetSelector';
 
-const MeleeAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const MeleeAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
-			<span>
-				11attack instructions to come
-			</span>
+			<WeaponSelector
+			nodeInfo = {nodeInfo}
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			botNumberSelected = {botNumberSelected}
+			aiAndScripts = {aiAndScripts}
+			weaponType = 'Melee'
+			/>
+			<br/>
+			<TargettingToggle
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			aiAndScripts = {aiAndScripts}
+			/>
+			<br/>
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting ? (
+				<TargetSelector
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			):(
+				<AttackDirectionSetter
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			)}
+			
 		</div>
 	)
 }

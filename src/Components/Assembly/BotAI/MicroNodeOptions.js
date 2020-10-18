@@ -30,7 +30,6 @@ const MicroNodeOptions = ({ attributes, nodeInfo, activeNodeArray, setActiveNode
 		activeNodeArray = {activeNodeArray}
 		setActiveNodeArray = {setActiveNodeArray}
 		aiAndScripts = {aiAndScripts}
-		setAiAndScripts = {setAiAndScripts}
 		botNumberSelected = {botNumberSelected}
 		/>
 	)

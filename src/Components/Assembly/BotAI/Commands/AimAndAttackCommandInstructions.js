@@ -1,18 +1,51 @@
 import React from 'react';
-import { useSelector } from "react-redux";
-import styled from 'styled-components';
-import StyledButton from '../../../StyledButton/StyledButton';
-import InstructionsOrInformation from '../InstructionOrInformation';
-import commandDetails from '../../../../Constants/commandDetails';
-import { commandInfo } from '../../../../Constants/attributes';
+import WeaponSelector from '../InstructionsComponents/WeaponSelector';
+import RotatingOrTargettingToggles from '../InstructionsComponents/RotatingOrTargettingToggles';
+import RotationSetter from '../InstructionsComponents/RotationSetter';
+import TargetSelector from '../InstructionsComponents/TargetSelector';
+import DirectionSetter from '../InstructionsComponents/DirectionSetter';
 
-const AimAndAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const AimAndAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
-			<span>
-				aim and attack instructions to come
-			</span>
+			<WeaponSelector
+			nodeInfo = {nodeInfo}
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			botNumberSelected = {botNumberSelected}
+			aiAndScripts = {aiAndScripts}
+			weaponType = 'Ranged'
+			/>
+			<br/>
+			<RotatingOrTargettingToggles
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			aiAndScripts = {aiAndScripts}
+			/>
+			<br/>
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating &&
+				<RotationSetter
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting &&
+				<TargetSelector
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
+			{!activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating &&
+			!activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting &&
+				<DirectionSetter
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
 		</div>
 	)
 }

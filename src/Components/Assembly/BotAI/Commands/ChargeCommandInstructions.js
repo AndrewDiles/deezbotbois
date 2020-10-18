@@ -6,7 +6,7 @@ import InstructionsOrInformation from '../InstructionOrInformation';
 import commandDetails from '../../../../Constants/commandDetails';
 import { commandInfo } from '../../../../Constants/attributes';
 
-const ChargeCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const ChargeCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>

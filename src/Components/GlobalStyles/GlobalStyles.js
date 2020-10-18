@@ -116,7 +116,7 @@ html {
 .commandContents {
 	height: 370px;
 	width: 100%;
-	/* overflow-y: auto; */
+	overflow-y: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: start;

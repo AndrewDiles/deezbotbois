@@ -12,7 +12,7 @@ import { commandInfo } from '../../../../Constants/attributes';
 import MicroCommandsProvider from '../MicroCommandsProvider';
 import WarningIcons from '../WarningIcons';
 
-const CommandTemplate = ({ attributes, nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts, children }) => {
+const CommandTemplate = ({ attributes, nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, children }) => {
 	const colors = useSelector(getThemeColors);
 	const [displayInfo, setDisplayInfo] = React.useState(false)
 	const [commandNotAvailable, setCommandNotAvailable] = React.useState(false);
@@ -142,7 +142,6 @@ const CommandTemplate = ({ attributes, nodeInfo, activeNodeArray, setActiveNodeA
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
-				setAiAndScripts = {setAiAndScripts}
 				botNumberSelected = {botNumberSelected}
 				/>
 			)}

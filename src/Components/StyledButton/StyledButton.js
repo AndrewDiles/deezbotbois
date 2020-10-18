@@ -58,5 +58,6 @@ const ButtonStylings = styled.button`
   }
 	&:focus {
 		outline-color: ${props => !props.disabled && props.colors.hoveredText};
+		color: ${props => props.colors.hoveredText};
 	}
 `

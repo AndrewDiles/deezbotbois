@@ -393,6 +393,7 @@ const StyledInput = styled.input`
 	}
 	&:focus {
 		outline-color: ${props => !props.disabled && props.colors.hoveredText};
+		color: ${props => props.colors.hoveredText};
 	}
 `
 const RowDiv = styled.div`

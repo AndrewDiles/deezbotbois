@@ -67,6 +67,7 @@ Intentions with the GUI include:
 ### Solution: Set navlink's tabindex="-1"
 
 # Potential Improvements
+- Drill up from Instruction Components to remove passing of props they don't need
 - Clean up / refactor Ai deletion Component as it contains code duplication
 - Add a duplicate Bot in the Assembly
 - Disable ability to Save Bots in Assembly after creating a new bot
@@ -153,6 +154,9 @@ import {copy} from 'react-icons-kit/icomoon/copy'
 import {eye} from 'react-icons-kit/icomoon/eye'
 
 import {alertTriangle} from 'react-icons-kit/feather/alertTriangle';
+
+import {ic_my_location} from 'react-icons-kit/md/ic_my_location'
+aim and shoot?
 
 
 1GUARD
