@@ -5,7 +5,7 @@ class MoveCommand {
 			targetting: false,
 			targetNumber: 1,
 			intent: 'adjacent',
-			directions: 'R'
+			directions: ['R']
 		}
 	}
 	activateTargetting() {

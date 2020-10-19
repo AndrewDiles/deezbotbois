@@ -141,10 +141,12 @@ const Assembly = () => {
 						setSuccessMsg = {setSuccessMsg}
 						/>
 						<SaveBots
+						botNumberSelected = {botNumberSelected}
 						disabled = {JSON.stringify(botSnapshot) === JSON.stringify(botInfo)}
 						setErrorMsg = {setErrorMsg}
 						setSuccessMsg = {setSuccessMsg}
 						setBotSnapshot = {setBotSnapshot}
+						attributes = {attributes}
 						/>
 					</>
 				}

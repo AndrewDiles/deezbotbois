@@ -7,15 +7,17 @@ import {
 	communicationsSuccessful,
 	communicationsFailed,
 	receiveBotInfo,
+	replaceAttributes
 } from '../../Redux/actions';
 
-const SaveBots = ({ disabled, setErrorMsg, setSuccessMsg, setBotSnapshot }) => {
+const SaveBots = ({ botNumberSelected, disabled, setErrorMsg, setSuccessMsg, setBotSnapshot, attributes }) => {
 	const settings = useSelector((state) => state.settings);
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
 	const dispatch = useDispatch();
 	const handleSaveBots = () => {
 		dispatch(communicating());
+		dispatch(replaceAttributes(botNumberSelected, attributes));
 			fetch('server/updateBotBuilds', {
 				method: "POST",
     	  headers: {

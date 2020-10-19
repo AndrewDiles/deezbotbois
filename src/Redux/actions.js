@@ -133,4 +133,9 @@ export const replaceScript = (index, newScript) => ({
 	type: 'REPLACE_SCRIPT',
 	index: index,
 	newScript: newScript,
+});
+export const replaceAttributes = (index, newAttributes) => ({
+	type: 'REPLACE_ATTRIBUTES',
+	index: index,
+	newAttributes: newAttributes,
 })

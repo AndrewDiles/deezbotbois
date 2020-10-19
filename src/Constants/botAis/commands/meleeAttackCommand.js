@@ -5,7 +5,7 @@ class MeleeAttackCommand {
 			weapon: 'arm1',
 			targetting: true,
 			targetNumber: 1,
-			direction: 'R',
+			direction: 'R'
 		}
 	}
 	// armSlot can be: arm1, arm2, arm3. Should only be a melee weapon

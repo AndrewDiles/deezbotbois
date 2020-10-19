@@ -15,7 +15,7 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 	function setDirection(direction) {
 		let newActiveNodeArray = [...activeNodeArray];
 		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction = direction;
-		setActiveNodeArray(newActiveNodeArray)
+		setActiveNodeArray(newActiveNodeArray);
 	}
 
 	return (		

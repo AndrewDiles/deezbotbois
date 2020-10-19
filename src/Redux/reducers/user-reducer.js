@@ -158,6 +158,14 @@ export default function userInfo(
 					botBuilds : botBuilds,
 				}
 			}
+			case 'REPLACE_ATTRIBUTES' : {
+				let botBuilds = [...state.botBuilds];
+				botBuilds[action.index].attributes = action.newAttributes;
+				return {
+					...state,
+					botBuilds : botBuilds,
+				}
+			}
 			case 'RESET_TECH_TREE' : {
 				// needs to remove excess arms / weps... ?
 				let botBuilds = [...state.botBuilds];

@@ -19,6 +19,7 @@ const TargetSelector = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) =
 					{[1,2,3,4,5].map((number)=>{
 						return (
 							<StyledButton
+							key = {number}
 							handleClick = {()=>{setTarget(number)}}
 							selected = {number === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetNumber}
 							fontSize = {9}
