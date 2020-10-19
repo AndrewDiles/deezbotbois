@@ -3,7 +3,7 @@ import MovementIntentSetter from '../InstructionsComponents/MovementIntentSetter
 import TargetSelector from '../InstructionsComponents/TargetSelector';
 import PathEditor from '../InstructionsComponents/PathEditor';
 
-const MoveCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
+const MoveCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, attributes }) => {
 	const [emptyPath, setEmptyPath] = React.useState(false);
 
 	React.useEffect(()=>{
@@ -32,6 +32,7 @@ const MoveCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 				/>
 			) : (
 				<PathEditor
+				movementDistance = {attributes.MovementDistance}
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}

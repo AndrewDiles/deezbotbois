@@ -23,6 +23,7 @@ const StepRemoval = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyP
 				<StyledButton
 				handleClick = {() => {handleRemoveStep()}}
 				disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 0}
+				width = {120}
 				// fontSize = '11'
 				>
 					REMOVE A STEP
@@ -30,6 +31,7 @@ const StepRemoval = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyP
 				<StyledButton
 				handleClick = {() => {handleResetPath()}}
 				disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 0}
+				width = {120}
 				// fontSize = '11'
 				>
 					RESET PATH

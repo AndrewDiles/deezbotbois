@@ -12,7 +12,7 @@ import MoveCommandInstructions from './Commands/MoveCommandInstructions';
 import RamCommandInstructions from './Commands/RamCommandInstructions';
 import RangedAttackCommandInstructions from './Commands/RangedAttackCommandInstructions';
 
-const MicroCommandsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
+const MicroCommandsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, attributes }) => {
 // console.log(nodeInfo)
 if (!nodeInfo || !nodeInfo.name) {
 	return (
@@ -101,6 +101,7 @@ switch(nodeInfo.name) {
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			botNumberSelected = {botNumberSelected}
+			attributes = {attributes}
 			/>
 		)
 	}

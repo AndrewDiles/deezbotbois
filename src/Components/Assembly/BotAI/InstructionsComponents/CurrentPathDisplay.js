@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import DirectionsOutputter from './DirectionsOutputter';
+import { movesAlongPath } from '../../../../Constants/helperFunctions';
 
-const CurrentPathDisplay = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPath }) => {
+const CurrentPathDisplay = ({ movementDistance, activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPath }) => {
 	return (		
 		<PathContainer
-		error = {emptyPath}
+		error = {emptyPath || movesAlongPath(activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions) > movementDistance}
 		>
 			<DisplayLabel className = 'centeredFlex'>
 				CURRENT PATH

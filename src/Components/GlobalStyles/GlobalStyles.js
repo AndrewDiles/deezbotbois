@@ -102,6 +102,12 @@ html {
 	align-items: center;
 	text-align: center;
 }
+.evenlyFlex {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	text-align: center;
+}
 .innerNodeOptionsWrapper {
 	width: 100%;
 	height: 422px;

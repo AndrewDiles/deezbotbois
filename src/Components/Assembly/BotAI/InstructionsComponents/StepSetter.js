@@ -28,7 +28,7 @@ const StepSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPa
 				disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5}
 				>
 					{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5 ? (
-						'MAX STEPS HIT'
+						'MAXIMUM STEP COUNT REACHED'
 					) : (
 						'SET NEXT STEP'
 					)}

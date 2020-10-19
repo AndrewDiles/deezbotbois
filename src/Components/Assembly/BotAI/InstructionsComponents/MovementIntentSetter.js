@@ -12,7 +12,7 @@ const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScript
 			newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting = true;
 			newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.intent = input;
 		} else {
-			newActiveNodeArray[aiAndScripts.çviewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting = false;
+			newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting = false;
 		}
 		setActiveNodeArray(newActiveNodeArray)
 	}
@@ -22,12 +22,13 @@ const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScript
 			<Request className = 'centeredFlex'>
 				SELECT MOVE INTENT
 			</Request>
-			<Options className = 'centeredFlex'>
+			<Options className = 'evenlyFlex'>
 				<StyledButton
 				handleClick = {()=>{selectIntent('adjacent')}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.intent === 'adjacent' &&
 				activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting}
 				fontSize = {9}
+				width = {120}
 				>
 					ADJACENT TO TARGET
 				</StyledButton>
@@ -36,6 +37,7 @@ const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScript
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.intent === 'collision' &&
 				activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting}
 				fontSize = {9}
+				width = {120}
 				>
 					COLLIDE WITH TARGET
 				</StyledButton>
@@ -43,6 +45,7 @@ const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScript
 				handleClick = {()=>{selectIntent('path')}}
 				selected = {!activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting}
 				fontSize = {9}
+				width = {120}
 				>
 					PLOT A PATH
 				</StyledButton>
@@ -53,7 +56,7 @@ const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScript
 export default MovementIntentSetter;
 const IntentSelectionContainer = styled.div`
 	width: 100%;
-	height: 120px;
+	height: 130px;
 	display: flex;
 `
 const Request = styled.div`

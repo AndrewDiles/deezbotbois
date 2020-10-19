@@ -143,6 +143,7 @@ const CommandTemplate = ({ attributes, nodeInfo, activeNodeArray, setActiveNodeA
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
 				botNumberSelected = {botNumberSelected}
+				attributes = {attributes}
 				/>
 			)}
 		</div>

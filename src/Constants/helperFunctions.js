@@ -197,7 +197,7 @@ function diagonalMovementTest (move) {
 	return false
 }
 // utility function to determine number of moves along a path
-function movesAlongPath (path) {
+export function movesAlongPath (path) {
 	if (path === undefined || path === null) return
 	if (path.length < 2 || !diagonalMovementTest(path[1])) {
 		return path.length
