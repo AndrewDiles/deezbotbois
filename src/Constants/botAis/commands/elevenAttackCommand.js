@@ -4,7 +4,7 @@ class ElevenAttackCommand {
 		this.instructions = {
 			weapon: 'arm1',
 			attackType: 'ranged',
-			angleToModify: 'arm1Angle',
+			// angleToModify: 'arm1Angle',
 
 			targetting: true,
 			targetNumber: 1,
@@ -12,7 +12,7 @@ class ElevenAttackCommand {
 			rotating: false,
 			rotation: 15,
 
-			pointing: false,
+			// pointing: false,
 			rangedDirection: 0,
 			meleeDirection: 'R'
 		}
@@ -20,8 +20,8 @@ class ElevenAttackCommand {
 	// armSlot can be: arm1, arm2, arm3. Should only be an energy weapon
 	setArm(armSlot) {
 		this.instructions.weapon = armSlot;
-		const armXAngle = `${armSlot}Angle`;
-		this.instructions.angleToModify = armXAngle;
+		// const armXAngle = `${armSlot}Angle`;
+		// this.instructions.angleToModify = armXAngle;
 	}
 	// type can be: ranged or melee
 	setAttackType(type) {
@@ -31,17 +31,17 @@ class ElevenAttackCommand {
 	activateTargetting() {
 		this.instructions.targetting = true;
 		this.instructions.rotating = false;
-		this.instructions.pointing = false;
+		// this.instructions.pointing = false;
 	}
 	activateRotating() {
 		this.instructions.targetting = false;
 		this.instructions.rotating = true;
-		this.instructions.pointing = false;
+		// this.instructions.pointing = false;
 	}
 	activatePointing() {
 		this.instructions.targetting = false;
 		this.instructions.rotating = false;
-		this.instructions.pointing = true;
+		// this.instructions.pointing = true;
 	}
 	// newTargetNumber is the index number +1 of a scan
 	setTargetNumber(newTargetNumber) {

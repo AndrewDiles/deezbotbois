@@ -1,18 +1,24 @@
 import React from 'react';
-import { useSelector } from "react-redux";
-import styled from 'styled-components';
-import StyledButton from '../../../StyledButton/StyledButton';
-import InstructionsOrInformation from '../InstructionOrInformation';
-import commandDetails from '../../../../Constants/commandDetails';
-import { commandInfo } from '../../../../Constants/attributes';
+import WeaponSelector from '../InstructionsComponents/WeaponSelector';
+import TargetSelector from '../InstructionsComponents/TargetSelector';
 
 const ChargeCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
-			<span>
-				charge instructions to come
-			</span>
+			<WeaponSelector
+			nodeInfo = {nodeInfo}
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			botNumberSelected = {botNumberSelected}
+			aiAndScripts = {aiAndScripts}
+			weaponType = 'Melee'
+			/>
+			<TargetSelector
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			aiAndScripts = {aiAndScripts}
+			/>
 		</div>
 	)
 }

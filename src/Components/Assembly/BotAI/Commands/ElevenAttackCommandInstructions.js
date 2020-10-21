@@ -1,18 +1,117 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-import styled from 'styled-components';
-import StyledButton from '../../../StyledButton/StyledButton';
-import InstructionsOrInformation from '../InstructionOrInformation';
-import commandDetails from '../../../../Constants/commandDetails';
-import { commandInfo } from '../../../../Constants/attributes';
+import AttackTypeSetter from '../InstructionsComponents/AttackTypeSetter';
+import WeaponSelector from '../InstructionsComponents/WeaponSelector';
+import TargettingToggle from '../InstructionsComponents/TargettingToggle';
+import TargetSelector from '../InstructionsComponents/TargetSelector';
+import AttackDirectionSetter from '../InstructionsComponents/AttackDirectionSetter';
+import RotatingOrTargettingToggles from '../InstructionsComponents/RotatingOrTargettingToggles';
+import RotationSetter from '../InstructionsComponents/RotationSetter';
+import DirectionSetter from '../InstructionsComponents/DirectionSetter';
+import { weaponStats } from '../../../../Constants/equipment';
+// import { getThemeColors } from '../../../../Redux/reducers/user-reducer';
+
 
 const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
+	const userInfo = useSelector((state) => state.userInfo);
+	const botInfo = userInfo.botBuilds;
+	
+	const [energyWeaponError, setEnergyWeaponError] = React.useState(false);
+
+	React.useEffect(()=>{
+		let selectedWeaponInfo = weaponStats[botInfo[botNumberSelected].equipment[activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.weapon]];
+		if (selectedWeaponInfo) {
+			if (selectedWeaponInfo.subTypes.includes("Energy")) {
+				setEnergyWeaponError(false)
+			} else {
+				setEnergyWeaponError(true)
+			}
+		} else {
+			setEnergyWeaponError(false)
+		}		
+		console.log('change trigger')
+		// dependacies need to be: changing slot number, changing of equipment
+	},[
+		activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.weapon,
+		botInfo[botNumberSelected].equipment[activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.weapon]
+	])
 
 	return (		
 		<div className = 'commandContents'>
-			<span>
-				11attack instructions to come
-			</span>
+			<AttackTypeSetter
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			aiAndScripts = {aiAndScripts}
+			/>
+			<br/>
+			<WeaponSelector
+			nodeInfo = {nodeInfo}
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			botNumberSelected = {botNumberSelected}
+			aiAndScripts = {aiAndScripts}
+			weaponType = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'melee' ? 'Melee' : 'Ranged'}
+			/>
+			<br/>
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'melee' &&
+				<TargettingToggle
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
+			<br/>
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'melee' &&
+			activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === true &&
+				<TargetSelector
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'melee' &&
+			activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === false &&
+				<AttackDirectionSetter
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
+
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'ranged' &&
+				<RotatingOrTargettingToggles
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
+			<br/>
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'ranged' &&
+			activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === true &&
+				<TargetSelector
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'ranged' &&
+			activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === false &&
+			activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === true &&
+				<RotationSetter
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'ranged' &&
+			activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === false &&
+			activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === false &&
+				<DirectionSetter
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				/>
+			}
 		</div>
 	)
 }

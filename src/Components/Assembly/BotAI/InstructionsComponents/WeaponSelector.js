@@ -45,7 +45,7 @@ const WeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 				>
 					SELECT A {weaponType.toUpperCase()} WEAPON
 				</Request>
-				<Options className = 'centeredFlex'>
+				<Options className = 'evenlyFlex'>
 					{['arm1','arm2','arm3'].map((slot)=>{
 						return(
 							<StyledButton
@@ -77,7 +77,7 @@ const WeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 export default WeaponSelector;
 const WeaponSelectContainer = styled.div`
 	width: 100%;
-	height: 120px;
+	height: 130px;
 	display: flex;
 	background: ${props => props.weaponWarning && 'rgba(255,0,0,0.2)'};
 `

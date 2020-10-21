@@ -26,8 +26,8 @@ const RotatingOrTargettingToggles = ({ activeNodeArray, setActiveNodeArray, aiAn
 			<Request className = 'centeredFlex'>
 				SELECT AIMING METHOD
 			</Request>
-			<Options className = 'centeredFlex'>
-			<StyledButton
+			<Options className = 'evenlyFlex'>
+				<StyledButton
 				handleClick = {()=>{handleSetAimMethod('targetting')}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === true}
 				fontSize = {9}
@@ -56,7 +56,7 @@ const RotatingOrTargettingToggles = ({ activeNodeArray, setActiveNodeArray, aiAn
 export default RotatingOrTargettingToggles;
 const AimTypeSelectionContainer = styled.div`
 	width: 100%;
-	height: 120px;
+	height: 130px;
 	display: flex;
 `
 const Request = styled.div`

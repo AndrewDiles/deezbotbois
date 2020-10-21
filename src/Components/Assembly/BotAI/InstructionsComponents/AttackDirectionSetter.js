@@ -14,7 +14,7 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 
 	function setDirection(direction) {
 		let newActiveNodeArray = [...activeNodeArray];
-		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction = direction;
+		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection = direction;
 		setActiveNodeArray(newActiveNodeArray);
 	}
 
@@ -32,28 +32,28 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 					padding = {5}
 					size = {25}
 					icon = {arrowUpLeft}
-					selected = {'UL' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+					selected = {'UL' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('U')}
 					padding = {5}
 					size = {25}
 					icon = {arrowUp}
-					selected = {'U' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+					selected = {'U' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('UR')}
 					padding = {5}
 					size = {25}
 					icon = {arrowUpRight}
-					selected = {'UR' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+					selected = {'UR' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('L')}
 					padding = {5}
 					size = {25}
 					icon = {arrowLeft}
-					selected = {'L' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+					selected = {'L' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
       		/>
 					<BlankEntry/>
 					<StyledIcon
@@ -61,28 +61,28 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 					padding = {5}
 					size = {25}
 					icon = {arrowRight}
-					selected = {'R' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+					selected = {'R' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('DL')}
 					padding = {5}
 					size = {25}
 					icon = {arrowDownLeft}
-					selected = {'DL' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+					selected = {'DL' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('D')}
 					padding = {5}
 					size = {25}
 					icon = {arrowDown}
-					selected = {'D' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+					selected = {'D' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('DR')}
 					padding = {5}
 					size = {25}
 					icon = {arrowDownRight}
-					selected = {'DR' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+					selected = {'DR' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
       		/>
 				</Options>
 			</DirectionSetterContainer>

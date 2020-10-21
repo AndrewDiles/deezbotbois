@@ -8,7 +8,7 @@ const MovementsRequiredDisplay = ({ movementDistance, activeNodeArray, aiAndScri
 		<>
 			<Wrapper
 			className = 'centeredFlex'
-			error = {movesAlongPath(activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions) > movementDistance}
+			error = {movesAlongPath() > movementDistance}
 			>
 				MOVEMENT USED:
 				{movesAlongPath(activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions)}

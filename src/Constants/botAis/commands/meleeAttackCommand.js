@@ -5,7 +5,7 @@ class MeleeAttackCommand {
 			weapon: 'arm1',
 			targetting: true,
 			targetNumber: 1,
-			direction: 'R'
+			meleeDirection: 'R'
 		}
 	}
 	// armSlot can be: arm1, arm2, arm3. Should only be a melee weapon
@@ -24,7 +24,7 @@ class MeleeAttackCommand {
 	}
 	// newDirection can be: U, D, L, R, UR, UL, DR, DL
 	setDirection(newDirection) {
-		this.instructions.direction = newDirection;
+		this.instructions.meleeDirection = newDirection;
 	}
 }
 module.exports = MeleeAttackCommand

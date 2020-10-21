@@ -15,7 +15,7 @@ const TargettingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts })
 			<Request className = 'centeredFlex'>
 				SELECT ATTACK METHOD
 			</Request>
-			<Options className = 'centeredFlex'>
+			<Options className = 'evenlyFlex'>
 				<StyledButton
 				handleClick = {()=>{toggleTargettingType(true)}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === true}
@@ -39,7 +39,7 @@ const TargettingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts })
 export default TargettingToggle;
 const AttackSelectionContainer = styled.div`
 	width: 100%;
-	height: 80px;
+	height: 85px;
 	display: flex;
 `
 const Request = styled.div`

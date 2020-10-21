@@ -11,7 +11,7 @@ class AimAndAttackCommand {
 
 			// pointing: true,
 			// above key is deriable, as it is true when both rotating and targetting are false
-			direction: 0,
+			rangedDirection: 0,
 		}
 	}
 	// armSlot can be: arm1, arm2, arm3. Should only be a ranged weapon
@@ -41,7 +41,7 @@ class AimAndAttackCommand {
 		this.instructions.rotation = angle;
 	}
 	setDirection(angle) {
-		this.instructions.direction = angle;
+		this.instructions.rangedDirection = angle;
 	}
 }
 module.exports = AimAndAttackCommand

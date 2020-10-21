@@ -23,7 +23,7 @@ const DirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) 
 
 	function setDirection(angle) {
 		let newActiveNodeArray = [...activeNodeArray];
-		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction = angle;
+		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rangedDirection = angle;
 		setActiveNodeArray(newActiveNodeArray)
 	}
 
@@ -40,7 +40,7 @@ const DirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) 
 						<NoSizeContainer>
 							<NewAngle
 							colors = {colors}
-							angle = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+							angle = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rangedDirection}
 							/>
 						</NoSizeContainer>
 					</Circle>
@@ -50,7 +50,7 @@ const DirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) 
 					colors = {colors}
 					entryError = {entryError}
 					className = "centeredInput"
-					placeholder= {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.direction}
+					placeholder= {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rangedDirection}
 					input="number" maxLength = "360" 
 					onChange = {(ev)=>{handleAngleEntry(parseInt(ev.target.value));}}
 					>

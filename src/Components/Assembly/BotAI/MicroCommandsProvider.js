@@ -108,11 +108,9 @@ switch(nodeInfo.name) {
 	case 'ramCommand' : {
 		return (
 			<RamCommandInstructions
-			nodeInfo = {nodeInfo}
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			botNumberSelected = {botNumberSelected}
 			/>
 		)
 	}

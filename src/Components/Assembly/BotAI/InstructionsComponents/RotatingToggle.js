@@ -15,7 +15,7 @@ const RotatingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) =
 			<Request className = 'centeredFlex'>
 				SELECT AIMING METHOD
 			</Request>
-			<Options className = 'centeredFlex'>
+			<Options className = 'evenlyFlex'>
 				<StyledButton
 				handleClick = {()=>{toggleRotationType(true)}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === true}
@@ -39,7 +39,7 @@ const RotatingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) =
 export default RotatingToggle;
 const AimTypeSelectionContainer = styled.div`
 	width: 100%;
-	height: 80px;
+	height: 85px;
 	display: flex;
 `
 const Request = styled.div`

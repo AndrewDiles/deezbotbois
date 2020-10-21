@@ -6,7 +6,7 @@ class AimCommand {
 			rotating: true,
 			rotation: 15,
 			// pointing: false,
-			direction: 0,
+			rangedDirection: 0,
 		}
 	}
 	// armSlot can be: arm1, arm2, arm3. Should only be a ranged weapon
@@ -29,7 +29,7 @@ class AimCommand {
 		this.instructions.rotation = angle;
 	}
 	setDirection(angle) {
-		this.instructions.direction = angle;
+		this.instructions.rangedDirection = angle;
 	}
 }
 module.exports = AimCommand

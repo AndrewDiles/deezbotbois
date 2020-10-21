@@ -1,18 +1,15 @@
 import React from 'react';
-import { useSelector } from "react-redux";
-import styled from 'styled-components';
-import StyledButton from '../../../StyledButton/StyledButton';
-import InstructionsOrInformation from '../InstructionOrInformation';
-import commandDetails from '../../../../Constants/commandDetails';
-import { commandInfo } from '../../../../Constants/attributes';
+import TargetSelector from '../InstructionsComponents/TargetSelector';
 
-const RamCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
+const RamCommandInstructions = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
-			<span>
-				ram instructions to come
-			</span>
+			<TargetSelector
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			aiAndScripts = {aiAndScripts}
+			/>
 		</div>
 	)
 }
