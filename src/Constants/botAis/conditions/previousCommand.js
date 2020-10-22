@@ -4,7 +4,7 @@ class PreviousCommand {
 		this.name = 'previousCommand';
 		this.test = {
 			commandName: 'scanCommand',
-			evaluationType: '===',
+			evaluationType: '=',
 			armSlot: null,
 		};
 		this.conditionMet = conditionMet;
@@ -14,7 +14,7 @@ class PreviousCommand {
 	setCommandName(newCommandName) {
 		this.test.commandName = newCommandName
 	}
-	// comparisonOperator can be: ===, !==
+	// comparisonOperator can be: =, ≠
 	setEvaluation(comparisonOperator) {
 		this.test.evaluationType = comparisonOperator
 	}

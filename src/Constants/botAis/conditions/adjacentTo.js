@@ -4,7 +4,7 @@ class AdjacentTo {
 		this.name = 'adjacentTo';
 		this.test = {
 			testTargets: 'hostile',
-			evaluationType: '===',
+			evaluationType: '=',
 			testReturn: 'any'
 		};
 		this.conditionMet = conditionMet;
@@ -14,7 +14,7 @@ class AdjacentTo {
 	setTarget(newTarget) {
 		this.test.testTargets = newTarget
 	}
-	// comparisonOperator can be: ===, !==
+	// comparisonOperator can be: =, ≠
 	setEvaluation(comparisonOperator) {
 		this.test.evaluationType = comparisonOperator
 	}

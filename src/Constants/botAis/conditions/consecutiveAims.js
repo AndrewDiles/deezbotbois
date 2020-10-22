@@ -9,7 +9,7 @@ class ConsecutiveAims {
 		this.conditionMet = conditionMet;
 		this.conditionUnMet = conditionUnMet;
 	}
-	// comparisonOperator can be: ===, !==, >, <
+	// comparisonOperator can be: =, ≠, >, <
 	setEvaluation(comparisonOperator) {
 		this.test.evaluationType = comparisonOperator
 	}

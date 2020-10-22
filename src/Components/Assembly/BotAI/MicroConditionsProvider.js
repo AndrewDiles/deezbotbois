@@ -1,6 +1,7 @@
 import React from 'react';
+import WeaponLoadedTest from './Conditions/WeaponLoadedTest';
 
-const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 	console.log(nodeInfo)
 	if (!nodeInfo || !nodeInfo.name) {
 		return (
@@ -82,9 +83,13 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, botNumberSelected,
 		}
 		case 'weaponLoaded' : {
 			return (
-				<>
-					wep loaded
-				</>
+				<WeaponLoadedTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			)
 		}
 		

@@ -15,11 +15,11 @@ class ScanResults {
 	setTarget(newTarget) {
 		this.test.testTargets = newTarget
 	}
-	// comparisonOperator can be: ===, !==
+	// comparisonOperator can be: =, ≠
 	setTargetEvaluation(comparisonOperator) {
 		this.test.targetEvaluationType = comparisonOperator
 	}
-	// comparisonOperator can be: ===, !==, >, <
+	// comparisonOperator can be: =, ≠, >, <
 	setThresholdEvaluation(comparisonOperator) {
 		this.test.thresholdEvaluationType = comparisonOperator
 	}

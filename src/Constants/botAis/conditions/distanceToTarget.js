@@ -14,7 +14,7 @@ class DistanceToTarget {
 	setTargetNumber(newTargetNumber) {
 		this.test.targetNumber = newTargetNumber
 	}
-	// comparisonOperator can be: ===, !==, >, <
+	// comparisonOperator can be: =, ≠, >, <
 	setEvaluation(comparisonOperator) {
 		this.test.evaluationType = comparisonOperator
 	}

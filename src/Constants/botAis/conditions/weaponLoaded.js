@@ -4,13 +4,13 @@ class WeaponLoaded {
 		this.name = 'weaponLoaded';
 		this.test = {
 			threshold: 0,
-			evaluationType: '===',
+			evaluationType: '=',
 			armSlot: 'arm1',
 		};
 		this.conditionMet = conditionMet;
 		this.conditionUnMet = conditionUnMet;
 	}
-	// comparisonOperator can be: ===, !==, >, <
+	// comparisonOperator can be: =, ≠, >, <
 	setEvaluation(comparisonOperator) {
 		this.test.evaluationType = comparisonOperator
 	}

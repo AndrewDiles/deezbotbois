@@ -4,7 +4,7 @@ class AimResults {
 		this.name = 'aimResults';
 		this.test = {
 			testTargets: 'hostile',
-			evaluationType: '===',
+			evaluationType: '=',
 		};
 		this.conditionMet = conditionMet;
 		this.conditionUnMet = conditionUnMet;
@@ -13,7 +13,7 @@ class AimResults {
 	setTarget(newTarget) {
 		this.test.testTargets = newTarget
 	}
-	// comparisonOperator can be: ===, !==
+	// comparisonOperator can be: =, ≠
 	setEvaluation(comparisonOperator) {
 		this.test.evaluationType = comparisonOperator
 	}
