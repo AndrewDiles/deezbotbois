@@ -111,6 +111,7 @@ switch(nodeInfo.name) {
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 		)
 	}

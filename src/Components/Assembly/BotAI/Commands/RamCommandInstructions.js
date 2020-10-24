@@ -1,7 +1,7 @@
 import React from 'react';
 import TargetSelector from '../InstructionsComponents/TargetSelector';
 
-const RamCommandInstructions = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) => {
+const RamCommandInstructions = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, botNumberSelected }) => {
 
 	return (		
 		<div className = 'commandContents'>
@@ -9,6 +9,7 @@ const RamCommandInstructions = ({ activeNodeArray, setActiveNodeArray, aiAndScri
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 		</div>
 	)

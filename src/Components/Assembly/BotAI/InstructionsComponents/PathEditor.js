@@ -4,7 +4,7 @@ import MovementsRequiredDisplay from './MovementsRequiredDisplay';
 import StepSetter from './StepSetter';
 import StepRemoval from './StepRemoval';
 
-const PathEditor = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPath, movementDistance }) => {
+const PathEditor = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPath, movementDistance, botNumberSelected }) => {
 	
 	return (		
 		<>
@@ -20,6 +20,7 @@ const PathEditor = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPa
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			emptyPath = {emptyPath}
+			botNumberSelected = {botNumberSelected}
 			/>
 			<MovementsRequiredDisplay
 			movementDistance = {movementDistance}
@@ -31,6 +32,7 @@ const PathEditor = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPa
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			emptyPath = {emptyPath}
+			botNumberSelected = {botNumberSelected}
 			/>
 		</>
 	)

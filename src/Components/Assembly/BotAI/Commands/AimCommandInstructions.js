@@ -21,6 +21,7 @@ const AimCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray,
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
 			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating ?
@@ -29,12 +30,14 @@ const AimCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray,
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			) : (
 				<DirectionSetter
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			)}
 		</div>

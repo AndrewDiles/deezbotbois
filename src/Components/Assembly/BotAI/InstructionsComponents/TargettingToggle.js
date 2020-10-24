@@ -1,13 +1,18 @@
 import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledButton from '../../../StyledButton/StyledButton';
 
-const TargettingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) => {
-	
+const TargettingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, botNumberSelected }) => {
+	const userInfo = useSelector((state) => state.userInfo);
+	const dispatch = useDispatch();
+
 	function toggleTargettingType(input) {
 		let newActiveNodeArray = [...activeNodeArray];
 		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting = input;
-		setActiveNodeArray(newActiveNodeArray)
+		setActiveNodeArray(newActiveNodeArray);
+		scriptUpdater(botNumberSelected, aiAndScripts, newActiveNodeArray, dispatch, userInfo);
 	}
 
 	return (		

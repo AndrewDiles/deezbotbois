@@ -1,13 +1,18 @@
 import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledButton from '../../../StyledButton/StyledButton';
 
-const AttackTypeSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) => {
-	
+const AttackTypeSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, botNumberSelected }) => {
+	const userInfo = useSelector((state) => state.userInfo);
+	const dispatch = useDispatch();
+
 	function setAttackType(input) {
 		let newActiveNodeArray = [...activeNodeArray];
 		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType = input;
-		setActiveNodeArray(newActiveNodeArray)
+		setActiveNodeArray(newActiveNodeArray);
+		scriptUpdater(botNumberSelected, aiAndScripts, newActiveNodeArray, dispatch, userInfo);
 	}
 
 	return (		

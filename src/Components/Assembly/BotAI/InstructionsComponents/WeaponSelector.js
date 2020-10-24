@@ -1,5 +1,6 @@
 import React from 'react';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledButton from '../../../StyledButton/StyledButton';
 import { weaponStats } from '../../../../Constants/equipment';
@@ -8,6 +9,7 @@ import WarningBar from './WarningBar';
 
 const WeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, weaponType }) => {
 	const userInfo = useSelector((state) => state.userInfo);
+	const dispatch = useDispatch();
 	const botInfo = userInfo.botBuilds;
 	const colors = useSelector(getThemeColors);
 	const [weaponWarning, setWeaponWarning] = React.useState(false);
@@ -29,7 +31,8 @@ const WeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 	function setArm(slot) {
 		let newActiveNodeArray = [...activeNodeArray];
 		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.weapon = slot;
-		setActiveNodeArray(newActiveNodeArray)
+		setActiveNodeArray(newActiveNodeArray);
+		scriptUpdater(botNumberSelected, aiAndScripts, newActiveNodeArray, dispatch, userInfo);
 	}
 
 	return (		

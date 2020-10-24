@@ -22,6 +22,7 @@ const AimAndAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
 			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating &&
@@ -29,6 +30,7 @@ const AimAndAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting &&
@@ -36,6 +38,7 @@ const AimAndAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 			{!activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating &&
@@ -44,6 +47,7 @@ const AimAndAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 		</div>

@@ -18,6 +18,7 @@ const ChargeCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArr
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 		</div>
 	)

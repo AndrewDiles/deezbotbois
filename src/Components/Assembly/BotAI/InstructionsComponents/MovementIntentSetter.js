@@ -1,8 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledButton from '../../../StyledButton/StyledButton';
 
-const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) => {
+const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, botNumberSelected }) => {
+	const userInfo = useSelector((state) => state.userInfo);
+	const dispatch = useDispatch();
+
 	function selectIntent(input) {
 		let newActiveNodeArray = [...activeNodeArray];
 		if (input === 'adjacent') {
@@ -14,7 +19,8 @@ const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScript
 		} else {
 			newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting = false;
 		}
-		setActiveNodeArray(newActiveNodeArray)
+		setActiveNodeArray(newActiveNodeArray);
+		scriptUpdater(botNumberSelected, aiAndScripts, newActiveNodeArray, dispatch, userInfo);
 	}
 
 	return (		

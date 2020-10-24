@@ -21,6 +21,7 @@ const MeleeAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNo
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
 			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting ? (
@@ -28,12 +29,14 @@ const MeleeAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNo
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			):(
 				<AttackDirectionSetter
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			)}
 			

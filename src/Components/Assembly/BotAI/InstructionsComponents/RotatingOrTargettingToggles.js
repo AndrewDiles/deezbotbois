@@ -1,9 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledButton from '../../../StyledButton/StyledButton';
 
-const RotatingOrTargettingToggles = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) => {
-	
+const RotatingOrTargettingToggles = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, botNumberSelected }) => {
+	const userInfo = useSelector((state) => state.userInfo);
+	const dispatch = useDispatch();
+
 	function handleSetAimMethod(method) {
 		let newActiveNodeArray = [...activeNodeArray];
 		if (method === 'targetting') {
@@ -18,7 +22,8 @@ const RotatingOrTargettingToggles = ({ activeNodeArray, setActiveNodeArray, aiAn
 		} else {
 			console.log('unknown method entered:', method)
 		}
-		setActiveNodeArray(newActiveNodeArray)
+		setActiveNodeArray(newActiveNodeArray);
+		scriptUpdater(botNumberSelected, aiAndScripts, newActiveNodeArray, dispatch, userInfo);
 	}
 
 	return (		

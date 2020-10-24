@@ -1,10 +1,13 @@
 import React from 'react';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import { verifyIsInteger } from '../../../../Constants/helperFunctions';
 import { getThemeColors } from '../../../../Redux/reducers/user-reducer';
 import WarningBar from './WarningBar';
-const RotationSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) => {
+const RotationSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, botNumberSelected }) => {
+	const userInfo = useSelector((state) => state.userInfo);
+	const dispatch = useDispatch();
 	const colors = useSelector(getThemeColors);
 	const [entryError, setEntryError] = React.useState(null);
 
@@ -29,7 +32,8 @@ const RotationSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts }) =
 	function setDirection(angle) {
 		let newActiveNodeArray = [...activeNodeArray];
 		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotation = angle;
-		setActiveNodeArray(newActiveNodeArray)
+		setActiveNodeArray(newActiveNodeArray);
+		scriptUpdater(botNumberSelected, aiAndScripts, newActiveNodeArray, dispatch, userInfo);
 	}
 
 	return (		

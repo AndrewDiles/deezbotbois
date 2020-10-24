@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledIcon from '../../../StyledIcon/StyledIcon';
 import {arrowUpLeft} from 'react-icons-kit/icomoon/arrowUpLeft';
@@ -11,11 +13,15 @@ import {arrowDown} from 'react-icons-kit/icomoon/arrowDown';
 import {arrowDownRight} from 'react-icons-kit/icomoon/arrowDownRight';
 import WarningBar from './WarningBar';
 
-const StepSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPath }) => {
+const StepSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPath, botNumberSelected }) => {
+	const userInfo = useSelector((state) => state.userInfo);
+	const dispatch = useDispatch();
+
 	function handleAddStep(step) {
 		let newActiveNodeArray = [...activeNodeArray];
 		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.push(step);
-		setActiveNodeArray(newActiveNodeArray)
+		setActiveNodeArray(newActiveNodeArray);
+		scriptUpdater(botNumberSelected, aiAndScripts, newActiveNodeArray, dispatch, userInfo);
 	}
 
 	return (		

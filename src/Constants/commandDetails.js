@@ -69,7 +69,7 @@ const commandDetails = {
 	guardCommand: {
 		cost: 7,
 		speed: 1,
-		affect: "The executor of this command will have their Armor and Shield multiplied trifold for the remainder of the tick.",
+		affect: "The executor of this command will have their Armor and Shield multiplied threefold for the remainder of the tick.",
 		generalUse: 'Best used as a source of burst damage when a hostile has been scanned.',
 		useWhen: [
 			'has detected the presence of a hostile',

@@ -42,6 +42,7 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
 			<WeaponSelector
@@ -58,6 +59,7 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 			<br/>
@@ -67,6 +69,7 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'melee' &&
@@ -75,6 +78,7 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 
@@ -83,6 +87,7 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 			<br/>
@@ -92,6 +97,7 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'ranged' &&
@@ -101,6 +107,7 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
 			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'ranged' &&
@@ -110,6 +117,8 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+
 				/>
 			}
 		</div>

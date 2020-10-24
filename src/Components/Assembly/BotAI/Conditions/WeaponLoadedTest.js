@@ -21,12 +21,14 @@ const WeaponLoadedTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNu
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			optionsArray = {['=','≠','>','<']}
+			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
 			<ThresholdSetter
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 		</div>
 	)

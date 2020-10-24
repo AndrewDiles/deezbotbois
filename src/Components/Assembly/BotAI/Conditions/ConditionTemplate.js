@@ -7,11 +7,6 @@ import MicroConditionsProvider from '../MicroConditionsProvider';
 const ConditionTemplate = ({ attributes, nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, children }) => {
 	const [displayInfo, setDisplayInfo] = React.useState(false)
 
-	console.log('nodeInfo',nodeInfo.name);
-	// console.log(nodeInfo.name);
-	console.log('cdata',conditionsData);
-	// console.log(conditionsData[conditionIndex]);
-
 	if (!conditionsData[nodeInfo.name]) {
 		return (
 			<div className = 'innerNodeOptionsWrapper'>
