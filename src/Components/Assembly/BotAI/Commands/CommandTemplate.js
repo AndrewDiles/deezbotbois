@@ -50,6 +50,7 @@ const CommandTemplate = ({ attributes, nodeInfo, activeNodeArray, setActiveNodeA
 			<InstructionsOrInformation
 			displayInfo = {displayInfo}
 			setDisplayInfo = {setDisplayInfo}
+			type = 'INSTRUCTIONS'
 			/>
 			{displayInfo ? (
 				<div className = 'commandContents infoContents'>

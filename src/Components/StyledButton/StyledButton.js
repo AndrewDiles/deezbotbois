@@ -3,19 +3,19 @@ import styled from 'styled-components';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSampling, width, fontSize, children} ) => {
+const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSampling, width, maxHeight, fontSize, children} ) => {
 	let colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
 	if (settings.serverStatus !== 'idle') disabled = true;
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
 	if (colorSampling) colors = colorSampling;
 	
-  
   if (handleClick === undefined || handleClick === null) {
     handleClick = () => {
       // console.log('clicked styled button without a handle click function')
     }
-  }
+	}
+	
   return (
       <ButtonStylings
 			id = {id}
@@ -27,6 +27,7 @@ const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSam
 			absolute = {absolute}
 			width = {width}
 			fontSize = {fontSize}
+			maxHeight = {maxHeight}
       >
         {children}
       </ButtonStylings>
@@ -35,8 +36,11 @@ const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSam
 export default StyledButton;
 
 const ButtonStylings = styled.button`
+	/* padding-bottom: ${props => props.maxHeight && `30px`}; */
+	/* line-height: ${props => props.maxHeight && `40px`}; */
   width: ${props=>props.width ? `${props.width}px` : '125px'};
 	min-height: 40px;
+	max-height: ${props => props.maxHeight && `${props.maxHeight}px`};
   /* padding: 5px; */
   position: ${props => props.absolute ? 'absolute' : 'relative'};
   background-color: ${props => props.selected ? props.colors.selected : props.colors.notSelected};

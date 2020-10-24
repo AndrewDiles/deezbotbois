@@ -83,6 +83,14 @@ html {
 	border-top: 1px solid rgba(0,0,0,0.24);
 	padding: 5px 0;
 }
+.aiTitleCondition {
+	height: 52px;
+	width: 100%;
+	font-size: 1.1em;
+	white-space: normal;
+	border-top: 1px solid rgba(0,0,0,0.24);
+	padding: 5px 0;
+}
 .aiButtonRow {
 	height: 40px;
 	width: 100%;
@@ -105,6 +113,12 @@ html {
 .evenlyFlex {
 	display: flex;
 	justify-content: space-evenly;
+	align-items: center;
+	text-align: center;
+}
+.betweenFlex {
+	display: flex;
+	justify-content: space-between;
 	align-items: center;
 	text-align: center;
 }

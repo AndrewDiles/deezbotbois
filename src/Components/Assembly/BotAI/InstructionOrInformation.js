@@ -1,7 +1,7 @@
 import React from 'react';
 import StyledButton from '../../StyledButton/StyledButton';
 
-const InstructionsOrInformation = ({ setDisplayInfo, displayInfo }) => {
+const InstructionsOrInformation = ({ setDisplayInfo, displayInfo, type }) => {
 	return (
 		<div className ='aiButtonRow centeredFlex'>
 			<StyledButton
@@ -10,7 +10,7 @@ const InstructionsOrInformation = ({ setDisplayInfo, displayInfo }) => {
 			width = {120}
 			fontSize = '9'
 			>
-				INSTRUCTIONS
+				{type}
 			</StyledButton>
 			<StyledButton
 			handleClick = {()=>setDisplayInfo(true)}

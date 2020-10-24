@@ -1,6 +1,7 @@
 import React from 'react';
 import MicroConditionsProvider from './MicroConditionsProvider';
 import CommandTemplate from './Commands/CommandTemplate';
+import ConditionTemplate from './Conditions/ConditionTemplate';
 
 const MicroNodeOptions = ({ attributes, nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 
@@ -15,12 +16,20 @@ const MicroNodeOptions = ({ attributes, nodeInfo, activeNodeArray, setActiveNode
 	}
 	return nodeInfo.condition ? (
 		// this needs to be changed to ConditionTemplate just like the CommandTemplate and its children below
-		<MicroConditionsProvider
+		// <MicroConditionsProvider
+		// nodeInfo = {nodeInfo.condition}
+		// activeNodeArray = {activeNodeArray}
+		// setActiveNodeArray = {setActiveNodeArray}
+		// aiAndScripts = {aiAndScripts}
+		// setAiAndScripts = {setAiAndScripts}
+		// botNumberSelected = {botNumberSelected}
+		// />
+		<ConditionTemplate
+		attributes = {attributes}
 		nodeInfo = {nodeInfo.condition}
 		activeNodeArray = {activeNodeArray}
 		setActiveNodeArray = {setActiveNodeArray}
 		aiAndScripts = {aiAndScripts}
-		setAiAndScripts = {setAiAndScripts}
 		botNumberSelected = {botNumberSelected}
 		/>
 	) : (

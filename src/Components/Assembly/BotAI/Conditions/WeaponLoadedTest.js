@@ -1,6 +1,7 @@
 import React from 'react';
 import WeaponSelector from '../TestComponents/WeaponSelector';
 import EvaluationTypeSelector from '../TestComponents/EvaluationTypeSelector';
+import ThresholdSetter from '../TestComponents/ThresholdSetter';
 
 const WeaponLoadedTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
@@ -14,11 +15,18 @@ const WeaponLoadedTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNu
 			aiAndScripts = {aiAndScripts}
 			weaponType = 'Melee'
 			/>
+			<br/>
 			<EvaluationTypeSelector
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			optionsArray = {['=','≠','>','<']}
+			/>
+			<br/>
+			<ThresholdSetter
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			aiAndScripts = {aiAndScripts}
 			/>
 		</div>
 	)

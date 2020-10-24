@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { useSelector } from "react-redux";
-import { getThemeColors } from '../../../Redux/reducers/user-reducer';
-import conditionsList, { conditionsData } from '../../../Constants/conditions';
+// import { useSelector } from "react-redux";
+// import { getThemeColors } from '../../../Redux/reducers/user-reducer';
+import /*conditionsList,*/ { conditionsData } from '../../../Constants/conditions';
 import AddIcon from './AddIcon';
 import SwapIcon from './SwapIcon';
 import styled from 'styled-components';
@@ -10,8 +10,7 @@ import NodeInsersionIndicator from './NodeInsersionIndicator';
 
 const ConditionRow = ({ botNumberSelected, aiAndScripts, setAiAndScripts, conditionOption, activeNodeArray, setActiveNodeArray }) => {
 	const [helpNeeded, setHelpNeeded] = React.useState(false);
-	const settings = useSelector((state) => state.settings);
-	const colors = useSelector(getThemeColors);
+	// const colors = useSelector(getThemeColors);
 
   return helpNeeded ? 
 		<NodeInsersionIndicator

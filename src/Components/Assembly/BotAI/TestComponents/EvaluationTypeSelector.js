@@ -31,7 +31,8 @@ const EvaluationTypeSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray,
 						key = {type}
 						handleClick = {()=>{setEvaluationType(type)}}
 						selected = {type === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.evaluationType}
-						fontSize = {20}
+						fontSize = {type === '≠' ? '28' : '16'}
+						maxHeight = {type === '≠' ? '40' : null}
 						>
 							{type}
 					</StyledButton>
@@ -41,13 +42,13 @@ const EvaluationTypeSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray,
 		</EvaluationTypeSelectorContainer>
 	)
 }
+// ≠
 export default EvaluationTypeSelector;
 const EvaluationTypeSelectorContainer = styled.div`
 	width: 100%;
 	height: ${props => props.heightMultiplier ? `${(props.heightMultiplier * 40) + ((props.heightMultiplier -1) * 5)}px` : `85px`};
 	display: flex;
 `
-
 const Request = styled.div`
 	height: 100%;
 	width: 49%;
