@@ -1,35 +1,35 @@
 import React from 'react';
-import ReloadableWeaponSelector from '../TestComponents/ReloadableWeaponSelector';
 import EvaluationTypeSelector from '../TestComponents/EvaluationTypeSelector';
-import ThresholdSetter from '../TestComponents/ThresholdSetter';
+import TestTargetsSetter from '../TestComponents/TestTargetsSetter';
+import TestReturnDirectionSetter from '../TestComponents/TestReturnDirectionSetter';
 
-const WeaponLoadedTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
+const AdjacentToTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
-			<ReloadableWeaponSelector
-			nodeInfo = {nodeInfo}
+			<TestReturnDirectionSetter
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
-			botNumberSelected = {botNumberSelected}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
+			/>
+			<br/>
+			<TestTargetsSetter
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
 			<EvaluationTypeSelector
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			optionsArray = {['=','≠','>','<']}
+			optionsArray = {['=','≠']}
 			botNumberSelected = {botNumberSelected}
 			/>
-			<br/>
-			<ThresholdSetter
-			activeNodeArray = {activeNodeArray}
-			setActiveNodeArray = {setActiveNodeArray}
-			aiAndScripts = {aiAndScripts}
-			botNumberSelected = {botNumberSelected}
-			/>
+			
 		</div>
 	)
 }
-export default WeaponLoadedTest;
+export default AdjacentToTest;

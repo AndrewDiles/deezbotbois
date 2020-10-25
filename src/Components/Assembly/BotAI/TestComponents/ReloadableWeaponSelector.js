@@ -7,7 +7,7 @@ import { weaponStats } from '../../../../Constants/equipment';
 import { getThemeColors } from '../../../../Redux/reducers/user-reducer';
 import WarningBar from '../InstructionsComponents/WarningBar';
 
-const WeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, weaponType }) => {
+const ReloadableWeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
 	const botInfo = userInfo.botBuilds;
@@ -16,18 +16,11 @@ const WeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 
 	React.useEffect(()=>{
 		if (botInfo[botNumberSelected].equipment[nodeInfo.test.armSlot]) {
-			if (weaponType === 'any') {
-				if (weaponStats[botInfo[botNumberSelected].equipment[nodeInfo.test.armSlot]]) {
-					setWeaponWarning(false)
-				} else {
-					setWeaponWarning(true)
-				}
-			} else {
-				if (weaponStats[botInfo[botNumberSelected].equipment[nodeInfo.instructions.weapon]].superTypes[0] === weaponType) {
-					setWeaponWarning(false)
-				} else {
-					setWeaponWarning(true)
-				}
+			if (weaponStats[botInfo[botNumberSelected].equipment[nodeInfo.test.armSlot]].reloadTime) {
+				setWeaponWarning(false)
+			}
+			else {
+				setWeaponWarning(true)
 			}
 		}
 		else {
@@ -53,11 +46,7 @@ const WeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 				warning = {weaponWarning}
 				colors = {colors}
 				>
-					{weaponType !== 'any' ? (
-						`SELECT A ${weaponType} WEAPON`
-					) : (
-						'SELECT A WEAPON'
-					)}
+					SELECT A RELOADABLE WEAPON
 				</Request>
 				<Options className = 'evenlyFlex'>
 					{['arm1','arm2','arm3'].map((slot)=>{
@@ -82,17 +71,13 @@ const WeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 			</WeaponSelectContainer>
 			{weaponWarning &&
 				<WarningBar>
-					{weaponType !== 'any' ? (
-						`SELECTED SLOT DOES NOT CONTAIN A ${weaponType} WEAPON`
-					) : (
-						'SELECTED SLOT DOES NOT CONTAIN A WEAPON'
-					)}
+					SELECTED SLOT DOES NOT CONTAIN A RELOADABLE WEAPON
 				</WarningBar>
 			}
 		</>
 	)
 }
-export default WeaponSelector;
+export default ReloadableWeaponSelector;
 const WeaponSelectContainer = styled.div`
 	width: 100%;
 	height: 130px;

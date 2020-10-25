@@ -10,7 +10,7 @@ class AdjacentTo {
 		this.conditionMet = conditionMet;
 		this.conditionUnMet = conditionUnMet;
 	}
-	// newTarget can be: hostile, friend, wall, corner
+	// newTarget can be: hostile, friend, wall, corner, any
 	setTarget(newTarget) {
 		this.test.testTargets = newTarget
 	}

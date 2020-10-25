@@ -4,13 +4,17 @@ import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledButton from '../../../StyledButton/StyledButton';
 
-const EvaluationTypeSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, optionsArray }) => {
+const EvaluationTypeSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, optionsArray, customKeyToChange }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
+	let keyToChange = 'evaluationType';
+	if (customKeyToChange) {
+		keyToChange = customKeyToChange;
+	}
 
 	function setEvaluationType(type) {
 		let newActiveNodeArray = [...activeNodeArray];
-		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.evaluationType = type;
+		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test[keyToChange] = type;
 		setActiveNodeArray(newActiveNodeArray);
 		scriptUpdater(botNumberSelected, aiAndScripts, newActiveNodeArray, dispatch, userInfo);
 	}
@@ -27,7 +31,14 @@ const EvaluationTypeSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray,
 		heightMultiplier = {optionsArray.length}
 		>
 			<Request className = 'centeredFlex'>
-				TEST IF VALUE IS
+				{customKeyToChange === 'thresholdEvaluationType' ? (
+					'TESTS IF MULTIPLICITY IS'
+				) : 
+				(	customKeyToChange === 'targetEvaluationType' ? (
+					'TEST IF RETURN DOES OR DOES NOT INCLUDE'
+				) : (
+					'TEST IF RETURN IS'
+				))}
 			</Request>
 			<Options className = 'evenlyFlex'>
 				{optionsArray.map((type)=>{
@@ -35,7 +46,7 @@ const EvaluationTypeSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray,
 						<StyledButton
 						key = {type}
 						handleClick = {()=>{setEvaluationType(type)}}
-						selected = {type === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.evaluationType}
+						selected = {type === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test[keyToChange]}
 						fontSize = {type === '≠' ? '28' : '16'}
 						maxHeight = {type === '≠' ? '40' : null}
 						>

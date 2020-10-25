@@ -21,7 +21,7 @@ const commandDetails = {
 		useWhen: [
 			'has not detected the presence of any hostiles',
 			'has not taken damage in the previous tick',
-			'is employing stationary-ranged strategy'
+			'is employing a stationary-ranged strategy'
 		],
 		instructionOptions: [
 			

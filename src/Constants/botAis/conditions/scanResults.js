@@ -4,7 +4,7 @@ class ScanResults {
 		this.name = 'scanResults';
 		this.test = {
 			testTargets: 'hostile',
-			targetEvaluationType: '===',
+			targetEvaluationType: '=',
 			threshold: 0,
 			thresholdEvaluationType: '>',
 		};

@@ -1,26 +1,27 @@
 import React from 'react';
-import ReloadableWeaponSelector from '../TestComponents/ReloadableWeaponSelector';
+import TestTargetsSetter from '../TestComponents/TestTargetsSetter';
 import EvaluationTypeSelector from '../TestComponents/EvaluationTypeSelector';
 import ThresholdSetter from '../TestComponents/ThresholdSetter';
 
-const WeaponLoadedTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
+const ScanResultsTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
-			<ReloadableWeaponSelector
-			nodeInfo = {nodeInfo}
+			<TestTargetsSetter
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
-			botNumberSelected = {botNumberSelected}
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
+			infoGatheredBy = {'scan'}
 			/>
 			<br/>
 			<EvaluationTypeSelector
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
-			optionsArray = {['=','≠','>','<']}
+			optionsArray = {['=','≠']}
 			botNumberSelected = {botNumberSelected}
+			customKeyToChange = {'targetEvaluationType'}
 			/>
 			<br/>
 			<ThresholdSetter
@@ -29,7 +30,18 @@ const WeaponLoadedTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNu
 			aiAndScripts = {aiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
+			<br/>
+			<EvaluationTypeSelector
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			aiAndScripts = {aiAndScripts}
+			optionsArray = {['=','≠','>','<']}
+			botNumberSelected = {botNumberSelected}
+			customKeyToChange = {'thresholdEvaluationType'}
+			/>
+			<br/>
+			
 		</div>
 	)
 }
-export default WeaponLoadedTest;
+export default ScanResultsTest;

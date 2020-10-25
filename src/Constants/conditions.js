@@ -18,13 +18,16 @@ export const conditionsData = {
 	adjacentTo: {
 		camel: 'adjacentTo',
 		name: 'Adjacent To',
-		affect: '',
-		generalUse: '',
+		affect: 'Tests a set direction one cell away from the executor and looks for contents of a selected type',
+		generalUse: 'Useful for wall navigation and to quicly test if beside a hostile bot.',
 		useWhen: [
-			'',
+			'is about to execute a MOVE command',
+			'is employing a wall or corner strategy',
 		],
 		testOptions: [
-			''
+			'if executor is adjacent to a hostile, friend, wall or corner',
+			'the direction of said obstacle',
+			'the type of said obstacle'
 		]
 	},
 	aimResults: {
@@ -102,37 +105,45 @@ export const conditionsData = {
 	previousCommand: {
 		camel: 'previousCommand',
 		name: 'Previous Command',
-		affect: '',
-		generalUse: '',
+		affect: 'Tests whether or not a selected command was executed in the previous tick.',
+		generalUse: 'Useful to determine which step a bot is on during a sequence of commands.',
 		useWhen: [
-			'',
+			'is incrementally aiming',
+			'is employing a simple-sequence strategy',
+			'has satisfied the conditions to enter into a subroutine'
 		],
 		testOptions: [
-			''
+			'if the bot executed the selected command on the previous tick'
 		]
 	},
 	scanResults: {
 		camel: 'scanResults',
 		name: 'Scan Results',
-		affect: '',
-		generalUse: '',
+		affect: 'Tests information from the end of the previous tick from a SCAN command or the auto-scan. Ex1: # of Hostiles Scanned > 0   Ex2: # of nonFriends = 0 ',
+		generalUse: 'Useful to find the location of other bots and walls.',
 		useWhen: [
-			'',
+			'has executed a MOVE command',
+			'is searching for a hostile bot',
+			'is searching for walls',
+			'is searching for a corner'
 		],
 		testOptions: [
-			''
+			'if a scan does or does not contain a selected return',
+			'if the multiplicity of selected returns is greater-than or less-than a provided number',
+			'if the multiplicity of selected returns is equal or not equal to than a provided number',
 		]
 	},
 	sufficientEnergy: {
 		camel: 'sufficientEnergy',
 		name: 'Sufficient Energy',
-		affect: '',
-		generalUse: '',
+		affect: 'Tests if the bot has enough energy in their Capacitor to execute a selected command.',
+		generalUse: 'Useful to know when a command will be executed and not ignored due to an impossibility to execute.',
 		useWhen: [
-			'',
+			'is about to execute a command',
 		],
 		testOptions: [
-			''
+			'if the bot has enough stored energy to perform a selected action',
+			'if the bot has enough stored energy to perform an attack with a specific weapon'
 		]
 	},
 	weaponLoaded: {
@@ -145,10 +156,9 @@ export const conditionsData = {
 			'has an option of which weapon to use'
 		],
 		testOptions: [
-			'if ticks remaining is equal to the provided number',
-			'if ticks remaining is not equal to the provided number',
-			'if ticks remaining is greater-than the provided number',
-			'if ticks remaining is less-than the provided number',
+			'if ticks remaining is equal or not equal to the provided number',
+			'if ticks remaining is greater-than or less-than the provided number',
+	
 		]
 	},
 }

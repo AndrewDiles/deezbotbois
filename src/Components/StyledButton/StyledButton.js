@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
-const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSampling, width, maxHeight, fontSize, children} ) => {
+const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSampling, width, maxHeight, minHeight, fontSize, children} ) => {
 	let colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
 	if (settings.serverStatus !== 'idle') disabled = true;
@@ -28,6 +28,7 @@ const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSam
 			width = {width}
 			fontSize = {fontSize}
 			maxHeight = {maxHeight}
+			minHeight = {minHeight}
       >
         {children}
       </ButtonStylings>
@@ -39,7 +40,7 @@ const ButtonStylings = styled.button`
 	/* padding-bottom: ${props => props.maxHeight && `30px`}; */
 	/* line-height: ${props => props.maxHeight && `40px`}; */
   width: ${props=>props.width ? `${props.width}px` : '125px'};
-	min-height: 40px;
+	min-height: ${props => props.minHeight ? `${props.minHeight}px` : '40px'};
 	max-height: ${props => props.maxHeight && `${props.maxHeight}px`};
   /* padding: 5px; */
   position: ${props => props.absolute ? 'absolute' : 'relative'};

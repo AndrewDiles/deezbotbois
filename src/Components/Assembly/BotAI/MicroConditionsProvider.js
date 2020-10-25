@@ -1,7 +1,12 @@
 import React from 'react';
-import WeaponLoadedTest from './Conditions/WeaponLoadedTest';
+import AdjacentToTest from './Conditions/AdjacentToTest';
 
-const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts }) => {
+import PreviousCommandTest from './Conditions/PreviousCommandTest';
+import SufficientEnergyTest from './Conditions/SufficientEnergyTest';
+import WeaponLoadedTest from './Conditions/WeaponLoadedTest';
+import ScanResultsTest from './Conditions/ScanResultsTest';
+
+const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts, attributes }) => {
 	console.log(nodeInfo)
 	if (!nodeInfo || !nodeInfo.name) {
 		return (
@@ -13,9 +18,13 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 	switch(nodeInfo.name) {
 		case 'adjacentTo' : {
 			return (
-				<>
-					adj to
-				</>
+				<AdjacentToTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			)
 		}
 		case 'aimResults' : {
@@ -62,23 +71,37 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 		}
 		case 'previousCommand' : {
 			return (
-				<>
-					prev co
-				</>
+				<PreviousCommandTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				attributes = {attributes}
+				/>
 			)
 		}
 		case 'scanResults' : {
 			return (
-				<>
-					scan res
-				</>
+				<ScanResultsTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			)
 		}
 		case 'sufficientEnergy' : {
 			return (
-				<>
-					suff en
-				</>
+				<SufficientEnergyTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				attributes = {attributes}
+				/>
 			)
 		}
 		case 'weaponLoaded' : {

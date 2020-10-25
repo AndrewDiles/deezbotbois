@@ -4,7 +4,6 @@ class PreviousCommand {
 		this.name = 'previousCommand';
 		this.test = {
 			commandName: 'scanCommand',
-			evaluationType: '=',
 			armSlot: null,
 		};
 		this.conditionMet = conditionMet;
