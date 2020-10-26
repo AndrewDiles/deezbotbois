@@ -1,6 +1,11 @@
 import React from 'react';
 import AdjacentToTest from './Conditions/AdjacentToTest';
-
+import AimResultsTest from './Conditions/AimResultsTest';
+import AttributeTest from './Conditions/AttributeTest';
+import ConsecutiveAimsTest from './Conditions/ConsecutiveAimsTest';
+import DamageTakenTest from './Conditions/DamageTakenTest';
+import DistanceToTest from './Conditions/DistanceToTest';
+import ObstructionToTest from './Conditions/ObstructionToTest';
 import PreviousCommandTest from './Conditions/PreviousCommandTest';
 import SufficientEnergyTest from './Conditions/SufficientEnergyTest';
 import WeaponLoadedTest from './Conditions/WeaponLoadedTest';
@@ -11,6 +16,7 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 	if (!nodeInfo || !nodeInfo.name) {
 		return (
 			<>
+			<br/>
 			MISSING NODE DATA
 			</>
 		)
@@ -29,44 +35,68 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 		}
 		case 'aimResults' : {
 			return (
-				<>
-					aims res
-				</>
+				<AimResultsTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			)
 		}
 		case 'attribute' : {
 			return (
-				<>
-					attr
-				</>
+				<AttributeTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			)
 		}
 		case 'consecutiveAims' : {
 			return (
-				<>
-					cons aims
-				</>
+				<ConsecutiveAimsTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			)
 		}
 		case 'damageTaken' : {
 			return (
-				<>
-					damage taken
-				</>
+				<DamageTakenTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			)
 		}
 		case 'distanceToTarget' : {
 			return (
-				<>
-					dist 2 tar
-				</>
+				<DistanceToTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			)
 		}
 		case 'obstructionToTarget' : {
 			return (
-				<>
-					obstr 2 tar
-				</>
+				<ObstructionToTest
+				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				/>
 			)
 		}
 		case 'previousCommand' : {

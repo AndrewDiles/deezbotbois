@@ -1,26 +1,26 @@
 import React from 'react';
-import TargetSelector from '../TestComponents/TargetSelector';
-import TestTargetsSetter from '../TestComponents/TestTargetsSetter';
+import EvaluationTypeSelector from '../TestComponents/EvaluationTypeSelector';
+import ThresholdSetter from '../TestComponents/ThresholdSetter';
 
-const ObstructionToTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
+const DamageTakenTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>
-			<TargetSelector
+			<ThresholdSetter
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
-			<TestTargetsSetter
+			<EvaluationTypeSelector
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
+			optionsArray = {['=','≠','>','<']}
 			botNumberSelected = {botNumberSelected}
-			infoGatheredBy = 'scan'
 			/>
 		</div>
 	)
 }
-export default ObstructionToTest;
+export default DamageTakenTest;

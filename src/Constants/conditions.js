@@ -93,13 +93,14 @@ export const conditionsData = {
 	obstructionToTarget : {
 		camel: 'obstructionToTarget',
 		name: 'Obstruction to Target',
-		affect: '',
-		generalUse: '',
+		affect: 'Tests whether or not there is an obstacle between the executor of a SCAN command and a scanned target.',
+		generalUse: 'Useful to guage expected outcomes of commands.',
 		useWhen: [
-			'',
+			'is about to execute a MOVE command toward a scanned target',
+			'is about to execute a ranged attack on a scanned target'
 		],
 		testOptions: [
-			''
+			'if there is another bot along the shortest path to a scanned target'
 		]
 	},
 	previousCommand: {

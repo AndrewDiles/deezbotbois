@@ -4,7 +4,7 @@ class AimResults {
 		this.name = 'aimResults';
 		this.test = {
 			testTargets: 'hostile',
-			evaluationType: '=',
+			targetEvaluationType: '=',
 		};
 		this.conditionMet = conditionMet;
 		this.conditionUnMet = conditionUnMet;
@@ -15,7 +15,7 @@ class AimResults {
 	}
 	// comparisonOperator can be: =, ≠
 	setEvaluation(comparisonOperator) {
-		this.test.evaluationType = comparisonOperator
+		this.test.targetEvaluationType = comparisonOperator
 	}
 }
 module.exports = AimResults

@@ -4,9 +4,13 @@ import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledButton from '../../../StyledButton/StyledButton';
 
-const TestTargetsSetter = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, infoGatheredBy }) => {
+const TestTargetsSetter = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, infoGatheredBy, ignoreTargetEvaluationType, targets }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
+	let targetsArray = ['hostile', 'friend', 'wall', 'corner', 'any'];
+	if (targets) {
+		targetsArray = targets;
+	}
 
 	function setTestTargets(type) {
 		let newActiveNodeArray = [...activeNodeArray];
@@ -16,24 +20,44 @@ const TestTargetsSetter = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botN
 	}
 
 	return (		
-		<EvaluationTypeSelectorContainer>
+		<EvaluationTypeSelectorContainer
+		heightMultiplier = {targetsArray.length}
+		>
 			<Request className = 'centeredFlex'>
 				{infoGatheredBy === 'scan' ? (
-					activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.targetEvaluationType === '=' ? (
-						'TEST IF SCAN CONTAINS'
+					ignoreTargetEvaluationType === '1' ? (
+						'TEST FOR'
 					) : (
-						'TEST IF SCAN DOES NOT CONTAIN'
+						activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.targetEvaluationType !== '≠' ? (
+							'TEST FOR'
+						) : (
+							'TEST FOR NOT'
+						)
 					)
 				) : (
-				activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.evaluationType === '=' ? (
+				activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.evaluationType !== '≠' ? (
 					'TEST IF DIRECTION CONTAINS'
 				) : (
 					'TEST IF DIRECTION DOES NOT CONTAIN'
 				))}
 				
 			</Request>
-			<Options className = 'evenlyFlex'>
-				<StyledButton
+			<Options
+			className = 'evenlyFlex'
+			>
+				{targetsArray.map((target)=>{
+					return (
+						<StyledButton
+						key = {target}
+						handleClick = {()=>{setTestTargets(target)}}
+						selected = {target === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testTargets}
+						fontSize = {target.length >= 10 && '10'}
+						>
+							{target.toUpperCase()}
+						</StyledButton>
+					)
+				})}
+				{/* <StyledButton
 				handleClick = {()=>{setTestTargets('hostile')}}
 				selected = {'hostile' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testTargets}
 				// fontSize = {'16'}
@@ -67,7 +91,7 @@ const TestTargetsSetter = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botN
 				// fontSize = {'16'}
 				>
 					ANY
-				</StyledButton>
+				</StyledButton> */}
 			</Options>
 		</EvaluationTypeSelectorContainer>
 	)
@@ -76,7 +100,7 @@ const TestTargetsSetter = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botN
 export default TestTargetsSetter;
 const EvaluationTypeSelectorContainer = styled.div`
 	width: 100%;
-	height: 220px;
+	height: ${props => props.heightMultiplier ? `${(props.heightMultiplier*40)+((props.heightMultiplier-1)*5)}px` : '40px'};
 	display: flex;
 `
 const Request = styled.div`

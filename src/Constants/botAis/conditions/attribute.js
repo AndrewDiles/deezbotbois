@@ -15,7 +15,7 @@ class Attribute {
 		this.test.testTargets = newTarget
 	}
 	
-	// comparisonOperator can be: =, >, <
+	// comparisonOperator can be: =, >, <, ≠
 	setEvaluation(comparisonOperator) {
 		this.test.evaluationType = comparisonOperator
 	}

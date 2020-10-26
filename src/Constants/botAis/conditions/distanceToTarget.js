@@ -4,6 +4,7 @@ class DistanceToTarget {
 		this.name = 'distanceToTarget';
 		this.test = {
 			targetNumber: 1,
+			testTargets: 'hostile',
 			evaluationType: '<',
 			threshold: 3
 		};
@@ -13,6 +14,10 @@ class DistanceToTarget {
 	// newTargetNumber is the index number +1 of a scan
 	setTargetNumber(newTargetNumber) {
 		this.test.targetNumber = newTargetNumber
+	}
+	// newTarget can be: hostile, friend, wall, corner, any
+	setTarget(newTarget) {
+		this.test.testTargets = newTarget
 	}
 	// comparisonOperator can be: =, ≠, >, <
 	setEvaluation(comparisonOperator) {
