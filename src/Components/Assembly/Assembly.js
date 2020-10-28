@@ -21,6 +21,7 @@ import BotTechTree from './BotTechTree/BotTechTree';
 import BotAI from './BotAI/BotAI';
 import BotScripts from './BotScripts/BotScripts';
 import ComprehensiveAttributes from './ComprehensiveAttributes/ComprehensiveAttributes';
+import AiDecisionNodeTree from './AiDecisionNodeTree/AiDecisionNodeTree';
 
 const Assembly = () => {
 	const settings = useSelector((state) => state.settings);
@@ -81,7 +82,8 @@ const Assembly = () => {
 	React.useEffect(()=>{
 		if (!userInfo.botBuilds) return
 		setActiveNodeArray(getNodeArray(userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing ))
-	},[setActiveNodeArray, botNumberSelected, userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing])
+		// console.log('updating activeNodeArray')
+	},[setActiveNodeArray, botNumberSelected, userInfo.botBuilds[botNumberSelected].script, JSON.stringify(aiAndScripts.viewing)])
 
 // Need to reset insertion upon navigation and changing of nodes
 	useEffect(()=>{
@@ -243,6 +245,11 @@ const Assembly = () => {
 			{masterAttributesTabDisplayed && 
 				<ComprehensiveAttributes
 				attributes = {attributes}
+				/>
+			}
+			{aiNodeTreeTabDisplayed && 
+				<AiDecisionNodeTree
+				botNumberSelected = {botNumberSelected}
 				/>
 			}
     </Wrapper>

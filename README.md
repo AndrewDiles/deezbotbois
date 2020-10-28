@@ -66,6 +66,11 @@ Intentions with the GUI include:
 - For non-mouse users, selecting optinos in nav links won't bubble to button's click function.
 ### Solution: Set navlink's tabindex="-1"
 
+# Must Completes:
+- Descending in Node Depth
+- Bot Duplication
+- Command and Condition Node's Instructions 
+
 # Potential Improvements
 - Drill up from Instruction Components to remove passing of props they don't need
 - Clean up / refactor Ai deletion Component as it contains code duplication
@@ -145,8 +150,19 @@ Intentions with the GUI include:
 - after being hit, see if last turn was a scan, if not scan or move (provided no auto-scanned hostile is detected)
 
 ## Declared strategy names
-- stationary-ranged
-- forced-melee
+
+### Marco Strategies
+- simple-sequence
+- stationary-ranged strategy
+- forced-melee strategy
+
+### Micro Strategies
+- wall strategy
+- corner strategy
+
+### loop types
+- subroutine
+- simple-sequence
 
 ### Icon Imports For Bot Assembly:
 import {copy} from 'react-icons-kit/icomoon/copy'

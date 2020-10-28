@@ -12,7 +12,7 @@ import WeaponLoadedTest from './Conditions/WeaponLoadedTest';
 import ScanResultsTest from './Conditions/ScanResultsTest';
 
 const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, setAiAndScripts, attributes }) => {
-	console.log(nodeInfo)
+	// console.log({nodeInfo})
 	if (!nodeInfo || !nodeInfo.name) {
 		return (
 			<>

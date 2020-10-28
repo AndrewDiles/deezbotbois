@@ -51,7 +51,6 @@ const SwapIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionNa
 				} else {
 					setLosingNestedNodes(decisionName);
 				}
-
 			} else {
 				console.log('swapping error')
 			}
@@ -74,13 +73,13 @@ const SwapIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionNa
     <StyledIcon
 		icon = {loop}
 		padding = '5'
-		disabled = {aiAndScripts === null || 
+		disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index] && (aiAndScripts === null || 
 			(activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command &&
 				activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.name === decisionName
 			) ||
 			(activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition &&
 				activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.name === decisionName
-			)
+			))
 		}
 		handleClick = {handleClick}
 		/>

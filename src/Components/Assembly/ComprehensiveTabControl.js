@@ -33,6 +33,7 @@ const Wrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 5px 0;
 	@media screen and (max-width: 1050px) {
 		flex-wrap: wrap;
 		height: 120px;

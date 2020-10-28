@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import InsertionIcon from './InsertionIcon';
 import DeleteNode from './DeleteNode';
 
+// import StyledButton from '../../StyledButton/StyledButton';
 import StyledIcon from '../../StyledIcon/StyledIcon';
 import {moveUp} from 'react-icons-kit/icomoon/moveUp';
 import {moveDown} from 'react-icons-kit/icomoon/moveDown';
@@ -18,6 +19,9 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 	const botInfo = userInfo.botBuilds;
 	let colors = useSelector(getThemeColors);
 	const dispatch = useDispatch();
+
+	console.log('aiAndScripts',aiAndScripts)
+	console.log('actual activeNodeArray',activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index])
 
 	// Purpose of this component is to provide buttons to move the Node's array index, delete the Node and set the inserstion point
 	// console.log({activeNodeArray})
@@ -45,7 +49,19 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 		setAiAndScripts(newAiAndScripts);
 		setDeleteActive(false);
 	}
-	
+	function handleConditionTrue () {
+		let newAiAndScripts = {...aiAndScripts};
+		newAiAndScripts.viewing.push({type: 'conditionTrue', index: 0})
+		setAiAndScripts(newAiAndScripts);
+		setDeleteActive(false);
+	}
+	function handleConditionFalse () {
+		let newAiAndScripts = {...aiAndScripts};
+		newAiAndScripts.viewing.push({type: 'conditionFalse', index: 0})
+		setAiAndScripts(newAiAndScripts);
+		setDeleteActive(false);
+	}
+
 	return deleteActive ? (
 		<DeleteNode
 		setDeleteActive = {setDeleteActive}
@@ -98,15 +114,59 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 					SET INSERTION POINT
 				</InsertionMessageContainer>
 			)}
-				
-			<IconRow>
-				<IconContainer>
-					<InsertionIcon
-					aiAndScripts = {aiAndScripts}
-					setAiAndScripts = {setAiAndScripts}
-					/>
-				</IconContainer>
-			</IconRow>
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command &&
+				<OptionsRow className ='evenlyFlex'>
+					<IconContainer>
+						<InsertionIcon
+						aiAndScripts = {aiAndScripts}
+						setAiAndScripts = {setAiAndScripts}
+						/>
+					</IconContainer>
+				</OptionsRow>
+			}
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition &&
+				<OptionsRow className ='evenlyFlex'>
+					<ButtonContainer case = {true}>
+						<StyledDepthMovementButton
+						// width = '90'
+						onClick = {handleConditionTrue}
+						colors = {colors}
+						case = {true}
+						>
+							DEPTH +1
+							CASE TRUE
+						</StyledDepthMovementButton>
+						{/* <ButtonColoration case = {true}>
+							DEPTH +1
+							CASE TRUE
+						</ButtonColoration> */}
+					</ButtonContainer>
+
+					<IconContainer>
+						<InsertionIcon
+						aiAndScripts = {aiAndScripts}
+						setAiAndScripts = {setAiAndScripts}
+						/>
+					</IconContainer>
+
+					<ButtonContainer>
+						<StyledDepthMovementButton
+						// width = '90'
+						onClick = {handleConditionFalse}
+						colors = {colors}
+						case = {false}
+						>
+							DEPTH +1
+							CASE FALSE
+						</StyledDepthMovementButton>
+						{/* <ButtonColoration case = {false}>
+							DEPTH +1
+							CASE FALSE
+						</ButtonColoration> */}
+					</ButtonContainer>
+				</OptionsRow>
+			}
+
     </Wrapper>
   )
 }
@@ -141,9 +201,51 @@ const IconContainer = styled.div`
 	height: 50px;
 	width: 50px;
 `
-const IconRow = styled.div`
+const OptionsRow = styled.div`
 	width: 100%;
 	height: 50px;
-	display: flex;
-	justify-content: center;
+	padding: 0 5px;
+`
+const ButtonContainer = styled.div`
+	width: 90px;
+	height: 40px;
+`
+const ButtonColoration = styled.div`
+	width: 90px;
+	height: 40px;
+	border-radius: 5px;
+	font-size: 8px;
+	white-space: pre-wrap;
+	text-align: center;
+	padding-top: 10px;
+	position: relative;
+	top: -40px;
+	background-color: ${props => props.case ? 'rgba(0,255,0,0.4);' : 'rgba(255,0,0,0.4);'};
+`
+const StyledDepthMovementButton = styled.button`
+	width: 90px;
+	height: 40px;
+	border-radius: 5px;
+	font-size: 8px;
+	color: ${props => props.colors.textColor};
+	white-space: pre-wrap;
+	text-align: center;
+	padding: 4px 0 0 0;
+	margin: 0;
+	border: 1px solid transparent;
+  font-weight: 500;
+  font-family: 'Press Start 2P', cursive;
+	transition: color .75s, background-color .75s;
+	background-color: ${props => props.case ? 'rgba(0,255,0,0.2);' : 'rgba(255,0,0,0.2);'};
+  &:hover {
+    cursor: pointer;
+    background-color: ${props => props.selected ? props.selected : props.colors.hovered};
+    color: ${props => props.colors.hoveredText};
+		background-color: ${props => props.case ? 'rgba(0,255,0,0.4);' : 'rgba(255,0,0,0.4);'};
+  }
+	&:focus {
+		outline-color: ${props => props.colors.hoveredText};
+		color: ${props => props.colors.hoveredText};
+		background-color: ${props => props.case ? 'rgba(0,255,0,0.4);' : 'rgba(255,0,0,0.4);'};
+	}
 `

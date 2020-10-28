@@ -19,6 +19,7 @@ const NodeDisplay = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeN
 	// 	setActiveNodeArray(getNodeArray(userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing ))
 	// },[setActiveNodeArray, botNumberSelected, userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing])
 	// console.log(activeNodeArray)
+	
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}

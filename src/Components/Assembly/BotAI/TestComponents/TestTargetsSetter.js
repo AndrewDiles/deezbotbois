@@ -51,7 +51,7 @@ const TestTargetsSetter = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botN
 						key = {target}
 						handleClick = {()=>{setTestTargets(target)}}
 						selected = {target === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testTargets}
-						fontSize = {target.length >= 10 && '10'}
+						fontSize = {target.length >= 10 ? '10' : '12'}
 						>
 							{target.toUpperCase()}
 						</StyledButton>

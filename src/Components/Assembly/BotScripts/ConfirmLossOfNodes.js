@@ -57,6 +57,7 @@ const ConfCancelWrapper = styled.div`
   height: 50px;
   display: flex;
   justify-content: space-evenly;
+	padding: 0 5px;
 `;
 const WarningText = styled.div`
   width: 100%;

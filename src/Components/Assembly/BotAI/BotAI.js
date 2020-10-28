@@ -67,6 +67,7 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 			/>
 			<PreviousCondition
 			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
 			/>
 			<NodeSelector
 			botNumberSelected = {botNumberSelected}

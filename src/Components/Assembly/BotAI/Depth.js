@@ -14,9 +14,9 @@ const Depth = ({ aiAndScripts, setAiAndScripts, setDeleteActive }) => {
 	}
 	function handleDecrementDepthLevel () {
 		let newAiAndScripts = {...aiAndScripts};
-		newAiAndScripts.viewing = newAiAndScripts.viewing.pop();
+		newAiAndScripts.viewing.pop();
 		setAiAndScripts(newAiAndScripts);
-		setDeleteActive(false)
+		setDeleteActive(false);
 	}
 	// console.log({aiAndScripts})
   return (
