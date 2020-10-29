@@ -12,6 +12,7 @@ import {
 
 import StyledIcon from '../StyledIcon/StyledIcon';
 import {floppyDisk} from 'react-icons-kit/icomoon/floppyDisk'
+import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 
 const Account = () => {
 
@@ -147,13 +148,19 @@ const Account = () => {
 			</RowDiv>
 
 			<br/>
-
-			<StyledIcon
+			{settings.serverStatus === 'idle' ? (
+				<StyledIcon
 				handleClick = {saveSettings}
 				padding = {5}
 				disabled = {!changeMade || serverErrorMsg !== null}
 				icon = {floppyDisk}
-      />
+      	/>
+			):(
+				<div className = 'centeredFlex'>
+					<LoadingAnimation size = {40}/>
+				</div>
+			)}
+
 			<ErrorP>
 				{serverErrorMsg}
 			</ErrorP>

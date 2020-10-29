@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from "react-redux";
-import { getThemeColors } from '../../Redux/reducers/user-reducer';
-
 import StyledButton from '../StyledButton/StyledButton';
+import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 
 import {
 	communicating,
@@ -44,7 +43,15 @@ const CreateNewBot = ({ setBotNumberSelected, setErrorMsg, setSuccessMsg }) => {
 					dispatch(communicationsFailed())
 				}
 			})
-
+	}
+	if (settings.serverStatus !== 'idle') {
+		return (
+			<div className = 'baseButtonSize'>
+				<LoadingAnimation
+				size = {40}
+				/>
+			</div>
+		)
 	}
   return (
     <StyledButton

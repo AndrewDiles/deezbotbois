@@ -19,6 +19,7 @@ import {
   replaceUserInfo,
 } from "../../Redux/actions";
 
+import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 import MessageDisplay from "../MessageDisplay/MessageDisplay";
 import StyledButton from "../StyledButton/StyledButton";
 import StyledIcon from "../StyledIcon/StyledIcon";
@@ -322,12 +323,18 @@ const Settings = () => {
         </ColDiv>
       </RowDiv>
       <br />
-      <StyledIcon
-        handleClick={saveSettings}
-        padding={5}
-        disabled={!changeMade || serverErrorMsg !== null}
-				icon={floppyDisk}
-      />
+			{settings.serverStatus === 'idle' ? (
+				<StyledIcon
+				handleClick = {saveSettings}
+				padding = {5}
+				disabled = {!changeMade || serverErrorMsg !== null}
+				icon = {floppyDisk}
+      	/>
+			):(
+				<div className = 'centeredFlex'>
+					<LoadingAnimation size = {40}/>
+				</div>
+			)}
       {serverErrorMsg && (
         <MessageDisplay
           type={"error"}

@@ -3,15 +3,10 @@ import styled from 'styled-components';
 
 import Bot from "../Bots/Bot";
 
-const LoadingAnimation = () => {
-	const [size, setSize] = React.useState(1);
-
-	React.useEffect(()=>{
-		let wrapper = document.getElementById('loadingWrapper');
-		console.log(wrapper);
-		console.log(wrapper.getBoundingClientRect());
-		// getBoundingClientRect()
-	},[])
+const LoadingAnimation = ({size}) => {
+	if (size === undefined) {
+		size = 0;
+	}
 
 	const test1 = Math.random();
 	let arm1 = 'Gun1';
@@ -47,9 +42,12 @@ const LoadingAnimation = () => {
 	}
 
   return (
-    <Wrapper className = 'centeredFlex' id = 'loadingWrapper'>
-      <BotTestWrapper
-      size = {size}
+    <Wrapper
+		className = 'centeredFlex'
+		>
+      <BotWrapper
+			size = {size}
+			className = 'rotating'
       >
         <Bot
         model = {model}
@@ -60,7 +58,7 @@ const LoadingAnimation = () => {
 				arm2Angle = {null}
 				alternativeBotSize = {size}
         />
-      </BotTestWrapper>
+      </BotWrapper>
 		</Wrapper>
   )
 }
@@ -71,7 +69,7 @@ const Wrapper = styled.div`
 	height: 100%;
 `
 
-const BotTestWrapper = styled.div`
+const BotWrapper = styled.div`
   height: ${(props) => `${props.size}px`};
   width: ${(props) => `${props.size}px`};
 `;

@@ -217,6 +217,14 @@ html {
 .disabledTransition {
 	transition: '';
 }
+.baseButtonSize {
+	width: 125px;
+	height: 40px;
+}
+.baseIconSize {
+	height: 40px;
+	width: 40px;
+}
 /* .enabledTransition {
 	transition: ${props => `transform ${props.executionSpeed}s  cubic-bezier(.8,.15,.65,.9)`};
 } */
@@ -232,7 +240,24 @@ html {
     top:0;
   }
 } */
+@keyframes rotating {
+  0%{
+		transform: scale(1) rotate(0deg);
+  }
+	10%{
+		transform: scale(0.9) rotate(0deg);
+	}
+	90%{
+		transform: scale(0.9) rotate(360deg);
+	}
+  100%{
+		transform: scale(1) rotate(360deg); 
+  }
+}
 
+.rotating {
+    animation: rotating 2s ease-in-out infinite;
+}
 @keyframes loadInScreen {
   0% {
     width: 10px;

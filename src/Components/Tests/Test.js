@@ -102,7 +102,7 @@ const Test = () => {
         />
       </BotTestWrapper>
 			<BotTestWrapper>
-				<LoadingAnimation/>
+				<LoadingAnimation size = '50'/>
 			</BotTestWrapper>
 		</Wrapper>
   )

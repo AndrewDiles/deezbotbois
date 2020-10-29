@@ -80,10 +80,10 @@ const Assembly = () => {
 	// },[botNumberSelected, botInfo[botNumberSelected] && botInfo[botNumberSelected].model])
 
 	React.useEffect(()=>{
-		if (!userInfo.botBuilds) return
+		if (!userInfo.botBuilds || !userInfo.botBuilds[botNumberSelected] ) return
 		setActiveNodeArray(getNodeArray(userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing ))
 		// console.log('updating activeNodeArray')
-	},[setActiveNodeArray, botNumberSelected, userInfo.botBuilds[botNumberSelected].script, JSON.stringify(aiAndScripts.viewing)])
+	},[setActiveNodeArray, botNumberSelected, userInfo.botBuilds[botNumberSelected] && userInfo.botBuilds[botNumberSelected].script, JSON.stringify(aiAndScripts.viewing)])
 
 // Need to reset insertion upon navigation and changing of nodes
 	useEffect(()=>{
