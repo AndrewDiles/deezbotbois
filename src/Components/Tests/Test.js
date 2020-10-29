@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
+import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 
 import Bot from "../Bots/Bot";
 
@@ -14,6 +15,7 @@ const Test = () => {
 		navLocation = {settings.navLocation}
 		profileTab = {settings.profileTab}
 		colors = {colors}
+		className = 'centeredFlex'
 		>
       {/* <BotTestWrapper
       size = {settings.cellSize}
@@ -99,6 +101,9 @@ const Test = () => {
         arm2Angle = {45}
         />
       </BotTestWrapper>
+			<BotTestWrapper>
+				<LoadingAnimation/>
+			</BotTestWrapper>
 		</Wrapper>
   )
 }
@@ -113,20 +118,12 @@ const Wrapper = styled.div`
 	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
-	display : flex;
+	/* display : flex;
 	flex-direction: row;
 	justify-content: center;
 	align-content: center;
-	align-items: center;
-	color: ${props => props.colors.textColor};
-	width: 100%;
-	height: 100%;
+	align-items: center; */
 	overflow: auto;
-	display : flex;
-	flex-direction: row;
-	justify-content: center;
-	align-content: center;
-	align-items: center;
 `
 
 const BotTestWrapper = styled.div`

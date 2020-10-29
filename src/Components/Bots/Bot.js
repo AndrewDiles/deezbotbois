@@ -114,6 +114,13 @@ const Bot = ( { model, arm1, arm2, arm3, botColors, arm1Angle, arm2Angle, arm3An
 	armsSelection(arm2, 2);
 	armsSelection(arm3, 3);
 
+	if (SelectedBot === null) {
+		console.log('Error trying to obtain a seclected bot for model:', model)
+		return (
+			<NoBot cellSize = {alternativeBotSize || settings.cellSize}/>
+		)
+	}
+
   return (
     <Wrapper
 		cellSize = {alternativeBotSize || settings.cellSize}

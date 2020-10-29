@@ -14,6 +14,7 @@ const CompName = () => {
 		navLocation = {settings.navLocation}
 		profileTab = {settings.profileTab}
 		colors = {colors}
+		className = 'centeredFlex'
 		>
       This is indeed a component
     </Wrapper>
@@ -31,9 +32,9 @@ const Wrapper = styled.div`
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-	display : flex;
+	/* display : flex;
 	flex-direction: row;
 	justify-content: center;
 	align-content: center;
-	align-items: center;
+	align-items: center; */
 `
