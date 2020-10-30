@@ -46,3 +46,58 @@ export const defaultBotColors = {
   armPrimary: 'silver',
   armSecondary: 'deepskyblue'
 }
+export const waspColors = {
+	primary: 'yellow',
+	secondary: 'orange',
+	trim: 'black',
+	extensions: 'black',
+	rollers: 'yellow',
+	eyes: 'black',
+	armTrim: 'limegreen',
+  armPrimary: 'lime',
+  armSecondary: 'springgreen'
+}
+export const lindyBColors = {
+	primary: 'khaki',
+	secondary: 'moccasin',
+	trim: 'darkkhaki',
+	extensions: 'beige',
+	rollers: 'tan',
+	eyes: 'ivory',
+	armTrim: 'indigo',
+  armPrimary: 'blueviolet',
+  armSecondary: 'fuchsia'
+}
+export const kermitColors = {
+	primary: 'greenyellow',
+	secondary: 'olivedrab',
+	trim: 'yellowgreen',
+	extensions: 'olivedrab',
+	rollers: 'yellowgreen',
+	eyes: 'darkslategray',
+	armTrim: 'maroon',
+  armPrimary: 'saddlebrown',
+  armSecondary: 'chocolate'
+}
+export const eliteColors = {
+	primary: 'crimson',
+	secondary: 'magenta',
+	trim: 'lavenderblush',
+	extensions: 'mediumblue',
+	rollers: 'darkred',
+	eyes: 'blue',
+	armTrim: 'black',
+  armPrimary: 'royalblue',
+  armSecondary: 'steelblue'
+}
+export const linenColors = {
+	primary: 'honeydew',
+	secondary: 'azure',
+	trim: 'linen',
+	extensions: 'floralwhite',
+	rollers: 'mistyrose',
+	eyes: 'cornsilk',
+	armTrim: 'seashell',
+  armPrimary: 'ghostwhite',
+  armSecondary: 'mintcream'
+}

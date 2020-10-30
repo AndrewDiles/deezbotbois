@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GoogleLogin from 'react-google-login';
 import styled from 'styled-components';
 import {REACT_APP_AUTH0_CLIENT_ID} from '../../authInfo';
+import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 
 import {
 	communicating,
@@ -54,13 +55,22 @@ function LoginViaGoogle() {
 			}
 		})
   }
-
+	if (settings.serverStatus !== 'idle') {
+		return (
+			<div className = 'baseButtonSize'>
+				<LoadingAnimation
+				size = {40}
+				/>
+			</div>
+		)
+	}
   return (
     <StyledGoogleLogin
-      buttonText = "LOGIN"
+			buttonText = "LOGIN"
+			onClick = {()=>dispatch(communicating())}
       clientId = {REACT_APP_AUTH0_CLIENT_ID}
       onSuccess = {(res)=>{handleSuccessfulGoogleLogin(res)}}
-      onFailure = {(res)=>{console.log(res)}}
+      onFailure = {(res)=>{console.log(res); dispatch(communicationsFailed())}}
 			cookiePolicy = {"single_host_origin"}
       >
     </StyledGoogleLogin>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import StyledButton from '../StyledButton/StyledButton';
+import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 
 import {
 	communicating,
@@ -278,12 +279,18 @@ const AltLogin = () => {
 						<br/>
 					</RowDiv>
 					<RowDiv>
-						<StyledButton
-						handleClick = {() => {handleSubmitNewAccount()}}
-						// disabled = {testForInvalidNewAccountData()}
-						>
-							SUMBIT
-						</StyledButton>
+						{settings.serverStatus === 'idle' ? (
+							<StyledButton
+							handleClick = {() => {handleSubmitNewAccount()}}
+							// disabled = {testForInvalidNewAccountData()}
+							>
+								SUBMIT
+							</StyledButton>
+						):(
+							<div className = 'centeredFlex'>
+								<LoadingAnimation size = {40}/>
+							</div>
+						)}
 						<br/>
 					</RowDiv>
 				</div>
@@ -328,12 +335,18 @@ const AltLogin = () => {
 						</RowDiv>
 					}
 					<RowDiv>
-						<StyledButton
-						handleClick = {() => {handleLogin()}}
-						disabled = {accountConfirmed === null ? testForInvalidLoginData() : testForInvalidFirstLoginData()}
-						>
-							LOGIN
-						</StyledButton>
+						{settings.serverStatus === 'idle' ? (
+							<StyledButton
+							handleClick = {() => {handleLogin()}}
+							disabled = {accountConfirmed === null ? testForInvalidLoginData() : testForInvalidFirstLoginData()}
+							>
+								LOGIN
+							</StyledButton>
+						):(
+							<div className = 'centeredFlex'>
+								<LoadingAnimation size = {40}/>
+							</div>
+						)}
 						<br/>
 					</RowDiv>
 				</div>
