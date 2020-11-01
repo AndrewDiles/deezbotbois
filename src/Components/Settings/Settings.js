@@ -255,7 +255,8 @@ const Settings = () => {
             <Bot
               className="userImg"
               alternativeBotSize={40}
-              model={botName}
+							model={botName}
+							botColors='default'
               arm1={"Gun1"}
               arm1Angle={-45}
             />
