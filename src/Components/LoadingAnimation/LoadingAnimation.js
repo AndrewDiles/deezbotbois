@@ -31,6 +31,7 @@ const LoadingAnimation = ({size}) => {
 			className = 'rotating'
       >
         <Bot
+				model = {null}
         arm1 = {arm1}
         arm1Angle = {-30}
 				alternativeBotSize = {size}

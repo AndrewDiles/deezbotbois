@@ -36,14 +36,14 @@ import Sword1 from '../Arms/Sword1';
 // Zapper
 
 const Bot = ( { model, arm1, arm2, arm3, botColors, arm1Angle, arm2Angle, arm3Angle, alternativeBotSize, faded } ) => {
-  const settings = useSelector((state) => state.settings);
-	// if (!model) {
-	// 	return (
-	// 		<NoBot 
-	// 		cellSize = {alternativeBotSize || settings.cellSize}
-	// 		/>
-	// 	)
-	// }
+	const settings = useSelector((state) => state.settings);
+	if (model === undefined) {
+		return (
+			<NoBot 
+			cellSize = {alternativeBotSize || settings.cellSize}
+			/>
+		)
+	}
 	if (botColors === 'default') {
 		botColors = botColorSchemes.defaultBotColors;
 	} else if (!botColors) {

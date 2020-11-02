@@ -77,8 +77,6 @@ const ComprehensiveAttributes = ({ attributes }) => {
 export default ComprehensiveAttributes;
 const Wrapper = styled.div`
 	width: 100%;
-	height: 100%;
-	/* min-height: 600px; */
 	/* border: 1px solid rgba(0,0,0,0.1); */
 `
 const AttributeWrapper = styled.div`

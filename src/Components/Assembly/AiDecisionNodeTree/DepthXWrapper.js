@@ -16,13 +16,11 @@ const DepthXWrapper = ({ depthLevel, children }) => {
 export default DepthXWrapper;
 
 const DepthXContainer = styled.div`
-	width: 120px;
-	height: 100%;
-	padding: 10px;
+	width: 175px;
 	display: flex;
 	flex-direction: column;
-	justify-content: start;
+	justify-content: center;
 	align-items: center;
 	text-align: center;
-	background-color: ${props => props.depthLevel < 55 ? `rgba(${200+props.depthLevel},${200+props.depthLevel},${200+props.depthLevel},0.2)` : 'rgba(255,255,255,0.2'};
+	background-color: ${props => props.depthLevel < 27 ? `rgba(${200+2*props.depthLevel},${200+2*props.depthLevel},${200+2*props.depthLevel},0.2)` : 'rgba(255,255,255,0.2'};
 `

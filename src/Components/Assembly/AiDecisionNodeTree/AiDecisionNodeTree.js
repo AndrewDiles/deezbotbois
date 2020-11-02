@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import ModularDepthDisplay from './ModularDepthDisplay';
+import LimbStarter from './LimbStarter';
+
 import DepthXWrapper from './DepthXWrapper';
 
 // import { comprehensiveStatsAdditive, comprehensiveStatsMultiplicative, comprehensiveStatsBool } from '../../../Constants/attributes';
@@ -10,10 +12,17 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const [maxDepthReached, setMaxDepthReached] = React.useState([1]);
+	React.useState(()=>{
+		//recursively go through scripts to determine new maxDepthReach
+	})
 	const depthLevel = 1;
-	if (!userInfo.botBuilds) {
+	if (!userInfo.botBuilds || 
+		!userInfo.botBuilds[botNumberSelected] ||
+		!userInfo.botBuilds[botNumberSelected].scripts ||
+		userInfo.botBuilds[botNumberSelected].scripts.length === 0) {
 		return (<></>)
 	}
+	
   return (
     <Wrapper>
 			<h3>
@@ -23,7 +32,15 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 			maxDepthReached = {maxDepthReached}
 			/>
 			<MasterDepthContainer>
-			<DepthXWrapper depthLevel = {depthLevel}>
+
+			{userInfo.botBuilds[botNumberSelected].scripts.map((nodeLimb)=>{
+				return (
+					<LimbStarter
+					nodeLimb = {nodeLimb}
+					/>
+				)
+			})}
+				{/* <DepthXWrapper depthLevel = {depthLevel}>
 					<StyledUl>
 						<StyledLi>
 							Info1
@@ -35,7 +52,7 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 							Info3
 						</StyledLi>
 					</StyledUl>
-				</DepthXWrapper>
+				</DepthXWrapper> */}
 			</MasterDepthContainer>
 			
 			{/* <DepthXWrapper depthLevel = {depthLevel}>
@@ -72,14 +89,14 @@ const StyledLi = styled.li`
 `
 const Wrapper = styled.div`
 	width: 100%;
-	height: 100%;
-	padding: 20px;
+	/* padding: 20px;
 	overflow-x: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: start;
 	align-items: center;
-	text-align: center;
+	text-align: center; */
+
 	/* min-height: 600px; */
 	/* border: 1px solid rgba(0,0,0,0.1); */
 `
