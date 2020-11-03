@@ -20,11 +20,8 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 	let colors = useSelector(getThemeColors);
 	const dispatch = useDispatch();
 
-	console.log('aiAndScripts',aiAndScripts)
-	console.log('actual activeNodeArray',activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index])
-
 	// Purpose of this component is to provide buttons to move the Node's array index, delete the Node and set the inserstion point
-	// console.log({activeNodeArray})
+	
 	function handleShiftLeft () {
 		let temp = {...activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index]};
 		let newScript = [...botInfo[botNumberSelected].script];

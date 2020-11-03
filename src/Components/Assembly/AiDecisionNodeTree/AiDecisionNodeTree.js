@@ -12,17 +12,19 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const [maxDepthReached, setMaxDepthReached] = React.useState([1]);
-	React.useState(()=>{
-		//recursively go through scripts to determine new maxDepthReach
-	})
+
+	// React.useState(()=>{
+	// 	//recursively go through scripts to determine new maxDepthReach
+	// })
+	
 	const depthLevel = 1;
 	if (!userInfo.botBuilds || 
 		!userInfo.botBuilds[botNumberSelected] ||
-		!userInfo.botBuilds[botNumberSelected].scripts ||
-		userInfo.botBuilds[botNumberSelected].scripts.length === 0) {
+		!userInfo.botBuilds[botNumberSelected].script ||
+		userInfo.botBuilds[botNumberSelected].script.length === 0) {
 		return (<></>)
 	}
-	
+	console.log('AiDecisionNodeTree proper render')
   return (
     <Wrapper>
 			<h3>
@@ -32,66 +34,24 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 			maxDepthReached = {maxDepthReached}
 			/>
 			<MasterDepthContainer>
-
-			{userInfo.botBuilds[botNumberSelected].scripts.map((nodeLimb)=>{
-				return (
-					<LimbStarter
-					nodeLimb = {nodeLimb}
-					/>
-				)
-			})}
-				{/* <DepthXWrapper depthLevel = {depthLevel}>
-					<StyledUl>
-						<StyledLi>
-							Info1
-						</StyledLi>
-						<StyledLi>
-							Info2
-						</StyledLi>
-						<StyledLi>
-							Info3
-						</StyledLi>
-					</StyledUl>
-				</DepthXWrapper> */}
+				{userInfo.botBuilds[botNumberSelected].script.map((nodeLimb, index)=>{
+					return (
+						<LimbStarter
+						key = {index}
+						nodeLimb = {nodeLimb}
+						/>
+					)
+				})}
 			</MasterDepthContainer>
-			
-			{/* <DepthXWrapper depthLevel = {depthLevel}>
-				{userInfo.botBuilds[botNumberSelected].script.length > 0 ? (
-					userInfo.botBuilds[botNumberSelected].script.map((node, index)=>{
-						return (
-							<div key = {index}>
-								NODE HERE
-							</div>
-						)
-					})
-				):(
-					<div>
-						AI EMPTY
-					</div>
-				)}
-			</DepthXWrapper> */}
     </Wrapper>
   )
 }
 export default AiDecisionNodeTree;
-const StyledUl = styled.ul`
-	display: flex;
-	flex-direction: column;
-	width: 100px;
-	padding: 0px;
-	margin: 0px;
-`
-const StyledLi = styled.li`
-	width: 100%;
-	height: 40px;
-	white-space: pre-wrap;
-	list-style: none;
-`
 const Wrapper = styled.div`
 	width: 100%;
-	/* padding: 20px;
-	overflow-x: auto;
-	display: flex;
+	padding-left: 20px;
+	/* overflow-x: auto; */
+	/* display: flex;
 	flex-direction: column;
 	justify-content: start;
 	align-items: center;
@@ -102,17 +62,12 @@ const Wrapper = styled.div`
 `
 const MasterDepthContainer = styled.div`
 	height: 100%;
-	width: 100%;
-	overflow-x: auto;
-	display: flex;
+	width: 175px;
+	/* overflow-x: auto; */
+	/* display: flex;
 	flex-direction: column;
-	justify-content: start;
+	justify-content: flex-start;
 	align-items: center;
-	text-align: center;
+	text-align: center; */
+	border: purple 1px dashed;
 `
-// const Depth1Wrapper = styled.div`
-// 	width: 120px;
-// 	height: 100%;
-// 	padding: 20px;
-
-// `

@@ -1,13 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import CommandNode from './CommandNode';
 import NodeHandler from './NodeHandler';
 
 const LimbStarter = ({ nodeLimb }) => {
   return (
 		<LimbRowWrapper>
-			<NodeHandler
-			decisionObject = {nodeLimb}
-			/>
+			{nodeLimb.command ? (
+				<CommandNode
+				command = {nodeLimb.command}
+				/>
+			):(
+				<NodeHandler
+				decisionObject = {nodeLimb}
+				/>
+			)}
+			
 		</LimbRowWrapper>
   )
 }

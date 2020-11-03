@@ -7,6 +7,7 @@ const ModularDepthDisplay = ({ maxDepthReached }) => {
 			{maxDepthReached.map((depthLevel)=>{
 				return (
 					<DepthLabel
+					key = {depthLevel}
 					depthLevel = {depthLevel}
 					className = 'centeredFlex'
 					>
@@ -29,8 +30,8 @@ const DepthDisplayWrapper = styled.div`
 	text-align: center;
 `
 const DepthLabel = styled.div`
-	padding: 5px;
-	width: 120px;
+	padding: 5px 10px;
+	width: 200px;
 	height: 100%;
 	font-size: 0.5em;
 	background-color: ${props => props.depthLevel < 27 ? `rgba(${200+2*props.depthLevel},${200+2*props.depthLevel},${200+2*props.depthLevel},0.2)` : 'rgba(255,255,255,0.2'};
