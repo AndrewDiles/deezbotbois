@@ -6,7 +6,7 @@ const CommandNode = ({ command }) => {
   return (
 		<CommandWrapper className = 'centeredFlex'>
 			<CommandBox className = 'centeredFlex'>
-				{command ? commandInfo[command.name] : 'EMPTY COMMAND'}
+				{command ? `${commandInfo[command.name]}-COMMAND` : 'EMPTY COMMAND'}
 			</CommandBox>
 		</CommandWrapper>
   )
@@ -21,6 +21,8 @@ const CommandWrapper = styled.div`
 const CommandBox = styled.div`
 	width: 125px;
 	height: 50px;
-	border: blue 1px solid;
-	font-size: 0.7em;
+	border: blue 2px solid;
+	background-color: rgba(0,0,255,0.2);
+	border-radius: 10px;
+	font-size: 0.6em;
 `

@@ -33,16 +33,21 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 			<ModularDepthDisplay
 			maxDepthReached = {maxDepthReached}
 			/>
-			<MasterDepthContainer>
-				{userInfo.botBuilds[botNumberSelected].script.map((nodeLimb, index)=>{
-					return (
-						<LimbStarter
-						key = {index}
-						nodeLimb = {nodeLimb}
-						/>
-					)
-				})}
-			</MasterDepthContainer>
+			<DepthXWrapper
+			depthLevel = {1}
+			>
+				<MasterDepthContainer>
+					{userInfo.botBuilds[botNumberSelected].script.map((nodeLimb, index)=>{
+						return (
+							<LimbStarter
+							key = {index}
+							nodeLimb = {nodeLimb}
+							firstEntry = {1}
+							/>
+						)
+					})}
+				</MasterDepthContainer>
+			</DepthXWrapper>
     </Wrapper>
   )
 }

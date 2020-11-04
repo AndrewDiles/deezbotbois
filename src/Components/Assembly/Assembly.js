@@ -99,7 +99,6 @@ const Assembly = () => {
       <Redirect to="/home" />
     )
 	}
-	console.log({aiNodeTreeTabDisplayed})
 	
   return (
     <Wrapper

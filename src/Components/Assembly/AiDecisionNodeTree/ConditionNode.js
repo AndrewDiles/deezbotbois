@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { conditionsData } from '../../../Constants/conditions';
 
 const ConditionNode = ({ condition }) => {
   return (
 		<ConditionWraaper className = 'centeredFlex'>
 			<Spacer/>
-			<ConditionBox>
-				{condition ? condition.name : 'EMPTY CONDITION'}
+			<ConditionBox className = 'centeredFlex'>
+				{condition ? `Condition: ${conditionsData[condition.name].name}` : 'EMPTY CONDITION'}
 			</ConditionBox>
-			<Spacer className = 'centeredFlex'>
+			<BarContainer className = 'evenlyFlex'>
 				<MetBar/>
 				<UnMetBar/>
-			</Spacer>
+			</BarContainer>
 		</ConditionWraaper>
   )
 }
@@ -25,10 +26,17 @@ const Spacer = styled.div`
 	width: 25px;
 	height: 25px;
 `
+const BarContainer = styled.div`
+	width: 25px;
+	height: 75px;
+	flex-direction: column;
+`
 const ConditionBox = styled.div`
 	width: 125px;
 	height: 50px;
-	border: blue 1px solid;
+	border: gold 2px solid;
+	background-color: rgba(255,215,0, 0.2);
+	font-size: 0.6em;
 `
 const MetBar = styled.div`
 	height: 5px;

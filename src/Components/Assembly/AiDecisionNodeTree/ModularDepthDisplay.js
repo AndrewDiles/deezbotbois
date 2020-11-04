@@ -25,7 +25,7 @@ const DepthDisplayWrapper = styled.div`
 	height: 40px;
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
 `
@@ -34,5 +34,5 @@ const DepthLabel = styled.div`
 	width: 200px;
 	height: 100%;
 	font-size: 0.5em;
-	background-color: ${props => props.depthLevel < 27 ? `rgba(${200+2*props.depthLevel},${200+2*props.depthLevel},${200+2*props.depthLevel},0.2)` : 'rgba(255,255,255,0.2'};
+	background-color: ${props => props.depthLevel < 27 ? `rgba(${200+2*props.depthLevel},${200+2*props.depthLevel},${200+2*props.depthLevel},0.1)` : 'rgba(255,255,255,0.2'};
 `

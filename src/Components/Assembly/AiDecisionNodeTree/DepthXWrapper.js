@@ -22,5 +22,5 @@ const DepthXContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	background-color: ${props => props.depthLevel < 27 ? `rgba(${200+2*props.depthLevel},${200+2*props.depthLevel},${200+2*props.depthLevel},0.2)` : 'rgba(255,255,255,0.2'};
+	background-color: ${props => props.depthLevel < 27 ? `rgba(${200+2*props.depthLevel},${200+2*props.depthLevel},${200+2*props.depthLevel},0.1)` : 'rgba(255,255,255,0.2'};
 `

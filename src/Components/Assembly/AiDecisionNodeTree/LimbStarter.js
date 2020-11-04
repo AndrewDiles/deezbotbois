@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import CommandNode from './CommandNode';
 import NodeHandler from './NodeHandler';
 
-const LimbStarter = ({ nodeLimb }) => {
+const LimbStarter = ({ nodeLimb, firstEntry }) => {
   return (
-		<LimbRowWrapper>
+		<LimbRowWrapper
+		firstEntry = {firstEntry}
+		containsCommand = {nodeLimb.command && 1}
+		>
 			{nodeLimb.command ? (
 				<CommandNode
 				command = {nodeLimb.command}
@@ -27,4 +30,5 @@ const LimbRowWrapper = styled.div`
 	justify-content: start;
 	align-items: center;
 	text-align: center;
+	margin-left: ${props => props.firstEntry ? '0px' : props.containsCommand ? '0px' : '200px'};
 `
