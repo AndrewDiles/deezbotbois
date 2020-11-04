@@ -12,19 +12,20 @@ const NodeHandler = ({ decisionObject }) => {
 				condition = {decisionObject.condition}
 				/>
 				<DepthXWrapper
-				depthLevel = {decisionObject.condition.depth}
+				depthLevel = {decisionObject.condition.depth -1}
+				width = {25}
 				>
-				<BarsContainer>
-					<TopSpace/>
-					<MetBar/>
-					<MidSpace/>
-					<UnMetBarTop/>
-					<UnMetBar/>
-					<UnMetBarContainer>
-						<BottomSpace/>
-						<UnMetBarBottom/>
-					</UnMetBarContainer>
-				</BarsContainer>
+					<BarsContainer>
+						<TopSpace/>
+						<MetBar/>
+						<MidSpace/>
+						<UnMetBarTop/>
+						<UnMetBar/>
+						<UnMetBarContainer>
+							<BottomSpace/>
+							<UnMetBarBottom/>
+						</UnMetBarContainer>
+					</BarsContainer>
 				</DepthXWrapper>
 				<Column>
 					<DepthXWrapper
@@ -86,7 +87,8 @@ const UnMetBarTop = styled.div`
 	border-radius: 0 50% 0 0;
 `
 const UnMetBar = styled.div`
-	height: 80%;
+	height: 65%;
+	/* the above % needs to be modular based on the met and unmet's heights */
 	width: 12px;
 	border-right: red 5px solid;
 `

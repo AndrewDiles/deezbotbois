@@ -28,7 +28,7 @@ const NodeBlock = ({ block, type }) => {
 export default NodeBlock;
 
 const MasterDepthContainer = styled.div`
-	min-height: 100px;
+	/* min-height: 100px; */
 	height: 100%;
 	width: 175px;
 	display: flex;

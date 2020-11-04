@@ -21,7 +21,7 @@ const CommandWrapper = styled.div`
 const CommandBox = styled.div`
 	width: 125px;
 	height: 50px;
-	border: blue 2px solid;
+	border: blue 3px solid;
 	background-color: rgba(0,0,255,0.2);
 	border-radius: 10px;
 	font-size: 0.6em;

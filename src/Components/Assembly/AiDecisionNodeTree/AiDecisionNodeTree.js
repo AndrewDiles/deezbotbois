@@ -3,19 +3,15 @@ import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import ModularDepthDisplay from './ModularDepthDisplay';
 import LimbStarter from './LimbStarter';
-
 import DepthXWrapper from './DepthXWrapper';
-
-// import { comprehensiveStatsAdditive, comprehensiveStatsMultiplicative, comprehensiveStatsBool } from '../../../Constants/attributes';
 
 const AiDecisionNodeTree = ({ botNumberSelected }) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	const settings = useSelector((state) => state.settings);
-	const [maxDepthReached, setMaxDepthReached] = React.useState([1]);
+	const [maxDepthReached, setMaxDepthReached] = React.useState([1,2,3]);
 
-	// React.useState(()=>{
-	// 	//recursively go through scripts to determine new maxDepthReach
-	// })
+	React.useState(()=>{
+		//recursively go through scripts to determine new maxDepthReach
+	},[ userInfo.botBuilds[botNumberSelected] && JSON.stringify(userInfo.botBuilds[botNumberSelected].script) ])
 	
 	const depthLevel = 1;
 	if (!userInfo.botBuilds || 
@@ -74,5 +70,5 @@ const MasterDepthContainer = styled.div`
 	justify-content: flex-start;
 	align-items: center;
 	text-align: center; */
-	border: purple 1px dashed;
+	border: purple 2px dashed;
 `

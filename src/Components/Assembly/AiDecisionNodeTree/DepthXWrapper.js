@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const DepthXWrapper = ({ depthLevel, children }) => {
+const DepthXWrapper = ({ depthLevel, width, children }) => {
   return (
 		<DepthXContainer 
 		depthLevel = {depthLevel}
+		width = {width}
 		>
 			{/* <h5>
 				DEPTH LV {depthLevel}
@@ -17,10 +18,11 @@ export default DepthXWrapper;
 
 const DepthXContainer = styled.div`
 	width: 175px;
+	width: ${props => props.width ? `${props.width}px`: '175px'};
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	background-color: ${props => props.depthLevel < 27 ? `rgba(${200+2*props.depthLevel},${200+2*props.depthLevel},${200+2*props.depthLevel},0.1)` : 'rgba(255,255,255,0.2'};
+	background-color: ${props => props.depthLevel < 20 ? `rgba(${100-5*props.depthLevel},${100-5*props.depthLevel},${100-5*props.depthLevel},0.1)` : 'rgba(0,0,0,0.2'};
 `

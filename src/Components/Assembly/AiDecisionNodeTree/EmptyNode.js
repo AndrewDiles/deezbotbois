@@ -20,7 +20,7 @@ const EmptyWrapper = styled.div`
 const EmptyBox = styled.div`
 	width: 125px;
 	height: 50px;
-	border: black 2px solid;
+	border: black 3px double;
 	background-color: rgba(0,0,0,0.2);
 	font-size: 0.6em;
 `

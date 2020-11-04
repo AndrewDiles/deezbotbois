@@ -34,7 +34,7 @@ const BarContainer = styled.div`
 const ConditionBox = styled.div`
 	width: 125px;
 	height: 50px;
-	border: gold 2px solid;
+	border: gold 3px dotted;
 	background-color: rgba(255,215,0, 0.2);
 	font-size: 0.6em;
 `

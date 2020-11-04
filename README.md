@@ -72,6 +72,7 @@ Intentions with the GUI include:
 - Command and Condition Node's Instructions 
 
 # Potential Improvements
+- UnMetBar 's height must be calculated
 - Drill up from Instruction Components to remove passing of props they don't need
 - Clean up / refactor Ai deletion Component as it contains code duplication
 - Add a duplicate Bot in the Assembly

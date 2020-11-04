@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 const ModularDepthDisplay = ({ maxDepthReached }) => {
   return (
-		<DepthDisplayWrapper>
+		<DepthDisplayWrapper
+		>
 			{maxDepthReached.map((depthLevel)=>{
 				return (
 					<DepthLabel
@@ -30,9 +31,10 @@ const DepthDisplayWrapper = styled.div`
 	text-align: center;
 `
 const DepthLabel = styled.div`
+	text-indent: -25px;
 	padding: 5px 10px;
 	width: 200px;
 	height: 100%;
-	font-size: 0.5em;
-	background-color: ${props => props.depthLevel < 27 ? `rgba(${200+2*props.depthLevel},${200+2*props.depthLevel},${200+2*props.depthLevel},0.1)` : 'rgba(255,255,255,0.2'};
+	font-size: 0.7em;
+	background-color: ${props => props.depthLevel < 20 ? `rgba(${100-5*props.depthLevel},${100-5*props.depthLevel},${100-5*props.depthLevel},0.1)` : 'rgba(0,0,0,0.2'};
 `
