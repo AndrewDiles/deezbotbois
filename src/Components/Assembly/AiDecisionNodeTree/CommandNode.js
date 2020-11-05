@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { commandInfo } from '../../../Constants/attributes';
 
-const CommandNode = ({ command }) => {
+const CommandNode = ({ index, command }) => {
   return (
 		<CommandWrapper className = 'centeredFlex'>
+			NODE # {index+1}
 			<CommandBox className = 'centeredFlex'>
 				{command ? `${commandInfo[command.name]}-COMMAND` : 'EMPTY COMMAND'}
 			</CommandBox>
@@ -16,6 +17,8 @@ export default CommandNode;
 const CommandWrapper = styled.div`
 	width: 175px;
 	height: 100px;
+	flex-direction: column;
+	font-size: 0.6em;
 `
 
 const CommandBox = styled.div`

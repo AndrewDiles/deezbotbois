@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { conditionsData } from '../../../Constants/conditions';
 
-const ConditionNode = ({ condition }) => {
+const ConditionNode = ({ index, condition }) => {
   return (
 		<ConditionWraaper className = 'centeredFlex'>
 			<Spacer/>
-			<ConditionBox className = 'centeredFlex'>
-				{condition ? `Condition: ${conditionsData[condition.name].name}` : 'EMPTY CONDITION'}
-			</ConditionBox>
+			<NodeDisplayWrapper className = 'centeredFlex'>
+				NODE # {index+1}
+				<ConditionBox className = 'centeredFlex'>
+					{condition ? `Condition: ${conditionsData[condition.name].name}` : 'EMPTY CONDITION'}
+				</ConditionBox>
+			</NodeDisplayWrapper>
 			<BarContainer className = 'evenlyFlex'>
 				<MetBar/>
 				<UnMetBar/>
@@ -17,7 +20,10 @@ const ConditionNode = ({ condition }) => {
   )
 }
 export default ConditionNode;
-
+const NodeDisplayWrapper = styled.div`
+	flex-direction: column;
+	font-size: 0.6em;
+`
 const ConditionWraaper = styled.div`
 	width: 175px;
 	height: 100px;
@@ -41,10 +47,12 @@ const ConditionBox = styled.div`
 const MetBar = styled.div`
 	height: 5px;
 	width: 25px;
-	background-color: lime;
+	/* background-color: lime; */
+	background-image: linear-gradient(to right, gold , lime);
 `
 const UnMetBar = styled.div`
 	height: 5px;
 	width: 25px;
-	background-color: red;
+	/* background-color: red; */
+	background-image: linear-gradient(to right, gold , red);
 `

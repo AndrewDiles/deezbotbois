@@ -4,7 +4,7 @@ import EmptyNode from './EmptyNode';
 import LimbStarter from './LimbStarter';
 
 const NodeBlock = ({ block, type }) => {
-	console.log('from inside NodeBlock:',{block})
+	// console.log('from inside NodeBlock:',{block})
   return (
 			<MasterDepthContainer
 			type = {type}
@@ -16,6 +16,7 @@ const NodeBlock = ({ block, type }) => {
 						return (
 							<LimbStarter
 							key = {index}
+							index = {index}
 							nodeLimb = {decisionObject}
 							/>
 						)

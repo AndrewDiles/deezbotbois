@@ -7,11 +7,6 @@ import DepthXWrapper from './DepthXWrapper';
 
 const AiDecisionNodeTree = ({ botNumberSelected }) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	const [maxDepthReached, setMaxDepthReached] = React.useState([1,2,3]);
-
-	React.useState(()=>{
-		//recursively go through scripts to determine new maxDepthReach
-	},[ userInfo.botBuilds[botNumberSelected] && JSON.stringify(userInfo.botBuilds[botNumberSelected].script) ])
 	
 	const depthLevel = 1;
 	if (!userInfo.botBuilds || 
@@ -20,14 +15,14 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 		userInfo.botBuilds[botNumberSelected].script.length === 0) {
 		return (<></>)
 	}
-	console.log('AiDecisionNodeTree proper render')
+	
   return (
     <Wrapper>
 			<h3>
 			AI DECISION-NODE TREE
 			</h3>
 			<ModularDepthDisplay
-			maxDepthReached = {maxDepthReached}
+			botNumberSelected = {botNumberSelected}
 			/>
 			<DepthXWrapper
 			depthLevel = {1}
@@ -37,6 +32,7 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 						return (
 							<LimbStarter
 							key = {index}
+							index = {index}
 							nodeLimb = {nodeLimb}
 							firstEntry = {1}
 							/>

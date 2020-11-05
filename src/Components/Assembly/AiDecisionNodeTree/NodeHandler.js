@@ -4,11 +4,21 @@ import NodeBlock from './NodeBlock';
 import ConditionNode from './ConditionNode'
 import styled from 'styled-components';
 
-const NodeHandler = ({ decisionObject }) => {
+const NodeHandler = ({ index, decisionObject }) => {
+	const rand = Math.random();
+	const [metNodeHeight, setMetNodeHeight] = React.useState(0);
+	React.useEffect(()=>{
+		let target = document.getElementById(rand);
+		if (target) {
+			console.log(target.getBoundingClientRect());
+		}
+	})
+	// Element.getBoundingClientRect()
 	if (decisionObject.condition) {
 		return (
 			<Row>
 				<ConditionNode
+				index = {index}
 				condition = {decisionObject.condition}
 				/>
 				<DepthXWrapper
@@ -27,22 +37,25 @@ const NodeHandler = ({ decisionObject }) => {
 						</UnMetBarContainer>
 					</BarsContainer>
 				</DepthXWrapper>
-				<Column>
-					<DepthXWrapper
-					depthLevel = {decisionObject.condition.depth}
-					>
-						<Spacer/>
-						<NodeBlock
-						block = {decisionObject.condition.conditionMet}
-						type = 'met'
-						/>
-						<Spacer/>
-						<NodeBlock
-						block = {decisionObject.condition.conditionUnMet}
-						type = 'unMet'
-						/>
-					</DepthXWrapper>
-				</Column>
+				{/* {(decisionObject.condition.conditionMet.length > 0 || decisionObject.condition.conditionUnMet.length > 0) && */}
+					<Column>
+						<DepthXWrapper
+						depthLevel = {decisionObject.condition.depth}
+						>
+							<Spacer/>
+							<NodeBlock
+							id = {rand}
+							block = {decisionObject.condition.conditionMet}
+							type = 'met'
+							/>
+							<Spacer/>
+							<NodeBlock
+							block = {decisionObject.condition.conditionUnMet}
+							type = 'unMet'
+							/>
+						</DepthXWrapper>
+					</Column>
+				{/* } */}
 			</Row>
 		)
 	} 
@@ -55,7 +68,7 @@ const NodeHandler = ({ decisionObject }) => {
 export default NodeHandler;
 const Row = styled.div`
 	display: flex;
-	/* margin-left: 50px; */
+	/* margin-left: 200px; */
 `
 const Column = styled.div`
 	display: flex;

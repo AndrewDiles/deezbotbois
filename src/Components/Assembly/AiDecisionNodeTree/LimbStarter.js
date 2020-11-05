@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CommandNode from './CommandNode';
 import NodeHandler from './NodeHandler';
 
-const LimbStarter = ({ nodeLimb, firstEntry }) => {
+const LimbStarter = ({ index, nodeLimb, firstEntry }) => {
   return (
 		<LimbRowWrapper
 		firstEntry = {firstEntry}
@@ -12,10 +12,12 @@ const LimbStarter = ({ nodeLimb, firstEntry }) => {
 			{nodeLimb.command ? (
 				<CommandNode
 				command = {nodeLimb.command}
+				index = {index}
 				/>
 			):(
 				<NodeHandler
 				decisionObject = {nodeLimb}
+				index = {index}
 				/>
 			)}
 			
@@ -27,8 +29,9 @@ export default LimbStarter;
 const LimbRowWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
-	justify-content: start;
+	/* justify-content: start; */
 	align-items: center;
 	text-align: center;
-	margin-left: ${props => props.firstEntry ? '0px' : props.containsCommand ? '0px' : '200px'};
+	margin-top: ${props => props.firstEntry && '-2px'};
+	margin-left: ${props => props.firstEntry ? '-2px' : props.containsCommand ? '0px' : '200px'};
 `

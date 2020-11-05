@@ -15,10 +15,8 @@ const AddIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionNam
 		}
 		else {
 			let newNode = new DecisionObject(decisionName, aiAndScripts.viewing.length, [], []);
-			console.log('newNode to be added:', newNode);
 			let newScript = [...userInfo.botBuilds[botNumberSelected].script];
 			let targetNodeArray = getNodeArray(newScript, aiAndScripts.viewing );
-			console.log('array?', targetNodeArray)
 			targetNodeArray.push(newNode);
 			dispatch(replaceScript(botNumberSelected, newScript))
 			setAiAndScripts({insertion:false, viewing: aiAndScripts.viewing})
