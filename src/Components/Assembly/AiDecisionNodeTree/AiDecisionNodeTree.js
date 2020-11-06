@@ -15,6 +15,7 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 		userInfo.botBuilds[botNumberSelected].script.length === 0) {
 		return (<></>)
 	}
+	console.log({botNumberSelected})
 	
   return (
     <Wrapper>
@@ -47,24 +48,12 @@ export default AiDecisionNodeTree;
 const Wrapper = styled.div`
 	width: 100%;
 	padding-left: 20px;
-	/* overflow-x: auto; */
-	/* display: flex;
-	flex-direction: column;
-	justify-content: start;
-	align-items: center;
-	text-align: center; */
-
-	/* min-height: 600px; */
-	/* border: 1px solid rgba(0,0,0,0.1); */
+	/* background-image: linear-gradient(to right, rgba(116,35,231,0.2), rgba(8,35,15,.2)); */
+	
 `
 const MasterDepthContainer = styled.div`
 	height: 100%;
 	width: 175px;
 	/* overflow-x: auto; */
-	/* display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-	text-align: center; */
 	border: purple 2px dashed;
 `

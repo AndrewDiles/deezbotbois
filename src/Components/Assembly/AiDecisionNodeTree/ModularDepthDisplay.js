@@ -6,7 +6,7 @@ const ModularDepthDisplay = ({ botNumberSelected }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const [maxDepthReached, setMaxDepthReached] = React.useState([]);
 
-	React.useState(()=>{
+	React.useEffect(()=>{
 		//recursively go through scripts to determine new maxDepthReach
 
 		// setting bail in the event that there is no script
@@ -46,14 +46,8 @@ const ModularDepthDisplay = ({ botNumberSelected }) => {
 		userInfo.botBuilds[botNumberSelected].script.forEach((scriptObject)=>{
 			digForDepth(scriptObject);
 		})
-	}
-	,[ 
-		botNumberSelected,
-		userInfo.botBuilds[botNumberSelected].script,
-		userInfo.botBuilds[botNumberSelected] && 
-		JSON.stringify(userInfo.botBuilds[botNumberSelected].script)
-	]
-	)
+	},
+	[ botNumberSelected, userInfo.botBuilds[botNumberSelected] && JSON.stringify(userInfo.botBuilds[botNumberSelected].script) ]);
 	if (maxDepthReached.length === 0) {
 		return <></>
 	}

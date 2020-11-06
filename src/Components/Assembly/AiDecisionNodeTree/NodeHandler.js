@@ -10,7 +10,8 @@ const NodeHandler = ({ index, decisionObject }) => {
 	React.useEffect(()=>{
 		let target = document.getElementById(rand);
 		if (target) {
-			console.log(target.getBoundingClientRect());
+			setMetNodeHeight(target.getBoundingClientRect().height);
+			// console.log('find height here:',target.getBoundingClientRect().height);
 		}
 	})
 	// Element.getBoundingClientRect()
@@ -30,7 +31,9 @@ const NodeHandler = ({ index, decisionObject }) => {
 						<MetBar/>
 						<MidSpace/>
 						<UnMetBarTop/>
-						<UnMetBar/>
+						<UnMetBar
+						metNodeHeight = {metNodeHeight}
+						/>
 						<UnMetBarContainer>
 							<BottomSpace/>
 							<UnMetBarBottom/>
@@ -100,8 +103,7 @@ const UnMetBarTop = styled.div`
 	border-radius: 0 50% 0 0;
 `
 const UnMetBar = styled.div`
-	height: 65%;
-	/* the above % needs to be modular based on the met and unmet's heights */
+	height: ${props => props.metNodeHeight && `${props.metNodeHeight}px`};
 	width: 12px;
 	border-right: red 5px solid;
 `

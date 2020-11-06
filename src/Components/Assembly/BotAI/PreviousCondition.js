@@ -16,7 +16,9 @@ const PreviousCondition = ({ aiAndScripts, botNumberSelected }) => {
 			let viewingCopy = [...aiAndScripts.viewing];
 			viewingCopy.pop();
 			let previousArray = getNodeArray(userInfo.botBuilds[botNumberSelected].script, viewingCopy);
+			if (previousArray[aiAndScripts.viewing[aiAndScripts.viewing.length-2].index]) {
 			setPreviousCondition(previousArray[aiAndScripts.viewing[aiAndScripts.viewing.length-2].index].condition.name);
+			}
 		}
 	},[setPreviousCondition, botNumberSelected, userInfo.botBuilds[botNumberSelected] && userInfo.botBuilds[botNumberSelected].script, JSON.stringify(aiAndScripts.viewing)])
 

@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import EmptyNode from './EmptyNode';
 import LimbStarter from './LimbStarter';
 
-const NodeBlock = ({ block, type }) => {
+const NodeBlock = ({ block, type, id }) => {
 	// console.log('from inside NodeBlock:',{block})
   return (
 			<MasterDepthContainer
 			type = {type}
+			id = {id && id}
 			>
 				{block.length === 0 ? (
 					<EmptyNode/>
