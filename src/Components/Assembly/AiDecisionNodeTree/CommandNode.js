@@ -2,11 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { commandInfo } from '../../../Constants/attributes';
 
-const CommandNode = ({ index, command }) => {
+const CommandNode = ({ index, command, active, localAiAndScript, setAiAndScripts }) => {
+	// console.log({active}, 'for:', command.name)
   return (
-		<CommandWrapper className = 'centeredFlex'>
+		<CommandWrapper 
+		className = 'centeredFlex'
+		active = {active}
+		>
 			NODE # {index+1}
-			<CommandBox className = 'centeredFlex'>
+			<CommandBox
+			className = 'centeredFlex decisionTreeBox'
+			active = {active}
+			onClick ={()=>{console.log(active, localAiAndScript); setAiAndScripts({insertion: false, viewing: localAiAndScript})}}
+			>
 				{command ? `${commandInfo[command.name]}-COMMAND` : 'EMPTY COMMAND'}
 			</CommandBox>
 		</CommandWrapper>
@@ -18,14 +26,20 @@ const CommandWrapper = styled.div`
 	width: 175px;
 	height: 100px;
 	flex-direction: column;
-	font-size: 0.6em;
+	flex-wrap: nowrap;
+	white-space: nowrap;
+	font-size: ${props =>props.active && props.active === 'active' ? '0.8em' : '0.6em'};
 `
 
 const CommandBox = styled.div`
-	width: 125px;
-	height: 50px;
-	border: blue 3px solid;
+	flex-wrap: wrap;
+	white-space: normal;
+	border: blue solid;
+	border-width: ${props =>props.active && props.active === 'offPath' ? '2px' : props.active === 'onPath' ? '4px' : '6px'};
 	background-color: rgba(0,0,255,0.2);
 	border-radius: 10px;
-	font-size: 0.6em;
+	opacity: ${props =>props.active && props.active === 'offPath' ? '0.5' : props.active === 'onPath' ? '0.75' : '1'};
+	:hover {
+		cursor: pointer;
+	}
 `

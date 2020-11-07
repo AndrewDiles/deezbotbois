@@ -33,5 +33,7 @@ const userInfoSchema = yup.object().shape({
 	botBuilds: yup.array(),
 	battleBits: yup.number(),
 	levelProgress: yup.object(),
-	tournamentHistory: yup.array()
+	tournamentHistory: yup.array(),
+	lastLogInBitsReceived: yup.number()
 });
+module.exports = userInfoSchema;

@@ -235,6 +235,11 @@ try {
   };
 
 	const handleCreateAccount = async (req, res) => {
+		// const userInfoSchema = require('./schemas');
+		// const validation = await userInfoSchema.isValid(req.body);
+
+		// console.log(validation);
+
 		const email = req.body.email;
 		const password = encryptomancer(req.body.password, magic);
 		const handle = req.body.handle;

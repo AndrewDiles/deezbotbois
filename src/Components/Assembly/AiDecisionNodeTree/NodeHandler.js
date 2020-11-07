@@ -3,24 +3,46 @@ import DepthXWrapper from './DepthXWrapper';
 import NodeBlock from './NodeBlock';
 import ConditionNode from './ConditionNode'
 import styled from 'styled-components';
+import testLocalAiAndScript from './testLocalAiAndScript';
 
-const NodeHandler = ({ index, decisionObject }) => {
+const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, localAiAndScript }) => {
 	const rand = Math.random();
 	const [metNodeHeight, setMetNodeHeight] = React.useState(0);
 	React.useEffect(()=>{
-		let target = document.getElementById(rand);
-		if (target) {
-			setMetNodeHeight(target.getBoundingClientRect().height);
-			// console.log('find height here:',target.getBoundingClientRect().height);
+		function updateHeight () {
+			let target = document.getElementById(rand);
+			if (target) {
+				setMetNodeHeight(target.getBoundingClientRect().height);
+			}
 		}
+		updateHeight();
+		const timedHeightUpdate = setTimeout(()=>{
+			updateHeight();
+		},500)
+		return () => clearTimeout(timedHeightUpdate)
 	})
-	// Element.getBoundingClientRect()
+
+	function addCaseToLocal (local, type) {
+		if (local === undefined) {
+			return local
+		}
+		// let newLocalAiAndScript = [...local];
+		let newLocalAiAndScript = JSON.parse(JSON.stringify(local));
+		newLocalAiAndScript.push({type: type, index: 0})
+		return newLocalAiAndScript
+	}
+
+	let active = testLocalAiAndScript(localAiAndScript,aiAndScripts);
+
 	if (decisionObject.condition) {
 		return (
 			<Row>
 				<ConditionNode
+				setAiAndScripts = {setAiAndScripts}
 				index = {index}
 				condition = {decisionObject.condition}
+				active = {active}
+				localAiAndScript = {localAiAndScript}
 				/>
 				<DepthXWrapper
 				depthLevel = {decisionObject.condition.depth -1}
@@ -50,11 +72,17 @@ const NodeHandler = ({ index, decisionObject }) => {
 							id = {rand}
 							block = {decisionObject.condition.conditionMet}
 							type = 'met'
+							aiAndScripts = {aiAndScripts}
+							setAiAndScripts ={setAiAndScripts}
+							localAiAndScript = {addCaseToLocal(localAiAndScript, 'conditionTrue')}
 							/>
 							<Spacer/>
 							<NodeBlock
 							block = {decisionObject.condition.conditionUnMet}
 							type = 'unMet'
+							aiAndScripts = {aiAndScripts}
+							setAiAndScripts = {setAiAndScripts}
+							localAiAndScript = {addCaseToLocal(localAiAndScript, 'conditionFalse')}
 							/>
 						</DepthXWrapper>
 					</Column>
@@ -104,6 +132,7 @@ const UnMetBarTop = styled.div`
 `
 const UnMetBar = styled.div`
 	height: ${props => props.metNodeHeight && `${props.metNodeHeight}px`};
+	transition: height 1s;
 	width: 12px;
 	border-right: red 5px solid;
 `

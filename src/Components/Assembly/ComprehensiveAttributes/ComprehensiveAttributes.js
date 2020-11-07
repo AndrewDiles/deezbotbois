@@ -77,6 +77,7 @@ const ComprehensiveAttributes = ({ attributes }) => {
 export default ComprehensiveAttributes;
 const Wrapper = styled.div`
 	width: 100%;
+	animation: 0.4s ease-out expand;
 	/* border: 1px solid rgba(0,0,0,0.1); */
 `
 const AttributeWrapper = styled.div`
@@ -98,10 +99,4 @@ const AttributeWrapper = styled.div`
 	@media screen and (max-width: 700px) {
     grid-template-columns: 1fr;
   }
-
-	/* display: flex;
-	justify-content: space-between;
-	align-items: center;
-	text-align: center;
-	flex-direction: column; */
 `

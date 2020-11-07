@@ -5,18 +5,21 @@ import ModularDepthDisplay from './ModularDepthDisplay';
 import LimbStarter from './LimbStarter';
 import DepthXWrapper from './DepthXWrapper';
 
-const AiDecisionNodeTree = ({ botNumberSelected }) => {
+const AiDecisionNodeTree = ({ botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 	const userInfo = useSelector((state) => state.userInfo);
+	const [globalAiAndScripts, setGlobalAiAndScripts] = React.useState(aiAndScripts);
+
+	React.useEffect(()=>{
+		setGlobalAiAndScripts(aiAndScripts);
+	},[JSON.stringify(aiAndScripts)])
 	
-	const depthLevel = 1;
 	if (!userInfo.botBuilds || 
 		!userInfo.botBuilds[botNumberSelected] ||
 		!userInfo.botBuilds[botNumberSelected].script ||
 		userInfo.botBuilds[botNumberSelected].script.length === 0) {
 		return (<></>)
 	}
-	console.log({botNumberSelected})
-	
+	const depthLevel = 1;
   return (
     <Wrapper>
 			<h3>
@@ -26,7 +29,7 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 			botNumberSelected = {botNumberSelected}
 			/>
 			<DepthXWrapper
-			depthLevel = {1}
+			depthLevel = {depthLevel}
 			>
 				<MasterDepthContainer>
 					{userInfo.botBuilds[botNumberSelected].script.map((nodeLimb, index)=>{
@@ -36,6 +39,10 @@ const AiDecisionNodeTree = ({ botNumberSelected }) => {
 							index = {index}
 							nodeLimb = {nodeLimb}
 							firstEntry = {1}
+							aiAndScripts = {globalAiAndScripts.viewing}
+							setAiAndScripts = {setAiAndScripts}
+							depthLevel = {depthLevel}
+							localAiAndScript = {[{type: 'head', index: index}]}
 							/>
 						)
 					})}
@@ -48,6 +55,7 @@ export default AiDecisionNodeTree;
 const Wrapper = styled.div`
 	width: 100%;
 	padding-left: 20px;
+	animation: 0.4s ease-out expand;
 	/* background-image: linear-gradient(to right, rgba(116,35,231,0.2), rgba(8,35,15,.2)); */
 	
 `

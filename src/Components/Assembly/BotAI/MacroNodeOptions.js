@@ -207,18 +207,18 @@ const ButtonContainer = styled.div`
 	width: 90px;
 	height: 40px;
 `
-const ButtonColoration = styled.div`
-	width: 90px;
-	height: 40px;
-	border-radius: 5px;
-	font-size: 8px;
-	white-space: pre-wrap;
-	text-align: center;
-	padding-top: 10px;
-	position: relative;
-	top: -40px;
-	background-color: ${props => props.case ? 'rgba(0,255,0,0.4);' : 'rgba(255,0,0,0.4);'};
-`
+// const ButtonColoration = styled.div`
+// 	width: 90px;
+// 	height: 40px;
+// 	border-radius: 5px;
+// 	font-size: 8px;
+// 	white-space: pre-wrap;
+// 	text-align: center;
+// 	padding-top: 10px;
+// 	position: relative;
+// 	top: -40px;
+// 	background-color: ${props => props.case ? 'rgba(0,255,0,0.4);' : 'rgba(255,0,0,0.4);'};
+// `
 const StyledDepthMovementButton = styled.button`
 	width: 90px;
 	height: 40px;

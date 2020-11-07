@@ -35,7 +35,8 @@ const StyledIcon = ({
   }
   return (
     <IconStylings
-      id={id}
+			id={id}
+			className = 'baseIconStyles'
       disabled={disabled || null}
       onClick={(ev) => {
         !disabled && handleClick(ev);
@@ -68,16 +69,9 @@ const IconStylings = styled(Icon)`
       : props.selected
       ? props.colors.textColor
       : props.colors.textColor};
-  animation: ${(props) =>
-    props.glowing && "1s linear infinite alternate glowGift"};
-  margin: 5px;
-  transform: ${(props) => props.rotation && `rotate(${props.rotation}deg)`};
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px,
-    rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
-  text-align: center;
-  opacity: ${(props) => props.disabled && 0.5};
-  transition: color 0.75s, background-color 0.75s;
+  animation: ${(props) => props.glowing && "1s linear infinite alternate glowGift"};
+	transform: ${(props) => props.rotation && `rotate(${props.rotation}deg)`};
+	opacity: ${(props) => props.disabled && 0.5};
   background-color: ${(props) =>
     props.hovered
       ? props.colors.hovered

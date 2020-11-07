@@ -159,16 +159,26 @@ html {
 	white-space: normal;
 }
 .assemblyGridChild {
-	/* width: 100%; */
 	height: 100%;
 	min-height: 600px;
-	/* display : flex;
-	flex-direction: column;
-	justify-content: center;
-	align-content: top;
-	text-align: top;
-	align-items: top; */
 	border: 1px solid rgba(0,0,0,0.1);
+	animation: 0.4s ease-out expand;
+}
+.baseButtonStyles {
+	border-radius: 5px;
+  border: 1px solid transparent;
+  font-weight: 500;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+	transition: color .75s, background-color .75s;
+}
+.baseIconStyles {
+	margin: 5px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+  text-align: center;
+  transition: color 0.75s, background-color 0.75s;
 }
 .colorOptions {
 	height: 225px;
@@ -225,6 +235,11 @@ html {
 	height: 40px;
 	width: 40px;
 }
+.decisionTreeBox {
+	width: 125px;
+	height: 50px;
+	font-size: 0.6em;
+}
 /* .enabledTransition {
 	transition: ${props => `transform ${props.executionSpeed}s  cubic-bezier(.8,.15,.65,.9)`};
 } */
@@ -240,6 +255,14 @@ html {
     top:0;
   }
 } */
+@keyframes expand {
+	0%{
+		transform: scale(0);
+	}
+	100%{
+		transform: scale(1);
+	}
+}
 @keyframes rotating {
   0%{
 		transform: scale(1) rotate(0deg);

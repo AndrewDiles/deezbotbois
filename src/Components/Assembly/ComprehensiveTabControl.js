@@ -28,16 +28,17 @@ const ComprehensiveTabControl = ({ masterAttributesTabDisplayed, setMasterAttrib
 }
 export default ComprehensiveTabControl;
 const Wrapper = styled.div`
-	height: 120px;
-	width: 250px;
+	height: 50px;
+	width: 505px;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 	padding: 5px 0;
 	@media screen and (max-width: 1050px) {
 		flex-wrap: wrap;
-		height: 120px;
-		width: 250px
+		height: 95px;
+		width: 250px;
+		padding: 0;
 	}
 `
 const ButtonWrapper = styled.div`

@@ -242,14 +242,16 @@ const Assembly = () => {
 					}
       	</AssemblyGrid>
 			}
-			{masterAttributesTabDisplayed && 
-				<ComprehensiveAttributes
-				attributes = {attributes}
-				/>
-			}
 			{aiNodeTreeTabDisplayed && 
 				<AiDecisionNodeTree
 				botNumberSelected = {botNumberSelected}
+				aiAndScripts = {aiAndScripts}
+				setAiAndScripts = {setAiAndScripts}
+				/>
+			}
+			{masterAttributesTabDisplayed && 
+				<ComprehensiveAttributes
+				attributes = {attributes}
 				/>
 			}
     </Wrapper>

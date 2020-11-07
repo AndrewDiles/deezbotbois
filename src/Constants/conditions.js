@@ -14,6 +14,8 @@ const conditionsList = [
 
 export default conditionsList;
 
+// TODO: complete conditionsData
+
 export const conditionsData = {
 	adjacentTo: {
 		camel: 'adjacentTo',

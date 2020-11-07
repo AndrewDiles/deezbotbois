@@ -2,16 +2,29 @@ import React from 'react';
 import styled from 'styled-components';
 import EmptyNode from './EmptyNode';
 import LimbStarter from './LimbStarter';
+import testLocalAiAndScript from './testLocalAiAndScript';
 
-const NodeBlock = ({ block, type, id }) => {
-	// console.log('from inside NodeBlock:',{block})
+const NodeBlock = ({ block, type, id, aiAndScripts, setAiAndScripts, localAiAndScript }) => {
+	function updateLocalAiAndScript (local, newIndex) {
+		// console.log({local});
+		// !!! Spread only created a shallow copy and caused all children to have the same, largest index value
+		// let newAiAndScript = [...local];
+		let newLocalAiAndScript = JSON.parse(JSON.stringify(local));
+		newLocalAiAndScript[newLocalAiAndScript.length-1].index = newIndex;
+		return newLocalAiAndScript
+	}
+	
   return (
 			<MasterDepthContainer
 			type = {type}
 			id = {id && id}
 			>
 				{block.length === 0 ? (
-					<EmptyNode/>
+					<EmptyNode
+					active = {testLocalAiAndScript(updateLocalAiAndScript(localAiAndScript, 0),aiAndScripts)}
+					localAiAndScript = {updateLocalAiAndScript(localAiAndScript, 0)}
+					setAiAndScripts = {setAiAndScripts}
+					/>
 				):(
 					block.map((decisionObject, index)=>{
 						return (
@@ -19,6 +32,9 @@ const NodeBlock = ({ block, type, id }) => {
 							key = {index}
 							index = {index}
 							nodeLimb = {decisionObject}
+							aiAndScripts = {aiAndScripts}
+							setAiAndScripts = {setAiAndScripts}
+							localAiAndScript = {updateLocalAiAndScript(localAiAndScript, index)}
 							/>
 						)
 					})

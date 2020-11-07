@@ -1,11 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const EmptyNode = () => {
+const EmptyNode = ({ active, localAiAndScript, setAiAndScripts }) => {
   return (
-		<EmptyWrapper className = 'centeredFlex'>
+		<EmptyWrapper
+		className = 'centeredFlex'
+		active = {active}
+		>
 			NODE # 1
-			<EmptyBox className = 'centeredFlex'>
+			<EmptyBox
+			className = 'centeredFlex decisionTreeBox'
+			active = {active}
+			onClick ={()=>{console.log(active, localAiAndScript); setAiAndScripts({insertion: false, viewing: localAiAndScript})}}
+			>
 				EMPTY NODE
 			</EmptyBox>
 		</EmptyWrapper>
@@ -17,13 +24,19 @@ const EmptyWrapper = styled.div`
 	width: 175px;
 	height: 100px;
 	flex-direction: column;
-	font-size: 0.6em;
+	flex-wrap: nowrap;
+	white-space: nowrap;
+	font-size: ${props =>props.active && props.active === 'active' ? '0.8em' : '0.6em'};
 `
 
 const EmptyBox = styled.div`
-	width: 125px;
-	height: 50px;
-	border: black 3px double;
+	flex-wrap: wrap;
+	white-space: normal;
+	border: black double;
+	border-width: ${props =>props.active && props.active === 'offPath' ? '2px' : props.active === 'onPath' ? '4px' : '6px'};
 	background-color: rgba(0,0,0,0.2);
-	font-size: 0.6em;
+	opacity: ${props =>props.active && props.active === 'offPath' ? '0.5' : props.active === 'onPath' ? '0.75' : '1'};
+	:hover {
+		cursor: pointer;
+	}
 `

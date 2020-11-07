@@ -3,13 +3,10 @@ import styled from 'styled-components';
 import StyledButton from '../StyledButton/StyledButton';
 
 const AssemblyTabControl = ({ tabsDisplayed, setTabsDisplayed }) => {
-	// model: true, equipment: false, attributes: false, techTree: false, ai: false, scripts: false});
-
 	const tabToggler = (keyToChange, state, setState) => {
 		let newState = {...state};
 		newState[keyToChange] = !state[keyToChange];
 		setState(newState);
-		// console.log('clicked, changed to:',newState)
 	}
 	return (
 		<Wrapper>
@@ -54,14 +51,16 @@ const AssemblyTabControl = ({ tabsDisplayed, setTabsDisplayed }) => {
 }
 export default AssemblyTabControl;
 const Wrapper = styled.div`
-	width: 750px;
+	height: 50px;
+	width: 785px;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	padding: 5px 0;
+	justify-content: space-evenly;
+	/* padding: 5px 0; */
 	@media screen and (max-width: 1050px) {
 		flex-wrap: wrap;
-		width: 250px
+		width: 250px;
+		height: 140px;
 	}
 `
 // const Wrapper = styled.div`

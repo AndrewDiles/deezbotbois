@@ -10,20 +10,18 @@ const ModularDepthDisplay = ({ botNumberSelected }) => {
 		//recursively go through scripts to determine new maxDepthReach
 
 		// setting bail in the event that there is no script
-		console.log('use State to update max depth Reached triggered');
+		// console.log('use State to update max depth Reached triggered');
 		if (!userInfo.botBuilds || !userInfo.botBuilds[botNumberSelected] ||
 			userInfo.botBuilds[botNumberSelected].script.length === 0) {
 				setMaxDepthReached([]);
 				return;
 			}
-
-		console.log('updating depth levels')
-		
+		// console.log('updating depth levels')
 		let currentMaxDepth = 0;
 		function digForDepth(currentSciptObject) {
 			if (currentSciptObject.condition) {
 				if (currentSciptObject.condition.depth > currentMaxDepth) {
-					console.log('new high of ', currentSciptObject.condition.depth);
+					// console.log('new high of ', currentSciptObject.condition.depth);
 					currentMaxDepth ++;
 				}
 				if (currentSciptObject.condition.conditionMet.length > 0) {
@@ -70,6 +68,7 @@ const ModularDepthDisplay = ({ botNumberSelected }) => {
 			<DepthLabel
 			depthLevel = {maxDepthReached[maxDepthReached.length-1]+1}
 			className = 'centeredFlex'
+			final = {1}
 			>
 				CONDITIONLESS DEPTH LV {maxDepthReached[maxDepthReached.length-1]+1}
 			</DepthLabel>
@@ -99,7 +98,7 @@ const DepthDisplayWrapper = styled.div`
 const DepthLabel = styled.div`
 	text-indent: -25px;
 	padding: 5px 10px;
-	width: 200px;
+	width: ${props => props.final ? '175px' : '200px'};
 	height: 100%;
 	font-size: 0.7em;
 	/* background-color: ${props => props.depthLevel < 12 ? `rgba(${20*props.depthLevel},0,0,0.35)` : 'rgba(240,0,0,0.35'}; */
