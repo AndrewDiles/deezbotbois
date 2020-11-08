@@ -15,10 +15,12 @@ import { weaponStats } from '../../../../Constants/equipment';
 const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
-	
 	const [energyWeaponError, setEnergyWeaponError] = React.useState(false);
 
 	React.useEffect(()=>{
+		if (!userInfo.botBuilds[botNumberSelected]) {
+			return
+		}
 		let selectedWeaponInfo = weaponStats[botInfo[botNumberSelected].equipment[activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.weapon]];
 		if (selectedWeaponInfo) {
 			if (selectedWeaponInfo.subTypes.includes("Energy")) {
@@ -35,7 +37,9 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 		activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.weapon,
 		botInfo[botNumberSelected].equipment[activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.weapon]
 	])
-
+	if (!userInfo.botBuilds[botNumberSelected]) {
+		return <></>
+	}
 	return (		
 		<div className = 'commandContents'>
 			<AttackTypeSetter

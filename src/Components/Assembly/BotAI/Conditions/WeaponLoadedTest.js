@@ -1,10 +1,14 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import ReloadableWeaponSelector from '../TestComponents/ReloadableWeaponSelector';
 import EvaluationTypeSelector from '../TestComponents/EvaluationTypeSelector';
 import ThresholdSetter from '../TestComponents/ThresholdSetter';
 
 const WeaponLoadedTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
-
+	const userInfo = useSelector((state) => state.userInfo);
+	if (!userInfo.botBuilds[botNumberSelected]) {
+		return <></>
+	}
 	return (		
 		<div className = 'commandContents'>
 			<ReloadableWeaponSelector

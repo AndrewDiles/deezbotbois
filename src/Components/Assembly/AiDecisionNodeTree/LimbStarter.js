@@ -39,6 +39,8 @@ const LimbRowWrapper = styled.div`
 	/* justify-content: start; */
 	align-items: center;
 	text-align: center;
-	margin-top: ${props => props.firstEntry && '-2px'};
-	margin-left: ${props => props.firstEntry ? '-2px' : props.containsCommand ? '0px' : '200px'};
+	margin-top: ${props => props.firstEntry && '-4px'};
+	/* position: ${props => props.firstEntry && 'relative'};
+	top: ${props => props.firstEntry && '-4px'}; */
+	margin-left: ${props => props.firstEntry ? '-4px' : props.containsCommand ? '0px' : '200px'};
 `

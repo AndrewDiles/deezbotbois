@@ -178,6 +178,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 			<p>
 				INVENTORY
 			</p>
+			{/* TODO: add filter and sort capacities for equipment: rating, type, alpha, etc */}
 			{(typeViewing === 'weapons' && Object.keys(userInfo.availableArms).length > 4) ||
 				(typeViewing === 'accessories' && Object.keys(userInfo.availableAcc).length > 4) &&
 				<StyledIcon

@@ -63,5 +63,5 @@ const MasterDepthContainer = styled.div`
 	height: 100%;
 	width: 175px;
 	/* overflow-x: auto; */
-	border: purple 2px dashed;
+	border: purple 4px dashed;
 `

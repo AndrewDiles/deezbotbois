@@ -456,6 +456,33 @@ html {
 	100% {background: radial-gradient(closest-side, blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,blue,deepskyblue,rgba(255,255,255,0),rgba(255,255,255,0));}
 }
 
+@keyframes glowConditionNodeBox {
+	0%{
+		background-color: rgba(255,215,0, 0.2);
+	}
+	100% {
+		background-color: rgba(255,215,0, 0.4);
+	}
+}
+@keyframes glowCommandNodeBox {
+	0%{
+		background-color: rgba(0,0,255,0.2);
+	}
+	100% {
+		background-color: rgba(0,0,255, 0.5);
+	}
+}
+@keyframes glowEmptyNodeBox {
+	0%{
+		background-color: rgba(0,0,0, 0.2);
+	}
+	100% {
+		background-color: rgba(0,0,0, 0.5);
+	}
+}
+
+
+
 @keyframes glowGift {
 	0% {color: rgba(0, 0, 0, 0.54)};
 	100% {color: blue};

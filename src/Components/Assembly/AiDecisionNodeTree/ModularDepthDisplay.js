@@ -8,7 +8,6 @@ const ModularDepthDisplay = ({ botNumberSelected }) => {
 
 	React.useEffect(()=>{
 		//recursively go through scripts to determine new maxDepthReach
-
 		// setting bail in the event that there is no script
 		// console.log('use State to update max depth Reached triggered');
 		if (!userInfo.botBuilds || !userInfo.botBuilds[botNumberSelected] ||
@@ -83,24 +82,12 @@ const DepthDisplayWrapper = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	/* align-items: center;
-	text-align: center; */
 `
-
-// const LimbRowWrapper = styled.div`
-// 	display: flex;
-// 	flex-direction: row;
-// 	justify-content: start;
-// 	align-items: center;
-// 	text-align: center;
-// 	margin-left: ${props => props.firstEntry ? '0px' : props.containsCommand ? '0px' : '200px'};
-// `
 const DepthLabel = styled.div`
 	text-indent: -25px;
 	padding: 5px 10px;
 	width: ${props => props.final ? '175px' : '200px'};
 	height: 100%;
 	font-size: 0.7em;
-	/* background-color: ${props => props.depthLevel < 12 ? `rgba(${20*props.depthLevel},0,0,0.35)` : 'rgba(240,0,0,0.35'}; */
-	background-color: ${props => props.depthLevel < 10 ? `rgba(${128-12*props.depthLevel},35,${255-24*props.depthLevel},0.2)` : 'rgba(8,35,15,.2'};
+	background-color: ${props => props.depthLevel < 10 ? `rgba(${128-12*props.depthLevel},35,${255-24*props.depthLevel},0.2)` : 'rgba(8,35,15,0.2)'};
 `

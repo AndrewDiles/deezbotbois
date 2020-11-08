@@ -4,13 +4,15 @@ import NodeBlock from './NodeBlock';
 import ConditionNode from './ConditionNode'
 import styled from 'styled-components';
 import testLocalAiAndScript from './testLocalAiAndScript';
+import testNextLocalAiAndScript from './testNextLocalAiAndScrip';
 
 const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, localAiAndScript }) => {
-	const rand = Math.random();
+	// const rand = Math.random();
 	const [metNodeHeight, setMetNodeHeight] = React.useState(0);
 	React.useEffect(()=>{
 		function updateHeight () {
-			let target = document.getElementById(rand);
+			// let target = document.getElementById(rand);
+			let target = document.getElementById(JSON.stringify(localAiAndScript));
 			if (target) {
 				setMetNodeHeight(target.getBoundingClientRect().height);
 			}
@@ -33,11 +35,14 @@ const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, loc
 	}
 
 	let active = testLocalAiAndScript(localAiAndScript,aiAndScripts);
+	let metActive = testNextLocalAiAndScript(localAiAndScript,aiAndScripts, 'conditionTrue', active);
+	let unMetActive = testNextLocalAiAndScript(localAiAndScript,aiAndScripts, 'conditionFalse', active);
 
 	if (decisionObject.condition) {
 		return (
 			<Row>
 				<ConditionNode
+				aiAndScripts = {aiAndScripts}
 				setAiAndScripts = {setAiAndScripts}
 				index = {index}
 				condition = {decisionObject.condition}
@@ -50,15 +55,16 @@ const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, loc
 				>
 					<BarsContainer>
 						<TopSpace/>
-						<MetBar/>
+						<MetBar active = {metActive}/>
 						<MidSpace/>
-						<UnMetBarTop/>
+						<UnMetBarTop active = {unMetActive}/>
 						<UnMetBar
 						metNodeHeight = {metNodeHeight}
+						active = {unMetActive}
 						/>
 						<UnMetBarContainer>
 							<BottomSpace/>
-							<UnMetBarBottom/>
+							<UnMetBarBottom active = {unMetActive}/>
 						</UnMetBarContainer>
 					</BarsContainer>
 				</DepthXWrapper>
@@ -67,9 +73,10 @@ const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, loc
 						<DepthXWrapper
 						depthLevel = {decisionObject.condition.depth}
 						>
-							<Spacer/>
+							{/* <Spacer/> */}
 							<NodeBlock
-							id = {rand}
+							// id = {rand}
+							id = {JSON.stringify(localAiAndScript)}
 							block = {decisionObject.condition.conditionMet}
 							type = 'met'
 							aiAndScripts = {aiAndScripts}
@@ -84,6 +91,7 @@ const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, loc
 							setAiAndScripts = {setAiAndScripts}
 							localAiAndScript = {addCaseToLocal(localAiAndScript, 'conditionFalse')}
 							/>
+							<Spacer/>
 						</DepthXWrapper>
 					</Column>
 				{/* } */}
@@ -106,7 +114,7 @@ const Column = styled.div`
 	flex-direction: column;
 `
 const Spacer = styled.div`
-	height: 60px;
+	height: 10px;
 `
 const BarsContainer = styled.div`
 	height: 100%;
@@ -119,6 +127,8 @@ const MetBar = styled.div`
 	height: 5px;
 	width: 25px;
 	background-color: lime;
+	opacity: ${props => props.active && props.active === 'onPath' ? '1' : '0.3'};
+	transition: opacity .5s;
 `
 const MidSpace = styled.div`
 	height: 22px;
@@ -129,12 +139,15 @@ const UnMetBarTop = styled.div`
 	border-top: red 5px solid;
 	border-right: red 5px solid;
 	border-radius: 0 50% 0 0;
+	opacity: ${props => props.active && props.active === 'onPath' ? '1' : '0.3'};
+	transition: opacity .5s;
 `
 const UnMetBar = styled.div`
-	height: ${props => props.metNodeHeight && `${props.metNodeHeight}px`};
-	transition: height 1s;
+	height: ${props => props.metNodeHeight && `${props.metNodeHeight-50}px`};
+	transition: height 1s, opacity .5s;
 	width: 12px;
 	border-right: red 5px solid;
+	opacity: ${props => props.active && props.active === 'onPath' ? '1' : '0.3'};
 `
 const UnMetBarContainer = styled.div`
 	display: flex;
@@ -148,4 +161,6 @@ const UnMetBarBottom = styled.div`
 	border-left: red 5px solid;
 	border-bottom: red 5px solid;
 	border-radius: 0 0 0 50%;
+	opacity: ${props => props.active && props.active === 'onPath' ? '1' : '0.3'};
+	transition: opacity .5s;
 `

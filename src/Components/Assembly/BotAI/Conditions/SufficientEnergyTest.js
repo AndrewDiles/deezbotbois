@@ -7,6 +7,9 @@ import { weaponStats } from '../../../../Constants/equipment';
 
 const SufficientEnergyTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, attributes }) => {
 	const userInfo = useSelector((state) => state.userInfo);
+	if (!userInfo.botBuilds[botNumberSelected]) {
+		return <></>
+	}
 	return (		
 		<div className = 'commandContents'>
 			{attributes[activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.commandName] === false &&

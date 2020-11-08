@@ -15,6 +15,7 @@ const WeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 	const [weaponWarning, setWeaponWarning] = React.useState(false);
 
 	React.useEffect(()=>{
+		if (!botInfo[botNumberSelected]) return
 		if (botInfo[botNumberSelected].equipment[nodeInfo.instructions.weapon]) {
 			if (weaponStats[botInfo[botNumberSelected].equipment[nodeInfo.instructions.weapon]].superTypes[0] === weaponType) {
 				setWeaponWarning(false)

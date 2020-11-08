@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import MovementIntentSetter from '../InstructionsComponents/MovementIntentSetter';
 import TargetSelector from '../InstructionsComponents/TargetSelector';
 import PathEditor from '../InstructionsComponents/PathEditor';
 
 const MoveCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, attributes }) => {
+	const userInfo = useSelector((state) => state.userInfo);
 	const [emptyPath, setEmptyPath] = React.useState(false);
 
 	React.useEffect(()=>{
@@ -15,7 +17,9 @@ const MoveCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 			setEmptyPath(false);
 		}
 	},[JSON.stringify(activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions)])
-
+	if (!userInfo.botBuilds[botNumberSelected]) {
+		return <></>
+	}
 	return (		
 		<div className = 'commandContents'>
 			<MovementIntentSetter

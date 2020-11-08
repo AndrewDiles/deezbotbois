@@ -1,11 +1,15 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import WeaponSelector from '../InstructionsComponents/WeaponSelector';
 import RotatingToggle from '../InstructionsComponents/RotatingToggle';
 import RotationSetter from '../InstructionsComponents/RotationSetter';
 import DirectionSetter from '../InstructionsComponents/DirectionSetter';
 
 const AimCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
-
+	const userInfo = useSelector((state) => state.userInfo);
+	if (!userInfo.botBuilds[botNumberSelected]) {
+		return <></>
+	}
 	return (		
 		<div className = 'commandContents'>
 			<WeaponSelector
