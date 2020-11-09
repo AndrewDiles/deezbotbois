@@ -176,7 +176,7 @@ function NavBar() {
 					</>
         )}
       </UserDiv>
-			{settings.profileTab === 'inactive' &&
+			{settings.profileTab !== 'inactive' &&
 				<Profile time = {time}/>
 			}
     </Wrapper>

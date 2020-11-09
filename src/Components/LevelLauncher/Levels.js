@@ -13,24 +13,25 @@ const Levels = ({ setViewingLevels }) => {
   return (
     <Wrapper>
 			{/* LAUNCH LEVEL */}
-			{/* <LevelSelectWrapper>
+
+			<LevelSelectWrapper>
 				<LevelSelect>
-      		LEVEL SELECT
+					LEVEL SELECT
 				</LevelSelect>
 			</LevelSelectWrapper>
-			<LevelDetailsWrapper>
+
+			{/* <LevelDetailsWrapper>
 				<LevelDetails>
 					LEVEL DETAILS
 				</LevelDetails>
-			</LevelDetailsWrapper>
-			<BotSelectorWrapper>
+			</LevelDetailsWrapper> */}
+
+			{/* <BotSelectorWrapper>
 				<BotSelector>
 					BOT SELECTION
 				</BotSelector>
 			</BotSelectorWrapper> */}
-			<Test>
-				TEST
-			</Test>
+
     </Wrapper>
   )
 }
@@ -39,11 +40,11 @@ export default Levels;
 
 const Wrapper = styled.div`
 /* width: 250px; */
-display : flex;
+/* display : flex;
 flex-direction: column;
 align-content: center;
 align-items: center;
-justify-content: flex-start;
+justify-content: flex-start; */
 `
 const LevelSelectWrapper = styled.div`
 	height: 0;
@@ -95,11 +96,6 @@ const BotSelector = styled.div`
 	background-color: grey;
 	width: 300px;
 	height: 600px;
-`
-const Test = styled.div`
-	height: 200px;
-	width: 200px;
-	background: blue;
 `
 // const Wrapper = styled.div`
 // display: grid;
