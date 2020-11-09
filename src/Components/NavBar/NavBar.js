@@ -1,19 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from "react-router-dom";
-
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
-
 import {
-  updateUrl,
 	setNavLocation,
 	activateProfileTab,
 	deactivateProfileTab,
 	hoverProfileTab
 } from '../../Redux/actions';
-
-import StyledButton from '../StyledButton/StyledButton';
+import NavLinkButton from './NavLinkButton';
+import NavLinkIcon from './NavLinkIcon';
 import StyledIcon from '../StyledIcon/StyledIcon';
 import {arrows_move_left} from 'react-icons-kit/linea/arrows_move_left';
 import {arrows_move_top} from 'react-icons-kit/linea/arrows_move_top';
@@ -28,9 +24,8 @@ function NavBar() {
 	const userInfo = useSelector((state) => state.userInfo);
 	let colors = useSelector(getThemeColors);
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
-		// dispatch(updateUrl(window.location.href));
 
-	React.useEffect((event) => {
+	React.useEffect(() => {
 		const targets = document.getElementsByClassName('userImg');
 		if (targets === null || targets.length === 0) return;
 		const handleMouseOver = () => {
@@ -116,6 +111,7 @@ function NavBar() {
 								model = {userInfo.imageUrl}
 								arm1 = {'Gun1'}
 								arm1Angle = {-45}
+								botColors='default'
 								/>
 							</BotWrapper>
 						)
@@ -123,112 +119,65 @@ function NavBar() {
 					</BorderDivForUserImg>
 				}
 			</RowDiv>
-      <StyledNavLink to="/home" tabIndex="-1">
-        <StyledButton
-					handleClick = {() => {dispatch(updateUrl('home'))}}
-					selected = {settings.currentUrl === 'home'}
-					disabled = {settings.currentUrl === 'home'}
-          >
-          HOME
-        </StyledButton>
-      </StyledNavLink>
 
-			<StyledNavLink to="/rules" tabIndex="-1">
-        <StyledButton
-					handleClick = {() => {dispatch(updateUrl('rules'))}}
-					selected = {settings.currentUrl === 'rules'}
-					disabled = {settings.currentUrl === 'rules'}
-          >
-          RULES
-        </StyledButton>
-      </StyledNavLink>
-
-      <StyledNavLink to="/test" tabIndex="-1">
-        <StyledButton
-					handleClick = {() => {dispatch(updateUrl('test'))}}
-					selected = {settings.currentUrl === 'test'}
-					disabled = {settings.currentUrl === 'test'}
-          >
-          TEST
-        </StyledButton>
-      </StyledNavLink>
-
-			<StyledNavLink to="/test2" tabIndex="-1">
-        <StyledButton
-					handleClick = {() => {dispatch(updateUrl('test2'))}}
-					selected = {settings.currentUrl === 'test2'}
-					disabled = {settings.currentUrl === 'test2'}
-          >
-          TEST2
-        </StyledButton>
-      </StyledNavLink>
+			{['home','rules','test','test2'].map((destination) =>{
+				return (
+					<div key = {destination}>
+						<NavLinkButton destination = {destination}/>
+						<NavLinkIcon destination = {destination}/>
+					</div>
+				)
+			})}
 
       <UserDiv
 			id = 'userDiv'
 			>
-        {
-          userInfo.email === null ? (
-						settings.navLocation === 'top' ? (
-							<TopLogInWrapper>
-								<StyledNavLink to="/altLogin" tabIndex="-1">
-        					<StyledButton
-										handleClick = {() => {dispatch(updateUrl('altLogin'))}}
-										selected = {settings.currentUrl === 'altLogin'}
-										disabled = {settings.currentUrl === 'altLogin'}
-        					  >
-        					  ALT LOGIN
-        					</StyledButton>
-      					</StyledNavLink >
-								<LoginViaGoogle/>
-							</TopLogInWrapper>
-						) : (
-							<ColDiv>
-								<StyledNavLink to="/altLogin" tabIndex="-1">
-        					<StyledButton
-										handleClick = {() => {dispatch(updateUrl('altLogin'))}}
-										selected = {settings.currentUrl === 'altLogin'}
-										disabled = {settings.currentUrl === 'altLogin'}
-        					  >
-        					  ALT LOGIN
-        					</StyledButton>
-      					</StyledNavLink>
-								<LoginViaGoogle/>
-							</ColDiv>
-						)
-          ) : (
-						<>
-							{userInfo.imageUrl && settings.navLocation === 'top' &&
-								<BorderDivForUserImg
-								navLocation = {settings.navLocation}
-								glow = {time - userInfo.lastLogInBitsReceived}
-								>
-									{userInfo.imageUrl[0] === 'h' ? (
-										<UserImg
-										className = 'userImg'
-										src={userInfo.imageUrl}
-										alt = "User's picture.  Likely of them, but perhaps not."
+        {userInfo.email === null ? (
+					settings.navLocation === 'top' ? (
+						<TopLogInWrapper>
+							<NavLinkButton destination = {'altLogin'} innerText = 'ALT LOGIN'/>
+							<NavLinkIcon destination = {'altLogin'}/>
+							<LoginViaGoogle/>
+						</TopLogInWrapper>
+					) : (
+						<ColDiv>
+							<NavLinkButton destination = {'altLogin'} innerText = 'ALT LOGIN'/>
+							<LoginViaGoogle/>
+						</ColDiv>
+					)
+        ) : (
+					<>
+						{userInfo.imageUrl && settings.navLocation === 'top' &&
+							<BorderDivForUserImg
+							navLocation = {settings.navLocation}
+							glow = {time - userInfo.lastLogInBitsReceived}
+							>
+								{userInfo.imageUrl[0] === 'h' ? (
+									<UserImg
+									className = 'userImg'
+									src={userInfo.imageUrl}
+									alt = "User's picture.  Likely of them, but perhaps not."
+									/>
+								) : (
+									<BotWrapper
+									className = 'userImg'
+									>
+										<Bot
+										alternativeBotSize = {40}
+										model = {userInfo.imageUrl}
+										arm1 = {'Gun1'}
+										arm1Angle = {-45}
+										botColors='default'
 										/>
-									) : (
-										<BotWrapper
-										className = 'userImg'
-										>
-											<Bot
-											// className = 'userImg'
-											alternativeBotSize = {40}
-											model = {userInfo.imageUrl}
-											arm1 = {'Gun1'}
-											arm1Angle = {-45}
-											/>
-										</BotWrapper>
-									)}
-								</BorderDivForUserImg>
-							}
-						</>
-          )
-        }
+									</BotWrapper>
+								)}
+							</BorderDivForUserImg>
+						}
+					</>
+        )}
       </UserDiv>
-			{
-				settings.profileTab === 'inactive' ? <></> : <Profile time = {time}/>
+			{settings.profileTab === 'inactive' &&
+				<Profile time = {time}/>
 			}
     </Wrapper>
   );
@@ -264,13 +213,6 @@ const Wrapper = styled.nav`
 	background-color: ${props => props.colors.primary};
 	color: ${props => props.colors.textColor};
 `
-const StyledNavLink = styled(NavLink)`
-  width: 125px;
-	height: 40px;
-	margin: 5px;
-	border-radius: 5px;
-  border: 1px solid transparent;
-`
 const UserImg = styled.img`
 	width: 40px;
 	height: 40px;
@@ -280,23 +222,26 @@ const UserImg = styled.img`
 const UserDiv = styled.div`
 `
 const RowDiv = styled.div`
-display: flex;
-align-content: center;
-text-align: center;
-flex-direction: row;
-justify-content: space-between;
+	display: flex;
+	align-content: center;
+	text-align: center;
+	flex-direction: row;
+	justify-content: space-between;
 `
 const TopLogInWrapper = styled.div`
-display: flex;
-flex-direction: row;
-align-content: right;
-justify-content: space-between;
-width: 260px;
+	display: flex;
+	flex-direction: row;
+	align-content: right;
+	justify-content: space-between;
+	width: 260px;
+	@media (max-width: 900px) {
+		width: 90px;
+	}
 `
 const ColDiv = styled.div`
-display: flex;
-flex-direction: column;
-align-content: left;
+	display: flex;
+	flex-direction: column;
+	align-content: left;
 `
 
 const BotWrapper = styled.div`

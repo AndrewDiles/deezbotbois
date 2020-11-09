@@ -32,7 +32,7 @@ const userInfoSchema = yup.object().shape({
 	availableBotColors: yup.object(),
 	botBuilds: yup.array(),
 	battleBits: yup.number(),
-	levelProgress: yup.object(),
+	levelProgress: yup.array(),
 	tournamentHistory: yup.array(),
 	lastLogInBitsReceived: yup.number()
 });

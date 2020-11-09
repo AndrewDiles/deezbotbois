@@ -7,11 +7,9 @@ import testLocalAiAndScript from './testLocalAiAndScript';
 import testNextLocalAiAndScript from './testNextLocalAiAndScrip';
 
 const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, localAiAndScript }) => {
-	// const rand = Math.random();
 	const [metNodeHeight, setMetNodeHeight] = React.useState(0);
 	React.useEffect(()=>{
 		function updateHeight () {
-			// let target = document.getElementById(rand);
 			let target = document.getElementById(JSON.stringify(localAiAndScript));
 			if (target) {
 				setMetNodeHeight(target.getBoundingClientRect().height);
@@ -68,39 +66,37 @@ const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, loc
 						</UnMetBarContainer>
 					</BarsContainer>
 				</DepthXWrapper>
-				{/* {(decisionObject.condition.conditionMet.length > 0 || decisionObject.condition.conditionUnMet.length > 0) && */}
-					<Column>
-						<DepthXWrapper
-						depthLevel = {decisionObject.condition.depth}
-						>
-							{/* <Spacer/> */}
-							<NodeBlock
-							// id = {rand}
-							id = {JSON.stringify(localAiAndScript)}
-							block = {decisionObject.condition.conditionMet}
-							type = 'met'
-							aiAndScripts = {aiAndScripts}
-							setAiAndScripts ={setAiAndScripts}
-							localAiAndScript = {addCaseToLocal(localAiAndScript, 'conditionTrue')}
-							/>
-							<Spacer/>
-							<NodeBlock
-							block = {decisionObject.condition.conditionUnMet}
-							type = 'unMet'
-							aiAndScripts = {aiAndScripts}
-							setAiAndScripts = {setAiAndScripts}
-							localAiAndScript = {addCaseToLocal(localAiAndScript, 'conditionFalse')}
-							/>
-							<Spacer/>
-						</DepthXWrapper>
-					</Column>
-				{/* } */}
+				<Column>
+					<DepthXWrapper
+					depthLevel = {decisionObject.condition.depth}
+					>
+						<NodeBlock
+						id = {JSON.stringify(localAiAndScript)}
+						block = {decisionObject.condition.conditionMet}
+						type = 'met'
+						aiAndScripts = {aiAndScripts}
+						setAiAndScripts ={setAiAndScripts}
+						localAiAndScript = {addCaseToLocal(localAiAndScript, 'conditionTrue')}
+						/>
+						<Spacer/>
+						<NodeBlock
+						block = {decisionObject.condition.conditionUnMet}
+						type = 'unMet'
+						aiAndScripts = {aiAndScripts}
+						setAiAndScripts = {setAiAndScripts}
+						localAiAndScript = {addCaseToLocal(localAiAndScript, 'conditionFalse')}
+						/>
+						<Spacer/>
+					</DepthXWrapper>
+				</Column>
 			</Row>
 		)
 	} 
 	else {
 		return (
-			<>{decisionObject}</>
+			<>
+				{decisionObject}
+			</>
 		)
 	}
 }

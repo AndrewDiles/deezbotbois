@@ -72,10 +72,9 @@ Intentions with the GUI include:
 - Command and Condition Node's Instructions 
 
 # Potential Improvements
-- UnMetBar 's height must be calculated
+- Add a duplicate Bot in the Assembly
 - Drill up from Instruction Components to remove passing of props they don't need
 - Clean up / refactor Ai deletion Component as it contains code duplication
-- Add a duplicate Bot in the Assembly
 - Disable ability to Save Bots in Assembly after creating a new bot
 - Add DR and Dmg attributes to be displayed on Attributes of Assembly
 - Change error codes for incorrect passwords to 403, make sure front end does not break with change from 401
@@ -106,21 +105,23 @@ Intentions with the GUI include:
 
 # Potential Improvements Met
 
-- In Assembly: Add ability to click and expand each section
+- In Assembly - Build an AI decision tree for node navigation and clarification
 ### DONE
 
+- In Assembly - Expand red line of UnMetBar based on the hieght of the above met node
+### DONE
+
+- In Assembly - Add ability to click and expand each section
+### DONE
 
 - In Assembly - Attributes: +/- and % change shouldn't be red for negative cost changes, as this is an improvement
 ### DONE
 
-
 - HIGH PRIORITY: improve import method and method of gathering icons for attributes and tech tree.  Current system is clunky
 ### DONE - Created a function that handles icon imports
 
-
 - encrypt passwords
 ### DONE
-
 
 - Don't ask user if it is their first time logging in.  Instead, let them try, and then ask for the confirmation code.
 ### DONE

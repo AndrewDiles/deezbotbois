@@ -107,6 +107,7 @@ const Wrapper = styled.div`
 			props.profileTab === 'active' && "0 140px 0 0"
 			: props.profileTab === 'active' ? "0 140px 0 140px" : "0 140px 0 0"
 			};
+	transition: padding 0.5s ease-in-out;
 	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
@@ -115,11 +116,7 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	overflow-y: auto;
 	align-content: center;
-	align-items: center;
-	color: ${props => props.colors.textColor};
-	width: 100%;
-	height: 100%;
-	
+	align-items: center;	
 `
 const Row = styled.div`
 	margin: 20px;

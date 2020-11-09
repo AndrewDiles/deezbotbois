@@ -67,6 +67,7 @@ function LoginViaGoogle() {
   return (
     <StyledGoogleLogin
 			buttonText = "LOGIN"
+			navlocation = {settings.navLocation}
 			onClick = {()=>dispatch(communicating())}
       clientId = {REACT_APP_AUTH0_CLIENT_ID}
       onSuccess = {(res)=>{handleSuccessfulGoogleLogin(res)}}
@@ -87,5 +88,8 @@ const StyledGoogleLogin = styled(GoogleLogin)`
 	&:hover{
 		color: #000 !important;
 		border: black 2px solid !important;
+	}
+	@media (max-width: 900px) {
+		width: ${props => props.navlocation === 'top' && '40px'};
 	}
 `

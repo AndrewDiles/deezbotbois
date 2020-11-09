@@ -14,8 +14,9 @@ import GlobalStyles from "./Components/GlobalStyles/GlobalStyles";
 import NavBar from "./Components/NavBar/NavBar";
 import Home from "./Components/Home/Home";
 import Assembly from "./Components/Assembly/Assembly";
-import Levels from "./Components/Levels/Levels";
-import Rules from "./Components/Rules/Rules"
+// import Levels from "./Components/Levels/Levels";
+import LevelLauncher from './Components/LevelLauncher/LevelLauncher';
+import Rules from "./Components/Rules/Rules";
 import Test from "./Components/Tests/Test";
 import Test2 from "./Components/Tests/Test2";
 import Settings from "./Components/Settings/Settings";
@@ -74,7 +75,7 @@ function App() {
 							)}
             </Route>
 						<Route exact path="/levels">
-              <Levels />
+              <LevelLauncher />
             </Route>
 						<Route exact path="/rules">
               <Rules />
