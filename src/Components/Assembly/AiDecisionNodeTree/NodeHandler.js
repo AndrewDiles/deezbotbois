@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import DepthXWrapper from './DepthXWrapper';
 import NodeBlock from './NodeBlock';
 import ConditionNode from './ConditionNode'
@@ -7,6 +8,7 @@ import testLocalAiAndScript from './testLocalAiAndScript';
 import testNextLocalAiAndScript from './testNextLocalAiAndScrip';
 
 const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, localAiAndScript }) => {
+	const userInfo = useSelector((state) => state.userInfo);
 	const [metNodeHeight, setMetNodeHeight] = React.useState(0);
 	React.useEffect(()=>{
 		function updateHeight () {
@@ -48,6 +50,7 @@ const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, loc
 				localAiAndScript = {localAiAndScript}
 				/>
 				<DepthXWrapper
+				colored = {userInfo.colorTheme.primary !== 'white'}
 				depthLevel = {decisionObject.condition.depth -1}
 				width = {25}
 				>
@@ -62,13 +65,17 @@ const NodeHandler = ({ index, decisionObject, aiAndScripts, setAiAndScripts, loc
 						/>
 						<UnMetBarContainer>
 							<BottomSpace/>
-							<UnMetBarBottom active = {unMetActive}/>
+							<UnMetBarBottom
+							active = {unMetActive}
+							metNodeHeight = {metNodeHeight}
+							/>
 						</UnMetBarContainer>
 					</BarsContainer>
 				</DepthXWrapper>
 				<Column>
 					<DepthXWrapper
 					depthLevel = {decisionObject.condition.depth}
+					colored = {userInfo.colorTheme.primary !== 'white'}
 					>
 						<NodeBlock
 						id = {JSON.stringify(localAiAndScript)}
@@ -139,8 +146,12 @@ const UnMetBarTop = styled.div`
 	transition: opacity .5s;
 `
 const UnMetBar = styled.div`
-	height: ${props => props.metNodeHeight && `${props.metNodeHeight-50}px`};
-	transition: height 1s, opacity .5s;
+	/* height: ${props => props.metNodeHeight && `${props.metNodeHeight-50}px`}; */
+	height: 10px;
+	transform: ${props => props.metNodeHeight && `scaleY(${(props.metNodeHeight-40)/10})`};
+	transform-origin: top;
+	/* scaleY() */
+	transition: opacity .5s, transform 1s ease-in-out;
 	width: 12px;
 	border-right: red 5px solid;
 	opacity: ${props => props.active && props.active === 'onPath' ? '1' : '0.3'};
@@ -154,9 +165,11 @@ const BottomSpace = styled.div`
 const UnMetBarBottom = styled.div`
 	height: 18px;
 	width: 18px;
+	transform: ${props => props.metNodeHeight && `translateY(${props.metNodeHeight-50}px)`};
+	transform-origin: top;
 	border-left: red 5px solid;
 	border-bottom: red 5px solid;
 	border-radius: 0 0 0 50%;
 	opacity: ${props => props.active && props.active === 'onPath' ? '1' : '0.3'};
-	transition: opacity .5s;
+	transition: opacity .5s, transform 1s ease-in-out;
 `

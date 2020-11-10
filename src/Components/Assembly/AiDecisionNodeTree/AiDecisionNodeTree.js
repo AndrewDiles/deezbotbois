@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import ModularDepthDisplay from './ModularDepthDisplay';
 import LimbStarter from './LimbStarter';
 import DepthXWrapper from './DepthXWrapper';
+import { user } from 'react-icons-kit/icomoon/user';
 
 const AiDecisionNodeTree = ({ botNumberSelected, aiAndScripts, setAiAndScripts }) => {
 	const userInfo = useSelector((state) => state.userInfo);
@@ -29,6 +30,7 @@ const AiDecisionNodeTree = ({ botNumberSelected, aiAndScripts, setAiAndScripts }
 			botNumberSelected = {botNumberSelected}
 			/>
 			<DepthXWrapper
+			colored = {userInfo.colorTheme.primary !== 'white'}
 			depthLevel = {depthLevel}
 			>
 				<MasterDepthContainer>

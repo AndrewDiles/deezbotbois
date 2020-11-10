@@ -202,6 +202,7 @@ const BorderDivForUserImg = styled.div`
 const Wrapper = styled.nav`
   width: ${props => props.navLocation === 'top' ? '100%' : '135px'};
   height: ${props => props.navLocation === 'top' ? '50px' : '100%'};
+	/* transition: width .5s ease-in-out, height .5s ease-in-out; This... don't do this */
   position: fixed;
   display: flex;
   flex-direction: ${props => props.navLocation === 'top' ? 'row' : 'column'};

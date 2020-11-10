@@ -9,28 +9,50 @@ const Levels = ({ setViewingLevels }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
+	const width = 300;
+	const lvSelHeight = 200;
+	const lvInfoHeight = 600;
+	const botSelHeight = 400;
 
   return (
     <Wrapper>
 			{/* LAUNCH LEVEL */}
 
-			<LevelSelectWrapper>
-				<LevelSelect>
+			<LevelSelectWrapper
+			height = {lvSelHeight}
+			width = {width}
+			>
+				<LevelSelect
+				height = {lvSelHeight}
+				width = {width}
+				>
 					LEVEL SELECT
 				</LevelSelect>
 			</LevelSelectWrapper>
 
-			{/* <LevelDetailsWrapper>
-				<LevelDetails>
+			<LevelDetailsWrapper
+			height = {lvInfoHeight}
+			width = {width}
+			>
+				<LevelDetails
+				height = {lvInfoHeight}
+				width = {width}
+				>
 					LEVEL DETAILS
 				</LevelDetails>
-			</LevelDetailsWrapper> */}
+			</LevelDetailsWrapper>
 
-			{/* <BotSelectorWrapper>
-				<BotSelector>
+			<BotSelectorWrapper
+			height = {botSelHeight}
+			width = {width}
+			>
+				<BotSelector
+				height = {botSelHeight}
+				width = {width}
+				>
 					BOT SELECTION
 				</BotSelector>
-			</BotSelectorWrapper> */}
+			</BotSelectorWrapper>
 
     </Wrapper>
   )
@@ -51,17 +73,17 @@ const LevelSelectWrapper = styled.div`
 	width: 0;
 	position: relative;
 	top: 0;
-	left: -150px;
+	left: ${props => `${-props.width/2}px`};
 	transition: top 1s, left 1s;
-	@media (min-width: 768px) {
+	@media (min-width: 700px) {
 		top: 50px;
-		left: 0;
+		left: ${props => `${1.5*props.width}px`};
 	}
 `
 const LevelSelect = styled.div`
 	background-color: pink;
-	width: 300px;
-	height: 400px;
+	width: ${props=>`${props.width}px`};
+	height: ${props=>`${props.height}px`};
 `
 const LevelDetailsWrapper = styled.div`
 	height: 0;
@@ -70,15 +92,15 @@ const LevelDetailsWrapper = styled.div`
 	top: 0;
 	left: 150px;
 	transition: top 1s, left 1s;
-	@media (min-width: 768px) {
+	@media (min-width: 700px) {
 		top: 50px;
 		left: 300px;
 	}
 `
 const LevelDetails = styled.div`
 	background-color: green;
-	width: 300px;
-	height: 600px;
+	width: ${props=>`${props.width}px`};
+	height: ${props=>`${props.height}px`};
 `
 const BotSelectorWrapper = styled.div`
 	height: 0;
@@ -87,15 +109,15 @@ const BotSelectorWrapper = styled.div`
 	top: 600px;
 	left: 0;
 	transition: top 1s, left 1s;
-	@media (min-width: 768px) {
+	@media (min-width: 700px) {
 		top: 800px;
 		left: -150px;
 	}
 `
 const BotSelector = styled.div`
 	background-color: grey;
-	width: 300px;
-	height: 600px;
+	width: ${props=>`${props.width}px`};
+	height: ${props=>`${props.height}px`};
 `
 // const Wrapper = styled.div`
 // display: grid;

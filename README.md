@@ -72,6 +72,7 @@ Intentions with the GUI include:
 - Command and Condition Node's Instructions 
 
 # Potential Improvements
+- Add build bots to Avatar image options in Account
 - Add a duplicate Bot in the Assembly
 - Drill up from Instruction Components to remove passing of props they don't need
 - Clean up / refactor Ai deletion Component as it contains code duplication

@@ -59,6 +59,7 @@ const ModularDepthDisplay = ({ botNumberSelected }) => {
 					key = {depthLevel}
 					depthLevel = {depthLevel}
 					className = 'centeredFlex'
+					colored = {userInfo.colorTheme.primary !== 'white'}
 					>
 						DEPTH LV {depthLevel}
 					</DepthLabel>
@@ -67,6 +68,7 @@ const ModularDepthDisplay = ({ botNumberSelected }) => {
 			<DepthLabel
 			depthLevel = {maxDepthReached[maxDepthReached.length-1]+1}
 			className = 'centeredFlex'
+			colored = {userInfo.colorTheme.primary !== 'white'}
 			final = {1}
 			>
 				CONDITIONLESS DEPTH LV {maxDepthReached[maxDepthReached.length-1]+1}
@@ -89,5 +91,5 @@ const DepthLabel = styled.div`
 	width: ${props => props.final ? '175px' : '200px'};
 	height: 100%;
 	font-size: 0.7em;
-	background-color: ${props => props.depthLevel < 10 ? `rgba(${128-12*props.depthLevel},35,${255-24*props.depthLevel},0.2)` : 'rgba(8,35,15,0.2)'};
+	background-color: ${props => props.colored ? props.depthLevel < 10 ? `rgba(${128-12*props.depthLevel},35,${255-24*props.depthLevel},0.2)` : 'rgba(8,35,15,0.2)' : ''};
 `
