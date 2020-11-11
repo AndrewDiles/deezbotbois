@@ -15,7 +15,7 @@ import {arrows_move_left} from 'react-icons-kit/linea/arrows_move_left';
 import {arrows_move_top} from 'react-icons-kit/linea/arrows_move_top';
 import LoginViaGoogle from './LoginViaGoogle';
 import Profile from '../Profile/Profile';
-import Bot from '../Bots/Bot';
+import UserImage from './UserImage';
 
 function NavBar() {
 	const [time, setTime] = React.useState(Date.now());
@@ -91,32 +91,9 @@ function NavBar() {
 				icon = {settings.navLocation === 'top' ? arrows_move_left : arrows_move_top}
       	/>
 				{userInfo.imageUrl && settings.navLocation === 'left' &&
-					<BorderDivForUserImg
-					navLocation = {settings.navLocation}
-					glow = {time - userInfo.lastLogInBitsReceived}
-					>
-						{userInfo.imageUrl[0] === 'h' ? (
-							<UserImg
-							className = 'userImg'
-							src={userInfo.imageUrl}
-							alt = "User's picture.  Likely of them, but perhaps not."
-							/>
-						) : (
-							<BotWrapper
-							className = 'userImg'
-							>
-								<Bot
-								// className = 'userImg'
-								alternativeBotSize = {40}
-								model = {userInfo.imageUrl}
-								arm1 = {'Gun1'}
-								arm1Angle = {-45}
-								botColors='default'
-								/>
-							</BotWrapper>
-						)
-						}
-					</BorderDivForUserImg>
+					<UserImage
+					time = {time}
+					/>
 				}
 			</RowDiv>
 
@@ -148,30 +125,9 @@ function NavBar() {
         ) : (
 					<>
 						{userInfo.imageUrl && settings.navLocation === 'top' &&
-							<BorderDivForUserImg
-							navLocation = {settings.navLocation}
-							glow = {time - userInfo.lastLogInBitsReceived}
-							>
-								{userInfo.imageUrl[0] === 'h' ? (
-									<UserImg
-									className = 'userImg'
-									src={userInfo.imageUrl}
-									alt = "User's picture.  Likely of them, but perhaps not."
-									/>
-								) : (
-									<BotWrapper
-									className = 'userImg'
-									>
-										<Bot
-										alternativeBotSize = {40}
-										model = {userInfo.imageUrl}
-										arm1 = {'Gun1'}
-										arm1Angle = {-45}
-										botColors='default'
-										/>
-									</BotWrapper>
-								)}
-							</BorderDivForUserImg>
+							<UserImage
+							time = {time}
+							/>
 						}
 					</>
         )}
@@ -184,25 +140,13 @@ function NavBar() {
 }
 
 export default NavBar;
-const BorderDivForUserImg = styled.div`
-	display: flex;
-	justify-content: center;
-  align-items: center;
-  align-content: center;
-	width: 52px;
-	height: 52px;
-	border-radius: 50%;
-	transition: transform .75s;
-	animation: ${props => props.glow > 79200000 ? '1s linear infinite alternate glowUserImg':''};
-	:hover {
-		transform: scale(1.2);
-		cursor: pointer;
-	}
-`
 const Wrapper = styled.nav`
   width: ${props => props.navLocation === 'top' ? '100%' : '135px'};
   height: ${props => props.navLocation === 'top' ? '50px' : '100%'};
-	/* transition: width .5s ease-in-out, height .5s ease-in-out; This... don't do this */
+
+	/* This looks terrible but funny*/
+	/* transition: width .5s ease-in-out, height .5s ease-in-out, box-shadow .5s ease-in-out; */
+
   position: fixed;
   display: flex;
   flex-direction: ${props => props.navLocation === 'top' ? 'row' : 'column'};
@@ -213,12 +157,6 @@ const Wrapper = styled.nav`
   z-index: 10;
 	background-color: ${props => props.colors.primary};
 	color: ${props => props.colors.textColor};
-`
-const UserImg = styled.img`
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	z-index: 21;
 `
 const UserDiv = styled.div`
 `
@@ -243,11 +181,4 @@ const ColDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-content: left;
-`
-
-const BotWrapper = styled.div`
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	z-index: 21;
 `

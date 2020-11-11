@@ -18,7 +18,8 @@ const Levels = ({ setViewingLevels }) => {
     <Wrapper>
 			{/* LAUNCH LEVEL */}
 
-			<LevelSelectWrapper
+
+			{/* <LevelSelectWrapper
 			height = {lvSelHeight}
 			width = {width}
 			>
@@ -28,9 +29,9 @@ const Levels = ({ setViewingLevels }) => {
 				>
 					LEVEL SELECT
 				</LevelSelect>
-			</LevelSelectWrapper>
+			</LevelSelectWrapper> */}
 
-			<LevelDetailsWrapper
+			{/* <LevelDetailsWrapper
 			height = {lvInfoHeight}
 			width = {width}
 			>
@@ -40,9 +41,9 @@ const Levels = ({ setViewingLevels }) => {
 				>
 					LEVEL DETAILS
 				</LevelDetails>
-			</LevelDetailsWrapper>
+			</LevelDetailsWrapper> */}
 
-			<BotSelectorWrapper
+			{/* <BotSelectorWrapper
 			height = {botSelHeight}
 			width = {width}
 			>
@@ -52,7 +53,7 @@ const Levels = ({ setViewingLevels }) => {
 				>
 					BOT SELECTION
 				</BotSelector>
-			</BotSelectorWrapper>
+			</BotSelectorWrapper> */}
 
     </Wrapper>
   )
@@ -68,6 +69,7 @@ align-content: center;
 align-items: center;
 justify-content: flex-start; */
 `
+
 const LevelSelectWrapper = styled.div`
 	height: 0;
 	width: 0;
