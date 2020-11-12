@@ -14,24 +14,19 @@ function UserImage({ time }) {
 		glow = {time - userInfo.lastLogInBitsReceived}
 		>
 			{userInfo.imageUrl[0] === 'h' ? (
-				<UserImg
+				<img
 				className = 'userImg'
 				src={userInfo.imageUrl}
 				alt = "User's picture.  Likely of them, but perhaps not."
 				/>
 			) : (
-				<BotWrapper
-				className = 'userImg'
-				>
+				<div className = 'userImg'>
 					<Bot
-					// className = 'userImg'
 					alternativeBotSize = {40}
 					model = {userInfo.imageUrl}
-					arm1 = {'Gun1'}
-					arm1Angle = {-45}
 					botColors='default'
 					/>
-				</BotWrapper>
+				</div>
 			)
 			}
 		</Wrapper>
@@ -49,16 +44,4 @@ const Wrapper = styled.div`
 		transform: scale(1.2);
 		cursor: pointer;
 	}
-`
-const UserImg = styled.img`
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	z-index: 21;
-`
-const BotWrapper = styled.div`
-	width: 40px;
-	height: 40px;
-	border-radius: 50%;
-	z-index: 21;
 `

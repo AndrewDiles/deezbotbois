@@ -110,6 +110,7 @@ const StyledInput = styled.input`
 	color: ${props => props.entryError ? 'red' :props.colors.textColor};
 	&:hover {
 		background-color: ${props => props.colors.hovered};
+		cursor: pointer;
 	}
 	&:focus {
 		outline-color: ${props => !props.disabled && props.colors.hoveredText};

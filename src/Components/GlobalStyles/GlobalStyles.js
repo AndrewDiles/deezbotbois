@@ -205,6 +205,12 @@ html {
 .noBullets li {
 	list-style-type: none;
 }
+.userImg {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	z-index: 21;
+}
 
 .techBranchHeight27 {
 	height: 27px;

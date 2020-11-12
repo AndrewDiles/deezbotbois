@@ -11,6 +11,7 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import Levels from './Levels';
 import Challenges from './Challenges';
+import debounce from '../../Constants/debounce';
 
 const LevelLauncher = () => {
 	// const dispatch = useDispatch();
@@ -19,6 +20,17 @@ const LevelLauncher = () => {
 	const colors = useSelector(getThemeColors);
 	const [gameLaunched, setGameLaunched] = useState(false);
 	const [viewingLevels, setViewingLevels] = useState(true);
+	const [windowWidth, setWindowWidth] = useState(document.body.clientWidth);
+	React.useEffect(()=>{
+		let limitedResizeFunction = debounce(function(){
+			setWindowWidth(document.body.clientWidth);
+		},75)
+		window.addEventListener('resize', limitedResizeFunction);
+		return()=>{
+			window.removeEventListener('resize', limitedResizeFunction);
+		}
+	})
+
 	if (!userInfo.email) {
     return (
       <Redirect to="/home" />
@@ -38,10 +50,12 @@ const LevelLauncher = () => {
       	viewingLevels ? (
 					<Levels
 					setViewingLevels = {setViewingLevels}
+					windowWidth = {windowWidth}
 					/>
 				) : (
 					<Challenges
 					setViewingLevels = {setViewingLevels}
+					windowWidth = {windowWidth}
 					/>
 				)
 			) : (

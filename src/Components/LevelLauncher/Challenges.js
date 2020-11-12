@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
 // import BotSelector from './BotSelector';
 
-const Challenges = ({ setViewingLevels }) => {
+const Challenges = ({ windowWidth, setViewingLevels }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	// const settings = useSelector((state) => state.settings);

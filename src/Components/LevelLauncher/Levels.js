@@ -4,24 +4,26 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 // import BotSelector from './BotSelector';
 
-const Levels = ({ setViewingLevels }) => {
+const Levels = ({ windowWidth, setViewingLevels }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	const width = 300;
 	const lvSelHeight = 200;
-	const lvInfoHeight = 600;
-	const botSelHeight = 400;
+	const lvDetailsHeight = 600;
+	const allOtherHeights = 400;
+	const gridGap = 50;
+
+	console.log('current windowWidth is:', windowWidth);
 
   return (
-    <Wrapper>
-			{/* LAUNCH LEVEL */}
-
-
-			{/* <LevelSelectWrapper
-			height = {lvSelHeight}
+    <div>
+			<LevelSelectWrapper
+			navLocation = {settings.navLocation}
+			windowWidth = {windowWidth}
 			width = {width}
+			gridGap = {gridGap}
 			>
 				<LevelSelect
 				height = {lvSelHeight}
@@ -29,80 +31,96 @@ const Levels = ({ setViewingLevels }) => {
 				>
 					LEVEL SELECT
 				</LevelSelect>
-			</LevelSelectWrapper> */}
+			</LevelSelectWrapper>
 
-			{/* <LevelDetailsWrapper
-			height = {lvInfoHeight}
+			<LevelDetailsWrapper
+			navLocation = {settings.navLocation}
+			windowWidth = {windowWidth}
 			width = {width}
+			gridGap = {gridGap}
+			lvSelHeight = {lvSelHeight}
 			>
 				<LevelDetails
-				height = {lvInfoHeight}
+				height = {lvDetailsHeight}
 				width = {width}
+				navLocation = {settings.navLocation}
+				windowWidth = {windowWidth}
+				gridGap = {gridGap}
+				lvSelHeight = {lvSelHeight}
 				>
 					LEVEL DETAILS
 				</LevelDetails>
-			</LevelDetailsWrapper> */}
+			</LevelDetailsWrapper>
 
-			{/* <BotSelectorWrapper
-			height = {botSelHeight}
-			width = {width}
-			>
+			{/* <ZeroSizedContainer>
 				<BotSelector
-				height = {botSelHeight}
+				height = {allOtherHeights}
 				width = {width}
 				>
 					BOT SELECTION
 				</BotSelector>
-			</BotSelectorWrapper> */}
+			</ZeroSizedContainer> */}
 
-    </Wrapper>
+			{/* LAUNCH LEVEL */}
+
+    </div>
   )
 }
 
 export default Levels;
 
-const Wrapper = styled.div`
-/* width: 250px; */
-/* display : flex;
-flex-direction: column;
-align-content: center;
-align-items: center;
-justify-content: flex-start; */
+const LevelSelectWrapper = styled.div`
+	height: 0px;
+	width: 0px;
+	transform: ${props => props.navLocation === 'top' ? 
+		props.windowWidth < (props.gridGap+(props.width*2)) ? `translateX(${-0.5*props.width}px)` :
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translateX(${-(props.width + (props.gridGap/2))}px)` :
+		`translateX(${-(props.width + (props.gridGap/2))}px)` :
+
+		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translateX(${-0.5*props.width}px)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translateX(${-(props.width + (props.gridGap/2))}px)` :
+		`translateX(${-(props.width + (props.gridGap/2))}px)`
+		};
+	transition: transform 1s ease-in-out;
 `
 
-const LevelSelectWrapper = styled.div`
-	height: 0;
-	width: 0;
-	position: relative;
-	top: 0;
-	left: ${props => `${-props.width/2}px`};
-	transition: top 1s, left 1s;
-	@media (min-width: 700px) {
-		top: 50px;
-		left: ${props => `${1.5*props.width}px`};
-	}
-`
+// navLocation = {settings.navLocation}
+// windowWidth = {windowWidth}
+// width = {width}
+
+
 const LevelSelect = styled.div`
 	background-color: pink;
 	width: ${props=>`${props.width}px`};
 	height: ${props=>`${props.height}px`};
 `
 const LevelDetailsWrapper = styled.div`
-	height: 0;
-	width: 0;
-	position: relative;
-	top: 0;
-	left: 150px;
-	transition: top 1s, left 1s;
-	@media (min-width: 700px) {
-		top: 50px;
-		left: 300px;
-	}
+	height: 0px;
+	width: 0px;
+	transform: ${props => props.navLocation === 'top' ? 
+		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight+props.gridGap}px)` :
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,0px)` :
+		'' :
+
+		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight+props.gridGap}px)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,0px)` :
+		''
+	};
+	transition: transform 1s ease-in-out;
 `
 const LevelDetails = styled.div`
 	background-color: green;
 	width: ${props=>`${props.width}px`};
 	height: ${props=>`${props.height}px`};
+	transform: ${props => props.navLocation === 'top' ? 
+		props.windowWidth < (props.gridGap+(props.width*2)) ? 'scale(1)' :
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? 'scale(1)' :
+		'scale(0)' :
+		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? 'scale(1)' :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? 'scale(1)' :
+		'scale(0)'
+	};
+	transition: transform 1s ease-in-out;
 `
 const BotSelectorWrapper = styled.div`
 	height: 0;
@@ -184,3 +202,55 @@ const BotSelector = styled.div`
 // // 			'aside main main'
 // // 			'aside footer footer';
 // // 	}
+
+
+
+
+{/* <LevelSelectWrapper
+			height = {lvSelHeight}
+			width = {width}
+			>
+				<LevelSelect
+				height = {lvSelHeight}
+				width = {width}
+				>
+					LEVEL SELECT
+				</LevelSelect>
+			</LevelSelectWrapper> */}
+
+			{/* <LevelDetailsWrapper
+			height = {lvInfoHeight}
+			width = {width}
+			>
+				<LevelDetails
+				height = {lvInfoHeight}
+				width = {width}
+				>
+					LEVEL DETAILS
+				</LevelDetails>
+			</LevelDetailsWrapper> */}
+
+			{/* <BotSelectorWrapper
+			height = {botSelHeight}
+			width = {width}
+			>
+				<BotSelector
+				height = {botSelHeight}
+				width = {width}
+				>
+					BOT SELECTION
+				</BotSelector>
+			</BotSelectorWrapper> */}
+
+// 			const LevelDetailsWrapper = styled.div`
+// 	height: 0;
+// 	width: 0;
+// 	position: relative;
+// 	top: 0;
+// 	left: 150px;
+// 	transition: top 1s, left 1s;
+// 	@media (min-width: 700px) {
+// 		top: 50px;
+// 		left: 300px;
+// 	}
+// `

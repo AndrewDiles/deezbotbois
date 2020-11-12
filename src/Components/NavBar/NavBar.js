@@ -122,14 +122,10 @@ function NavBar() {
 							<LoginViaGoogle/>
 						</ColDiv>
 					)
-        ) : (
-					<>
-						{userInfo.imageUrl && settings.navLocation === 'top' &&
-							<UserImage
-							time = {time}
-							/>
-						}
-					</>
+        ) : (userInfo.imageUrl && settings.navLocation === 'top' &&
+					<UserImage
+					time = {time}
+					/>
         )}
       </UserDiv>
 			{settings.profileTab !== 'inactive' &&
