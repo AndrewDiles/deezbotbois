@@ -269,6 +269,14 @@ html {
 		transform: scale(1);
 	}
 }
+@keyframes expandY {
+	0%{
+		transform: scaleY(0);
+	}
+	100%{
+		transform: scaleY(1);
+	}
+}
 @keyframes rotating {
   0%{
 		transform: scale(1) rotate(0deg);

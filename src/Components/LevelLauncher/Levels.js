@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 // import BotSelector from './BotSelector';
 
@@ -8,10 +7,9 @@ const Levels = ({ windowWidth, setViewingLevels }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
-	const colors = useSelector(getThemeColors);
 	const width = 300;
 	const lvSelHeight = 200;
-	const lvDetailsHeight = 600;
+	const lvDetailsHeight = 650;
 	const allOtherHeights = 400;
 	const gridGap = 50;
 
@@ -33,6 +31,27 @@ const Levels = ({ windowWidth, setViewingLevels }) => {
 				</LevelSelect>
 			</LevelSelectWrapper>
 
+			<LevelSelectExtensionWrapper
+			navLocation = {settings.navLocation}
+			windowWidth = {windowWidth}
+			width = {width}
+			gridGap = {gridGap}
+			lvSelHeight = {lvSelHeight}
+			>
+				<LevelSelectExtension
+				navLocation = {settings.navLocation}
+				windowWidth = {windowWidth}
+				height = {allOtherHeights-lvSelHeight}
+				width = {width}
+				gridGap = {gridGap}
+				>
+					<button onClick={()=>{console.log('buttonclick')}}>
+						LEVEL EXTENSION
+					</button>
+				</LevelSelectExtension>
+
+			</LevelSelectExtensionWrapper>
+
 			<LevelDetailsWrapper
 			navLocation = {settings.navLocation}
 			windowWidth = {windowWidth}
@@ -41,10 +60,10 @@ const Levels = ({ windowWidth, setViewingLevels }) => {
 			lvSelHeight = {lvSelHeight}
 			>
 				<LevelDetails
-				height = {lvDetailsHeight}
-				width = {width}
 				navLocation = {settings.navLocation}
 				windowWidth = {windowWidth}
+				height = {lvDetailsHeight}
+				width = {width}
 				gridGap = {gridGap}
 				lvSelHeight = {lvSelHeight}
 				>
@@ -52,14 +71,82 @@ const Levels = ({ windowWidth, setViewingLevels }) => {
 				</LevelDetails>
 			</LevelDetailsWrapper>
 
-			{/* <ZeroSizedContainer>
+			<BotSelectorWrapper
+			navLocation = {settings.navLocation}
+			windowWidth = {windowWidth}
+			height = {allOtherHeights}
+			width = {width}
+			gridGap = {gridGap}
+			lvSelHeight = {lvSelHeight}
+			lvDetailsHeight = {lvDetailsHeight}
+			>
 				<BotSelector
 				height = {allOtherHeights}
 				width = {width}
 				>
 					BOT SELECTION
 				</BotSelector>
-			</ZeroSizedContainer> */}
+			</BotSelectorWrapper>
+
+			<LayoutWrapper
+			navLocation = {settings.navLocation}
+			windowWidth = {windowWidth}
+			width = {width}
+			gridGap = {gridGap}
+			allOtherHeights = {allOtherHeights}
+			lvDetailsHeight = {lvDetailsHeight}
+			lvSelHeight = {lvSelHeight}
+			>
+				<Layout
+				navLocation = {settings.navLocation}
+				windowWidth = {windowWidth}
+				height = {allOtherHeights}
+				width = {width}
+				gridGap = {gridGap}
+				>
+					LAYOUT
+				</Layout>
+			</LayoutWrapper>
+
+			<HostilesWrapper
+			navLocation = {settings.navLocation}
+			windowWidth = {windowWidth}
+			width = {width}
+			gridGap = {gridGap}
+			allOtherHeights = {allOtherHeights}
+			lvDetailsHeight = {lvDetailsHeight}
+			lvSelHeight = {lvSelHeight}
+			>
+				<Hostiles
+				navLocation = {settings.navLocation}
+				windowWidth = {windowWidth}
+				height = {allOtherHeights}
+				width = {width}
+				gridGap = {gridGap}
+				>
+					HOSTILES
+				</Hostiles>
+			</HostilesWrapper>
+
+			<AchievementsWrapper
+			navLocation = {settings.navLocation}
+			windowWidth = {windowWidth}
+			width = {width}
+			gridGap = {gridGap}
+			allOtherHeights = {allOtherHeights}
+			lvDetailsHeight = {lvDetailsHeight}
+			lvSelHeight = {lvSelHeight}
+			>
+				<Achievements
+				navLocation = {settings.navLocation}
+				windowWidth = {windowWidth}
+				height = {allOtherHeights}
+				width = {width}
+				gridGap = {gridGap}
+				>
+					ACHIEVEMENTS
+				</Achievements>
+			</AchievementsWrapper>
 
 			{/* LAUNCH LEVEL */}
 
@@ -83,16 +170,47 @@ const LevelSelectWrapper = styled.div`
 		};
 	transition: transform 1s ease-in-out;
 `
-
-// navLocation = {settings.navLocation}
-// windowWidth = {windowWidth}
-// width = {width}
-
-
 const LevelSelect = styled.div`
-	background-color: pink;
+	background-color: blue;
+	width: ${props=>`${props.width}px`};
+	height: ${props=> `${props.height}px`};
+	animation: 1s ease-out 1 expandY;
+	transform-origin: center top;
+`
+const LevelSelectExtensionWrapper = styled.div`
+	height: 0px;
+	width: 0px;
+	transform: ${props => props.navLocation === 'top' ? 
+		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight}px)` :
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${-(props.width + (props.gridGap/2))}px, ${props.lvSelHeight}px)` :
+		`translate(${-(props.width + (props.gridGap/2))}px, ${props.lvSelHeight}px)` :
+
+		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight}px)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${-(props.width + (props.gridGap/2))}px, ${props.lvSelHeight}px)` :
+		`translate(${-(props.width + (props.gridGap/2))}px, ${props.lvSelHeight}px)`
+		};
+	transition: transform 1s ease-in-out;
+`
+const LevelSelectExtension = styled.div`
+	background-color: blue;
 	width: ${props=>`${props.width}px`};
 	height: ${props=>`${props.height}px`};
+	transform: ${props => props.navLocation === 'top' ?
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? 'scaleY(0)' :
+		'scaleY(1)' :
+
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? 'scaleY(0)' :
+		'scaleY(1)'
+		};
+	transition: transform 1s ease-in-out;
+	animation: ${props => props.navLocation === 'top' ?
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? '' :
+		'1s ease-out 1 expandY' :
+
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? '' :
+		'1s ease-out 1 expandY'
+		};
+	transform-origin: center top;
 `
 const LevelDetailsWrapper = styled.div`
 	height: 0px;
@@ -101,7 +219,6 @@ const LevelDetailsWrapper = styled.div`
 		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight+props.gridGap}px)` :
 		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,0px)` :
 		'' :
-
 		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight+props.gridGap}px)` :
 		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,0px)` :
 		''
@@ -109,148 +226,129 @@ const LevelDetailsWrapper = styled.div`
 	transition: transform 1s ease-in-out;
 `
 const LevelDetails = styled.div`
-	background-color: green;
+	background-color: mintcream;
 	width: ${props=>`${props.width}px`};
 	height: ${props=>`${props.height}px`};
 	transform: ${props => props.navLocation === 'top' ? 
-		props.windowWidth < (props.gridGap+(props.width*2)) ? 'scale(1)' :
 		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? 'scale(1)' :
 		'scale(0)' :
-		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? 'scale(1)' :
 		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? 'scale(1)' :
 		'scale(0)'
 	};
 	transition: transform 1s ease-in-out;
+	animation: ${props => props.navLocation === 'top' ? 
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? '1s ease-out 1 expandY' :
+		'' :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? '1s ease-out 1 expandY' :
+		''
+	};
+	transform-origin: center top;
 `
 const BotSelectorWrapper = styled.div`
-	height: 0;
-	width: 0;
-	position: relative;
-	top: 600px;
-	left: 0;
-	transition: top 1s, left 1s;
-	@media (min-width: 700px) {
-		top: 800px;
-		left: -150px;
-	}
+	height: 0px;
+	width: 0px;
+	transform: ${props => props.navLocation === 'top' ? 
+		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight+props.lvDetailsHeight+2*props.gridGap}px)` :
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${-(props.width + (props.gridGap/2))}px,${props.lvSelHeight+props.gridGap}px)` :
+		`translate(${0.5*props.gridGap}px,0px)` :
+
+		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight+props.lvDetailsHeight+2*props.gridGap}px)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${-(props.width + (props.gridGap/2))}px,${props.lvSelHeight+props.gridGap}px)` :
+		`translate(${0.5*props.gridGap}px,0px)`
+	};
+	transition: transform 1s ease-in-out;
 `
 const BotSelector = styled.div`
 	background-color: grey;
 	width: ${props=>`${props.width}px`};
 	height: ${props=>`${props.height}px`};
+	animation: 1s ease-out 1 expandY;
+	transform-origin: center top;
 `
-// const Wrapper = styled.div`
-// display: grid;
-// grid-gap: 10px;
-// transition: .5s grid-template-areas;
-// /* width: 250px; */
-// /* display : flex;
-// flex-direction: column;
-// align-content: center;
-// align-items: center;
-// justify-content: flex-start; */
+const LayoutWrapper = styled.div`
+	height: 0px;
+	width: 0px;
+	transform: ${props => props.navLocation === 'top' ?
+		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${(props.lvSelHeight + props.gridGap + props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,${(props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		`translate(${-(1.5*props.width + (props.gridGap))}px,${props.allOtherHeights+props.gridGap}px)` :
 
-// @media (min-width: 768px) {
-// 		grid-template-areas:
-// 		'. select .'
-// 		'. details .'
-// 		'. bot .';
-// 	}
-// @media (min-width: 900px) {
-// 		grid-template-areas: 
-// 		'select select . .'
-// 		'. details details .'
-// 		'. . bot bot';
-// 	}
-// 	@media (min-width: 1000px) {
-// 		grid-template-areas: 
-// 		'select select details details'
-// 		'. bot bot .';
-// 	}
+		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${(props.lvSelHeight + props.gridGap + props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,${(props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		`translate(${-(1.5*props.width + (props.gridGap))}px,${props.allOtherHeights+props.gridGap}px)`
+	};
+	transition: transform 1s ease-in-out;
+`
+const Layout = styled.div`
+	background-color: orange;
+	width: ${props=>`${props.width}px`};
+	height: ${props=>`${props.height}px`};
+	transform: ${props=> props.navLocation === 'top' ? 
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? 'scale(0)' : `scale(1)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? 'scale(0)' : `scale(1)`
+	};
+	transition: transform 1s ease-in-out;
+	animation: ${props=> props.navLocation === 'top' ? 
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? '' : '1s ease-out 1 expandY' :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? '' : '1s ease-out 1 expandY'
+	};
+	transform-origin: center top;
+`
+const HostilesWrapper = styled.div`
+	height: 0px;
+	width: 0px;
+	transform: ${props => props.navLocation === 'top' ? 
+		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${(props.lvSelHeight + props.gridGap + props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,${(props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		`translate(${-(0.5*props.width)}px,${props.allOtherHeights+props.gridGap}px)` :
 
-// `
+		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${(props.lvSelHeight + props.gridGap + props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,${(props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		`translate(${-(0.5*props.width)}px,${props.allOtherHeights+props.gridGap}px)`
+	};
+	transition: transform 1s ease-in-out;
+`
+const Hostiles = styled.div`
+	background-color: pink;
+	width: ${props=>`${props.width}px`};
+	height: ${props=>`${props.height}px`};
+	transform: ${props=> props.navLocation === 'top' ? 
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? 'scale(0)' : `scale(1)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? 'scale(0)' : `scale(1)`
+	};
+	transition: transform 1s ease-in-out;
+	animation: ${props=> props.navLocation === 'top' ? 
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? '' : '1s ease-out 1 expandY' :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? '' : '1s ease-out 1 expandY'
+	};
+	transform-origin: center top;
+`
+const AchievementsWrapper = styled.div`
+	height: 0px;
+	width: 0px;
+	transform: ${props => props.navLocation === 'top' ? 
+		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${(props.lvSelHeight + props.gridGap + props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,${(props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		`translate(${(0.5*props.width + (props.gridGap))}px,${props.allOtherHeights+props.gridGap}px)` :
 
-// const LevelSelect = styled.div`
-// 	background-color: pink;
-// 	width: 300px;
-// 	height: 400px;
-// 	grid-area: select;
-// `
-// const LevelDetails = styled.div`
-// 	background-color: green;
-// 	width: 300px;
-// 	grid-area: details;
-// 	height: 600px;
-// `
-// const BotSelector = styled.div`
-// 	background-color: grey;
-// 	width: 300px;
-// 	height: 600px;
-// 	grid-area: bot;
-// `
-
-// // .footer {
-// // 	grid-area: footer;
-// // 	height: 100px;
-// // 	background-color: midnightblue;
-// // }
-
-// // @media (min-width: 768px) {
-// // 	.container {
-// // 			grid-template-areas:
-// // 			'nav nav nav'
-// // 			'aside main main'
-// // 			'aside footer footer';
-// // 	}
-
-
-
-
-{/* <LevelSelectWrapper
-			height = {lvSelHeight}
-			width = {width}
-			>
-				<LevelSelect
-				height = {lvSelHeight}
-				width = {width}
-				>
-					LEVEL SELECT
-				</LevelSelect>
-			</LevelSelectWrapper> */}
-
-			{/* <LevelDetailsWrapper
-			height = {lvInfoHeight}
-			width = {width}
-			>
-				<LevelDetails
-				height = {lvInfoHeight}
-				width = {width}
-				>
-					LEVEL DETAILS
-				</LevelDetails>
-			</LevelDetailsWrapper> */}
-
-			{/* <BotSelectorWrapper
-			height = {botSelHeight}
-			width = {width}
-			>
-				<BotSelector
-				height = {botSelHeight}
-				width = {width}
-				>
-					BOT SELECTION
-				</BotSelector>
-			</BotSelectorWrapper> */}
-
-// 			const LevelDetailsWrapper = styled.div`
-// 	height: 0;
-// 	width: 0;
-// 	position: relative;
-// 	top: 0;
-// 	left: 150px;
-// 	transition: top 1s, left 1s;
-// 	@media (min-width: 700px) {
-// 		top: 50px;
-// 		left: 300px;
-// 	}
-// `
+		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${(props.lvSelHeight + props.gridGap + props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,${(props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
+		`translate(${(0.5*props.width + (props.gridGap))}px,${props.allOtherHeights+props.gridGap}px)`
+	};
+	transition: transform 1s ease-in-out;
+`
+const Achievements = styled.div`
+	background-color: green;
+	width: ${props=>`${props.width}px`};
+	height: ${props=>`${props.height}px`};
+	transform: ${props=> props.navLocation === 'top' ? 
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? 'scale(0)' : `scale(1)` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? 'scale(0)' : `scale(1)`
+	};
+	transition: transform 1s ease-in-out;
+	animation: ${props=> props.navLocation === 'top' ? 
+		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? '' : `1s ease-out 1 expandY` :
+		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? '' : `1s ease-out 1 expandY`
+	};
+	transform-origin: center top;
+`

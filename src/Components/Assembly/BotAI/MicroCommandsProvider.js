@@ -149,6 +149,7 @@ switch(nodeInfo.name) {
 	case 'waitCommand' : {
 		return (
 			<CommandWithoutInstructions/>
+			//TODO: Add flag modification and flag tests in the Conditions
 		)
 	}
 	default: {

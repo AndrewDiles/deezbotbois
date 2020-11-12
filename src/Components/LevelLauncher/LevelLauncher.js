@@ -24,7 +24,7 @@ const LevelLauncher = () => {
 	React.useEffect(()=>{
 		let limitedResizeFunction = debounce(function(){
 			setWindowWidth(document.body.clientWidth);
-		},75)
+		},150)
 		window.addEventListener('resize', limitedResizeFunction);
 		return()=>{
 			window.removeEventListener('resize', limitedResizeFunction);
