@@ -14,9 +14,7 @@ const myEmailAddress = 'a_diles@hotmail.com';
 const {
 	userInfoSchema
 } = require('./schemas');
-const { 
-	generateNewUser
-} = require('./helpferFunctions');
+const {	generateNewUser } = require('./helpferFunctions');
 
 const uri = `mongodb+srv://botMaster:${password}@botboicluster.imeos.azure.mongodb.net/test`;
 
@@ -304,7 +302,7 @@ try {
 				});
 
 				// Second add info to Data collection
-				let newUserData = generateNewUser(email, handle, navLocation, cellSize, imageUrl, null);
+				let newUserData = generateNewUser(email, handle, navLocation, cellSize, 'BotBoxey', null);
         // let newUserData = {
 				// 	email : email,
 				// 	handle : handle,

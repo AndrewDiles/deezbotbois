@@ -18,13 +18,20 @@ const LevelLauncher = () => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
+	const initialSelectionOptions = {
+		viewingLevels: true,
+		levelNumber: 0,
+		challengeNumber: 0,
+		detailsSelected: 'layout',
+		botNumberSelected: 0
+	}
 	const [gameLaunched, setGameLaunched] = useState(false);
-	const [viewingLevels, setViewingLevels] = useState(true);
+	const [selectionOptions, setSelectionOptions] = useState(initialSelectionOptions);
 	const [windowWidth, setWindowWidth] = useState(document.body.clientWidth);
 	React.useEffect(()=>{
 		let limitedResizeFunction = debounce(function(){
 			setWindowWidth(document.body.clientWidth);
-		},150)
+		},250)
 		window.addEventListener('resize', limitedResizeFunction);
 		return()=>{
 			window.removeEventListener('resize', limitedResizeFunction);
@@ -47,15 +54,17 @@ const LevelLauncher = () => {
 				FIGHT-EM
 			</h2>
 			{!gameLaunched ? (
-      	viewingLevels ? (
+      	selectionOptions.viewingLevels ? (
 					<Levels
-					setViewingLevels = {setViewingLevels}
 					windowWidth = {windowWidth}
+					selectionOptions = {selectionOptions}
+					setSelectionOptions = {setSelectionOptions}
 					/>
 				) : (
 					<Challenges
-					setViewingLevels = {setViewingLevels}
 					windowWidth = {windowWidth}
+					selectionOptions = {selectionOptions}
+					setSelectionOptions = {setSelectionOptions}
 					/>
 				)
 			) : (

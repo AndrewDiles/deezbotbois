@@ -18,7 +18,7 @@ const StyledIcon = ({
   id,
   rotation,
   hovered,
-  keepcursor,
+	keepcursor
 }) => {
   const settings = useSelector((state) => state.settings);
   let colors = useSelector(getThemeColors);
@@ -51,7 +51,7 @@ const StyledIcon = ({
       absolute={absolute}
       rotation={rotation}
       hovered={hovered}
-      keepcursor={keepcursor}
+			keepcursor={keepcursor}
     >
       {children}
     </IconStylings>

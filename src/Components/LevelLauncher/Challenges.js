@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 // import BotSelector from './BotSelector';
 
-const Challenges = ({ windowWidth, setViewingLevels }) => {
+const Challenges = ({ windowWidth, selectionOptions, setSelectionOptions }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	// const settings = useSelector((state) => state.settings);

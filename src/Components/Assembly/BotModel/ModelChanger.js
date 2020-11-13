@@ -86,7 +86,7 @@ const ModelChanger = ({ botNumberSelected }) => {
     <Wrapper>
 			CHANGE MODEL
 			<br/>
-			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Name}
+			{baseBotAttributes[userInfo.botBuilds[botNumberSelected].model].Name.toUpperCase()}
 			<RowDivSpace
 			justifyContent = 'space-between'
 			>

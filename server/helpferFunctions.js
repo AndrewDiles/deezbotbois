@@ -36,3 +36,4 @@ const generateNewUser = (email, name, navLocation, cellSize, imageUrl, googleIma
 	}
 	return result
 }
+module.exports = { generateNewUser };

@@ -76,7 +76,7 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				// handleClick = {()=>{handleColorThemeClick(paleGreen)}}
 				padding = {5}
 				icon = {arrowRight}
-				disabled = {botNumberSelected === userInfo.botBuilds.length-1}
+				disabled = {botNumberSelected === userInfo.botBuilds.length-1 || userInfo.botBuilds.length === 0}
     		/>
 				<Bot
 				alternativeBotSize = {40}
