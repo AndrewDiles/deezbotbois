@@ -12,6 +12,7 @@ import BotBiggey from './BotBiggey';
 import BotZippey from './BotZippey';
 import BotJager from './BotJager';
 import BotRobbey from './BotRobbey';
+import BotDummey from './BotDummey';
 
 // arms imports:
 import Gun1 from '../Arms/Gun1';
@@ -46,6 +47,8 @@ const Bot = ( { model, arm1, arm2, arm3, botColors, arm1Angle, arm2Angle, arm3An
 	}
 	if (botColors === 'default') {
 		botColors = botColorSchemes.defaultBotColors;
+	} else if (botColorSchemes[botColors]) {
+		botColors = botColorSchemes[botColors];
 	} else if (!botColors) {
 		const botColorNames = Object.keys(botColorSchemes);
 		const increment = 1/botColorNames.length;
@@ -82,8 +85,12 @@ const Bot = ( { model, arm1, arm2, arm3, botColors, arm1Angle, arm2Angle, arm3An
   	  }
   	  break;
   	  case 'BotRobbey' : {
-  	    SelectedBot = BotRobbey;
-  	  }
+				SelectedBot = BotRobbey;
+			}
+			break;
+			case 'BotDummey' : {
+				SelectedBot = BotDummey;
+			}
   	  break;
   	  default:{
 			}

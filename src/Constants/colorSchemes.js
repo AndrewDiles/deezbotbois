@@ -60,11 +60,11 @@ export const botColorSchemes = {
 	},
 	lindyBColors : {
 		primary: 'khaki',
-		secondary: 'lightgoldenrodyellow',
+		secondary: 'palegoldenrod',
 		trim: 'darkkhaki',
-		extensions: 'beige',
+		extensions: 'palegoldenrod',
 		rollers: 'tan',
-		eyes: 'ivory',
+		eyes: 'black',
 		armTrim: 'indigo',
 		armPrimary: 'blueviolet',
 		armSecondary: 'fuchsia'

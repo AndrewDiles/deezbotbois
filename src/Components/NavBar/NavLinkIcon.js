@@ -43,14 +43,13 @@ function NavLinkIcon({ destination }) {
 	}
 	
   return (
-		//TODO: increase accessibility by adding tabbable focus to icons
 		<NavLinkIconWrapper
 		id = {`NavLinkTo${destination}`}
 		to = {`/${destination}`}
 		navlocation = {settings.navLocation}
 		onFocus = {()=>{setHasFocus(1)}}
 		onBlur = {()=>{setHasFocus(0)}}
-		tabIndex = {settings.currentUrl === destination && -1}
+		tabIndex = {settings.currentUrl === destination ? '-1' : ''}
 		>
 			<StyledIcon
 			handleClick = {() => {dispatch(updateUrl(destination))}}

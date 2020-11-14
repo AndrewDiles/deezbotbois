@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { 
 	useSelector, 
 	// useDispatch 
@@ -11,7 +11,7 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import Levels from './Levels';
 import Challenges from './Challenges';
-import debounce from '../../Constants/debounce';
+// import debounce from '../../Constants/debounce';
 
 const LevelLauncher = () => {
 	// const dispatch = useDispatch();
@@ -27,16 +27,19 @@ const LevelLauncher = () => {
 	}
 	const [gameLaunched, setGameLaunched] = useState(false);
 	const [selectionOptions, setSelectionOptions] = useState(initialSelectionOptions);
-	const [windowWidth, setWindowWidth] = useState(document.body.clientWidth);
-	React.useEffect(()=>{
-		let limitedResizeFunction = debounce(function(){
-			setWindowWidth(document.body.clientWidth);
-		},250)
-		window.addEventListener('resize', limitedResizeFunction);
-		return()=>{
-			window.removeEventListener('resize', limitedResizeFunction);
-		}
-	})
+
+	// const [windowWidth, setWindowWidth] = useState(document.body.clientWidth);	
+	// React.useEffect(()=>{
+	// 	window.addEventListener('resize', limitedResizeFunction);
+	// 	return()=>{
+	// 		window.removeEventListener('resize', limitedResizeFunction);
+	// 	}
+	// })
+	// const limitedResizeFunction = useCallback(
+  //   debounce(function(){
+	// 			setWindowWidth(document.body.clientWidth);
+	// 	},250, false), []
+  // );
 
 	if (!userInfo.email) {
     return (
@@ -56,13 +59,11 @@ const LevelLauncher = () => {
 			{!gameLaunched ? (
       	selectionOptions.viewingLevels ? (
 					<Levels
-					windowWidth = {windowWidth}
 					selectionOptions = {selectionOptions}
 					setSelectionOptions = {setSelectionOptions}
 					/>
 				) : (
 					<Challenges
-					windowWidth = {windowWidth}
 					selectionOptions = {selectionOptions}
 					setSelectionOptions = {setSelectionOptions}
 					/>

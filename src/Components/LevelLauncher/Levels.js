@@ -9,63 +9,43 @@ import ViewLayout from './ViewLayout';
 import ViewHostiles from './ViewHostiles';
 import ViewAchievements from './ViewAchievements';
 
-const Levels = ({ windowWidth, selectionOptions, setSelectionOptions }) => {
+const Levels = ({ selectionOptions, setSelectionOptions }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
-	const sizes = {
-		width: 300,
-		lvSelHeight: 200,
-		lvDetailsHeight: 650,
-		allOtherHeights: 400,
-		gridGap: 50,
-	}
 	
   return (
     <div>
 			<LevelSelector
-			windowWidth = {windowWidth}
-			sizes = {sizes}
 			selectionOptions = {selectionOptions}
 			setSelectionOptions = {setSelectionOptions}
 			/>
 			<LevelSelectorExtension
-			windowWidth = {windowWidth}
-			sizes = {sizes}
 			selectionOptions = {selectionOptions}
 			/>
 			<LevelDetails
-			windowWidth = {windowWidth}
-			sizes = {sizes}
 			selectionOptions = {selectionOptions}
 			setSelectionOptions = {setSelectionOptions}
 			/>
 			<BotSelector
-			windowWidth = {windowWidth}
-			sizes = {sizes}
 			selectionOptions = {selectionOptions}
 			setSelectionOptions = {setSelectionOptions}
 			/>
 			<ViewLayout
-			windowWidth = {windowWidth}
-			sizes = {sizes}
 			selectionOptions = {selectionOptions}
 			setSelectionOptions = {setSelectionOptions}
+			border = {1}
 			/>
 			<ViewHostiles
-			windowWidth = {windowWidth}
-			sizes = {sizes}
 			selectionOptions = {selectionOptions}
 			setSelectionOptions = {setSelectionOptions}
 			/>
 			<ViewAchievements
-			windowWidth = {windowWidth}
-			sizes = {sizes}
 			selectionOptions = {selectionOptions}
 			setSelectionOptions = {setSelectionOptions}
 			/>
+			{/* TODO: Add a moving component that is invisible and allows the user to scroll lower? */}
 			{/* LAUNCH LEVEL */}
-
     </div>
   )
 }

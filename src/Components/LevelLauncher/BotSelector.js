@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import BotSelection from '../Assembly/BotSelection';
 import baseBotAttributes from '../../Constants/attributes';
@@ -8,7 +8,7 @@ import { Icon } from "react-icons-kit";
 import {xSquare} from 'react-icons-kit/feather/xSquare';
 import {checkSquare} from 'react-icons-kit/feather/checkSquare';
 
-const BotSelector = ({ windowWidth, sizes, selectionOptions, setSelectionOptions }) => {
+const BotSelector = ({ selectionOptions, setSelectionOptions }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
@@ -22,15 +22,8 @@ const BotSelector = ({ windowWidth, sizes, selectionOptions, setSelectionOptions
   return (
 		<BotSelectorWrapper
 		navLocation = {settings.navLocation}
-		windowWidth = {windowWidth}
-		width = {sizes.width}
-		gridGap = {sizes.gridGap}
-		lvSelHeight = {sizes.lvSelHeight}
-		lvDetailsHeight = {sizes.lvDetailsHeight}
 		>
 			<Selector
-			height = {sizes.allOtherHeights}
-			width = {sizes.width}
 			className = 'centeredFlex'
 			color = {colors.secondary}
 			>
@@ -60,7 +53,7 @@ const BotSelector = ({ windowWidth, sizes, selectionOptions, setSelectionOptions
 					AI VERIFICATION:
 					<StyledIcon
 					icon = {userInfo.botBuilds[selectionOptions.botNumberSelected] && userInfo.botBuilds[selectionOptions.botNumberSelected].script.length > 0 ? checkSquare : xSquare}
-					pass = {userInfo.botBuilds[selectionOptions.botNumberSelected] && userInfo.botBuilds[selectionOptions.botNumberSelected].script.length > 0}
+					pass = {userInfo.botBuilds[selectionOptions.botNumberSelected] && userInfo.botBuilds[selectionOptions.botNumberSelected].script.length > 0 ? 1 : 0}
 					size = {50}
 					/>
 				</Verification>
@@ -100,22 +93,24 @@ const BotInfo = styled.div`
 const BotSelectorWrapper = styled.div`
 	height: 0px;
 	width: 0px;
-	transform: ${props => props.navLocation === 'top' ? 
-		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight+props.lvDetailsHeight+2*props.gridGap}px)` :
-		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${-(props.width + (props.gridGap/2))}px,${props.lvSelHeight+props.gridGap}px)` :
-		`translate(${0.5*props.gridGap}px,0px)` :
-
-		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight+props.lvDetailsHeight+2*props.gridGap}px)` :
-		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${-(props.width + (props.gridGap/2))}px,${props.lvSelHeight+props.gridGap}px)` :
-		`translate(${0.5*props.gridGap}px,0px)`
-	};
+	transform: translate(-150px, 950px);
+	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
+		'650px': '785px'}
+	) {
+		transform: translate(-325px, 250px);
+  }
+	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
+		'1000px': '1135px'}
+	) {
+		transform: translate(25px, 0px);
+  }
 	transition: transform 1s ease-in-out;
 `
 const Selector = styled.div`
 	/* background-color: grey; */
 	flex-direction: column;
-	width: ${props=>`${props.width}px`};
-	height: ${props=>`${props.height}px`};
+	width: 300px;
+	height: 400px;
 	animation: 1s ease-out 1 expandY;
 	transform-origin: center top;
 	padding: 5px;

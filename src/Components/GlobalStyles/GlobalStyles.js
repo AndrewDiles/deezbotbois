@@ -122,6 +122,12 @@ html {
 	align-items: center;
 	text-align: center;
 }
+.startFlex {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
+}
 .innerNodeOptionsWrapper {
 	width: 100%;
 	height: 422px;
@@ -275,6 +281,16 @@ html {
 	}
 	100%{
 		transform: scaleY(1);
+	}
+}
+@keyframes expandYAndSlideDown {
+	0%{
+		transform: scaleY(0);
+		top: -200px;
+	}
+	100%{
+		transform: scaleY(1);
+		top: 0;
 	}
 }
 @keyframes rotating {

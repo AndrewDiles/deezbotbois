@@ -1,27 +1,22 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
+import { getThemeColors } from '../../Redux/reducers/user-reducer';
 // import BotSelector from './BotSelector';
 
-const LevelSelectorExtension = ({ windowWidth, sizes, selectionOptions }) => {
+const LevelSelectorExtension = ({ selectionOptions }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
+	const colors = useSelector(getThemeColors);
 
   return (
 		<LevelSelectExtensionWrapper
 		navLocation = {settings.navLocation}
-		windowWidth = {windowWidth}
-		width = {sizes.width}
-		gridGap = {sizes.gridGap}
-		lvSelHeight = {sizes.lvSelHeight}
 		>
 			<LevelSelectExtension
 			navLocation = {settings.navLocation}
-			windowWidth = {windowWidth}
-			height = {sizes.allOtherHeights-sizes.lvSelHeight}
-			width = {sizes.width}
-			gridGap = {sizes.gridGap}
+			color = {colors.secondary}
 			className = 'centeredFlex'
 			>
 				LEVEL EXTENSION
@@ -35,35 +30,30 @@ export default LevelSelectorExtension;
 const LevelSelectExtensionWrapper = styled.div`
 	height: 0px;
 	width: 0px;
-	transform: ${props => props.navLocation === 'top' ? 
-		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight}px)` :
-		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${-(props.width + (props.gridGap/2))}px, ${props.lvSelHeight}px)` :
-		`translate(${-(props.width + (props.gridGap/2))}px, ${props.lvSelHeight}px)` :
-
-		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${props.lvSelHeight}px)` :
-		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${-(props.width + (props.gridGap/2))}px, ${props.lvSelHeight}px)` :
-		`translate(${-(props.width + (props.gridGap/2))}px, ${props.lvSelHeight}px)`
-		};
+	transform: translate(-150px, 200px);
+	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
+		'650px': '785px'}
+	) {
+		transform: translate(-325px, 200px);
+  }
 	transition: transform 1s ease-in-out;
 `
 const LevelSelectExtension = styled.div`
+	position: relative;
 	background-color: blue;
-	width: ${props=>`${props.width}px`};
-	height: ${props=>`${props.height}px`};
-	transform: ${props => props.navLocation === 'top' ?
-		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? 'scaleY(0)' :
-		'scaleY(1)' :
-
-		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? 'scaleY(0)' :
-		'scaleY(1)'
-		};
+	width: 300px;
+	height: 200px;
+	transform: scaleY(0);
+	animation: '';
+	border: ${props => `5px solid ${props.color}`};
+	border-radius: 0 0 10px 10px;
+	border-top: none;
+	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
+		'1000px': '1135px'}
+	) {
+		transform: scaleY(1);
+		animation: 1s ease-out 1 expandYAndSlideDown;
+  }
 	transition: transform 1s ease-in-out;
-	animation: ${props => props.navLocation === 'top' ?
-		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? '' :
-		'1s ease-out 1 expandY' :
-
-		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? '' :
-		'1s ease-out 1 expandY'
-		};
 	transform-origin: center top;
 `
