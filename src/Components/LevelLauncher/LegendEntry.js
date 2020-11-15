@@ -21,17 +21,18 @@ const Legend = ({ type }) => {
 
 export default Legend;
 const Description = styled.div`
-	width: 100px;
+	width: 160px;
 	margin-left: 15px;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
+	/* font-size: 1.6em; */
 `
 const EntryWrapper = styled.div`
 	height: 30px;
 	width: 100%;
-	font-size: 0.5em;
+	font-size: 1em;
 `
 const ColoredCell = styled.div`
 	height: 20px;

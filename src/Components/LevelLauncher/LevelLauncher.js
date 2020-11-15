@@ -22,7 +22,7 @@ const LevelLauncher = () => {
 		viewingLevels: true,
 		levelNumber: 0,
 		challengeNumber: 0,
-		detailsSelected: 'layout',
+		detailsSelected: 'LAYOUT',
 		botNumberSelected: 0
 	}
 	const [gameLaunched, setGameLaunched] = useState(false);
@@ -85,7 +85,7 @@ padding: ${(props) =>
 		props.profileTab === 'active' ? "20px 140px 0 0" : "20px 0 0 0"
 		: props.profileTab === 'active' ? "20px 140px 0 140px" : "20px 140px 0 0"
 		};
-transition: padding 0.5s ease-in-out;
+transition: padding 0.75s ease-in-out;
 color: ${props => props.colors.textColor};
 width: 100%;
 height: 100%;

@@ -12,7 +12,7 @@ const ViewHostiles = ({ selectionOptions, setSelectionOptions }) => {
 	React.useEffect(()=>{
 		let	animatedTimer = setTimeout(()=>{
 			setHasAnimated(1)
-		},1000);
+		},750);
 		return () => clearTimeout(animatedTimer)
 	},[])
 
@@ -22,63 +22,57 @@ const ViewHostiles = ({ selectionOptions, setSelectionOptions }) => {
 		>
 			<Hostiles
 			navLocation = {settings.navLocation}
+			selectionOptions = {selectionOptions}
 			color = {colors.secondary}
 			className = 'startFlex'
 			hasAnimated = {hasAnimated}
 			>
-				HOSTILES
+				<Title>
+					OTHER BOTS
+				</Title>
 			</Hostiles>
 		</HostilesWrapper>
   )
 }
 
 export default ViewHostiles;
-
+const Title = styled.div`
+	margin: 10px 0;
+	font-size: 18px;
+`
 const HostilesWrapper = styled.div`
 	height: 0px;
 	width: 0px;
-	transform: translate(-25px, 250px);
+	transform: translate(-150px, 500px);
 	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
 		'650px': '785px'}
 	) {
-		transform: translate(25px, 125px);
+		transform: translate(50px, 250px);
   }
 	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
 		'1000px': '1135px'}
 	) {
 		transform: translate(-150px, 450px);
   }
-	transition: transform 1s ease-in-out;
+	transition: transform .75s ease-in-out;
 `
 const Hostiles = styled.div`
 	background-color: orange;
 	width: 300px;
 	height: 400px;
 	padding: 5px;
-	border: ${props => `5px solid ${props.color}`};
+	font-size: 0.8em;
+	border: '';
 	border-radius: 10px;
-	animation: '';
-	transform: scale(0);
-	transition: ${props => props.hasAnimated ? 'transform 1s ease-in-out' : '' };
+	animation: ${props => props.selectionOptions.detailsSelected === 'OTHER BOTS' ? '.75s ease-out 1 expandYHalfDelay' : ''};
+	transform: ${props => props.selectionOptions.detailsSelected === 'OTHER BOTS' ? 'scale(1)' : 'scale(0)'};
+	transition: ${props => props.hasAnimated ? 'transform .75s ease-in-out' : '' };
 	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
 		'1000px': '1135px'}
 	) {
 		transform: scale(1);
-		animation: 1s ease-out 1 expandY;
+		animation: .75s ease-out 1 expandY;
+		border: ${props => `5px solid ${props.color}`};
   }
 	transform-origin: center top;
 `
-
-
-
-
-
-/* transform: ${props => props.navLocation === 'top' ? 
-		props.windowWidth < (props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${(props.lvSelHeight + props.gridGap + props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
-		props.windowWidth < ((2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,${(props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
-		`translate(${-(0.5*props.width)}px,${props.allOtherHeights+props.gridGap}px)` :
-
-		props.windowWidth < (135 + props.gridGap+(props.width*2)) ? `translate(${-0.5*props.width}px, ${(props.lvSelHeight + props.gridGap + props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
-		props.windowWidth < (135 + (2*props.gridGap)+(props.width*3)) ? `translate(${(props.gridGap/2)}px,${(props.lvDetailsHeight - props.allOtherHeights)/2}px)` :
-		`translate(${-(0.5*props.width)}px,${props.allOtherHeights+props.gridGap}px)`
-	}; */

@@ -128,6 +128,9 @@ html {
 	align-items: center;
 	text-align: center;
 }
+.col {
+	flex-direction: column;
+}
 .innerNodeOptionsWrapper {
 	width: 100%;
 	height: 422px;
@@ -277,6 +280,17 @@ html {
 }
 @keyframes expandY {
 	0%{
+		transform: scaleY(0);
+	}
+	100%{
+		transform: scaleY(1);
+	}
+}
+@keyframes expandYHalfDelay {
+	0%{
+		transform: scaleY(0);
+	}
+	50%{
 		transform: scaleY(0);
 	}
 	100%{

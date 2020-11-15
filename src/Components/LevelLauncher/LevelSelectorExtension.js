@@ -36,7 +36,7 @@ const LevelSelectExtensionWrapper = styled.div`
 	) {
 		transform: translate(-325px, 200px);
   }
-	transition: transform 1s ease-in-out;
+	transition: transform .75s ease-in-out;
 `
 const LevelSelectExtension = styled.div`
 	position: relative;
@@ -52,8 +52,8 @@ const LevelSelectExtension = styled.div`
 		'1000px': '1135px'}
 	) {
 		transform: scaleY(1);
-		animation: 1s ease-out 1 expandYAndSlideDown;
+		animation: .75s ease-out 1 expandYAndSlideDown;
   }
-	transition: transform 1s ease-in-out;
+	transition: transform .75s ease-in-out;
 	transform-origin: center top;
 `

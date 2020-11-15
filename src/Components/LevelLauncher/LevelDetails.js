@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
-import ViewLayout from './ViewLayout';
+import TypeSwitchButton from './TypeSwitchButton';
 
-const LevelDetails = ({ selectionOptions,setSelectionOptions }) => {
+const LevelDetails = ({ selectionOptions , setSelectionOptions }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
@@ -27,13 +27,51 @@ const LevelDetails = ({ selectionOptions,setSelectionOptions }) => {
 			className = 'startFlex'
 			hasAnimated = {hasAnimated}
 			>
-				LEVEL DETAILS
+				<Title>
+					LEVEL DETAILS
+				</Title>
+				<br/>
+				<TypeButtonContainer className = 'evenlyFlex'>
+					{['LAYOUT', 'OTHER BOTS', 'HISTORY'].map((type)=>{
+						return(
+							<TypeSwitchButton
+							type = {type}
+							selectionOptions = {selectionOptions}
+							setSelectionOptions = {setSelectionOptions}
+							/>
+						)
+					})}
+				</TypeButtonContainer>
+				<br/>
+				<Description>
+					{selectionOptions.detailsSelected === 'LAYOUT' && 
+						'BELOW IS A SAMPLE GRID OF THE SELECTED LEVEL AND THE STARTING LOCATION OF EACH BOT IN THE LEVEL'
+					}
+					{selectionOptions.detailsSelected === 'OTHER BOTS' && 
+						'BELOW IS INFORMATION ABOUT THE OTHER BOTS YOUR BOT WILL ENCOUNTER IN THE SELECTED LEVEL'
+					}
+					{selectionOptions.detailsSelected === 'HISTORY' && 
+						'BELOW IS A LIST OF YOUR RECORDS AND ACHIEVEMENTS FOR THE SELECTED LEVEL'
+					}
+				</Description>
 			</Details>
 		</LevelDetailsWrapper>
   )
 }
 
 export default LevelDetails;
+const Description = styled.div`
+	font-size: 0.8em;
+	height: 150px;
+`
+const TypeButtonContainer = styled.div`
+	height: 50px;
+	width: 100%;
+`
+const Title = styled.div`
+	margin: 10px 0;
+	font-size: 18px;
+`
 const LevelDetailsWrapper = styled.div`
 	height: 0px;
 	width: 0px;
@@ -48,10 +86,9 @@ const LevelDetailsWrapper = styled.div`
 	) {
 		transform: '';
   }
-	transition: transform 1s ease-in-out;
+	transition: transform .75s ease-in-out;
 `
 const Details = styled.div`
-	background-color: mintcream;
 	width: 300px;
 	height: 650px;
 	flex-direction: column;
@@ -59,8 +96,8 @@ const Details = styled.div`
 	border: ${props => `5px solid ${props.color}`};
 	border-radius: 10px;
 	transform: scale(1);
-	transition: ${props => props.hasAnimated ? 'transform 1s ease-in-out' : '' };
-	animation: 1s ease-out 1 expandY;
+	transition: ${props => props.hasAnimated ? 'transform .75s ease-in-out' : '' };
+	animation: .75s ease-out 1 expandY;
 	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
 		'1000px': '1135px'}
 	) {

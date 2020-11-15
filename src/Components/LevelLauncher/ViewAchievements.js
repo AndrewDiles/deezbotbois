@@ -12,7 +12,7 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 	React.useEffect(()=>{
 		let	animatedTimer = setTimeout(()=>{
 			setHasAnimated(1)
-		},1000);
+		},750);
 		return () => clearTimeout(animatedTimer)
 	},[])
 
@@ -22,49 +22,58 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 		>
 			<Achievements
 			navLocation = {settings.navLocation}
+			selectionOptions = {selectionOptions}
 			color = {colors.secondary}
 			className = 'startFlex'
 			hasAnimated = {hasAnimated}
 			>
-				ACHIEVEMENTS
+				<Title>
+					RECORDS
+				</Title>
 			</Achievements>
 		</AchievementsWrapper>
   )
 }
 
 export default ViewAchievements;
-
+const Title = styled.div`
+	margin: 10px 0;
+	font-size: 18px;
+`
 const AchievementsWrapper = styled.div`
 	height: 0px;
 	width: 0px;
-	transform: translate(-25px, 250px);
+	transform: translate(-150px, 500px);
 	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
 		'650px': '785px'}
 	) {
-		transform: translate(25px, 125px);
+		transform: translate(50px, 250px);
   }
 	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
 		'1000px': '1135px'}
 	) {
 		transform: translate(200px, 450px);
   }
-	transition: transform 1s ease-in-out;
+	transition: transform .75s ease-in-out;
 `
 const Achievements = styled.div`
 	background-color: green;
 	width: 300px;
 	height: 400px;
 	padding: 5px;
-	border: ${props => `5px solid ${props.color}`};
+	font-size: 0.8em;
+	border: '';
 	border-radius: 10px;
-	animation: '';
-	transform: scale(0);
-	transition: ${props => props.hasAnimated ? 'transform 1s ease-in-out' : '' };
+	animation: ${props => props.selectionOptions.detailsSelected === 'HISTORY' ? '.75s ease-out 1 expandYHalfDelay' : ''};
+	transform: ${props => props.selectionOptions.detailsSelected === 'HISTORY' ? 'scale(1)' : 'scale(0)'};
+	transition: ${props => props.hasAnimated ? 'transform .75s ease-in-out' : '' };
+	flex-direction: column;
 	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
 		'1000px': '1135px'}
 	) {
 		transform: scale(1);
-		animation: 1s ease-out 1 expandY;
+		animation: .75s ease-out 1 expandY;
+		border: ${props => `5px solid ${props.color}`};
   }
 	transform-origin: center top;
 `

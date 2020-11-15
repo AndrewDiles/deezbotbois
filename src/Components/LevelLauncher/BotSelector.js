@@ -24,9 +24,13 @@ const BotSelector = ({ selectionOptions, setSelectionOptions }) => {
 		navLocation = {settings.navLocation}
 		>
 			<Selector
-			className = 'centeredFlex'
+			className = 'startFlex'
 			color = {colors.secondary}
 			>
+				<Title>
+					YOUR BOT INFO
+				</Title>
+				<br/>
 				<BotSelectionContainer>
 					<BotSelection
 					setBotNumberSelected = {setBotNumberSelected}
@@ -63,6 +67,11 @@ const BotSelector = ({ selectionOptions, setSelectionOptions }) => {
 }
 
 export default BotSelector;
+
+const Title = styled.div`
+	margin: 10px 0;
+	font-size: 18px;
+`
 
 const StyledIcon = styled(Icon)`
 	color: ${props => props.pass ? 'lime' : 'red'};
@@ -104,14 +113,14 @@ const BotSelectorWrapper = styled.div`
 	) {
 		transform: translate(25px, 0px);
   }
-	transition: transform 1s ease-in-out;
+	transition: transform .75s ease-in-out;
 `
 const Selector = styled.div`
 	/* background-color: grey; */
 	flex-direction: column;
 	width: 300px;
 	height: 400px;
-	animation: 1s ease-out 1 expandY;
+	animation: .75s ease-out 1 expandY;
 	transform-origin: center top;
 	padding: 5px;
 	border: ${props => `5px solid ${props.color}`};

@@ -34,7 +34,6 @@ const Levels = ({ selectionOptions, setSelectionOptions }) => {
 			<ViewLayout
 			selectionOptions = {selectionOptions}
 			setSelectionOptions = {setSelectionOptions}
-			border = {1}
 			/>
 			<ViewHostiles
 			selectionOptions = {selectionOptions}

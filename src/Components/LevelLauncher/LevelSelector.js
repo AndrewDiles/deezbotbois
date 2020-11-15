@@ -50,13 +50,13 @@ const LevelSelectWrapper = styled.div`
 	) {
 		transform: translateX(-325px);
   } */
-	transition: transform 1s ease-in-out;
+	transition: transform .75s ease-in-out;
 `
 const LevelSelect = styled.div`
 	background-color: blue;
 	width: 300px;
 	height: 200px;
-	animation: 1s ease-out 1 expandY;
+	animation: .75s ease-out 1 expandY;
 	transform-origin: center top;
 	flex-direction: column;
 	padding: 5px;

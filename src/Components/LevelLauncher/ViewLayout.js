@@ -6,7 +6,7 @@ import levelInfo from '../../Constants/levels/levelnfo';
 import LayoutDisplay from './LayoutDisplay';
 import Legend from './Legend';
 
-const ViewLayout = ({ selectionOptions, setSelectionOptions, border }) => {
+const ViewLayout = ({ selectionOptions, setSelectionOptions }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
@@ -15,7 +15,7 @@ const ViewLayout = ({ selectionOptions, setSelectionOptions, border }) => {
 	React.useEffect(()=>{
 		let	animatedTimer = setTimeout(()=>{
 			setHasAnimated(1)
-		},1000);
+		},750);
 		return () => clearTimeout(animatedTimer)
 	},[])
 
@@ -29,7 +29,6 @@ const ViewLayout = ({ selectionOptions, setSelectionOptions, border }) => {
 			color = {colors.secondary}
 			className = 'startFlex'
 			hasAnimated = {hasAnimated}
-			border = {border}
 			>
 				<Title>
 					LEVEL LAYOUT
@@ -49,7 +48,7 @@ const ViewLayout = ({ selectionOptions, setSelectionOptions, border }) => {
 export default ViewLayout;
 const Title = styled.div`
 	margin: 10px 0;
-	font-size: 16px;
+	font-size: 18px;
 `
 const LayoutWrapper = styled.div`
 	height: 0px;
@@ -65,7 +64,7 @@ const LayoutWrapper = styled.div`
 	) {
 		transform: translate(-500px, 450px);
   }
-	transition: transform 1s ease-in-out;
+	transition: transform .75s ease-in-out;
 `
 const Layout = styled.div`
 	width: 300px;
@@ -74,16 +73,16 @@ const Layout = styled.div`
 	font-size: 0.8em;
 	border: '';
 	border-radius: 10px;
-	animation: '';
-	transform: ${props => props.selectionOptions.detailsSelected === 'layout' ? 'scale(1)' : 'scale(0)'};
+	animation: ${props => props.selectionOptions.detailsSelected === 'LAYOUT' ? '.75s ease-out 1 expandYHalfDelay' : ''};
+	transform: ${props => props.selectionOptions.detailsSelected === 'LAYOUT' ? 'scale(1)' : 'scale(0)'};
+	transition: ${props => props.hasAnimated ? 'transform .75s ease-in-out' : '' };
 	flex-direction: column;
-	transition: ${props => props.hasAnimated ? 'transform 1s ease-in-out' : '' };
 	@media screen and (min-width: ${props => props.navLocation === 'top' ? 
 		'1000px': '1135px'}
 	) {
 		transform: scale(1);
-		animation: 1s ease-out 1 expandY;
-		border: ${props => props.border && `5px solid ${props.color}`};
+		animation: .75s ease-out 1 expandY;
+		border: ${props => `5px solid ${props.color}`};
   }
 	transform-origin: center top;
 `
