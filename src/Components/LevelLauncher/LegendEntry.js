@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
-import LegendEntry from './LegendEntry';
 
 const Legend = ({ type }) => {
 	const colors = useSelector(getThemeColors);

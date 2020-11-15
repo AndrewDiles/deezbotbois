@@ -14,7 +14,7 @@ const TypeSwitchButton = ({ type, selectionOptions, setSelectionOptions }) => {
 		disabled = {selectionOptions.detailsSelected === type}
 		handleClick = {handleClick}
 		width = {90}
-		fontSize = {type === 'HISTORY' && '10'}
+		fontSize = {type === 'HISTORY' ? '10': null}
 		>
 			{type}
 		</StyledButton>

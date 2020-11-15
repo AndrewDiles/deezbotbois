@@ -35,6 +35,7 @@ const LevelDetails = ({ selectionOptions , setSelectionOptions }) => {
 					{['LAYOUT', 'OTHER BOTS', 'HISTORY'].map((type)=>{
 						return(
 							<TypeSwitchButton
+							key = {type}
 							type = {type}
 							selectionOptions = {selectionOptions}
 							setSelectionOptions = {setSelectionOptions}

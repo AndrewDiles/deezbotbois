@@ -1,0 +1,4 @@
+const bots = {
+	dumbOne : {"scriptInfo":"MORE TARGETTING PRACTICE THAN FOE.","name":"Dumb One","model":"BotDummey","colors":{"primary":"khaki","secondary":"palegoldenrod","trim":"darkkhaki","extensions":"palegoldenrod","rollers":"tan","eyes":"black","armTrim":"indigo","armPrimary":"blueviolet","armSecondary":"fuchsia"},"equipment":{"arm1":null,"arm2":null,"arm3":null,"acc1":null,"acc2":null,"acc3":null,"acc4":null,"acc5":null},"techTree":[null,false,false,null,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],"script":[{"command":{"name":"waitCommand","instructions":{}}}]},
+}
+export default bots

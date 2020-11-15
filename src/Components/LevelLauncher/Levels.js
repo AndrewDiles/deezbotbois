@@ -37,7 +37,6 @@ const Levels = ({ selectionOptions, setSelectionOptions }) => {
 			/>
 			<ViewHostiles
 			selectionOptions = {selectionOptions}
-			setSelectionOptions = {setSelectionOptions}
 			/>
 			<ViewAchievements
 			selectionOptions = {selectionOptions}

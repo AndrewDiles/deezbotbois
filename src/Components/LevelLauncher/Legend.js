@@ -12,10 +12,10 @@ const Legend = ({ levelInfo }) => {
 			{levelInfo.userBots.length > 0 && 
 				<LegendEntry type = 'YOUR BOT'/>
 			}
-			{levelInfo.friendlies.length > 0 && 
+			{levelInfo.friendly.length > 0 && 
 				<LegendEntry type = 'FRIENDLY'/>
 			}
-			{levelInfo.hostiles.length > 0 && 
+			{levelInfo.hostile.length > 0 && 
 				<LegendEntry type = 'HOSTILE'/>
 			}
 		</DisplayWrapper>

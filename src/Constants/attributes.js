@@ -1366,7 +1366,202 @@ const baseBotAttributes = {
 			},
 			null
 		]
-	}
+	},
+	BotDummey: {
+		Name: 'Boxey',
+		Durability: 40,
+		Armor: 1,
+		Shield: 1,
+		Accuracy: 10,
+		Power: 10,
+		Capacitor: 100,
+		Reactor: 10,
+		AutoRepair: 0,
+		ScanDistance: 2,
+		ScanCost: 10,
+		MovementDistance: 1,
+		MovementCost: 20,
+		WeaponSlots: 2,
+		AccessorySlots: 2,
+		Initiative: 25,
+
+		aimCostModifier: 0,
+		reloadTimeModifier: 0,
+		attackCostModifier: 0,
+		DamageBonus: 0,
+		DamageReduction: 0,
+
+		CrushingDamageMultiplier: 1,
+		CrushingDamageReductionMultiplier: 1,
+		PiercingDamageMultiplier: 1,
+		PiercingDamageReductionMultiplier: 1,
+		AcidDamageMultiplier: 1,
+		AcidDamageReductionMultiplier: 1,
+		FireDamageMultiplier: 1,
+		FireDamageReductionMultiplier: 1,
+		EnergyDamageMultiplier: 1,
+		EnergyDamageReductionMultiplier: 1,
+
+		CollisionDamageMultiplier: 1,
+		CollisionDamageReductionMultiplier: 1,
+		MeleeDamageMultiplier: 1,
+		MeleeDamageReductionMultiplier: 1,
+		RangedDamageMultiplier: 1,
+		RangedDamageReductionMultiplier: 1,
+
+		MeleeArmorPenetration: 1,
+		RangedShieldPenetration: 1,
+
+		BurnAndCorrosionBoost: false,
+		
+		aimCommand: true,
+		aimAndAttackCommand: true,
+		chargeCommand: false,
+		counterCommand: false,
+		elevenAttackCommand: false,
+		guardCommand: false,
+		meleeAttackCommand: true,
+		moveCommand: false,
+		ramCommand: false,
+		rangedAttackCommand: true,
+		rechargeCommand: false,
+		redirectCommand: false,
+		repairCommand: false,
+		scanCommand: true,
+		waitCommand: true,
+		
+		Description: "This is a dumb one.",
+		Special1: "-",
+		Special2: "-",
+		Special3: "-",
+		BlueStarConversionRate: 1,
+		TechTree: [
+			null,
+			{
+				affect: 'Durability',
+				magnitude: 1,
+				cost: 1,
+				techMessage: "Inceases Durability by 1 at a cost of 1 Bit"
+			},
+			{
+				affect: 'Armor',
+				magnitude: 1,
+				cost: 2,
+				techMessage: "Inceases Armor by 1 at a cost of 2 Bits"
+			},
+			null,
+			{
+				affect: 'Durability',
+				magnitude: 1,
+				cost: 1,
+				techMessage: "Inceases Durability by 1 at a cost of 1 Bit"
+			},
+			{
+				affect: 'Durability',
+				magnitude: 2,
+				cost: 2,
+				techMessage: "Inceases Durability by 2 at a cost of 2 Bits"
+			},
+			{
+				affect: 'Armor',
+				magnitude: 1,
+				cost: 2,
+				techMessage: "Inceases Armor by 1 at a cost of 2 Bits"
+			},
+			{
+				affect: 'Armor',
+				magnitude: 1,
+				cost: 2,
+				techMessage: "Inceases Armor by 1 at a cost of 2 Bits"
+			},
+			{
+				affect: 'Durability',
+				magnitude: 4,
+				cost: 4,
+				techMessage: "Inceases Durability by 4 at a cost of 4 Bits"
+			},
+			{
+				affect: 'Durability',
+				magnitude: 4,
+				cost: 4,
+				techMessage: "Inceases Durability by 4 at a cost of 4 Bits"
+			},
+			{
+				affect: 'Shield',
+				magnitude: 2,
+				cost: 4,
+				techMessage: "Inceases Shield by 2 at a cost of 4 Bits"
+			},
+			{
+				affect: 'Shield',
+				magnitude: 2,
+				cost: 4,
+				techMessage: "Inceases Shield by 2 at a cost of 4 Bits"
+			},
+			{
+				affect: 'PiercingDamageReductionMultiplier',
+				magnitude: 0.75,
+				cost: 5,
+				techMessage: "Reduces 25% of damage taken from Piercing attacks at a cost of 5 Bits"
+			},
+			{
+				affect: 'Durability',
+				magnitude: 4,
+				cost: 4,
+				techMessage: "Inceases Durability by 4 at a cost of 4 Bits"
+			},
+			{
+				affect: 'AutoRepair',
+				magnitude: .1,
+				cost: 6,
+				techMessage: "Increases Auto Repair by 0.1 at a cost of 6 Bits"
+			},
+			{
+				affect: 'AutoRepair',
+				magnitude: .1,
+				cost: 6,
+				techMessage: "Increases Auto Repair by 0.1 at a cost of 6 Bits"
+			},
+			{
+				affect: 'CollisionDamageMultiplier',
+				magnitude: 1.5,
+				cost: 7,
+				techMessage: "Increases damage dealt in Collisions by 50% at a cost of 7 Bits"
+			},
+			{
+				affect: 'MeleeDamageMultiplier',
+				magnitude: 1.5,
+				cost: 7,
+				techMessage: "Increases Melee Damage by 50% at a cost of 7 Bits"
+			},
+			{
+				affect: 'RangedDamageMultiplier',
+				magnitude: 1.5,
+				cost: 10,
+				techMessage: "Increases Ranged Damage by 50% at a cost of 10 Bits"
+			},
+			{
+				affect: 'reloadTimeModifier',
+				magnitude: -1,
+				cost: 5,
+				techMessage: "Reduces weapon Reload Time by 1 tick at a cost of 5 Bits"
+			},
+			null,
+			{
+				affect: 'Armor',
+				magnitude: 5,
+				cost: 14,
+				techMessage: "Inceases Armor by 5 at a cost of 14 Bits"
+			},
+			{
+				affect: 'repairCommand',
+				magnitude: true,
+				cost: 12,
+				techMessage: "Unlocks the REPAIR command at a cost of 12 Bits"
+			},
+			null
+		]
+	},
 }
 export default baseBotAttributes;
 export const attributeInfo = {

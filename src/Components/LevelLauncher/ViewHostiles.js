@@ -1,20 +1,29 @@
-import React from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
+import BotViewingSwitchButton from './BotViewingSwitchButton';
+import levelInfo from '../../Constants/levels/levelnfo';
+import OtherBotSelector from './OtherBotSelector';
+import bots from '../../Constants/botAis/bots';
 import styled from 'styled-components';
 
-const ViewHostiles = ({ selectionOptions, setSelectionOptions }) => {
-	// const dispatch = useDispatch();
+const ViewHostiles = ({ selectionOptions }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
-	const [hasAnimated, setHasAnimated] = React.useState(0);
-	React.useEffect(()=>{
+	const [typeViewing, setTypeViewing] = useState('HOSTILE');
+	const [botNumberViewing, setBotNumberViewing] = useState(0);
+	const [hasAnimated, setHasAnimated] = useState(0);
+	useEffect(()=>{
 		let	animatedTimer = setTimeout(()=>{
 			setHasAnimated(1)
 		},750);
 		return () => clearTimeout(animatedTimer)
 	},[])
+	useEffect(()=>{
+		setBotNumberViewing(0);
+	},[JSON.stringify(selectionOptions)])
+	
 
   return (
 		<HostilesWrapper
@@ -24,18 +33,59 @@ const ViewHostiles = ({ selectionOptions, setSelectionOptions }) => {
 			navLocation = {settings.navLocation}
 			selectionOptions = {selectionOptions}
 			color = {colors.secondary}
-			className = 'startFlex'
+			className = 'startFlex col'
 			hasAnimated = {hasAnimated}
 			>
 				<Title>
 					OTHER BOTS
 				</Title>
+				<TypeButtonContainer className = 'evenlyFlex'>
+					{['HOSTILE', 'FRIENDLY'].map((type)=>{
+						return(
+							<BotViewingSwitchButton
+							key = {type}
+							type = {type}
+							typeViewing = {typeViewing}
+							setTypeViewing = {setTypeViewing}
+							/>
+						)
+					})}
+				</TypeButtonContainer>
+				<br/>
+				<OtherBotSelector
+				botNumberViewing = {botNumberViewing}
+				setBotNumberViewing = {setBotNumberViewing}
+				typeViewing = {typeViewing}
+				levelInfo = {levelInfo[selectionOptions.levelNumber]}
+				/>
+				<BotName>
+					{levelInfo[selectionOptions.levelNumber][typeViewing.toLowerCase()][botNumberViewing] &&
+					bots[levelInfo[selectionOptions.levelNumber][typeViewing.toLowerCase()][botNumberViewing].name].name}
+				</BotName>
+				<Description className = 'centeredFlex'>
+					{levelInfo[selectionOptions.levelNumber][typeViewing.toLowerCase()][botNumberViewing] ?
+						bots[levelInfo[selectionOptions.levelNumber][typeViewing.toLowerCase()][botNumberViewing].name].scriptInfo 
+					: 
+						typeViewing === 'HOSTILE' ? 
+							'THERE ARE NO HOSTILE BOTS TO DEFEAT.'
+						:
+							"THERE ARE NO FRIENDLY BOTS TO AID YOUR BOT.  SUCK IT UP."
+					}
+				</Description>
 			</Hostiles>
 		</HostilesWrapper>
   )
 }
 
 export default ViewHostiles;
+const Description = styled.div`
+	width: 100%;
+	height: 150px;
+`
+const BotName = styled.div`
+	width: 100%;
+	height: 25px;
+`
 const Title = styled.div`
 	margin: 10px 0;
 	font-size: 18px;
@@ -57,7 +107,6 @@ const HostilesWrapper = styled.div`
 	transition: transform .75s ease-in-out;
 `
 const Hostiles = styled.div`
-	background-color: orange;
 	width: 300px;
 	height: 400px;
 	padding: 5px;
@@ -75,4 +124,8 @@ const Hostiles = styled.div`
 		border: ${props => `5px solid ${props.color}`};
   }
 	transform-origin: center top;
+`
+const TypeButtonContainer = styled.div`
+	height: 50px;
+	width: 100%;
 `

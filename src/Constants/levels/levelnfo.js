@@ -4,11 +4,11 @@ const levelInfo = [
 		levelName: 'FALL OVER',
 		width: 13,
 		height: 13,
-		friendlies: [
+		friendly: [
 		],
-		hostiles : [
+		hostile : [
 			{
-				name: 'DumbOne',
+				name: 'dumbOne',
 				location: {col: 10, row:10},
 			}
 		],
@@ -21,17 +21,17 @@ const levelInfo = [
 	{
 		levelNumber: 1,
 		levelName: 'COMRADE?',
-		width: 13,
-		height: 13,
-		friendlies: [
+		width: 11,
+		height: 11,
+		friendly: [
 			{
-				name: 'DumbOne',
+				name: 'dumbOne',
 				location: {col: 9, row:9},
 			}
 		],
-		hostiles : [
+		hostile : [
 			{
-				name: 'DumbOne',
+				name: 'dumbOne',
 				location: {col: 10, row:10},
 			}
 		],
@@ -46,10 +46,10 @@ const levelInfo = [
 		levelName: 'NOT YET MADE',
 		width: 13,
 		height: 13,
-		friendlies: [
+		friendly: [
 
 		],
-		hostiles : [
+		hostile : [
 		],
 		userBots : [
 		]
@@ -59,10 +59,10 @@ const levelInfo = [
 		levelName: 'NOT YET MADE',
 		width: 13,
 		height: 13,
-		friendlies: [
+		friendly: [
 
 		],
-		hostiles : [
+		hostile : [
 		],
 		userBots : [
 		]
@@ -72,10 +72,10 @@ const levelInfo = [
 		levelName: 'NOT YET MADE',
 		width: 13,
 		height: 13,
-		friendlies: [
+		friendly: [
 
 		],
-		hostiles : [
+		hostile : [
 		],
 		userBots : [
 		]
@@ -85,10 +85,10 @@ const levelInfo = [
 		levelName: 'NOT YET MADE',
 		width: 13,
 		height: 13,
-		friendlies: [
+		friendly: [
 
 		],
-		hostiles : [
+		hostile : [
 		],
 		userBots : [
 		]

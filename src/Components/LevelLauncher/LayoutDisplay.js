@@ -29,6 +29,7 @@ const LayoutDisplay = ({ levelInfo }) => {
 				{cells.map((cell)=>{
 					return(
 						<Cell
+						key = {`r${cell.row}c${cell.col}`}
 						colors = {colors}
 						levelInfo = {levelInfo}
 						contents = {testContents(cell,levelInfo)}

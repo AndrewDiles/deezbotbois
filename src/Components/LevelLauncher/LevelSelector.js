@@ -45,11 +45,6 @@ const LevelSelectWrapper = styled.div`
 	) {
 		transform: translateX(-325px);
   }
-	/* @media screen and (min-width: ${props => props.navLocation === 'top' ? 
-		'1000px': '1135px'}
-	) {
-		transform: translateX(-325px);
-  } */
 	transition: transform .75s ease-in-out;
 `
 const LevelSelect = styled.div`

@@ -17,6 +17,8 @@ const SaveBots = ({ botNumberSelected, disabled, setErrorMsg, setSuccessMsg, set
 	const botInfo = userInfo.botBuilds;
 	const dispatch = useDispatch();
 	const handleSaveBots = () => {
+		//TODO: Remove console log when done making bots
+		if (userInfo.email === 'andrewdiles@gmail.com') console.log('current bot:',JSON.stringify(botInfo[botNumberSelected]));
 		dispatch(communicating());
 		dispatch(replaceAttributes(botNumberSelected, attributes));
 			fetch('server/updateBotBuilds', {
