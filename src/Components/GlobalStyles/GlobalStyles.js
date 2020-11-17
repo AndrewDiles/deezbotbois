@@ -104,6 +104,9 @@ html {
 .disableClicks {
   pointer-events: none;
 }
+.indent {
+	padding-left: 25px;
+}
 .centeredFlex {
 	display: flex;
 	justify-content: center;

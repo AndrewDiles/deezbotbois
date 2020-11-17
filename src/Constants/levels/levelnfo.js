@@ -16,7 +16,33 @@ const levelInfo = [
 			{
 				location: {col:3, row:3}
 			}
-		]
+		],
+		ach1 : {
+			type: 'SPEED DEMON',
+			threshold: 12,
+			reward: {
+				equipment : {
+					acc: 'wd40'
+				}
+			}
+		},
+		ach2 : {
+			type: 'OVERKILL ',
+			threshold: 50,
+			reward: {
+				color: {
+					secondary: 'tan'
+				}
+			}
+		},
+		ach3 : {
+			type: 'BUSHIDO',
+			reward: {
+				color: {
+					trim: 'teal'
+				}
+			}
+		}
 	},
 	{
 		levelNumber: 1,
@@ -25,7 +51,7 @@ const levelInfo = [
 		height: 11,
 		friendly: [
 			{
-				name: 'dumbOne',
+				name: 'deadWeight',
 				location: {col: 9, row:9},
 			}
 		],
@@ -39,7 +65,31 @@ const levelInfo = [
 			{
 				location: {col:3, row:3}
 			}
-		]
+		],
+		ach1 : {
+			type: 'BEST FFRIENDS',
+			reward: {
+				color: {
+					rollers: 'pink'
+				}
+			}
+		},
+		ach2 : {
+			type: 'LAST STAND ',
+			reward: {
+				color: {
+					primary: 'brown'
+				}
+			}
+		},
+		ach3 : {
+			type: 'GUTS',
+			reward: {
+				equipment : {
+					acc: 'plateCoat'
+				}
+			}
+		}
 	},
 	{
 		levelNumber: 991,

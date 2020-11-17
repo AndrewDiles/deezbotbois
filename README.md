@@ -130,15 +130,6 @@ Intentions with the GUI include:
 
 # Reminders
 
-### Level Goals
-- Melee only: Bushido
-- Ranged only: Hotshot
-- Ram only: Guts
-- No damage taken: Golden Standard
-- No movement: Last stand
-- Win in under x ticks: Speed demon
-- Win with more than x capacitor: Power Hog
-
 ### Application of Rules
 - Test each tick for changes to bot durability.
 - Set a maximum number of passable Ticks without a change to cause a draw
@@ -154,7 +145,7 @@ Intentions with the GUI include:
 
 ## Declared strategy names
 
-### Marco Strategies
+### Macro Strategies
 - simple-sequence
 - stationary-ranged strategy
 - forced-melee strategy
@@ -166,26 +157,3 @@ Intentions with the GUI include:
 ### loop types
 - subroutine
 - simple-sequence
-
-### Icon Imports For Bot Assembly:
-import {copy} from 'react-icons-kit/icomoon/copy'
-
-import {eye} from 'react-icons-kit/icomoon/eye'
-
-import {alertTriangle} from 'react-icons-kit/feather/alertTriangle';
-
-import {ic_my_location} from 'react-icons-kit/md/ic_my_location'
-aim and shoot?
-
-
-1GUARD
-2Melee Attacks / Ranged Attacks / 3Aim and Shoot
-411Attacks
-5RAM / Charge
-6`Movement / test for collisions (not a command)`
-7`Test for projectile / cell damage (not commands)`
-8Aim
-9Scan / Auto-Scan (not a command)
-10AUTO-REPAIR, RECHARGE (not commands)
-internal bot updates: reload, repair from nano-bots
-Internal cleanup: refresh collision potentials, remove destroyed bots from lists. Test for game win / loss conditions

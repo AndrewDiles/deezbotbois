@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
+import Bot from '../Bots/Bot';
 import styled from 'styled-components';
 
 const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
@@ -15,7 +16,7 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 		},750);
 		return () => clearTimeout(animatedTimer)
 	},[])
-
+	
   return (
 		<AchievementsWrapper
 		navLocation = {settings.navLocation}
@@ -28,14 +29,83 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 			hasAnimated = {hasAnimated}
 			>
 				<Title>
-					RECORDS
+					LEVEL RECORDS
 				</Title>
+				{userInfo.levelProgress[selectionOptions.levelNumber].length === 0 ?
+					'LEVEL HAS NOT BEEN COMPLETED'
+				: 
+					<>
+						<RowEntry className = 'startFlex'>
+							<Label className = 'centeredFlex'>
+								MODEL WINS
+							</Label>
+							<EntryContents
+							className = 'evenlyFlex'
+							>
+								{userInfo.levelProgress[selectionOptions.levelNumber].map((botName, index)=>{
+									if (index !== 0) {
+										return(
+											<Bot
+											key = {index}
+											alternativeBotSize = {(userInfo.levelProgress[selectionOptions.levelNumber].length-1) > 4 ? 24 : 38}
+											model = {botName}
+											botColors = {'default'}
+											// arm1 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm1}
+											// arm2 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm2}
+											// arm3 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm3}
+											// arm1Angle = '-45'
+											// arm2Angle = '45'
+											// arm3Angle = '235'
+											/>
+										)
+									}
+								})}
+							</EntryContents>
+						</RowEntry>
+						<RowEntry className = 'startFlex'>
+							<Label className = 'centeredFlex'>
+								FASTEST WIN
+							</Label>
+							<EntryContents className = 'centeredFlex'>
+								{userInfo.levelProgress[selectionOptions.levelNumber][0].minTicks} TICKS
+							</EntryContents>
+						</RowEntry>
+						<RowEntry className = 'startFlex'>
+							<Label className = 'centeredFlex'>
+								LEAST DAMAGE TAKEN
+							</Label>
+							<EntryContents className = 'startFlex indent'>
+								{userInfo.levelProgress[selectionOptions.levelNumber][0].minDamageTaken}
+							</EntryContents>
+							<br/>
+							<Label className = 'centeredFlex'>
+								MOST DAMAGE DEALT
+							</Label>
+							<EntryContents className = 'startFlex indent'>
+								{userInfo.levelProgress[selectionOptions.levelNumber][0].maxDamageDealt}
+							</EntryContents>
+						</RowEntry>
+					</>
+				}
 			</Achievements>
 		</AchievementsWrapper>
   )
 }
 
 export default ViewAchievements;
+const Label = styled.div`
+	height: 100%;
+	width: 80px;
+	font-size: 0.7em;
+`
+const EntryContents = styled.div`
+	height: 100%;
+	width: 200px;
+`
+const RowEntry = styled.div`
+	height: 40px;
+	width: 100%;
+`
 const Title = styled.div`
 	margin: 10px 0;
 	font-size: 18px;
@@ -57,7 +127,6 @@ const AchievementsWrapper = styled.div`
 	transition: transform .75s ease-in-out;
 `
 const Achievements = styled.div`
-	background-color: green;
 	width: 300px;
 	height: 400px;
 	padding: 5px;
