@@ -8,6 +8,7 @@ import LevelDetails from './LevelDetails';
 import ViewLayout from './ViewLayout';
 import ViewHostiles from './ViewHostiles';
 import ViewAchievements from './ViewAchievements';
+import ScrollingSpacer from './ScrollingSpacer';
 
 const Levels = ({ selectionOptions, setSelectionOptions }) => {
 	// const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const Levels = ({ selectionOptions, setSelectionOptions }) => {
 			selectionOptions = {selectionOptions}
 			setSelectionOptions = {setSelectionOptions}
 			/>
-			{/* TODO: Add a moving component that is invisible and allows the user to scroll lower? */}
+			<ScrollingSpacer/>
 			{/* LAUNCH LEVEL */}
     </div>
   )

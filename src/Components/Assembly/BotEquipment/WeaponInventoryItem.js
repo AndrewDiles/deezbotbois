@@ -136,7 +136,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 								EQUIP
 							</StyledButton>
 						): (
-							equipmentStaging.to && equipmentStaging.to.name === weapon ? (
+							equipmentStaging.to && equipmentStaging.to.name === weapon &&
 								<StyledButton
 								handleClick = {unstage}
 								width = '60'
@@ -144,9 +144,6 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 								>
 									UNSELECT
 								</StyledButton>
-							) : (
-								<></>
-							)
 						)
 					)
 				}
