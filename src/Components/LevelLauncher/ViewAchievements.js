@@ -36,9 +36,20 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 				: 
 					<>
 						<RowEntry className = 'startFlex'>
-							<Label className = 'centeredFlex'>
+							<NarrowLabel className = 'centeredFlex'>
 								MODEL WINS
-							</Label>
+							</NarrowLabel>
+							<RatioContainer className = 'centeredFlex col'>
+								<RatioChild className = 'startFlex'>
+									{userInfo.levelProgress[selectionOptions.levelNumber].length-1}
+								</RatioChild>
+								<DivisionSymbol
+								color = {colors.textColor}
+								/>
+								<RatioChild className = 'endFlex'>
+									{userInfo.availableBots.length}
+								</RatioChild>
+							</RatioContainer>
 							<EntryContents
 							className = 'evenlyFlex'
 							>
@@ -97,6 +108,26 @@ const Label = styled.div`
 	height: 100%;
 	width: 80px;
 	font-size: 0.7em;
+`
+const NarrowLabel = styled.div`
+	height: 100%;
+	width: 50px;
+	font-size: 0.7em;
+`
+const RatioContainer = styled.div`
+	height: 100%;
+	width: 30px;
+	font-size: 0.7em;
+`
+const DivisionSymbol = styled.div`
+	height: 2px;
+	width: 50px;
+	transform: rotate(-45deg);
+	background-color: ${props => props.color};
+`
+const RatioChild = styled.div`
+	height: 50%;
+	width: 30px;
 `
 const EntryContents = styled.div`
 	height: 100%;

@@ -131,6 +131,12 @@ html {
 	align-items: center;
 	text-align: center;
 }
+.endFlex {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	text-align: center;
+}
 .col {
 	flex-direction: column;
 }
