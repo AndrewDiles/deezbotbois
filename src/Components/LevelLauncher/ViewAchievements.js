@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import Bot from '../Bots/Bot';
 import styled from 'styled-components';
+import levelInfo from '../../Constants/levels/levelnfo';
+import Goals from './Goals';
 
 const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 	// const dispatch = useDispatch();
@@ -61,12 +63,6 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 											alternativeBotSize = {(userInfo.levelProgress[selectionOptions.levelNumber].length-1) > 4 ? 24 : 38}
 											model = {botName}
 											botColors = {'default'}
-											// arm1 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm1}
-											// arm2 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm2}
-											// arm3 = {botInfo[botNumberSelected] && userInfo.botBuilds[botNumberSelected].equipment.arm3}
-											// arm1Angle = '-45'
-											// arm2Angle = '45'
-											// arm3Angle = '235'
 											/>
 										)
 									}
@@ -98,6 +94,11 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 						</RowEntry>
 					</>
 				}
+				<br/>
+				<Goals
+				metInfo = {userInfo.levelProgress[selectionOptions.levelNumber][0]}
+				goalInfo = {[levelInfo[selectionOptions.levelNumber].ach1,levelInfo[selectionOptions.levelNumber].ach2,levelInfo[selectionOptions.levelNumber].ach3]}
+				/>
 			</Achievements>
 		</AchievementsWrapper>
   )
@@ -136,6 +137,7 @@ const EntryContents = styled.div`
 const RowEntry = styled.div`
 	height: 40px;
 	width: 100%;
+	margin-bottom: 5px;
 `
 const Title = styled.div`
 	margin: 10px 0;

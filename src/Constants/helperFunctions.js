@@ -385,7 +385,7 @@ export function collisionVerification (cellLocation, objectsArray, maxRows, maxC
 	let collision = false;
 	objectsArray.forEach((object)=>{
 		if (!collision) {
-			// console.log('testing colision potential between', cellLocation, ' and ', object.location)
+			// console.log('testing collision potential between', cellLocation, ' and ', object.location)
 			if (object.location.col === cellLocation.col && object.location.row === cellLocation.row) {
 				collision = true;
 				console.log(`Impending impact with ${object}`)

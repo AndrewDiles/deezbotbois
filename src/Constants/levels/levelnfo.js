@@ -27,7 +27,7 @@ const levelInfo = [
 			}
 		},
 		ach2 : {
-			type: 'OVERKILL ',
+			type: 'OVERKILL',
 			threshold: 50,
 			reward: {
 				color: {
@@ -67,7 +67,7 @@ const levelInfo = [
 			}
 		],
 		ach1 : {
-			type: 'BEST FFRIENDS',
+			type: 'BEST FRIENDS',
 			reward: {
 				color: {
 					rollers: 'pink'
@@ -75,7 +75,7 @@ const levelInfo = [
 			}
 		},
 		ach2 : {
-			type: 'LAST STAND ',
+			type: 'LAST STAND',
 			reward: {
 				color: {
 					primary: 'brown'

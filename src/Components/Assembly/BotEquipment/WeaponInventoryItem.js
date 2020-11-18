@@ -7,7 +7,7 @@ import WeaponContents from '../../ToolTip/WeaponContents';
 import { weaponStats } from '../../../Constants/equipment';
 import { equipItem, unequipItem } from '../../../Redux/actions';
 
-const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped, setMessageDisplayed }) => {
+const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped, setMessageDisplayed, altBaseSize }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
@@ -106,7 +106,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 				):(
 					<StyledButton
 					id = {`${weapon}Button`}
-					width = '240'
+					width= {altBaseSize ? altBaseSize : '240'}
 					handleClick = {stage}
 					selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
 					>
@@ -160,8 +160,8 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 				<ToolTip
 				messageHovered = {messageHovered}
 				setMessageHovered = {setMessageHovered}
-				width= '240'
-				animated = {'equipment'}
+				width= {altBaseSize ? altBaseSize : '240'}
+				animated = {altBaseSize ? 'equipment220' : 'equipment'}
 				>
 					{weaponStats[weapon] &&
 						<WeaponContents

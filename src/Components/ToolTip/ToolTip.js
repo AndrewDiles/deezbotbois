@@ -61,6 +61,7 @@ const Message = styled.div`
 	border: 1px solid rgba(0,0,0,0.1);
 	z-index: 15;
 	animation: ${props => props.animated === 'equipment' ? '.5s ease-out 1 openFromTopToBottom' 
+	: props.animated === 'equipment220' ? '.5s ease-out 1 openFromTopToBottom220' 
 	: props.animated === 'attribute' ? '.5s ease-out 1 attributeExpandxAxis'
 	: props.animated === 'command300' ? '.5s ease-out 1 commandExpand300'
 	: props.animated === 'command200' ? '.5s ease-out 1 commandExpand200'

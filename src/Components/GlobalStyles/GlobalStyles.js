@@ -378,6 +378,28 @@ html {
 		/* min-height: 50px; */
 	}
 }
+@keyframes openFromTopToBottom220 {
+  0% {
+		width: 0px;
+    height: 5px;
+		/* min-height: 0px; */
+  }
+  25% {
+    width: 220px;
+    height: 5px;
+		/* min-height: 0px; */
+  }
+  99% {
+    width: 220px;
+    height: 60px;
+		/* min-height: 0px; */
+  }
+	100% {
+		width: 220px;
+    height: 100%;
+		/* min-height: 50px; */
+	}
+}
 @keyframes attributeExpandxAxis {
   0% {
 		width: 5px;
