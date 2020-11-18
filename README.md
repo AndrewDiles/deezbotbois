@@ -35,6 +35,9 @@ Intentions with the GUI include:
 
 
 # PAST BUGS
+- Corrected bouncing of scroll position while ToolTips were being expanded when another equipment had focus.
+### Solution: called document.activeElement.blur() to remove focus from other piece of equipment.
+
 - Previously working accessories in Assembly no longer displayed.
 ### Cause: in attributeObjectGenerator, I had deleted the name, description and potency key/values in order to factor the affects of the accessories into the comprehensive attribute totals
 ### Solution: Make a shallow copy by using the spread operator before deleting the lines so it is only affecting the local object

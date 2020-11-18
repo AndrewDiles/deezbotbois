@@ -92,56 +92,35 @@ const levelInfo = [
 		}
 	},
 	{
-		levelNumber: 991,
-		levelName: 'NOT YET MADE',
-		width: 13,
-		height: 13,
-		friendly: [
-
-		],
-		hostile : [
-		],
-		userBots : [
-		]
-	},
-	{
-		levelNumber: 992,
-		levelName: 'NOT YET MADE',
-		width: 13,
-		height: 13,
-		friendly: [
-
-		],
-		hostile : [
-		],
-		userBots : [
-		]
-	},
-	{
-		levelNumber: 993,
-		levelName: 'NOT YET MADE',
-		width: 13,
-		height: 13,
-		friendly: [
-
-		],
-		hostile : [
-		],
-		userBots : [
-		]
-	},
-	{
 		levelNumber: 999,
 		levelName: 'NOT YET MADE',
-		width: 13,
-		height: 13,
+		width: 5,
+		height: 5,
 		friendly: [
-
 		],
 		hostile : [
 		],
 		userBots : [
-		]
+			{
+				location: {col:1, row:1}
+			}
+		],
+		ach1 : {
+			type: 'HOTSHOT',
+			reward: {
+			}
+		},
+		ach2 : {
+			type: 'GOLDEN STANDARD',
+			reward: {
+			}
+		},
+		ach3 : {
+			type: 'POWER HOG',
+			threshold: 100,
+			reward: {
+			}
+		}
 	}
 ]
 export default levelInfo;

@@ -19,6 +19,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 			// if (ev.target === target) 
 			setMessageHovered(true);
 			setMessageDisplayed(true);
+			document.activeElement.blur();
 		}
 		const onMouseLeave = (ev) => {
 			// if (ev.target === target) 
@@ -158,7 +159,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 								EQUIP
 							</StyledButton>
 						): (
-							equipmentStaging.to && equipmentStaging.to.name === accessory ? (
+							equipmentStaging.to && equipmentStaging.to.name === accessory &&
 								<StyledButton
 								handleClick = {unstage}
 								width = '60'
@@ -166,16 +167,6 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 								>
 									UNSELECT
 								</StyledButton>
-							) : (
-								<></>
-								// <StyledButton
-								// handleClick = {stage}
-								// width = '60'
-								// fontSize = '8'
-								// >
-								// 	SELECT
-								// </StyledButton>
-							)
 						)
 					)
 				}

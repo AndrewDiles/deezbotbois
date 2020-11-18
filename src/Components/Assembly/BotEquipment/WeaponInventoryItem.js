@@ -19,6 +19,8 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 			// if (ev.target === target) 
 			setMessageHovered(true);
 			setMessageDisplayed(true);
+			// target.focus();
+			document.activeElement.blur();
 		}
 		const onMouseLeave = (ev) => {
 			// if (ev.target === target) 
@@ -144,13 +146,6 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 								</StyledButton>
 							) : (
 								<></>
-								// <StyledButton
-								// handleClick = {stage}
-								// width = '60'
-								// fontSize = '8'
-								// >
-								// 	SELECT
-								// </StyledButton>
 							)
 						)
 					)
