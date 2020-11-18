@@ -22,9 +22,6 @@ const goalsInfo = {
 			POWERHOG: ' OR MORE, ENERGY STORED IN YOUR CAPACITOR',
 			SPEEDDEMON : ' TICKS OR FEWER',
 		}
-	},
-	rewards: {
-
 	}
 }
 export default goalsInfo

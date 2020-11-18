@@ -28,18 +28,11 @@ const LevelLauncher = () => {
 	const [gameLaunched, setGameLaunched] = useState(false);
 	const [selectionOptions, setSelectionOptions] = useState(initialSelectionOptions);
 
-	// const [windowWidth, setWindowWidth] = useState(document.body.clientWidth);	
-	// React.useEffect(()=>{
-	// 	window.addEventListener('resize', limitedResizeFunction);
-	// 	return()=>{
-	// 		window.removeEventListener('resize', limitedResizeFunction);
-	// 	}
-	// })
-	// const limitedResizeFunction = useCallback(
-  //   debounce(function(){
-	// 			setWindowWidth(document.body.clientWidth);
-	// 	},250, false), []
-  // );
+	function swapBetweenChallengesAndLevels () {
+		let newSelectionOptions = {...selectionOptions};
+		newSelectionOptions.viewingLevels = !newSelectionOptions.viewingLevels;
+		setSelectionOptions(newSelectionOptions);
+	}
 
 	if (!userInfo.email) {
     return (
@@ -61,11 +54,13 @@ const LevelLauncher = () => {
 					<Levels
 					selectionOptions = {selectionOptions}
 					setSelectionOptions = {setSelectionOptions}
+					swapBetweenChallengesAndLevels = {swapBetweenChallengesAndLevels}
 					/>
 				) : (
 					<Challenges
 					selectionOptions = {selectionOptions}
 					setSelectionOptions = {setSelectionOptions}
+					swapBetweenChallengesAndLevels = {swapBetweenChallengesAndLevels}
 					/>
 				)
 			) : (

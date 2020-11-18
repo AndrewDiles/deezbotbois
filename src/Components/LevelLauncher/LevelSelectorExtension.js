@@ -40,7 +40,6 @@ const LevelSelectExtensionWrapper = styled.div`
 `
 const LevelSelectExtension = styled.div`
 	position: relative;
-	background-color: blue;
 	width: 300px;
 	height: 200px;
 	transform: scaleY(0);
