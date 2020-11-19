@@ -11,8 +11,6 @@ import Bot from '../Bots/Bot';
 import { botColorSchemes } from '../../Constants/colorSchemes';
 
 const Goal = ({ goalInfo, met }) => {
-	const userInfo = useSelector((state) => state.userInfo);
-	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
 	const [viewingRewards, setViewingRewards] = React.useState(false);
 	
@@ -112,7 +110,7 @@ const InfoContainer = styled.div`
 const Details = styled.div`
 	width: 100%;
 	height: 75%;
-	font-size: 0.6em;
+	font-size: 8px;
 	animation: .5s ease-out 1 expandY;
 `
 const Label = styled.div`

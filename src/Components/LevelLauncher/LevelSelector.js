@@ -19,6 +19,7 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 		let	animatedTimer = setTimeout(()=>{
 			setHasAnimated(true)
 		},750);
+		setLevelNumber(userInfo.levelProgress.length);
 		return () => clearTimeout(animatedTimer)
 	},[])
 
@@ -32,7 +33,10 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 
 	React.useEffect(()=>{
 		// set focus to new levelNumber
-
+		let target = document.getElementById(`levelBox${userInfo.levelProgress.length}`);
+		if (target) {
+			target.focus();
+		}
 	},[selectionOptions.levelNumber])
 
 	console.log(levelInfo[selectionOptions.levelNumber]);
@@ -40,6 +44,11 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 	function setLevelNumber (num) {
 		let newSelectionOptions = {...selectionOptions};
 		newSelectionOptions.levelNumber = num;
+		setSelectionOptions(newSelectionOptions);
+	}
+	function modifyLevelNumber (change) {
+		let newSelectionOptions = {...selectionOptions};
+		newSelectionOptions.levelNumber += change;
 		setSelectionOptions(newSelectionOptions);
 	}
 
@@ -56,31 +65,76 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 					LEVEL SELECT
 				</Title>
 				<LevelSelectContainer className = 'centeredFlex'>
-					{availableLevels.length > 6 &&
-						<StyledButton
-						disabled = {selectionOptions.levelNumber === 0}
-						width = '30'
-						maxHeight = '30'
-						handleClick = {()=>{setLevelNumber(0)}}
-						>
-							0
-						</StyledButton>
-					}
+					<LevelMovementContainer className = 'centeredFlex col'>
+						{availableLevels.length > 6 &&
+							<StyledButton
+							disabled = {selectionOptions.levelNumber === 0}
+							width = '40'
+							maxHeight = '20'
+							handleClick = {()=>{setLevelNumber(0)}}
+							>
+								0
+							</StyledButton>
+						}
+						{availableLevels.length > 10 &&
+							<StyledButton
+							disabled = {selectionOptions.levelNumber < 10}
+							width = '40'
+							maxHeight = '20'
+							handleClick = {()=>{modifyLevelNumber(-10)}}
+							>
+								-10
+							</StyledButton>
+						}
+					</LevelMovementContainer>
 					<LevelChoicesContainer
 					colors = {colors}
+					className = 'startFlex'
+					numberSelected = {selectionOptions.levelNumber}
 					>
-
+						{availableLevels.map((levelNumber)=>{
+							return (
+								<LevelBox
+								id = {`levelBox${levelNumber}`}
+								key = {levelNumber}
+								onClick ={()=>{setLevelNumber(levelNumber)}}
+								className = 'centeredFlex'
+								colors = {colors}
+								selected = {levelNumber === selectionOptions.levelNumber}
+								>
+									<LevelContents
+									className = 'centeredFlex'
+									colors = {colors}
+									selected = {levelNumber === selectionOptions.levelNumber}
+									>
+										{levelNumber}
+									</LevelContents>
+								</LevelBox>
+							)
+						})}
 					</LevelChoicesContainer>
-					{availableLevels.length > 6 &&
-						<StyledButton
-						disabled = {selectionOptions.levelNumber === availableLevels.length}
-						width = '30'
-						maxHeight = '30'
-						handleClick = {()=>{setLevelNumber(0)}}
-						>
-							{availableLevels.length}
-						</StyledButton>
-					}
+					<LevelMovementContainer className = 'centeredFlex col'>
+						{availableLevels.length > 6 &&
+							<StyledButton
+							disabled = {selectionOptions.levelNumber === availableLevels.length}
+							width = '40'
+							maxHeight = '20'
+							handleClick = {()=>{setLevelNumber(0)}}
+							>
+								{availableLevels.length}
+							</StyledButton>
+						}
+						{availableLevels.length > 10 &&
+							<StyledButton
+							disabled = {selectionOptions.levelNumber + 10 > availableLevels.length}
+							width = '40'
+							maxHeight = '20'
+							handleClick = {()=>{modifyLevelNumber(+10)}}
+							>
+								+10
+							</StyledButton>
+						}
+					</LevelMovementContainer>
 				</LevelSelectContainer>
 				<BattleButton
 				selectionOptions = {selectionOptions}
@@ -91,7 +145,8 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 					<ShiftIconContainer>
 						<StyledIcon
 						icon = {shift}
-						padding = {5}
+						padding = {3}
+						size = {25}
 						handleClick = {swapBetweenChallengesAndLevels}
 						// disabled = {userInfo.levelProgress.length < 5}
 						/>
@@ -103,6 +158,29 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 }
 
 export default LevelSelector;
+const LevelMovementContainer = styled.div`
+	height: 40px;
+	width: 40px;
+`
+const LevelContents = styled.div`
+	height: 30px;
+	width: 30px;
+	transform: ${props => props.selected && 'scale(1.2)'};
+	font-size: 0.8em;
+	color: ${props => props.selected && props.colors.hoveredText};
+`
+const LevelBox = styled.div`
+	height: 40px;
+	width: 40px;
+	border: ${props => props.selected && `5px double ${props.colors.selected}`};
+	:hover {
+		border: ${props => props.selected ? `5px double ${props.colors.hovered}` : `3px double ${props.colors.hovered}`};
+		cursor: pointer;
+		/* >div {
+			color: ${props => props.selected && props.colors.hoveredText};
+		} */
+	}
+`
 const ShiftIconContainer = styled.div`
 	position: absolute;
 	top: 0;
@@ -146,6 +224,10 @@ const LevelChoicesContainer = styled.div`
 	width: 200px;
 	height: 50px;
 	border-radius: 5px;
+	overflow-x: auto;
+	overflow: hidden;
+	padding-left: ${props => `${80-(40*props.numberSelected)}px`};
+	transition: padding-left .5s cubic-bezier(1,0,.6,1.75);
 	border: ${props => `3px solid ${props.colors.notSelected}`};
 	:hover {
 		border: ${props => `3px solid ${props.colors.hovered}`};

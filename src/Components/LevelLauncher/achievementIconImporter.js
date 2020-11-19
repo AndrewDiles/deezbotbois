@@ -11,7 +11,7 @@ import {question as notFound} from 'react-icons-kit/fa/question'
 const achievementIconImporter = (stringToConvert) => {
 	let icon
 	switch (stringToConvert) {
-		case 'BEST FFRIENDS' : {
+		case 'BEST FRIENDS' : {
 			icon = bestFriends;
 			break;
 		}
@@ -31,7 +31,7 @@ const achievementIconImporter = (stringToConvert) => {
 			icon = hotShot;
 			break;
 		}
-		case 'LASTSTAND' : {
+		case 'LAST STAND' : {
 			icon = lastStand;
 			break;
 		}

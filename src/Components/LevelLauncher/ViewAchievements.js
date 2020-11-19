@@ -33,8 +33,10 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 				<Title>
 					LEVEL RECORDS
 				</Title>
-				{userInfo.levelProgress[selectionOptions.levelNumber].length === 0 ?
-					'LEVEL HAS NOT BEEN COMPLETED'
+				{!userInfo.levelProgress[selectionOptions.levelNumber] ?
+					<RowEntry>
+						LEVEL HAS NOT BEEN COMPLETED
+					</RowEntry>
 				: 
 					<>
 						<RowEntry className = 'startFlex'>
@@ -96,7 +98,7 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 				}
 				<br/>
 				<Goals
-				metInfo = {userInfo.levelProgress[selectionOptions.levelNumber][0]}
+				metInfo = {userInfo.levelProgress[selectionOptions.levelNumber] ? userInfo.levelProgress[selectionOptions.levelNumber][0] : []}
 				goalInfo = {[levelInfo[selectionOptions.levelNumber].ach1,levelInfo[selectionOptions.levelNumber].ach2,levelInfo[selectionOptions.levelNumber].ach3]}
 				/>
 			</Achievements>
