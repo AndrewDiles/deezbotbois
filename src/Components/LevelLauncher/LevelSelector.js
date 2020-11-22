@@ -136,6 +136,7 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 						}
 					</LevelMovementContainer>
 				</LevelSelectContainer>
+				<br/>
 				<BattleButton
 				selectionOptions = {selectionOptions}
 				setSelectionOptions = {setSelectionOptions}

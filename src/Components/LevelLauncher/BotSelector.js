@@ -90,7 +90,7 @@ const BotInfo = styled.div`
 		position:relative;
   	top:-15px;
   	left:-40%;
-  	background-color: ${props => props.primary};
+  	background-color: ${props => props.colors.primary};
 		font-size: 0.6em;
 	}
 	>div{

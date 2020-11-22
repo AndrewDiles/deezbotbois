@@ -1,9 +1,10 @@
 export const paleGreen = {
   primary: '#DFF59E',
-  secondary: '#C8DB8C',
+	secondary: '#C2ED91',
   selected: '#A5B574',
-  notSelected: '#C8DB8C',
-  hovered: '#6B754B',
+	notSelected: '#C8DB8C',
+	hovered: '#7FBF3F',
+	// hovered: '#6B754B',
 	textColor : '#313622',
 	hoveredText : '#A8ED62',
 };
