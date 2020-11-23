@@ -38,9 +38,8 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 			target.focus();
 		}
 	},[selectionOptions.levelNumber])
-
-	console.log(levelInfo[selectionOptions.levelNumber]);
-
+	// console.log(levelInfo[selectionOptions.levelNumber]);
+	
 	function setLevelNumber (num) {
 		let newSelectionOptions = {...selectionOptions};
 		newSelectionOptions.levelNumber = num;

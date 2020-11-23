@@ -2,13 +2,31 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
-// import BotSelector from './BotSelector';
+import tips from '../../Constants/levels/extensionTips';
+import TextCrawler from '../TextCrawler/TextCrawler'
 
 const LevelSelectorExtension = ({ selectionOptions }) => {
-	// const dispatch = useDispatch();
-	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
+	const crawlRate = 100;
+	function randomizeIndex() {
+		return Math.floor(Math.random()*tips.length)
+	}
+	const [currentTipIndex, setCurrentTipIndex] = React.useState(randomizeIndex());
+
+	React.useEffect(()=>{
+		const setNewTip = setInterval(()=>{
+			let newIndex = randomizeIndex();
+			while (newIndex === currentTipIndex) {
+				newIndex = randomizeIndex();
+			}
+			setCurrentTipIndex(newIndex);
+			// console.log('new index set to: ',newIndex, 'msg is: ',tips[currentTipIndex])
+		}, 12000)
+		return ()=>{
+			clearInterval(setNewTip);
+		}
+	},[])
 
   return (
 		<LevelSelectExtensionWrapper
@@ -19,7 +37,10 @@ const LevelSelectorExtension = ({ selectionOptions }) => {
 			color = {colors.secondary}
 			className = 'centeredFlex'
 			>
-				LEVEL EXTENSION
+				<TextCrawler
+				fullMessage = {tips[currentTipIndex]}
+				singleCharRevealSpeed = {crawlRate}
+				/>
 			</LevelSelectExtension>
 		</LevelSelectExtensionWrapper>
   )
@@ -44,6 +65,8 @@ const LevelSelectExtension = styled.div`
 	height: 200px;
 	transform: scaleY(0);
 	animation: '';
+	transform-origin: center top;
+	padding: 5px;
 	border: ${props => `5px solid ${props.color}`};
 	border-radius: 0 0 10px 10px;
 	border-top: none;

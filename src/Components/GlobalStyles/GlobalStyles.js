@@ -334,6 +334,7 @@ html {
 .rotating {
     animation: rotating 2s ease-in-out infinite;
 }
+
 @keyframes loadInScreen {
   0% {
     width: 10px;
