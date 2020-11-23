@@ -20,8 +20,7 @@ const initialState = {
 		minEnergyStored: 999,
 	},
 	tick: 0,
-	initiativeOrder: [],
-	initiativeIndex: 0,
+	commandsToExecute: [],
 	rotatingTieBreak: [],
 	battleHasOutcome = false,
 }

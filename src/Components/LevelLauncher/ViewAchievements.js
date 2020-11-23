@@ -31,7 +31,7 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 			hasAnimated = {hasAnimated}
 			>
 				<Title>
-					LEVEL RECORDS
+					LEVEL HISTORY
 				</Title>
 				{!userInfo.levelProgress[selectionOptions.levelNumber] ?
 					<RowEntry>
