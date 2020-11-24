@@ -50,10 +50,7 @@ export default function battleInfo(
 				// requires: 
 				// .levelNumber or .challenge which will have shape { start: x, finish: y}
 				// .userBots
-        return {
-          ...state,
-          currentUrl : action.url,
-        }
+        return newBattleInfo
       }
       
       default:{

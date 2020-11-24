@@ -2,21 +2,28 @@ import React from 'react';
 
 const TextCrawler = ({ fullMessage, singleCharRevealSpeed }) => {
 	const [partialMessage, setPartialMessage] = React.useState('');
+	let addLetterTimout = null;
+
+	function cleanup () {
+		if (addLetterTimout) {
+			clearTimeout(addLetterTimout)
+		}
+	} 
 
 	React.useEffect(()=>{
-		let addLetterTimout = null;
 		if (partialMessage.length !== fullMessage.length && fullMessage[partialMessage.length]) {
 			addLetterTimout = setTimeout(()=>{
 				setPartialMessage(partialMessage+fullMessage[partialMessage.length])
 			},singleCharRevealSpeed)
 		}
 		return () =>{
-			addLetterTimout && clearTimeout(addLetterTimout)
+			cleanup();
 		}
 	},[partialMessage])
 
 	React.useEffect(()=>{
-		setPartialMessage('')
+		cleanup();
+		setPartialMessage(fullMessage[0])
 	},[fullMessage])
 
   return (

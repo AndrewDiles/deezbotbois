@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import StyledButton from '../StyledButton/StyledButton';
 
 const BattleButton = ({ selectionOptions, setSelectionOptions }) => {
+	const dispatch = useDispatch();
 	const [error, setError] = React.useState(null);
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);

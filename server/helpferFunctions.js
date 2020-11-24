@@ -14,6 +14,10 @@ const generateNewUser = (email, name, navLocation, cellSize, imageUrl, googleIma
 			hovered: 'silver',
 			textColor : 'rgba(0, 0, 0, 0.54)',
 		},
+		availableSchemes: [
+			'vanilla',
+			'dark'
+		],
 		availableBots : ['BotBoxey'],
 		availableArms : ["Gun1", "Sword1"],
 		availableAcc : ["thickPaint"],
@@ -30,7 +34,7 @@ const generateNewUser = (email, name, navLocation, cellSize, imageUrl, googleIma
 		},
 		botBuilds : [],
 		battleBits: 0,
-		levelProgress : [[]],
+		levelProgress : [],
 		tournamentHistory : [],
 		lastLogInBitsReceived: 0
 	}

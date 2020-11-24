@@ -82,6 +82,12 @@ const Goal = ({ goalInfo, met }) => {
 								/>
 							</ColorReward>
 						}
+						{goalInfo.reward.colorScheme &&
+							<ColorReward className = 'evenlyFlex'>
+								// TODO: Make a button that sets the temp test scheme onHover
+								{Object.keys(goalInfo.reward.colorScheme)[0]}
+							</ColorReward>
+						}
 					</Details>
 				) : (
 					<Details className = 'endFlex'>

@@ -33,7 +33,7 @@ const ViewAchievements = ({ selectionOptions, setSelectionOptions }) => {
 				<Title>
 					LEVEL HISTORY
 				</Title>
-				{!userInfo.levelProgress[selectionOptions.levelNumber] ?
+				{!(userInfo.levelProgress[selectionOptions.levelNumber] && userInfo.levelProgress[selectionOptions.levelNumber][0])  ?
 					<RowEntry>
 						LEVEL HAS NOT BEEN COMPLETED
 					</RowEntry>

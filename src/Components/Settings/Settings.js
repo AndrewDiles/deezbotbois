@@ -4,10 +4,7 @@ import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { getThemeColors } from "../../Redux/reducers/user-reducer";
 import {
-  vanilla,
-  dark,
-  vibrant,
-  paleGreen,
+	colorSchemes
 } from "../../Constants/colorSchemes";
 
 import {
@@ -96,8 +93,6 @@ const Settings = () => {
   };
   const changeNavLocation = (ev) => {
     if (ev.target === undefined) return;
-    // console.log('ev.target',ev.target)
-    // console.log('ev.target.value',ev.target.innerText)
     updateChangeMade();
     if (ev.target.innerText === "TOP") {
       dispatch(setNavLocation("top"));
@@ -160,7 +155,7 @@ const Settings = () => {
     });
   };
 
-  // TBD: Modofication of: nav location, color theme....
+  // TODO: Modofication of: nav location, color theme....
   return (
     <Wrapper
       navLocation={settings.navLocation}
@@ -198,26 +193,20 @@ const Settings = () => {
         Location of your navigation menu:
         <br />
         <br />
-        <StyledButton
-          selected={settings.navLocation === "top"}
-          value="top"
-          handleClick={(ev) => {
-            changeNavLocation(ev);
-          }}
-          disabled={settings.navLocation === "top"}
-        >
-          TOP
-        </StyledButton>
-        <StyledButton
-          selected={settings.navLocation === "left"}
-          value="left"
-          handleClick={(ev) => {
-            changeNavLocation(ev);
-          }}
-          disabled={settings.navLocation === "left"}
-        >
-          LEFT
-        </StyledButton>
+				{['top','left'].map((direction)=>{
+					return (
+						<StyledButton
+          	selected={settings.navLocation === direction}
+          	value = {direction}
+          	handleClick={(ev) => {
+          	  changeNavLocation(ev);
+          	}}
+          	disabled={settings.navLocation === direction}
+        		>
+          		{direction.toUpperCase()}
+        		</StyledButton>
+					)
+				})}
       </Styledh5>
       <Styledh5>Size of your bots / battlegrid:</Styledh5>
       <RowDiv>
@@ -227,7 +216,9 @@ const Settings = () => {
         </BotDiv>
       </RowDiv>
       <Styledh5>Avatar image:</Styledh5>
-      <AvatarImgSelection>
+      <AvatarImgSelection
+			elements = {userInfo.googleImageUrl ? 1 + userInfo.availableBots.length : userInfo.availableBots.length}
+			>
         {userInfo.googleImageUrl && (
           <AvatarImgOption
             className="centeredFlex"
@@ -265,64 +256,23 @@ const Settings = () => {
       </AvatarImgSelection>
       <br />
       Color scheme:
-      <RowDiv>
-        <ColDiv>
-          <StyledButton
-            colorSampling={vanilla}
-            disabled={
-              JSON.stringify(settings.colorsTesting) === JSON.stringify(vanilla)
-            }
-            handleClick={() => {
-              handleColorThemeClick(vanilla);
-            }}
-          >
-            VANILLA
-          </StyledButton>
-        </ColDiv>
-
-        <ColDiv>
-          <StyledButton
-            colorSampling={dark}
-            disabled={
-              JSON.stringify(settings.colorsTesting) === JSON.stringify(dark)
-            }
-            handleClick={() => {
-              handleColorThemeClick(dark);
-            }}
-          >
-            DARK
-          </StyledButton>
-        </ColDiv>
-
-        <ColDiv>
-          <StyledButton
-            colorSampling={vibrant}
-            disabled={
-              JSON.stringify(settings.colorsTesting) === JSON.stringify(vibrant)
-            }
-            handleClick={() => {
-              handleColorThemeClick(vibrant);
-            }}
-          >
-            VIBRANT
-          </StyledButton>
-        </ColDiv>
-
-        <ColDiv>
-          <StyledButton
-            colorSampling={paleGreen}
-            disabled={
-              JSON.stringify(settings.colorsTesting) ===
-              JSON.stringify(paleGreen)
-            }
-            handleClick={() => {
-              handleColorThemeClick(paleGreen);
-            }}
-          >
-            GREEN
-          </StyledButton>
-        </ColDiv>
-      </RowDiv>
+			<br/>
+      <ColorSchemeContainer
+			elements = {userInfo.availableSchemes.length}
+			navLocation = {settings.navLocation}
+			>
+				{userInfo.availableSchemes.map((scheme)=>{
+					return (
+        	  <StyledButton
+        	  colorSampling={colorSchemes[scheme]}
+        	  disabled={ JSON.stringify(settings.colorsTesting) === JSON.stringify(colorSchemes[scheme])}
+        	  handleClick={() => {handleColorThemeClick(colorSchemes[scheme]);}}
+        	  >
+        	    {scheme.toUpperCase()}
+        	  </StyledButton>
+					)
+				})}
+      </ColorSchemeContainer>
       <br />
 			{settings.serverStatus === 'idle' ? (
 				<StyledIcon
@@ -366,7 +316,7 @@ const StyledInput = styled.input`
 		outline-color: ${props => !props.disabled && props.colors.hoveredText};
 		color: ${props => props.colors.hoveredText};
 	}
-`;
+`
 const Wrapper = styled.div`
   padding: ${(props) =>
     props.navLocation === "top"
@@ -379,57 +329,64 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;
-`;
+`
 const Styledh5 = styled.h5`
   z-index: 8;
-`;
-const ErrorP = styled.p`
-  color: red;
-  font-size: 0.6em;
-`;
-
+`
 const BotDiv = styled.div`
   position: absolute;
   display: ${(props) => !props.botShowing && "none"};
   margin-left: 100px;
   z-index: 0;
-`;
+`
+const ColorSchemeContainer = styled.div`
+	display: grid;
+	justify-items: center;
+	justify-content: center;
+	grid-template-columns: ${props => props.elements % 2 === 0 ? 'repeat(2, 125px)' : 'repeat(3, 125px)'};
+	@media screen and (max-width: ${props => props.navLocation === 'top' ? '520px' : '650px'}) {
+    grid-template-columns: repeat(2, 125px);
+  }
+	@media screen and (max-width: ${props => props.navLocation === 'top' ? '250px' : '380px'}) {
+    grid-template-columns: 125px;
+  }
+`
 const RowDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
-  @media screen and (max-width: 800px) {
-    flex-wrap: wrap;
-  }
-`;
-const ColDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 0 10px;
-`;
+`
 const AvatarImgSelection = styled.div`
   display: grid;
+	justify-items: center;
+	justify-content: center;
   grid-gap: 10px;
-  grid-template-columns: repeat(5, 1fr);
+	grid-template-columns: ${props => props.elements % 5 === 0 ? 'repeat(5, 1fr)' :
+	props.elements % 4 === 0 ? 'repeat(4, 1fr)' :
+	props.elements % 3 === 0 ? 'repeat(3, 1fr)' :
+	props.elements === 2 ? 'repeat(2, 1fr)' :
+	props.elements === 1 ? '1fr' :
+	'repeat(5, 1fr)'
+	};
   width: 265px;
   margin-left: auto;
   margin-right: auto;
   @media screen and (max-width: 550px) {
     width: 155px;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: ${props => props.elements > 3 ? 'repeat(3, 1fr)' :
+		props.elements === 2 ? 'repeat(2, 1fr)' :
+		'1fr'
+		};
   }
-`;
+`
 const UserImg = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
   z-index: 21;
-`;
+`
 
 const AvatarImgOption = styled.div`
   width: 45px;
@@ -442,4 +399,4 @@ const AvatarImgOption = styled.div`
     cursor: ${(props) => (!props.selected ? "pointer" : "not-allowed")};
     opacity: ${(props) => !props.selected && 0.8};
   }
-`;
+`

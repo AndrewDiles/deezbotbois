@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import {shift} from 'react-icons-kit/icomoon/shift';
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
-import levelInfo from '../../Constants/levels/levelnfo';
 import StyledButton from '../StyledButton/StyledButton';
 import StyledIcon from '../StyledIcon/StyledIcon';
 import BattleButton from './BattleButton';
 
 const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChallengesAndLevels }) => {
+	// TODO: Return to this component to ensure proper displays and functionality once 5+ levels are beaten
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
@@ -135,13 +135,12 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 						}
 					</LevelMovementContainer>
 				</LevelSelectContainer>
-				<br/>
+				<br style = {{lineHeight: '10px'}}/>
 				<BattleButton
 				selectionOptions = {selectionOptions}
 				setSelectionOptions = {setSelectionOptions}
 				/>
-				{hasAnimated && 
-				// needs to also require a minimum of 5 levels having been beaten.  Correct later after testing
+				{hasAnimated && userInfo.levelProgress.length > 4 &&
 					<ShiftIconContainer>
 						<StyledIcon
 						icon = {shift}

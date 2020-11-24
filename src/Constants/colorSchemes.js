@@ -1,10 +1,9 @@
-export const paleGreen = {
+export const green = {
   primary: '#DFF59E',
 	secondary: '#C2ED91',
   selected: '#A5B574',
 	notSelected: '#C8DB8C',
 	hovered: '#7FBF3F',
-	// hovered: '#6B754B',
 	textColor : '#313622',
 	hoveredText : '#A8ED62',
 };
@@ -29,13 +28,30 @@ export const dark = {
 
 export const vanilla = {
   primary: 'white',
-  secondary: 'ghostwhite',
+  secondary: '#E0E0E0',
   selected: 'rgba(170, 170, 170, 0.45)',
   notSelected: 'rgba(255,255,255,0.3)',
   hovered: 'silver',
 	textColor : 'rgba(0, 0, 0, 0.54)',
 	hoveredText : 'rgba(0, 0, 0, 0.75)',
 };
+export const darker = {
+	primary: '#09060D',
+  secondary: '#30043D',
+  selected: '#3D2004',
+  notSelected: '#170E1F',
+  hovered: '#003EC6',
+	textColor : '#824A01',
+	hoveredText : '#CC0088',
+}
+export const colorSchemes = {
+	vanilla,
+	dark,
+	vibrant,
+	green,
+	darker,
+};
+
 export const botColorSchemes = {
 	defaultBotColors : {
 		primary: 'lime',

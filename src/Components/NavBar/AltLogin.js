@@ -218,22 +218,24 @@ const AltLogin = () => {
 			className = 'centeredFlex'
 			>
 				Do you have an account? &ensp;
-      	<StyledButton
-				handleClick = {() => {resetFields();setExistingAccount(true);(setAccountConfirmed(null))}}
-				selected = {existingAccount === true}
-				>
-					YES
-				</StyledButton>
-				<StyledButton
-				handleClick = {() => {resetFields();setExistingAccount(false);(setAccountConfirmed(null))}}
-				selected = {existingAccount === false}
-				>
-					NO
-				</StyledButton>
+				<div>
+      		<StyledButton
+					handleClick = {() => {resetFields();setExistingAccount(true);(setAccountConfirmed(null))}}
+					selected = {existingAccount === true}
+					>
+						YES
+					</StyledButton>
+					<StyledButton
+					handleClick = {() => {resetFields();setExistingAccount(false);(setAccountConfirmed(null))}}
+					selected = {existingAccount === false}
+					>
+						NO
+					</StyledButton>
+				</div>
 			</RowDiv>
 			<br/>
 			{existingAccount === false &&
-				<div>
+				<div className = 'centeredFlex col'>
 					<Styledh2>
 						CREATE A NEW ACCOUNT
 					</Styledh2>
@@ -296,7 +298,7 @@ const AltLogin = () => {
 				</div>
 			}
 			{existingAccount === true &&
-				<div>
+				<div className = 'centeredFlex col'>
 					<Styledh2>
 					LOGIN
 					</Styledh2>
@@ -390,7 +392,8 @@ const Wrapper = styled.div`
 const StyledInput = styled.input`
 	background-color: ${props => props.colors.secondary};
 	font-size:16px;
-	width: ${props => props.codeEntry ? '100px' : '100%'};
+	/* width: ${props => props.codeEntry ? '100px' : '100%'}; */
+	width: 100%;
 	height: 25px;
 	color: ${props => props.colors.textColor};
 	&:hover {
@@ -406,6 +409,9 @@ const RowDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	@media screen and (max-width: 600px) {
+		flex-wrap: wrap;
+	}
 `
 
 const ErrorP = styled.p`
@@ -417,7 +423,9 @@ const SuccessP = styled.p`
 	font-size: 0.6em;
 `
 const Styledh2 = styled.h2`
+	align-self: center;
 	text-align: center;
+	justify-content: center;
 	width: 500px;
 	@media screen and (max-width: 800px) {
 			width: 400px

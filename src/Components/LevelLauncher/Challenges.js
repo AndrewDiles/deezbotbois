@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // import BotSelector from './BotSelector';
 
 const Challenges = ({ selectionOptions, setSelectionOptions, swapBetweenChallengesAndLevels }) => {
+	//TODO: return to this component and its upcoming children once levels can be played
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	// const settings = useSelector((state) => state.settings);

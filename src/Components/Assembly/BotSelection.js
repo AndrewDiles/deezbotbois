@@ -73,7 +73,6 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				/>
 				<StyledIcon
 				handleClick = {()=>{handleRotateBot('right')}}
-				// handleClick = {()=>{handleColorThemeClick(paleGreen)}}
 				padding = {5}
 				icon = {arrowRight}
 				disabled = {botNumberSelected === userInfo.botBuilds.length-1 || userInfo.botBuilds.length === 0}
