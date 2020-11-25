@@ -1,40 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from 'react';
+import { useSelector } from "react-redux";
 import mainThemeSrc from './MainTheme.wav';
+// import battleThemeSrc from './BattleTheme.wav';
 
 const Music = () => {
-	const dispatch = useDispatch();
-	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
-	const [mainTheme, setMainTheme] = useState(new Audio());
-
-	function setSoundOptions (state, setState, src) {
-		// let newState = state;
-		state.src = src;
-		state.loop = true;
-		setState(state);
+	function loopingAudio (src) {
+		const newAudio = new Audio(src);
+		newAudio.loop = true;
+		return newAudio
 	}
-
-	// const mainTheme = new Audio();
-	useEffect(()=>{
-		setSoundOptions(mainTheme,setMainTheme,mainThemeSrc);
-	},[])
-	// mainTheme.src = mainThemeSrc;
-	// mainTheme.loop = true;
+	const [mainTheme, setMainTheme] = useState(loopingAudio(mainThemeSrc));
+	// const [battleTheme, setBattleTheme] = useState(loopingAudio(battleThemeSrc));
 	
 	useEffect(()=>{
-		// TODO: Add second theme and change to it when on battle screen
 		if (settings.volume) {
-			console.log('playing mainTheme....');
-			mainTheme.play();
+			if (settings.currentUrl !== 'battle'){
+				mainTheme.play();
+			} else {
+				// battleTheme.play();
+			}
 		} else {
 			mainTheme.pause();
+			// battleTheme.pause();
 		}
-	},[settings.volume])
+	},[settings.volume, settings.currentUrl])
 
-	return (
-		null
-	)
+	return null
 }
 
 export default Music;
+// TODO: Uncomment battleTheme lines once asset is acquired
