@@ -12,6 +12,7 @@ import { getThemeColors } from './Redux/reducers/user-reducer';
 
 import GlobalStyles from "./Components/GlobalStyles/GlobalStyles";
 import NavBar from "./Components/NavBar/NavBar";
+import Music from './Components/Music/Music';
 import Home from "./Components/Home/Home";
 import Assembly from "./Components/Assembly/Assembly";
 // import Levels from "./Components/Levels/Levels";
@@ -51,6 +52,7 @@ function App() {
         navLocation = {settings.navLocation}
         colors = {colors}
         >
+					<Music/>
           <Switch>
             <Route exact path="/">
               <Redirect to="/home" />

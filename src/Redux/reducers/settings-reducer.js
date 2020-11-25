@@ -3,6 +3,7 @@ const initialState = {
   serverStatus: 'idle',
   currentUrl : null,
 	navLocation: 'top',
+	volume: 0,
 	profileTab: 'inactive',
 	cellSize : 75,
 	colorsTesting: null,
@@ -23,6 +24,12 @@ export default function settings(
         return {
           ...state,
           navLocation : action.navLocation,
+        }
+			}
+			case 'SET_VOLUME' : {
+				return {
+          ...state,
+          volume : action.volume,
         }
 			}
 			case 'SET_COLORS_TESTING' : {

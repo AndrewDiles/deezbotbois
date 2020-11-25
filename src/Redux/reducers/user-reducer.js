@@ -5,6 +5,7 @@ const initialState = {
   handle : null,
 	navLocationPreference: null,
 	cellSizePreference : null,
+	volumePreference: null,
 	imageUrl : null,
 	googleImageUrl : null,
 	colorTheme: null,
@@ -29,6 +30,12 @@ export default function userInfo(
         return {
           ...state,
           navLocationPreference : action.navLocation,
+        }
+			}
+			case 'UPDATE_VOLUME_PREFERENCE' : {
+        return {
+          ...state,
+          volumePreference : action.volumePreference,
         }
 			}
 			case 'INCREASE_BIT_COUNT' : {

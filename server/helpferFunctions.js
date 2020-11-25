@@ -4,6 +4,7 @@ const generateNewUser = (email, name, navLocation, cellSize, imageUrl, googleIma
 		handle : name,
 		navLocationPreference : navLocation,
 		cellSizePreference : cellSize,
+		volumePreference: 1,
 		imageUrl : imageUrl,
 		googleImageUrl : googleImageUrl,
 		colorTheme : {

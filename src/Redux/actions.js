@@ -1,4 +1,13 @@
 // SETTINGS ACTIONS
+// request sfx:
+export const playSFX = (sfxName) => ({
+	type: 'PLAY_SFX',
+	sfxName: sfxName
+});
+// reset sfx request:
+export const resetSFX = () => ({
+	type: 'RESET_SFX',
+});
 // setting url:
 export const updateUrl = (url) => ({
   type: 'URL_UPDATE',
@@ -8,6 +17,11 @@ export const updateUrl = (url) => ({
 export const setNavLocation = (navLocation) => ({
   type: 'SET_NAV_LOCATION',
   navLocation: navLocation
+});
+// setting volume:
+export const setVolume = (volume) => ({
+	type: 'SET_VOLUME',
+	volume: volume
 });
 // setting cell size:
 export const setCellSize = (size) => ({
@@ -67,6 +81,13 @@ export const updateNavPref = (navLocation) => ({
   type: 'UPDATE_NAV_LOCATION_PREFERENCE',
   navLocation: navLocation
 });
+
+// update user's volume preference:
+export const updateVolumePref = (volumePreference) => ({
+	type: 'UPDATE_VOLUME_PREFERENCE',
+	volumePreference: volumePreference
+
+})
 export const increaseBitCount = (bitIncrease, currentTime) => ({
   type: 'INCREASE_BIT_COUNT',
 	bitIncrease: bitIncrease,

@@ -7,7 +7,6 @@ import testLocalAiAndScript from './testLocalAiAndScript';
 const NodeBlock = ({ block, type, id, aiAndScripts, setAiAndScripts, localAiAndScript }) => {
 	const [alongPath, setAlongPath] = React.useState(false);
 	React.useEffect(()=>{
-		let blockContainsAnOnPathOrActiveLimb = false;
 		if (block.length === 0) {
 			let nextActive = testLocalAiAndScript(updateLocalAiAndScript(localAiAndScript, 0),aiAndScripts);
 			if (nextActive === 'offPath') setAlongPath(false);

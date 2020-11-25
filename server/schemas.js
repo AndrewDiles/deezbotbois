@@ -23,6 +23,7 @@ const userInfoSchema = yup.object().shape({
 	handle: yup.string(),
 	navLocationPreference: yup.string(),
 	cellSizePreference: yup.number(),
+	volumePreference: yup.number(),
 	imageUrl: yup.string(),
 	googleImageUrl: yup.string(),
 	colorTheme: yup.object(),
