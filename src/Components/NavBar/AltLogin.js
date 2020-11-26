@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
 import styled from 'styled-components';
 
@@ -36,13 +36,13 @@ const AltLogin = () => {
 	const [successMsg ,setSuccessMsg] = useState(null);
 	const [secondSuccessMsg ,setSecondSuccessMsg] = useState(null);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (userInfo.email !== null) {
 			dispatch(updateUrl('home'))
 		}
 	},[userInfo.email])
 
-	React.useEffect(() => {
+	useEffect(() => {
 		let eraseSuccessMsg;
 		if (successMsg) {
 			eraseSuccessMsg = setTimeout(()=>{
@@ -51,7 +51,7 @@ const AltLogin = () => {
 		}
 		return () => clearTimeout(eraseSuccessMsg)
 	},[successMsg])
-	React.useEffect(() => {
+	useEffect(() => {
 		let eraseSecondSuccessMsg;
 		if (secondSuccessMsg) {
 			eraseSecondSuccessMsg = setTimeout(()=>{
@@ -60,7 +60,7 @@ const AltLogin = () => {
 		}
 		return () => clearTimeout(eraseSecondSuccessMsg)
 	},[secondSuccessMsg])
-	React.useEffect(() => {
+	useEffect(() => {
 		let eraseErrorMsg;
 		if (errorMsg) {
 			eraseErrorMsg = setTimeout(()=>{

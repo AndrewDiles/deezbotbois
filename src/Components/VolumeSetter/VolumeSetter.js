@@ -1,21 +1,14 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { setMusic, setSfx, updateMusicPref, updateSfxPref } from '../../Redux/actions';
-
-import {volumeMute} from 'react-icons-kit/typicons/volumeMute';
-// import {volumeDown} from 'react-icons-kit/typicons/volumeDown';
-import {volumeUp} from 'react-icons-kit/typicons/volumeUp';
 import StyledIcon from '../StyledIcon/StyledIcon';
-
-
-import {notesOutline} from 'react-icons-kit/typicons/notesOutline';
-import {notes} from 'react-icons-kit/typicons/notes';
-import {u1F515 as sfxoff} from 'react-icons-kit/noto_emoji_regular/u1F515';
-import {u1F514 as sfxon} from 'react-icons-kit/noto_emoji_regular/u1F514';
-import {androidNotificationsOff} from 'react-icons-kit/ionicons/androidNotificationsOff';
-import {androidNotifications} from 'react-icons-kit/ionicons/androidNotifications';
-
-// import { getThemeColors } from '../../Redux/reducers/user-reducer';
+import {notesOutline as musicOff} from 'react-icons-kit/typicons/notesOutline';
+import {notes as musicOn} from 'react-icons-kit/typicons/notes';
+import {iosBellOutline as sfxOff} from 'react-icons-kit/ionicons/iosBellOutline';
+import {iosBell as sfxOn} from 'react-icons-kit/ionicons/iosBell';
+// import {volumeMute as musicOff} from 'react-icons-kit/typicons/volumeMute';
+// import {u1F515 as sfxOff} from 'react-icons-kit/noto_emoji_regular/u1F515';
+// import {u1F514 as sfxOn} from 'react-icons-kit/noto_emoji_regular/u1F514';
 
 const VolumeSetter = () => {
 	const dispatch = useDispatch();
@@ -36,12 +29,12 @@ const VolumeSetter = () => {
   return (
 		<div className = 'evenlyFlex'>
 			<StyledIcon
-			icon = {settings.music ? notes : volumeMute}
+			icon = {settings.music ? musicOn : musicOff}
 			padding = '5'
 			handleClick = {handleClickMusic}
 			/>
 			<StyledIcon
-			icon = {settings.sfx ? sfxon : sfxoff}
+			icon = {settings.sfx ? sfxOn : sfxOff}
 			padding = '5'
 			handleClick = {handleClickSfx}
 			/>

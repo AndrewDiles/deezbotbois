@@ -29,7 +29,7 @@ const Settings = () => {
   const settings = useSelector((state) => state.settings);
   const [newHandle, setNewHandle] = useState(userInfo.handle);
 	const [newAvImg, setNewAvImg] = useState(userInfo.imageUrl);
-	const [volumeChanged, setVolumeChanged] = useState(true);
+	const [initialVolumes, setInitialVolumes] = useState({music: userInfo.musicPreference, sfx: userInfo.sfxPreference, change: false});
   const [lastTimeCellSizeWasChanged, setLastTimeCellSizeWasChanged] = useState(
     Date.now()
   );
@@ -51,9 +51,18 @@ const Settings = () => {
 	
 	useEffect(()=>{
 		//TODO: return to verification after actions are fixed
-		setVolumeChanged(true);
-		if (changeMade) return;
-		setChangeMade(true);
+		if (initialVolumes.music === userInfo.musicPreference && initialVolumes.sfx === userInfo.sfxPreference) {
+			console.log('volume settings are the same');
+			let newInitialVolumes = {...initialVolumes};
+			newInitialVolumes.change = false;
+			setInitialVolumes(newInitialVolumes);
+		} else {
+			console.log('volume settings have changed');
+			let newInitialVolumes = {...initialVolumes};
+			newInitialVolumes.change = true;
+			setInitialVolumes(newInitialVolumes);
+			!changeMade && setChangeMade(true);
+		}
 	},[userInfo.sfxPreference, userInfo.musicPreference])
 
   useEffect(() => {
@@ -121,7 +130,7 @@ const Settings = () => {
     newUserInfo.imageUrl = newAvImg;
 		newUserInfo.colorTheme = settings.colorsTesting;
     // verify there actually is a change to make
-    if (JSON.stringify(newUserInfo) === JSON.stringify(userInfo) && !volumeChanged) {
+    if (JSON.stringify(newUserInfo) === JSON.stringify(userInfo) && !initialVolumes.change) {
       setServerErrorMsg("No changes detected.");
       setChangeMade(false);
       return;
@@ -140,7 +149,7 @@ const Settings = () => {
       if (res.status === 200) {
         res.json().then((data) => {
 					setChangeMade(false);
-					setVolumeChanged(false);
+					setInitialVolumes({music: newUserInfo.musicPreference, sfx: newUserInfo.sfxPreference, change: false});
           dispatch(replaceUserInfo(data.userInfo));
           dispatch(communicationsSuccessful());
           setSuccessMsg("Settings change successful!");
