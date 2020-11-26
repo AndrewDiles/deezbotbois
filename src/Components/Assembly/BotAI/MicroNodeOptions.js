@@ -15,15 +15,6 @@ const MicroNodeOptions = ({ attributes, nodeInfo, activeNodeArray, setActiveNode
 		)
 	}
 	return nodeInfo.condition ? (
-		// this needs to be changed to ConditionTemplate just like the CommandTemplate and its children below
-		// <MicroConditionsProvider
-		// nodeInfo = {nodeInfo.condition}
-		// activeNodeArray = {activeNodeArray}
-		// setActiveNodeArray = {setActiveNodeArray}
-		// aiAndScripts = {aiAndScripts}
-		// setAiAndScripts = {setAiAndScripts}
-		// botNumberSelected = {botNumberSelected}
-		// />
 		<ConditionTemplate
 		attributes = {attributes}
 		nodeInfo = {nodeInfo.condition}

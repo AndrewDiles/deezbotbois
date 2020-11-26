@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { playSFX } from '../../Redux/actions';
 import styled from 'styled-components';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 
 const StyledInput = ({labelName, value, setValue, disabled, height, width, maxLength, margin}) => {
+	const dispatch = useDispatch();
 	const colors = useSelector(getThemeColors);
 	const [hasBeenFocused, setHasBeenFocused] = useState(false);
 
@@ -29,8 +32,8 @@ const StyledInput = ({labelName, value, setValue, disabled, height, width, maxLe
 			type = 'text'
 			maxLength = {maxLength}
 			onChange = {(ev)=>{setValue(ev.target.value)}}
-			onFocus = {()=>{setHasBeenFocused(true); console.log('has been focused')}}
-			onMouseEnter = {()=>{setHasBeenFocused(true); console.log('has been focused')}}
+			onFocus = {()=>{setHasBeenFocused(true); dispatch(playSFX('selected'))}}
+			onMouseEnter = {()=>setHasBeenFocused(true)}
 			value = {value && value}
 			disabled = {disabled}
 			/>

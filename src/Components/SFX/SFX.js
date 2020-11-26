@@ -31,6 +31,32 @@ const SFX = () => {
 		acid: new Audio(acidSrc),
 		burn: new Audio(burnSrc),
 	})
+	
+
+	useEffect(()=>{
+		if (!sfx.sfx) return;
+		if (settings.sfx) {
+			SFX[sfx.sfx].pause();
+			SFX[sfx.sfx].currentTime = 0;
+			SFX[sfx.sfx].play();
+		}
+		dispatch(resetSFX());
+	},[settings.sfx, sfx.sfx])
+
+	useEffect(()=>{
+		if (!settings.sfx) {
+			{Object.keys(SFX).forEach((sfx)=>{
+				SFX[sfx].pause();
+			})}
+		}
+	},[settings.sfx])
+
+	return null
+}
+
+export default SFX;
+
+// first solution, less effective:
 	// const [confirm, setConfirm] = useState(new Audio(confirmSrc));
 	// const [disabled, setDisabled] = useState(new Audio(disabledSrc));
 	// const [destroyed, setDestroyed] = useState(new Audio(destroyedSrc));
@@ -55,26 +81,3 @@ const SFX = () => {
 	// 	acid: acid,
 	// 	burn: burn
 	// };
-
-	useEffect(()=>{
-		if (!sfx.sfx) return;
-		if (settings.sfx) {
-			console.log('playing a given sfx');
-			sfx[sfx.sfx].pause();
-			sfx[sfx.sfx].play();
-			dispatch(resetSFX());
-		}
-	},[settings.sfx, sfx.sfx])
-
-	useEffect(()=>{
-		if (!settings.sfx) {
-			{Object.keys(SFX).forEach((sfx)=>{
-				SFX[sfx].pause();
-			})}
-		}
-	},[settings.sfx])
-
-	return null
-}
-
-export default SFX;

@@ -114,8 +114,6 @@ const Account = () => {
 			}
 		})
 	}
-	
-	// TBD: Modofication of: nav location, color theme.... 
   return (
 		<Wrapper
 		navLocation = {settings.navLocation}

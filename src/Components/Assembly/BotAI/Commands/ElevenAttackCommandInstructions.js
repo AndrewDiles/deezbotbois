@@ -32,7 +32,6 @@ const ElevenAttackCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveN
 			setEnergyWeaponError(false)
 		}		
 		console.log('change trigger')
-		// dependacies need to be: changing slot number, changing of equipment
 	},[
 		activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.weapon,
 		botInfo[botNumberSelected].equipment[activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.weapon]
