@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styled from 'styled-components';
@@ -10,6 +10,7 @@ import {
 	communicationsFailed,
 } from '../../Redux/actions';
 
+import StyledInput from '../StyledInput/StyledInput';
 import StyledIcon from '../StyledIcon/StyledIcon';
 import {floppyDisk} from 'react-icons-kit/icomoon/floppyDisk'
 import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
@@ -26,7 +27,7 @@ const Account = () => {
 	const [successMsg, setSuccessMsg] = useState(null);
 	let colors = useSelector(getThemeColors);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		let eraseServerErrorMsg;
 		if (serverErrorMsg) {
 			eraseServerErrorMsg = setTimeout(()=>{
@@ -36,7 +37,7 @@ const Account = () => {
 		return () => clearTimeout(eraseServerErrorMsg)
 	},[serverErrorMsg])
 
-	React.useEffect(() => {
+	useEffect(() => {
 		let eraseSuccessMsg;
 		if (successMsg) {
 			eraseSuccessMsg = setTimeout(()=>{
@@ -46,15 +47,17 @@ const Account = () => {
 		return () => clearTimeout(eraseSuccessMsg)
 	},[successMsg])
 
+	useEffect(()=>{
+		if (changeMade) return;
+		if (newPassword1 !== null || newPassword2 !== null) {
+			setChangeMade(true);
+		}
+	},[newPassword1, newPassword2])
+
 	if (userInfo.email === undefined || userInfo.email === null) {
     return (
       <Redirect to="/home" />
     )
-	}
-
-	const updateChangeMade = () => {
-		if (changeMade) return;
-		setChangeMade(true);
 	}
 	
 	const saveSettings = () => {
@@ -120,31 +123,23 @@ const Account = () => {
 		colors = {colors}
 		>
 			<br/>
-			Change login password:
+			CHANGE PASSWORD:
 			<br/>
 			<RowDiv>
-				<ColDiv>
-					<StyledInput
-					colors = {colors}
-					className = "centeredInput"
-					input="text" maxLength = "24" 
-					onChange = {(ev)=>{updateChangeMade();setNewPassword1(ev.target.value)}}
-					>
-					</StyledInput>
-					New password
-					<br/>
-				</ColDiv>
-				<ColDiv>
-					<StyledInput
-					colors = {colors}
-					className = "centeredInput" 
-					input="text" maxLength = "24" 
-					onChange = {(ev)=>{updateChangeMade();setNewPassword2(ev.target.value)}}
-					>
-					</StyledInput>
-					Repeat new password
-					<br/>
-				</ColDiv>
+				<StyledInput
+				maxLength = "24"
+				setValue = {setNewPassword1}
+				labelName = 'NEW PASSWORD'
+				margin = {5}
+				width = '350'
+				/>
+				<StyledInput
+				maxLength = "24"
+				setValue = {setNewPassword2}
+				labelName = 'REPEAT NEW PASSWORD'
+				margin = {5}
+				width = '350'
+				/>
 			</RowDiv>
 
 			<br/>
@@ -171,19 +166,6 @@ const Account = () => {
   )
 }
 export default Account;
-
-const StyledInput = styled.input`
-	background-color: ${props => props.colors.secondary};
-	color: ${props => props.colors.textColor};
-	&:hover {
-		background-color: ${props => props.colors.hovered};
-		cursor: pointer;
-	}
-	&:focus {
-		outline-color: ${props => !props.disabled && props.colors.hoveredText};
-		color: ${props => props.colors.hoveredText};
-	}
-`
 const Wrapper = styled.div`
 	padding: ${(props) =>
 		props.navLocation === "top" ? 
@@ -208,12 +190,10 @@ const SuccessP = styled.p`
 const RowDiv = styled.div`
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
+	flex-wrap: wrap;
 	width: 100%;
-	@media screen and (max-width: 800px) {
-		flex-wrap: wrap;
-	}
 `
 const ColDiv = styled.div`
 	display: flex;

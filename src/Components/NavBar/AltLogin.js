@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import StyledButton from '../StyledButton/StyledButton';
+import StyledInput from '../StyledInput/StyledInput';
 import LoadingAnimation from '../LoadingAnimation/LoadingAnimation';
 
 import {
@@ -244,46 +245,31 @@ const AltLogin = () => {
 						CREATE A NEW ACCOUNT
 					</Styledh2>
 					<br/>
-					<RowDiv>
-						HANDLE: &ensp; 
-						<StyledInput
-						colors = {colors}
-						className = "centeredInput" 
-						type="text" maxLength = "24" 
-						onChange = {(ev)=>{setHandle(ev.target.value)}}
-						/>
-						<br/>
-					</RowDiv>
-					<RowDiv>
-						EMAIL: &ensp; 
-						<StyledInput
-						colors = {colors}
-						className = "centeredInput" 
-						type="text" maxLength = "24" 
-						onChange = {(ev)=>{setEmailEntry(ev.target.value)}}
-						/>
-						<br/>
-					</RowDiv>
-					<RowDiv>
-						PASSWORD: &ensp; 
-						<StyledInput
-						colors = {colors}
-						className = "centeredInput" 
-						type="text" maxLength = "24" 
-						onChange = {(ev)=>{setPassword1(ev.target.value)}}
-						/>
-						<br/>
-					</RowDiv>
-					<RowDiv>
-						PASSWORD: &ensp; 
-						<StyledInput
-						colors = {colors}
-						className = "centeredInput" 
-						type="text" maxLength = "24" 
-						onChange = {(ev)=>{setPassword2(ev.target.value)}}
-						/>
-						<br/>
-					</RowDiv>
+					<StyledInput
+					maxLength = "24"
+					setValue = {setHandle}
+					labelName = 'HANDLE'
+					margin = {5}
+					/>
+					<StyledInput
+					maxLength = "24"
+					setValue = {setEmailEntry}
+					labelName = 'EMAIL'
+					margin = {5}
+					/>
+					<StyledInput
+					maxLength = "24"
+					setValue = {setPassword1}
+					labelName = 'PASSWORD'
+					margin = {5}
+					/>
+					<StyledInput
+					maxLength = "24"
+					setValue = {setPassword2}
+					labelName = 'PASSWORD'
+					margin = {5}
+					/>
+					<br/>
 					<RowDiv>
 						{settings.serverStatus === 'idle' ? (
 							<StyledButton
@@ -304,42 +290,31 @@ const AltLogin = () => {
 			{existingAccount === true &&
 				<div className = 'centeredFlex col'>
 					<Styledh2>
-					LOGIN
+						LOGIN
 					</Styledh2>
 					<br/>
-					<RowDiv>
-						EMAIL: &ensp; 
-						<StyledInput
-						colors = {colors}
-						className = "centeredInput" 
-						type="text" maxLength = "24" 
-						onChange = {(ev)=>{setEmailEntry(ev.target.value)}}
-						/>
-						<br/>
-					</RowDiv>
-					<RowDiv>
-						PASSWORD: &ensp; 
-						<StyledInput
-						colors = {colors}
-						className = "centeredInput" 
-						type="password" maxLength = "24"
-						onChange = {(ev)=>{setPassword1(ev.target.value)}}
-						/>
-						<br/>
-					</RowDiv>
+					<StyledInput
+					maxLength = "24"
+					setValue = {setEmailEntry}
+					labelName = 'EMAIL'
+					margin = {5}
+					/>
+					<StyledInput
+					maxLength = "24"
+					setValue = {setPassword1}
+					labelName = 'PASSWORD'
+					margin = {5}
+					/>
+					
 					{accountConfirmed === false &&
-						<RowDiv>
-							CONFIRMATION NUMBER: &ensp; 
-							<StyledInput
-							colors = {colors}
-							codeEntry = {true}
-							className = "centeredInput" 
-							type="text" maxLength = "5" 
-							onChange = {(ev)=>{setConfirmationCode(ev.target.value)}}
-							/>
-							<br/>
-						</RowDiv>
+						<StyledInput
+						maxLength = "24"
+						setValue = {setConfirmationCode}
+						labelName = 'CONFIRMATION NUMBER'
+						margin = {5}
+						/>
 					}
+					<br/>
 					<RowDiv>
 						{settings.serverStatus === 'idle' ? (
 							<StyledButton
@@ -391,23 +366,6 @@ const Wrapper = styled.div`
 	justify-content: center;
 	align-content: center;
 	align-items: center;
-`
-
-const StyledInput = styled.input`
-	background-color: ${props => props.colors.secondary};
-	font-size:16px;
-	/* width: ${props => props.codeEntry ? '100px' : '100%'}; */
-	width: 100%;
-	height: 25px;
-	color: ${props => props.colors.textColor};
-	&:hover {
-		background-color: ${props => props.colors.hovered};
-		cursor: pointer;
-	}
-	&:focus {
-		outline-color: ${props => !props.disabled && props.colors.hoveredText};
-		color: ${props => props.colors.hoveredText};
-	}
 `
 const RowDiv = styled.div`
 	display: flex;

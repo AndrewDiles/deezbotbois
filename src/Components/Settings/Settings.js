@@ -191,7 +191,7 @@ const Settings = () => {
             updateChangeMade();
             setNewHandle(ev.target.value);
           }}
-        ></StyledInput>
+        />
         {newHandle.length === 0 && (
           // <ErrorP>
           // 	Handle must not be empty
