@@ -13,6 +13,7 @@ import { getThemeColors } from './Redux/reducers/user-reducer';
 import GlobalStyles from "./Components/GlobalStyles/GlobalStyles";
 import NavBar from "./Components/NavBar/NavBar";
 import Music from './Components/Music/Music';
+import SFX from './Components/SFX/SFX';
 import Home from "./Components/Home/Home";
 import Assembly from "./Components/Assembly/Assembly";
 // import Levels from "./Components/Levels/Levels";
@@ -23,13 +24,14 @@ import Test2 from "./Components/Tests/Test2";
 import Settings from "./Components/Settings/Settings";
 import Account from "./Components/Account/Account";
 import AltLogin from "./Components/NavBar/AltLogin";
-
+import NotTheBots from "./Components/NotTheBots/NotTheBots";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const dispatch = useDispatch();
 	const settings = useSelector((state) => state.settings);
 	const userInfo = useSelector((state) => state.userInfo);
+	const battleInfo = useSelector((state) => state.battleInfo);
   let colors = useSelector(getThemeColors);
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
   
@@ -53,6 +55,7 @@ function App() {
         colors = {colors}
         >
 					<Music/>
+					<SFX/>
           <Switch>
             <Route exact path="/">
               <Redirect to="/home" />
@@ -88,7 +91,19 @@ function App() {
 						<Route path="/test2">
               <Test2/>
             </Route>
-            <Route path="/:">{/* <NotFound/> */}</Route>
+						<Route path="/battle">
+							{!(battleInfo.battleLaunched && userInfo.email) ? (
+									<Redirect to="/home" />
+								) : (
+									<>
+										Battle here
+									</>
+								)
+							}
+						</Route>
+            <Route path="/*">
+							<NotTheBots/>
+						</Route>
           </Switch>
         </Wrapper>
     </Router>

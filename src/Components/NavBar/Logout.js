@@ -6,7 +6,8 @@ import {
 	logOut,
 	deactivateProfileTab,
 	resetColorTesting,
-	setVolume
+	setMusic,
+	setSfx
 } from '../../Redux/actions';
 
 function Logout() {
@@ -16,7 +17,8 @@ function Logout() {
     <StyledButton
       handleClick = {()=>{
 				dispatch(logOut());
-				dispatch(setVolume(0));
+				dispatch(setMusic(false));
+				dispatch(setSfx(false));
 				dispatch(deactivateProfileTab());
 				dispatch(resetColorTesting());
 			}}

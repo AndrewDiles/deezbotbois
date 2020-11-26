@@ -14,7 +14,7 @@ const Music = () => {
 	// const [battleTheme, setBattleTheme] = useState(loopingAudio(battleThemeSrc));
 	
 	useEffect(()=>{
-		if (settings.volume) {
+		if (settings.music) {
 			if (settings.currentUrl !== 'battle'){
 				mainTheme.play();
 			} else {
@@ -24,7 +24,7 @@ const Music = () => {
 			mainTheme.pause();
 			// battleTheme.pause();
 		}
-	},[settings.volume, settings.currentUrl])
+	},[settings.music, settings.currentUrl])
 
 	return null
 }

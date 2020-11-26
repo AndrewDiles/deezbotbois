@@ -15,7 +15,10 @@ yup.setLocale({
 	},
 	string: {
     default: `Invalid string`,
-  }
+	},
+	boolean: {
+		default: `Invalid boolean`,
+	}
 });
 
 const userInfoSchema = yup.object().shape({
@@ -23,7 +26,8 @@ const userInfoSchema = yup.object().shape({
 	handle: yup.string(),
 	navLocationPreference: yup.string(),
 	cellSizePreference: yup.number(),
-	volumePreference: yup.number(),
+	musicPreference: yup.boolean(),
+	sfxPreference: yup.boolean(),
 	imageUrl: yup.string(),
 	googleImageUrl: yup.string(),
 	colorTheme: yup.object(),

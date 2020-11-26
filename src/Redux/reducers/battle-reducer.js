@@ -3,7 +3,6 @@ const initialState = {
 	battleLaunched : false,
 	userOptions :{
 		animation : true,
-		sound : 1,
 		wait : true
 	},
 	challenge : null,
@@ -22,7 +21,7 @@ const initialState = {
 	tick: 0,
 	commandsToExecute: [],
 	rotatingTieBreak: [],
-	battleHasOutcome = false,
+	battleHasOutcome: false,
 }
 // upon initialization, set minEnergyStored to lowest of all user bots
 // add additional values for currentStats
@@ -38,13 +37,11 @@ export default function battleInfo(
 				} else {
 					newBattleInfo.levelInfo = levelInfo[action.levelNumber];
 				}
-				newBattleInfo.userOptions.sound = action.userVolumeLevel;
 				action.userBots.forEach((userBot)=>{
 					const botToAdd = JSON.parse(JSON.stringify(userBot));
 
 					// function to add current stats goes here
 					newBattleInfo.botInfo.push(botToAdd);
-					setBotSnapshot(JSON.parse(JSON.stringify(data.botBuilds)))
 				})
 				
 				// requires: 

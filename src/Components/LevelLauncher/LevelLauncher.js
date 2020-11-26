@@ -11,7 +11,6 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import Levels from './Levels';
 import Challenges from './Challenges';
-// import debounce from '../../Constants/debounce';
 
 const LevelLauncher = () => {
 	// const dispatch = useDispatch();
@@ -23,9 +22,11 @@ const LevelLauncher = () => {
 		levelNumber: 0,
 		challengeNumber: 0,
 		detailsSelected: 'LAYOUT',
-		botNumberSelected: 0
+		botNumberSelected: 0,
+		// botNumbersSelected: [0]
 	}
 	const [gameLaunched, setGameLaunched] = useState(false);
+	//TODO: if multiple bots are to be sent, then this needs to be changed to an array : botNumbersSelected
 	const [selectionOptions, setSelectionOptions] = useState(initialSelectionOptions);
 
 	function swapBetweenChallengesAndLevels () {

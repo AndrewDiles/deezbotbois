@@ -5,7 +5,8 @@ const initialState = {
   handle : null,
 	navLocationPreference: null,
 	cellSizePreference : null,
-	volumePreference: null,
+	musicPreference: null,
+	sfxPreference: null,
 	imageUrl : null,
 	googleImageUrl : null,
 	colorTheme: null,
@@ -32,10 +33,16 @@ export default function userInfo(
           navLocationPreference : action.navLocation,
         }
 			}
-			case 'UPDATE_VOLUME_PREFERENCE' : {
+			case 'UPDATE_MUSIC_PREFERENCE' : {
         return {
           ...state,
-          volumePreference : action.volumePreference,
+          musicPreference : action.musicPreference,
+        }
+			}
+			case 'UPDATE_SFX_PREFERENCE' : {
+        return {
+          ...state,
+          sfxPreference : action.sfxPreference,
         }
 			}
 			case 'INCREASE_BIT_COUNT' : {

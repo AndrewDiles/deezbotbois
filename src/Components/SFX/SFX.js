@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { playSFX,resetSFX } from '../../Redux/actions';
+import { resetSFX } from '../../Redux/actions';
 
 import confirmSrc from './assets/GameSFX SFX1_confirm.wav';
 import disabledSrc from './assets/GameSFX SFX2_notAllowed.wav';
@@ -18,45 +18,63 @@ const SFX = () => {
 	const dispatch = useDispatch();
 	const sfx = useSelector((state) => state.sfx);
 	const settings = useSelector((state) => state.settings);
-	const [confirm, setConfirm] = useState(new Audio());
-	const [disabled, setDisabled] = useState(new Audio());
-	const [destroyed, setDestroyed] = useState(new Audio());
-	const [selected, setSelected] = useState(new Audio());
-	const [toggle, setConfirm] = useState(new Audio());
-	const [melee, setConfirm] = useState(new Audio());
-	const [impact, setConfirm] = useState(new Audio());
-	const [laser, setConfirm] = useState(new Audio());
-	const [gun, setConfirm] = useState(new Audio());
-	const [acid, setConfirm] = useState(new Audio());
-	const [burn, setConfirm] = useState(new Audio());
+	const [SFX, setSFX] = useState({
+		confirm : new Audio(confirmSrc),
+		disabled: new Audio(disabledSrc),
+		destroyed: new Audio(destroyedSrc),
+		selected: new Audio(selectSrc),
+		toggle: new Audio(toggleSrc),
+		melee: new Audio(meleeSrc),
+		impact: new Audio(impactSrc),
+		laser: new Audio(laserSrc),
+		gun: new Audio(gunSrc),
+		acid: new Audio(acidSrc),
+		burn: new Audio(burnSrc),
+	})
+	// const [confirm, setConfirm] = useState(new Audio(confirmSrc));
+	// const [disabled, setDisabled] = useState(new Audio(disabledSrc));
+	// const [destroyed, setDestroyed] = useState(new Audio(destroyedSrc));
+	// const [selected, setSelected] = useState(new Audio(selectSrc));
+	// const [toggle, setToggle] = useState(new Audio(toggleSrc));
+	// const [melee, setMelee] = useState(new Audio(meleeSrc));
+	// const [impact, setImpact] = useState(new Audio(impactSrc));
+	// const [laser, setLaser] = useState(new Audio(laserSrc));
+	// const [gun, setGun] = useState(new Audio(gunSrc));
+	// const [acid, setAcid] = useState(new Audio(acidSrc));
+	// const [burn, setBurn] = useState(new Audio(burnSrc));
+	// const SFX = {
+	// 	confirm : confirm,
+	// 	disabled: disabled,
+	// 	destroyed: destroyed,
+	// 	selected: selected,
+	// 	toggle: toggle,
+	// 	melee: melee,
+	// 	impact: impact,
+	// 	laser: laser,
+	// 	gun: gun,
+	// 	acid: acid,
+	// 	burn: burn
+	// };
 
-	// function setSoundOptions (state, setState, src) {
-	// 	// let newState = state;
-	// 	state.src = src;
-	// 	state.loop = true;
-	// 	setState(state);
-	// }
+	useEffect(()=>{
+		if (!sfx.sfx) return;
+		if (settings.sfx) {
+			console.log('playing a given sfx');
+			sfx[sfx.sfx].pause();
+			sfx[sfx.sfx].play();
+			dispatch(resetSFX());
+		}
+	},[settings.sfx, sfx.sfx])
 
-	// // const mainTheme = new Audio();
-	// useEffect(()=>{
-	// 	setSoundOptions(mainTheme,setMainTheme,mainThemeSrc);
-	// },[])
-	// // mainTheme.src = mainThemeSrc;
-	// // mainTheme.loop = true;
-	
-	// useEffect(()=>{
-	// 	// TODO: Add second theme and change to it when on battle screen
-	// 	if (settings.volume) {
-	// 		console.log('playing mainTheme....');
-	// 		mainTheme.play();
-	// 	} else {
-	// 		mainTheme.pause();
-	// 	}
-	// },[settings.volume])
+	useEffect(()=>{
+		if (!settings.sfx) {
+			{Object.keys(SFX).forEach((sfx)=>{
+				SFX[sfx].pause();
+			})}
+		}
+	},[settings.sfx])
 
-	return (
-		null
-	)
+	return null
 }
 
 export default SFX;

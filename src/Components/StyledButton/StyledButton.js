@@ -1,19 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../Redux/reducers/user-reducer';
+import { playSFX } from '../../Redux/actions';
 
-const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSampling, width, maxHeight, minHeight, fontSize, children} ) => {
+const StyledButton = ( { sfxType, id, handleClick, disabled, selected, absolute, colorSampling, width, maxHeight, minHeight, fontSize, children, value} ) => {
+	const dispatch = useDispatch();
 	let colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
+	let onClickFunction = null;
 	if (settings.serverStatus !== 'idle') disabled = true;
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
 	if (colorSampling) colors = colorSampling;
 	
   if (handleClick === undefined || handleClick === null) {
-    handleClick = () => {
-      // console.log('clicked styled button without a handle click function')
+    onClickFunction = () => {
+			// console.log('clicked styled button without a handle click function')
+			dispatch(playSFX('disabledSrc'));
     }
+	} else {
+		onClickFunction = () => {
+			handleClick();
+			if (sfxType) {
+				dispatch(playSFX('sfxType'));
+			}
+		}
 	}
 	
   return (
@@ -21,7 +32,7 @@ const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSam
 			id = {id}
 			className = 'baseButtonStyles'
       disabled = {disabled || null}
-      onClick = {(ev)=> {handleClick(ev)}}
+      onClick = {()=> {onClickFunction()}}
       selected = {selected}
       children = {children}
 			colors = {colors}
@@ -30,6 +41,7 @@ const StyledButton = ( { id, handleClick, disabled, selected, absolute, colorSam
 			fontSize = {fontSize}
 			maxHeight = {maxHeight}
 			minHeight = {minHeight}
+			value = {value}
       >
         {children}
       </ButtonStylings>

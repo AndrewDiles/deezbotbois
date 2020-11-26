@@ -3,7 +3,8 @@ const initialState = {
   serverStatus: 'idle',
   currentUrl : null,
 	navLocation: 'top',
-	volume: 0,
+	music: false,
+	sfx: false,
 	profileTab: 'inactive',
 	cellSize : 75,
 	colorsTesting: null,
@@ -26,10 +27,16 @@ export default function settings(
           navLocation : action.navLocation,
         }
 			}
-			case 'SET_VOLUME' : {
+			case 'SET_MUSIC' : {
 				return {
           ...state,
-          volume : action.volume,
+          music : action.music,
+        }
+			}
+			case 'SET_SFX' : {
+				return {
+          ...state,
+          sfx : action.sfx,
         }
 			}
 			case 'SET_COLORS_TESTING' : {

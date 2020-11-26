@@ -13,7 +13,8 @@ import {
 	communicationsFailed,
 	receiveUserInfo,
 	setNavLocation,
-	setVolume,
+	setMusic,
+	setSfx,
 	setColorTesting,
 	setCellSize,
 	updateUrl
@@ -182,7 +183,8 @@ const AltLogin = () => {
 				res.json().then((data)=>{
 					dispatch(receiveUserInfo(data.userInfo));
 					dispatch(setNavLocation(data.userInfo.navLocationPreference));
-					dispatch(setVolume(data.userInfo.volumePreference));
+					dispatch(setMusic(data.userInfo.musicPreference));
+					dispatch(setSfx(data.userInfo.sfxPreference));
 					dispatch(setColorTesting(data.userInfo.colorTheme));
 					dispatch(setCellSize(data.userInfo.cellSizePreference));
 					dispatch(communicationsSuccessful());

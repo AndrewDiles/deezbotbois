@@ -13,6 +13,7 @@ import StyledButton from '../StyledButton/StyledButton';
 import Logout from '../NavBar/Logout';
 import Gift from './Gift';
 import SizeSlider from '../SizeSlider/SizeSlider';
+import VolumeSetter from '../VolumeSetter/VolumeSetter';
 
 const Profile = ({ time, disabled }) => {
 	const dispatch = useDispatch();
@@ -54,7 +55,10 @@ const Profile = ({ time, disabled }) => {
         </StyledButton>
     	</StyledNavLink>
 			{settings.currentUrl !== 'settings' &&
-					<SizeSlider/>
+				<SizeSlider/>
+			}
+			{settings.currentUrl !== 'settings' &&
+				<VolumeSetter/>
 			}
 			<StyledNavLink to="/settings" tabIndex="-1">
         <StyledButton

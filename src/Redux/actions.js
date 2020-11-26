@@ -1,4 +1,4 @@
-// SETTINGS ACTIONS
+// SFX ACTIONS
 // request sfx:
 export const playSFX = (sfxName) => ({
 	type: 'PLAY_SFX',
@@ -8,6 +8,16 @@ export const playSFX = (sfxName) => ({
 export const resetSFX = () => ({
 	type: 'RESET_SFX',
 });
+
+// BATTLE ACTIONS
+export const initializeBattle = (challenge, levelNumber, userBots, ) => ({
+	type: 'INITIALIZE_BATTLE',
+	challenge: challenge,
+	levelNumber: levelNumber,
+	userBots: userBots,
+})
+
+// SETTINGS ACTIONS
 // setting url:
 export const updateUrl = (url) => ({
   type: 'URL_UPDATE',
@@ -18,10 +28,15 @@ export const setNavLocation = (navLocation) => ({
   type: 'SET_NAV_LOCATION',
   navLocation: navLocation
 });
-// setting volume:
-export const setVolume = (volume) => ({
-	type: 'SET_VOLUME',
-	volume: volume
+// setting music:
+export const setMusic = (music) => ({
+	type: 'SET_MUSIC',
+	music: music
+});
+// setting sfx:
+export const setSfx = (sfx) => ({
+	type: 'SET_SFX',
+	sfx: sfx
 });
 // setting cell size:
 export const setCellSize = (size) => ({
@@ -82,11 +97,15 @@ export const updateNavPref = (navLocation) => ({
   navLocation: navLocation
 });
 
-// update user's volume preference:
-export const updateVolumePref = (volumePreference) => ({
-	type: 'UPDATE_VOLUME_PREFERENCE',
-	volumePreference: volumePreference
-
+// update user's music preference:
+export const updateMusicPref = (musicPreference) => ({
+	type: 'UPDATE_MUSIC_PREFERENCE',
+	musicPreference: musicPreference
+})
+// update user's sfx preference:
+export const updateSfxPref = (sfxPreference) => ({
+	type: 'UPDATE_SFX_PREFERENCE',
+	sfxPreference: sfxPreference
 })
 export const increaseBitCount = (bitIncrease, currentTime) => ({
   type: 'INCREASE_BIT_COUNT',

@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { getThemeColors } from "../../Redux/reducers/user-reducer";
-import {
-	colorSchemes
-} from "../../Constants/colorSchemes";
+import { colorSchemes } from "../../Constants/colorSchemes";
 
 import {
   setNavLocation,
@@ -22,6 +20,7 @@ import StyledButton from "../StyledButton/StyledButton";
 import StyledIcon from "../StyledIcon/StyledIcon";
 import { floppyDisk } from "react-icons-kit/icomoon/floppyDisk";
 import SizeSlider from "../SizeSlider/SizeSlider";
+import VolumeSetter from "../VolumeSetter/VolumeSetter";
 import Bot from "../Bots/Bot";
 
 const Settings = () => {
@@ -29,7 +28,8 @@ const Settings = () => {
   const userInfo = useSelector((state) => state.userInfo);
   const settings = useSelector((state) => state.settings);
   const [newHandle, setNewHandle] = useState(userInfo.handle);
-  const [newAvImg, setNewAvImg] = useState(userInfo.imageUrl);
+	const [newAvImg, setNewAvImg] = useState(userInfo.imageUrl);
+	const [volumeChanged, setVolumeChanged] = useState(true);
   const [lastTimeCellSizeWasChanged, setLastTimeCellSizeWasChanged] = useState(
     Date.now()
   );
@@ -40,16 +40,23 @@ const Settings = () => {
   let colors = useSelector(getThemeColors);
   if (settings.currentUrl === "settings") colors = settings.colorsTesting;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       JSON.stringify(settings.colorsTesting) !==
       JSON.stringify(userInfo.colorTheme)
     ) {
       dispatch(setColorTesting(userInfo.colorTheme));
     }
-  }, []);
+	}, []);
+	
+	useEffect(()=>{
+		//TODO: return to verification after actions are fixed
+		setVolumeChanged(true);
+		if (changeMade) return;
+		setChangeMade(true);
+	},[userInfo.sfxPreference, userInfo.musicPreference])
 
-  React.useEffect(() => {
+  useEffect(() => {
     let eraseServerErrorMsg;
     if (serverErrorMsg) {
       eraseServerErrorMsg = setTimeout(() => {
@@ -59,7 +66,7 @@ const Settings = () => {
     return () => clearTimeout(eraseServerErrorMsg);
   }, [serverErrorMsg]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let eraseSuccessMsg;
     if (successMsg) {
       eraseSuccessMsg = setTimeout(() => {
@@ -69,7 +76,7 @@ const Settings = () => {
     return () => clearTimeout(eraseSuccessMsg);
   }, [successMsg]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let eraseBotFromDom;
     if (settings.cellSize !== userInfo.cellSizePreference) {
       setChangeMade(true);
@@ -91,14 +98,10 @@ const Settings = () => {
     if (changeMade) return;
     setChangeMade(true);
   };
-  const changeNavLocation = (ev) => {
-    if (ev.target === undefined) return;
-    updateChangeMade();
-    if (ev.target.innerText === "TOP") {
-      dispatch(setNavLocation("top"));
-    } else {
-      dispatch(setNavLocation("left"));
-    }
+  const changeNavLocation = (direction) => {
+    if (direction === undefined) return;
+		updateChangeMade();
+		dispatch(setNavLocation(direction));
   };
   const handleColorThemeClick = (scheme) => {
     setChangeMade(true);
@@ -116,9 +119,9 @@ const Settings = () => {
     newUserInfo.navLocationPreference = settings.navLocation;
     newUserInfo.cellSizePreference = settings.cellSize;
     newUserInfo.imageUrl = newAvImg;
-    newUserInfo.colorTheme = settings.colorsTesting;
+		newUserInfo.colorTheme = settings.colorsTesting;
     // verify there actually is a change to make
-    if (JSON.stringify(newUserInfo) === JSON.stringify(userInfo)) {
+    if (JSON.stringify(newUserInfo) === JSON.stringify(userInfo) && !volumeChanged) {
       setServerErrorMsg("No changes detected.");
       setChangeMade(false);
       return;
@@ -136,7 +139,8 @@ const Settings = () => {
     }).then((res) => {
       if (res.status === 200) {
         res.json().then((data) => {
-          setChangeMade(false);
+					setChangeMade(false);
+					setVolumeChanged(false);
           dispatch(replaceUserInfo(data.userInfo));
           dispatch(communicationsSuccessful());
           setSuccessMsg("Settings change successful!");
@@ -155,14 +159,15 @@ const Settings = () => {
     });
   };
 
-  // TODO: Modofication of: nav location, color theme....
   return (
     <Wrapper
       navLocation={settings.navLocation}
       profileTab={settings.profileTab}
       colors={colors}
     >
-      <h1>Hello {newHandle}!</h1>
+      <h1>
+				Hello {newHandle}!
+			</h1>
       <Styledh5>
         Handle change:
         <br />
@@ -196,10 +201,11 @@ const Settings = () => {
 				{['top','left'].map((direction)=>{
 					return (
 						<StyledButton
+						key = {direction}
           	selected={settings.navLocation === direction}
           	value = {direction}
-          	handleClick={(ev) => {
-          	  changeNavLocation(ev);
+          	handleClick={() => {
+          	  changeNavLocation(direction);
           	}}
           	disabled={settings.navLocation === direction}
         		>
@@ -208,14 +214,22 @@ const Settings = () => {
 					)
 				})}
       </Styledh5>
-      <Styledh5>Size of your bots / battlegrid:</Styledh5>
+      <Styledh5>
+				Size of your bots / battlegrid:
+			</Styledh5>
       <RowDiv>
         <SizeSlider />
         <BotDiv botShowing={botShowing} className="disableClicks">
           <Bot model={"BotRobbey"} arm1={""} arm1Angle={-45} />
         </BotDiv>
       </RowDiv>
-      <Styledh5>Avatar image:</Styledh5>
+			<br/>
+			<RowDiv>
+				<VolumeSetter/>
+			</RowDiv>
+      <Styledh5>
+				Avatar image:
+			</Styledh5>
       <AvatarImgSelection
 			elements = {userInfo.googleImageUrl ? 1 + userInfo.availableBots.length : userInfo.availableBots.length}
 			>
@@ -264,6 +278,7 @@ const Settings = () => {
 				{userInfo.availableSchemes.map((scheme)=>{
 					return (
         	  <StyledButton
+						key = {scheme}
         	  colorSampling={colorSchemes[scheme]}
         	  disabled={ JSON.stringify(settings.colorsTesting) === JSON.stringify(colorSchemes[scheme])}
         	  handleClick={() => {handleColorThemeClick(colorSchemes[scheme]);}}
