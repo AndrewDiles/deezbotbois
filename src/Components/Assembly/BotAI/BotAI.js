@@ -70,7 +70,6 @@ const BotAI = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArr
 			botNumberSelected = {botNumberSelected}
 			/>
 			<NodeSelector
-			botNumberSelected = {botNumberSelected}
 			aiAndScripts = {aiAndScripts}
 			setAiAndScripts = {setAiAndScripts}
 			activeNodeArray = {activeNodeArray}

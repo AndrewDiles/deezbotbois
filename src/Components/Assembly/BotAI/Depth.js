@@ -30,6 +30,7 @@ const Depth = ({ aiAndScripts, setAiAndScripts, setDeleteActive }) => {
 			padding = {5}
 			icon = {chevronUp}
 			disabled = {aiAndScripts.viewing.length === 1}
+			sfx = 'confirm'
     	/>
     </Wrapper>
   )

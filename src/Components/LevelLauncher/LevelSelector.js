@@ -147,6 +147,7 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 						padding = {3}
 						size = {25}
 						handleClick = {swapBetweenChallengesAndLevels}
+						sfx = 'toggle'
 						// disabled = {userInfo.levelProgress.length < 5}
 						/>
 					</ShiftIconContainer>

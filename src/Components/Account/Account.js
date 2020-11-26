@@ -147,6 +147,7 @@ const Account = () => {
 				padding = {5}
 				disabled = {!changeMade || serverErrorMsg !== null}
 				icon = {floppyDisk}
+				sfx = 'confirm'
       	/>
 			):(
 				<div className = 'centeredFlex'>

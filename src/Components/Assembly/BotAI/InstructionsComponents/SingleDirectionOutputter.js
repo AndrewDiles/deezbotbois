@@ -56,6 +56,7 @@ const SingleDirectionOutputter = ({ direction }) => {
 		size = {20}
 		icon = {iconImport}
 		selected = {true}
+		sfx = 'selected'
 		/>
 	)
 }

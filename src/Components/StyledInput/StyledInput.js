@@ -16,15 +16,19 @@ const StyledInput = ({labelName, value, setValue, disabled, height, width, maxLe
 		height = {height}
 		width = {width}
 		margin = {margin}
+		onMouseEnter = {()=>setHasBeenHovered(true)}
+		onMouseLeave = {()=>setHasBeenHovered(false)}
 		>
 			<LabelWrapper
 			hasBeenFocused = {hasBeenFocused}
 			hasBeenHovered = {hasBeenHovered}
+			unselectable = 'on'
 			>
 				<Label
 				colors = {colors}
 				hasBeenFocused = {hasBeenFocused}
 				hasBeenHovered = {hasBeenHovered}
+				unselectable = 'on'
 				>
 					{labelName}
 				</Label>
@@ -35,8 +39,6 @@ const StyledInput = ({labelName, value, setValue, disabled, height, width, maxLe
 			maxLength = {maxLength}
 			onChange = {(ev)=>{setValue(ev.target.value)}}
 			onFocus = {()=>{setHasBeenFocused(true); dispatch(playSFX('selected'))}}
-			onMouseEnter = {()=>setHasBeenHovered(true)}
-			onMouseLeave = {()=>setHasBeenHovered(false)}
 			value = {value && value}
 			disabled = {disabled}
 			/>
@@ -58,12 +60,14 @@ const LabelWrapper = styled.label`
 	left: 8px;
 	transition: top 0.5s ease-in-out;
 	z-index: 1;
+	user-select: none;
 `
 const Label = styled.label`
 	font-size: ${props => props.hasBeenFocused ? '8px' : props.hasBeenHovered ? '8px' : '16px'};
 	background-color: ${props => props.hasBeenFocused && props.colors.primary};
 	transition: font-size 0.5s ease-in-out, background-color 0.5s ease-in-out;
 	white-space: nowrap;
+	user-select: none;
 `
 const Input = styled.input`
 	width: 100%;

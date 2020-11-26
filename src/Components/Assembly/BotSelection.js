@@ -59,6 +59,7 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				padding = {5}
 				icon = {arrowLeft}
 				disabled = {botNumberSelected === 0}
+				sfx = 'selected'
       	/>
 				<Bot
 				alternativeBotSize = {70}
@@ -76,7 +77,8 @@ const BotSelection = ({ setBotNumberSelected, botNumberSelected }) => {
 				padding = {5}
 				icon = {arrowRight}
 				disabled = {botNumberSelected === userInfo.botBuilds.length-1 || userInfo.botBuilds.length === 0}
-    		/>
+    		sfx = 'selected'
+				/>
 				<Bot
 				alternativeBotSize = {40}
 				faded = {true}

@@ -53,6 +53,7 @@ const BotModel = ({ botNumberSelected}) => {
 					padding = {2}
 					icon = {dice}
 					disabled = {settings.serverStatus === 'idle'}
+      		sfx = 'selected'
     			/>
 				</DiceDiv>
 			</RowDivCenter>

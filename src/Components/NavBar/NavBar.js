@@ -89,6 +89,7 @@ function NavBar() {
 				handleClick = {toggleNavLocation}
 				padding = {5}
 				icon = {settings.navLocation === 'top' ? arrows_move_left : arrows_move_top}
+				sfx = 'toggle'
       	/>
 				{userInfo.imageUrl && settings.navLocation === 'left' &&
 					<UserImage

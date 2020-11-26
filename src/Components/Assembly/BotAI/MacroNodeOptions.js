@@ -76,13 +76,15 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 					icon = {moveUp}
 					rotation = '-90'
 					disabled = {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === 0}
-    			/>
+    			sfx = 'selected'
+					/>
 				</IconContainer>
 				<IconContainer>
 					<StyledIcon
 					handleClick = {()=>{setDeleteActive(!deleteActive)}}
 					padding = {5}
 					icon = {iosTrash}
+					sfx = 'toggle'
     			/>
 				</IconContainer>
 				<IconContainer>
@@ -92,7 +94,8 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 					icon = {moveDown}
 					rotation = '-90'
 					disabled = {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === activeNodeArray.length-1}
-    			/>
+    			sfx = 'selected'
+					/>
 				</IconContainer>
 			</RowContainer>
 			{aiAndScripts.insertion ? (

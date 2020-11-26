@@ -1,22 +1,12 @@
 import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
-
-// import getNodeArray from '../../../Constants/scriptHelpers/getNodeArray';
 import {chevronLeft} from 'react-icons-kit/feather/chevronLeft';
 import {chevronRight} from 'react-icons-kit/feather/chevronRight';
 import StyledIcon from '../../StyledIcon/StyledIcon';
-import NodeDisplay from './NodeDisplay';
 
-const NodeSelector = ({ botNumberSelected, aiAndScripts, setAiAndScripts, activeNodeArray, setDeleteActive }) => {
+const NodeSelector = ({ aiAndScripts, setAiAndScripts, activeNodeArray, setDeleteActive }) => {
 	const userInfo = useSelector((state) => state.userInfo);
-	// const [activeNodeArray, setActiveNodeArray] = React.useState([]);
-	
-	// React.useEffect(()=>{
-	// 	if (!userInfo.botBuilds) return
-	// 	setActiveNodeArray(getNodeArray(userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing ))
-	// },[setActiveNodeArray, botNumberSelected, userInfo.botBuilds[botNumberSelected].script, aiAndScripts.viewing])
-	// console.log(activeNodeArray)
 	if (!userInfo.botBuilds) {
 		return (<></>)
 	}
@@ -39,6 +29,7 @@ const NodeSelector = ({ botNumberSelected, aiAndScripts, setAiAndScripts, active
 			padding = {5}
 			icon = {chevronLeft}
 			disabled = {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === 0}
+			sfx = 'selected'
     	/>
 			<span>
 				NODE # {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index+1}
@@ -48,6 +39,7 @@ const NodeSelector = ({ botNumberSelected, aiAndScripts, setAiAndScripts, active
 			padding = {5}
 			icon = {chevronRight}
 			disabled = {aiAndScripts.viewing[aiAndScripts.viewing.length-1].index === activeNodeArray.length}
+			sfx = 'selected'
     	/>
     </Wrapper>
   )

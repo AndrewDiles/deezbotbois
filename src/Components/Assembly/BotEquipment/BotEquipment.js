@@ -185,6 +185,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				handleClick = {clickUp}
 				disabled = {inventoryIndexRange.min === 0}
 				icon = {arrowUp}
+				sfx = 'selected'
 				/>
 			}
 			{typeViewing === 'weapons' &&
@@ -235,6 +236,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				handleClick = {clickDown}
 				disabled = {inventoryIndexRange.max+1 === Object.keys(userInfo.availableAcc).length}
 				icon = {arrowDown}
+				sfx = 'selected'
 				/>
 			}
     </Wrapper>

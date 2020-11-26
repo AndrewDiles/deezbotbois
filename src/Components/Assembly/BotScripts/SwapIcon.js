@@ -55,6 +55,7 @@ const SwapIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionNa
 			))
 		}
 		handleClick = {handleClick}
+		sfx = 'toggle'
 		/>
   )
 }

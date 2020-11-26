@@ -39,6 +39,7 @@ const ToolTipIcon = ({ name, iconImport, selfLocation, animated }) => {
 					size = {15}
 					padding = 'mini'
 					handleClick = {handleClick}
+      		sfx = 'toggle'
 					/>
 				)
 			)

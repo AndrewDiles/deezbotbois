@@ -47,6 +47,7 @@ const OtherBotSelector = ({ botNumberViewing, setBotNumberViewing, typeViewing, 
 				padding = {5}
 				icon = {arrowLeft}
 				disabled = {botNumberViewing === 0}
+				sfx = 'selected'
       	/>
 				<Bot
 				alternativeBotSize = {70}
@@ -64,6 +65,7 @@ const OtherBotSelector = ({ botNumberViewing, setBotNumberViewing, typeViewing, 
 				padding = {5}
 				icon = {arrowRight}
 				disabled = {botNumberViewing === levelInfo[typeViewing.toLowerCase()].length-1 || levelInfo[typeViewing.toLowerCase()].length === 0}
+				sfx = 'selected'
     		/>
 				<Bot
 				alternativeBotSize = {40}

@@ -47,20 +47,23 @@ const StepSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPa
 					size = {25}
 					icon = {arrowUpLeft}
 					disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5}
-      		/>
+      		sfx = 'selected'
+					/>
 					<StyledIcon
 					handleClick = {()=>handleAddStep('U')}
 					padding = {5}
 					size = {25}
 					icon = {arrowUp}
 					disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5}
-      		/>
+      		sfx = 'selected'
+					/>
 					<StyledIcon
 					handleClick = {()=>handleAddStep('UR')}
 					padding = {5}
 					size = {25}
 					icon = {arrowUpRight}
 					disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>handleAddStep('L')}
@@ -68,6 +71,7 @@ const StepSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPa
 					size = {25}
 					icon = {arrowLeft}
 					disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5}
+      		sfx = 'selected'
       		/>
 					<BlankEntry/>
 					<StyledIcon
@@ -76,6 +80,7 @@ const StepSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPa
 					size = {25}
 					icon = {arrowRight}
 					disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>handleAddStep('DL')}
@@ -83,6 +88,7 @@ const StepSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPa
 					size = {25}
 					icon = {arrowDownLeft}
 					disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>handleAddStep('D')}
@@ -90,6 +96,7 @@ const StepSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPa
 					size = {25}
 					icon = {arrowDown}
 					disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>handleAddStep('DR')}
@@ -97,6 +104,7 @@ const StepSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, emptyPa
 					size = {25}
 					icon = {arrowDownRight}
 					disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 5}
+      		sfx = 'selected'
       		/>
 				</Options>
 			</PathSetterContainer>

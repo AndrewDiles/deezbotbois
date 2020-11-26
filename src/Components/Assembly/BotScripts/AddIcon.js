@@ -28,6 +28,7 @@ const AddIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionNam
 		padding = '5'
 		disabled = {aiAndScripts === null }
 		handleClick = {handleClick}
+		sfx = 'confirm'
 		/>
   )
 }

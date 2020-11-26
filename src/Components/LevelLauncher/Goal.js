@@ -27,6 +27,7 @@ const Goal = ({ goalInfo, met }) => {
 			selected = {met}
 			padding = {5}
 			handleClick = {()=>{setViewingRewards(!viewingRewards)}}
+			sfx = 'toggle'
 			/>
 			<InfoContainer className = 'evenlyFlex col'>
 				<Label

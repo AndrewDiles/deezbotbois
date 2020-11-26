@@ -101,6 +101,7 @@ const ModelChanger = ({ botNumberSelected }) => {
 				padding = {5}
 				icon = {arrowLeft}
 				disabled = {indexOfSelectedModel === 0}
+				sfx = 'selected'
       	/>
 				<Bot
 				alternativeBotSize = {70}
@@ -118,6 +119,7 @@ const ModelChanger = ({ botNumberSelected }) => {
 				padding = {5}
 				icon = {arrowRight}
 				disabled = {indexOfSelectedModel === userInfo.availableBots.length-1}
+				sfx = 'selected'
     		/>
 				<Bot
 				alternativeBotSize = {40}

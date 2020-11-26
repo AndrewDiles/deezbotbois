@@ -42,7 +42,7 @@ const StyledIcon = ({
 			id={id}
 			className = 'baseIconStyles'
       disabled={disabled || null}
-			onClick={ disabled ? sfx ? ()=>{dispatch(playSFX('disabled'))} : {}
+			onClick={ disabled ? sfx ? ()=>{dispatch(playSFX('disabled'))} : ()=>{}
 				: sfx ? (ev)=>{handleClick(ev);dispatch(playSFX(sfx))} : (ev)=>{handleClick(ev)}
       }
       icon={icon}

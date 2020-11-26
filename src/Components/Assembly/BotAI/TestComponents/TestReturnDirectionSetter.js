@@ -39,6 +39,7 @@ const TestReturnDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndS
 					size = {25}
 					icon = {arrowUpLeft}
 					selected = {'UL' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testReturn}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('U')}
@@ -46,6 +47,7 @@ const TestReturnDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndS
 					size = {25}
 					icon = {arrowUp}
 					selected = {'U' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testReturn}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('UR')}
@@ -53,6 +55,7 @@ const TestReturnDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndS
 					size = {25}
 					icon = {arrowUpRight}
 					selected = {'UR' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testReturn}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('L')}
@@ -60,6 +63,7 @@ const TestReturnDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndS
 					size = {25}
 					icon = {arrowLeft}
 					selected = {'L' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testReturn}
+      		sfx = 'selected'
       		/>
 
 					<StyledButton
@@ -69,6 +73,7 @@ const TestReturnDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndS
 					fontSize = '8'
 					handleClick = {()=>setDirection('any')}
 					selected = {'any' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testReturn}
+      		sfx = 'selected'
 					>
 						ANY
 					</StyledButton>
@@ -79,6 +84,7 @@ const TestReturnDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndS
 					size = {25}
 					icon = {arrowRight}
 					selected = {'R' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testReturn}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('DL')}
@@ -86,6 +92,7 @@ const TestReturnDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndS
 					size = {25}
 					icon = {arrowDownLeft}
 					selected = {'DL' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testReturn}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('D')}
@@ -93,6 +100,7 @@ const TestReturnDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndS
 					size = {25}
 					icon = {arrowDown}
 					selected = {'D' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testReturn}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('DR')}
@@ -100,6 +108,7 @@ const TestReturnDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndS
 					size = {25}
 					icon = {arrowDownRight}
 					selected = {'DR' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testReturn}
+      		sfx = 'selected'
       		/>
 				</Options>
 			</DirectionSetterContainer>

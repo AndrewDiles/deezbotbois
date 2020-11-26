@@ -32,6 +32,7 @@ const InsertionIcon = ({ aiAndScripts, setAiAndScripts }) => {
 			selected = {aiAndScripts.insertion === true}
 			rotation = '180'
 			handleClick = {handleClick}
+			sfx = 'toggle'
 			/>
 		</IconWrapper>
   )

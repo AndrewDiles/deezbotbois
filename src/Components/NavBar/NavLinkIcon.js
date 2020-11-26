@@ -57,6 +57,7 @@ function NavLinkIcon({ destination }) {
 			disabled = {settings.currentUrl === destination}
 			padding = {5}
 			icon = {icon}
+			sfx = 'confirm'
 			/>
 		</NavLinkIconWrapper>
 	)

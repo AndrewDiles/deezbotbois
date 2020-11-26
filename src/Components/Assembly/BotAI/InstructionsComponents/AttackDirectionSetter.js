@@ -38,13 +38,15 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 					size = {25}
 					icon = {arrowUpLeft}
 					selected = {'UL' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
-      		/>
+      		sfx = 'selected'
+					/>
 					<StyledIcon
 					handleClick = {()=>setDirection('U')}
 					padding = {5}
 					size = {25}
 					icon = {arrowUp}
 					selected = {'U' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('UR')}
@@ -52,6 +54,7 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 					size = {25}
 					icon = {arrowUpRight}
 					selected = {'UR' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('L')}
@@ -59,6 +62,7 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 					size = {25}
 					icon = {arrowLeft}
 					selected = {'L' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
+      		sfx = 'selected'
       		/>
 					<BlankEntry/>
 					<StyledIcon
@@ -67,6 +71,7 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 					size = {25}
 					icon = {arrowRight}
 					selected = {'R' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('DL')}
@@ -74,6 +79,7 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 					size = {25}
 					icon = {arrowDownLeft}
 					selected = {'DL' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('D')}
@@ -81,6 +87,7 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 					size = {25}
 					icon = {arrowDown}
 					selected = {'D' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
+      		sfx = 'selected'
       		/>
 					<StyledIcon
 					handleClick = {()=>setDirection('DR')}
@@ -88,6 +95,7 @@ const AttackDirectionSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScrip
 					size = {25}
 					icon = {arrowDownRight}
 					selected = {'DR' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.meleeDirection}
+      		sfx = 'selected'
       		/>
 				</Options>
 			</DirectionSetterContainer>
