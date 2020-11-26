@@ -8,7 +8,8 @@ import iconImporter from'../../../Constants/iconImporter';
 
 import {
 	addTech,
-	removeTechs
+	removeTechs,
+	playSFX
 } from '../../../Redux/actions';
 
 const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, tech, size, trimSize, botNumberSelected, index }) => {
@@ -52,10 +53,16 @@ const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, 
 	const handleClick = (purchased, disabled) => {
 		// console.log('index, purchased, disabled',index, purchased, disabled)
 		if (purchased) {
-			dispatch(removeTechs(botNumberSelected, inverseTechTreeRequirements(index)))
+			dispatch(removeTechs(botNumberSelected, inverseTechTreeRequirements(index)));
+			dispatch(playSFX('toggle'));
 		}
-		else if (!disabled)
-		dispatch(addTech(botNumberSelected, index ))
+		else if (!disabled) {
+			dispatch(addTech(botNumberSelected, index));
+			dispatch(playSFX('selected'));
+		}
+		else if (disabled) {
+			dispatch(playSFX('disabled'));
+		}
 	}
 	let icons = iconImporter(tech.affect);
 	let icon1 = icons.icon1;
