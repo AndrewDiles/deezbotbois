@@ -32,11 +32,13 @@ const VolumeSetter = () => {
 			icon = {settings.music ? musicOn : musicOff}
 			padding = '5'
 			handleClick = {handleClickMusic}
+			sfx = 'toggle'
 			/>
 			<StyledIcon
 			icon = {settings.sfx ? sfxOn : sfxOff}
 			padding = '5'
 			handleClick = {handleClickSfx}
+			sfx = 'toggle'
 			/>
 		</div>
     

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { playSFX } from '../../Redux/actions';
 import { Icon } from "react-icons-kit";
 import { useSelector } from "react-redux";
 import { getThemeColors } from "../../Redux/reducers/user-reducer";
@@ -18,8 +20,10 @@ const StyledIcon = ({
   id,
   rotation,
   hovered,
-	keepcursor
+	keepcursor,
+	sfx
 }) => {
+	const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
   let colors = useSelector(getThemeColors);
   if (settings.currentUrl === "settings") colors = settings.colorsTesting;
@@ -38,9 +42,9 @@ const StyledIcon = ({
 			id={id}
 			className = 'baseIconStyles'
       disabled={disabled || null}
-      onClick={(ev) => {
-        !disabled && handleClick(ev);
-      }}
+			onClick={ disabled ? sfx ? ()=>{dispatch(playSFX('disabled'))} : {}
+				: sfx ? (ev)=>{handleClick(ev);dispatch(playSFX(sfx))} : (ev)=>{handleClick(ev)}
+      }
       icon={icon}
       selected={selected}
       children={children}

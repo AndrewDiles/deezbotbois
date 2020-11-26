@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import {
-  setCellSize
+  setCellSize, playSFX
 } from '../../Redux/actions';
 
 import { useSelector, useDispatch } from "react-redux";
@@ -42,6 +41,7 @@ const SizeSlider = ({ disabled }) => {
 			appliedMouseLocation = ev.clientX-bar.getBoundingClientRect().x;
 			dispatch(setCellSize(pixelCountToCellSize(appliedMouseLocation-3)));
 			setDialClicked(false);
+			dispatch(playSFX('selected'));
 		}
 		sliderWrapper.addEventListener('mousedown', handleBarClick);
 		return ()=>{
@@ -82,7 +82,7 @@ const SizeSlider = ({ disabled }) => {
         disabled = {disabled}
 				left = {left}
 				dialClicked = {dialClicked}
-        onClick = {handleClick}
+        onClick = {()=>{handleClick()}}
         >
         </Dial>
       </Bar>

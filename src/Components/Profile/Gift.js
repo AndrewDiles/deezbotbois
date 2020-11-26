@@ -61,6 +61,7 @@ const Gift = ({ time }) => {
 		icon = {gift}
 		glowing = 'indeeditglows'
 		padding = {5}
+		sfx = 'confirm'
     />
 	)
 	}
