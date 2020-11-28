@@ -35,6 +35,11 @@ const SFX = () => {
 
 	useEffect(()=>{
 		if (!sfx.sfx) return;
+		if (!SFX[sfx.sfx]) {
+			console.log('sfx call ', sfx.sfx, ' does not exist');
+			dispatch(resetSFX());
+			return;
+		}
 		if (settings.sfx) {
 			SFX[sfx.sfx].pause();
 			SFX[sfx.sfx].currentTime = 0;

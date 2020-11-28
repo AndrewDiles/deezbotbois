@@ -26,17 +26,17 @@ const ThresholdSetter = ({ activeNodeArray, setActiveNodeArray, botNumberSelecte
 				fontSize = '22'
 				width = '40'
 				disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.threshold === 0}
+				sfx = 'selected'
 				>
 					-
 				</StyledButton>
-
 				{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.threshold}
-				
 				<StyledButton
 				handleClick = {()=>{modifyThreshold(1)}}
 				fontSize = '22'
 				width = '40'
 				disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.threshold === 20}
+				sfx = 'selected'
 				>
 					+
 				</StyledButton>

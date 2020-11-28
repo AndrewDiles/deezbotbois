@@ -65,18 +65,20 @@ const DeleteBot = ({ setBotNumberSelected, botNumberSelected, setErrorMsg, setSu
 		className = 'centeredFlex'
 		>
     	<StyledButton
-				handleClick = {() => {setConfirmOpen(true)}}
-				disabled = {settings.serverStatus !== 'idle'}
-				>
-					DISMANTLE BUILD
+			handleClick = {() => {setConfirmOpen(true)}}
+			disabled = {settings.serverStatus !== 'idle'}
+			sfx = 'selected'
+			>
+				DISMANTLE BUILD
 			</StyledButton>
-			{confirmOpen && 
+			{confirmOpen &&
 				<StyledButton
 				handleClick = {() => {handleDeleteBot();setConfirmOpen(false)}}
 				disabled = {settings.serverStatus !== 'idle'}
+				sfx = 'confirm'
 				>
-				CONFIRM REMOVAL
-		</StyledButton>
+					CONFIRM REMOVAL
+				</StyledButton>
 			}
 		</RowDivCenter>
   )

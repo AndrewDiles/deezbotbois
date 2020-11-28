@@ -52,46 +52,12 @@ const TestTargetsSetter = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botN
 						handleClick = {()=>{setTestTargets(target)}}
 						selected = {target === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testTargets}
 						fontSize = {target.length >= 10 ? '10' : '12'}
+						sfx = 'selected'
 						>
 							{target.toUpperCase()}
 						</StyledButton>
 					)
 				})}
-				{/* <StyledButton
-				handleClick = {()=>{setTestTargets('hostile')}}
-				selected = {'hostile' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testTargets}
-				// fontSize = {'16'}
-				>
-					HOSTILE
-				</StyledButton>
-				<StyledButton
-				handleClick = {()=>{setTestTargets('friend')}}
-				selected = {'friend' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testTargets}
-				// fontSize = {'16'}
-				>
-					FRIEND
-				</StyledButton>
-				<StyledButton
-				handleClick = {()=>{setTestTargets('wall')}}
-				selected = {'wall' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testTargets}
-				// fontSize = {'16'}
-				>
-					WALL
-				</StyledButton>
-				<StyledButton
-				handleClick = {()=>{setTestTargets('corner')}}
-				selected = {'corner' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testTargets}
-				// fontSize = {'16'}
-				>
-					CORNER
-				</StyledButton>
-				<StyledButton
-				handleClick = {()=>{setTestTargets('any')}}
-				selected = {'any' === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.testTargets}
-				// fontSize = {'16'}
-				>
-					ANY
-				</StyledButton> */}
 			</Options>
 		</EvaluationTypeSelectorContainer>
 	)

@@ -35,6 +35,7 @@ const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScript
 				activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting}
 				fontSize = {9}
 				width = {120}
+				sfx = 'selected'
 				>
 					ADJACENT TO TARGET
 				</StyledButton>
@@ -44,6 +45,7 @@ const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScript
 				activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting}
 				fontSize = {9}
 				width = {120}
+				sfx = 'selected'
 				>
 					COLLIDE WITH TARGET
 				</StyledButton>
@@ -52,6 +54,7 @@ const MovementIntentSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScript
 				selected = {!activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting}
 				fontSize = {9}
 				width = {120}
+				sfx = 'selected'
 				>
 					PLOT A PATH
 				</StyledButton>

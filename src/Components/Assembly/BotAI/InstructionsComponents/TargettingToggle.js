@@ -25,6 +25,7 @@ const TargettingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, b
 				handleClick = {()=>{toggleTargettingType(true)}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === true}
 				fontSize = {9}
+				sfx = 'selected'
 				// disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === true}
 				>
 					SCANNED TARGET
@@ -33,6 +34,7 @@ const TargettingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, b
 				handleClick = {()=>{toggleTargettingType(false)}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === false}
 				fontSize = {9}
+				sfx = 'selected'
 				// disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === false}
 				>
 					SET DIRECTION

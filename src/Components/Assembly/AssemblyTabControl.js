@@ -13,36 +13,42 @@ const AssemblyTabControl = ({ tabsDisplayed, setTabsDisplayed }) => {
 			<StyledButton
 			handleClick = {() => {tabToggler('model',tabsDisplayed,setTabsDisplayed)}}
 			fontSize = '11'
+			sfx = 'toggle'
 			>
 				{tabsDisplayed.model ? 'CLOSE MODEL' : 'OPEN MODEL'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('equipment',tabsDisplayed,setTabsDisplayed)}}
 			fontSize = '11'
+			sfx = 'toggle'
 			>
 				{tabsDisplayed.equipment ? 'CLOSE EQUIPMENT' : 'OPEN EQUIPMENT'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('attributes',tabsDisplayed,setTabsDisplayed)}}
 			fontSize = '11'
+			sfx = 'toggle'
 			>
 				{tabsDisplayed.attributes ? 'CLOSE ATTRIBUTES' : 'OPEN ATTRIBUTES'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('techTree',tabsDisplayed,setTabsDisplayed)}}
 			fontSize = '11'
+			sfx = 'toggle'
 			>
 				{tabsDisplayed.techTree ? 'CLOSE TECHTREE' : 'OPEN TECHTREE'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('ai',tabsDisplayed,setTabsDisplayed)}}
 			fontSize = '11'
+			sfx = 'toggle'
 			>
 				{tabsDisplayed.ai ? 'CLOSE AI.' : 'OPEN AI.'}
 			</StyledButton>
 			<StyledButton
 			handleClick = {() => {tabToggler('scripts',tabsDisplayed,setTabsDisplayed)}}
 			fontSize = '11'
+			sfx = 'toggle'
 			>
 				{tabsDisplayed.scripts ? 'CLOSE NODES' : 'OPEN NODES'}
 			</StyledButton>
@@ -63,26 +69,3 @@ const Wrapper = styled.div`
 		height: 140px;
 	}
 `
-// const Wrapper = styled.div`
-	/* display: grid;
-	grid-gap: 20px;
-	grid-template-columns: repeat(6, 125px);
-	width: 1550px;
-	margin-left: auto;
-  margin-right: auto;
-	@media screen and 
-	(max-width: ${props => props.navLocation === 'top' ? '1600px' : '1730px'}) {
-		width: 1030px;
-		grid-template-columns: repeat(2, 125px);
-  }
-	@media screen and 
-	(max-width: ${props => props.navLocation === 'top' ? '1150px' : '1280px'}) {
-    width: 510px;
-		grid-template-columns: repeat(2, 1fr);
-  }
-	@media screen and
-	(max-width: ${props => props.navLocation === 'top' ? '700px' : '830px'}) {
-    width: 250px;
-		grid-template-columns: 1fr;
-  } */
-// `

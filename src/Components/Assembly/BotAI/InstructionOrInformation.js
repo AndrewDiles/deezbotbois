@@ -9,6 +9,7 @@ const InstructionsOrInformation = ({ setDisplayInfo, displayInfo, type }) => {
 			selected = {displayInfo === false}
 			width = {120}
 			fontSize = '9'
+			sfx = 'selected'
 			>
 				{type}
 			</StyledButton>
@@ -17,6 +18,7 @@ const InstructionsOrInformation = ({ setDisplayInfo, displayInfo, type }) => {
 			selected = {displayInfo === true}
 			width = {120}
 			fontSize = '9'
+			sfx = 'selected'
 			>
 				INFORMATION
 			</StyledButton>

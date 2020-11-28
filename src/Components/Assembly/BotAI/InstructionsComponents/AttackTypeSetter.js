@@ -24,6 +24,7 @@ const AttackTypeSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, b
 				<StyledButton
 				handleClick = {()=>{setAttackType('melee')}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'melee'}
+				sfx = 'selected'
 				// fontSize = {9}
 				>
 					MELEE
@@ -31,6 +32,7 @@ const AttackTypeSetter = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, b
 				<StyledButton
 				handleClick = {()=>{setAttackType('ranged')}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.attackType === 'ranged'}
+				sfx = 'selected'
 				// fontSize = {9}
 				>
 					RANGED

@@ -30,6 +30,7 @@ const TargetSelector = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, bot
 							selected = {number === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetNumber}
 							fontSize = {9}
 							width = '30'
+							sfx = 'selected'
 							>
 								{number}
 							</StyledButton>

@@ -56,8 +56,16 @@ const DeleteNode = ({
 				PROCEED WITH NODE DELETION?
 			</ConfirmationText>
       <ConfCancelWrapper>
-        <StyledButton handleClick={handleDelete}>CONFIRM</StyledButton>
-        <StyledButton handleClick={() => setDeleteActive(false)}>
+        <StyledButton
+				handleClick={handleDelete}
+				sfx = 'confirm'
+				>
+					CONFIRM
+				</StyledButton>
+        <StyledButton
+				handleClick={() => setDeleteActive(false)}
+				sfx = 'disabled'
+				>
           CANCEL
         </StyledButton>
       </ConfCancelWrapper>

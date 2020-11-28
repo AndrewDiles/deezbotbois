@@ -25,6 +25,7 @@ const RotatingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, bot
 				handleClick = {()=>{toggleRotationType(true)}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === true}
 				fontSize = {9}
+				sfx = 'selected'
 				// disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === true}
 				>
 					BY INCREMENT
@@ -33,6 +34,7 @@ const RotatingToggle = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, bot
 				handleClick = {()=>{toggleRotationType(false)}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === false}
 				fontSize = {9}
+				sfx = 'selected'
 				// disabled = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === false}
 				>
 					SET DIRECTION

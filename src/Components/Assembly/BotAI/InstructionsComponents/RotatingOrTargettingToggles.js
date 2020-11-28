@@ -36,6 +36,7 @@ const RotatingOrTargettingToggles = ({ activeNodeArray, setActiveNodeArray, aiAn
 				handleClick = {()=>{handleSetAimMethod('targetting')}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === true}
 				fontSize = {9}
+				sfx = 'selected'
 				>
 					SCANNED TARGET
 				</StyledButton>
@@ -43,6 +44,7 @@ const RotatingOrTargettingToggles = ({ activeNodeArray, setActiveNodeArray, aiAn
 				handleClick = {()=>{handleSetAimMethod('rotating')}}
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === true}
 				fontSize = {9}
+				sfx = 'selected'
 				>
 					BY INCREMENT
 				</StyledButton>
@@ -51,6 +53,7 @@ const RotatingOrTargettingToggles = ({ activeNodeArray, setActiveNodeArray, aiAn
 				selected = {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.rotating === false &&
 					activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === false}
 				fontSize = {9}
+				sfx = 'selected'
 				>
 					SET DIRECTION
 				</StyledButton>

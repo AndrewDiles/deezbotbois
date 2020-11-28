@@ -57,6 +57,7 @@ const ReloadableWeaponSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArra
 							selected = {slot === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.armSlot}
 							fontSize = {9}
 							disabled = {!weaponStats[botInfo[botNumberSelected].equipment[slot]]}
+							sfx = 'selected'
 							>
 								{weaponStats[botInfo[botNumberSelected].equipment[slot]] ?
 								(

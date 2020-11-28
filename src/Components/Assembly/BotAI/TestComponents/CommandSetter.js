@@ -62,6 +62,7 @@ const CommandSetter = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumbe
 							disabled = {attributes[command] === false}
 							fontSize = {command.length < 16 ? '12' : '9'}
 							maxHeight = {'40'}
+							sfx = 'selected'
 							>
 								{commandInfo[command]} COMMAND
 							</StyledButton>

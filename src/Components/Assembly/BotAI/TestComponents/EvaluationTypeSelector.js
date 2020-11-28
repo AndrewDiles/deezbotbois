@@ -49,6 +49,7 @@ const EvaluationTypeSelector = ({ nodeInfo, activeNodeArray, setActiveNodeArray,
 						selected = {type === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test[keyToChange]}
 						fontSize = {type === '≠' ? '28' : '16'}
 						maxHeight = {type === '≠' ? '40' : null}
+						sfx = 'selected'
 						>
 							{type}
 					</StyledButton>

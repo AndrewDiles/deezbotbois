@@ -55,10 +55,11 @@ const CreateNewBot = ({ setBotNumberSelected, setErrorMsg, setSuccessMsg }) => {
 	}
   return (
     <StyledButton
-			handleClick = {() => {handleClickCreateNewBot()}}
-			disabled = {(userInfo.botBuilds && userInfo.botBuilds.length >= 9) || settings.serverStatus !== 'idle'}
-			>
-				NEW BOT
+		handleClick = {() => {handleClickCreateNewBot()}}
+		disabled = {(userInfo.botBuilds && userInfo.botBuilds.length >= 9) || settings.serverStatus !== 'idle'}
+		sfx = 'confirm'
+		>
+			NEW BOT
 		</StyledButton>
   )
 }

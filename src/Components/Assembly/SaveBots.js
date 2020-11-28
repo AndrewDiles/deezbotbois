@@ -59,10 +59,11 @@ const SaveBots = ({ botNumberSelected, disabled, setErrorMsg, setSuccessMsg, set
 	}
   return (
     <StyledButton
-			handleClick = {() => {handleSaveBots()}}
-			disabled = {disabled || settings.serverStatus !== 'idle'}
-			>
-				SAVE BOTS
+		handleClick = {() => {handleSaveBots()}}
+		disabled = {disabled || settings.serverStatus !== 'idle'}
+		sfx = 'confirm'
+		>
+			SAVE BOTS
 		</StyledButton>
   )
 }

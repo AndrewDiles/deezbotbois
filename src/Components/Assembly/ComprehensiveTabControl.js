@@ -10,6 +10,7 @@ const ComprehensiveTabControl = ({ masterAttributesTabDisplayed, setMasterAttrib
 				handleClick = {() => {setMasterAttributesTabDisplayed(!masterAttributesTabDisplayed)}}
 				fontSize = '12'
 				width = {250}
+				sfx = 'toggle'
 				>
 					{masterAttributesTabDisplayed ? 'CLOSE COMPREHESIVE ATTRIBUTES' : 'VIEW COMPREHESIVE ATTRIBUTES'}
 				</StyledButton>
@@ -19,6 +20,7 @@ const ComprehensiveTabControl = ({ masterAttributesTabDisplayed, setMasterAttrib
 				handleClick = {() => {setAiNodeTreeTabDisplayed(!aiNodeTreeTabDisplayed)}}
 				fontSize = '12'
 				width = {250}
+				sfx = 'toggle'
 				>
 					{aiNodeTreeTabDisplayed ? 'CLOSE AI DECISION-NODE TREE' : 'VIEW AI DECISION-NODE TREE'}
 				</StyledButton>
