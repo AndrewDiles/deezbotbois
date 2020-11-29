@@ -71,6 +71,7 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 							width = '40'
 							maxHeight = '20'
 							handleClick = {()=>{setLevelNumber(0)}}
+							sfx = 'selected'
 							>
 								0
 							</StyledButton>
@@ -81,6 +82,7 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 							width = '40'
 							maxHeight = '20'
 							handleClick = {()=>{modifyLevelNumber(-10)}}
+							sfx = 'selected'
 							>
 								-10
 							</StyledButton>
@@ -119,6 +121,7 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 							width = '40'
 							maxHeight = '20'
 							handleClick = {()=>{setLevelNumber(0)}}
+							sfx = 'selected'
 							>
 								{availableLevels.length}
 							</StyledButton>
@@ -129,6 +132,7 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 							width = '40'
 							maxHeight = '20'
 							handleClick = {()=>{modifyLevelNumber(+10)}}
+							sfx = 'selected'
 							>
 								+10
 							</StyledButton>

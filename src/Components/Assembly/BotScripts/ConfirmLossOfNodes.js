@@ -37,10 +37,10 @@ const ConfirmLossOfNodes = ({ botNumberSelected,aiAndScripts,setAiAndScripts,act
 				PROCEED WITH NODE OPTION TYPE CHANGE?
 			</ConfirmationText>
       <ConfCancelWrapper>
-        <StyledButton handleClick={handleSwap}>
+        <StyledButton handleClick={handleSwap} sfx = 'toggle'>
 					CONFIRM
 				</StyledButton>
-        <StyledButton handleClick={() => setLosingNestedNodes(null)}>
+        <StyledButton handleClick={() => setLosingNestedNodes(null)} sfx = 'toggle'>
           CANCEL
         </StyledButton>
       </ConfCancelWrapper>

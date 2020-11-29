@@ -83,6 +83,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 					handleClick = {null}
 					selected = {true}
 					disabled = {true}
+					sfx = 'selected'
 					>
 						{accessoryStats[accessory].name}
 						
@@ -91,6 +92,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 					handleClick = {unequip}
 					width = '60'
 					fontSize = '6'
+					sfx = 'disabled'
 					>
 						UNEQUIP
 					</StyledButton>
@@ -122,6 +124,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 					width = '180'
 					handleClick = {unstage}
 					selected = {equipmentStaging.to && equipmentStaging.to.name === accessory}
+					sfx = 'selected'
 					>
 						{accessoryStats[accessory].name}
     			</StyledButton>
@@ -131,6 +134,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 					width= {altBaseSize ? altBaseSize : '240'}
 					handleClick = {stage}
 					selected = {equipmentStaging.to && equipmentStaging.to.name === accessory}
+					sfx = 'selected'
 					>
 						{accessoryStats[accessory].name}
     			</StyledButton>
@@ -155,6 +159,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 							handleClick = {equip}
 							width = '60'
 							fontSize = '8'
+							sfx = 'confirm'
 							>
 								EQUIP
 							</StyledButton>
@@ -164,6 +169,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 								handleClick = {unstage}
 								width = '60'
 								fontSize = '6'
+								sfx = 'disabled'
 								>
 									UNSELECT
 								</StyledButton>

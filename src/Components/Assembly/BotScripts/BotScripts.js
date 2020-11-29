@@ -27,6 +27,7 @@ const BotScripts = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScrip
 				// disabled = {scriptTypeViewing === 'conditions'}
 				width = '120'
 				fontSize = '10'
+				sfx = 'toggle'
 				>
 					CONDITIONS
 				</StyledButton>
@@ -36,6 +37,7 @@ const BotScripts = ({ botNumberSelected, attributes, aiAndScripts, setAiAndScrip
 				// disabled = {scriptTypeViewing === 'commands'}
 				width = '120'
 				fontSize = '10'
+				sfx = 'toggle'
 				>
 					COMMANDS
 				</StyledButton>

@@ -80,6 +80,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 					handleClick = {null}
 					selected = {true}
 					disabled = {true}
+					sfx = 'selected'
 					>
 						{weaponStats[weapon].name}
     			</StyledButton>
@@ -87,6 +88,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 					handleClick = {unequip}
 					width = '60'
 					fontSize = '6'
+					sfx = 'disabled'
 					>
 						UNEQUIP
 					</StyledButton>
@@ -102,6 +104,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 					width = '180'
 					handleClick = {unstage}
 					selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
+					sfx = 'selected'
 					>
 						{weaponStats[weapon].name}
     			</StyledButton>
@@ -111,6 +114,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 					width= {altBaseSize ? altBaseSize : '240'}
 					handleClick = {stage}
 					selected = {equipmentStaging.to && equipmentStaging.to.name === weapon}
+					sfx = 'selected'
 					>
 						{weaponStats[weapon].name}
     			</StyledButton>
@@ -132,6 +136,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 							handleClick = {equip}
 							width = '60'
 							fontSize = '8'
+							sfx = 'confirm'
 							>
 								EQUIP
 							</StyledButton>
@@ -141,6 +146,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
 								handleClick = {unstage}
 								width = '60'
 								fontSize = '6'
+								sfx = 'disabled'
 								>
 									UNSELECT
 								</StyledButton>

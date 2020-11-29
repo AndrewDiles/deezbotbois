@@ -68,6 +68,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				// disabled = {typeViewing === 'weapons'}
 				width = '120'
 				fontSize = '10'
+				sfx = 'toggle'
 				>
 					WEAPONS
 				</StyledButton>
@@ -77,6 +78,7 @@ const BotEquipment = ({ botNumberSelected, equipmentStaging, setEquipmentStaging
 				// disabled = {typeViewing === 'accessories'}
 				width = '120'
 				fontSize = '10'
+				sfx = 'toggle'
 				>
 					ACCESSORIES
 				</StyledButton>

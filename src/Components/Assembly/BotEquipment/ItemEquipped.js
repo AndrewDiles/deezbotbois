@@ -88,6 +88,7 @@ const ItemEquipped = ({ slotKey, type, equipmentStaging, setEquipmentStaging, bo
 					width = '180'
 					handleClick = {handleClickSlot}
 					selected = {equipmentStaging.from && equipmentStaging.from.slot === slotKey}
+					sfx = 'selected'
 					>
 					{name}
     		</StyledButton>
@@ -96,6 +97,7 @@ const ItemEquipped = ({ slotKey, type, equipmentStaging, setEquipmentStaging, bo
 					width = '240'
 					handleClick = {handleClickSlot}
 					selected = {equipmentStaging.from && equipmentStaging.from.slot === slotKey}
+					sfx = 'selected'
 					>
 					EMPTY SLOT
     		</StyledButton>
@@ -105,6 +107,7 @@ const ItemEquipped = ({ slotKey, type, equipmentStaging, setEquipmentStaging, bo
 						width = '60'
 						fontSize = '6'
 						handleClick = {unequip}
+						sfx = 'disabled'
 						>
 							UNEQUIP
 						</StyledButton>

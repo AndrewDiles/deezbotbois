@@ -40,6 +40,7 @@ const BattleButton = ({ selectionOptions, setSelectionOptions }) => {
 	):(
 		<StyledButton
 		handleClick = {initializeBattle}
+		sfx = 'melee'
 		>
 			BATTLE
 		</StyledButton>

@@ -41,6 +41,7 @@ const Profile = ({ time, disabled }) => {
 					handleClick = {() => {dispatch(updateUrl('assembly'))}}
 					selected = {settings.currentUrl === 'assembly'}
 					disabled = {settings.currentUrl === 'assembly'}
+					sfx = 'selected'
       	  >
       	  BUILD-EM
         </StyledButton>
@@ -50,6 +51,7 @@ const Profile = ({ time, disabled }) => {
 					handleClick = {() => {dispatch(updateUrl('levels'))}}
 					selected = {settings.currentUrl === 'levels'}
 					disabled = {settings.currentUrl === 'levels'}
+					sfx = 'selected'
       	  >
       	  FIGHT-EM
         </StyledButton>
@@ -65,6 +67,7 @@ const Profile = ({ time, disabled }) => {
 					handleClick = {() => {dispatch(updateUrl('settings'))}}
 					selected = {settings.currentUrl === 'settings'}
 					disabled = {settings.currentUrl === 'settings'}
+					sfx = 'selected'
           >
           SETTINGS
         </StyledButton>
@@ -74,13 +77,15 @@ const Profile = ({ time, disabled }) => {
 					handleClick = {() => {dispatch(updateUrl('account'))}}
 					selected = {settings.currentUrl === 'account'}
 					disabled = {settings.currentUrl === 'account'}
+					sfx = 'selected'
           >
           ACCOUNT
         </StyledButton>
       </StyledNavLink>
 			<StyledNavLink to={settings.currentUrl} tabIndex="-1">
 			<StyledButton 
-        handleClick = {() => {dispatch(deactivateProfileTab())}}
+				handleClick = {() => {dispatch(deactivateProfileTab())}}
+				sfx = 'selected'
         >
         COLLAPSE
       </StyledButton>

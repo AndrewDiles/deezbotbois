@@ -9,6 +9,7 @@ const BotViewingSwitchButton = ({ type, typeViewing, setTypeViewing }) => {
 		disabled = {typeViewing === type}
 		handleClick = {()=>{setTypeViewing(type)}}
 		width = {125}
+		sfx = 'toggle'
 		>
 			{type}
 		</StyledButton>

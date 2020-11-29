@@ -14,6 +14,7 @@ function NavLinkButton({ destination, innerText }) {
 			handleClick = {() => {dispatch(updateUrl(destination))}}
 			selected = {settings.currentUrl === destination}
 			disabled = {settings.currentUrl === destination}
+			sfx = 'selected'
       >
         {innerText ? innerText : destination.toUpperCase()}
       </StyledButton>

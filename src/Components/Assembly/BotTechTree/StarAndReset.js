@@ -42,6 +42,7 @@ const StarAndReset = ({starInfo, botNumberSelected}) => {
 				width = '75'
 				fontSize = '12'
 				handleClick = {handleClick}
+				sfx = 'toggle'
 				>
 					RESET
 				</StyledButton>

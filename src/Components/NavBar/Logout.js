@@ -15,15 +15,16 @@ function Logout() {
 
   return (
     <StyledButton
-      handleClick = {()=>{
-				dispatch(logOut());
-				dispatch(setMusic(false));
-				dispatch(setSfx(false));
-				dispatch(deactivateProfileTab());
-				dispatch(resetColorTesting());
-			}}
-      >
-				LOG OUT
+		sfx = 'disabled'
+    handleClick = {()=>{
+			dispatch(logOut());
+			dispatch(setMusic(false));
+			dispatch(setSfx(false));
+			dispatch(deactivateProfileTab());
+			dispatch(resetColorTesting());
+		}}
+    >
+			LOG OUT
     </StyledButton>
   );
 }

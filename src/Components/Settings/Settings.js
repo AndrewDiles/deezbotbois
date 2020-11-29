@@ -216,7 +216,8 @@ const Settings = () => {
           	handleClick={() => {
           	  changeNavLocation(direction);
           	}}
-          	disabled={settings.navLocation === direction}
+						disabled={settings.navLocation === direction}
+						sfx = 'toggle'
         		>
           		{direction.toUpperCase()}
         		</StyledButton>
@@ -290,7 +291,8 @@ const Settings = () => {
 						key = {scheme}
         	  colorSampling={colorSchemes[scheme]}
         	  disabled={ JSON.stringify(settings.colorsTesting) === JSON.stringify(colorSchemes[scheme])}
-        	  handleClick={() => {handleColorThemeClick(colorSchemes[scheme]);}}
+						handleClick={() => {handleColorThemeClick(colorSchemes[scheme]);}}
+						sfx = 'selected'
         	  >
         	    {scheme.toUpperCase()}
         	  </StyledButton>
