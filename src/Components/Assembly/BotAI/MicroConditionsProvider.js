@@ -8,6 +8,7 @@ import DistanceToTest from './Conditions/DistanceToTest';
 import ObstructionToTest from './Conditions/ObstructionToTest';
 import PreviousCommandTest from './Conditions/PreviousCommandTest';
 import SufficientEnergyTest from './Conditions/SufficientEnergyTest';
+import SwitchTest from './Conditions/SwitchTest';
 import WeaponLoadedTest from './Conditions/WeaponLoadedTest';
 import ScanResultsTest from './Conditions/ScanResultsTest';
 
@@ -114,7 +115,6 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 		case 'scanResults' : {
 			return (
 				<ScanResultsTest
-				nodeInfo = {nodeInfo}
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}
@@ -126,6 +126,17 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 			return (
 				<SufficientEnergyTest
 				nodeInfo = {nodeInfo}
+				activeNodeArray = {activeNodeArray}
+				setActiveNodeArray = {setActiveNodeArray}
+				aiAndScripts = {aiAndScripts}
+				botNumberSelected = {botNumberSelected}
+				attributes = {attributes}
+				/>
+			)
+		}
+		case 'switch' : {
+			return (
+				<SwitchTest
 				activeNodeArray = {activeNodeArray}
 				setActiveNodeArray = {setActiveNodeArray}
 				aiAndScripts = {aiAndScripts}

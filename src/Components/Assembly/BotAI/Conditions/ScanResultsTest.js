@@ -3,7 +3,7 @@ import TestTargetsSetter from '../TestComponents/TestTargetsSetter';
 import EvaluationTypeSelector from '../TestComponents/EvaluationTypeSelector';
 import ThresholdSetter from '../TestComponents/ThresholdSetter';
 
-const ScanResultsTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
+const ScanResultsTest = ({ activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts }) => {
 
 	return (		
 		<div className = 'commandContents'>

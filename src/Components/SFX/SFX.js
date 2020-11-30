@@ -44,7 +44,7 @@ const SFX = () => {
 					console.log('sfx call ', sfx.sfx, ' does not exist');
 				} else {
 					if (calledList.length === 0 || !calledList.includes(sfxCalled)) {
-						SFX[sfxCalled].pause();
+						// SFX[sfxCalled].pause();
 						SFX[sfxCalled].currentTime = 0;
 						SFX[sfxCalled].play();
 						let newCallList = [calledList]

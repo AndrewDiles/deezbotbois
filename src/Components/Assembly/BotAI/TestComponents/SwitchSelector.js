@@ -4,33 +4,33 @@ import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledButton from '../../../StyledButton/StyledButton';
 
-const TargetSelector = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, botNumberSelected }) => {
+const SwitchSelector = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, botNumberSelected }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
 
-	function setTarget(number) {
+	function setSwitch(number) {
 		let newActiveNodeArray = [...activeNodeArray];
-		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.targetNumber = number;
+		newActiveNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.switchNumber = number;
 		setActiveNodeArray(newActiveNodeArray);
 		scriptUpdater(botNumberSelected, aiAndScripts, newActiveNodeArray, dispatch, userInfo);
 	}
 
 	return (		
 		<>
-			<TargetSelectorContainer>
+			<SwitchSelectorContainer>
 				<Request className = 'centeredFlex'>
-					SET TARGET NUMBER
+					SET SWITCH NUMBER
 				</Request>
 				<Options className = 'centeredFlex'>
 					{[1,2,3,4,5].map((number)=>{
 						return (
 							<StyledButton
 							key = {number}
-							handleClick = {()=>{setTarget(number)}}
-							selected = {number === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.targetNumber}
+							handleClick = {()=>{setSwitch(number)}}
+							selected = {number === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.switchNumber}
 							fontSize = {9}
 							width = '30'
-							sfx = {number === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.targetNumber ? 'disabled' : 'selected'}
+							sfx = {number === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.switchNumber ? 'disabled' : 'selected'}
 							>
 								{number}
 							</StyledButton>
@@ -38,12 +38,12 @@ const TargetSelector = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, bot
 						
 					})}
 				</Options>
-			</TargetSelectorContainer>
+			</SwitchSelectorContainer>
 		</>
 	)
 }
-export default TargetSelector;
-const TargetSelectorContainer = styled.div`
+export default SwitchSelector;
+const SwitchSelectorContainer = styled.div`
 	width: 100%;
 	height: 40px;
 	display: flex;

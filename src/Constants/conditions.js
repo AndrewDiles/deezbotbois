@@ -9,6 +9,7 @@ const conditionsList = [
 	'previousCommand',
 	'scanResults',
 	'sufficientEnergy',
+	'switch',
 	'weaponLoaded',
 ]
 
@@ -147,6 +148,18 @@ export const conditionsData = {
 		testOptions: [
 			'if the bot has enough stored energy to perform a selected action',
 			'if the bot has enough stored energy to perform an attack with a specific weapon'
+		]
+	},
+	switch: {
+		camel: 'switch',
+		name: 'Switch',
+		affect: 'Tests if the state of a selected switch.',
+		generalUse: 'Useful to communicate future conditions and organize complicated procedures .',
+		useWhen: [
+			'needs guidance in a complicated series of conditions and commands.',
+		],
+		testOptions: [
+			'if a selected switch is on or off',
 		]
 	},
 	weaponLoaded: {
