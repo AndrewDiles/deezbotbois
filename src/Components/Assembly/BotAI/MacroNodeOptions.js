@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
+import { playSFX } from '../../../Redux/actions';
 import styled from 'styled-components';
 import InsertionIcon from './InsertionIcon';
 import DeleteNode from './DeleteNode';
@@ -128,18 +129,13 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 				<OptionsRow className ='evenlyFlex'>
 					<ButtonContainer case = {true}>
 						<StyledDepthMovementButton
-						// width = '90'
-						onClick = {handleConditionTrue}
+						onClick = {()=>{handleConditionTrue(); dispatch(playSFX('selected'));}}
 						colors = {colors}
 						case = {true}
 						>
 							DEPTH +1
 							CASE TRUE
 						</StyledDepthMovementButton>
-						{/* <ButtonColoration case = {true}>
-							DEPTH +1
-							CASE TRUE
-						</ButtonColoration> */}
 					</ButtonContainer>
 
 					<IconContainer>
@@ -151,18 +147,13 @@ const MacroNodeOption = ({ activeNodeArray, botNumberSelected, aiAndScripts, set
 
 					<ButtonContainer>
 						<StyledDepthMovementButton
-						// width = '90'
-						onClick = {handleConditionFalse}
+						onClick = {()=>{handleConditionFalse(); dispatch(playSFX('selected'));}}
 						colors = {colors}
 						case = {false}
 						>
 							DEPTH +1
 							CASE FALSE
 						</StyledDepthMovementButton>
-						{/* <ButtonColoration case = {false}>
-							DEPTH +1
-							CASE FALSE
-						</ButtonColoration> */}
 					</ButtonContainer>
 				</OptionsRow>
 			}

@@ -1,5 +1,5 @@
 const initialState = {
-  sfx: null
+  sfx: []
 }
 
 export default function settings(
@@ -7,10 +7,19 @@ export default function settings(
     switch(action.type) {
       case 'RESET_SFX': {
         return initialState
+			}
+			case 'REMOVE_SFX': {
+				let newSfx = [...state.sfx];
+				newSfx.shift();
+        return {
+          sfx : newSfx
+        }
       }
       case 'PLAY_SFX' : {
+				let newSfx = [...state.sfx];
+				newSfx.push(action.sfxName);
         return {
-          sfx : action.sfxName,
+          sfx : newSfx
         }
 			}
       default:{

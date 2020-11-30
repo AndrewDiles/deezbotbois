@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { resetSFX } from '../../Redux/actions';
+import { resetSFX, removeSFX } from '../../Redux/actions';
 
 import confirmSrc from './assets/GameSFX SFX1_confirm.wav';
 import disabledSrc from './assets/GameSFX SFX2_notAllowed.wav';
@@ -31,21 +31,30 @@ const SFX = () => {
 		acid: new Audio(acidSrc),
 		burn: new Audio(burnSrc),
 	})
-	
+	const [calledList, setCalledList] = useState([]);
 
 	useEffect(()=>{
-		if (!sfx.sfx) return;
-		if (!SFX[sfx.sfx]) {
-			console.log('sfx call ', sfx.sfx, ' does not exist');
-			dispatch(resetSFX());
+		if (sfx.sfx.length === 0) {
+			setCalledList([]);
 			return;
 		}
 		if (settings.sfx) {
-			SFX[sfx.sfx].pause();
-			SFX[sfx.sfx].currentTime = 0;
-			SFX[sfx.sfx].play();
+			sfx.sfx.forEach((sfxCalled)=>{
+				if (!SFX[sfxCalled]) {
+					console.log('sfx call ', sfx.sfx, ' does not exist');
+				} else {
+					if (calledList.length === 0 || !calledList.includes(sfxCalled)) {
+						SFX[sfxCalled].pause();
+						SFX[sfxCalled].currentTime = 0;
+						SFX[sfxCalled].play();
+						let newCallList = [calledList]
+						newCallList.push(sfxCalled);
+						setCalledList(newCallList);
+					}
+				}
+				dispatch(removeSFX());
+			})
 		}
-		dispatch(resetSFX());
 	},[settings.sfx, sfx.sfx])
 
 	useEffect(()=>{

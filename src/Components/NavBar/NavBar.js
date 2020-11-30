@@ -6,7 +6,8 @@ import {
 	setNavLocation,
 	activateProfileTab,
 	deactivateProfileTab,
-	hoverProfileTab
+	hoverProfileTab,
+	playSFX
 } from '../../Redux/actions';
 import NavLinkButton from './NavLinkButton';
 import NavLinkIcon from './NavLinkIcon';
@@ -33,8 +34,10 @@ function NavBar() {
 			if (settings.profileTab === 'inactive') {
 				dispatch(hoverProfileTab());
 			}
+			dispatch(playSFX('selected'));
 		}
 		const handleMouseOff = () => {
+			dispatch(playSFX('disabled'));
 			if (!userInfo.imageUrl || settings.profileTab === 'active' || settings.profileTab === 'inactive') return;
 				dispatch(deactivateProfileTab());
 		}
@@ -49,6 +52,7 @@ function NavBar() {
 			else {
 				dispatch(activateProfileTab());
 			}
+			dispatch(playSFX('toggle'));
 		}
 			targets[0].addEventListener('mouseenter',handleMouseOver);
 			targets[0].addEventListener('mouseleave',handleMouseOff);

@@ -38,7 +38,7 @@ const VolumeSetter = () => {
 			icon = {settings.sfx ? sfxOn : sfxOff}
 			padding = '5'
 			handleClick = {handleClickSfx}
-			sfx = 'toggle'
+			sfx = {settings.sfx ? 'toggle' : null}
 			/>
 		</div>
     

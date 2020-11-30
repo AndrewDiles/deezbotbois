@@ -4,7 +4,11 @@ export const playSFX = (sfxName) => ({
 	type: 'PLAY_SFX',
 	sfxName: sfxName
 });
-// reset sfx request:
+// remove last sfx played
+export const removeSFX = () => ({
+	type: 'REMOVE_SFX',
+})
+// reset sfx requests:
 export const resetSFX = () => ({
 	type: 'RESET_SFX',
 });
