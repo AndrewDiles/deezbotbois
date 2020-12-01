@@ -28,13 +28,16 @@ const Rules = () => {
 						0. WAIT
 					</li>
 					<li>
-						1. GUARD
+						1. SWITCH
 					</li>
 					<li>
-						2. COUNTER
+						2. GUARD
 					</li>
 					<li>
-						3. REDIRECT
+						3. COUNTER
+					</li>
+					<li>
+						4. REDIRECT
 					</li>
 					<li>
 						11. MELEE-ATTACK; RANGED-ATTACK; AIM-AND-ATTACK

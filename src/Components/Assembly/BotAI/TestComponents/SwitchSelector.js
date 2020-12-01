@@ -19,7 +19,7 @@ const SwitchSelector = ({ activeNodeArray, setActiveNodeArray, aiAndScripts, bot
 		<>
 			<SwitchSelectorContainer>
 				<Request className = 'centeredFlex'>
-					SET SWITCH NUMBER
+					TEST SWITCH NUMBER
 				</Request>
 				<Options className = 'centeredFlex'>
 					{[1,2,3,4,5].map((number)=>{

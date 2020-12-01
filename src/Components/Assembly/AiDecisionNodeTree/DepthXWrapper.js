@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const DepthXWrapper = ({ depthLevel, width, colored, children }) => {
-	console.log({colored})
+	// console.log({colored})
   return (
 		<DepthXContainer
 		// className = 'centeredFlex'

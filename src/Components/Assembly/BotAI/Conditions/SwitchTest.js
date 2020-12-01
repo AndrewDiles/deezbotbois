@@ -13,14 +13,15 @@ const SwitchTest = ({ activeNodeArray, setActiveNodeArray, botNumberSelected, ai
 			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
-			<EvaluationTypeSelector
-			activeNodeArray = {activeNodeArray}
-			setActiveNodeArray = {setActiveNodeArray}
-			aiAndScripts = {aiAndScripts}
-			optionsArray = {['ON','OFF']}
-			botNumberSelected = {botNumberSelected}
-			/>
+			<p>
+				CASE IS TRUE IF SWITCH IS ON
+			</p>
 			<br/>
+			{5 === activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.test.switchNumber && (
+				<p>
+					NOTE: SWITCH 5 FLIPS TO OFF AFTER IT HAS BEEN ON FOR A ONE TICK CYCLE
+				</p>
+			)}
 		</div>
 	)
 }

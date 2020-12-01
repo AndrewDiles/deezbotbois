@@ -61,6 +61,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		switchCommand: true,
 		scanCommand: true,
 		waitCommand: true,
 		
@@ -256,6 +257,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		switchCommand: true,
 		scanCommand: true,
 		waitCommand: true,
 		
@@ -451,6 +453,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		switchCommand: true,
 		scanCommand: true,
 		waitCommand: true,
 		
@@ -646,6 +649,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		switchCommand: true,
 		scanCommand: true,
 		waitCommand: true,
 		
@@ -841,6 +845,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		switchCommand: true,
 		scanCommand: true,
 		waitCommand: true,
 		
@@ -1037,6 +1042,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		switchCommand: true,
 		scanCommand: true,
 		waitCommand: true,
 		
@@ -1232,6 +1238,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		switchCommand: true,
 		scanCommand: true,
 		waitCommand: true,
 		
@@ -1427,6 +1434,7 @@ const baseBotAttributes = {
 		rechargeCommand: false,
 		redirectCommand: false,
 		repairCommand: false,
+		switchCommand: true,
 		scanCommand: true,
 		waitCommand: true,
 		
@@ -1624,6 +1632,7 @@ export const attributeInfo = {
 	redirectCommand: "Enables the execution of the REDIRECT command",
 	repairCommand: "Enables the execution of the REPAIR command",
 	scanCommand: "Enables the execution of the SCAN command",
+	switchCommand: "Enables the execution of the SWITCH command",
 	waitCommand: "Enables the execution of the WAIT command",
 
 	// Below are technically not attributes, but are useful for the AttributeHeader
@@ -1651,6 +1660,7 @@ export const commandInfo = {
 	redirectCommand: "REDIRECT",
 	repairCommand: "REPAIR",
 	scanCommand: "SCAN",
+	switchCommand: 'SWITCH',
 	waitCommand: "WAIT",
 }
 export const displayedAttributes = [
@@ -1731,5 +1741,6 @@ export const comprehensiveStatsBool = [
 	'redirectCommand',
 	'repairCommand',
 	'scanCommand',
+	'switchCommand',
 	'waitCommand',
 ]

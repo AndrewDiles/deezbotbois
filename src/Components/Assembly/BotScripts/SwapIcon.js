@@ -29,7 +29,7 @@ const SwapIcon = ({ botNumberSelected, aiAndScripts, setAiAndScripts, decisionNa
 			} else if (!decisionName.includes('Command')) {
 				swapNode(newScript, targetNodeArray, targetNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.conditionMet, targetNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.conditionUnMet)
 			} else if (targetNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition) {
-				console.log(targetNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition)
+				// console.log(targetNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition)
 
 				if (targetNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.conditionMet.length === 0 &&
 				targetNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].condition.conditionUnMet.length === 0) {

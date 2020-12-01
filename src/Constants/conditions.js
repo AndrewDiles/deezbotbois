@@ -153,8 +153,8 @@ export const conditionsData = {
 	switch: {
 		camel: 'switch',
 		name: 'Switch',
-		affect: 'Tests if the state of a selected switch.',
-		generalUse: 'Useful to communicate future conditions and organize complicated procedures .',
+		affect: 'Tests if the state of a selected switch.  Note: Switch 5 flips to OFF after it has been ON for one tick cycle.',
+		generalUse: 'Useful to communicate future conditions and organize complicated procedures.',
 		useWhen: [
 			'needs guidance in a complicated series of conditions and commands.',
 		],

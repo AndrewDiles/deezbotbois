@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import StyledIcon from '../../../StyledIcon/StyledIcon';
 import {power as cost} from 'react-icons-kit/icomoon/power';
 import {listOl as initiative} from 'react-icons-kit/fa/listOl';
-import StyledButton from '../../../StyledButton/StyledButton';
 import { getThemeColors } from '../../../../Redux/reducers/user-reducer';
 import InstructionsOrInformation from '../InstructionOrInformation';
 import commandDetails from '../../../../Constants/commandDetails';

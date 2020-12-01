@@ -55,6 +55,7 @@ import {basic_target as scan} from 'react-icons-kit/linea/basic_target'
 import {sphere as shield} from 'react-icons-kit/icomoon/sphere'
 // import {rocket as shieldPenetration} from 'react-icons-kit/oct/rocket'
 import {list as slots} from 'react-icons-kit/iconic/list'
+import {iosToggle as switchC} from 'react-icons-kit/ionicons/iosToggle'
 
 // import {iosWorld as typedShield} from 'react-icons-kit/ionicons/iosWorld'
 import {unlocked} from 'react-icons-kit/icomoon/unlocked'
@@ -331,6 +332,11 @@ const iconImporter = (stringToConvert) => {
 			icon1 = shield;
 			break;
 		}
+		case 'switchCommand' : {
+			icon1 = switchC;
+			icon2 = command;
+			break;
+		}
 		case 'waitCommand' : {
 			icon1 = wait;
 			icon2 = command;
@@ -357,7 +363,7 @@ const iconImporter = (stringToConvert) => {
 			icon2 = slots;
 			break;
 		}
-		default :{icon1 = null; icon2 = null}
+		default :{icon1 = null; icon2 = null; console.log('not found:',stringToConvert)}
 	}
 	// if (!icon1)
 	// console.log('the following string failed to load icons:', stringToConvert)

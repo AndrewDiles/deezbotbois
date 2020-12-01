@@ -42,7 +42,7 @@ const commandDetails = {
 	},
 	counterCommand: {
 		cost: 'The same cost as a MELEE-ATTACK with the selected equipment.',
-		speed: 2,
+		speed: 3,
 		affect: "For the remainder of the tick, the executor of this command will have their Armor and Shield multiplied twofold against incoming MELEE-ATTACKs, and, upon such an attack, the executor will attack the agressor with a MELEE-ATTACK.",
 		generalUse: 'Great to use repeatdely when an adjacent hostile unit initiated a conflict.',
 		useWhen: [
@@ -68,7 +68,7 @@ const commandDetails = {
 	},
 	guardCommand: {
 		cost: 7,
-		speed: 1,
+		speed: 2,
 		affect: "The executor of this command will have their Armor and Shield multiplied threefold for the remainder of the tick.",
 		generalUse: 'Best used as a source of burst damage when a hostile has been scanned.',
 		useWhen: [
@@ -141,7 +141,7 @@ const commandDetails = {
 	},
 	redirectCommand: {
 		cost: ".",
-		speed: 3,
+		speed: 4,
 		affect: ".",
 		generalUse: ".",
 		useWhen: [
@@ -176,6 +176,21 @@ const commandDetails = {
 		],
 		instructionOptions: [
 			// this command does not take Instructions
+		]
+	},
+	switchCommand: {
+		//TODO : Modify this
+		cost: 0,
+		speed: 1,
+		affect: "The execution of this command will provide the executor with the contents, be it wall, hostile or friendly, of each cell up to a distance of the executor's Scan Distance from the executor.",
+		generalUse: 'This is the primary means through which bots discover where other bots are positioned.',
+		useWhen: [
+			'has not detected the presence of any hostiles',
+			'has executed a MOVE command in the previous tick',
+			'has enough stored energy to attack a scanned hostile in the following turn',
+		],
+		instructionOptions: [
+			
 		]
 	},
 	waitCommand: {

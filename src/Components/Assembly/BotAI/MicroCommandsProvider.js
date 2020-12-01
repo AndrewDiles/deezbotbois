@@ -11,6 +11,7 @@ import MeleeAttackCommandInstructions from './Commands/MeleeAttackCommandInstruc
 import MoveCommandInstructions from './Commands/MoveCommandInstructions';
 import RamCommandInstructions from './Commands/RamCommandInstructions';
 import RangedAttackCommandInstructions from './Commands/RangedAttackCommandInstructions';
+import SwitchCommandInstructions from './Commands/SwitchCommandInstructions';
 
 const MicroCommandsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, attributes }) => {
 // console.log(nodeInfo)
@@ -146,10 +147,20 @@ switch(nodeInfo.name) {
 			<CommandWithoutInstructions/>
 		)
 	}
+	case 'switchCommand' : {
+		return (
+			<SwitchCommandInstructions
+			nodeInfo = {nodeInfo}
+			activeNodeArray = {activeNodeArray}
+			setActiveNodeArray = {setActiveNodeArray}
+			aiAndScripts = {aiAndScripts}
+			botNumberSelected = {botNumberSelected}
+			/>
+		)
+	}
 	case 'waitCommand' : {
 		return (
 			<CommandWithoutInstructions/>
-			//TODO: Add flag modification and flag tests in the Conditions
 		)
 	}
 	default: {
