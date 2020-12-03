@@ -17,8 +17,8 @@ const MicroConditionsProvider = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 	if (!nodeInfo || !nodeInfo.name) {
 		return (
 			<>
-			<br/>
-			MISSING NODE DATA
+				<br/>
+				MISSING NODE DATA
 			</>
 		)
 	}

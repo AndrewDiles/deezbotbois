@@ -1,4 +1,5 @@
 const commandDetails = {
+	//TODO: finish several of these
 	aimAndAttackCommand: {
 		cost: 'The energy cost is the sum of the costs of an AIM command + a RANGED-ATTACK command.',
 		speed: 11,
@@ -179,18 +180,17 @@ const commandDetails = {
 		]
 	},
 	switchCommand: {
-		//TODO : Modify this
 		cost: 0,
 		speed: 1,
-		affect: "The execution of this command will provide the executor with the contents, be it wall, hostile or friendly, of each cell up to a distance of the executor's Scan Distance from the executor.",
-		generalUse: 'This is the primary means through which bots discover where other bots are positioned.',
+		affect: "The execution of this command will allow the executor to set the state of all five switches.",
+		generalUse: 'This can indicate when certain conditions are met.',
 		useWhen: [
-			'has not detected the presence of any hostiles',
-			'has executed a MOVE command in the previous tick',
-			'has enough stored energy to attack a scanned hostile in the following turn',
+			'has met certain criteria and the switch is in the incorrect position',
 		],
 		instructionOptions: [
-			
+			'Each individual switch can be set to ON or OFF',
+			'Alternatively, a switch can be flipped to its opposite state',
+			'Finally, a switch can be left unchanged'
 		]
 	},
 	waitCommand: {

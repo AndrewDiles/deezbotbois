@@ -19,6 +19,7 @@ const initialState = {
 		minEnergyStored: 999,
 	},
 	tick: 0,
+	ticksSinceDamageTaken: 0,
 	commandsToExecute: [],
 	rotatingTieBreak: [],
 	battleHasOutcome: false,

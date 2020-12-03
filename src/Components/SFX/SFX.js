@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { resetSFX, removeSFX } from '../../Redux/actions';
+import { removeSFX } from '../../Redux/actions';
 
 import confirmSrc from './assets/GameSFX SFX1_confirm.wav';
 import disabledSrc from './assets/GameSFX SFX2_notAllowed.wav';
@@ -69,29 +69,3 @@ const SFX = () => {
 }
 
 export default SFX;
-
-// first solution, less effective:
-	// const [confirm, setConfirm] = useState(new Audio(confirmSrc));
-	// const [disabled, setDisabled] = useState(new Audio(disabledSrc));
-	// const [destroyed, setDestroyed] = useState(new Audio(destroyedSrc));
-	// const [selected, setSelected] = useState(new Audio(selectSrc));
-	// const [toggle, setToggle] = useState(new Audio(toggleSrc));
-	// const [melee, setMelee] = useState(new Audio(meleeSrc));
-	// const [impact, setImpact] = useState(new Audio(impactSrc));
-	// const [laser, setLaser] = useState(new Audio(laserSrc));
-	// const [gun, setGun] = useState(new Audio(gunSrc));
-	// const [acid, setAcid] = useState(new Audio(acidSrc));
-	// const [burn, setBurn] = useState(new Audio(burnSrc));
-	// const SFX = {
-	// 	confirm : confirm,
-	// 	disabled: disabled,
-	// 	destroyed: destroyed,
-	// 	selected: selected,
-	// 	toggle: toggle,
-	// 	melee: melee,
-	// 	impact: impact,
-	// 	laser: laser,
-	// 	gun: gun,
-	// 	acid: acid,
-	// 	burn: burn
-	// };

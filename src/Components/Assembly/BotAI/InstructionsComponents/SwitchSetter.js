@@ -58,5 +58,4 @@ const Request = styled.div`
 const Options = styled.div`
 	height: 40px;
 	width: 100%;
-	/* padding: 0 10px; */
 `

@@ -37,9 +37,9 @@ function NavBar() {
 			dispatch(playSFX('selected'));
 		}
 		const handleMouseOff = () => {
-			dispatch(playSFX('disabled'));
 			if (!userInfo.imageUrl || settings.profileTab === 'active' || settings.profileTab === 'inactive') return;
-				dispatch(deactivateProfileTab());
+			dispatch(playSFX('disabled'));
+			dispatch(deactivateProfileTab());
 		}
 		const handleClick = () => {
 			if (!userInfo.imageUrl) return;

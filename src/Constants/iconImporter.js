@@ -9,7 +9,6 @@ import {target as aim} from 'react-icons-kit/ikons/target'
 import {ic_my_location as aimAndAttack} from 'react-icons-kit/md/ic_my_location'
 import {shield as armor} from 'react-icons-kit/icomoon/shield'
 import {shieldOff as armorPenetration} from 'react-icons-kit/feather/shieldOff'
-
 import {u1F44A as attack} from 'react-icons-kit/noto_emoji_regular/u1F44A'
 // import {ic_pages as attack} from 'react-icons-kit/md/ic_pages'
 // import {battery as capacitor} from 'react-icons-kit/entypo/battery'
@@ -33,11 +32,9 @@ import {shield as guard} from 'react-icons-kit/entypo/shield'
 import {listOl as initiative} from 'react-icons-kit/fa/listOl'
 import {hammer as melee} from 'react-icons-kit/icomoon/hammer'
 // import {ic_timeline as movement} from 'react-icons-kit/md/ic_timeline'
-
 import {graph_rise as movement} from 'react-icons-kit/ikons/graph_rise'
 // import {meter as movementDistance} from 'react-icons-kit/icomoon/meter'
 import {graph_rise as movementDistance} from 'react-icons-kit/ikons/graph_rise'
-
 // import {x as multiplier} from 'react-icons-kit/oct/x'
 import {u1F52A as piercing} from 'react-icons-kit/noto_emoji_regular/u1F52A' // used to be armorPenetration
 import {u1F529 as power} from 'react-icons-kit/noto_emoji_regular/u1F529'
@@ -56,13 +53,10 @@ import {sphere as shield} from 'react-icons-kit/icomoon/sphere'
 // import {rocket as shieldPenetration} from 'react-icons-kit/oct/rocket'
 import {list as slots} from 'react-icons-kit/iconic/list'
 import {iosToggle as switchC} from 'react-icons-kit/ionicons/iosToggle'
-
 // import {iosWorld as typedShield} from 'react-icons-kit/ionicons/iosWorld'
 import {unlocked} from 'react-icons-kit/icomoon/unlocked'
 import {u23F3 as wait} from 'react-icons-kit/noto_emoji_regular/u23F3'
 import {u1F528 as weapon} from 'react-icons-kit/noto_emoji_regular/u1F528'
-
-
 // import {radio as scanCommand} from 'react-icons-kit/feather/radio'
 
 const iconImporter = (stringToConvert) => {
@@ -111,16 +105,6 @@ const iconImporter = (stringToConvert) => {
 			icon1 = armor;
 			break;
 		}
-		// case 'ArmorVsPiercingMultiplier' : {
-		// 	icon1 = typedArmor;
-		// 	icon2 = multiplier;
-		// 	break;
-		// }
-		// case 'ArmorVsCrushingMultiplier' : {
-		// 	icon1 = typedArmor;
-		// 	icon2 = multiplier;
-		// 	break;
-		// }
 		case 'attackCostModifier' : {
 			icon1 = attack;
 			icon2 = cost;
@@ -342,19 +326,8 @@ const iconImporter = (stringToConvert) => {
 			icon2 = command;
 			break;
 		}
-		// case 'ShieldVsEnergyMultiplier' : {
-		// 	icon1 = typedShield;
-		// 	icon2 = multiplier;
-		// 	break;
-		// }
-		// case 'ShieldVsFireMultiplier' : {
-		// 	icon1 = typedShield;
-		// 	icon2 = multiplier;
-		// 	break;
-		// }
 		case 'weaponSlot' : {
 			icon1 = weapon;
-			// icon2 = slot;
 			icon2 = unlocked;
 			break;
 		}

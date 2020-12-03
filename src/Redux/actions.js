@@ -9,9 +9,9 @@ export const removeSFX = () => ({
 	type: 'REMOVE_SFX',
 })
 // reset sfx requests:
-export const resetSFX = () => ({
-	type: 'RESET_SFX',
-});
+// export const resetSFX = () => ({
+// 	type: 'RESET_SFX',
+// });
 
 // BATTLE ACTIONS
 export const initializeBattle = (challenge, levelNumber, userBots, ) => ({

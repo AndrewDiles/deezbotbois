@@ -5,9 +5,9 @@ const initialState = {
 export default function settings(
   state = initialState, action) {
     switch(action.type) {
-      case 'RESET_SFX': {
-        return initialState
-			}
+      // case 'RESET_SFX': {
+      //   return initialState
+			// }
 			case 'REMOVE_SFX': {
 				let newSfx = [...state.sfx];
 				newSfx.shift();
