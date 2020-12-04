@@ -1,29 +1,23 @@
 function testContents (testLocation, levelInfo) {
-	//TODO: switch from forEachs, and use for loops and break; if contents are determined
-	let contents = null;
+	function sameCell (location1, location2) {
+		if (location1.col === location2.col && location1.row === location2.row) return true;
+		return false
+	}
 	if (levelInfo.friendly.length > 0) {
-		levelInfo.friendly.forEach((entry)=>{
-			if (entry.location.col === testLocation.col && entry.location.row === testLocation.row) {
-				contents = 'friendly';
-			}
-		})
+		for (let i = 0; i < levelInfo.friendly.length; i++) {
+			if (sameCell(levelInfo.friendly[i].location, testLocation)) return 'friendly'
+		}
 	}
-	if (contents) return contents;
 	if (levelInfo.hostile.length > 0) {
-		levelInfo.hostile.forEach((entry)=>{
-			if (entry.location.col === testLocation.col && entry.location.row === testLocation.row) {
-				contents =  'hostile';
-			}
-		})
+		for (let i = 0; i < levelInfo.hostile.length; i++) {
+			if (sameCell(levelInfo.hostile[i].location, testLocation)) return 'hostile'
+		}
 	}
-	if (contents) return contents;
 	if (levelInfo.userBots.length > 0) {
-		levelInfo.userBots.forEach((entry, index)=>{
-			if (entry.location.col === testLocation.col && entry.location.row === testLocation.row) {
-				contents =  'userBot';
-			}
-		})
+		for (let i = 0; i < levelInfo.userBots.length; i++) {
+			if (sameCell(levelInfo.userBots[i].location, testLocation)) return 'userBot'
+		}
 	}
-	return contents
+	return null
 }
 export default testContents
