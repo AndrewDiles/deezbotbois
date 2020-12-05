@@ -19,7 +19,7 @@ const BattleButton = ({ selectionOptions, setSelectionOptions }) => {
 		return () => clearTimeout(eraseErrorMsg)
 	},[error])
 
-	function initializeBattle () {
+	function moveToBattle () {
 		// test that a bot is selected and has valid ai
 		// dispatch to battle reducer
 		if (!userInfo.botBuilds[selectionOptions.botNumberSelected]) setError('NO BOT SELECTED');
@@ -29,7 +29,7 @@ const BattleButton = ({ selectionOptions, setSelectionOptions }) => {
 			const newSelectionOptions = {...selectionOptions};
 			newSelectionOptions.viewingLevels = false;
 			setSelectionOptions(newSelectionOptions);
-			dispatch(initializeBattle(newSelectionOptions.challengeNumber, newSelectionOptions.levelNumber, [newSelectionOptions.botNumberSelected]))
+			dispatch(initializeBattle(newSelectionOptions.challengeNumber, newSelectionOptions.levelNumber, [userInfo.botBuilds[newSelectionOptions.botNumberSelected]]))
 
 		}
 	}
@@ -39,7 +39,7 @@ const BattleButton = ({ selectionOptions, setSelectionOptions }) => {
 		</ErrorP>
 	):(
 		<StyledButton
-		handleClick = {initializeBattle}
+		handleClick = {moveToBattle}
 		sfx = 'melee'
 		>
 			BATTLE

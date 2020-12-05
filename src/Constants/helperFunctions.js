@@ -842,3 +842,35 @@ export function filterHostileScanResults (scanResults) {
 	}
 	return nonEmprtyCells
 }
+
+function addArmaments (botInfo) {
+	if (botInfo.equipment.arm1) {
+		botInfo.armAngle1 = 0;
+		botInfo.arm1LoadTime = 0;
+	}
+	if (botInfo.equipment.arm2) {
+		botInfo.armAngle2 = 0;
+		botInfo.arm2LoadTime = 0;
+	}
+	if (botInfo.equipment.arm3) {
+		botInfo.armAngle3 = 0;
+		botInfo.arm3LoadTime = 0;
+	}
+}
+
+export function initializeUserBot (botInfo, teamNumber, location) {
+	let botToAdd = JSON.parse(JSON.stringify(botInfo));
+	botToAdd.type = 'Bot';
+	botToAdd.team = teamNumber;
+	botToAdd.location = location;
+	botToAdd.events = [];
+	addArmaments(botToAdd);
+	botToAdd.switches = {1:false,2:false,3:false,4:false,5:false};
+	botToAdd.scanResults = [];
+	botToAdd.aimResults = false;  // this may not end up being a bool
+	botToAdd.consecutiveAims = 0;
+	botToAdd.previousCommand = null;
+	// need to add current stats
+
+	return botToAdd
+}

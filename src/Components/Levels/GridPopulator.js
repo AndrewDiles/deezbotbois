@@ -27,7 +27,7 @@ const GridPopulator = ({ objectsToBePlaced }) => {
       	  			model = {object.model}
       	  			arm1 = {object.arm1}
       	  			arm2 = {object.arm2}
-      	  			botColors = {object.botColors}
+      	  			botColors = {object.colors}
       	  			arm1Angle = {object.arm1Angle}
       	  			arm2Angle = {object.arm2Angle}
       	  		/>

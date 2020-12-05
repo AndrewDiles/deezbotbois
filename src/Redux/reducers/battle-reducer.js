@@ -1,4 +1,6 @@
 import levelInfo from '../../Constants/levels/levelnfo';
+import { initializeUserBot } from '../../Constants/helperFunctions'; 
+
 const initialState = {
 	battleLaunched : false,
 	userOptions :{
@@ -7,7 +9,7 @@ const initialState = {
 	},
 	challenge : null,
 	levelInfo : {},
-	botInfo : [],
+	objectsToRender : [],
 	recordTracker: {
 		totalDamageTaken: 0,
 		totalDamageDealt: 0,
@@ -38,11 +40,9 @@ export default function battleInfo(
 				} else {
 					newBattleInfo.levelInfo = levelInfo[action.levelNumber];
 				}
-				action.userBots.forEach((userBot)=>{
-					const botToAdd = JSON.parse(JSON.stringify(userBot));
-
-					// function to add current stats goes here
-					newBattleInfo.botInfo.push(botToAdd);
+				action.userBots.forEach((userBot, index)=>{
+					// function to add current stats goes here - current stats,
+					newBattleInfo.objectsToRender.push(initializeUserBot(userBot, 1, newBattleInfo.levelInfo.userBots[index].location));
 				})
 				
 				// requires: 
@@ -55,4 +55,4 @@ export default function battleInfo(
         return state;
       }
     }
-  }
+	}
