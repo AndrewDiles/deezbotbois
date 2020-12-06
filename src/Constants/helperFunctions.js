@@ -858,11 +858,11 @@ function addArmaments (botInfo) {
 	}
 }
 
-export function initializeUserBot (botInfo, teamNumber, location) {
+export function initializeBot (botInfo, teamNumber, location, type) {
 	let botToAdd = JSON.parse(JSON.stringify(botInfo));
-	botToAdd.type = 'Bot';
+	botToAdd.type = type;
 	botToAdd.team = teamNumber;
-	botToAdd.location = location;
+	botToAdd.location = {...location};
 	botToAdd.events = [];
 	addArmaments(botToAdd);
 	botToAdd.switches = {1:false,2:false,3:false,4:false,5:false};
@@ -870,7 +870,8 @@ export function initializeUserBot (botInfo, teamNumber, location) {
 	botToAdd.aimResults = false;  // this may not end up being a bool
 	botToAdd.consecutiveAims = 0;
 	botToAdd.previousCommand = null;
-	// need to add current stats
-
+	botToAdd.attributes.CurrentBurn = 0;
+	botToAdd.attributes.CurrentDurability = botInfo.attributes.Durability;
+	botToAdd.attributes.CurrentCapacitor = botInfo.attributes.CurrentCapacitor;
 	return botToAdd
 }

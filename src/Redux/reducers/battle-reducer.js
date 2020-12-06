@@ -1,5 +1,6 @@
 import levelInfo from '../../Constants/levels/levelnfo';
-import { initializeUserBot } from '../../Constants/helperFunctions'; 
+import { initializeBot } from '../../Constants/helperFunctions';
+import bots from '../../Constants/botAis/bots';
 
 const initialState = {
 	battleLaunched : false,
@@ -42,7 +43,13 @@ export default function battleInfo(
 				}
 				action.userBots.forEach((userBot, index)=>{
 					// function to add current stats goes here - current stats,
-					newBattleInfo.objectsToRender.push(initializeUserBot(userBot, 1, newBattleInfo.levelInfo.userBots[index].location));
+					newBattleInfo.objectsToRender.push(initializeBot(userBot, 1, newBattleInfo.levelInfo.userBots[index].location, 'User'));
+				})
+				newBattleInfo.levelInfo.hostile.forEach((hostile)=>{
+					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 2, hostile.location, 'Bot'));
+				})
+				newBattleInfo.levelInfo.friendly.length > 0 && newBattleInfo.levelInfo.friendly.forEach((friendly)=>{
+					newBattleInfo.objectsToRender.push(initializeBot(bots[friendly.name], 1, friendly.location, 'Bot'));
 				})
 				
 				// requires: 

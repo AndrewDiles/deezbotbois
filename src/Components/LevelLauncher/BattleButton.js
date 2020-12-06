@@ -4,7 +4,7 @@ import { initializeBattle } from '../../Redux/actions';
 import styled from 'styled-components';
 import StyledButton from '../StyledButton/StyledButton';
 
-const BattleButton = ({ selectionOptions, setSelectionOptions }) => {
+const BattleButton = ({ selectionOptions, setSelectionOptions, setGameLaunched }) => {
 	const dispatch = useDispatch();
 	const [error, setError] = React.useState(null);
 	const userInfo = useSelector((state) => state.userInfo);
@@ -29,8 +29,8 @@ const BattleButton = ({ selectionOptions, setSelectionOptions }) => {
 			const newSelectionOptions = {...selectionOptions};
 			newSelectionOptions.viewingLevels = false;
 			setSelectionOptions(newSelectionOptions);
+			setGameLaunched(true);
 			dispatch(initializeBattle(newSelectionOptions.challengeNumber, newSelectionOptions.levelNumber, [userInfo.botBuilds[newSelectionOptions.botNumberSelected]]))
-
 		}
 	}
   return error ? (

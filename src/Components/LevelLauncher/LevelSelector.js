@@ -7,7 +7,7 @@ import StyledButton from '../StyledButton/StyledButton';
 import StyledIcon from '../StyledIcon/StyledIcon';
 import BattleButton from './BattleButton';
 
-const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChallengesAndLevels }) => {
+const LevelSelector = ({ selectionOptions, setSelectionOptions, setGameLaunched, swapBetweenChallengesAndLevels }) => {
 	// TODO: Return to this component to ensure proper displays and functionality once 5+ levels are beaten
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
@@ -143,6 +143,7 @@ const LevelSelector = ({ selectionOptions, setSelectionOptions, swapBetweenChall
 				<BattleButton
 				selectionOptions = {selectionOptions}
 				setSelectionOptions = {setSelectionOptions}
+				setGameLaunched = {setGameLaunched}
 				/>
 				{hasAnimated && userInfo.levelProgress.length > 4 &&
 					<ShiftIconContainer>

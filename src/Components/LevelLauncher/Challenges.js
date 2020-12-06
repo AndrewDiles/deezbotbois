@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import styled from 'styled-components';
 // import BotSelector from './BotSelector';
 
-const Challenges = ({ selectionOptions, setSelectionOptions, swapBetweenChallengesAndLevels }) => {
+const Challenges = ({ selectionOptions, setSelectionOptions, setGameLaunched, swapBetweenChallengesAndLevels }) => {
 	//TODO: return to this component and its upcoming children once levels can be played
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);

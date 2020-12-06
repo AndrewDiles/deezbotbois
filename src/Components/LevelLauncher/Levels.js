@@ -10,7 +10,7 @@ import ViewHostiles from './ViewHostiles';
 import ViewAchievements from './ViewAchievements';
 import ScrollingSpacer from './ScrollingSpacer';
 
-const Levels = ({ selectionOptions, setSelectionOptions, swapBetweenChallengesAndLevels }) => {
+const Levels = ({ selectionOptions, setSelectionOptions, setGameLaunched, swapBetweenChallengesAndLevels }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
@@ -20,6 +20,7 @@ const Levels = ({ selectionOptions, setSelectionOptions, swapBetweenChallengesAn
 			<LevelSelector
 			selectionOptions = {selectionOptions}
 			setSelectionOptions = {setSelectionOptions}
+			setGameLaunched = {setGameLaunched}
 			swapBetweenChallengesAndLevels = {swapBetweenChallengesAndLevels}
 			/>
 			<LevelSelectorExtension

@@ -11,6 +11,7 @@ import { getThemeColors } from '../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import Levels from './Levels';
 import Challenges from './Challenges';
+import Battle from '../Battle/Battle';
 
 const LevelLauncher = () => {
 	// const dispatch = useDispatch();
@@ -55,19 +56,19 @@ const LevelLauncher = () => {
 					<Levels
 					selectionOptions = {selectionOptions}
 					setSelectionOptions = {setSelectionOptions}
+					setGameLaunched = {setGameLaunched}
 					swapBetweenChallengesAndLevels = {swapBetweenChallengesAndLevels}
 					/>
 				) : (
 					<Challenges
 					selectionOptions = {selectionOptions}
 					setSelectionOptions = {setSelectionOptions}
+					setGameLaunched = {setGameLaunched}
 					swapBetweenChallengesAndLevels = {swapBetweenChallengesAndLevels}
 					/>
 				)
 			) : (
-				<>
-					GAME GRID COMPONENT
-				</>
+				<Battle/>
 			)}
     </Wrapper>
   )

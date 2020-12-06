@@ -17,7 +17,7 @@ import styled from 'styled-components';
 
 // import StyledButton from '../StyledButton/StyledButton';
 
-const Levels = ({ disabled }) => {
+const Battle = ({ disabled }) => {
 	// const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
@@ -30,19 +30,13 @@ const Levels = ({ disabled }) => {
 	}
 
   return (
-    <Wrapper
-		navLocation = {settings.navLocation}
-		profileTab = {settings.profileTab}
-		colors = {colors}
-		>
-      Level selections go here
-			<br/>
-			Include 5 level Gambits and 20 level Gauntlets with better rewards
-    </Wrapper>
+    <>
+			Battle Grid and Battle Options
+		</>
   )
 }
 
-export default Levels;
+export default Battle;
 
 const Wrapper = styled.div`
 	padding: ${(props) =>
