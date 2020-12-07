@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import Levels from './Levels';
 import Challenges from './Challenges';
 import Battle from '../Battle/Battle';
-import BattleSettings from '../Battle/BattleSettings';
+import BattleSettings from '../Battle/BattleSettings/BattleSettings';
 
 const LevelLauncher = () => {
 	// const dispatch = useDispatch();

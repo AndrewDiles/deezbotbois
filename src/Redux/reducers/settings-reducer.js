@@ -9,6 +9,7 @@ const initialState = {
 	cellSize : 75,
 	colorsTesting: null,
 	executionSpeed: 1,
+	autoTick: false,
 	borderDisabled: false,
 }
 
@@ -43,6 +44,12 @@ export default function settings(
 				return {
 					...state,
 					executionSpeed: action.speed,
+				}
+			}
+			case 'TOGGLE_AUTO_TICK' : {
+				return {
+					...state,
+					autoTick: !state.autoTick,
 				}
 			}
 			case 'SET_COLORS_TESTING' : {

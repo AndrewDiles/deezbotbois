@@ -47,6 +47,10 @@ export const setExecutionSpeed = (speed) => ({
 	type: 'SET_EXECUTION_SPEED',
 	speed: speed
 });
+// toggling auto tick fire offs:
+export const toggleAutoTick = () => ({
+	type: 'TOGGLE_AUTO_TICK',
+});
 // setting cell size:
 export const setCellSize = (size) => ({
   type: 'SET_CELL_SIZE',

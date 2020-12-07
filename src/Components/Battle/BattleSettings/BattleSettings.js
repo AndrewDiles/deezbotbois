@@ -6,10 +6,12 @@ import styled from 'styled-components';
 import {
 	updateUrl,
 	setExecutionSpeed,
-} from '../../Redux/actions';
+} from '../../../Redux/actions';
 
-import StyledButton from '../StyledButton/StyledButton';
+import StyledButton from '../../StyledButton/StyledButton';
 
+import ProceedButton from './ProceedButton';
+import AutoTickSetter from './AutoTickSetter';
 import ExecutionSpeedSettings from './ExecutionSpeedSettings';
 
 const BattleSettings = ({ setGameLaunched }) => {
@@ -21,15 +23,16 @@ const BattleSettings = ({ setGameLaunched }) => {
   return (
     <Wrapper>
 			<div>
-				View Cell
+				VIEW BATTLE LOG
+			</div>
+			<div>
+				VIEW CELL
+			</div>
+			<div>
+				<ProceedButton/>
+				<AutoTickSetter/>
 			</div>
 			<ExecutionSpeedSettings/>
-			<div>
-				Begin
-			</div>
-			<div>
-				Auto
-			</div>
 		</Wrapper>
   )
 }
@@ -45,4 +48,7 @@ const Wrapper = styled.div`
 	align-content: center;
 	align-items: start;
 	margin: 10px;
+	>div{
+		margin: 5px;
+	}
 `
