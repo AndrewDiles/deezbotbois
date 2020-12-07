@@ -845,15 +845,15 @@ export function filterHostileScanResults (scanResults) {
 
 function addArmaments (botInfo) {
 	if (botInfo.equipment.arm1) {
-		botInfo.armAngle1 = 0;
+		botInfo.arm1Angle = 0;
 		botInfo.arm1LoadTime = 0;
 	}
 	if (botInfo.equipment.arm2) {
-		botInfo.armAngle2 = 0;
+		botInfo.arm2Angle = 0;
 		botInfo.arm2LoadTime = 0;
 	}
 	if (botInfo.equipment.arm3) {
-		botInfo.armAngle3 = 0;
+		botInfo.arm3Angle = 0;
 		botInfo.arm3LoadTime = 0;
 	}
 }

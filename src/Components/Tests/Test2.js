@@ -176,55 +176,55 @@ const Test2 = () => {
 		colors = {colors}
 		>
 			<ColDiv className = 'centeredFlex'>
-			<StyledButton
-			handleClick = {(e) => {setCellClicked({row: cellClicked.row-1, col: cellClicked.col})}}
-			sfx = 'selected'
-			>
-				ROW UP
-			</StyledButton>
-			<StyledButton
-			handleClick = {(e) => {setCellClicked({row: cellClicked.row+1, col: cellClicked.col})}}
-			sfx = 'selected'
-			>
-				ROW DOWN
-			</StyledButton>
-			<StyledButton
-			handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col+1})}}
-			sfx = 'selected'
-			>
-				COL RIGHT
-			</StyledButton>
-			<StyledButton
-			handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col-1})}}
-			sfx = 'selected'
-			>
-				COL LEFT
-			</StyledButton>
-			<StyledButton
-			handleClick = {(e) => {handleMove(objectsToBePlaced,0,cellClicked, pathToAdjacentCell)}}
-			sfx = 'selected'
-			>
-				Move ADJ
-			</StyledButton>
-			<StyledButton
-			handleClick = {(e) => {handleMove(objectsToBePlaced,0,cellClicked, pathToCell)}}
-			sfx = 'selected'
-			>
-				Move ONTO
-			</StyledButton>
-			<StyledButton
-			handleClick = {(e) => {dispatch(toggleBorder())}}
-			sfx = 'selected'
-			>
-				TOGGLE BORDER
-			</StyledButton>
-			<StyledButton
-			handleClick = {(e) => {handleScan(0, objectsToBePlaced[0].attributes.ScanDistance, rows, columns, objectsToBePlaced)}}
-			sfx = 'toggle'
-			// /(indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced) {
-			>
-				PERFORM SCAN
-			</StyledButton>
+				<StyledButton
+				handleClick = {(e) => {setCellClicked({row: cellClicked.row-1, col: cellClicked.col})}}
+				sfx = 'selected'
+				>
+					ROW UP
+				</StyledButton>
+				<StyledButton
+				handleClick = {(e) => {setCellClicked({row: cellClicked.row+1, col: cellClicked.col})}}
+				sfx = 'selected'
+				>
+					ROW DOWN
+				</StyledButton>
+				<StyledButton
+				handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col+1})}}
+				sfx = 'selected'
+				>
+					COL RIGHT
+				</StyledButton>
+				<StyledButton
+				handleClick = {(e) => {setCellClicked({row: cellClicked.row, col: cellClicked.col-1})}}
+				sfx = 'selected'
+				>
+					COL LEFT
+				</StyledButton>
+				<StyledButton
+				handleClick = {(e) => {handleMove(objectsToBePlaced,0,cellClicked, pathToAdjacentCell)}}
+				sfx = 'selected'
+				>
+					Move ADJ
+				</StyledButton>
+				<StyledButton
+				handleClick = {(e) => {handleMove(objectsToBePlaced,0,cellClicked, pathToCell)}}
+				sfx = 'selected'
+				>
+					Move ONTO
+				</StyledButton>
+				<StyledButton
+				handleClick = {(e) => {dispatch(toggleBorder())}}
+				sfx = 'selected'
+				>
+					TOGGLE BORDER
+				</StyledButton>
+				<StyledButton
+				handleClick = {(e) => {handleScan(0, objectsToBePlaced[0].attributes.ScanDistance, rows, columns, objectsToBePlaced)}}
+				sfx = 'toggle'
+				// /(indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced) {
+				>
+					PERFORM SCAN
+				</StyledButton>
 			</ColDiv>
 			<BattleGrid
 			rows = {rows}

@@ -1,57 +1,54 @@
 import React from 'react';
-import { 
-	useSelector, 
-	// useDispatch 
-} from "react-redux";
-import { 
-	// NavLink, 
-	Redirect 
-} from "react-router-dom";
-import { getThemeColors } from '../../Redux/reducers/user-reducer';
+import { useSelector } from "react-redux";
+import BattleGrid from './BattleGrid';
+import GridPopulator from './GridPopulator';
 import styled from 'styled-components';
 
-// import {
-// 	updateUrl,
-// 	deactivateProfileTab,
-// } from '../../Redux/actions';
-
-// import StyledButton from '../StyledButton/StyledButton';
-
-const Battle = ({ disabled }) => {
-	// const dispatch = useDispatch();
-	const userInfo = useSelector((state) => state.userInfo);
+const Battle = () => {
+	const battleInfo = useSelector((state) => state.battleInfo);
 	const settings = useSelector((state) => state.settings);
-	const colors = useSelector(getThemeColors);
-
-	if (userInfo.email === undefined || userInfo.email === null) {
-    return (
-      <Redirect to="/home" />
-    )
-	}
+	const [cellColors, setCellColors] = React.useState({});
+	const [cellClicked, setCellClicked] = React.useState({row: 0, col:0});
 
   return (
-    <>
-			Battle Grid and Battle Options
-		</>
+    <Wrapper>
+			<BattleGrid
+			rows = {battleInfo.levelInfo.height}
+			columns = {battleInfo.levelInfo.width}
+			setCellClicked = {setCellClicked}
+			cellClicked = {cellClicked}
+			cellColors = {cellColors}
+			/>
+			<ShiftedWrapper
+			rows = {battleInfo.levelInfo.height}
+			columns = {battleInfo.levelInfo.width}
+			cellSize = {settings.cellSize}
+			>
+				<GridPopulator
+				objectsToBePlaced = {battleInfo.objectsToRender}
+				>
+				</GridPopulator>
+			</ShiftedWrapper>
+		</Wrapper>
   )
 }
 
 export default Battle;
 
+const ShiftedWrapper = styled.div`
+	position: relative;
+	left: ${props => `-${props.cellSize*props.columns}px`};
+	overflow: visible;
+	pointer-events:none;
+`
 const Wrapper = styled.div`
-	padding: ${(props) =>
-		props.navLocation === "top" ? 
-			props.profileTab === 'active' && "0 140px 0 0"
-			: props.profileTab === 'active' ? "0 140px 0 140px" : "0 140px 0 0"
-			};
-	transition: padding 0.5s ease-in-out;
-	color: ${props => props.colors.textColor};
 	width: 100%;
 	height: 100%;
 	overflow: auto;
 	display : flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: start;
 	align-content: center;
-	align-items: center;
+	align-items: start;
+	margin: 10px;
 `

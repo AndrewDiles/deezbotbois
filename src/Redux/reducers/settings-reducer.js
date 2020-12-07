@@ -39,6 +39,12 @@ export default function settings(
           sfx : action.sfx,
         }
 			}
+			case 'SET_EXECUTION_SPEED' : {
+				return {
+					...state,
+					executionSpeed: action.speed,
+				}
+			}
 			case 'SET_COLORS_TESTING' : {
         return {
           ...state,

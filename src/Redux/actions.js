@@ -42,6 +42,11 @@ export const setSfx = (sfx) => ({
 	type: 'SET_SFX',
 	sfx: sfx
 });
+// setting execution speed:
+export const setExecutionSpeed = (speed) => ({
+	type: 'SET_EXECUTION_SPEED',
+	speed: speed
+});
 // setting cell size:
 export const setCellSize = (size) => ({
   type: 'SET_CELL_SIZE',

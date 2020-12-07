@@ -22,14 +22,17 @@ const GridPopulator = ({ objectsToBePlaced }) => {
 						id = {`placer${index}`}
 						// executionSpeed = {settings.executionSpeed}
 						>
-							{object.type === 'Bot' &&
+							{(object.type === 'Bot' || object.type === 'User') &&
 								<Bot
       	  			model = {object.model}
-      	  			arm1 = {object.arm1}
-      	  			arm2 = {object.arm2}
+      	  			arm1 = {object.equipment.arm1}
+								arm2 = {object.equipment.arm2}
+								arm3 = {object.equipment.arm3}
       	  			botColors = {object.colors}
       	  			arm1Angle = {object.arm1Angle}
-      	  			arm2Angle = {object.arm2Angle}
+								arm2Angle = {object.arm2Angle}
+								arm3Angle = {object.arm3Angle}
+								// alternativeBotSize
       	  		/>
 							}
     				</ObjectPlacer>
