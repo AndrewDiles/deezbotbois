@@ -42,7 +42,7 @@ const BattleButton = ({ selectionOptions, setSelectionOptions, setGameLaunched }
 		handleClick = {moveToBattle}
 		sfx = 'melee'
 		>
-			BATTLE
+			CONFIRM
 		</StyledButton>
   )
 }

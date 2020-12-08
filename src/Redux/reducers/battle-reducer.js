@@ -43,13 +43,19 @@ export default function battleInfo(
 				}
 				action.userBots.forEach((userBot, index)=>{
 					// function to add current stats goes here - current stats,
-					newBattleInfo.objectsToRender.push(initializeBot(userBot, 1, newBattleInfo.levelInfo.userBots[index].location, 'User'));
+					newBattleInfo.objectsToRender.push(initializeBot(userBot, 0, newBattleInfo.levelInfo.userBots[index].location, 'User'));
 				})
 				newBattleInfo.levelInfo.hostile.forEach((hostile)=>{
+					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 1, hostile.location, 'Bot'));
+				})
+				newBattleInfo.levelInfo.hostile2.length > 0 && newBattleInfo.levelInfo.hostile2.forEach((hostile)=>{
 					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 2, hostile.location, 'Bot'));
 				})
+				newBattleInfo.levelInfo.hostile3.length > 0 && newBattleInfo.levelInfo.hostile3.forEach((hostile)=>{
+					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 3, hostile.location, 'Bot'));
+				})
 				newBattleInfo.levelInfo.friendly.length > 0 && newBattleInfo.levelInfo.friendly.forEach((friendly)=>{
-					newBattleInfo.objectsToRender.push(initializeBot(bots[friendly.name], 1, friendly.location, 'Bot'));
+					newBattleInfo.objectsToRender.push(initializeBot(bots[friendly.name], 0, friendly.location, 'Bot'));
 				})
 				
 				// requires: 

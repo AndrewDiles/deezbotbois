@@ -18,6 +18,16 @@ function testContents (testLocation, levelInfo) {
 			if (sameCell(levelInfo.userBots[i].location, testLocation)) return 'userBot'
 		}
 	}
+	if (levelInfo.hostile2.length > 0) {
+		for (let i = 0; i < levelInfo.hostile2.length; i++) {
+			if (sameCell(levelInfo.hostile2[i].location, testLocation)) return 'hostileT2'
+		}
+	}
+	if (levelInfo.hostile3.length > 0) {
+		for (let i = 0; i < levelInfo.hostile3.length; i++) {
+			if (sameCell(levelInfo.hostile3[i].location, testLocation)) return 'hostileT3'
+		}
+	}
 	return null
 }
 export default testContents

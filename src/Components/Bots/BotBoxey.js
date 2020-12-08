@@ -100,7 +100,8 @@ const Head = styled.div`
   top: 5%;
   left: 37.5%;
   border: ${props => `${props.borderSize} solid ${props.trim}`};
-  background: ${props => props.color};
+  /* background: ${props => props.color}; */
+	background-image: ${props => `radial-gradient(${props.color},${props.trim})`};
   display: flex;
   justify-content: space-evenly;
   align-items: center;

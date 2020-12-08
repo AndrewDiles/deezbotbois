@@ -137,7 +137,8 @@ const Head = styled.div`
   top: 20%;
   left: 40%;
   border: ${props => `${props.borderSize} solid ${props.trim}`};
-  background: ${props => props.color};
+  /* background: ${props => props.color}; */
+	background-image: ${props => `radial-gradient(${props.color},${props.trim})`};
   border-radius: 50%;
   display: flex;
   justify-content: space-evenly;

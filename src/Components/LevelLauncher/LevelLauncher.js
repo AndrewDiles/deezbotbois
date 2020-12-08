@@ -69,10 +69,12 @@ const LevelLauncher = () => {
 					/>
 				)
 			) : (
+				// <BattleContainer>
 				<>
 					<BattleSettings setGameLaunched = {setGameLaunched}/>
 					<Battle/>
 				</>
+				// </BattleContainer>
 			)}
     </Wrapper>
   )
@@ -84,7 +86,7 @@ const Wrapper = styled.div`
 	padding: ${(props) =>
 		props.navLocation === "top" ? 
 			props.profileTab === 'active' ? "20px 140px 0 0" : "20px 0 0 0"
-			: props.profileTab === 'active' ? "20px 140px 0 140px" : "20px 140px 0 0"
+			: props.profileTab === 'active' ? "20px 145px 0 145px" : "20px 145px 0 5px"
 			};
 	transition: padding 0.75s ease-in-out;
 	color: ${props => props.colors.textColor};

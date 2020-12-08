@@ -12,6 +12,7 @@ const OtherBotSelector = ({ botNumberViewing, setBotNumberViewing, typeViewing, 
 			<></>
 		)
 	}
+	//TODO: add ability to set team number if there are multiple teams
 
 	const handleRotateBot = (direction) => {
 		if (direction === 'left') {

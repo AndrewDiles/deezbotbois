@@ -58,6 +58,12 @@ const Grid = styled.div`
 const Cell = styled.div`
 	height: ${props => props.levelInfo.width > props.levelInfo.height ? `${200/props.levelInfo.width}px` : `${200/props.levelInfo.width}px`};
 	width: ${props => props.levelInfo.width > props.levelInfo.height ? `${200/props.levelInfo.width}px` : `${200/props.levelInfo.width}px`};
-	background-color: ${props => props.contents === 'hostile' ? 'red' : props.contents === 'friendly' ? 'lime' : props.contents === 'userBot' ? 'blue' : `${props.colors.primary}`};
+	background-color: ${props => props.contents === 'hostile' ? 'red' :
+		props.contents === 'friendly' ? 'lime' :
+		props.contents === 'userBot' ? 'blue' :
+		props.contents === 'hostileT2' ? 'fuchsia' :
+		props.contents === 'hostileT3' ? 'darkorange' :
+		`${props.colors.primary}`
+	};
 	border: ${props => `1px solid ${props.colors.secondary}`};
 `

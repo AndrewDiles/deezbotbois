@@ -12,6 +12,8 @@ const levelInfo = [
 				location: {col: 10, row:10},
 			}
 		],
+		hostile2 : [],
+		hostile3 : [],
 		userBots : [
 			{
 				location: {col:3, row:3}
@@ -61,6 +63,8 @@ const levelInfo = [
 				location: {col: 10, row:10},
 			}
 		],
+		hostile2 : [],
+		hostile3 : [],
 		userBots : [
 			{
 				location: {col:3, row:3}
@@ -93,12 +97,28 @@ const levelInfo = [
 	},
 	{
 		levelNumber: 999,
-		levelName: 'NOT YET MADE',
-		width: 5,
-		height: 5,
+		levelName: 'UNDER CONSTRUCTION',
+		width: 13,
+		height: 13,
 		friendly: [
 		],
 		hostile : [
+			{
+				name: 'dumbOne',
+				location: {col: 10, row:10},
+			}
+		],
+		hostile2 : [
+			{
+				name: 'dumbOne',
+				location: {col: 3, row:10},
+			}
+		],
+		hostile3 : [
+			{
+				name: 'dumbOne',
+				location: {col: 10, row:3},
+			}
 		],
 		userBots : [
 			{

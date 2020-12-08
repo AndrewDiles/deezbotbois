@@ -51,7 +51,7 @@ const ButtonStylings = styled.button`
   font-size: ${props=>props.fontSize ? `${props.fontSize}px` : '12px'};
   color: ${props => props.colors.textColor};
 	opacity: ${props => props.disabled && 0.5};
-  
+	white-space: pre-line;
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     background-color: ${props => !props.disabled && props.selected ? props.selected : props.colors.hovered};

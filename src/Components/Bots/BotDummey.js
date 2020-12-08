@@ -78,10 +78,10 @@ const PlatformWrapper = styled.div`
 `
 const Body = styled.div`
   position: relative;
-  width: 60%;
-  height: 50%;
+  width: 40%;
+  height: 45%;
   top: 0%;
-  left: 20%;
+  left: 30%;
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   background: ${props => props.color};
   background-image: ${props => `radial-gradient(${props.color},${props.trim})`};
@@ -111,7 +111,8 @@ const Head = styled.div`
   left: 14.5%;
   border: ${props => `${props.borderSize} solid ${props.trim}`};
 	border-radius: 50% 50% 25% 50%;
-  background: ${props => props.color};
+  /* background: ${props => props.color}; */
+	background-image: ${props => `radial-gradient(${props.color},${props.trim})`};
   display: flex;
   justify-content: space-evenly;
   align-items: center;

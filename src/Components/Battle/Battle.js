@@ -51,4 +51,5 @@ const Wrapper = styled.div`
 	align-content: center;
 	align-items: start;
 	margin: 10px;
+	animation: .5s ease-out 1 expandY;
 `

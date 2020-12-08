@@ -1,24 +1,24 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import styled from 'styled-components';
-
+import StyledButton from '../../StyledButton/StyledButton';
 import {
 	updateUrl
 } from '../../../Redux/actions';
 
-import StyledButton from '../../StyledButton/StyledButton';
-
-const ProceedButton = () => {
+const InspectCellButton = ({ viewing, setViewing }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const battleInfo = useSelector((state) => state.battleInfo);
 	const settings = useSelector((state) => state.settings);
 	
   return (
-    <StyledButton>
-			{battleInfo.tick === 0 ? 'BEGIN BATTLE' : 'NEXT TICK'}
+    <StyledButton
+		handleClick = {()=>{setViewing(viewing === 'cell' ? null : 'cell')}}
+		>
+			{viewing === 'cell' ? 'CLOSE INSPECTOR' : 'OPEN INSPECTOR'}
 		</StyledButton>
   )
 }
 
-export default ProceedButton;
+export default InspectCellButton;

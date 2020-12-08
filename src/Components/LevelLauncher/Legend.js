@@ -15,8 +15,14 @@ const Legend = ({ levelInfo }) => {
 			{levelInfo.friendly.length > 0 && 
 				<LegendEntry type = 'FRIENDLY'/>
 			}
-			{levelInfo.hostile.length > 0 && 
-				<LegendEntry type = 'HOSTILE'/>
+			{levelInfo.hostile.length > 0 &&
+				<LegendEntry type = {levelInfo.hostile2.length === 0 ? 'HOSTILE' : 'HOSTILE T1'}/>
+			}
+			{levelInfo.hostile2.length > 0 &&
+				<LegendEntry type = 'HOSTILE T2'/>
+			}
+			{levelInfo.hostile3.length > 0 &&
+				<LegendEntry type = 'HOSTILE T3'/>
 			}
 		</DisplayWrapper>
   )

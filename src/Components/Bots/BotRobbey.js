@@ -116,8 +116,8 @@ const Body = styled.div`
 const Neck = styled.div`
   position: relative;
   width: 10%;
-  height: 15%;
-  top: -2.5%;
+  height: 14%;
+  top: -1%;
   left: 45%;
   border: ${props => `${props.borderSize} solid ${props.trim}`};
   background: ${props => props.color};
@@ -130,7 +130,8 @@ const Head = styled.div`
   top: 0%;
   left: 35%;
   border: ${props => `${props.borderSize} solid ${props.trim}`};
-  background: ${props => props.color};
+  /* background: ${props => props.color}; */
+	background-image: ${props => `radial-gradient(${props.color},${props.trim})`};
   display: flex;
   justify-content: space-evenly;
   align-items: center;

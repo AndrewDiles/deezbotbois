@@ -36,5 +36,9 @@ const EntryWrapper = styled.div`
 const ColoredCell = styled.div`
 	height: 20px;
 	width : 20px;
-	background-color: ${props => props.type === 'YOUR BOT' ? 'blue' : props.type === 'FRIENDLY' ? 'lime' : 'red'};
+	background-color: ${props => props.type === 'YOUR BOT' ? 'blue' :
+	props.type === 'FRIENDLY' ? 'lime' :
+	props.type === 'HOSTILE T2' ? 'fuchsia' :
+	props.type === 'HOSTILE T3' ? 'darkorange' : 'red'
+	};
 `
