@@ -37,6 +37,7 @@ export function incrementerArrayGenerator (numberOfEntries) {
 	}
 	return newArray;
 }
+
 // function below verifies that a given input is an Integer
 export function verifyIsInteger (supposedNumber) {
 	if (supposedNumber === null || supposedNumber === undefined) {
@@ -86,11 +87,18 @@ export function testValidityOfLocationInput (location) {
 	// }
 	return true
 }
+// function tests if two locations are the same
+export function testSameCell (location1, location2) {
+	if (!testValidityOfLocationInput(location1) || !testValidityOfLocationInput(location2)) return
+	if (location1.row !== location2.row || location1.col !== location2.col) return false
+	return true
+}
 // function verifies that a row/col combination is in bounds
 export function verifyCellIsInBounds (cellLocation, maxRows, maxCols) {
 	if (!testValidityOfLocationInput(cellLocation)) return
 	if (!verifyIsInteger(maxRows) || !verifyIsInteger(maxCols)) return
-	if (cellLocation.col > maxCols || cellLocation.row >maxRows) return false
+	if (cellLocation.col > maxCols || cellLocation.row > maxRows ||
+		cellLocation.col === 0 || cellLocation.row === 0) return false
 	else return true
 }
 // function below determines distance (cell count) from a cell
@@ -841,6 +849,16 @@ export function filterHostileScanResults (scanResults) {
 		}
 	}
 	return nonEmprtyCells
+}
+
+// function returns the object if one exists on the given cellLocation, or null if one does not exist
+export function findObjectOnCell (cellLocation, allObjectsOnGrid) {
+	for (let i = 0; i < allObjectsOnGrid.length; i++) {
+		if (testSameCell(cellLocation, allObjectsOnGrid[i].location)) {
+			return allObjectsOnGrid[i]
+		}
+	}
+	return null
 }
 
 function addArmaments (botInfo) {

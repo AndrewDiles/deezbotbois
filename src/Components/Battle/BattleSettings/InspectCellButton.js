@@ -1,20 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import styled from 'styled-components';
 import StyledButton from '../../StyledButton/StyledButton';
-import {
-	updateUrl
-} from '../../../Redux/actions';
+import { deactivateProfileTab } from '../../../Redux/actions';
 
 const InspectCellButton = ({ viewing, setViewing }) => {
 	const dispatch = useDispatch();
-	const userInfo = useSelector((state) => state.userInfo);
-	const battleInfo = useSelector((state) => state.battleInfo);
 	const settings = useSelector((state) => state.settings);
 	
   return (
     <StyledButton
-		handleClick = {()=>{setViewing(viewing === 'cell' ? null : 'cell')}}
+		handleClick = {()=>{setViewing(viewing === 'cell' ? null : 'cell'); dispatch(deactivateProfileTab())}}
+		sfx = 'toggle'
 		>
 			{viewing === 'cell' ? 'CLOSE INSPECTOR' : 'OPEN INSPECTOR'}
 		</StyledButton>

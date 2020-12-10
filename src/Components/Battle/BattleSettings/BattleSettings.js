@@ -24,6 +24,12 @@ const BattleSettings = ({ setGameLaunched, cellClicked }) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
 	const settings = useSelector((state) => state.settings);
 	const [viewing, setViewing] = React.useState(null);
+
+	React.useEffect(()=>{
+		if (settings.profileTab === 'active') {
+			setViewing(null);
+		}
+	}, [settings.profileTab])
 	
 	// TODO: Create a modal that only exists if viewing is: log, cell, or end
 

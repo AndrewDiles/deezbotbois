@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const BattleLog = ({ viewing }) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
-
+	
   return (
     <Wrapper className = 'startFlex col'>
 			<Tab
@@ -13,37 +13,37 @@ const BattleLog = ({ viewing }) => {
 			<LogContainer
 			viewing = {viewing}
 			>
-				{battleInfo.battleLog.map((logEntry)=>{
+				{battleInfo.battleLog.map((logEntry, index)=>{
 					if (logEntry.type === 'new-tick') {
 						return (
-							<NewTick>
+							<NewTick key = {index}>
 								-- NEW TICK # {logEntry.number} --
 							</NewTick>
 						)
 					}
 					if (logEntry.type === 'determining-actions') {
 						return (
-							<Phase>
+							<Phase key = {index}>
 								-- DETERMINING ACTIONS --
 							</Phase>
 						)
 					}
 					if (logEntry.type === 'testing-bot') {
 						return (
-							<Bot>
+							<Bot key = {index}>
 								-- TESTING {logEntry.name} --
 							</Bot>
 						)
 					}
 					if (logEntry.type === 'test-fail') {
 						return (
-							<UnMet>
+							<UnMet key = {index}>
 								CONDITION NOT MET AT DEPTH {logEntry.depth}, NODE {logEntry.node}: {logEntry.name}
 							</UnMet>
 						)
 					}
 					return (
-						<p>
+						<p key = {index}>
 							unspecified action type: 
 							{logEntry}
 						</p>
@@ -56,7 +56,7 @@ const BattleLog = ({ viewing }) => {
 
 export default BattleLog;
 const LogContainer = styled.div`
-	height: ${props => props.viewing === 'log' ? '600px' : '0px'};
+	height: ${props => props.viewing === 'log' ? '450px' : '0px'};
 	margin-top: ${props => props.viewing === 'log' ? '0px' : '20px'};
 	width: 300px;
 	background-color: rgb(0,10,0);
@@ -69,6 +69,7 @@ const LogContainer = styled.div`
 	overflow-x: auto;
 	border: ${props => props.viewing === 'log' && '4px double lime'};
 	border-radius: 5px;
+	padding: 0 8px;
 	>p{
 		display: ${props => props.viewing !== 'log' && 'none'};
 		animation: 0.5s ease-out expandYHalfDelay;

@@ -47,7 +47,9 @@ function NavBar() {
 				dispatch(activateProfileTab());
 			}
 			else if (settings.profileTab === 'active') {
-				dispatch(hoverProfileTab());
+				dispatch(deactivateProfileTab());
+				// user to hover on Click when active but this causes hover effects on cells that can't un-hover
+				// dispatch(hoverProfileTab());
 			}
 			else {
 				dispatch(activateProfileTab());

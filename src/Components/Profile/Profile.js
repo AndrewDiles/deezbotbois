@@ -125,4 +125,5 @@ const StyledNavLink = styled(NavLink)`
 	border-radius: 5px;
   border: 1px solid transparent;
 	line-height: 10px;
+	z-index: 20;
 `
