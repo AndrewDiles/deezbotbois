@@ -19,6 +19,7 @@ const LevelLauncher = () => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const settings = useSelector((state) => state.settings);
 	const colors = useSelector(getThemeColors);
+	const [cellClicked, setCellClicked] = React.useState({row: 0, col:0});
 	const initialSelectionOptions = {
 		viewingLevels: true,
 		levelNumber: 0,
@@ -30,6 +31,12 @@ const LevelLauncher = () => {
 	const [gameLaunched, setGameLaunched] = useState(false);
 	//TODO: if multiple bots are to be sent, then this needs to be changed to an array : botNumbersSelected
 	const [selectionOptions, setSelectionOptions] = useState(initialSelectionOptions);
+
+	React.useEffect(()=>{
+		if (!gameLaunched) {
+			setCellClicked({row: 0, col:0})
+		}
+	}, [gameLaunched])
 
 	function swapBetweenChallengesAndLevels () {
 		let newSelectionOptions = {...selectionOptions};
@@ -71,8 +78,14 @@ const LevelLauncher = () => {
 			) : (
 				// <BattleContainer>
 				<>
-					<BattleSettings setGameLaunched = {setGameLaunched}/>
-					<Battle/>
+					<BattleSettings
+					setGameLaunched = {setGameLaunched}
+					cellClicked = {cellClicked}
+					/>
+					<Battle
+					cellClicked = {cellClicked}
+					setCellClicked = {setCellClicked}
+					/>
 				</>
 				// </BattleContainer>
 			)}

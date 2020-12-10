@@ -22,8 +22,8 @@ const VolumeSetter = () => {
 		dispatch(updateMusicPref(!userInfo.musicPreference));
 	}
 	function handleClickSfx () {
-		dispatch(setSfx(!settings.sfx));
 		dispatch(updateSfxPref(!userInfo.sfxPreference));
+		dispatch(setSfx(!settings.sfx));
 	}
 
   return (
@@ -38,7 +38,7 @@ const VolumeSetter = () => {
 			icon = {settings.sfx ? sfxOn : sfxOff}
 			padding = '5'
 			handleClick = {handleClickSfx}
-			sfx = {settings.sfx ? 'toggle' : null}
+			sfx = 'toggle'
 			/>
 		</div>
     

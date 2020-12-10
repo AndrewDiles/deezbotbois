@@ -24,6 +24,13 @@ const initialState = {
 	tick: 0,
 	ticksSinceDamageTaken: 0,
 	commandsToExecute: [],
+	battleLog: [
+		// {type: 'battle-init'},
+		{type: 'new-tick', number: 0},
+		{type: 'determining-actions'},
+		{type: 'testing-bot', name: 'RY66'},
+		{type: 'test-fail', depth: 0, node: 1, content: 'NO EMEIES DETECTED'}
+	],
 	rotatingTieBreak: [],
 	battleHasOutcome: false,
 }
@@ -44,18 +51,23 @@ export default function battleInfo(
 				action.userBots.forEach((userBot, index)=>{
 					// function to add current stats goes here - current stats,
 					newBattleInfo.objectsToRender.push(initializeBot(userBot, 0, newBattleInfo.levelInfo.userBots[index].location, 'User'));
+					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
 				})
 				newBattleInfo.levelInfo.hostile.forEach((hostile)=>{
 					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 1, hostile.location, 'Bot'));
+					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
 				})
 				newBattleInfo.levelInfo.hostile2.length > 0 && newBattleInfo.levelInfo.hostile2.forEach((hostile)=>{
 					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 2, hostile.location, 'Bot'));
+					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
 				})
 				newBattleInfo.levelInfo.hostile3.length > 0 && newBattleInfo.levelInfo.hostile3.forEach((hostile)=>{
 					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 3, hostile.location, 'Bot'));
+					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
 				})
 				newBattleInfo.levelInfo.friendly.length > 0 && newBattleInfo.levelInfo.friendly.forEach((friendly)=>{
 					newBattleInfo.objectsToRender.push(initializeBot(bots[friendly.name], 0, friendly.location, 'Bot'));
+					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
 				})
 				
 				// requires: 

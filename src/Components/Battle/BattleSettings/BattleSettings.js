@@ -11,12 +11,14 @@ import {
 import StyledButton from '../../StyledButton/StyledButton';
 
 import ViewBattleLogButton from './ViewBattleLogButton';
+import BattleLog from '../BattleLog/BattleLog';
 import InspectCellButton from './InspectCellButton';
+import Inspector from '../Inspector/Inspector';
 import ProceedButton from './ProceedButton';
 import AutoTickSetter from './AutoTickSetter';
 import ExecutionSpeedSettings from './ExecutionSpeedSettings';
 
-const BattleSettings = ({ setGameLaunched }) => {
+const BattleSettings = ({ setGameLaunched, cellClicked }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const battleInfo = useSelector((state) => state.battleInfo);
@@ -35,9 +37,16 @@ const BattleSettings = ({ setGameLaunched }) => {
 				viewing = {viewing}
 				setViewing = {setViewing}
 				/>
+				<BattleLog
+				viewing = {viewing}
+				/>
 				<InspectCellButton
 				viewing = {viewing}
 				setViewing = {setViewing}
+				/>
+				<Inspector
+				viewing = {viewing}
+				cellClicked = {cellClicked}
 				/>
 			</ButtonContainer>
 			<ButtonContainer className = 'centeredFlex'>

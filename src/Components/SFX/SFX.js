@@ -52,9 +52,10 @@ const SFX = () => {
 						setCalledList(newCallList);
 					}
 				}
-				dispatch(removeSFX());
+
 			})
 		}
+		dispatch(removeSFX());
 	},[settings.sfx, sfx.sfx])
 
 	useEffect(()=>{

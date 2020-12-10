@@ -4,11 +4,10 @@ import BattleGrid from './BattleGrid';
 import GridPopulator from './GridPopulator';
 import styled from 'styled-components';
 
-const Battle = () => {
+const Battle = ({ cellClicked, setCellClicked }) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
 	const settings = useSelector((state) => state.settings);
 	const [cellColors, setCellColors] = React.useState({});
-	const [cellClicked, setCellClicked] = React.useState({row: 0, col:0});
 
   return (
     <Wrapper>
