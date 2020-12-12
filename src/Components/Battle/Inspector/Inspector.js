@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import { verifyCellIsInBounds, findObjectOnCell } from '../../../Constants/helperFunctions';
 import Wall from './BorderWall';
+import FoundObjectHandler from './FoundObjectHandler';
 
 const Inspector = ({ viewing, cellClicked }) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
@@ -46,7 +47,9 @@ const Inspector = ({ viewing, cellClicked }) => {
 					cellContents === null ? (
 						'NOTHING'
 					):(
-						'found something'
+						<FoundObjectHandler
+						cellContents = {cellContents}
+						/>
 					)
 				)}
 			</InspectorContainer>
