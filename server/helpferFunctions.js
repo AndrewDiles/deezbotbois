@@ -37,6 +37,7 @@ const generateNewUser = (email, name, navLocation, cellSize, imageUrl, googleIma
 		botBuilds : [],
 		battleBits: 0,
 		levelProgress : [],
+		challengeProgress : [],
 		tournamentHistory : [],
 		lastLogInBitsReceived: 0
 	}

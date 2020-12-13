@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import StyledButton from '../../StyledButton/StyledButton';
 
-import Description from './Description';
+import Overview from './Overview';
 
 const FoundeObjectHandler = ({ cellContents }) => {
-	const [viewing, setViewing] = React.useState('description');
+	const [viewing, setViewing] = React.useState('overview');
 
   return (
     <Wrapper className = 'startFlex col'>
 			<h2>
-				{cellContents.type === 'User' ? 'YOUR BOT' : cellContents.type.toUpperCase()}
+				{cellContents.type === 'User' ? 'YOUR BOT' : `A ${cellContents.type.toUpperCase()} ON ${cellContents.team === 0 ? ' YOUR TEAM' : ` TEAM ${cellContents.team}`}`}
 			</h2>
 			<div
 			className = 'centeredFlex'
@@ -18,11 +18,11 @@ const FoundeObjectHandler = ({ cellContents }) => {
 				<StyledButton
 				fontSize = {10}
 				width = {137}
-				handleClick = {()=>{setViewing('description')}}
-				selected = {viewing === 'description'}
-				sfx = {viewing === 'description' ? 'disabled' : 'toggle'}
+				handleClick = {()=>{setViewing('overview')}}
+				selected = {viewing === 'overview'}
+				sfx = {viewing === 'overview' ? 'disabled' : 'toggle'}
 				>
-					DESCRIPTION
+					OVERVIEW
 				</StyledButton>
 				<StyledButton
 				fontSize = {10}
@@ -34,8 +34,8 @@ const FoundeObjectHandler = ({ cellContents }) => {
 					ATTRIBUTES
 				</StyledButton>
 			</div>
-			{viewing === 'description' &&
-				<Description
+			{viewing === 'overview' &&
+				<Overview
 				cellContents = {cellContents}
 				/>
 			}

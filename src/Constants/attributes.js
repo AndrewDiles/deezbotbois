@@ -1375,7 +1375,7 @@ const baseBotAttributes = {
 		]
 	},
 	BotDummey: {
-		Name: 'Boxey',
+		Name: 'Dummey',
 		Durability: 40,
 		Armor: 1,
 		Shield: 1,

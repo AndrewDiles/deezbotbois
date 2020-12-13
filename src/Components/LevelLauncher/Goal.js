@@ -47,6 +47,7 @@ const Goal = ({ goalInfo, met }) => {
 							alreadyEquipped = {0}
 							setMessageDisplayed = {()=>{}}
 							altBaseSize = {220}
+							notEquipable = {1}
 							/>
 						}
 						{goalInfo.reward.equipment && goalInfo.reward.equipment.arm &&
@@ -58,6 +59,7 @@ const Goal = ({ goalInfo, met }) => {
 							alreadyEquipped = {0}
 							setMessageDisplayed = {()=>{}}
 							altBaseSize = {220}
+							notEquipable = {1}
 							/>
 						}
 						{goalInfo.reward.color &&

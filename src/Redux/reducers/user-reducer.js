@@ -13,7 +13,8 @@ const initialState = {
 	availableBots : null,
 	botBuilds: null,
   battleBits: 0,
-  levelProgress : null,
+	levelProgress : null,
+	challengeProgress: null,
 	tournamentHistory: null,
 	lastLogInBitsReceived: null,
 }

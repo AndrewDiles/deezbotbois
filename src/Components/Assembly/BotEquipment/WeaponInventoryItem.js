@@ -7,7 +7,7 @@ import WeaponContents from '../../ToolTip/WeaponContents';
 import { weaponStats } from '../../../Constants/equipment';
 import { equipItem, unequipItem } from '../../../Redux/actions';
 
-const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped, setMessageDisplayed, altBaseSize }) => {
+const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped, setMessageDisplayed, altBaseSize , notEquipable }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
@@ -120,7 +120,7 @@ const WeaponInventoryItem = ({ weapon, equipmentStaging, setEquipmentStaging, bo
     			</StyledButton>
 				)}
 						
-				{(botInfo[botNumberSelected].equipment.arm1 === weapon ||
+				{!notEquipable && (botInfo[botNumberSelected].equipment.arm1 === weapon ||
 					botInfo[botNumberSelected].equipment.arm2 === weapon ||
 					botInfo[botNumberSelected].equipment.arm3 === weapon) ? (
 						<StyledButton

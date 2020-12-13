@@ -7,7 +7,7 @@ import AccessoryContents from '../../ToolTip/AccessoryContents';
 import { accessoryStats } from '../../../Constants/equipment';
 import { equipItem, unequipItem } from '../../../Redux/actions';
 
-const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped, setMessageDisplayed, altBaseSize }) => {
+const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStaging, botNumberSelected, alreadyEquipped, setMessageDisplayed, altBaseSize, notEquipable }) => {
 	const dispatch = useDispatch();
 	const userInfo = useSelector((state) => state.userInfo);
 	const botInfo = userInfo.botBuilds;
@@ -140,7 +140,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
     			</StyledButton>
 				)}
 						
-				{(botInfo[botNumberSelected].equipment.acc1 === accessory ||
+				{!notEquipable && (botInfo[botNumberSelected].equipment.acc1 === accessory ||
 					botInfo[botNumberSelected].equipment.acc2 === accessory ||
 					botInfo[botNumberSelected].equipment.acc3 === accessory ||
 					botInfo[botNumberSelected].equipment.acc4 === accessory ||
