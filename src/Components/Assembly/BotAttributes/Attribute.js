@@ -160,7 +160,7 @@ const InfinityDiv = styled.div`
 const AttributeRow = styled.div`
 	display: grid;
 	grid-template-columns: repeat(7,35px);
-	border-bottom: ${props => `1px solid ${props.color}`}
+	border-bottom: ${props => `1px solid ${props.color}`};
 `
 const Bar = styled.div`
 	width: 246px;

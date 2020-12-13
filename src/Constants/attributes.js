@@ -1586,6 +1586,8 @@ export const attributeInfo = {
 	MovementDistance: "Movement Distance: MOVE Command's maximum traversable distance",
 	MovementCost: 'Movement Cost: Cost to execute a MOVE Command [kJ]',
 	
+	Burn: "Burn: At the end of each tick, a bot with Burn takes Fire Damage equal to their Burn value, and then it decreases by 2",
+
 	WeaponSlots: 'Weapon Slots: Maximum number of equipable weapons',
 	AccessorySlots: 'Accessory Slots: Maximum number of equipable accessories',
 	Initiative: 'Initiative: First action priority tie breaker - See RULES',

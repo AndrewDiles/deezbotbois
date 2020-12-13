@@ -7,7 +7,7 @@ import StyledIcon from '../../StyledIcon/StyledIcon';
 import ToolTip from '../../ToolTip/ToolTip';
 import {attributeInfo} from '../../../Constants/attributes';
 
-const Attribute = ({ attribute, value }) => {
+const Attribute = ({ attribute, value, currentValue, singleLeftDisplay }) => {
 	const colors = useSelector(getThemeColors);
 	const [icons, setIcons] = useState(null);
 	const [toolTipToggle, setToolTipToggle] = useState(false);
@@ -22,7 +22,7 @@ const Attribute = ({ attribute, value }) => {
 	}
   return (
     <AttributeRow
-		className = 'centeredFlex'
+		className = {singleLeftDisplay ? 'startFlex' : 'centeredFlex'}
 		onClick = {e=>{setToolTipToggle(!toolTipToggle)}}
 		colors = {colors}
 		onMouseEnter = {()=>{setHovered(true);}}
@@ -47,7 +47,21 @@ const Attribute = ({ attribute, value }) => {
 					)}
 				</ToolTip>
 			) : (
-				<AttributeContents 
+				singleLeftDisplay ? (
+					<LeftAttributeContents>
+						<StyledIcon
+						icon = {icons.icon1}
+						padding = {5}
+						hovered = {hovered ? 1 : 0}
+						/>
+						<Spacer/>
+						<Value>
+							{currentValue === 0 || currentValue && `${currentValue} / `}
+							{value % 1 === 0 ? value : value.toFixed(2)}
+						</Value>
+					</LeftAttributeContents>
+				):(
+					<AttributeContents 
 				// className = 'centeredFlex'
 				>
 					{icons.icon2 ? (
@@ -74,10 +88,12 @@ const Attribute = ({ attribute, value }) => {
 					)}
 					<Spacer>
 						<Value>
+							{currentValue === 0 || currentValue && `${currentValue} / `}
 							{value % 1 === 0 ? value : value.toFixed(2)}
 						</Value>
 					</Spacer>
 				</AttributeContents>
+				)
 			)}
     </AttributeRow>
   )
@@ -102,6 +118,16 @@ const AttributeContents = styled.div`
 	width: 150px;
 	height: 50px;
 	margin: 0, 5px;
+`
+const LeftAttributeContents = styled.div`
+	width: 150px;
+	height: 50px;
+	margin: 0, 5px;
+	padding-left: 25px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	text-align: center;
 `
 const Spacer = styled.div`
 	min-width: 50px;

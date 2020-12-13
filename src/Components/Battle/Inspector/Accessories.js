@@ -20,9 +20,10 @@ const Accessories = ({ cellContents }) => {
     <Wrapper className = 'startFlex col'>
 			{hasAnAccEquiped ? (
 				<>
-				{['acc1','acc2','acc3', 'acc4', 'acc5'].map((slot)=>{
+				{['acc1','acc2','acc3', 'acc4', 'acc5'].map((slot, index)=>{
 					return cellContents.equipment[slot] ? (
 						<AccessoryInventoryItem
+						key = {index}
 						accessory = {cellContents.equipment[slot]}
 						equipmentStaging = {{}}
 						setEquipmentStaging = {()=>{}}

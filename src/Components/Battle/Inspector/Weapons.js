@@ -20,9 +20,10 @@ const Weapons = ({ cellContents }) => {
     <Wrapper className = 'startFlex col'>
 			{hasAnAccEquiped ? (
 				<>
-					{['arm1','arm2','arm3'].map((slot)=>{
+					{['arm1','arm2','arm3'].map((slot, index)=>{
 						return cellContents.equipment[slot] ? (
 							<WeaponInventoryItem
+							key = {index}
 							weapon = {cellContents.equipment[slot]}
 							equipmentStaging = {{}}
 							setEquipmentStaging = {()=>{}}

@@ -122,6 +122,10 @@ const iconImporter = (stringToConvert) => {
 			icon2 = corrosion;
 			break;
 		}
+		case 'Burn' : {
+			icon1 = burn;
+			break;
+		}
 		case 'Capacitor' : {
 			icon1 = capacitor;
 			break;

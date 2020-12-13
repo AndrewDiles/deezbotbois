@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import StyledButton from '../../StyledButton/StyledButton';
 
 import Overview from './Overview';
+import Attributes from './Attributes';
 
 const FoundeObjectHandler = ({ cellContents }) => {
 	const [viewing, setViewing] = React.useState('overview');
@@ -34,10 +35,16 @@ const FoundeObjectHandler = ({ cellContents }) => {
 					ATTRIBUTES
 				</StyledButton>
 			</div>
-			{viewing === 'overview' &&
+			{viewing === 'overview' ? (
 				<Overview
 				cellContents = {cellContents}
 				/>
+			) : (
+				<Attributes
+				cellContents = {cellContents}
+				/>
+			)
+				
 			}
 		</Wrapper>
   )
