@@ -7,7 +7,7 @@ import StyledIcon from '../../StyledIcon/StyledIcon';
 import ToolTip from '../../ToolTip/ToolTip';
 import {attributeInfo} from '../../../Constants/attributes';
 
-const Attribute = ({ attribute, value, currentValue, singleLeftDisplay }) => {
+const Attribute = ({ attribute, value, width, currentValue, singleLeftDisplay }) => {
 	const colors = useSelector(getThemeColors);
 	const [icons, setIcons] = useState(null);
 	const [toolTipToggle, setToolTipToggle] = useState(false);
@@ -25,6 +25,7 @@ const Attribute = ({ attribute, value, currentValue, singleLeftDisplay }) => {
 		className = {singleLeftDisplay ? 'startFlex' : 'centeredFlex'}
 		onClick = {e=>{setToolTipToggle(!toolTipToggle)}}
 		colors = {colors}
+		width = {width}
 		onMouseEnter = {()=>{setHovered(true);}}
 		onMouseLeave = {()=>{setToolTipToggle(false);setHovered(false);}}
 		>
@@ -33,9 +34,9 @@ const Attribute = ({ attribute, value, currentValue, singleLeftDisplay }) => {
 				messageHovered = {toolTipToggle}
 				setMessageHovered = {setToolTipToggle}
 				// fontSize = '0.6em'
-				width = '300'
+				width = {width || 300}
 				height = '50'
-				animated = {'command300'}
+				animated = {width ? 'command200' : 'command300'}
 				>
 					{attributeInfo[attribute].indexOf(":") > 0 ? (
 						<>
@@ -101,7 +102,7 @@ const Attribute = ({ attribute, value, currentValue, singleLeftDisplay }) => {
 export default Attribute;
 const AttributeRow = styled.div`
 	justify-self: center;
-	width: 300px;
+	width: ${props => props.width ? `${props.width}px` : '300px'};
 	height: 50px;
 	transition: color .75s, background-color .75s;
 	&:hover {

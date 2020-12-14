@@ -431,11 +431,11 @@ html {
 }
 @keyframes commandExpand200 {
 	0% {
-		width: 200px;
+		/* width: 200px; */
 		height: 0;
   }
 	100% {
-		width: 200px;
+		/* width: 200px; */
 		height: 50px;
 	}
 }

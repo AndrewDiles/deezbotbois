@@ -20,6 +20,7 @@ const Weapons = ({ cellContents }) => {
     <Wrapper className = 'startFlex col'>
 			{hasAnAccEquiped ? (
 				<>
+					BASE WEAPON STATS:
 					{['arm1','arm2','arm3'].map((slot, index)=>{
 						return cellContents.equipment[slot] ? (
 							<WeaponInventoryItem
@@ -50,4 +51,5 @@ const Wrapper = styled.div`
 	width: 100%;
 	overflow-y: auto;
 	margin-top: 15px;
+	padding-bottom: 40px;
 `

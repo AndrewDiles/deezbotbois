@@ -50,4 +50,5 @@ const Wrapper = styled.div`
 	width: 100%;
 	overflow-y: auto;
 	margin-top: 15px;
+	padding-bottom: 40px;
 `

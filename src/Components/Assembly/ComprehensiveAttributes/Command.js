@@ -14,7 +14,7 @@ import {xSquare} from 'react-icons-kit/feather/xSquare';
 import {checkSquare} from 'react-icons-kit/feather/checkSquare';
 // import {check} from 'react-icons-kit/feather/check';
 
-const Command = ({ attribute, value, width, excludesCommand }) => {
+const Command = ({ attribute, value, width, excludesCommand, excludesConfirmation }) => {
 	const colors = useSelector(getThemeColors);
 	const [icons, setIcons] = useState(null);
 	const [toolTipToggle, setToolTipToggle] = useState(false);
@@ -67,7 +67,7 @@ const Command = ({ attribute, value, width, excludesCommand }) => {
 					padding = {5}
 					hovered = {hovered ? 1 : 0}
 					/>
-					{value ? (
+					{!excludesConfirmation ? value ? (
 						<StyledIcon
 					icon = {checkSquare}
 					padding = {5}
@@ -79,6 +79,8 @@ const Command = ({ attribute, value, width, excludesCommand }) => {
 					padding = {5}
 					hovered = {hovered ? 1 : 0}
 					/>
+					) : (
+						null
 					)}
 				</>
 			)}

@@ -891,5 +891,6 @@ export function initializeBot (botInfo, teamNumber, location, type) {
 	botToAdd.attributes.CurrentBurn = 0;
 	botToAdd.attributes.CurrentDurability = botInfo.attributes.Durability;
 	botToAdd.attributes.CurrentCapacitor = botInfo.attributes.Capacitor;
+	botToAdd.attributes.CurrentArmor = botInfo.attributes.Armor;
 	return botToAdd
 }

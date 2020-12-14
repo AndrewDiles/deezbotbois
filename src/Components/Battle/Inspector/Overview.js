@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import Bot from '../../Bots/Bot';
 import StyledButton from '../../StyledButton/StyledButton';
+import SwitchIcon from './SwitchIcon';
 import Weapons from './Weapons';
 import Accessories from './Accessories';
 import baseBotAttributes from '../../../Constants/attributes';
@@ -51,7 +52,8 @@ const Overview = ({ cellContents }) => {
     			</BotInfo>
 				</div>
 			</TopRow>
-			<EquipmentChoices className = 'centeredFlex'>
+			
+			<Row className = 'centeredFlex'>
 				<StyledButton
 				fontSize = {10}
 				width = {137}
@@ -70,12 +72,24 @@ const Overview = ({ cellContents }) => {
 				>
 					ACCESSORIES
 				</StyledButton>
-			</EquipmentChoices>
+			</Row>
 			{equipmentViewing === 'weapons' ? (
 				<Weapons cellContents = {cellContents}/>
 			):(
 				<Accessories cellContents = {cellContents}/>
 			)}
+			SWITCHES:
+			<Row className = 'evenlyFlex'>
+				{[1,2,3,4,5].map((switchNumber)=>{
+					return (
+						<SwitchIcon
+						key = {switchNumber}
+						switchNumber = {switchNumber}
+						value = {cellContents.switches[switchNumber]}
+						/>
+					)
+				})}
+			</Row>
 		</Wrapper>
   )
 }
@@ -118,6 +132,6 @@ const TopRow = styled.div`
 	height: 70px;
 	margin-top: 15px;
 `
-const EquipmentChoices = styled.div`
+const Row = styled.div`
 	margin-top: 15px;
 `
