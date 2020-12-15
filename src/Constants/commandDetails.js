@@ -129,7 +129,7 @@ const commandDetails = {
 		]
 	},
 	rechargeCommand: {
-		cost: ".",
+		cost: 0,
 		speed: 24,
 		affect: ".",
 		generalUse: ".",
@@ -141,7 +141,7 @@ const commandDetails = {
 		]
 	},
 	redirectCommand: {
-		cost: ".",
+		cost: 15,
 		speed: 4,
 		affect: ".",
 		generalUse: ".",

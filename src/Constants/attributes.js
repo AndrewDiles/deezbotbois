@@ -153,9 +153,9 @@ const baseBotAttributes = {
 			},
 			{
 				affect: 'aimCostModifier',
-				magnitude: 2,
+				magnitude: -2,
 				cost: 0,
-				techMessage: "Increases Aim's Cost by 2 at no Bit cost"
+				techMessage: "Decreases Aim's Cost by 2 at no Bit cost"
 			},
 			{
 				affect: 'MeleeArmorPenetration',
@@ -1264,9 +1264,9 @@ const baseBotAttributes = {
 			null,
 			{
 				affect: 'aimCostModifier',
-				magnitude: 1,
+				magnitude: -1,
 				cost: 2,
-				techMessage: "Increases Aim's Cost by 1 at a cost of 2 Bits"
+				techMessage: "Decreases Aim's Cost by 1 at a cost of 2 Bits"
 			},
 			{
 				affect: 'MovementCost',

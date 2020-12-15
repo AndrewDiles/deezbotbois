@@ -73,7 +73,7 @@ const AccessoryInventoryItem = ({ accessory, equipmentStaging, setEquipmentStagi
 			))
 		fullUnstage();
 	}
-	
+	// TODO: if length of content is above a certain length, decrease font-size, martial arts kit too large, extends vertical
 	if (alreadyEquipped) return (
 		<ColDiv className = 'centeredFlex'>
 			<RowDiv className = 'centeredFlex'>
