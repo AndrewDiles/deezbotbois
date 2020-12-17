@@ -19,6 +19,9 @@ const Rules = () => {
 				Rules and tabs for more information will reside on this endpoint
 			</h1>
 			<Row>
+				The nature of commands being legal at both the time they are set to be executed and when they are executed
+			</Row>
+			<Row>
 				- The order of resolution of action types / bot priority cycling:
 			</Row>
 			

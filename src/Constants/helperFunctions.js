@@ -821,34 +821,34 @@ export function illuminateScannedCells (scanResults,executionSpeed, setCellColor
 // function filters out the scanning bot and empty entries from scan Results.  Contains distances and is ordered from closest to furthest
 export function filterScanResults (scanResults) {
 	if (!verifyScanResults(scanResults)) return
-	let nonEmprtyCells = [];
+	let nonEmptyCells = [];
 	for (let i = 1; i < scanResults.length; i++) {
 		if (scanResults[i]) {
 			scanResults[i].forEach((result)=>{
 				if (result.cellIs) {
 					result.distance = i;
-					nonEmprtyCells.push(result)
+					nonEmptyCells.push(result)
 				}
 			})
 		}
 	}
-	return nonEmprtyCells
+	return nonEmptyCells
 }
 // function filters out friendly, wall and empty entries from scan Results.  Contains distances and is ordered from closest to furthest
 export function filterHostileScanResults (scanResults) {
 	if (!verifyScanResults(scanResults)) return
-	let nonEmprtyCells = [];
+	let nonEmptyCells = [];
 	for (let i = 1; i < scanResults.length; i++) {
 		if (scanResults[i]) {
 			scanResults[i].forEach((result)=>{
 				if (result.cellIs === 'hostile') {
 					result.distance = i;
-					nonEmprtyCells.push(result)
+					nonEmptyCells.push(result)
 				}
 			})
 		}
 	}
-	return nonEmprtyCells
+	return nonEmptyCells
 }
 
 // function returns the object if one exists on the given cellLocation, or null if one does not exist
@@ -892,5 +892,6 @@ export function initializeBot (botInfo, teamNumber, location, type) {
 	botToAdd.attributes.CurrentDurability = botInfo.attributes.Durability;
 	botToAdd.attributes.CurrentCapacitor = botInfo.attributes.Capacitor;
 	botToAdd.attributes.CurrentArmor = botInfo.attributes.Armor;
+	botToAdd.switchFiveTrueAtBeginningOfTick = false;
 	return botToAdd
 }

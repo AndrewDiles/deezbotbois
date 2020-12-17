@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 const BattleLog = ({ viewing }) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
+
+	//TODO: Add filters to remove testing jargin, damage formulae, etc.
 	
   return (
     <Wrapper className = 'startFlex col'>
