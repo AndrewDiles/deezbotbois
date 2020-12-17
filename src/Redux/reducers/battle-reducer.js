@@ -4,6 +4,7 @@ import bots from '../../Constants/botAis/bots';
 
 const initialState = {
 	battleLaunched : false,
+	status: 'AWAITING_USER_INPUT',
 	userOptions :{
 		animation : true,
 		wait : true
@@ -25,11 +26,11 @@ const initialState = {
 	ticksSinceDamageTaken: 0,
 	commandsToExecute: [],
 	battleLog: [
-		// {type: 'battle-init'},
-		{type: 'new-tick', number: 0},
-		{type: 'determining-actions'},
-		{type: 'testing-bot', name: 'RY66'},
-		{type: 'test-fail', depth: 0, node: 1, content: 'NO EMEIES DETECTED'}
+		{type: 'battle-init'},
+		// {type: 'new-tick', number: 0},
+		// {type: 'determining-actions'},
+		// {type: 'testing-bot', name: 'RY66'},
+		// {type: 'test-fail', depth: 0, node: 1, content: 'NO ENEMIES DETECTED'}
 	],
 	rotatingTieBreak: [],
 	battleHasOutcome: false,
@@ -75,7 +76,42 @@ export default function battleInfo(
 				// .userBots
         return newBattleInfo
       }
-      
+      case 'LAUNCH_BATTLE': {
+				return {
+					...state,
+					battleLaunched: true,
+					status: 'FIRST_TICK',
+					battleLog: [...state.battleLog, {type: 'new-tick', number: state.tick+1}]
+				}
+			}
+			case 'FIRST_TICK': {
+				return {
+					...state,
+					tick: state.tick++,
+					status: 'DETERMINING_COMMANDS',
+					battleLog: [...state.battleLog, {type: 'determining-actions'}]
+					// battleLog: newBattleLog
+				}
+			}
+			case 'NEXT_TICK': {
+				return {
+					...state,
+					tick: state.tick++,
+					status: 'NEW_TICK'
+				}
+			}
+			case 'DETERMINE_COMMANDS': {
+				return {
+					...state,
+					status: 'DETERMINING_COMMANDS'
+				}
+			}
+			case 'ADD_NEW_BATTLE_LOGS': {
+				return {
+					...state,
+					battleLog: [...state.battleLog, ...action.newLogEntries]
+				}
+			}
       default:{
         return state;
       }

@@ -14,11 +14,31 @@ export const removeSFX = () => ({
 // });
 
 // BATTLE ACTIONS
+// setup the BattleInfo for initial display based on levelInfo and bots being sent in
 export const initializeBattle = (challenge, levelNumber, userBots, ) => ({
 	type: 'INITIALIZE_BATTLE',
 	challenge: challenge,
 	levelNumber: levelNumber,
 	userBots: userBots,
+})
+// commence the battle
+export const launchBattle = () => ({
+	type: 'LAUNCH_BATTLE'
+})
+// process the first tick
+export const firstTick = () => ({
+	type: 'FIRST_TICK'
+})
+// process the next tick
+export const nextTick = () => ({
+	type: 'NEXT_TICK'
+})
+export const determineCommands = () => ({
+	type: 'DETERMINE_COMMANDS'
+})
+export const addNewBattleLogs = (newLogEntries) => ({
+	type: 'ADD_NEW_BATTLE_LOGS',
+	newLogEntries: newLogEntries,
 })
 
 // SETTINGS ACTIONS

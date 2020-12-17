@@ -101,6 +101,18 @@ export function verifyCellIsInBounds (cellLocation, maxRows, maxCols) {
 		cellLocation.col === 0 || cellLocation.row === 0) return false
 	else return true
 }
+export function verifyCellIsOnCorner (cellLocation, maxRows, maxCols) {
+	if (!testValidityOfLocationInput(cellLocation)) return
+	if (testSameCell(cellLocation, {col: 1, row: 1}) ||
+	testSameCell(cellLocation, {col: maxCols, row: 1}) ||
+	testSameCell(cellLocation, {col: 1, row: maxRows}) ||
+	testSameCell(cellLocation, {col: maxCols, row: maxRows})
+	) {
+		return true
+	} else {
+		return false
+	}
+}
 // function below determines distance (cell count) from a cell
 export function straightDistanceBetweenCells (startLocation, finishLocation) {
 	if (!testValidityOfLocationInput(startLocation) || !testValidityOfLocationInput(finishLocation)) return

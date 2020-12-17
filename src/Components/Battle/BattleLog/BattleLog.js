@@ -1,9 +1,12 @@
 import React from 'react';
 import { useSelector } from "react-redux";
+import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 
 const BattleLog = ({ viewing }) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
+	const [hovering, setHovering] = React.useState(0);
+	let colors = useSelector(getThemeColors);
 
 	//TODO: Add filters to remove testing jargin, damage formulae, etc.
 	
@@ -11,9 +14,15 @@ const BattleLog = ({ viewing }) => {
     <Wrapper className = 'startFlex col'>
 			<Tab
 			viewing = {viewing}
+			colors = {colors}
+			hovering = {hovering}
 			/>
 			<LogContainer
 			viewing = {viewing}
+			colors = {colors}
+			hovering = {hovering}
+			onMouseEnter = {()=>{setHovering(1)}}
+			onMouseLeave = {()=>{setHovering(0)}}
 			>
 				{battleInfo.battleLog.map((logEntry, index)=>{
 					if (logEntry.type === 'new-tick') {
@@ -40,8 +49,43 @@ const BattleLog = ({ viewing }) => {
 					if (logEntry.type === 'test-fail') {
 						return (
 							<UnMet key = {index}>
-								CONDITION NOT MET AT DEPTH {logEntry.depth}, NODE {logEntry.node}: {logEntry.name}
+								{logEntry.content}
 							</UnMet>
+						)
+					}
+					if (logEntry.type === 'test-pass') {
+						return (
+							<Met key = {index}>
+								{logEntry.content}
+							</Met>
+						)
+					}
+					if (logEntry.type === 'action-determined') {
+						return (
+							<CommandToBe key = {index}>
+								{logEntry.content}
+							</CommandToBe>
+						)
+					}
+					if (logEntry.type === 'battle-init') {
+						return (
+							<Initial key = {index}>
+								INITIALIZATION OF {battleInfo.challenge ? `CHALLENGE #${battleInfo.challenge}` : `LEVEL #${battleInfo.levelInfo.levelNumber} - ${battleInfo.levelInfo.levelName}`}
+							</Initial>
+						)
+					}
+					if (logEntry.type === 'invalid') {
+						return (
+							<Invalid key = {index}>
+								{logEntry.content}
+							</Invalid>
+						)
+					}
+					if (logEntry.type === 'empty') {
+						return (
+							<Empty key = {index}>
+								{logEntry.content}
+							</Empty>
 						)
 					}
 					return (
@@ -68,8 +112,8 @@ const LogContainer = styled.div`
 	z-index: 10;
 	transition: height 0.5s ease-in-out;
 	font-size: 0.5em;
-	overflow-x: auto;
-	border: ${props => props.viewing === 'log' && '4px double lime'};
+	overflow-y: auto;
+	border: ${props => props.viewing === 'log' && `4px double ${props.hovering ? props.colors.hoveredText : props.colors.secondary}`};
 	border-radius: 5px;
 	padding: 0 8px;
 	>p{
@@ -80,22 +124,43 @@ const LogContainer = styled.div`
 const Tab = styled.div`
 	height: 20px;
 	width: 20px;
-	background-color: lime;
+	background-color: ${props => props.hovering ? props.colors.hoveredText : props.colors.secondary};
 	transform: rotate(45deg);
 	display: ${props => props.viewing !== 'log' && 'none'};
 	animation: 0.2s ease-out expandY;
 `
 const Bot = styled.p`
 	color: deepskyblue;
+	font-size: 1.2em;
 `
 const UnMet = styled.p`
-	color: red;
+	color: orangered;
+	font-size: 0.8em;
+`
+const Met = styled.p`
+	color: lime;
+	font-size: 0.8em;
 `
 const NewTick = styled.p`
 	color: gold;
+	font-size: 1.4em;
 `
 const Phase = styled.p`
 	color: fuchsia;
+	font-size: 1.3em;
+`
+const Empty = styled.p`
+	color: chocolate;
+`
+const Initial = styled.p`
+	color: orange;
+	font-size: 1.5em;
+`
+const CommandToBe = styled.div`
+	color: lightskyblue;
+`
+const Invalid = styled.p`
+	color: red;
 `
 const Wrapper = styled.div`
 	display: flex;

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import BattleGrid from './BattleGrid';
 import GridPopulator from './GridPopulator';
+import GameLogic from './GameLogic';
 import styled from 'styled-components';
 
 const Battle = ({ cellClicked, setCellClicked }) => {
@@ -28,6 +29,7 @@ const Battle = ({ cellClicked, setCellClicked }) => {
 				>
 				</GridPopulator>
 			</ShiftedWrapper>
+			<GameLogic/>
 		</Wrapper>
   )
 }

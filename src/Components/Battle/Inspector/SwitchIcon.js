@@ -10,7 +10,7 @@ const SwitchIcon = ({ switchNumber, value }) => {
     <Wrapper className = 'startFlex col'>
 			{switchNumber}
 			<Switch
-			active = {value}
+			active = {value === true ? 1 : 0}
 			icon = {value ? toggleRight : toggleLeft}
 			size = {30}
 			/>

@@ -1,47 +1,63 @@
 import getNodeArray from './getNodeArray';
 import commandDetails from '../../Constants/commandDetails';
 import { weaponStats } from '../../Constants/equipment';
-import { distanceToAdjacentToCell, pathToAdjacentCell, nextStepGenerator, collisionVerification } from '../../Constants/helperFunctions';
+
+import { 
+	testSameCell,
+	verifyCellIsInBounds,
+	verifyCellIsOnCorner,
+	distanceToAdjacentToCell,
+	pathToAdjacentCell,
+	nextStepGenerator,
+	collisionVerification
+} from '../../Constants/helperFunctions';
 
 const waitCommand = {name: 'waitCommand', instructions: {}};
+const allDirections = ['U','D','L','R','UR','UL','DR','DL'];
 
 function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 	const botData = objectsToRender[indexInQuestion];
 	const battleLogEntries = [];
 	let result = null;
 	const mapToTest = [{type: 'head', index: 0}];
-	// let nodeTestNumber = 1;  	// This is the 1+index of mapToTest
-	// let depthTestLevel = 1;		// This is mapToTest.length
+	// let nodeTestNumber = 1;  	// : mapToTest[mapToTest.length-1].index+1
+	// let depthTestLevel = 1;		// : mapToTest.length
 	// if needed, consider adding these values to the battle log
 
 	// TODO: Format battle log to easily color code message types
 	
 	if (testIsDestroyed(botData)) return {command: {name:'noneBotIsDestroyed'}}
 	const nodeBlockInQuestion = getNodeArray(botData.script, mapToTest);
-
+	// console.log('the whole script:',botData.script);
+	battleLogEntries.push({type: 'testing-bot', name: botData.name})
 	// Test is empty
 	if (testNodeBlockIsEmpty(nodeBlockInQuestion)) {
-		battleLogEntries.push(`COMMAND TESTING FOR BOT ${botData.name} FAILED: AI IS EMPTY.  DEFAULTING TO WAITCOMMAND`);
+		battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} FAILED: AI IS EMPTY.  DEFAULTING TO WAITCOMMAND`});
 		result = waitCommand;
 	} else {
-		for (let i = 0; i < botData.script.length; i++) {
+		for (let i = mapToTest[mapToTest.length-1].index; i < botData.script.length; i++) {
 			if (result) break;
 			// Test is condition or command
-			if (testNodeIsCondition(nodeBlockInQuestion)) {
+			if (testNodeIsCondition(nodeBlockInQuestion[i])) {
 				// Case : Condition.	Test if met or unmet, then set the map and dive deeper
-				const conditionTestResult = conditionTest(nodeBlockInQuestion, objectsToRender, indexInQuestion, battleLogEntries);
+				console.log('head level returns is a condition')
+				const conditionTestResult = conditionTest(nodeBlockInQuestion[i].condition, objectsToRender, indexInQuestion, levelInfo);
 				if (!conditionTestResult) {
+					console.log('head level condition is not met');
 					// Case: Condition is not met, extend map to unMet branch
-					mapToTest.push({type: false, index: 0});
+					battleLogEntries.push({type: 'test-fail', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} NOT MET`});
+					mapToTest.push({type: 'conditionFalse', index: 0});
 				} else {
-					mapToTest.push({type: true, index: 0});
+					console.log('head level condition is met');
+					battleLogEntries.push({type: 'test-pass', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} MET`});
+					mapToTest.push({type: 'conditionTrue', index: 0});
 					// Case: Condition is met, extend map to met branch
 				}
 				// Begin new node testing given the new map
 				handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo);
 			} else {
 				// Case : Command.  Test if command can be executed
-				handleCommandCandidacy(nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender);
+				handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
 			}
 		}
 	}
@@ -59,18 +75,18 @@ function testNodeBlockIsEmpty (nodeBlock) {
 function testNodeIsCondition (nodeBlock) {
 	return Object.keys(nodeBlock)[0] === 'condition' ? true : false
 }
-function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo) {
+function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result) {
 	const invalidInstructionsTest = testInvalidInstructions(nodeBlockInQuestion, botData, objectsToRender, levelInfo);
 	if (invalidInstructionsTest) {
 		mapToTest[mapToTest.length-1].index ++;
-		battleLogEntries.push(invalidInstructionsTest);
+		battleLogEntries.push({type: 'invalid', content: invalidInstructionsTest});
 	} else {
 		const insufficientEnergyTest = testInsufficientEnergy(nodeBlockInQuestion, botData);
 		if (insufficientEnergyTest) {
 			mapToTest[mapToTest.length-1].index ++;
-			battleLogEntries.push(insufficientEnergyTest);
+			battleLogEntries.push({type: 'invalid', content: insufficientEnergyTest});
 		} else {
-			battleLogEntries.push(`COMMAND TESTING FOR BOT ${botData.name} RESULTS IN ${nodeBlockInQuestion.name.toUpperCase()}`);
+			battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} RESULTS IN ${nodeBlockInQuestion.name.toUpperCase()}`});
 			result = nodeBlockInQuestion;
 		}
 	}
@@ -79,10 +95,10 @@ function noWeaponEquipped (supposedWeaponName, commandName, armSlot) {
 	return supposedWeaponName ? false : `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT NO WEAPON IS EQUIPPED IN ${armSlot.toUpperCase()}`
 }
 function notRangedWeapon (supposedRangedWeapon, commandName, armSlot) {
-	weaponStats[supposedRangedWeapon].superTypes[0] === 'Ranged' ? false : `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT ${weaponStats[supposedRangedWeapon].name.toUpperCase()} EQUIPPED IN ${armSlot.toUpperCase()} IS NOT A RANGED WEAPON`
+	return weaponStats[supposedRangedWeapon].superTypes[0] === 'Ranged' ? false : `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT ${weaponStats[supposedRangedWeapon].name.toUpperCase()} EQUIPPED IN ${armSlot.toUpperCase()} IS NOT A RANGED WEAPON`
 }
 function notMeleedWeapon (supposedMeleeWeapon, commandName, armSlot) {
-	weaponStats[supposedMeleeWeapon].superTypes[0] === 'Melee' ? false : `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT ${weaponStats[supposedMeleeWeapon].name.toUpperCase()} EQUIPPED IN ${armSlot.toUpperCase()} IS NOT A MELEE WEAPON`
+	return weaponStats[supposedMeleeWeapon].superTypes[0] === 'Melee' ? false : `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT ${weaponStats[supposedMeleeWeapon].name.toUpperCase()} EQUIPPED IN ${armSlot.toUpperCase()} IS NOT A MELEE WEAPON`
 }
 function invalidRangedWeaponTest (commandNode, botInfo) {
 	const armSlot = commandNode.instructions.weapon;
@@ -102,7 +118,8 @@ function invalidMeleeWeaponTest (commandNode, botInfo) {
 }
 function weaponNotLoadedTest (commandNode, botInfo) {
 	const armSlot = commandNode.instructions.weapon;
-	return botInfo[`${armSlot}LoadTime`] === 0 ? false : `CONDITIONS TO EXECUTE COMMAND ${commandNode.name.toUpperCase()} MET, BUT ${weaponStats[supposedRangedWeapon].name.toUpperCase()} EQUIPPED IN ${armSlot.toUpperCase()} IS STILL RELOADING`
+	const weaponName = botInfo.equipment[armSlot];
+	return botInfo[`${armSlot}LoadTime`] === 0 ? false : `CONDITIONS TO EXECUTE COMMAND ${commandNode.name.toUpperCase()} MET, BUT ${weaponStats[weaponName].name.toUpperCase()} EQUIPPED IN ${armSlot.toUpperCase()} IS STILL RELOADING`
 }
 function weaponNotOfTypeEnergyTest (commandNode, botInfo) {
 	const armSlot = commandNode.instructions.weapon;
@@ -111,11 +128,12 @@ function weaponNotOfTypeEnergyTest (commandNode, botInfo) {
 	for(let i = 0; i < weaponSubTypes.length; i++) {
 		if (weaponSubTypes[i] === 'Energy') return false
 	}
-	return `CONDITIONS TO EXECUTE COMMAND ${commandNode.name.toUpperCase()} MET, BUT ${weaponStats[supposedRangedWeapon].name.toUpperCase()} EQUIPPED IN ${armSlot.toUpperCase()} IS NOT OF TYPE ENERGY`;
+	return `CONDITIONS TO EXECUTE COMMAND ${commandNode.name.toUpperCase()} MET, BUT ${weaponStats[weaponName].name.toUpperCase()} EQUIPPED IN ${armSlot.toUpperCase()} IS NOT OF TYPE ENERGY`;
 }
 function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelInfo) {
-	// TODO: weapons must be loaded!!!!
-	switch (commandNode.name) {
+	// console.log('find the name:',{commandNode})
+	const commandName = commandNode.name;
+	switch (commandName) {
 		case 'aimCommand' : {
 			return invalidRangedWeaponTest(commandNode, botInfo)
 		}
@@ -149,7 +167,7 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			const path = pathToAdjacentCell(botInfo.location, botInfo.scanResults[commandNode.instructions.targetNumber-1].location);
 			if (path.length === 0) return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} IS ALREADY ADJACENT`;
 			if (path.length > botInfo.attributes.MovementDistance) return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT WITHIN MOVEMENT DISTANCE`;
-			let currentLandingSpot = {...botData.location};
+			let currentLandingSpot = {...botInfo.location};
 			let pathObstructed = false;
 			let nextStep;
 			path.forEach((move)=>{
@@ -164,7 +182,9 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			return !pathObstructed ? false : `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT SOMETHING IS BETWEEN EXECUTOR AND TARGET NUMBER ${commandNode.instructions.targetNumber}`;
 		}
 		case 'counterCommand' : {
-			return invalidMeleeWeaponTest(commandNode, botInfo)
+			const meleeWeaponInvalid = invalidMeleeWeaponTest(commandNode, botInfo);
+			if (meleeWeaponInvalid) return meleeWeaponInvalid;
+			return weaponNotLoadedTest(commandNode, botInfo);
 		}
 		case 'elevenAttackCommand' : {
 			if (commandNode.instructions.attackType === 'ranged') {
@@ -276,6 +296,8 @@ function testInsufficientEnergy (commandNode, botInfo) {
 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
 		}
 		case 'chargeCommand' : {
+			const armSlot = commandNode.instructions.weapon;
+			const weaponName = botInfo.equipment[armSlot];
 			const moveCost = botInfo.attributes.MovementCost;
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const totalAttackCost = baseAttackCost + botInfo.attributes.attackCostModifier;
@@ -283,11 +305,15 @@ function testInsufficientEnergy (commandNode, botInfo) {
 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
 		}
 		case 'counterCommand' : {
+			const armSlot = commandNode.instructions.weapon;
+			const weaponName = botInfo.equipment[armSlot];
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
 		}
 		case 'elevenAttackCommand' : {
+			const armSlot = commandNode.instructions.weapon;
+			const weaponName = botInfo.equipment[armSlot];
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const nonElevenTotalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
 			const totalCost = 2 * nonElevenTotalCost;
@@ -295,12 +321,16 @@ function testInsufficientEnergy (commandNode, botInfo) {
 		}
 		case 'guardCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
 		case 'meleeAttackCommand' : {
+			const armSlot = commandNode.instructions.weapon;
+			const weaponName = botInfo.equipment[armSlot];
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
 		}
 		case 'moveCommand' : return botInfo.attributes.CurrentCapacitor >= botInfo.attributes.MovementCost ? false : true;
 		case 'rangedAttackCommand' : {
+			const armSlot = commandNode.instructions.weapon;
+			const weaponName = botInfo.equipment[armSlot];
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
@@ -318,37 +348,235 @@ function testInsufficientEnergy (commandNode, botInfo) {
 	}
 }
 
-function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, battleLogEntries) {
+function testCellForBotTypeX (objectsToRender, testLocation, botData, botType) {
+	for(let i = 0; i < objectsToRender.length; i++) {
+		if (testSameCell(objectsToRender[i].location, testLocation)) {
+			if (botType === 'hostile') {
+				if (objectsToRender[i].team !== botData.team) return true
+			} else {
+				if (objectsToRender[i].team === botData.team) return true
+			}
+		}
+	}
+	return false
+}
+
+function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, levelInfo) {
 	// TODO: this function
 	// This function will return true if the conditions are met, and false otherwise.
-	// This function must add to the battleLogEntries whether the condition was or was not met
+	const botData = objectsToRender[indexInQuestion];
+	const conditionName = nodeBlockInQuestion.name;
+	// console.log('find the name:',nodeBlockInQuestion);
+	switch (conditionName) {
+		case 'adjacentTo' : {
+			if (nodeBlockInQuestion.test.testReturn !== 'any') {
+				const testLocation = nextStepGenerator(botData.location, nodeBlockInQuestion.test.testReturn);
+				if (nodeBlockInQuestion.test.evaluationType === '=') {
+					if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+						if (testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile')) return true
+					} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
+						if (testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend')) return true
+					} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
+						if (!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width)) return true
+					} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
+						if (verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)) return true
+					} else if (nodeBlockInQuestion.test.testTargets === 'any') {
+						if ( testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') ||
+						testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') ||
+						!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width) ||
+						verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+						) return true
+					}
+				} else {
+					if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+						if (testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') ||
+						!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width) ||
+						verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+						) return true
+					} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
+						if ( testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') ||
+						!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width) ||
+						verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+						) return true
+					} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
+						if ( testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') ||
+						testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') ||
+						verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+						) return true
+					} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
+						if ( testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') ||
+						testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') ||
+						!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width)
+						) return true
+					} else if (nodeBlockInQuestion.test.testTargets === 'any') {
+						// Honestly the logic of this test confused me
+						// These test settings want to find if a given direction does not contain anything
+						// Hence it must be the case that it does not find a hostile, friend, wall nor corner
+						if ( !testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') &&
+						!testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') &&
+						verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width) &&
+						!verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+						) return true
+					}
+				}
+			} else {
+				// Case: test every direction
+				allDirections.forEach((direction)=>{
+					const testLocation = nextStepGenerator(botData.location, direction);
+					if (nodeBlockInQuestion.test.evaluationType === '=') {
+						if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+							if (testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile')) return true
+						} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
+							if (testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend')) return true
+						} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
+							if (!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width)) return true
+						} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
+							if (verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)) return true
+						} else if (nodeBlockInQuestion.test.testTargets === 'any') {
+							if ( testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') ||
+							testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') ||
+							!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width) ||
+							verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+							) return true
+						}
+					} else {
+						if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+							if (testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') ||
+							!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width) ||
+							verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+							) return true
+						} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
+							if ( testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') ||
+							!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width) ||
+							verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+							) return true
+						} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
+							if ( testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') ||
+							testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') ||
+							verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+							) return true
+						} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
+							if ( testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') ||
+							testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') ||
+							!verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width)
+							) return true
+						} else if (nodeBlockInQuestion.test.testTargets === 'any') {
+							// Honestly the logic of this test confused me
+							// These test settings want to find if a given direction does not contain anything
+							// Hence it must be the case that it does not find a hostile, friend, wall nor corner
+							if ( !testCellForBotTypeX(objectsToRender, testLocation, botData, 'hostile') &&
+							!testCellForBotTypeX(objectsToRender, testLocation, botData, 'friend') &&
+							verifyCellIsInBounds(testLocation, levelInfo.height, levelInfo.width) &&
+							!verifyCellIsOnCorner(testLocation, levelInfo.height, levelInfo.width)
+							) return true
+						}
+					}
+				})
+			}
+			return false
+		}
+		case 'aimResults' : {
+			
+
+
+
+			return false
+		}
+		case 'attribute' : {
+			
+
+
+
+			return false
+		}
+		case 'consecutiveAims' : {
+			
+
+
+
+			return false
+		}
+		case 'distanceToTarget' : {
+			
+
+
+
+			return false
+		}
+		case 'obstructionToTarget' : {
+			
+
+
+
+			return false
+		}
+		case 'previousCommand' : {
+			
+
+
+
+			return false
+		}
+		case 'sufficientEnergy' : {
+			
+
+
+
+			return false
+		}
+		case 'switch' : {
+			
+
+
+
+			return false
+		}
+		case 'weaponLoaded' : {
+			
+
+
+
+			return false
+		}
+		default: {
+			console.log(`Unknown condition name: ${conditionName} inside condition test`);
+			return false
+		}
+	}
+
+
 }
 
 function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo) {
 	// This function will be a mirror of the head case, but will pop map if no command hits the result instead of setting it to waitCommand
 
+	// console.log({mapToTest});
 	const botData = objectsToRender[indexInQuestion];
 	const nodeBlockInQuestion = getNodeArray(botData.script, mapToTest);
 	if (testNodeBlockIsEmpty(nodeBlockInQuestion)) {
 		// if the block is empty then go back up a depth level and increment the index to be tested
+		console.log('empty node block found, popping map');
 		mapToTest.pop();
 		mapToTest[mapToTest.length-1].index ++;
-		battleLogEntries.push(`CONDITION BRANCH EMPTY.  TESTING TO CONTINUE AT PREVIOUS DEPTH`);
+		battleLogEntries.push({type: 'empty', content: `CONDITION BRANCH EMPTY.  TESTING TO CONTINUE AT PREVIOUS DEPTH`});
 		return
 	}
-	for (let i = 0; i < nodeBlockInQuestion.length; i++) {
+	console.log({mapToTest});
+	for (let i = mapToTest[mapToTest.length-1].index; i < nodeBlockInQuestion.length; i++) {
 		if (result) break;
-		if (testNodeIsCondition(nodeBlockInQuestion)) {
-			const conditionTestResult = conditionTest(nodeBlockInQuestion, objectsToRender, indexInQuestion, battleLogEntries);
+		if (testNodeIsCondition(nodeBlockInQuestion[i])) {
+			const conditionTestResult = conditionTest(nodeBlockInQuestion[i].condition, objectsToRender, indexInQuestion, levelInfo);
 			if (!conditionTestResult) {
-				mapToTest.push({type: false, index: 0});
+				battleLogEntries.push({type: 'test-fail', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} NOT MET`});
+				mapToTest.push({type: 'conditionFalse', index: 0});
 			} else {
-				mapToTest.push({type: true, index: 0});
+				battleLogEntries.push({type: 'test-pass', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} MET`});
+				mapToTest.push({type: 'conditionTrue', index: 0});
 			}
 			handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo);
 		} else {
 			// Case : Command.  Test if command can be executed
-			handleCommandCandidacy(nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo);
+			handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
 		}
 	}
 }
