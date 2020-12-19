@@ -1,6 +1,8 @@
 import getNodeArray from './getNodeArray';
 import commandDetails from '../../Constants/commandDetails';
 import { weaponStats } from '../../Constants/equipment';
+import allDirections from '../../Constants/allDirectionsArray';
+import waitCommand from '../../Constants/defaultWaitCommand';
 
 import { 
 	testSameCell,
@@ -12,9 +14,6 @@ import {
 	collisionVerification
 } from '../../Constants/helperFunctions';
 
-const waitCommand = {name: 'waitCommand', instructions: {}};
-const allDirections = ['U','D','L','R','UR','UL','DR','DL'];
-
 function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 	const botData = objectsToRender[indexInQuestion];
 	const battleLogEntries = [];
@@ -23,8 +22,6 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 	// let nodeTestNumber = 1;  	// : mapToTest[mapToTest.length-1].index+1
 	// let depthTestLevel = 1;		// : mapToTest.length
 	// if needed, consider adding these values to the battle log
-
-	// TODO: Format battle log to easily color code message types
 	
 	if (testIsDestroyed(botData)) return {command: {name:'noneBotIsDestroyed'}}
 	const nodeBlockInQuestion = getNodeArray(botData.script, mapToTest);
@@ -35,29 +32,37 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 		battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} FAILED: AI IS EMPTY.  DEFAULTING TO WAITCOMMAND`});
 		result = waitCommand;
 	} else {
-		for (let i = mapToTest[mapToTest.length-1].index; i < botData.script.length; i++) {
-			if (result) break;
-			// Test is condition or command
-			if (testNodeIsCondition(nodeBlockInQuestion[i])) {
-				// Case : Condition.	Test if met or unmet, then set the map and dive deeper
-				console.log('head level returns is a condition')
-				const conditionTestResult = conditionTest(nodeBlockInQuestion[i].condition, objectsToRender, indexInQuestion, levelInfo);
-				if (!conditionTestResult) {
-					console.log('head level condition is not met');
-					// Case: Condition is not met, extend map to unMet branch
-					battleLogEntries.push({type: 'test-fail', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} NOT MET`});
-					mapToTest.push({type: 'conditionFalse', index: 0});
-				} else {
-					console.log('head level condition is met');
-					battleLogEntries.push({type: 'test-pass', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} MET`});
-					mapToTest.push({type: 'conditionTrue', index: 0});
-					// Case: Condition is met, extend map to met branch
-				}
-				// Begin new node testing given the new map
-				handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo);
+		// for (let i = mapToTest[mapToTest.length-1].index; i < botData.script.length; i++) {
+		for (let i = 0; i < botData.script.length; i++) {
+			console.log('head test, node #',i+1)
+			if (result) {
+				console.log('result already found, breaking out of for loop');
+				break;
 			} else {
-				// Case : Command.  Test if command can be executed
-				handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
+				// Test is condition or command
+				if (testNodeIsCondition(nodeBlockInQuestion[i])) {
+					// Case : Condition.	Test if met or unmet, then set the map and dive deeper
+					console.log('head level returns is a condition')
+					const conditionTestResult = conditionTest(nodeBlockInQuestion[i].condition, objectsToRender, indexInQuestion, levelInfo);
+					if (!conditionTestResult) {
+						console.log('head level condition is not met');
+						// Case: Condition is not met, extend map to unMet branch
+						battleLogEntries.push({type: 'test-fail', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} NOT MET`});
+						mapToTest.push({type: 'conditionFalse', index: 0});
+					} else {
+						console.log('head level condition is met');
+						battleLogEntries.push({type: 'test-pass', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} MET`});
+						mapToTest.push({type: 'conditionTrue', index: 0});
+						// Case: Condition is met, extend map to met branch
+					}
+					// Begin new node testing given the new map
+					result = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo);
+				} else {
+					// Case : Command.  Test if command can be executed
+					console.log('head level contains a command.  result is', result);
+					result = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
+					console.log({result})
+				}
 			}
 		}
 	}
@@ -70,12 +75,13 @@ function testIsDestroyed (botData) {
 	return botData.CurrentDurability === 0 ? true : false
 }
 function testNodeBlockIsEmpty (nodeBlock) {
-	return nodeBlock ? false : true
+	return nodeBlock.length > 0 ? false : true
 }
 function testNodeIsCondition (nodeBlock) {
 	return Object.keys(nodeBlock)[0] === 'condition' ? true : false
 }
 function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result) {
+	console.log('result from inside handle command test',result)
 	const invalidInstructionsTest = testInvalidInstructions(nodeBlockInQuestion, botData, objectsToRender, levelInfo);
 	if (invalidInstructionsTest) {
 		mapToTest[mapToTest.length-1].index ++;
@@ -87,9 +93,13 @@ function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battle
 			battleLogEntries.push({type: 'invalid', content: insufficientEnergyTest});
 		} else {
 			battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} RESULTS IN ${nodeBlockInQuestion.name.toUpperCase()}`});
+			// result = {...nodeBlockInQuestion};
 			result = nodeBlockInQuestion;
+			console.log('command has been determined, result should no longer be null:', result)
 		}
 	}
+	console.log('result at end of handle Command Candicacy:', result)
+	return result
 }
 function noWeaponEquipped (supposedWeaponName, commandName, armSlot) {
 	return supposedWeaponName ? false : `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT NO WEAPON IS EQUIPPED IN ${armSlot.toUpperCase()}`
@@ -543,8 +553,6 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 			return false
 		}
 	}
-
-
 }
 
 function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo) {
@@ -561,22 +569,31 @@ function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, ba
 		battleLogEntries.push({type: 'empty', content: `CONDITION BRANCH EMPTY.  TESTING TO CONTINUE AT PREVIOUS DEPTH`});
 		return
 	}
-	console.log({mapToTest});
-	for (let i = mapToTest[mapToTest.length-1].index; i < nodeBlockInQuestion.length; i++) {
-		if (result) break;
-		if (testNodeIsCondition(nodeBlockInQuestion[i])) {
-			const conditionTestResult = conditionTest(nodeBlockInQuestion[i].condition, objectsToRender, indexInQuestion, levelInfo);
-			if (!conditionTestResult) {
-				battleLogEntries.push({type: 'test-fail', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} NOT MET`});
-				mapToTest.push({type: 'conditionFalse', index: 0});
-			} else {
-				battleLogEntries.push({type: 'test-pass', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} MET`});
-				mapToTest.push({type: 'conditionTrue', index: 0});
-			}
-			handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo);
+	console.log('map inside deeper recursion',{mapToTest});
+	// for (let i = mapToTest[mapToTest.length-1].index; i < nodeBlockInQuestion.length; i++) {
+	for (let i = 0; i < nodeBlockInQuestion.length; i++) {
+		if (result) {
+			console.log('result already found, breaking out of for loop');
+			break;
 		} else {
-			// Case : Command.  Test if command can be executed
-			handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
+			if (testNodeIsCondition(nodeBlockInQuestion[i])) {
+				const conditionTestResult = conditionTest(nodeBlockInQuestion[i].condition, objectsToRender, indexInQuestion, levelInfo);
+				if (!conditionTestResult) {
+					console.log('deeper recursion conditions are not met');
+					battleLogEntries.push({type: 'test-fail', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} NOT MET`});
+					mapToTest.push({type: 'conditionFalse', index: 0});
+				} else {
+					console.log('deeper recursion conditions are met');
+					battleLogEntries.push({type: 'test-pass', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} MET`});
+					mapToTest.push({type: 'conditionTrue', index: 0});
+				}
+				result = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo);
+			} else {
+				// Case : Command.  Test if command can be executed
+				console.log('deeper recursion is a command');
+				handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
+			}
 		}
 	}
+	return result
 }
