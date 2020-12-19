@@ -67,8 +67,8 @@ const levelInfo = [
 		hostile3 : [],
 		userBots : [
 			{
-				location: {col:3, row:3}
-				// location: {col:11, row:11}
+				// location: {col:3, row:3}
+				location: {col:11, row:11}
 			}
 		],
 		ach1 : {
