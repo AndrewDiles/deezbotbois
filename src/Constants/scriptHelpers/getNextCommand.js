@@ -72,8 +72,9 @@ function testNodeBlockIsEmpty (nodeBlock) {
 function testNodeIsCondition (nodeBlock) {
 	return Object.keys(nodeBlock)[0] === 'condition' ? true : false
 }
-function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result) {
+function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo) {
 	const invalidInstructionsTest = testInvalidInstructions(nodeBlockInQuestion, botData, objectsToRender, levelInfo);
+	let result = null;
 	if (invalidInstructionsTest) {
 		mapToTest[mapToTest.length-1].index ++;
 		battleLogEntries.push({type: 'invalid', content: invalidInstructionsTest});
@@ -84,7 +85,6 @@ function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battle
 			battleLogEntries.push({type: 'invalid', content: insufficientEnergyTest});
 		} else {
 			battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} RESULTS IN ${nodeBlockInQuestion.name.toUpperCase()}`});
-			// result = {...nodeBlockInQuestion};
 			result = nodeBlockInQuestion;
 		}
 	}
@@ -546,7 +546,7 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 	}
 }
 
-function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo) {
+function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, battleLogEntries, levelInfo) {
 	// This function will be a mirror of the head case, but will pop map if no command hits the result instead of setting it to waitCommand
 
 	const botData = objectsToRender[indexInQuestion];
@@ -558,6 +558,7 @@ function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, ba
 		battleLogEntries.push({type: 'empty', content: `CONDITION BRANCH EMPTY.  TESTING TO CONTINUE AT PREVIOUS DEPTH`});
 		return
 	}
+	let result = null;
 	// for (let i = mapToTest[mapToTest.length-1].index; i < nodeBlockInQuestion.length; i++) {
 	for (let i = 0; i < nodeBlockInQuestion.length; i++) {
 		if (result) {
@@ -572,10 +573,10 @@ function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, ba
 					battleLogEntries.push({type: 'test-pass', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} MET`});
 					mapToTest.push({type: 'conditionTrue', index: 0});
 				}
-				result = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo);
+				result = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, levelInfo);
 			} else {
 				// Case : Command.  Test if command can be executed
-				handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
+				result = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo);
 			}
 		}
 	}

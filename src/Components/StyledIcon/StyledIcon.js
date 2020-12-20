@@ -21,7 +21,8 @@ const StyledIcon = ({
   rotation,
   hovered,
 	keepcursor,
-	sfx
+	sfx,
+	additionalClassName
 }) => {
 	const dispatch = useDispatch();
   const settings = useSelector((state) => state.settings);
@@ -40,7 +41,7 @@ const StyledIcon = ({
   return (
     <IconStylings
 			id={id}
-			className = 'baseIconStyles'
+			className = {additionalClassName ? `${additionalClassName} baseIconStyles` : 'baseIconStyles'}
       disabled={disabled || null}
 			onClick={ disabled ? sfx ? ()=>{dispatch(playSFX('disabled'))} : ()=>{}
 				: sfx ? (ev)=>{handleClick(ev);dispatch(playSFX(sfx))} : (ev)=>{handleClick(ev)}

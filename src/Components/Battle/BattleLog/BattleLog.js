@@ -8,13 +8,15 @@ const baseFilters = {
 	newTick: 1,
 	phaseChange: 1,
 	attributeChange: 1,
-	
+	test: 1,
+	executions: 1,
+	formula: 1
 }
 
 const BattleLog = ({ viewing }) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
 	const [hovering, setHovering] = useState(0);
-	const [filters, setFilters] = useState({})
+	const [filters, setFilters] = useState(baseFilters);
 	let colors = useSelector(getThemeColors);
 
 	//TODO: Add filters to remove testing jargin, damage formulae, etc.
@@ -38,67 +40,72 @@ const BattleLog = ({ viewing }) => {
 				setFilters = {setFilters}
 				/>
 				{battleInfo.battleLog.map((logEntry, index)=>{
+
 					if (logEntry.type === 'newTick') {
-						return (
+						return filters.newTick ? (
 							<NewTick key = {index}>
 								-- NEW TICK # {logEntry.number} --
 							</NewTick>
-						)
-					}
+					) : (null)}
+
 					if (logEntry.type === 'phaseChange') {
-						return (
+						return filters.phaseChange ? (
 							<Phase key = {index}>
 								{logEntry.content}
 							</Phase>
-						)
+						) : (null)
 					}
+
 					if (logEntry.type === 'testing-bot') {
-						return (
+						return filters.test ? (
 							<Bot key = {index}>
 								-- TESTING {logEntry.name} --
 							</Bot>
-						)
+						) : (null)
 					}
+
 					if (logEntry.type === 'test-fail') {
-						return (
+						return filters.test ? (
 							<UnMet key = {index}>
 								{logEntry.content}
 							</UnMet>
-						)
+						) : (null)
 					}
+
 					if (logEntry.type === 'test-pass') {
-						return (
+						return filters.test ? (
 							<Met key = {index}>
 								{logEntry.content}
 							</Met>
-						)
+						) : (null)
 					}
 					if (logEntry.type === 'action-determined') {
-						return (
+						return filters.test ? (
 							<CommandToBe key = {index}>
 								{logEntry.content}
 							</CommandToBe>
-						)
+						) : (null)
+					}
+					
+					if (logEntry.type === 'invalid') {
+						return filters.test ? (
+							<Invalid key = {index}>
+								{logEntry.content}
+							</Invalid>
+						) : (null)
+					}
+					if (logEntry.type === 'empty') {
+						return filters.test ? (
+							<Empty key = {index}>
+								{logEntry.content}
+							</Empty>
+						) : (null)
 					}
 					if (logEntry.type === 'battle-init') {
 						return (
 							<Initial key = {index} filtersOpen = {filters.open}>
 								{battleInfo.challenge ? 'CHALLENGE' : 'LEVEL'} INITIALIZATION {battleInfo.challenge ? `\r\nCHALLENGE #${battleInfo.challenge}` : `\r\nLEVEL #${battleInfo.levelInfo.levelNumber} - ${battleInfo.levelInfo.levelName}`}
 							</Initial>
-						)
-					}
-					if (logEntry.type === 'invalid') {
-						return (
-							<Invalid key = {index}>
-								{logEntry.content}
-							</Invalid>
-						)
-					}
-					if (logEntry.type === 'empty') {
-						return (
-							<Empty key = {index}>
-								{logEntry.content}
-							</Empty>
 						)
 					}
 					return (
@@ -176,11 +183,22 @@ const Initial = styled.p`
 	padding-right: ${props => props.filtersOpen ? '0px' : '40px'};
 	transition: padding-right 0.5s ease-in-out;
 `
-const CommandToBe = styled.div`
-	color: lightskyblue;
+const CommandToBe = styled.p`
+	color: mediumslateblue;
+`
+const Command = styled.p`
+	color: mediumslateblue;
+	font-size: 1.1em;
+`
+const Formula = styled.p`
+	color: deeppink;
+	font-size: 0.8em;
 `
 const Invalid = styled.p`
 	color: red;
+`
+const Attribute = styled.p`
+	color: limegreen;
 `
 const Wrapper = styled.div`
 	display: flex;
