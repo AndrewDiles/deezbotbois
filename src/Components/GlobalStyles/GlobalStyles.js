@@ -229,6 +229,12 @@ html {
 	border-radius: 50%;
 	z-index: 21;
 }
+.darkBg {
+	background-color: rgb(0,10,0);
+	:hover {
+		cursor: pointer;
+	}
+}
 
 .techBranchHeight27 {
 	height: 27px;
@@ -341,6 +347,17 @@ html {
 
 .rotating {
     animation: rotating 2s ease-in-out infinite;
+}
+@keyframes gearSpin {
+  0%{
+		transform: rotate(0deg);
+  }
+  100%{
+		transform: rotate(360deg); 
+  }
+}
+.gearSpin {
+    animation: gearSpin .5s ease-in-out;
 }
 
 @keyframes loadInScreen {

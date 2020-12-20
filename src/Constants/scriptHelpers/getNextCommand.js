@@ -581,3 +581,13 @@ function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, ba
 	}
 	return result
 }
+
+
+let a = 0;
+function changeA (a) {
+	for (let i = 0; i < 5; i++) {
+		a++;
+		return a
+	}
+}
+changeA(a);

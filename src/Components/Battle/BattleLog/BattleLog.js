@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
+import Filters from './Filters';
+const baseFilters = {
+	open: 0,
+	newTick: 1,
+	phaseChange: 1,
+	attributeChange: 1,
+	
+}
 
 const BattleLog = ({ viewing }) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
-	const [hovering, setHovering] = React.useState(0);
+	const [hovering, setHovering] = useState(0);
+	const [filters, setFilters] = useState({})
 	let colors = useSelector(getThemeColors);
 
 	//TODO: Add filters to remove testing jargin, damage formulae, etc.
@@ -24,18 +33,22 @@ const BattleLog = ({ viewing }) => {
 			onMouseEnter = {()=>{setHovering(1)}}
 			onMouseLeave = {()=>{setHovering(0)}}
 			>
+				<Filters
+				filters = {filters}
+				setFilters = {setFilters}
+				/>
 				{battleInfo.battleLog.map((logEntry, index)=>{
-					if (logEntry.type === 'new-tick') {
+					if (logEntry.type === 'newTick') {
 						return (
 							<NewTick key = {index}>
 								-- NEW TICK # {logEntry.number} --
 							</NewTick>
 						)
 					}
-					if (logEntry.type === 'determining-actions') {
+					if (logEntry.type === 'phaseChange') {
 						return (
 							<Phase key = {index}>
-								-- DETERMINING ACTIONS --
+								{logEntry.content}
 							</Phase>
 						)
 					}
@@ -69,8 +82,8 @@ const BattleLog = ({ viewing }) => {
 					}
 					if (logEntry.type === 'battle-init') {
 						return (
-							<Initial key = {index}>
-								INITIALIZATION OF {battleInfo.challenge ? `CHALLENGE #${battleInfo.challenge}` : `LEVEL #${battleInfo.levelInfo.levelNumber} - ${battleInfo.levelInfo.levelName}`}
+							<Initial key = {index} filtersOpen = {filters.open}>
+								{battleInfo.challenge ? 'CHALLENGE' : 'LEVEL'} INITIALIZATION {battleInfo.challenge ? `\r\nCHALLENGE #${battleInfo.challenge}` : `\r\nLEVEL #${battleInfo.levelInfo.levelNumber} - ${battleInfo.levelInfo.levelName}`}
 							</Initial>
 						)
 					}
@@ -120,6 +133,10 @@ const LogContainer = styled.div`
 		display: ${props => props.viewing !== 'log' && 'none'};
 		animation: 0.5s ease-out expandYHalfDelay;
 	}
+	>div{
+		display: ${props => props.viewing !== 'log' && 'none'};
+		animation: 0.5s ease-out expandYHalfDelay;
+	}
 `
 const Tab = styled.div`
 	height: 20px;
@@ -154,7 +171,10 @@ const Empty = styled.p`
 `
 const Initial = styled.p`
 	color: orange;
-	font-size: 1.5em;
+	font-size: 1.4em;
+	font-weight: 600;
+	padding-right: ${props => props.filtersOpen ? '0px' : '40px'};
+	transition: padding-right 0.5s ease-in-out;
 `
 const CommandToBe = styled.div`
 	color: lightskyblue;

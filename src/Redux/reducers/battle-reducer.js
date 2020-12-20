@@ -27,8 +27,8 @@ const initialState = {
 	commandsToExecute: [],
 	battleLog: [
 		{type: 'battle-init'},
-		// {type: 'new-tick', number: 0},
-		// {type: 'determining-actions'},
+		// {type: 'newTick', number: 0},
+		// {type: 'phaseChange'},
 		// {type: 'testing-bot', name: 'RY66'},
 		// {type: 'test-fail', depth: 0, node: 1, content: 'NO ENEMIES DETECTED'}
 	],
@@ -81,7 +81,7 @@ export default function battleInfo(
 					...state,
 					battleLaunched: true,
 					status: 'FIRST_TICK',
-					battleLog: [...state.battleLog, {type: 'new-tick', number: state.tick+1}]
+					battleLog: [...state.battleLog, {type: 'newTick', number: state.tick+1}]
 				}
 			}
 			case 'FIRST_TICK': {
@@ -89,7 +89,7 @@ export default function battleInfo(
 					...state,
 					tick: state.tick++,
 					status: 'DETERMINING_COMMANDS',
-					battleLog: [...state.battleLog, {type: 'determining-actions'}]
+					battleLog: [...state.battleLog, {type: 'phaseChange', content: '-- DETERMINING ACTIONS --'}]
 					// battleLog: newBattleLog
 				}
 			}
