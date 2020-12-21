@@ -232,7 +232,7 @@ html {
 .darkBg {
 	background-color: rgb(0,10,0);
 	:hover {
-		cursor: pointer;
+		background-color: rgb(0,10,0);
 	}
 }
 

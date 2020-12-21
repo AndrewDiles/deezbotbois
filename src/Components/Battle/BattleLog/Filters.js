@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {gear} from 'react-icons-kit/fa/gear';
 import StyledIcon from '../../StyledIcon/StyledIcon';
+import StyledCheckbox from '../../StyledCheckbox/StyledCheckbox';
 
 const Filters = ({ filters, setFilters}) => {
 	const [gearSpinning, setGearSpinning] = React.useState(0);
@@ -33,57 +34,51 @@ const Filters = ({ filters, setFilters}) => {
 			open = {filters.open}
 			>
 				<TickCheckContainer className = 'startFlex'>
-					<input 
-					type = "checkbox" 
-					checked = {filters.newTick} 
-					onChange = {() => {
-						setFilters({...filters, newTick: !filters.newTick})
-					}}/>
+					<StyledCheckbox
+					sfx = 'selected'
+					value = {filters.newTick}
+					handleClick = {() => {setFilters({...filters, newTick: !filters.newTick})}}
+					/>
 					TICKS
 				</TickCheckContainer>
 				<ExecutionCheckContainer className = 'startFlex'>
-					<input 
-					type = "checkbox" 
-					checked = {filters.executions} 
-					onChange = {() => {
-						setFilters({...filters, executions: !filters.executions})
-					}}/>
+					<StyledCheckbox
+					sfx = 'selected'
+					value = {filters.executions}
+					handleClick = {() => {setFilters({...filters, executions: !filters.executions})}}
+					/>
 					EXECUTIONS
 				</ExecutionCheckContainer>
 				<PhaseCheckContainer className = 'startFlex'>
-					<input 
-					type = "checkbox" 
-					checked = {filters.phaseChange} 
-					onChange = {() => {
-						setFilters({...filters, phaseChange: !filters.phaseChange})
-					}}/>
+					<StyledCheckbox
+					sfx = 'selected'
+					value = {filters.phaseChange}
+					handleClick = {() => {setFilters({...filters, phaseChange: !filters.phaseChange})}}
+					/>
 					PHASES
 				</PhaseCheckContainer>
 				<AttributeCheckContainer className = 'startFlex'>
-					<input 
-					type = "checkbox" 
-					checked = {filters.attributeChange} 
-					onChange = {() => {
-						setFilters({...filters, attributeChange: !filters.attributeChange})
-					}}/>
+					<StyledCheckbox
+					sfx = 'selected'
+					value = {filters.attributeChange}
+					handleClick = {() => {setFilters({...filters, attributeChange: !filters.attributeChange})}}
+					/>
 					ATTRIBUTES
 				</AttributeCheckContainer>
 				<TestCheckContainer className = 'startFlex'>
-					<input 
-					type = "checkbox" 
-					checked = {filters.test} 
-					onChange = {() => {
-						setFilters({...filters, test: !filters.test})
-					}}/>
+					<StyledCheckbox
+					sfx = 'selected'
+					value = {filters.test}
+					handleClick = {() => {setFilters({...filters, test: !filters.test})}}
+					/>
 					TESTS
 				</TestCheckContainer>
 				<FormulaeCheckContainer className = 'startFlex'>
-					<input 
-					type = "checkbox" 
-					checked = {filters.formula} 
-					onChange = {() => {
-						setFilters({...filters, formula: !filters.formula})
-					}}/>
+					<StyledCheckbox
+					sfx = 'selected'
+					value = {filters.formula}
+					handleClick = {() => {setFilters({...filters, formula: !filters.formula})}}
+					/>
 					FORMULAE
 				</FormulaeCheckContainer>
 			</Options>
