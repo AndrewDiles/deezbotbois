@@ -348,17 +348,6 @@ html {
 .rotating {
   animation: rotating 2s ease-in-out infinite;
 }
-@keyframes gearSpin {
-  0%{
-		transform: rotate(0deg);
-  }
-  100%{
-		transform: rotate(180deg); 
-  }
-}
-.gearSpin {
-  animation: gearSpin .5s ease-in-out infinite;
-}
 
 @keyframes loadInScreen {
   0% {

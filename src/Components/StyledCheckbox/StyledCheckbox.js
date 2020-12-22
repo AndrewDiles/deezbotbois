@@ -7,7 +7,7 @@ import { Icon } from "react-icons-kit";
 import {xSquare} from 'react-icons-kit/feather/xSquare';
 import {checkSquare} from 'react-icons-kit/feather/checkSquare';
 
-const StyledCheckbox = ( { sfx, handleClick, disabled, value} ) => {
+const StyledCheckbox = ( { sfx, handleClick, disabled, value, right, margin} ) => {
 	const dispatch = useDispatch();
 	let colors = useSelector(getThemeColors);
 	const settings = useSelector((state) => state.settings);
@@ -29,17 +29,22 @@ const StyledCheckbox = ( { sfx, handleClick, disabled, value} ) => {
 		colors = {colors}
 		value = {value}
 		icon = {value ? checkSquare : xSquare}
+		right = {right}
+		margin = {margin}
     />
   )
 }
 export default StyledCheckbox;
 
 const StyledIcon = styled(Icon)`
+	position: relative;
+	right: ${props => props.right && props.right};
 	transition: color .25s, background-color .25s;
   background-color: ${props => props.checked ? props.colors.selected : props.colors.notSelected};
   color: ${props => props.displaying ? 'lime' : 'red'};
 	opacity: ${props => props.disabled && 0.5};
 	border-radius: 3px;
+	margin: ${props => props.margin && props.margin};
   &:hover {
     cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
     background-color: ${props => !props.disabled && props.checked ? props.selected : props.colors.hovered};

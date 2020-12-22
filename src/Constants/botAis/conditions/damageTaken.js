@@ -1,5 +1,6 @@
 class DamageTaken {
   constructor(depth, conditionMet, conditionUnMet) {
+		// TODO: May want to allow changes in threshold in increments of 0.1
 		this.depth = depth;
 		this.name = 'damageTaken';
 		this.test = {

@@ -54,7 +54,7 @@ const TechCellProvider = ({ setTechDisplay, availableStars, availableBlueStars, 
 		// console.log('index, purchased, disabled',index, purchased, disabled)
 		if (purchased) {
 			dispatch(removeTechs(botNumberSelected, inverseTechTreeRequirements(index)));
-			dispatch(playSFX('toggle'));
+			dispatch(playSFX('confirm'));
 		}
 		else if (!disabled) {
 			dispatch(addTech(botNumberSelected, index));

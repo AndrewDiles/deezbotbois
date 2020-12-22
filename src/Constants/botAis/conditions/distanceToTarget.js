@@ -4,7 +4,7 @@ class DistanceToTarget {
 		this.name = 'distanceToTarget';
 		this.test = {
 			targetNumber: 1,
-			testTargets: 'hostile',
+			// testTargets: 'hostile',
 			evaluationType: '<',
 			threshold: 3
 		};
@@ -15,10 +15,10 @@ class DistanceToTarget {
 	setTargetNumber(newTargetNumber) {
 		this.test.targetNumber = newTargetNumber
 	}
-	// newTarget can be: hostile, friend, wall, corner, any
-	setTarget(newTarget) {
-		this.test.testTargets = newTarget
-	}
+	// newTarget can be: hostile, friend
+	// setTarget(newTarget) {
+	// 	this.test.testTargets = newTarget
+	// }
 	// comparisonOperator can be: =, ≠, >, <
 	setEvaluation(comparisonOperator) {
 		this.test.evaluationType = comparisonOperator

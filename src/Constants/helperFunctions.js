@@ -897,8 +897,10 @@ export function initializeBot (botInfo, teamNumber, location, type) {
 	addArmaments(botToAdd);
 	botToAdd.switches = {1:false,2:false,3:false,4:false,5:false};
 	botToAdd.scanResults = [];
-	botToAdd.aimResults = false;  // this may not end up being a bool
+	botToAdd.aimResults = [];
 	botToAdd.consecutiveAims = 0;
+	botToAdd.damageTakenPreviousTick = 0;
+	botToAdd.damageTakenCurrentTick = 0;
 	botToAdd.previousCommand = null;
 	botToAdd.attributes.CurrentBurn = 0;
 	botToAdd.attributes.CurrentDurability = botInfo.attributes.Durability;

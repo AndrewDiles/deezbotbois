@@ -58,13 +58,17 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 			}
 		}
 	}
+	if (!result) {
+		result = waitCommand;
+		battleLogEntries.push({type: 'invalid', content: `COMMAND TESTING FOR BOT ${botData.name} FAILED: DEPLETED AI BRANCHES WITHOUT FINDING A VALID COMMAND.  DEFAULTING TO WAITCOMMAND`});
+	}
 	return {command: result, battleLogEntries: battleLogEntries}
 }
 
 export default getNextCommand
 
 function testIsDestroyed (botData) {
-	return botData.CurrentDurability === 0 ? true : false
+	return botData.attributes.CurrentDurability === 0 ? true : false
 }
 function testNodeBlockIsEmpty (nodeBlock) {
 	return nodeBlock.length > 0 ? false : true
@@ -73,22 +77,38 @@ function testNodeIsCondition (nodeBlock) {
 	return Object.keys(nodeBlock)[0] === 'condition' ? true : false
 }
 function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo) {
-	const invalidInstructionsTest = testInvalidInstructions(nodeBlockInQuestion, botData, objectsToRender, levelInfo);
 	let result = null;
-	if (invalidInstructionsTest) {
-		mapToTest[mapToTest.length-1].index ++;
-		battleLogEntries.push({type: 'invalid', content: invalidInstructionsTest});
-	} else {
-		const insufficientEnergyTest = testInsufficientEnergy(nodeBlockInQuestion, botData);
-		if (insufficientEnergyTest) {
+	const botKnowsCommand = botKnowsCommandTest(nodeBlockInQuestion.name, botData);
+	if (botKnowsCommand) {
+		const invalidInstructionsTest = testInvalidInstructions(nodeBlockInQuestion, botData, objectsToRender, levelInfo);
+		if (invalidInstructionsTest) {
 			mapToTest[mapToTest.length-1].index ++;
-			battleLogEntries.push({type: 'invalid', content: insufficientEnergyTest});
+			battleLogEntries.push({type: 'invalid', content: invalidInstructionsTest});
 		} else {
-			battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} RESULTS IN ${nodeBlockInQuestion.name.toUpperCase()}`});
-			result = nodeBlockInQuestion;
+			const insufficientEnergyTest = testInsufficientEnergy(nodeBlockInQuestion, botData);
+			if (insufficientEnergyTest) {
+				mapToTest[mapToTest.length-1].index ++;
+				battleLogEntries.push({type: 'invalid', content: insufficientEnergyTest});
+			} else {
+				battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} RESULTS IN ${nodeBlockInQuestion.name.toUpperCase()}`});
+				result = nodeBlockInQuestion;
+			}
 		}
+	} else {
+		battleLogEntries.push({type: 'invalid', content: `AI ERROR: BOT ${botData.name} DOES NOT KNOW COMMAND ${nodeBlockInQuestion.name.toUpperCase()}`});
 	}
 	return result
+}
+function botKnowsCommandTest (commandName, botInfo) {
+	console.log({commandName});
+	console.log('searching for command in attributes:', botInfo.attributes);
+	// console.log()
+	if (botInfo.attributes[commandName] !== true && botInfo.attributes[commandName] !== false) {
+		console.log('Error acquiring command known test information');
+		return false
+	} else {
+		return botInfo.attributes[commandName]
+	}
 }
 function noWeaponEquipped (supposedWeaponName, commandName, armSlot) {
 	return supposedWeaponName ? false : `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT NO WEAPON IS EQUIPPED IN ${armSlot.toUpperCase()}`
@@ -360,7 +380,6 @@ function testCellForBotTypeX (objectsToRender, testLocation, botData, botType) {
 }
 
 function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, levelInfo) {
-	// TODO: this function
 	// This function will return true if the conditions are met, and false otherwise.
 	const botData = objectsToRender[indexInQuestion];
 	const conditionName = nodeBlockInQuestion.name;
@@ -477,67 +496,165 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 			return false
 		}
 		case 'aimResults' : {
-			
-
-
-
-			return false
+			// bot.AimResults will be an array with one or zero elements.
+			// if 0, return false
+			// else test types against testTargets and targetEvaluation Type
+			if (botData.aimResults.length === 0) return false
+			else {
+				let lockedTarget = objectsToRender[botData.aimResults[0].index];
+				let onSameTeam = lockedTarget.team === botData.team;
+				if (nodeBlockInQuestion.test.targetEvaluationType === '=') {
+					if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+						return onSameTeam ? false : true;
+					} else return onSameTeam ? true : false;
+				} else {
+					if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+						return onSameTeam ? true : false;
+					} else return onSameTeam ? false : true;
+				}
+			}
 		}
 		case 'attribute' : {
-			
-
-
-
-			return false
+			let botAttributeInQuestion = null;
+			if (nodeBlockInQuestion.test.testTargets === 'durability') {
+				botAttributeInQuestion = botData.attributes.CurrentDurability;
+			} else if (nodeBlockInQuestion.test.testTargets === 'capacitor') {
+				botAttributeInQuestion = botData.attributes.CurrentCapacitor;
+			} else {
+				console.log('error acquiring current Attribute type in attribute test');
+				return nodeBlockInQuestion.test.evaluationType === '≠' ? true : false
+			}
+			if (typeof(botAttributeInQuestion) !== 'number') {
+				console.log('error acquiring current Attribute value in attribute test');
+				return nodeBlockInQuestion.test.evaluationType === '≠' ? true : false
+			} else {
+				if (nodeBlockInQuestion.test.evaluationType === '>') {
+					return botAttributeInQuestion > nodeBlockInQuestion.test.threshold ? true : false
+				} else if (nodeBlockInQuestion.test.evaluationType === '<') {
+					return botAttributeInQuestion < nodeBlockInQuestion.test.threshold ? true : false
+				} else if (nodeBlockInQuestion.test.evaluationType === '=') {
+					return botAttributeInQuestion === nodeBlockInQuestion.test.threshold ? true : false
+				} else if (nodeBlockInQuestion.test.evaluationType === '≠') {
+					return botAttributeInQuestion !== nodeBlockInQuestion.test.threshold ? true : false
+				} else {
+					console.log('error determining evaluationType in attribute test');
+					return false
+				}
+			}
 		}
 		case 'consecutiveAims' : {
-			
-
-
-
-			return false
+			if (nodeBlockInQuestion.test.evaluationType === '>') {
+				return botData.consecutiveAims > nodeBlockInQuestion.test.threshold ? true : false
+			} else if (nodeBlockInQuestion.test.evaluationType === '<') {
+				return botData.consecutiveAims < nodeBlockInQuestion.test.threshold ? true : false
+			} else if (nodeBlockInQuestion.test.evaluationType === '=') {
+				return botData.consecutiveAims === nodeBlockInQuestion.test.threshold ? true : false
+			} else if (nodeBlockInQuestion.test.evaluationType === '≠') {
+				return botData.consecutiveAims !== nodeBlockInQuestion.test.threshold ? true : false
+			} else {
+				console.log('error determining evaluationType in consecutiveAims test');
+				return false
+			}
+		}
+		case 'damageTaken' : {
+			if (nodeBlockInQuestion.test.evaluationType === '>') {
+				return botData.damageTakenPreviousTick > nodeBlockInQuestion.test.threshold ? true : false
+			} else if (nodeBlockInQuestion.test.evaluationType === '<') {
+				return botData.damageTakenPreviousTick < nodeBlockInQuestion.test.threshold ? true : false
+			} else if (nodeBlockInQuestion.test.evaluationType === '=') {
+				return botData.damageTakenPreviousTick === nodeBlockInQuestion.test.threshold ? true : false
+			} else if (nodeBlockInQuestion.test.evaluationType === '≠') {
+				return botData.damageTakenPreviousTick !== nodeBlockInQuestion.test.threshold ? true : false
+			} else {
+				console.log('error determining evaluationType in damageTaken test');
+				return false
+			}
 		}
 		case 'distanceToTarget' : {
-			
-
-
-
-			return false
+			const targetInQuestion = botData.scanResults[nodeBlockInQuestion.targetNumber];
+			if (!targetInQuestion) {
+				return nodeBlockInQuestion.test.evaluationType === '≠' ? true : false
+			} else {
+				const objectInQuestion = objectsToRender[targetInQuestion.index];
+				if (!objectInQuestion) {
+					console.log('error retrieving object info of scanned object in distanceToTarget test');
+					return false
+				} else {
+					const determinedDistance = distanceToAdjacentToCell(botData.location, objectInQuestion.location);
+					if (typeof(determinedDistance) !== 'number') {
+						console.log('error retrieving distance to object in distanceToTarget test');
+						return false
+					} else {
+						if (nodeBlockInQuestion.test.evaluationType === '>') {
+							return determinedDistance > nodeBlockInQuestion.test.threshold ? true : false
+						} else if (nodeBlockInQuestion.test.evaluationType === '<') {
+							return determinedDistance < nodeBlockInQuestion.test.threshold ? true : false
+						} else if (nodeBlockInQuestion.test.evaluationType === '=') {
+							return determinedDistance === nodeBlockInQuestion.test.threshold ? true : false
+						} else if (nodeBlockInQuestion.test.evaluationType === '≠') {
+							return determinedDistance !== nodeBlockInQuestion.test.threshold ? true : false
+						} else {
+							console.log('error determining evaluationType in distanceToTarget test');
+							return false
+						}
+					}
+				}
+			}
 		}
 		case 'obstructionToTarget' : {
-			
-
+			// TODO: this condition test
 
 
 			return false
 		}
 		case 'previousCommand' : {
-			
-
+			if (!botData.previousCommand) {
+				return false
+			} else {
+				if (botData.previousCommand.name !== nodeBlockInQuestion.test.name) {
+					return false
+				} else {
+					if (!botData.previousCommand.instructions.weapon) {
+						return true
+					} else {
+						return botData.previousCommand.instructions.weapon === nodeBlockInQuestion.test.armSlot ? true : false
+					}
+				}
+			}
+		}
+		case 'scanResults' : {
+			// TODO: this condition test
 
 
 			return false
 		}
 		case 'sufficientEnergy' : {
-			
-
-
-
-			return false
+			return !testInsufficientEnergy({name: nodeBlockInQuestion.test.commandName, instructions: {weapon: nodeBlockInQuestion.test.armSlot}}, botData)
 		}
 		case 'switch' : {
-			
-
-
-
-			return false
+			return botData.switches[nodeBlockInQuestion.test.switchNumber]
 		}
 		case 'weaponLoaded' : {
-			
-
-
-
-			return false
+			const armSlot = nodeBlockInQuestion.test.armSlot;
+			const weaponName = botData.equipment[armSlot];
+			if (!weaponName) {
+				console.log('error acquiring weapon info in weaponLoaded test');
+				return false
+			} else {
+				const turnsUntilLoaded = botData[`${armSlot}LoadTime`];
+				if (nodeBlockInQuestion.test.evaluationType === '>') {
+					return turnsUntilLoaded > nodeBlockInQuestion.test.threshold ? true : false
+				} else if (nodeBlockInQuestion.test.evaluationType === '<') {
+					return turnsUntilLoaded < nodeBlockInQuestion.test.threshold ? true : false
+				} else if (nodeBlockInQuestion.test.evaluationType === '=') {
+					return turnsUntilLoaded === nodeBlockInQuestion.test.threshold ? true : false
+				} else if (nodeBlockInQuestion.test.evaluationType === '≠') {
+					return turnsUntilLoaded !== nodeBlockInQuestion.test.threshold ? true : false
+				} else {
+					console.log('error determining evaluationType in distanceToTarget test');
+					return false
+				}
+			}
 		}
 		default: {
 			console.log(`Unknown condition name: ${conditionName} inside condition test`);
@@ -582,13 +699,3 @@ function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, ba
 	}
 	return result
 }
-
-
-let a = 0;
-function changeA (a) {
-	for (let i = 0; i < 5; i++) {
-		a++;
-		return a
-	}
-}
-changeA(a);

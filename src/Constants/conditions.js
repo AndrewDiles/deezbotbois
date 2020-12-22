@@ -92,6 +92,8 @@ export const conditionsData = {
 		testOptions: [
 			''
 		]
+		// if no target is found always goes case true if evaluationType is ≠, otherwise always true
+		// actually finds distance to travel adjacent to target
 	},
 	obstructionToTarget : {
 		camel: 'obstructionToTarget',

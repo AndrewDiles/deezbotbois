@@ -1,28 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {gear} from 'react-icons-kit/fa/gear';
 import StyledIcon from '../../StyledIcon/StyledIcon';
 import StyledCheckbox from '../../StyledCheckbox/StyledCheckbox';
 
 const Filters = ({ filters, setFilters}) => {
-	const [gearSpinning, setGearSpinning] = React.useState(0);
+	const [gearSpinning, setGearSpinning] = useState('reset');
+	const [spinningDisabled, setSpinningDisabled] = useState(0);
+
+	// React.useEffect(()=>{
+	// 	console.log(filters);
+	// },
+	// [JSON.stringify(filters)]
+	// )
 
 	React.useEffect(()=>{
-		console.log(filters);
+		let pendingChange = null;
+		if (gearSpinning === 'forward') {
+			pendingChange = setTimeout(()=>{
+				setGearSpinning('rotated');
+				setSpinningDisabled(0);
+			}, 500)
+		} else if (gearSpinning === 'backward') {
+			pendingChange = setTimeout(()=>{
+				setGearSpinning('reset');
+				setSpinningDisabled(0);
+			}, 500)
+		}
+		return ()=>{
+			if (pendingChange) {
+				clearTimeout(pendingChange);
+			}
+		}
 	},
-	// [JSON.stringify(filters)]
+	[gearSpinning]
 	)
 
 	function spinTheGear () {
-		const gearContainer = document.getElementById('gearContainer');
-		if (gearContainer) {
-			setGearSpinning(1);
+		setSpinningDisabled(1);
+		if (gearSpinning === 'reset') {
+			setGearSpinning('forward');
+		} else {
+			setGearSpinning('backward');
 		}
-		setTimeout(()=>{
-			if (gearContainer) {
-				setGearSpinning(0);
-			}
-		},500)
 	}
   return (
     <Wrapper
@@ -38,6 +58,7 @@ const Filters = ({ filters, setFilters}) => {
 					sfx = 'selected'
 					value = {filters.newTick}
 					handleClick = {() => {setFilters({...filters, newTick: !filters.newTick})}}
+					right = '2px'
 					/>
 					TICKS
 				</TickCheckContainer>
@@ -46,6 +67,7 @@ const Filters = ({ filters, setFilters}) => {
 					sfx = 'selected'
 					value = {filters.executions}
 					handleClick = {() => {setFilters({...filters, executions: !filters.executions})}}
+					right = '2px'
 					/>
 					EXECUTIONS
 				</ExecutionCheckContainer>
@@ -54,6 +76,7 @@ const Filters = ({ filters, setFilters}) => {
 					sfx = 'selected'
 					value = {filters.phaseChange}
 					handleClick = {() => {setFilters({...filters, phaseChange: !filters.phaseChange})}}
+					right = '2px'
 					/>
 					PHASES
 				</PhaseCheckContainer>
@@ -62,6 +85,7 @@ const Filters = ({ filters, setFilters}) => {
 					sfx = 'selected'
 					value = {filters.attributeChange}
 					handleClick = {() => {setFilters({...filters, attributeChange: !filters.attributeChange})}}
+					right = '2px'
 					/>
 					ATTRIBUTES
 				</AttributeCheckContainer>
@@ -70,6 +94,7 @@ const Filters = ({ filters, setFilters}) => {
 					sfx = 'selected'
 					value = {filters.test}
 					handleClick = {() => {setFilters({...filters, test: !filters.test})}}
+					right = '2px'
 					/>
 					TESTS
 				</TestCheckContainer>
@@ -78,6 +103,7 @@ const Filters = ({ filters, setFilters}) => {
 					sfx = 'selected'
 					value = {filters.formula}
 					handleClick = {() => {setFilters({...filters, formula: !filters.formula})}}
+					right = '2px'
 					/>
 					FORMULAE
 				</FormulaeCheckContainer>
@@ -85,13 +111,14 @@ const Filters = ({ filters, setFilters}) => {
 			<Gear
 			open = {filters.open}
 			id = 'gearContainer'
-			className = {gearSpinning && 'gearSpin'}
+			gearSpinning = {gearSpinning}
 			>
 				<StyledIcon
 				handleClick = {()=>{
 					spinTheGear();
 					setFilters({...filters, open: !filters.open})}
 				}
+				disabled = {spinningDisabled}
 				icon = {gear}
 				sfx = 'toggle'
 				id = 'gearIcon'
@@ -120,7 +147,8 @@ const Options = styled.div`
 `
 const Gear = styled.div`
 	margin-top: ${props => props.open ? '0px' : '40px'};
-	transition: margin-top ease-in-out 0.5s;
+	transition: margin-top ease-in-out 0.5s, transform ease-in-out 0.5s;
+	transform: ${props => (props.gearSpinning === 'forward' || props.gearSpinning === 'rotated') ? 'rotate(180deg)' : 'rotate(0deg)'};
 `
 const TickCheckContainer = styled.div`
 	color: gold;

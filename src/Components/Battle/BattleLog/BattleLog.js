@@ -18,8 +18,6 @@ const BattleLog = ({ viewing }) => {
 	const [hovering, setHovering] = useState(0);
 	const [filters, setFilters] = useState(baseFilters);
 	let colors = useSelector(getThemeColors);
-
-	//TODO: Add filters to remove testing jargin, damage formulae, etc.
 	
   return (
     <Wrapper className = 'startFlex col'>
