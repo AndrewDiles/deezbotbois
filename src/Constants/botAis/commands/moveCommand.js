@@ -5,7 +5,8 @@ class MoveCommand {
 			targetting: false,
 			targetNumber: 1,
 			intent: 'adjacent',
-			directions: ['R']
+			directions: ['R'],
+			targetType: 'hostile'
 		}
 	}
 	activateTargetting() {
@@ -25,6 +26,10 @@ class MoveCommand {
 	// newDirection can be a string comination of: U, D, L, R, UR, UL, DR, DL
 	setMeleeDirection(newDirections) {
 		this.instructions.directions = newDirections;
+	}
+	// targetType can be 'hostile', 'friend', 'wall', or 'corner'
+	setTargetType(newTargetType) {
+		this.instructions.targetType = newTargetType;
 	}
 }
 module.exports = MoveCommand

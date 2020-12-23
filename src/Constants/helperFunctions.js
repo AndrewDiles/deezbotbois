@@ -863,6 +863,25 @@ export function filterHostileScanResults (scanResults) {
 	return nonEmptyCells
 }
 
+// function determines if a path between two objects has other objects in the way
+export function isPathAdjacentToObstructed (startLocation, endLocation, objectsToRender, levelInfo) {
+	const path = pathToAdjacentCell(startLocation, endLocation);
+	if (path.length === 0) return false;
+	let currentLandingSpot = {...startLocation};
+	let pathObstructed = false;
+	let nextStep;
+	path.forEach((move)=>{
+		if (!pathObstructed) {
+			nextStep = nextStepGenerator(currentLandingSpot, move);
+			pathObstructed = collisionVerification(nextStep, objectsToRender, levelInfo.height, levelInfo.width)
+			if (!pathObstructed) {
+				currentLandingSpot = nextStep;
+			}
+		}
+	})
+	return pathObstructed
+}
+
 // function returns the object if one exists on the given cellLocation, or null if one does not exist
 export function findObjectOnCell (cellLocation, allObjectsOnGrid) {
 	for (let i = 0; i < allObjectsOnGrid.length; i++) {
@@ -872,6 +891,45 @@ export function findObjectOnCell (cellLocation, allObjectsOnGrid) {
 	}
 	return null
 }
+
+// function sifts through scanResults and returns the bot info of a hostile or friendly, given it's index
+// NOTE: DECIDED TO CHANGE THE SCAN STRUCTURE AND SEPARATE HOSTILES FROM FRIENDS AT SCAN
+// THEREFOR, THIS FUNCTION IS OBSOLETE
+// export function findFriendOrFoe (scanResults, alliedTeamNumber, friendOrFoe, targetIndex) {
+// 	let foundIndex = 1;
+// 	let result = null;
+
+// 	for (let i = 0; i < scanResults.length; i++) {
+// 		if (scanResults[i].team === alliedTeamNumber) {
+// 			// case found an friend
+// 			if (friendOrFoe === 'friend') {
+// 				// s case, we found the type we wanted to
+// 				if (foundIndex === targetIndex) {
+// 					// ss case we found the droid we are looking for
+// 					result = scanResults[i];
+// 					break;
+// 				} else {
+// 					// ss case this is the wrong friend
+// 					foundIndex ++;
+// 				}
+// 			}
+// 		} else {
+// 			// case found a hostile
+// 			if (friendOrFoe === 'hostile') {
+// 				// s case, we found the type we wanted to
+// 				if (foundIndex === targetIndex) {
+// 					// ss case we found the droid we are looking for
+// 					result = scanResults[i];
+// 					break;
+// 				} else {
+// 					// ss case this is the wrong friend
+// 					foundIndex ++;
+// 				}
+// 			}
+// 		}
+// 	}
+// 	return result
+// }
 
 function addArmaments (botInfo) {
 	if (botInfo.equipment.arm1) {
@@ -897,6 +955,9 @@ export function initializeBot (botInfo, teamNumber, location, type) {
 	addArmaments(botToAdd);
 	botToAdd.switches = {1:false,2:false,3:false,4:false,5:false};
 	botToAdd.scanResults = [];
+	botToAdd.scanFriendResults = [];
+	botToAdd.scanWallResults = [];
+	botToAdd.scanCornerResults = [];
 	botToAdd.aimResults = [];
 	botToAdd.consecutiveAims = 0;
 	botToAdd.damageTakenPreviousTick = 0;

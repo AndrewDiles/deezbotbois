@@ -4,10 +4,13 @@ import scriptUpdater from '../scriptUpdater';
 import styled from 'styled-components';
 import StyledButton from '../../../StyledButton/StyledButton';
 
-const TestTargetsSetter = ({ activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, infoGatheredBy, ignoreTargetEvaluationType, targets }) => {
+const TestTargetsSetter = ({ activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, infoGatheredBy, ignoreTargetEvaluationType, targets, includesAny }) => {
 	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
-	let targetsArray = ['hostile', 'friend', 'wall', 'corner', 'any'];
+	let targetsArray = ['hostile', 'friend', 'wall', 'corner'];
+	if (includesAny) {
+		targetsArray.push('any');
+	}
 	if (targets) {
 		targetsArray = targets;
 	}

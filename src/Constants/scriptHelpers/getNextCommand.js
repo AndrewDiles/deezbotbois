@@ -11,7 +11,8 @@ import {
 	distanceToAdjacentToCell,
 	pathToAdjacentCell,
 	nextStepGenerator,
-	collisionVerification
+	collisionVerification,
+	isPathAdjacentToObstructed,
 } from '../../Constants/helperFunctions';
 
 function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
@@ -100,9 +101,6 @@ function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battle
 	return result
 }
 function botKnowsCommandTest (commandName, botInfo) {
-	console.log({commandName});
-	console.log('searching for command in attributes:', botInfo.attributes);
-	// console.log()
 	if (botInfo.attributes[commandName] !== true && botInfo.attributes[commandName] !== false) {
 		console.log('Error acquiring command known test information');
 		return false
@@ -263,11 +261,23 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			// in these cases, the bot will move as far as it can travel
 			// moveCommand instructions will only be invalid if the isntructions are targetting and there is no target number n
 			if (!commandNode.instructions.targetting) return false
-			if (!botInfo.scanResults[commandNode.instructions.targetNumber-1]) {
-				return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN SCAN RESULTS`
+			if (commandNode.instructions.targetType === 'hostile') {
+				if (!botInfo.scanResults[commandNode.instructions.targetNumber-1]) {
+					return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN SCAN RESULTS`
+				} else {
+					return false
+				}
+			} else if (commandNode.instructions.targetType === 'friend') {
+				if (!botInfo.scanFriendResults[commandNode.instructions.targetNumber-1]) {
+					return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN FRIEND SCAN RESULTS`
+				} else {
+					return false
+				}
 			} else {
+				console.log('error acquiring targetType of moveCommand instructions');
 				return false
 			}
+			
 		}
 		case 'rangedAttackCommand' : {
 			const invalidRangedWeapon = invalidRangedWeaponTest(commandNode, botInfo);
@@ -378,7 +388,20 @@ function testCellForBotTypeX (objectsToRender, testLocation, botData, botType) {
 	}
 	return false
 }
-
+function evaluateLength (arrayLength, nodeBlockInQuestion) {
+	if (nodeBlockInQuestion.test.evaluationType === '>') {
+		return arrayLength > nodeBlockInQuestion.test.threshold ? true : false
+	} else if (nodeBlockInQuestion.test.evaluationType === '<') {
+		return arrayLength < nodeBlockInQuestion.test.threshold ? true : false
+	} else if (nodeBlockInQuestion.test.evaluationType === '=') {
+		return arrayLength === nodeBlockInQuestion.test.threshold ? true : false
+	} else if (nodeBlockInQuestion.test.evaluationType === '≠') {
+		return arrayLength !== nodeBlockInQuestion.test.threshold ? true : false
+	} else {
+		console.log('error determining evaluationType in scanResults test');
+		return false
+	}
+}
 function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, levelInfo) {
 	// This function will return true if the conditions are met, and false otherwise.
 	const botData = objectsToRender[indexInQuestion];
@@ -571,7 +594,19 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 			}
 		}
 		case 'distanceToTarget' : {
-			const targetInQuestion = botData.scanResults[nodeBlockInQuestion.targetNumber];
+			let targetInQuestion = null;
+			if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+				targetInQuestion = botData.scanResults[nodeBlockInQuestion.test.targetNumber-1];
+			} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
+				targetInQuestion = botData.scanWallResults[nodeBlockInQuestion.test.targetNumber-1];
+			} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
+				targetInQuestion = botData.scanCornerResults[nodeBlockInQuestion.test.targetNumber-1];
+			} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
+				targetInQuestion = botData.scanFriendResults[nodeBlockInQuestion.test.targetNumber-1];
+			} else {
+				console.log('error obtaining testTargets in distanceToTarget test');
+				return false
+			}
 			if (!targetInQuestion) {
 				return nodeBlockInQuestion.test.evaluationType === '≠' ? true : false
 			} else {
@@ -602,10 +637,23 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 			}
 		}
 		case 'obstructionToTarget' : {
-			// TODO: this condition test
-
-
-			return false
+			// returns false if no target is found - since there is no obstruction
+			if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+				const targetInQuestion = botData.scanResults[nodeBlockInQuestion.test.targetNumber-1];
+				return !targetInQuestion ? false : isPathAdjacentToObstructed(botData.location, targetInQuestion.location, objectsToRender, levelInfo);
+			} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
+				const targetInQuestion = botData.scanWallResults[nodeBlockInQuestion.test.targetNumber-1];
+				return !targetInQuestion ? false : isPathAdjacentToObstructed(botData.location, targetInQuestion.location, objectsToRender, levelInfo);
+			} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
+				const targetInQuestion = botData.scanCornerResults[nodeBlockInQuestion.test.targetNumber-1];
+				return !targetInQuestion ? false : isPathAdjacentToObstructed(botData.location, targetInQuestion.location, objectsToRender, levelInfo);
+			} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
+				const targetInQuestion = botData.scanFriendResults[nodeBlockInQuestion.test.targetNumber-1];
+				return !targetInQuestion ? false : isPathAdjacentToObstructed(botData.location, targetInQuestion.location, objectsToRender, levelInfo);
+			} else {
+				console.log('error obtaining testTargets in obstructionToTarget test');
+				return false
+			}
 		}
 		case 'previousCommand' : {
 			if (!botData.previousCommand) {
@@ -623,10 +671,35 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 			}
 		}
 		case 'scanResults' : {
-			// TODO: this condition test
-
-
-			return false
+			if (nodeBlockInQuestion.test.targetEvaluationType === '=') {
+				// Case, looking for one type
+				if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+					return evaluateLength(botData.scanResults.length, nodeBlockInQuestion);
+				} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
+					return evaluateLength(botData.scanFriendResults.length, nodeBlockInQuestion);
+				} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
+					return evaluateLength(botData.scanWallResults.length, nodeBlockInQuestion);
+				} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
+					return evaluateLength(botData.scanCornerResults.length, nodeBlockInQuestion);
+				} else {
+					console.log('error obtaining testTargets in scanResults test');
+					return false
+				}
+			} else {
+				// Case, finding sum of non-selected scan type
+				if (nodeBlockInQuestion.test.testTargets === 'hostile') {
+					return evaluateLength(botData.scanFriendResults.length + botData.scanWallResults.length + botData.scanCornerResults.length, nodeBlockInQuestion);
+				} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
+					return evaluateLength(botData.scanResults.length + botData.scanWallResults.length + botData.scanCornerResults.length, nodeBlockInQuestion);
+				} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
+					return evaluateLength(botData.scanResults.length + botData.scanFriendResults.length + botData.scanCornerResults.length, nodeBlockInQuestion);
+				} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
+					return evaluateLength(botData.scanResults.length + botData.scanFriendResults.length + botData.scanWallResults.length, nodeBlockInQuestion);
+				} else {
+					console.log('error obtaining testTargets in scanResults test');
+					return false
+				}
+			}
 		}
 		case 'sufficientEnergy' : {
 			return !testInsufficientEnergy({name: nodeBlockInQuestion.test.commandName, instructions: {weapon: nodeBlockInQuestion.test.armSlot}}, botData)
@@ -699,3 +772,5 @@ function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, ba
 	}
 	return result
 }
+
+// TODO: look for every case of scanResults, and fix it into hostiles, friends, wall, and corners

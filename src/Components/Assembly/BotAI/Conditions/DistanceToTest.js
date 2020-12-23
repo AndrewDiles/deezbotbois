@@ -15,7 +15,7 @@ const DistanceToTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
-			{/* <TestTargetsSetter
+			<TestTargetsSetter
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
@@ -23,7 +23,7 @@ const DistanceToTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 			infoGatheredBy = 'scan'
 			ignoreTargetEvaluationType = '1'
 			/>
-			<br/> */}
+			<br/>
 			<EvaluationTypeSelector
 			activeNodeArray = {activeNodeArray}
 			setActiveNodeArray = {setActiveNodeArray}

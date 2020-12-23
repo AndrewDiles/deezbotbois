@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import MovementIntentSetter from '../InstructionsComponents/MovementIntentSetter';
 import TargetSelector from '../InstructionsComponents/TargetSelector';
 import PathEditor from '../InstructionsComponents/PathEditor';
+import TargetTypeSelector from '../InstructionsComponents/TargetTypeSelector';
+import WarningBar from '../InstructionsComponents/WarningBar';
 
 const MoveCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumberSelected, aiAndScripts, attributes }) => {
 	const userInfo = useSelector((state) => state.userInfo);
@@ -29,13 +31,32 @@ const MoveCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 			botNumberSelected = {botNumberSelected}
 			/>
 			<br/>
+			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.intent === 'collision' &&
+			activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting === true &&
+			activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetType !== 'hostile' &&
+				<>
+					<WarningBar>
+						INTENTIONAL COLLISION WITH A {activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetType.toUpperCase()} IS NOT ADVISED
+					</WarningBar>
+					<br/>
+				</>
+			}
 			{activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.targetting ? (
-				<TargetSelector
-				activeNodeArray = {activeNodeArray}
-				setActiveNodeArray = {setActiveNodeArray}
-				aiAndScripts = {aiAndScripts}
-				botNumberSelected = {botNumberSelected}
-				/>
+				<>
+					<TargetTypeSelector
+					activeNodeArray = {activeNodeArray}
+					setActiveNodeArray = {setActiveNodeArray}
+					aiAndScripts = {aiAndScripts}
+					botNumberSelected = {botNumberSelected}
+					/>
+					<br/>
+					<TargetSelector
+					activeNodeArray = {activeNodeArray}
+					setActiveNodeArray = {setActiveNodeArray}
+					aiAndScripts = {aiAndScripts}
+					botNumberSelected = {botNumberSelected}
+					/>
+				</>
 			) : (
 				<PathEditor
 				movementDistance = {attributes.MovementDistance}

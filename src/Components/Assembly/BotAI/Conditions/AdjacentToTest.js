@@ -19,6 +19,7 @@ const AdjacentToTest = ({ nodeInfo, activeNodeArray, setActiveNodeArray, botNumb
 			setActiveNodeArray = {setActiveNodeArray}
 			aiAndScripts = {aiAndScripts}
 			botNumberSelected = {botNumberSelected}
+			includesAny = {1}
 			/>
 			<br/>
 			<EvaluationTypeSelector

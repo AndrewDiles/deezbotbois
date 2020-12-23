@@ -11,7 +11,7 @@ const commandDetails = {
 			'is predicting the location of an hostile, or has limited the likely locations they may be'
 		],
 		instructionOptions: [
-			
+			'always looks to scanned hostiles for targets',
 		]
 	},
 	aimCommand: {
@@ -38,7 +38,7 @@ const commandDetails = {
 			'is employing a forced-melee strategy'
 		],
 		instructionOptions: [
-			
+			'always looks to scanned hostiles for targets',
 		]
 	},
 	counterCommand: {
@@ -64,7 +64,7 @@ const commandDetails = {
 			'has a large amount of energy stored in their Capacitor'
 		],
 		instructionOptions: [
-			
+			'always looks to scanned hostiles for targets',
 		]
 	},
 	guardCommand: {
@@ -89,7 +89,7 @@ const commandDetails = {
 			'',
 		],
 		instructionOptions: [
-			
+			'always looks to scanned hostiles for targets',
 		]
 	},
 	moveCommand: {

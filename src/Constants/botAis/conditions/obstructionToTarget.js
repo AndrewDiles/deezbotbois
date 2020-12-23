@@ -9,7 +9,7 @@ class ObstructionToTarget {
 		this.conditionMet = conditionMet;
 		this.conditionUnMet = conditionUnMet;
 	}
-	// newTarget can be: hostile, friend, wall, corner, any
+	// newTarget can be: hostile, friend, wall, corner
 	setTarget(newTarget) {
 		this.test.testTargets = newTarget
 	}
