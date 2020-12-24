@@ -162,16 +162,16 @@ const Test2 = () => {
 	}
 
 	function handleScan (indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced) {
-		let scanResults = generateScanResults(indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced);
-		console.log({scanResults});
+		let scanDisplayResults = generateScanResults(indexOfScanner, ScanDistance, maxRows, maxCols, objectsToBePlaced);
+		console.log({scanDisplayResults});
 
-		illuminateScannedCells(scanResults,settings.executionSpeed, setCellColors);
+		illuminateScannedCells(scanDisplayResults,settings.executionSpeed, setCellColors);
 		setTimeout(()=>{
 			// potential memory leak
 			setCellColors({});
 		},settings.executionSpeed*1000)
 
-		let filteredResults = filterScanResults(scanResults)
+		let filteredResults = filterScanResults(scanDisplayResults)
 		console.log(filteredResults);
 	}
 

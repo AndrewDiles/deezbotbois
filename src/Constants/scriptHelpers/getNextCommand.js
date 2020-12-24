@@ -19,7 +19,9 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 	const botData = objectsToRender[indexInQuestion];
 	const battleLogEntries = [];
 	let result = null;
-	const mapToTest = [{type: 'head', index: 0}];
+	let mapToTest = [{type: 'head', index: 0}];
+	// TODO: mapToTest is not properly popping due to closures
+	// let mapToTest = {map:[{type: 'head', index: 0}], pop};
 	// let nodeTestNumber = 1;  	// : mapToTest[mapToTest.length-1].index+1
 	// let depthTestLevel = 1;		// : mapToTest.length
 	// if needed, consider adding these values to the battle log
@@ -51,10 +53,16 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 						// Case: Condition is met, extend map to met branch
 					}
 					// Begin new node testing given the new map
-					result = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, result, levelInfo);
+					let testResults = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, levelInfo);
+					result = testResults.result;
+					mapToTest = testResults.mapToTest;
+					// result = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, levelInfo);
 				} else {
 					// Case : Command.  Test if command can be executed
-					result = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
+					// result = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
+					let testResults = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
+					result = testResults.result;
+					mapToTest = testResults.mapToTest;
 				}
 			}
 		}
@@ -78,17 +86,21 @@ function testNodeIsCondition (nodeBlock) {
 	return Object.keys(nodeBlock)[0] === 'condition' ? true : false
 }
 function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo) {
+	console.log('candicacy of Command:', nodeBlockInQuestion.name, 'being tested');
 	let result = null;
 	const botKnowsCommand = botKnowsCommandTest(nodeBlockInQuestion.name, botData);
 	if (botKnowsCommand) {
 		const invalidInstructionsTest = testInvalidInstructions(nodeBlockInQuestion, botData, objectsToRender, levelInfo);
 		if (invalidInstructionsTest) {
-			mapToTest[mapToTest.length-1].index ++;
+			// mapToTest[mapToTest.length-1].index ++;
+			mapToTest.pop();
 			battleLogEntries.push({type: 'invalid', content: invalidInstructionsTest});
 		} else {
-			const insufficientEnergyTest = testInsufficientEnergy(nodeBlockInQuestion, botData);
+			// const insufficientEnergyTest = testInsufficientEnergy(nodeBlockInQuestion, botData);
+			const insufficientEnergyTest = calculateCommandCost(nodeBlockInQuestion, botData) > botData.attributes.CurrentCapacitor;
 			if (insufficientEnergyTest) {
-				mapToTest[mapToTest.length-1].index ++;
+				// mapToTest[mapToTest.length-1].index ++;
+				mapToTest.pop();
 				battleLogEntries.push({type: 'invalid', content: insufficientEnergyTest});
 			} else {
 				battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} RESULTS IN ${nodeBlockInQuestion.name.toUpperCase()}`});
@@ -96,9 +108,11 @@ function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battle
 			}
 		}
 	} else {
+		// mapToTest[mapToTest.length-1].index ++;
+		mapToTest.pop();
 		battleLogEntries.push({type: 'invalid', content: `AI ERROR: BOT ${botData.name} DOES NOT KNOW COMMAND ${nodeBlockInQuestion.name.toUpperCase()}`});
 	}
-	return result
+	return {result: result, mapToTest: mapToTest}
 }
 function botKnowsCommandTest (commandName, botInfo) {
 	if (botInfo.attributes[commandName] !== true && botInfo.attributes[commandName] !== false) {
@@ -160,7 +174,7 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			if (weaponNotLoaded) return weaponNotLoaded;
 
 			if (commandNode.instructions.targetting) {
-				if (!botInfo.scanResults[commandNode.instructions.targetNumber-1]) {
+				if (!botInfo.scanHostileResults[commandNode.instructions.targetNumber-1]) {
 					return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN SCAN RESULTS`
 				} else {
 					return false
@@ -179,8 +193,8 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			if (meleeWeaponInvalid) return meleeWeaponInvalid;
 			const weaponNotLoaded = weaponNotLoadedTest(commandNode, botInfo);
 			if (weaponNotLoaded) return weaponNotLoaded;
-			if (!botInfo.scanResults[commandNode.instructions.targetNumber-1]) return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN SCAN RESULTS`;
-			const path = pathToAdjacentCell(botInfo.location, botInfo.scanResults[commandNode.instructions.targetNumber-1].location);
+			if (!botInfo.scanHostileResults[commandNode.instructions.targetNumber-1]) return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN SCAN RESULTS`;
+			const path = pathToAdjacentCell(botInfo.location, botInfo.scanHostileResults[commandNode.instructions.targetNumber-1].location);
 			if (path.length === 0) return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} IS ALREADY ADJACENT`;
 			if (path.length > botInfo.attributes.MovementDistance) return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT WITHIN MOVEMENT DISTANCE`;
 			let currentLandingSpot = {...botInfo.location};
@@ -216,16 +230,16 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			if (weaponNotOfTypeEnergy) return weaponNotOfTypeEnergy;
 			if (!commandNode.instructions.targetting) {
 				if (commandNode.instructions.attackType === 'ranged') {
-					if (!botInfo.scanResults[commandNode.instructions.targetNumber-1]) {
+					if (!botInfo.scanHostileResults[commandNode.instructions.targetNumber-1]) {
 						return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN SCAN RESULTS`
 					} else {
 						return false
 					}
 				} else {
-					if (!botInfo.scanResults[commandNode.instructions.targetNumber-1]) {
+					if (!botInfo.scanHostileResults[commandNode.instructions.targetNumber-1]) {
 						return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN SCAN RESULTS`
 					} else {
-						if (distanceToAdjacentToCell(botInfo.location, botInfo.scanResults[commandNode.instructions.targetNumber-1].location) === 0) {
+						if (distanceToAdjacentToCell(botInfo.location, botInfo.scanHostileResults[commandNode.instructions.targetNumber-1].location) === 0) {
 							return false
 						} else {
 							return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} IS NOT ADJACENT`
@@ -242,10 +256,10 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			if (weaponNotLoaded) return weaponNotLoaded;
 
 			if (commandNode.instructions.targetting) {
-				if (!botInfo.scanResults[commandNode.instructions.targetNumber-1]) {
+				if (!botInfo.scanHostileResults[commandNode.instructions.targetNumber-1]) {
 					return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN SCAN RESULTS`
 				} else {
-					if (distanceToAdjacentToCell(botInfo.location, botInfo.scanResults[commandNode.instructions.targetNumber-1].location) === 0) {
+					if (distanceToAdjacentToCell(botInfo.location, botInfo.scanHostileResults[commandNode.instructions.targetNumber-1].location) === 0) {
 						return false
 					} else {
 						return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} IS NOT ADJACENT`
@@ -262,7 +276,7 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			// moveCommand instructions will only be invalid if the isntructions are targetting and there is no target number n
 			if (!commandNode.instructions.targetting) return false
 			if (commandNode.instructions.targetType === 'hostile') {
-				if (!botInfo.scanResults[commandNode.instructions.targetNumber-1]) {
+				if (!botInfo.scanHostileResults[commandNode.instructions.targetNumber-1]) {
 					return `CONDITIONS TO EXECUTE COMMAND ${commandName.toUpperCase()} MET, BUT TARGET NUMBER ${commandNode.instructions.targetNumber} WAS NOT IN SCAN RESULTS`
 				} else {
 					return false
@@ -303,7 +317,80 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 		}
 	}
 }
-function testInsufficientEnergy (commandNode, botInfo) {
+//TODO: fracture this function into two: one that returns the cost, the other the true false
+// function testInsufficientEnergy (commandNode, botInfo) {
+// 	const commandName = commandNode.name;
+// 	switch (commandName) {
+// 		case 'aimCommand' : {
+// 			const armSlot = commandNode.instructions.weapon;
+// 			const weaponName = botInfo.equipment[armSlot];
+// 			const baseAimCost = weaponStats[weaponName].aimCost;
+// 			const totalCost = baseAimCost + botInfo.attributes.aimCostModifier;
+// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+// 		}
+// 		case 'aimAndAttackCommand' : {
+// 			const armSlot = commandNode.instructions.weapon;
+// 			const weaponName = botInfo.equipment[armSlot];
+// 			const baseAimCost = weaponStats[weaponName].aimCost;
+// 			const totalAimCost = baseAimCost + botInfo.attributes.aimCostModifier;
+// 			const baseAttackCost = weaponStats[weaponName].attackCost;
+// 			const totalAttackCost = baseAttackCost + botInfo.attributes.attackCostModifier;
+// 			const totalCost = totalAimCost + totalAttackCost;
+// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+// 		}
+// 		case 'chargeCommand' : {
+// 			const armSlot = commandNode.instructions.weapon;
+// 			const weaponName = botInfo.equipment[armSlot];
+// 			const moveCost = botInfo.attributes.MovementCost;
+// 			const baseAttackCost = weaponStats[weaponName].attackCost;
+// 			const totalAttackCost = baseAttackCost + botInfo.attributes.attackCostModifier;
+// 			const totalCost = moveCost + totalAttackCost;
+// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+// 		}
+// 		case 'counterCommand' : {
+// 			const armSlot = commandNode.instructions.weapon;
+// 			const weaponName = botInfo.equipment[armSlot];
+// 			const baseAttackCost = weaponStats[weaponName].attackCost;
+// 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
+// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+// 		}
+// 		case 'elevenAttackCommand' : {
+// 			const armSlot = commandNode.instructions.weapon;
+// 			const weaponName = botInfo.equipment[armSlot];
+// 			const baseAttackCost = weaponStats[weaponName].attackCost;
+// 			const nonElevenTotalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
+// 			const totalCost = 2 * nonElevenTotalCost;
+// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+// 		}
+// 		case 'guardCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
+// 		case 'meleeAttackCommand' : {
+// 			const armSlot = commandNode.instructions.weapon;
+// 			const weaponName = botInfo.equipment[armSlot];
+// 			const baseAttackCost = weaponStats[weaponName].attackCost;
+// 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
+// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+// 		}
+// 		case 'moveCommand' : return botInfo.attributes.CurrentCapacitor >= botInfo.attributes.MovementCost ? false : true;
+// 		case 'rangedAttackCommand' : {
+// 			const armSlot = commandNode.instructions.weapon;
+// 			const weaponName = botInfo.equipment[armSlot];
+// 			const baseAttackCost = weaponStats[weaponName].attackCost;
+// 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
+// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+// 		}
+// 		case 'rechargeCommand' : return false
+// 		case 'redirectCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
+// 		case 'repairCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
+// 		case 'scanCommand' : return botInfo.attributes.CurrentCapacitor >= botInfo.attributes.ScanCost ? false : true;
+// 		case 'switchCommand' : return false
+// 		case 'waitCommand' : return false
+// 		default: {
+// 			console.log(`Unknown command name: ${commandName} inside insufficient energy test`);
+// 			return true
+// 		}
+// 	}
+// }
+function calculateCommandCost (commandNode, botInfo) {
 	const commandName = commandNode.name;
 	switch (commandName) {
 		case 'aimCommand' : {
@@ -311,7 +398,7 @@ function testInsufficientEnergy (commandNode, botInfo) {
 			const weaponName = botInfo.equipment[armSlot];
 			const baseAimCost = weaponStats[weaponName].aimCost;
 			const totalCost = baseAimCost + botInfo.attributes.aimCostModifier;
-			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+			return totalCost
 		}
 		case 'aimAndAttackCommand' : {
 			const armSlot = commandNode.instructions.weapon;
@@ -321,7 +408,7 @@ function testInsufficientEnergy (commandNode, botInfo) {
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const totalAttackCost = baseAttackCost + botInfo.attributes.attackCostModifier;
 			const totalCost = totalAimCost + totalAttackCost;
-			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+			return totalCost
 		}
 		case 'chargeCommand' : {
 			const armSlot = commandNode.instructions.weapon;
@@ -330,14 +417,14 @@ function testInsufficientEnergy (commandNode, botInfo) {
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const totalAttackCost = baseAttackCost + botInfo.attributes.attackCostModifier;
 			const totalCost = moveCost + totalAttackCost;
-			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+			return totalCost
 		}
 		case 'counterCommand' : {
 			const armSlot = commandNode.instructions.weapon;
 			const weaponName = botInfo.equipment[armSlot];
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
-			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+			return totalCost
 		}
 		case 'elevenAttackCommand' : {
 			const armSlot = commandNode.instructions.weapon;
@@ -345,7 +432,7 @@ function testInsufficientEnergy (commandNode, botInfo) {
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const nonElevenTotalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
 			const totalCost = 2 * nonElevenTotalCost;
-			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+			return totalCost
 		}
 		case 'guardCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
 		case 'meleeAttackCommand' : {
@@ -353,7 +440,7 @@ function testInsufficientEnergy (commandNode, botInfo) {
 			const weaponName = botInfo.equipment[armSlot];
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
-			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+			return totalCost
 		}
 		case 'moveCommand' : return botInfo.attributes.CurrentCapacitor >= botInfo.attributes.MovementCost ? false : true;
 		case 'rangedAttackCommand' : {
@@ -361,17 +448,17 @@ function testInsufficientEnergy (commandNode, botInfo) {
 			const weaponName = botInfo.equipment[armSlot];
 			const baseAttackCost = weaponStats[weaponName].attackCost;
 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
-			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
+			return totalCost
 		}
-		case 'rechargeCommand' : return false
-		case 'redirectCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
-		case 'repairCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
-		case 'scanCommand' : return botInfo.attributes.CurrentCapacitor >= botInfo.attributes.ScanCost ? false : true;
-		case 'switchCommand' : return false
-		case 'waitCommand' : return false
+		case 'rechargeCommand' : return 0
+		case 'redirectCommand' : return commandDetails[commandName].cost
+		case 'repairCommand' : return commandDetails[commandName].cost
+		case 'scanCommand' : return botInfo.attributes.ScanCost
+		case 'switchCommand' : return 0
+		case 'waitCommand' : return 0
 		default: {
-			console.log(`Unknown command name: ${commandName} inside insufficient energy test`);
-			return true
+			console.log(`Unknown command name: ${commandName} inside calculate energy cost function`);
+			return 255
 		}
 	}
 }
@@ -404,6 +491,7 @@ function evaluateLength (arrayLength, nodeBlockInQuestion) {
 }
 function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, levelInfo) {
 	// This function will return true if the conditions are met, and false otherwise.
+
 	const botData = objectsToRender[indexInQuestion];
 	const conditionName = nodeBlockInQuestion.name;
 	switch (conditionName) {
@@ -596,7 +684,7 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 		case 'distanceToTarget' : {
 			let targetInQuestion = null;
 			if (nodeBlockInQuestion.test.testTargets === 'hostile') {
-				targetInQuestion = botData.scanResults[nodeBlockInQuestion.test.targetNumber-1];
+				targetInQuestion = botData.scanHostileResults[nodeBlockInQuestion.test.targetNumber-1];
 			} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
 				targetInQuestion = botData.scanWallResults[nodeBlockInQuestion.test.targetNumber-1];
 			} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
@@ -639,7 +727,7 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 		case 'obstructionToTarget' : {
 			// returns false if no target is found - since there is no obstruction
 			if (nodeBlockInQuestion.test.testTargets === 'hostile') {
-				const targetInQuestion = botData.scanResults[nodeBlockInQuestion.test.targetNumber-1];
+				const targetInQuestion = botData.scanHostileResults[nodeBlockInQuestion.test.targetNumber-1];
 				return !targetInQuestion ? false : isPathAdjacentToObstructed(botData.location, targetInQuestion.location, objectsToRender, levelInfo);
 			} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
 				const targetInQuestion = botData.scanWallResults[nodeBlockInQuestion.test.targetNumber-1];
@@ -674,7 +762,7 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 			if (nodeBlockInQuestion.test.targetEvaluationType === '=') {
 				// Case, looking for one type
 				if (nodeBlockInQuestion.test.testTargets === 'hostile') {
-					return evaluateLength(botData.scanResults.length, nodeBlockInQuestion);
+					return evaluateLength(botData.scanHostileResults.length, nodeBlockInQuestion);
 				} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
 					return evaluateLength(botData.scanFriendResults.length, nodeBlockInQuestion);
 				} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
@@ -690,11 +778,11 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 				if (nodeBlockInQuestion.test.testTargets === 'hostile') {
 					return evaluateLength(botData.scanFriendResults.length + botData.scanWallResults.length + botData.scanCornerResults.length, nodeBlockInQuestion);
 				} else if (nodeBlockInQuestion.test.testTargets === 'friend') {
-					return evaluateLength(botData.scanResults.length + botData.scanWallResults.length + botData.scanCornerResults.length, nodeBlockInQuestion);
+					return evaluateLength(botData.scanHostileResults.length + botData.scanWallResults.length + botData.scanCornerResults.length, nodeBlockInQuestion);
 				} else if (nodeBlockInQuestion.test.testTargets === 'wall') {
-					return evaluateLength(botData.scanResults.length + botData.scanFriendResults.length + botData.scanCornerResults.length, nodeBlockInQuestion);
+					return evaluateLength(botData.scanHostileResults.length + botData.scanFriendResults.length + botData.scanCornerResults.length, nodeBlockInQuestion);
 				} else if (nodeBlockInQuestion.test.testTargets === 'corner') {
-					return evaluateLength(botData.scanResults.length + botData.scanFriendResults.length + botData.scanWallResults.length, nodeBlockInQuestion);
+					return evaluateLength(botData.scanHostileResults.length + botData.scanFriendResults.length + botData.scanWallResults.length, nodeBlockInQuestion);
 				} else {
 					console.log('error obtaining testTargets in scanResults test');
 					return false
@@ -702,7 +790,8 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 			}
 		}
 		case 'sufficientEnergy' : {
-			return !testInsufficientEnergy({name: nodeBlockInQuestion.test.commandName, instructions: {weapon: nodeBlockInQuestion.test.armSlot}}, botData)
+			return calculateCommandCost({name: nodeBlockInQuestion.test.commandName, instructions: {weapon: nodeBlockInQuestion.test.armSlot}}, botData) <= botData.attributes.CurrentCapacitor ? true : false
+			// return !testInsufficientEnergy({name: nodeBlockInQuestion.test.commandName, instructions: {weapon: nodeBlockInQuestion.test.armSlot}}, botData)
 		}
 		case 'switch' : {
 			return botData.switches[nodeBlockInQuestion.test.switchNumber]
@@ -746,7 +835,7 @@ function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, ba
 		mapToTest.pop();
 		mapToTest[mapToTest.length-1].index ++;
 		battleLogEntries.push({type: 'empty', content: `CONDITION BRANCH EMPTY.  TESTING TO CONTINUE AT PREVIOUS DEPTH`});
-		return
+		return {result: null, mapToTest: mapToTest}
 	}
 	let result = null;
 	// for (let i = mapToTest[mapToTest.length-1].index; i < nodeBlockInQuestion.length; i++) {
@@ -763,14 +852,20 @@ function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, ba
 					battleLogEntries.push({type: 'test-pass', content: `CONDITION CRITERIA AT D${mapToTest.length} N${mapToTest[mapToTest.length-1].index+1}: ${nodeBlockInQuestion[i].condition.name.toUpperCase()} MET`});
 					mapToTest.push({type: 'conditionTrue', index: 0});
 				}
-				result = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, levelInfo);
+				// result = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, levelInfo);
+				let testResults = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, levelInfo);
+				result = testResults.result;
+				mapToTest = testResults.mapToTest;
 			} else {
 				// Case : Command.  Test if command can be executed
-				result = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo);
+				// result = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo);
+				let testResults = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo);
+				result = testResults.result;
+				mapToTest = testResults.mapToTest;
 			}
 		}
 	}
-	return result
+	return {result: result, mapToTest: mapToTest}
 }
 
 // TODO: look for every case of scanResults, and fix it into hostiles, friends, wall, and corners

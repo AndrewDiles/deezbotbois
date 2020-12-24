@@ -7,6 +7,7 @@ import {
 	addNewBattleLogs
 } from '../../Redux/actions';
 
+import commandDetails from '../../Constants/commandDetails';
 import getNextCommand from '../../Constants/scriptHelpers/getNextCommand';
 
 
@@ -20,10 +21,18 @@ const GameLogic = () => {
 			dispatch(determineCommands());
 		} else if (battleInfo.status === 'DETERMINING_COMMANDS') {
 			let battleLogEntriesToAdd = [];
+			let commandsToExecute = [];
 			console.log('time to find commands');
 			battleInfo.objectsToRender.forEach((bot, index)=>{
 				const nextCommandResults = getNextCommand(battleInfo.objectsToRender, index, battleInfo.levelInfo);
 				console.log({nextCommandResults});
+				let newCommand = {
+					botIndex: index,
+					command: nextCommandResults.command,
+					commandSpeed: commandDetails[nextCommandResults.command.name].speed,
+					botInitiative: 0,
+					tieBreaker: 0,
+				}
 				battleLogEntriesToAdd = [...battleLogEntriesToAdd, ...nextCommandResults.battleLogEntries];
 				console.log({battleLogEntriesToAdd});
 			})

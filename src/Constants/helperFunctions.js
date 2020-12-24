@@ -954,7 +954,8 @@ export function initializeBot (botInfo, teamNumber, location, type) {
 	botToAdd.events = [];
 	addArmaments(botToAdd);
 	botToAdd.switches = {1:false,2:false,3:false,4:false,5:false};
-	botToAdd.scanResults = [];
+	botToAdd.scanDisplayResults = [];
+	botToAdd.scanHostileResults = [];
 	botToAdd.scanFriendResults = [];
 	botToAdd.scanWallResults = [];
 	botToAdd.scanCornerResults = [];
