@@ -971,3 +971,13 @@ export function initializeBot (botInfo, teamNumber, location, type) {
 	botToAdd.switchFiveTrueAtBeginningOfTick = false;
 	return botToAdd
 }
+
+// function takes in a list of commands to execute and orders them based on a series of initiatives / priorities
+export function orderCommands(commandList) {
+	if (commandList.length === 0) {
+		console.log('error - command list is empty')
+		return []
+	}
+	// include additional commandList validation if errors are occuring
+
+}

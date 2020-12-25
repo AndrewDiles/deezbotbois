@@ -33,8 +33,18 @@ export const firstTick = () => ({
 export const nextTick = () => ({
 	type: 'NEXT_TICK'
 })
+// ticks not set to auto-fire, wait on user
+export const awaitUserInput = () => ({
+	type: 'AWAIT_USER_INPUT'
+})
+
 export const determineCommands = () => ({
 	type: 'DETERMINE_COMMANDS'
+})
+export const commandsDetermined = (commandsToExecute, newLogEntries) => ({
+	type: 'COMMANDS_DETERMINED',
+	commandsToExecute, commandsToExecute,
+	newLogEntries: newLogEntries,
 })
 export const addNewBattleLogs = (newLogEntries) => ({
 	type: 'ADD_NEW_BATTLE_LOGS',

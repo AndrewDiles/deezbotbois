@@ -106,10 +106,31 @@ export default function battleInfo(
 					status: 'DETERMINING_COMMANDS'
 				}
 			}
+			case 'COMMANDS_DETERMINED': {
+				return {
+					...state,
+					battleLog: [...state.battleLog, ...action.newLogEntries],
+					commandsToExecute: action.commandsToExecute,
+					status: 'EXECUTING_COMMANDS'
+				}
+			}
 			case 'ADD_NEW_BATTLE_LOGS': {
 				return {
 					...state,
 					battleLog: [...state.battleLog, ...action.newLogEntries]
+				}
+			}
+			case 'END_OF_TICK_CLEANUP': {
+				// this needs to be written
+				return {
+					...state,
+					status: 'TICK_COMPLETE',
+				}
+			}
+			case 'AWAIT_USER_INPUT': {
+				return {
+					...state,
+					status: 'AWAITING_USER_INPUT',
 				}
 			}
       default:{
