@@ -87,17 +87,17 @@ export default function battleInfo(
 			case 'FIRST_TICK': {
 				return {
 					...state,
-					tick: state.tick++,
+					tick: state.tick+1,
 					status: 'DETERMINING_COMMANDS',
 					battleLog: [...state.battleLog, {type: 'phaseChange', content: '-- DETERMINING ACTIONS --'}]
-					// battleLog: newBattleLog
 				}
 			}
 			case 'NEXT_TICK': {
 				return {
 					...state,
-					tick: state.tick++,
-					status: 'NEW_TICK'
+					tick: state.tick+1,
+					status: 'NEW_TICK',
+					battleLog: [...state.battleLog, {type: 'newTick', number: state.tick+1} ,{type: 'phaseChange', content: '-- DETERMINING ACTIONS --'}]
 				}
 			}
 			case 'DETERMINE_COMMANDS': {
@@ -109,28 +109,59 @@ export default function battleInfo(
 			case 'COMMANDS_DETERMINED': {
 				return {
 					...state,
-					battleLog: [...state.battleLog, ...action.newLogEntries],
+					battleLog: [...state.battleLog, ...action.newLogEntries, {type: 'phaseChange', content: '-- EXECUTING COMMANDS --'}],
 					commandsToExecute: action.commandsToExecute,
 					status: 'EXECUTING_COMMANDS'
 				}
 			}
-			case 'ADD_NEW_BATTLE_LOGS': {
+			case 'EXECUTION_IN_PROGRESS': {
 				return {
 					...state,
-					battleLog: [...state.battleLog, ...action.newLogEntries]
+					status: 'EXECUTION_IN_PROGRESS'
 				}
 			}
-			case 'END_OF_TICK_CLEANUP': {
+			case 'EXECUTION_COMPLETE': {
+				// this needs to be written
+				let newCommandsToExecute = state.commandsToExecute;
+				newCommandsToExecute.shift();
+				return {
+					...state,
+					status: 'EXECUTION_COMPLETE',
+					commandsToExecute: newCommandsToExecute
+				}
+			}
+			case 'NEXT_EXECUTION': {
+				return {
+					...state,
+					status: 'EXECUTE_NEXT_COMMAND',
+				}
+			}
+			case 'EXECUTIONS_COMPLETE': {
+				// this needs to be written
+				return {
+					...state,
+					status: 'CLEAN_UP',
+					battleLog : [...state.battleLog, {type: 'phaseChange', content: '-- END OF TICK CLEAN UP --'}]
+				}
+			}
+			case 'END_OF_CLEANUP': {
 				// this needs to be written
 				return {
 					...state,
 					status: 'TICK_COMPLETE',
 				}
 			}
+			
 			case 'AWAIT_USER_INPUT': {
 				return {
 					...state,
 					status: 'AWAITING_USER_INPUT',
+				}
+			}
+			case 'ADD_NEW_BATTLE_LOGS': {
+				return {
+					...state,
+					battleLog: [...state.battleLog, ...action.newLogEntries]
 				}
 			}
       default:{

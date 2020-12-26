@@ -20,7 +20,8 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 	const battleLogEntries = [];
 	let result = null;
 	let mapToTest = [{type: 'head', index: 0}];
-	// TODO: mapToTest is not properly popping due to closures
+	// TODO: make sure that if a bot is being targetted from aim or scan results, that it is verified that their durability > 0 and that their location is the same...
+	// on 2nd thought, targets should bge locations, not bots
 	// let mapToTest = {map:[{type: 'head', index: 0}], pop};
 	// let nodeTestNumber = 1;  	// : mapToTest[mapToTest.length-1].index+1
 	// let depthTestLevel = 1;		// : mapToTest.length

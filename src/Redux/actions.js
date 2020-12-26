@@ -33,19 +33,41 @@ export const firstTick = () => ({
 export const nextTick = () => ({
 	type: 'NEXT_TICK'
 })
-// ticks not set to auto-fire, wait on user
-export const awaitUserInput = () => ({
-	type: 'AWAIT_USER_INPUT'
-})
-
+// run through bot ais to find their commands
 export const determineCommands = () => ({
 	type: 'DETERMINE_COMMANDS'
 })
+// begins execution of commands
 export const commandsDetermined = (commandsToExecute, newLogEntries) => ({
 	type: 'COMMANDS_DETERMINED',
 	commandsToExecute, commandsToExecute,
 	newLogEntries: newLogEntries,
 })
+// halts progress until last execution is complete
+export const executionInProgress = () => ({
+	type: 'EXECUTION_IN_PROGRESS'
+})
+// pops commands to execute and resets status
+export const executionComplete = () => ({
+	type: 'EXECUTION_COMPLETE'
+})
+// resets status to commence next execution
+export const nextExecution = () => ({
+	type: 'NEXT_EXECUTION'
+})
+// begins clean up
+export const executionsComplete = () => ({
+	type: 'EXECUTIONS_COMPLETE'
+})
+// tick is complete
+export const endOfCleanUp = () => ({
+	type: 'END_OF_CLEANUP'
+})
+// if ticks are not set to auto-fire, wait on user
+export const awaitUserInput = () => ({
+	type: 'AWAIT_USER_INPUT'
+})
+// manually adds new Battle Logs - this may end up being obsolete
 export const addNewBattleLogs = (newLogEntries) => ({
 	type: 'ADD_NEW_BATTLE_LOGS',
 	newLogEntries: newLogEntries,

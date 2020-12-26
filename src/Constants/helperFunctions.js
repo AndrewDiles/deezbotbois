@@ -972,12 +972,35 @@ export function initializeBot (botInfo, teamNumber, location, type) {
 	return botToAdd
 }
 
-// function takes in a list of commands to execute and orders them based on a series of initiatives / priorities
-export function orderCommands(commandList) {
-	if (commandList.length === 0) {
-		console.log('error - command list is empty')
-		return []
+// function verifies that two given commands are the same
+export function areSameCommand (command1, command2) {
+	if (!command1.name || !command1.instructions) {
+		console.log('error, command1 is not a command in same test', command1);
+		return false
+	} else if (!command2.name || !command2.instructions) {
+		console.log('error, command2 is not a command in same test', command2);
+		return false
 	}
-	// include additional commandList validation if errors are occuring
-
+	if (command1.name !== command2.name) {
+		return false
+	} else {
+		const command1InstructionKeys = Object.keys(command1.instructions);
+		const command2InstructionKeys = Object.keys(command2.instructions);
+		let difference = false;
+		for (let i = 0; i < command1InstructionKeys.length; i++) {
+			if (difference) break;
+			if (command1.instructions[command1InstructionKeys[i]] !== command2.instructions[command1InstructionKeys[i]]) difference = true;
+			console.log(command1InstructionKeys[i]);
+			console.log(command2.instructions[command1InstructionKeys[i]]);
+		}
+		if (!difference) {
+			for (let i = 0; i < command2InstructionKeys.length; i++) {
+				if (difference) break;
+				if (command2.instructions[command2InstructionKeys[i]] !== command1.instructions[command2InstructionKeys[i]]) difference = true;
+				console.log(command2InstructionKeys[i]);
+				console.log(command2.instructions[command1InstructionKeys[i]]);
+			}
+		}
+		return !difference
+	}
 }

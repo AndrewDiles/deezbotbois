@@ -6,13 +6,18 @@ import {
 	determineCommands,
 	addNewBattleLogs,
 	commandsDetermined,
+	nextExecution,
+	executionInProgress,
+	executionComplete,
+	executionsComplete,
+	endOfCleanUp,
 	nextTick,
 	awaitUserInput
 } from '../../Redux/actions';
 
-import commandDetails from '../../Constants/commandDetails';
+import resolveDeterminingCommands from '../../Constants/scriptHelpers/resolveDeterminingCommands';
 import getNextCommand from '../../Constants/scriptHelpers/getNextCommand';
-
+import { areSameCommand } from '../../Constants/helperFunctions';
 
 const GameLogic = () => {
 	const settings = useSelector((state) => state.settings);
@@ -20,47 +25,50 @@ const GameLogic = () => {
 	const dispatch = useDispatch();
 
 	useEffect(()=>{
-		if (battleInfo.status === 'NEW_TICK') {
+		if (battleInfo.status === 'EXECUTION_IN_PROGRESS' || battleInfo.status === 'AWAITING_USER_INPUT') {
+			return
+		} else if (battleInfo.status === 'EXECUTE_NEXT_COMMAND') {
+			dispatch(executionInProgress());
+			const reverifyCommandToExecute = getNextCommand(battleInfo.objectsToRender, battleInfo.commandsToExecute[0].botIndex, battleInfo.levelInfo);
+			const isSameCommand = areSameCommand(battleInfo.commandsToExecute[0].command, reverifyCommandToExecute.command);
+			// console.log({isSameCommand});
+			if (!isSameCommand) {
+				dispatch(addNewBattleLogs([{type: 'invalid', content: `${battleInfo.objectsToRender[battleInfo.commandsToExecute[0].botIndex].name}`}]));
+				dispatch(executionComplete());
+			} else {
+				// TODO: Execution of Command, test records
+				dispatch(addNewBattleLogs([{type: 'new-initiative', content: `- INITIATIVE: ${battleInfo.objectsToRender[battleInfo.commandsToExecute[0].botIndex].name} -`}]));
+				dispatch(executionComplete());
+			}
+		} else if (battleInfo.status === 'EXECUTING_COMMANDS' || battleInfo.status === 'EXECUTE_NEXT_COMMAND') {
+			if (battleInfo.commandsToExecute.length === 0) {
+				dispatch(executionsComplete())
+			} else {
+				dispatch(nextExecution())
+			}
+		} else if (battleInfo.status === 'EXECUTION_COMPLETE') {
+			if (battleInfo.commandsToExecute.length === 0) {
+				dispatch(executionsComplete())
+			} else {
+				dispatch(nextExecution())
+			}
+		} else if (battleInfo.status === 'NEW_TICK') {
 			dispatch(determineCommands());
 		} else if (battleInfo.status === 'DETERMINING_COMMANDS') {
-			let battleLogEntriesToAdd = [];
-			let commandsToExecute = [];
-			console.log('time to find commands');
-			battleInfo.objectsToRender.forEach((bot, index)=>{
-				const nextCommandResults = getNextCommand(battleInfo.objectsToRender, index, battleInfo.levelInfo);
-				// console.log({nextCommandResults});
-				let initiative =
-				(100000 * (50-commandDetails[nextCommandResults.command.name].speed)) +
-				(1000 * (bot.attributes.Initiative)) +
-				battleInfo.rotatingTieBreak.findIndex((value) => value === index)
-				;
-				let newCommand = {
-					botIndex: index,
-					command: nextCommandResults.command,
-					// commandSpeed: commandDetails[nextCommandResults.command.name].speed,
-					// botInitiative: bot.attributes.Initiative,
-					// tieBreaker: battleInfo.rotatingTieBreak.findIndex((value) => value === index),
-					initiative: initiative
-				}
-				battleLogEntriesToAdd = [...battleLogEntriesToAdd, ...nextCommandResults.battleLogEntries];
-				commandsToExecute.push(newCommand);
-			})
-			// dispatch(addNewBattleLogs(battleLogEntriesToAdd));
-			commandsToExecute.sort(function(a, b){return b.initiative - a.initiative});
-			// console.log({commandsToExecute});
-			dispatch(commandsDetermined(commandsToExecute, battleLogEntriesToAdd))
-		}else if (battleInfo.status === 'FIRST_TICK') {
-			dispatch(firstTick());
-		} else if (battleInfo.status === 'EXECUTING_COMMANDS') {
-			// test if commands to execute are completed (i.e. array length is 0, if so, cleanup)
-			// if command to execute, verify it is still executable
-			// if it is not, then invalid it.
-			// if it is, execute it, switch status to a COMMAND_IN_PROGRESS, and pop the command from the list to be executed
+			const commandResults = resolveDeterminingCommands(battleInfo);
+			dispatch(commandsDetermined(commandResults.commandsToExecute, commandResults.battleLogEntriesToAdd));
+		} else if (battleInfo.status === 'CLEAN_UP') {
+			// TODO: Test records, cycle tie breaks, add new scan info, regen attributes / burn / acid
+			// more record testing, cycling tie breaks, adding scan info, regenerating stats etc
+			dispatch(endOfCleanUp());
 		} else if (battleInfo.status === 'TICK_COMPLETE') {
+			battleInfo.battleHasOutcome ? dispatch(awaitUserInput()) :
 			settings.autoTick ? dispatch(nextTick()) : dispatch(awaitUserInput());
+		} else if (battleInfo.status === 'FIRST_TICK') {
+			dispatch(firstTick());
+		} else {
+			console.log(`unknown battleInfo status: ${battleInfo.status}`);
 		}
-
-		// when tick is done, test auto.  If auto, dispatch next tick, else dispatch tick complete
 	},[battleInfo.status])
 
 	return null

@@ -42,7 +42,7 @@ const BattleLog = ({ viewing }) => {
 					if (logEntry.type === 'newTick') {
 						return filters.newTick ? (
 							<NewTick key = {index}>
-								-- NEW TICK # {logEntry.number} --
+								*** TICK # {logEntry.number} ***
 							</NewTick>
 					) : (null)}
 
@@ -57,7 +57,7 @@ const BattleLog = ({ viewing }) => {
 					if (logEntry.type === 'testing-bot') {
 						return filters.test ? (
 							<Bot key = {index}>
-								-- TESTING {logEntry.name} --
+								- TESTING {logEntry.name} -
 							</Bot>
 						) : (null)
 					}
@@ -84,6 +84,35 @@ const BattleLog = ({ viewing }) => {
 							</CommandToBe>
 						) : (null)
 					}
+					if (logEntry.type === 'new-initiative') {
+						return filters.executions ? (
+							<Bot key = {index}>
+								{logEntry.content}
+							</Bot>
+						) : (null)
+					}
+					if (logEntry.type === 'execution') {
+						return filters.executions ? (
+							<Command key = {index}>
+								{logEntry.content}
+							</Command>
+						) : (null)
+					}
+					if (logEntry.type === 'attribute-change') {
+						return filters.attributeChange ? (
+							<Attribute key = {index}>
+								{logEntry.content}
+							</Attribute>
+						) : (null)
+					}
+					if (logEntry.type === 'damage-calculation') {
+						return filters.formula ? (
+							<Formula key = {index}>
+								{logEntry.content}
+							</Formula>
+						) : (null)
+					}
+
 					
 					if (logEntry.type === 'invalid') {
 						return filters.test ? (
