@@ -18,7 +18,6 @@ function resolveDeterminingCommands (battleInfo) {
 		battleLogEntriesToAdd = [...battleLogEntriesToAdd, ...nextCommandResults.battleLogEntries];
 		commandsToExecute.push(newCommand);
 	})
-	// dispatch(addNewBattleLogs(battleLogEntriesToAdd));
 	commandsToExecute.sort(function(a, b){return b.initiative - a.initiative});
 	return {battleLogEntriesToAdd:battleLogEntriesToAdd, commandsToExecute: commandsToExecute}
 }

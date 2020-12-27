@@ -60,11 +60,18 @@ const GameLogic = () => {
 		} else if (battleInfo.status === 'CLEAN_UP') {
 			// TODO: Test records, cycle tie breaks, add new scan info, regen attributes / burn / acid
 			// more record testing, cycling tie breaks, adding scan info, regenerating stats etc
+
+
+			// let newRecords = recordUpdater(battleInfo, null, null); //jfbdifdkn
+
+
+
 			dispatch(endOfCleanUp());
 		} else if (battleInfo.status === 'TICK_COMPLETE') {
 			battleInfo.battleHasOutcome ? dispatch(awaitUserInput()) :
 			settings.autoTick ? dispatch(nextTick()) : dispatch(awaitUserInput());
 		} else if (battleInfo.status === 'FIRST_TICK') {
+			// first tick needs to recalculate records and provide 1 cell scan results
 			dispatch(firstTick());
 		} else {
 			console.log(`unknown battleInfo status: ${battleInfo.status}`);

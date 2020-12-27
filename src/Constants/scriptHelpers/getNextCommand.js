@@ -22,10 +22,10 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 	let mapToTest = [{type: 'head', index: 0}];
 	// TODO: make sure that if a bot is being targetted from aim or scan results, that it is verified that their durability > 0 and that their location is the same...
 	// on 2nd thought, targets should bge locations, not bots
-	// let mapToTest = {map:[{type: 'head', index: 0}], pop};
-	// let nodeTestNumber = 1;  	// : mapToTest[mapToTest.length-1].index+1
-	// let depthTestLevel = 1;		// : mapToTest.length
-	// if needed, consider adding these values to the battle log
+
+	// nodeNumber = mapToTest[mapToTest.length-1].index+1
+	// depthLevel = mapToTest.length
+	
 	
 	if (testIsDestroyed(botData)) return {command: {name:'noneBotIsDestroyed'}}
 	const nodeBlockInQuestion = getNodeArray(botData.script, mapToTest);
@@ -35,7 +35,6 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 		battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} FAILED: AI IS EMPTY.  DEFAULTING TO WAITCOMMAND`});
 		result = waitCommand;
 	} else {
-		// for (let i = mapToTest[mapToTest.length-1].index; i < botData.script.length; i++) {
 		for (let i = 0; i < botData.script.length; i++) {
 			if (result) {
 				break;
@@ -57,10 +56,8 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 					let testResults = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, levelInfo);
 					result = testResults.result;
 					mapToTest = testResults.mapToTest;
-					// result = handleTestNewNodeDepth(objectsToRender, indexInQuestion, mapToTest, battleLogEntries, levelInfo);
 				} else {
 					// Case : Command.  Test if command can be executed
-					// result = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
 					let testResults = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
 					result = testResults.result;
 					mapToTest = testResults.mapToTest;
@@ -93,14 +90,11 @@ function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battle
 	if (botKnowsCommand) {
 		const invalidInstructionsTest = testInvalidInstructions(nodeBlockInQuestion, botData, objectsToRender, levelInfo);
 		if (invalidInstructionsTest) {
-			// mapToTest[mapToTest.length-1].index ++;
 			mapToTest.pop();
 			battleLogEntries.push({type: 'invalid', content: invalidInstructionsTest});
 		} else {
-			// const insufficientEnergyTest = testInsufficientEnergy(nodeBlockInQuestion, botData);
 			const insufficientEnergyTest = calculateCommandCost(nodeBlockInQuestion, botData) > botData.attributes.CurrentCapacitor;
 			if (insufficientEnergyTest) {
-				// mapToTest[mapToTest.length-1].index ++;
 				mapToTest.pop();
 				battleLogEntries.push({type: 'invalid', content: insufficientEnergyTest});
 			} else {
@@ -109,7 +103,6 @@ function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battle
 			}
 		}
 	} else {
-		// mapToTest[mapToTest.length-1].index ++;
 		mapToTest.pop();
 		battleLogEntries.push({type: 'invalid', content: `AI ERROR: BOT ${botData.name} DOES NOT KNOW COMMAND ${nodeBlockInQuestion.name.toUpperCase()}`});
 	}
@@ -185,11 +178,11 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			}			
 		}
 		case 'chargeCommand' : {
-			// done 1. check valid melee
-			// done 2. check loaded
-			// done 3. check target number exists
-			// done 4. check target's closest adjacent space is within bot's moveDistance
-			// done 5. check to make sure path is not obstructed
+			// 1. check valid melee
+			// 2. check loaded
+			// 3. check target number exists
+			// 4. check target's closest adjacent space is within bot's moveDistance
+			// 5. check to make sure path is not obstructed
 			const meleeWeaponInvalid = invalidMeleeWeaponTest(commandNode, botInfo);
 			if (meleeWeaponInvalid) return meleeWeaponInvalid;
 			const weaponNotLoaded = weaponNotLoadedTest(commandNode, botInfo);
@@ -318,79 +311,7 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 		}
 	}
 }
-//TODO: fracture this function into two: one that returns the cost, the other the true false
-// function testInsufficientEnergy (commandNode, botInfo) {
-// 	const commandName = commandNode.name;
-// 	switch (commandName) {
-// 		case 'aimCommand' : {
-// 			const armSlot = commandNode.instructions.weapon;
-// 			const weaponName = botInfo.equipment[armSlot];
-// 			const baseAimCost = weaponStats[weaponName].aimCost;
-// 			const totalCost = baseAimCost + botInfo.attributes.aimCostModifier;
-// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
-// 		}
-// 		case 'aimAndAttackCommand' : {
-// 			const armSlot = commandNode.instructions.weapon;
-// 			const weaponName = botInfo.equipment[armSlot];
-// 			const baseAimCost = weaponStats[weaponName].aimCost;
-// 			const totalAimCost = baseAimCost + botInfo.attributes.aimCostModifier;
-// 			const baseAttackCost = weaponStats[weaponName].attackCost;
-// 			const totalAttackCost = baseAttackCost + botInfo.attributes.attackCostModifier;
-// 			const totalCost = totalAimCost + totalAttackCost;
-// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
-// 		}
-// 		case 'chargeCommand' : {
-// 			const armSlot = commandNode.instructions.weapon;
-// 			const weaponName = botInfo.equipment[armSlot];
-// 			const moveCost = botInfo.attributes.MovementCost;
-// 			const baseAttackCost = weaponStats[weaponName].attackCost;
-// 			const totalAttackCost = baseAttackCost + botInfo.attributes.attackCostModifier;
-// 			const totalCost = moveCost + totalAttackCost;
-// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
-// 		}
-// 		case 'counterCommand' : {
-// 			const armSlot = commandNode.instructions.weapon;
-// 			const weaponName = botInfo.equipment[armSlot];
-// 			const baseAttackCost = weaponStats[weaponName].attackCost;
-// 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
-// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
-// 		}
-// 		case 'elevenAttackCommand' : {
-// 			const armSlot = commandNode.instructions.weapon;
-// 			const weaponName = botInfo.equipment[armSlot];
-// 			const baseAttackCost = weaponStats[weaponName].attackCost;
-// 			const nonElevenTotalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
-// 			const totalCost = 2 * nonElevenTotalCost;
-// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
-// 		}
-// 		case 'guardCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
-// 		case 'meleeAttackCommand' : {
-// 			const armSlot = commandNode.instructions.weapon;
-// 			const weaponName = botInfo.equipment[armSlot];
-// 			const baseAttackCost = weaponStats[weaponName].attackCost;
-// 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
-// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
-// 		}
-// 		case 'moveCommand' : return botInfo.attributes.CurrentCapacitor >= botInfo.attributes.MovementCost ? false : true;
-// 		case 'rangedAttackCommand' : {
-// 			const armSlot = commandNode.instructions.weapon;
-// 			const weaponName = botInfo.equipment[armSlot];
-// 			const baseAttackCost = weaponStats[weaponName].attackCost;
-// 			const totalCost = baseAttackCost + botInfo.attributes.attackCostModifier;
-// 			return botInfo.attributes.CurrentCapacitor >= totalCost ? false : true;
-// 		}
-// 		case 'rechargeCommand' : return false
-// 		case 'redirectCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
-// 		case 'repairCommand' : return botInfo.attributes.CurrentCapacitor >= commandDetails[commandName].cost ? false : true;
-// 		case 'scanCommand' : return botInfo.attributes.CurrentCapacitor >= botInfo.attributes.ScanCost ? false : true;
-// 		case 'switchCommand' : return false
-// 		case 'waitCommand' : return false
-// 		default: {
-// 			console.log(`Unknown command name: ${commandName} inside insufficient energy test`);
-// 			return true
-// 		}
-// 	}
-// }
+
 function calculateCommandCost (commandNode, botInfo) {
 	const commandName = commandNode.name;
 	switch (commandName) {
