@@ -22,7 +22,6 @@ const LoadingAnimation = ({size, botToDisplay}) => {
 			arm1 = 'Gun1'
 		}
 	}
-	console.log({botToDisplay});
   return (
     <Wrapper
 		className = 'centeredFlex'

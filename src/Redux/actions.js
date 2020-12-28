@@ -22,12 +22,13 @@ export const initializeBattle = (challenge, levelNumber, userBots, ) => ({
 	userBots: userBots,
 })
 // commence the battle
-export const launchBattle = () => ({
-	type: 'LAUNCH_BATTLE'
+export const launchBattle = (newRecords) => ({
+	type: 'LAUNCH_BATTLE',
+	newRecords: newRecords
 })
 // process the first tick
 export const firstTick = () => ({
-	type: 'FIRST_TICK'
+	type: 'FIRST_TICK',
 })
 // process the next tick
 export const nextTick = () => ({

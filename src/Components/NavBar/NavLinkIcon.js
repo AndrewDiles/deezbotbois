@@ -66,7 +66,7 @@ function NavLinkIcon({ destination }) {
 export default NavLinkIcon;
 const NavLinkIconWrapper = styled(NavLink)`
 	display: ${props => props.navlocation === 'left' && 'none'};
-	@media (min-width: 900px) {
+	@media (min-width: 901px) {
 		display: none;
 	}
 `

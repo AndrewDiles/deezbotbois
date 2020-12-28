@@ -84,7 +84,7 @@ function testNodeIsCondition (nodeBlock) {
 	return Object.keys(nodeBlock)[0] === 'condition' ? true : false
 }
 function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo) {
-	console.log('candicacy of Command:', nodeBlockInQuestion.name, 'being tested');
+	// console.log('candicacy of Command:', nodeBlockInQuestion.name, 'being tested');
 	let result = null;
 	const botKnowsCommand = botKnowsCommandTest(nodeBlockInQuestion.name, botData);
 	if (botKnowsCommand) {

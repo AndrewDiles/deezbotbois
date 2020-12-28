@@ -990,15 +990,15 @@ export function areSameCommand (command1, command2) {
 		for (let i = 0; i < command1InstructionKeys.length; i++) {
 			if (difference) break;
 			if (command1.instructions[command1InstructionKeys[i]] !== command2.instructions[command1InstructionKeys[i]]) difference = true;
-			console.log(command1InstructionKeys[i]);
-			console.log(command2.instructions[command1InstructionKeys[i]]);
+			// console.log(command1InstructionKeys[i]);
+			// console.log(command2.instructions[command1InstructionKeys[i]]);
 		}
 		if (!difference) {
 			for (let i = 0; i < command2InstructionKeys.length; i++) {
 				if (difference) break;
 				if (command2.instructions[command2InstructionKeys[i]] !== command1.instructions[command2InstructionKeys[i]]) difference = true;
-				console.log(command2InstructionKeys[i]);
-				console.log(command2.instructions[command1InstructionKeys[i]]);
+				// console.log(command2InstructionKeys[i]);
+				// console.log(command2.instructions[command1InstructionKeys[i]]);
 			}
 		}
 		return !difference

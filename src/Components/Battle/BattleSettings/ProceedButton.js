@@ -10,6 +10,7 @@ import {
 
 import StyledButton from '../../StyledButton/StyledButton';
 import LoadingAnimation from '../../LoadingAnimation/LoadingAnimation';
+import recordUpdater from '../../../Constants/scriptHelpers/recordUpdater';
 
 const ProceedButton = () => {
 	const dispatch = useDispatch();
@@ -20,7 +21,8 @@ const ProceedButton = () => {
 		// open modal to view new records, collect rewards and return to level select screen
 	}
 	const beginBattle = () => {
-		dispatch(launchBattle())
+		let newRecords = recordUpdater(battleInfo);
+		dispatch(launchBattle(newRecords))
 	}
 	const incrementTick = () => {
 		dispatch(nextTick())

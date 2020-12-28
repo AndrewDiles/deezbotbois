@@ -17,7 +17,9 @@ import {
 
 import resolveDeterminingCommands from '../../Constants/scriptHelpers/resolveDeterminingCommands';
 import getNextCommand from '../../Constants/scriptHelpers/getNextCommand';
+import recordUpdater from '../../Constants/scriptHelpers/recordUpdater';
 import { areSameCommand } from '../../Constants/helperFunctions';
+
 
 const GameLogic = () => {
 	const settings = useSelector((state) => state.settings);
@@ -31,7 +33,6 @@ const GameLogic = () => {
 			dispatch(executionInProgress());
 			const reverifyCommandToExecute = getNextCommand(battleInfo.objectsToRender, battleInfo.commandsToExecute[0].botIndex, battleInfo.levelInfo);
 			const isSameCommand = areSameCommand(battleInfo.commandsToExecute[0].command, reverifyCommandToExecute.command);
-			// console.log({isSameCommand});
 			if (!isSameCommand) {
 				dispatch(addNewBattleLogs([{type: 'invalid', content: `${battleInfo.objectsToRender[battleInfo.commandsToExecute[0].botIndex].name}`}]));
 				dispatch(executionComplete());
@@ -62,7 +63,7 @@ const GameLogic = () => {
 			// more record testing, cycling tie breaks, adding scan info, regenerating stats etc
 
 
-			// let newRecords = recordUpdater(battleInfo, null, null); //jfbdifdkn
+			// let newRecords = recordUpdater(battleInfo);
 
 
 
@@ -72,6 +73,7 @@ const GameLogic = () => {
 			settings.autoTick ? dispatch(nextTick()) : dispatch(awaitUserInput());
 		} else if (battleInfo.status === 'FIRST_TICK') {
 			// first tick needs to recalculate records and provide 1 cell scan results
+
 			dispatch(firstTick());
 		} else {
 			console.log(`unknown battleInfo status: ${battleInfo.status}`);

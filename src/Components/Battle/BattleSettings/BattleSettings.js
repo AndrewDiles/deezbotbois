@@ -34,7 +34,7 @@ const BattleSettings = ({ setGameLaunched, cellClicked }) => {
 	// TODO: Create a modal that only exists if viewing is: log, cell, or end
 
   return (
-    <Wrapper className = 'centeredFlex'>
+    <Wrapper className = 'startFlex'>
 			<ButtonContainer
 			className = 'centeredFlex'
 			shrink = {1}

@@ -82,7 +82,8 @@ export default function battleInfo(
 					...state,
 					battleLaunched: true,
 					status: 'FIRST_TICK',
-					battleLog: [...state.battleLog, {type: 'newTick', number: state.tick+1}]
+					battleLog: [...state.battleLog, {type: 'newTick', number: state.tick+1}],
+					recordTracker: {...action.newRecords}
 				}
 			}
 			case 'FIRST_TICK': {
