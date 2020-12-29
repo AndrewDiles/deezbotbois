@@ -8,13 +8,13 @@ const recordKeys = [
 	'allyHasDied',
 	'hasMoved',
 ];
-let recordsToTrack = [...recordKeys];
+// let recordsToTrack = [...recordKeys];
 
 function recordUpdater (battleInfo) {
 	let newRecords = { ...battleInfo.recordTracker};
 
 	if (battleInfo.tick === 0) {
-		recordsToTrack = [...recordKeys];
+		let recordsToTrack = [...recordKeys];
 		let allyFound = false;
 		battleInfo.objectsToRender.forEach((object)=>{
 			if (object.type === 'User') {
@@ -28,7 +28,9 @@ function recordUpdater (battleInfo) {
 		if (!allyFound) {
 			recordsToTrack.splice(recordsToTrack.indexOf('allyHasDied'), 1);
 		}
+		newRecords.recordsToTrack = recordsToTrack;
 	} else {
+		let recordsToTrack = [...battleInfo.recordTracker.recordsToTrack];
 		recordsToTrack.forEach((recordType, recordIndex)=>{
 			switch(recordType) {
 				case 'totalDamageTaken' : {
@@ -119,6 +121,7 @@ function recordUpdater (battleInfo) {
 				}
 			}
 		})
+		newRecords.recordsToTrack = recordsToTrack;
 	}
 	newRecords.recordChanges = [];
 	console.log({newRecords});

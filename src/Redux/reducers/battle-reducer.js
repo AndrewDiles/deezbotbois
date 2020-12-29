@@ -22,6 +22,7 @@ const initialState = {
 		allyHasDied: false,
 		hasMoved: false,
 		recordChanges: [],
+		recordsToTrack: [],
 	},
 	tick: 0,
 	ticksSinceDamageTaken: 0,
@@ -116,6 +117,12 @@ export default function battleInfo(
 					status: 'EXECUTING_COMMANDS'
 				}
 			}
+			case 'CALLING_EXECUTION' : {
+				return {
+					...state,
+					status: 'CALLING_EXECUTION'
+				}
+			}
 			case 'EXECUTION_IN_PROGRESS': {
 				return {
 					...state,
@@ -151,6 +158,7 @@ export default function battleInfo(
 				return {
 					...state,
 					status: 'TICK_COMPLETE',
+					recordTracker: action.newRecords
 				}
 			}
 			

@@ -44,6 +44,10 @@ export const commandsDetermined = (commandsToExecute, newLogEntries) => ({
 	commandsToExecute, commandsToExecute,
 	newLogEntries: newLogEntries,
 })
+// signals to Execution.js that it needs to run an execution
+export const callingExecution = () => ({
+	type: 'CALLING_EXECUTION'
+})
 // halts progress until last execution is complete
 export const executionInProgress = () => ({
 	type: 'EXECUTION_IN_PROGRESS'
@@ -61,8 +65,9 @@ export const executionsComplete = () => ({
 	type: 'EXECUTIONS_COMPLETE'
 })
 // tick is complete
-export const endOfCleanUp = () => ({
-	type: 'END_OF_CLEANUP'
+export const endOfCleanUp = (newRecords) => ({
+	type: 'END_OF_CLEANUP',
+	newRecords: newRecords
 })
 // if ticks are not set to auto-fire, wait on user
 export const awaitUserInput = () => ({
