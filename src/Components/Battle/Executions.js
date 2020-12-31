@@ -5,8 +5,8 @@ import {
 	addNewBattleLogs,
 	executionInProgress,
 	executionComplete,
-	// executionsComplete,
-	replaceBattleInfo,
+	completeCommand,
+	playSFX,
 } from '../../Redux/actions';
 import aimAndAttackCommand from '../../Constants/scriptHelpers/executions/aimAndAttackCommand';
 import aimCommand from '../../Constants/scriptHelpers/executions/aimCommand';
@@ -25,7 +25,7 @@ import scanCommand from '../../Constants/scriptHelpers/executions/scanCommand';
 import switchCommand from '../../Constants/scriptHelpers/executions/switchCommand';
 import waitCommand from '../../Constants/scriptHelpers/executions/waitCommand';
 
-const Executions = ({ setCellColors, }) => {
+const Executions = ({ setCellColors, setCellClicked }) => {
 	const settings = useSelector((state) => state.settings);
 	const battleInfo = useSelector((state) => state.battleInfo);
 	const dispatch = useDispatch();
@@ -36,81 +36,78 @@ const Executions = ({ setCellColors, }) => {
 
 	useEffect(()=>{
 		if (battleInfo.status === 'CALLING_EXECUTION') {
-			console.log('need to execute:', battleInfo.commandsToExecute[0]);
+			setCellClicked(battleInfo.objectsToRender[battleInfo.commandsToExecute[0].botIndex].location);
 			dispatch(executionInProgress());
-
-			// the above has .botIndex, and .command.name, .command.instructions
 			switch(battleInfo.commandsToExecute[0].command.name) {
 				case 'aimAndAttackCommand' : {
-					aimAndAttackCommand(dispatch, battleInfo);
+					aimAndAttackCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'aimCommand' : {
-					aimCommand(dispatch, battleInfo);
+					aimCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'chargeCommand' : {
-					chargeCommand(dispatch, battleInfo);
+					chargeCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'counterCommand' : {
-					counterCommand(dispatch, battleInfo);
+					counterCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'elevenAttackCommand' : {
-					elevenAttackCommand(dispatch, battleInfo);
+					elevenAttackCommand(dispatch, battleInfo, completeCommand);
+					break;
+				}
+				case 'guardCommand' : {
+					guardCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'meleeAttackCommand' : {
-					meleeAttackCommand(dispatch, battleInfo);
+					meleeAttackCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'moveCommand' : {
-					moveCommand(dispatch, battleInfo);
+					moveCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'ramCommand' : {
-					ramCommand(dispatch, battleInfo);
+					ramCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'rangedAttackCommand' : {
-					rangedAttackCommand(dispatch, battleInfo);
+					rangedAttackCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'rechargeCommand' : {
-					rechargeCommand(dispatch, battleInfo);
+					rechargeCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'redirectCommand' : {
-					redirectCommand(dispatch, battleInfo);
+					redirectCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'repairCommand' : {
-					repairCommand(dispatch, battleInfo);
+					repairCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'scanCommand' : {
-					scanCommand(dispatch, battleInfo);
+					scanCommand(dispatch, battleInfo, completeCommand);
 					break;
 				}
 				case 'switchCommand' : {
-					switchCommand(dispatch, battleInfo);
+					switchCommand(dispatch, battleInfo, completeCommand, playSFX, settings.executionSpeed);
 					break;
 				}
 				case 'waitCommand' : {
-					waitCommand(dispatch, battleInfo, replaceBattleInfo);
+					waitCommand(dispatch, battleInfo, completeCommand, playSFX, settings.executionSpeed);
 					break;
 				}
 				default: {
 					console.log(`unfound command name: ${battleInfo.commandsToExecute[0].command.name} Execution.js`);
+					dispatch(executionComplete());
 				}
 			}
-
-
-			
-
-			dispatch(executionComplete());
-			return
 		}
 	},[battleInfo.status])
 

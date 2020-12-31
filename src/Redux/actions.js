@@ -79,8 +79,8 @@ export const addNewBattleLogs = (newLogEntries) => ({
 	newLogEntries: newLogEntries,
 })
 // replace BattleInfo - used to save multiple action calls
-export const replaceBattleInfo = (newBattleInfo) => ({
-	type: 'REPLACE_BATTLE_INFO',
+export const completeCommand = (newBattleInfo) => ({
+	type: 'COMPLETE_COMMAND',
 	newBattleInfo: newBattleInfo,
 })
 

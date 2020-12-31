@@ -18,7 +18,7 @@ const BattleLog = ({ viewing }) => {
 	const [hovering, setHovering] = useState(0);
 	const [filters, setFilters] = useState(baseFilters);
 	let colors = useSelector(getThemeColors);
-	
+
   return (
     <Wrapper className = 'startFlex col'>
 			<Tab

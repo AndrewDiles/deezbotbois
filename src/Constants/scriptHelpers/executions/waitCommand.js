@@ -1,8 +1,10 @@
-function waitCommand (dispatch, battleInfo, replaceBattleInfo) {
+function waitCommand (dispatch, battleInfo, completeCommand, playSFX, speed) {
 	let newBattleInfo = {...battleInfo};
 	let battleLogsToAdd = [];
 	let executingBot = newBattleInfo.objectsToRender[battleInfo.commandsToExecute[0].botIndex];
 	battleLogsToAdd.push({type: 'execution', content: `${executingBot.name} EXECUTES ${battleInfo.commandsToExecute[0].command.name.toUpperCase()}`});
+
+
 	executingBot.switches[5] = false;
 	executingBot.scanDisplayResults = [];
 	executingBot.scanHostileResults = [];
@@ -13,6 +15,12 @@ function waitCommand (dispatch, battleInfo, replaceBattleInfo) {
 	executingBot.consecutiveAims = 0;
 	executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
 	newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
-	dispatch(replaceBattleInfo(newBattleInfo));
+	// dispatch(completeCommand(newBattleInfo));
+	if (speed !== 0.1) {
+		setTimeout(()=>{dispatch(completeCommand(newBattleInfo));},speed*1000);
+	} else {
+		dispatch(completeCommand(newBattleInfo));
+	}
+	
 }
 export default waitCommand

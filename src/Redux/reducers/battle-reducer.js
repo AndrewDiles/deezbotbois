@@ -175,9 +175,13 @@ export default function battleInfo(
 					battleLog: [...state.battleLog, ...action.newLogEntries]
 				}
 			}
-			case 'REPLACE_BATTLE_INFO': {
+			case 'COMPLETE_COMMAND': {
+				let newCommandsToExecute = state.commandsToExecute;
+				newCommandsToExecute.shift();
 				return {
-					...action.newBattleInfo
+					...action.newBattleInfo,
+					status: 'EXECUTION_COMPLETE',
+					commandsToExecute: newCommandsToExecute
 				}
 			}
       default:{

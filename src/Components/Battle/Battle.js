@@ -33,6 +33,7 @@ const Battle = ({ cellClicked, setCellClicked }) => {
 			<GameLogic/>
 			<Executions
 			setCellColors = {setCellColors}
+			setCellClicked = {setCellClicked}
 			/>
 		</Wrapper>
   )
