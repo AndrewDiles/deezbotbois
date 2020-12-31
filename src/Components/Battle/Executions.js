@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 
 import {
+	addNewBattleLogs,
 	executionInProgress,
 	executionComplete,
 	// executionsComplete,
+	replaceBattleInfo,
 } from '../../Redux/actions';
 import aimAndAttackCommand from '../../Constants/scriptHelpers/executions/aimAndAttackCommand';
 import aimCommand from '../../Constants/scriptHelpers/executions/aimCommand';
@@ -36,10 +38,67 @@ const Executions = ({ setCellColors, }) => {
 		if (battleInfo.status === 'CALLING_EXECUTION') {
 			console.log('need to execute:', battleInfo.commandsToExecute[0]);
 			dispatch(executionInProgress());
+
 			// the above has .botIndex, and .command.name, .command.instructions
 			switch(battleInfo.commandsToExecute[0].command.name) {
 				case 'aimAndAttackCommand' : {
 					aimAndAttackCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'aimCommand' : {
+					aimCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'chargeCommand' : {
+					chargeCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'counterCommand' : {
+					counterCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'elevenAttackCommand' : {
+					elevenAttackCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'meleeAttackCommand' : {
+					meleeAttackCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'moveCommand' : {
+					moveCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'ramCommand' : {
+					ramCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'rangedAttackCommand' : {
+					rangedAttackCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'rechargeCommand' : {
+					rechargeCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'redirectCommand' : {
+					redirectCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'repairCommand' : {
+					repairCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'scanCommand' : {
+					scanCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'switchCommand' : {
+					switchCommand(dispatch, battleInfo);
+					break;
+				}
+				case 'waitCommand' : {
+					waitCommand(dispatch, battleInfo, replaceBattleInfo);
 					break;
 				}
 				default: {

@@ -25,7 +25,8 @@ const initialState = {
 		recordsToTrack: [],
 	},
 	tick: 0,
-	ticksSinceDamageTaken: 0,
+	durabilityChangeThisTick: false,
+	ticksSinceDurabilityChange: 0,
 	commandsToExecute: [],
 	battleLog: [
 		{type: 'battle-init'},
@@ -172,6 +173,11 @@ export default function battleInfo(
 				return {
 					...state,
 					battleLog: [...state.battleLog, ...action.newLogEntries]
+				}
+			}
+			case 'REPLACE_BATTLE_INFO': {
+				return {
+					...action.newBattleInfo
 				}
 			}
       default:{

@@ -78,6 +78,11 @@ export const addNewBattleLogs = (newLogEntries) => ({
 	type: 'ADD_NEW_BATTLE_LOGS',
 	newLogEntries: newLogEntries,
 })
+// replace BattleInfo - used to save multiple action calls
+export const replaceBattleInfo = (newBattleInfo) => ({
+	type: 'REPLACE_BATTLE_INFO',
+	newBattleInfo: newBattleInfo,
+})
 
 // SETTINGS ACTIONS
 // setting url:
