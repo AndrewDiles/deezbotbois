@@ -588,7 +588,7 @@ function verifyScanResults (scanResults) {
 export function illuminateScannedCells (scanResults,executionSpeed, setCellColors) {
 	if (!verifyIsInteger(executionSpeed)) return
 	if (!verifyScanResults(scanResults)) return
-	if (executionSpeed > 0) {
+	if (executionSpeed > 0.1) {
 		function generateLocationColor (objectToFill, location, colorIntensity) {
 			if (colorIntensity <= 0) return
 			if (location.cellIs === 'hostile') {
@@ -951,7 +951,7 @@ export function initializeBot (botInfo, teamNumber, location, type) {
 	botToAdd.type = type;
 	botToAdd.team = teamNumber;
 	botToAdd.location = {...location};
-	botToAdd.events = [];
+	botToAdd.stance = null;
 	addArmaments(botToAdd);
 	botToAdd.switches = {1:false,2:false,3:false,4:false,5:false};
 	botToAdd.scanDisplayResults = [];

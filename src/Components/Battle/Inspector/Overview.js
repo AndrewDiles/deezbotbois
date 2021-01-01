@@ -52,6 +52,8 @@ const Overview = ({ cellContents }) => {
     			</BotInfo>
 				</div>
 			</TopRow>
+
+			{/* INSERT ROWS OF DURABILITY AND CAPACITOR HERE */}
 			
 			<Row className = 'centeredFlex'>
 				<StyledButton

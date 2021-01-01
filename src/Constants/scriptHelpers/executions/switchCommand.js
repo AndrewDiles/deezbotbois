@@ -42,6 +42,7 @@ function switchCommand (dispatch, battleInfo, completeCommand, playSFX, speed) {
 		dispatch(playSFX('toggle'));
 	}
 	
+	executingBot.stance = null;
 	executingBot.scanDisplayResults = [];
 	executingBot.scanHostileResults = [];
 	executingBot.scanFriendResults = [];
