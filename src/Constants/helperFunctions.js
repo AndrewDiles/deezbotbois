@@ -1,3 +1,4 @@
+// TODO: !IMPORTANT! Once everything is working, remove all validity tests to improve performance
 
 export const techTreeRequirements = (index) => {
 	// This function takes in the index value of a given tech cell and outputs the
@@ -102,11 +103,11 @@ export function verifyCellIsInBounds (cellLocation, maxRows, maxCols) {
 	else return true
 }
 export function verifyCellIsOnCorner (cellLocation, maxRows, maxCols) {
-	if (!testValidityOfLocationInput(cellLocation)) return
+	if (!testValidityOfLocationInput(cellLocation)) return;
 	if (testSameCell(cellLocation, {col: 1, row: 1}) ||
-	testSameCell(cellLocation, {col: maxCols, row: 1}) ||
-	testSameCell(cellLocation, {col: 1, row: maxRows}) ||
-	testSameCell(cellLocation, {col: maxCols, row: maxRows})
+	testSameCell(cellLocation, {col: maxCols+1, row: 1}) ||
+	testSameCell(cellLocation, {col: 1, row: maxRows+1}) ||
+	testSameCell(cellLocation, {col: maxCols+1, row: maxRows+1})
 	) {
 		return true
 	} else {
@@ -586,7 +587,9 @@ function verifyScanResults (scanResults) {
 }
 // function illuminates scanned cells based on executionSpeed
 export function illuminateScannedCells (scanResults,executionSpeed, setCellColors) {
-	if (!verifyIsInteger(executionSpeed)) return
+	// if (!verifyIsInteger(executionSpeed)) return
+	if (typeof executionSpeed !== 'number') {console.log(`executionSpeed: ${executionSpeed} is not a number`);return}
+	// executionSpeed can also be 0.5, which is not an integer
 	if (!verifyScanResults(scanResults)) return
 	if (executionSpeed > 0.1) {
 		function generateLocationColor (objectToFill, location, colorIntensity) {

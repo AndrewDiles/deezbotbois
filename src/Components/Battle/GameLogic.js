@@ -52,10 +52,8 @@ const GameLogic = () => {
 			}
 		} else if (battleInfo.status === 'EXECUTION_COMPLETE') {
 			if (battleInfo.commandsToExecute.length === 0) {
-				console.log('all executions complete');
 				dispatch(executionsComplete())
 			} else {
-				console.log('still more executions to execute');
 				dispatch(nextExecution())
 			}
 		} else if (battleInfo.status === 'NEW_TICK') {

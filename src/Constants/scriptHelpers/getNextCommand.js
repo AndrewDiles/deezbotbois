@@ -67,7 +67,7 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 	}
 	if (!result) {
 		result = waitCommand;
-		battleLogEntries.push({type: 'invalid', content: `COMMAND TESTING FOR BOT ${botData.name} FAILED: DEPLETED AI BRANCHES WITHOUT FINDING A VALID COMMAND.  DEFAULTING TO WAITCOMMAND`});
+		battleLogEntries.push({type: 'invalid', content: `COMMAND TESTING FOR BOT: ${botData.name} FAILED: DEPLETED AI BRANCHES WITHOUT FINDING A VALID COMMAND.  DEFAULTING TO WAITCOMMAND`});
 	}
 	return {command: result, battleLogEntries: battleLogEntries}
 }

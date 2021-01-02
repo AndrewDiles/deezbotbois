@@ -124,7 +124,7 @@ function recordUpdater (battleInfo) {
 		newRecords.recordsToTrack = recordsToTrack;
 	}
 	newRecords.recordChanges = [];
-	console.log({newRecords});
+	// console.log({newRecords});
 	return newRecords;
 }
 
