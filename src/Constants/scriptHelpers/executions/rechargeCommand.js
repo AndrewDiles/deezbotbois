@@ -3,6 +3,7 @@ function rechargeCommand (dispatch, battleInfo, completeCommand, playSFX, speed)
 	let battleLogsToAdd = [];
 	let executingBot = newBattleInfo.objectsToRender[battleInfo.commandsToExecute[0].botIndex];
 	battleLogsToAdd.push({type: 'execution', content: `${executingBot.name} EXECUTES ${battleInfo.commandsToExecute[0].command.name.toUpperCase()}`});
+	battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name}'S CAPACITOR INCREASES FROM ${executingBot.attributes.CurrentCapacitor} TO ${executingBot.attributes.CurrentCapacitor+executingBot.attributes.Reactor}`});
 	executingBot.attributes.CurrentCapacitor += executingBot.attributes.Reactor;
 
 	executingBot.stance = null;

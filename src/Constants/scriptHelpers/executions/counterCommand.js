@@ -6,7 +6,9 @@ function counterCommand (dispatch, battleInfo, completeCommand, playSFX, speed) 
 	let executingBot = newBattleInfo.objectsToRender[battleInfo.commandsToExecute[0].botIndex];
 	battleLogsToAdd.push({type: 'execution', content: `${executingBot.name} EXECUTES ${battleInfo.commandsToExecute[0].command.name.toUpperCase()}`});
 	executingBot.stance = 'COUNTER';
-	executingBot.attributes.CurrentCapacitor -= (weaponStats[executingBot.equipment[battleInfo.commandsToExecute[0].command.instrucitons.weapon]].attackCost + executingBot.attributes.attackCostModifier);
+	let commandCost = (weaponStats[executingBot.equipment[battleInfo.commandsToExecute[0].command.instructions.weapon]].attackCost + executingBot.attributes.attackCostModifier);
+	battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name}'S CAPACITOR DECREASES FROM ${executingBot.attributes.CurrentCapacitor} TO ${executingBot.attributes.CurrentCapacitor-commandCost}`});
+	executingBot.attributes.CurrentCapacitor -= commandCost;
 
 	executingBot.switches[5] = false;
 	executingBot.scanDisplayResults = [];

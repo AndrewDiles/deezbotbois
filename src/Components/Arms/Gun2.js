@@ -35,6 +35,7 @@ const Barrel = styled.div`
   left: 20%;
   transform-origin: left;
   transform: ${props => `rotate(${props.angle}deg)`};
+	transition: transform 0.25s ease-out;
   z-index:4;
 `
 const Base = styled.div`

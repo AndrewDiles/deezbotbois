@@ -6,6 +6,7 @@ function guardCommand (dispatch, battleInfo, completeCommand, playSFX, speed) {
 	let executingBot = newBattleInfo.objectsToRender[battleInfo.commandsToExecute[0].botIndex];
 	battleLogsToAdd.push({type: 'execution', content: `${executingBot.name} EXECUTES ${battleInfo.commandsToExecute[0].command.name.toUpperCase()}`});
 	executingBot.stance = 'GUARD';
+	battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name}'S CAPACITOR DECREASES FROM ${executingBot.attributes.CurrentCapacitor} TO ${executingBot.attributes.CurrentCapacitor-commandDetails.guardCommand.cost}`});
 	executingBot.attributes.CurrentCapacitor -= commandDetails.guardCommand.cost;
 	
 	executingBot.switches[5] = false;

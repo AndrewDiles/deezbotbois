@@ -9,7 +9,7 @@ const Attributes = ({ cellContents }) => {
 	React.useState(()=>{
 		let non1Found = false;
 		for (let i = 0; i < comprehensiveStatsMultiplicative.length; i++) {
-			console.log(comprehensiveStatsMultiplicative[i],cellContents.attributes[comprehensiveStatsMultiplicative[i]])
+			// console.log(comprehensiveStatsMultiplicative[i],cellContents.attributes[comprehensiveStatsMultiplicative[i]])
 			if (cellContents.attributes[comprehensiveStatsMultiplicative[i]] !== 1) {
 				non1Found = true;
 				break;
@@ -65,9 +65,8 @@ const Attributes = ({ cellContents }) => {
 					return null
 				} else
 				return (
-					<AttributeContainer>
+					<AttributeContainer key = {index}>
 						<Attribute
-						key = {index}
 						attribute = {attributeName}
 						value = {cellContents.attributes[attributeName]}
 						// singleLeftDisplay = {1}
@@ -81,9 +80,8 @@ const Attributes = ({ cellContents }) => {
 			{hasNon1Multiplier && 'DAMAGE & DAMAGE REDUCTION MULTIPLIERS:'}
 			{comprehensiveStatsMultiplicative.map((attributeName, index)=>{
 				return cellContents.attributes[attributeName] !== 1 && (
-					<AttributeContainer>
+					<AttributeContainer key = {index}>
 						<Attribute
-						key = {index}
 						attribute = {attributeName}
 						value = {cellContents.attributes[attributeName]}
 						// singleLeftDisplay = {1}
@@ -113,9 +111,8 @@ const Attributes = ({ cellContents }) => {
 			AVAILABLE COMMANDS:
 			{comprehensiveStatsBool.map((commandName, index)=>{
 				return (cellContents.attributes[commandName] && commandName !== 'BurnAndCorrosionBoost') && (
-					<AttributeContainer>
+					<AttributeContainer key = {index}>
 						<Command
-						key = {index}
 						attribute = {commandName}
 						value = {cellContents.attributes[commandName]}
 						excludesConfirmation = {1}

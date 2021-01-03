@@ -184,6 +184,13 @@ export default function battleInfo(
 					commandsToExecute: newCommandsToExecute
 				}
 			}
+			case 'SET_ARM_X_ANGLE': {
+				let newState = {...state};
+				newState.objectsToRender[action.botIndex][action.angleKey] = action.angleValue
+				return {
+					...newState,
+				}
+			}
       default:{
         return state;
       }

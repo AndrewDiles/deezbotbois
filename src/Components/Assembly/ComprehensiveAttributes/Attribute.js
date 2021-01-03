@@ -57,7 +57,7 @@ const Attribute = ({ attribute, value, width, currentValue, singleLeftDisplay })
 						/>
 						<Spacer/>
 						<Value>
-							{currentValue === 0 || currentValue && `${currentValue} / `}
+							{typeof currentValue === 'number'  && `${currentValue} / `}
 							{value % 1 === 0 ? value : value.toFixed(2)}
 						</Value>
 					</LeftAttributeContents>

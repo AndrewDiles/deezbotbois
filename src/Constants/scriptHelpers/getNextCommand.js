@@ -95,8 +95,10 @@ function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battle
 		} else {
 			const insufficientEnergyTest = calculateCommandCost(nodeBlockInQuestion, botData) > botData.attributes.CurrentCapacitor;
 			if (insufficientEnergyTest) {
+				// nodeBlockInQuestion.test.commandName
+				// battleLogEntries.push({type: 'invalid', content: insufficientEnergyTest});
+				battleLogEntries.push({type: 'invalid', content: `INSUFFICIENT ENERGY AVAILABLE IN CAPACITOR TO EXECUTE ${nodeBlockInQuestion.name.toUpperCase()}`});
 				mapToTest.pop();
-				battleLogEntries.push({type: 'invalid', content: insufficientEnergyTest});
 			} else {
 				battleLogEntries.push({type: 'action-determined', content: `COMMAND TESTING FOR BOT ${botData.name} RESULTS IN ${nodeBlockInQuestion.name.toUpperCase()}`});
 				result = nodeBlockInQuestion;

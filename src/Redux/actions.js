@@ -83,6 +83,13 @@ export const completeCommand = (newBattleInfo) => ({
 	type: 'COMPLETE_COMMAND',
 	newBattleInfo: newBattleInfo,
 })
+// intermediary step to set angle of a weapon's arm
+export const setArmXAngle = (botIndex, angleKey, angleValue) => ({
+	type: 'SET_ARM_X_ANGLE',
+	botIndex: botIndex,
+	angleKey: angleKey,
+	angleValue: angleValue
+})
 
 // SETTINGS ACTIONS
 // setting url:

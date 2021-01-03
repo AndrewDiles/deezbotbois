@@ -6,6 +6,7 @@ import {
 	executionInProgress,
 	executionComplete,
 	completeCommand,
+	setArmXAngle,
 	playSFX,
 } from '../../Redux/actions';
 import aimAndAttackCommand from '../../Constants/scriptHelpers/executions/aimAndAttackCommand';
@@ -44,7 +45,7 @@ const Executions = ({ setCellColors, setCellClicked }) => {
 					break;
 				}
 				case 'aimCommand' : {
-					aimCommand(dispatch, battleInfo, completeCommand, playSFX, settings.executionSpeed);
+					aimCommand(dispatch, battleInfo, completeCommand, playSFX, settings.executionSpeed, settings.cellSize, setArmXAngle);
 					break;
 				}
 				case 'chargeCommand' : {
