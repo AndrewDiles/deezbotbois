@@ -52,26 +52,32 @@ export default function battleInfo(
 				} else {
 					newBattleInfo.levelInfo = levelInfo[action.levelNumber];
 				}
+				let objectIndex = 0;
 				action.userBots.forEach((userBot, index)=>{
 					// function to add current stats goes here - current stats,
-					newBattleInfo.objectsToRender.push(initializeBot(userBot, 0, newBattleInfo.levelInfo.userBots[index].location, 'User'));
+					newBattleInfo.objectsToRender.push(initializeBot(userBot, 0, newBattleInfo.levelInfo.userBots[index].location, 'User', objectIndex));
 					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
+					objectIndex ++;
 				})
 				newBattleInfo.levelInfo.hostile.forEach((hostile)=>{
-					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 1, hostile.location, 'Bot'));
+					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 1, hostile.location, 'Bot', objectIndex));
 					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
+					objectIndex ++;
 				})
 				newBattleInfo.levelInfo.hostile2.length > 0 && newBattleInfo.levelInfo.hostile2.forEach((hostile)=>{
-					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 2, hostile.location, 'Bot'));
+					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 2, hostile.location, 'Bot', objectIndex));
 					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
+					objectIndex ++;
 				})
 				newBattleInfo.levelInfo.hostile3.length > 0 && newBattleInfo.levelInfo.hostile3.forEach((hostile)=>{
-					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 3, hostile.location, 'Bot'));
+					newBattleInfo.objectsToRender.push(initializeBot(bots[hostile.name], 3, hostile.location, 'Bot', objectIndex));
 					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
+					objectIndex ++;
 				})
 				newBattleInfo.levelInfo.friendly.length > 0 && newBattleInfo.levelInfo.friendly.forEach((friendly)=>{
-					newBattleInfo.objectsToRender.push(initializeBot(bots[friendly.name], 0, friendly.location, 'Bot'));
+					newBattleInfo.objectsToRender.push(initializeBot(bots[friendly.name], 0, friendly.location, 'Bot', objectIndex));
 					newBattleInfo.rotatingTieBreak.push(newBattleInfo.rotatingTieBreak.length);
+					objectIndex ++;
 				})
 				
 				// requires: 

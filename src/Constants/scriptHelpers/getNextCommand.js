@@ -536,8 +536,9 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 			// else test types against testTargets and targetEvaluation Type
 			if (botData.aimResults.length === 0) return false
 			else {
-				let lockedTarget = objectsToRender[botData.aimResults[0].index];
-				let onSameTeam = lockedTarget.team === botData.team;
+				// let lockedTarget = objectsToRender[botData.aimResults[0].index];
+				// let onSameTeam = lockedTarget.team === botData.team;
+				let onSameTeam = botData.aimResults[0].team === botData.team;
 				if (nodeBlockInQuestion.test.targetEvaluationType === '=') {
 					if (nodeBlockInQuestion.test.testTargets === 'hostile') {
 						return onSameTeam ? false : true;

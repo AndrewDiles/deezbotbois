@@ -949,9 +949,10 @@ function addArmaments (botInfo) {
 	}
 }
 
-export function initializeBot (botInfo, teamNumber, location, type) {
+export function initializeBot (botInfo, teamNumber, location, type, index) {
 	let botToAdd = JSON.parse(JSON.stringify(botInfo));
 	botToAdd.type = type;
+	botToAdd.index = index;
 	botToAdd.team = teamNumber;
 	botToAdd.location = {...location};
 	botToAdd.stance = null;
@@ -1006,4 +1007,84 @@ export function areSameCommand (command1, command2) {
 		}
 		return !difference
 	}
+}
+// Following functions are specific to aim detections and animation
+export function generateAimDot (cellSize) {
+	const aimDot = document.createElement("div"); 
+	aimDot.style.background = 'radial-gradient(red, rgba(255,0,0,0.2))';
+	aimDot.style.height = `${cellSize/10}px`;
+	aimDot.style.width = `${cellSize/10}px`;
+	aimDot.style.margin = `${cellSize/20}px`;
+	aimDot.style.position = 'relative';
+	aimDot.style.zIndex = '5';
+	aimDot.style.borderRadius = '50%';
+	return aimDot
+}
+export function generateTargetCircle (cellSize) {
+	const targetCircle = document.createElement('div');
+	targetCircle.style.height = `${1.4*cellSize}px`;
+	targetCircle.style.width = `${1.4*cellSize}px`;
+	targetCircle.style.border = `solid red ${Math.ceil(cellSize/16)}px`;
+	targetCircle.style.position = 'relative';
+	targetCircle.style.top = `-${1.2*cellSize}px`;
+	targetCircle.style.left = `-${.2*cellSize}px`;
+	targetCircle.style.borderRadius = '50%';
+	return targetCircle
+}
+export function generateAimX (cellSize) {
+	const aimX = document.createElement("div");
+	
+	aimX.style.height = `${cellSize/10}px`;
+	aimX.style.width = `${cellSize/10}px`;
+	aimX.style.margin = `${cellSize/20}px`;
+	aimX.style.position = 'relative';
+	aimX.style.left = `${cellSize/20}px`;
+	aimX.style.top = `-${cellSize/40}px`;
+	aimX.style.zIndex = '5';
+	// aimX.className = 'centeredFlex';
+	// aimX.style.borderRadius = '50%';
+	const zeroContainer1 = document.createElement("div");
+	zeroContainer1.style.height = '0px';
+	zeroContainer1.style.width = '0px';
+	aimX.appendChild(zeroContainer1);
+
+	const xBar1 = document.createElement("div");
+	xBar1.style.height = `${cellSize/7}px`;
+	xBar1.style.width = `${cellSize/35}px`;
+	xBar1.style.background = 'red';
+	xBar1.style.transform = 'rotate(45deg)';
+	zeroContainer1.appendChild(xBar1);
+
+	const zeroContainer2 = document.createElement("div");
+	zeroContainer2.style.height = '0px';
+	zeroContainer2.style.width = '0px';
+	aimX.appendChild(zeroContainer2);
+
+	const xBar2 = document.createElement("div");
+	xBar2.style.height = `${cellSize/7}px`;
+	xBar2.style.width = `${cellSize/35}px`;
+	xBar2.style.background = 'red';
+	xBar2.style.transform = 'rotate(-45deg)';
+	zeroContainer2.appendChild(xBar2);
+	return aimX
+}
+export function generateAimBar (cellSize, barWidth, angle) {
+	const aimBar = document.createElement("div");
+	aimBar.style.height = `${cellSize/5}px`;
+	// may have to set width to something small to avoid displacement of other objects?
+	// not the case - plus it doesn't extend outside the top and left grid barriers due to overflow: none
+	// aimBar.style.width = `${((battleInfo.levelInfo.height + battleInfo.levelInfo.width)/1.5)*cellSize}px`;
+	aimBar.style.width = `${barWidth}px`;
+	aimBar.style.position = 'relative';
+	aimBar.style.top = `-${6*cellSize/10}px`;
+	aimBar.style.left = `${(9*cellSize/20)}px`;
+	aimBar.style.zIndex = '5';
+	aimBar.style.display = 'flex';
+	aimBar.style.flexDirection = 'row';
+	aimBar.style.transformOrigin = `${(cellSize/10)}px`;
+	aimBar.style.transform = `rotate(${angle}deg)`;
+	return aimBar
+}
+export function findLocationOfDot(x, y, cellSize){
+	return {row:Math.ceil(y/cellSize), col:Math.ceil(x/cellSize)}
 }

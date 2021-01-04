@@ -1,4 +1,4 @@
-import { verifyCellIsOnCorner } from '../../helperFunctions';
+import { generateAimBar, generateAimDot, generateAimX, generateTargetCircle, findLocationOfDot, verifyCellIsInBounds, findObjectOnCell, testSameCell } from '../../helperFunctions';
 import { weaponStats } from '../../equipment';
 
 function aimCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cellSize, setArmXAngle) {
@@ -14,67 +14,147 @@ function aimCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cell
 	if (battleInfo.commandsToExecute[0].command.instructions.rotating) {
 		newAngle = executingBot[armXAngle] + battleInfo.commandsToExecute[0].command.instructions.rotation;
 	} else {
-		console.log('just setting value to:', battleInfo.commandsToExecute[0].command.instructions.rangedDirection);
 		newAngle = battleInfo.commandsToExecute[0].command.instructions.rangedDirection;
 	}
 	dispatch(setArmXAngle(battleInfo.commandsToExecute[0].botIndex, armXAngle, newAngle));
 	
 	// problem with botCellPlacement below is that placerX is using transform and so z-index is not working as intended
 	// const botCellPlacement = document.getElementById(`col${executingBot.location.col} row${executingBot.location.row}`);
-	const botCellPlacement = document.getElementById(`placer${battleInfo.commandsToExecute[0].botIndex}`);
-	const aimBar = document.createElement("div");
+
+	const battleFieldHypotenuse = Math.sqrt(Math.pow(cellSize*battleInfo.levelInfo.height,2) + Math.pow(cellSize*battleInfo.levelInfo.width,2));
+	
+	
+	let collision = null;
+	const firstDotCoordinates = {x:cellSize*(executingBot.location.col-.5), y:cellSize*(executingBot.location.row-.5)}
+	const dotSize = (Math.sqrt(2*(cellSize*cellSize)))/7;
+	const deltaX = dotSize*Math.cos(newAngle * Math.PI / 180);
+	const deltaY = dotSize*Math.sin(newAngle * Math.PI / 180);
 
 	if (speed > 0.1) {
-		aimBar.style.height = `${cellSize/5}px`;
-		// may have to set width to something small to avoid displacement of other objects?
-		// not the case - plus it doesn't extend outside the top and left grid barriers due to overflow: none
-		aimBar.style.width = `${((battleInfo.levelInfo.height + battleInfo.levelInfo.width)/1.5)*cellSize}px`;
-		aimBar.style.position = 'relative';
-		aimBar.style.top = `-${6*cellSize/10}px`;
-		aimBar.style.left = `${(9*cellSize/20)}px`;
-		aimBar.style.zIndex = '5';
-		aimBar.style.display = 'flex';
-		aimBar.style.flexDirection = 'row';
-		// aimBar.style.backgroundColor = 'purple';
-		aimBar.style.transformOrigin = `${(cellSize/10)}px`;
-		aimBar.style.transform = `rotate(${executingBot[armXAngle]}deg)`;
-
+		// includes animations and timeouts
+		const botCellPlacement = document.getElementById(`placer${battleInfo.commandsToExecute[0].botIndex}`);
+		const aimBar = generateAimBar(cellSize, battleFieldHypotenuse, executingBot[armXAngle]);
 		botCellPlacement.appendChild(aimBar);
-
-		function addAimDot () {
-			const aimDot = document.createElement("div"); 
-			aimDot.style.background = 'red';
-			aimDot.style.height = `${cellSize/10}px`;
-			aimDot.style.width = `${cellSize/10}px`;
-			aimDot.style.margin = `${cellSize/20}px`;
-			aimDot.style.position = 'relative';
-			aimDot.style.zIndex = '5';
-			aimDot.style.borderRadius = '50%';
-			aimBar.appendChild(aimDot);
+		// units below: [time/dot] = [time allocated] / [distance] * [dot/distance]
+		// 50% of the execution time is allocated to generation of dots, hence 0.5 multiplier
+		const rateOfDotAnimation = (speed*0.5)/(battleFieldHypotenuse/dotSize);
+		let previousDotLocation = {...findLocationOfDot(firstDotCoordinates.x, firstDotCoordinates.y, cellSize)}
+		let i = 0;
+		function nextDot () {
+			if (!collision) {
+				let newDotLocation = findLocationOfDot(firstDotCoordinates.x+i*deltaX, firstDotCoordinates.y+i*deltaY, cellSize);
+				// verifyCellIsInBounds, findObjectOnCell, testSameCell
+				if (testSameCell(previousDotLocation, newDotLocation)) {
+					aimBar.appendChild(generateAimDot(cellSize));
+					i++;
+					setTimeout(nextDot,rateOfDotAnimation);
+				} else {
+					if (verifyCellIsInBounds(newDotLocation, battleInfo.levelInfo.height, battleInfo.levelInfo.width)) {
+						let possibleResult = findObjectOnCell(newDotLocation, battleInfo.objectsToRender);
+						if (possibleResult) {
+							aimBar.appendChild(generateAimX(cellSize));
+							collision = {index: possibleResult.index, type: possibleResult.type, team: possibleResult.team };
+							console.log({collision});
+							const targetCellPlacement = document.getElementById(`placer${possibleResult.index}`);
+							const targetCircle = generateTargetCircle(cellSize);
+							targetCellPlacement.appendChild(targetCircle);
+							executingBot.stance = null;
+							executingBot.switches[5] = false;
+							executingBot.aimResults = [collision];
+							executingBot.consecutiveAims ++;
+							executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+							newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
+							setTimeout(()=>{
+								botCellPlacement.removeChild(aimBar);
+								targetCellPlacement.removeChild(targetCircle);
+								dispatch(completeCommand(newBattleInfo));
+							},((speed*1000)-(i*rateOfDotAnimation)));
+						} else {
+							aimBar.appendChild(generateAimDot(cellSize));
+							i++;
+							previousDotLocation = {...newDotLocation};
+							setTimeout(nextDot,rateOfDotAnimation*1000)
+						}
+					} else {
+						aimBar.appendChild(generateAimX(cellSize));
+						// collision = {type: 'wall', location: newDotLocation}
+						// console.log({collision});
+						executingBot.stance = null;
+						executingBot.switches[5] = false;
+						executingBot.aimResults = [];
+						executingBot.consecutiveAims ++;
+						executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+						newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
+						setTimeout(()=>{
+							botCellPlacement.removeChild(aimBar);
+							dispatch(completeCommand(newBattleInfo));
+						},((speed*1000)-(i*rateOfDotAnimation)));
+					}
+				}
+			}
 		}
-		const dotSize = (Math.sqrt(2*(cellSize*cellSize)))/7;
-		const firstDotCoordinates = {x:cellSize*(executingBot.location.col-.5), y:cellSize*(executingBot.location.row-.5)}
-		const deltaX = dotSize*Math.cos(newAngle * Math.PI / 180);
-		const deltaY = -dotSize*Math.sin(newAngle * Math.PI / 180);
-		for(let i = 0; i<15; i++) {
-			addAimDot();
-		}
-	}
-
-	executingBot.stance = null;
-	executingBot.switches[5] = false;
-	executingBot.aimResults = [];
-	executingBot.consecutiveAims = 0;
-	executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
-	newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
-	// dispatch(completeCommand(newBattleInfo));
-	if (speed !== 0.1) {
-		setTimeout(()=>{
-			// botCellPlacement.removeChild(aimBar);
-			dispatch(completeCommand(newBattleInfo));
-		},speed*1000);
+		nextDot();
 	} else {
-		dispatch(completeCommand(newBattleInfo));
+		// does not include animations nor timeouts - runs as fast as possible
+		let previousDotLocation = {...findLocationOfDot(firstDotCoordinates.x, firstDotCoordinates.y, cellSize)}
+		let i = 0;
+		function nextDot () {
+			if (!collision) {
+				let newDotLocation = findLocationOfDot(firstDotCoordinates.x+i*deltaX, firstDotCoordinates.y+i*deltaY, cellSize);
+				if (testSameCell(previousDotLocation, newDotLocation)) {
+					i++;
+					nextDot();
+				} else {
+					if (verifyCellIsInBounds(newDotLocation, battleInfo.levelInfo.height, battleInfo.levelInfo.width)) {
+						let possibleResult = findObjectOnCell(newDotLocation, battleInfo.objectsToRender);
+						if (possibleResult) {
+							collision = {index: possibleResult.index, type: possibleResult.type, team: possibleResult.team };
+							console.log({collision});
+							executingBot.stance = null;
+							executingBot.switches[5] = false;
+							executingBot.aimResults = [collision];
+							executingBot.consecutiveAims ++;
+							executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+							newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
+							dispatch(completeCommand(newBattleInfo))
+						} else {
+							i++;
+							previousDotLocation = {...newDotLocation};
+							nextDot();
+						}
+					} else {
+						collision = {type: 'wall', location: newDotLocation}
+						console.log({collision});
+						executingBot.stance = null;
+						executingBot.switches[5] = false;
+						executingBot.aimResults = [];
+						executingBot.consecutiveAims ++;
+						executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+						newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
+						dispatch(completeCommand(newBattleInfo))
+					}
+				}
+			}
+		}
+		nextDot();
 	}
+
+	// all this will be moved into a function that will be called once a collision is detected
+	// executingBot.stance = null;
+	// executingBot.switches[5] = false;
+	// executingBot.aimResults = [];
+	// executingBot.consecutiveAims ++;
+	// executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+	// newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
+	// NO LONGER NEEDED dispatch(completeCommand(newBattleInfo));
+	// if (speed !== 0.1) {
+	// 	setTimeout(()=>{
+	// 		botCellPlacement.removeChild(aimBar);
+	// 		dispatch(completeCommand(newBattleInfo));
+	// 	},speed*1000);
+	// } else {
+	// 	botCellPlacement.removeChild(aimBar);
+	// 	dispatch(completeCommand(newBattleInfo));
+	// }
 }
 export default aimCommand

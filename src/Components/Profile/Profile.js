@@ -18,6 +18,7 @@ import VolumeSetter from '../VolumeSetter/VolumeSetter';
 const Profile = ({ time, disabled }) => {
 	const dispatch = useDispatch();
 	const settings = useSelector((state) => state.settings);
+	const battleInfo = useSelector((state) => state.battleInfo);
 	let colors = useSelector(getThemeColors);
 	if (settings.currentUrl === 'settings') colors = settings.colorsTesting;
 
@@ -56,7 +57,7 @@ const Profile = ({ time, disabled }) => {
       	  FIGHT-EM
         </StyledButton>
     	</StyledNavLink>
-			{settings.currentUrl !== 'settings' &&
+			{settings.currentUrl !== 'settings' && battleInfo.status === 'AWAITING_USER_INPUT' &&
 				<SizeSlider/>
 			}
 			{settings.currentUrl !== 'settings' &&
