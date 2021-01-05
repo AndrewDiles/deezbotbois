@@ -62,7 +62,7 @@ function aimCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cell
 							executingBot.switches[5] = false;
 							executingBot.aimResults = [collision];
 							executingBot.consecutiveAims ++;
-							executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+							executingBot.previousCommand = battleInfo.commandsToExecute[0].command;
 							newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 							setTimeout(()=>{
 								botCellPlacement.removeChild(aimBar);
@@ -83,7 +83,7 @@ function aimCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cell
 						executingBot.switches[5] = false;
 						executingBot.aimResults = [];
 						executingBot.consecutiveAims ++;
-						executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+						executingBot.previousCommand = battleInfo.commandsToExecute[0].command;
 						newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 						setTimeout(()=>{
 							botCellPlacement.removeChild(aimBar);
@@ -114,7 +114,7 @@ function aimCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cell
 							executingBot.switches[5] = false;
 							executingBot.aimResults = [collision];
 							executingBot.consecutiveAims ++;
-							executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+							executingBot.previousCommand = battleInfo.commandsToExecute[0].command;
 							newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 							dispatch(completeCommand(newBattleInfo))
 						} else {
@@ -129,7 +129,7 @@ function aimCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cell
 						executingBot.switches[5] = false;
 						executingBot.aimResults = [];
 						executingBot.consecutiveAims ++;
-						executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+						executingBot.previousCommand = battleInfo.commandsToExecute[0].command;
 						newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 						dispatch(completeCommand(newBattleInfo))
 					}
@@ -138,23 +138,5 @@ function aimCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cell
 		}
 		nextDot();
 	}
-
-	// all this will be moved into a function that will be called once a collision is detected
-	// executingBot.stance = null;
-	// executingBot.switches[5] = false;
-	// executingBot.aimResults = [];
-	// executingBot.consecutiveAims ++;
-	// executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
-	// newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
-	// NO LONGER NEEDED dispatch(completeCommand(newBattleInfo));
-	// if (speed !== 0.1) {
-	// 	setTimeout(()=>{
-	// 		botCellPlacement.removeChild(aimBar);
-	// 		dispatch(completeCommand(newBattleInfo));
-	// 	},speed*1000);
-	// } else {
-	// 	botCellPlacement.removeChild(aimBar);
-	// 	dispatch(completeCommand(newBattleInfo));
-	// }
 }
 export default aimCommand

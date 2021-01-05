@@ -17,7 +17,7 @@ function guardCommand (dispatch, battleInfo, completeCommand, playSFX, speed) {
 	executingBot.scanCornerResults = [];
 	executingBot.aimResults = [];
 	executingBot.consecutiveAims = 0;
-	executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+	executingBot.previousCommand = battleInfo.commandsToExecute[0].command;
 	newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 	// dispatch(completeCommand(newBattleInfo));
 	if (speed !== 0.1) {

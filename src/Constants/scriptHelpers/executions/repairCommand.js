@@ -24,7 +24,7 @@ function repairCommand (dispatch, battleInfo, completeCommand, playSFX, speed) {
 	executingBot.scanCornerResults = [];
 	executingBot.aimResults = [];
 	executingBot.consecutiveAims = 0;
-	executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+	executingBot.previousCommand = battleInfo.commandsToExecute[0].command;
 	newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 	if (speed !== 0.1) {
 		setTimeout(()=>{dispatch(completeCommand(newBattleInfo));},speed*1000);

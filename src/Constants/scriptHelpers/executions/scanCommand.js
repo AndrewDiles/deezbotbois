@@ -47,7 +47,7 @@ function scanCommand (dispatch, battleInfo, completeCommand, playSFX, speed, set
 	executingBot.switches[5] = false;
 	executingBot.aimResults = [];
 	executingBot.consecutiveAims = 0;
-	executingBot.previousCommand = battleInfo.commandsToExecute[0].command.name;
+	executingBot.previousCommand = battleInfo.commandsToExecute[0].command;
 	newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 	// dispatch(completeCommand(newBattleInfo));
 	if (speed !== 0.1) {

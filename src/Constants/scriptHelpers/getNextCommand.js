@@ -672,7 +672,7 @@ function conditionTest (nodeBlockInQuestion, objectsToRender, indexInQuestion, l
 			if (!botData.previousCommand) {
 				return false
 			} else {
-				if (botData.previousCommand.name !== nodeBlockInQuestion.test.name) {
+				if (botData.previousCommand.name !== nodeBlockInQuestion.test.commandName) {
 					return false
 				} else {
 					if (!botData.previousCommand.instructions.weapon) {
