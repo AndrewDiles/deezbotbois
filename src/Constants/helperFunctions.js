@@ -400,22 +400,39 @@ export function testValidityOfObjectsArrayInput (objectsArray) {
 	})
 	return caseTest
 }
+// // previous inferior (both slower and did not make sure bot doesn't impact itself) collisionVerification
+// export function collisionVerification (cellLocation, objectsArray, maxRows, maxCols) {
+// 	if (!testValidityOfLocationInput(cellLocation) || !testValidityOfObjectsArrayInput(objectsArray)) return
+// 	let collision = false;
+// 	objectsArray.forEach((object)=>{
+// 		if (!collision) {
+// 			// console.log('testing collision potential between', cellLocation, ' and ', object.location)
+// 			if (object.location.col === cellLocation.col && object.location.row === cellLocation.row) {
+// 				collision = true;
+// 				console.log(`Impending impact with ${object}`);
+// 				return collision
+// 			}
+// 		}
+// 	})
+// 	if (cellLocation.row === 0 || cellLocation.col === 0 || cellLocation.row === maxRows+1 || cellLocation.col === maxCols+1) collision = true
+// 	return collision
+// }
+
+
 // function tests if a collision occurs given a location to move to and all the objects
-export function collisionVerification (cellLocation, objectsArray, maxRows, maxCols) {
+export function collisionVerification (cellLocation, objectsArray, maxRows, maxCols, indexOfMovingBot) {
 	if (!testValidityOfLocationInput(cellLocation) || !testValidityOfObjectsArrayInput(objectsArray)) return
-	let collision = false;
-	objectsArray.forEach((object)=>{
-		if (!collision) {
-			// console.log('testing collision potential between', cellLocation, ' and ', object.location)
-			if (object.location.col === cellLocation.col && object.location.row === cellLocation.row) {
-				collision = true;
-				console.log(`Impending impact with ${object}`)
+	for (let i = 0; i < objectsArray.length; i++) {
+		if(i !== indexOfMovingBot) {
+			if (testSameCell(cellLocation, objectsArray[i].location)) {
+				return objectsArray[i]
 			}
 		}
-	})
-	if (cellLocation.row === 0 || cellLocation.col === 0 || cellLocation.row === maxRows+1 || cellLocation.col === maxCols+1) collision = true
-	return collision
+	}
+	if (cellLocation.row === 0 || cellLocation.col === 0 || cellLocation.row === maxRows+1 || cellLocation.col === maxCols+1) return {type: 'wall', location: cellLocation};
+	return false
 }
+
 // function below takes in a string and returns the number contained inside it as a number without 'px'
 export function convertPxStringToNum (string) {
 	if (typeof(string) !== 'string' || !string.includes('px')) {
@@ -440,14 +457,11 @@ export function convertNumToPxstring (number) {
 	return `${number}px`
 }
 // function takes in an array of moves and the cell size and outputs the translation needed to move an element
-export function translationGenerator (movementArray, cellSize) {
+export function translationGenerator (movementArray, cellSize, xDisplacement, yDisplacement) {
 	if (typeof(movementArray) !== 'object' || movementArray.length <1 || typeof(cellSize) !== 'number') {
 		return;
 	}
-	console.log({movementArray})
-	let xDisplacement = 0;
-	let yDisplacement = 0;
-
+	
 	movementArray.forEach((move)=>{
 		switch(move) {
 			case 'R' : {
@@ -489,8 +503,8 @@ export function translationGenerator (movementArray, cellSize) {
 			default: {}
 		}
 	})
-	// `translate3d(100px,50px,0px)`;
-	let result = `translate3d(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)},0px)`;
+	// let result = `translate3d(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)},0px)`;
+	let result = { transform: `translate(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)})`, xDisplacement: xDisplacement, yDisplacement: yDisplacement};
 	return result
 }
 // function generates an array of all possible locations

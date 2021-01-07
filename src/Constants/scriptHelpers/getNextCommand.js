@@ -58,7 +58,7 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 					mapToTest = testResults.mapToTest;
 				} else {
 					// Case : Command.  Test if command can be executed
-					let testResults = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result);
+					let testResults = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, result, indexInQuestion);
 					result = testResults.result;
 					mapToTest = testResults.mapToTest;
 				}
@@ -83,12 +83,12 @@ function testNodeBlockIsEmpty (nodeBlock) {
 function testNodeIsCondition (nodeBlock) {
 	return Object.keys(nodeBlock)[0] === 'condition' ? true : false
 }
-function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo) {
+function handleCommandCandidacy (nodeBlockInQuestion, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, indexInQuestion) {
 	// console.log('candicacy of Command:', nodeBlockInQuestion.name, 'being tested');
 	let result = null;
 	const botKnowsCommand = botKnowsCommandTest(nodeBlockInQuestion.name, botData);
 	if (botKnowsCommand) {
-		const invalidInstructionsTest = testInvalidInstructions(nodeBlockInQuestion, botData, objectsToRender, levelInfo);
+		const invalidInstructionsTest = testInvalidInstructions(nodeBlockInQuestion, botData, objectsToRender, levelInfo, indexInQuestion);
 		if (invalidInstructionsTest) {
 			mapToTest.pop();
 			battleLogEntries.push({type: 'invalid', content: invalidInstructionsTest});
@@ -157,7 +157,7 @@ function weaponNotOfTypeEnergyTest (commandNode, botInfo) {
 	}
 	return `CONDITIONS TO EXECUTE COMMAND ${commandNode.name.toUpperCase()} MET, BUT ${weaponStats[weaponName].name.toUpperCase()} EQUIPPED IN ${armSlot.toUpperCase()} IS NOT OF TYPE ENERGY`;
 }
-function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelInfo) {
+function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelInfo, indexInQuestion) {
 	const commandName = commandNode.name;
 	switch (commandName) {
 		case 'aimCommand' : {
@@ -199,7 +199,7 @@ function testInvalidInstructions (commandNode, botInfo, objectsToRender, levelIn
 			path.forEach((move)=>{
 				if (!pathObstructed) {
 					nextStep = nextStepGenerator(currentLandingSpot, move);
-					pathObstructed = collisionVerification(nextStep, objectsToRender, levelInfo.height, levelInfo.width)
+					pathObstructed = collisionVerification(nextStep, objectsToRender, levelInfo.height, levelInfo.width, indexInQuestion)
 					if (!pathObstructed) {
 						currentLandingSpot = nextStep;
 					}
@@ -784,7 +784,7 @@ function handleTestNewNodeDepth (objectsToRender, indexInQuestion, mapToTest, ba
 			} else {
 				// Case : Command.  Test if command can be executed
 				// result = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo);
-				let testResults = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo);
+				let testResults = handleCommandCandidacy(nodeBlockInQuestion[i].command, botData, mapToTest, battleLogEntries, objectsToRender, levelInfo, indexInQuestion);
 				result = testResults.result;
 				mapToTest = testResults.mapToTest;
 			}

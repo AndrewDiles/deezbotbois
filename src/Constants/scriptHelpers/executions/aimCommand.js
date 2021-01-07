@@ -23,7 +23,6 @@ function aimCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cell
 
 	const battleFieldHypotenuse = Math.sqrt(Math.pow(cellSize*battleInfo.levelInfo.height,2) + Math.pow(cellSize*battleInfo.levelInfo.width,2));
 	
-	
 	let collision = null;
 	const firstDotCoordinates = {x:cellSize*(executingBot.location.col-.5), y:cellSize*(executingBot.location.row-.5)}
 	const dotSize = (Math.sqrt(2*(cellSize*cellSize)))/7;

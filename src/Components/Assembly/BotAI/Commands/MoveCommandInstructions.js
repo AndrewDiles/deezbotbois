@@ -18,6 +18,7 @@ const MoveCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 		} else {
 			setEmptyPath(false);
 		}
+		// is this changing during battle?
 	},[JSON.stringify(activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions)])
 	if (!userInfo.botBuilds[botNumberSelected]) {
 		return <></>

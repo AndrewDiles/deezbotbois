@@ -37,10 +37,6 @@ function switchCommand (dispatch, battleInfo, completeCommand, playSFX, speed) {
 	for (let i = 1; i <= 5 ; i ++) {
 		executingBot.switches[i] = modifySwitch(battleInfo.commandsToExecute[0].command.instructions[i], executingBot.switches[i], i);
 	}
-	console.log({speed})
-	if (speed !== 0.1) {
-		dispatch(playSFX('toggle'));
-	}
 	
 	executingBot.stance = null;
 	executingBot.scanDisplayResults = [];
@@ -53,6 +49,7 @@ function switchCommand (dispatch, battleInfo, completeCommand, playSFX, speed) {
 	executingBot.previousCommand = battleInfo.commandsToExecute[0].command;
 	newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 	if (speed !== 0.1) {
+		dispatch(playSFX('toggle'));
 		setTimeout(()=>{dispatch(completeCommand(newBattleInfo));},speed*1000);
 	} else {
 		dispatch(completeCommand(newBattleInfo));

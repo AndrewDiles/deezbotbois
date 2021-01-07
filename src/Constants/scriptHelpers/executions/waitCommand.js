@@ -17,6 +17,7 @@ function waitCommand (dispatch, battleInfo, completeCommand, playSFX, speed) {
 	newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 	// dispatch(completeCommand(newBattleInfo));
 	if (speed !== 0.1) {
+		dispatch(playSFX('disabled'));
 		setTimeout(()=>{dispatch(completeCommand(newBattleInfo));},speed*1000);
 	} else {
 		dispatch(completeCommand(newBattleInfo));
