@@ -1,6 +1,6 @@
 import { pathToAdjacentCell, pathToCell, nextStepGenerator, movesAlongPath, collisionVerification, translationGenerator } from '../../helperFunctions';
 
-function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cellSize) {
+function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cellSize, setCellColors) {
 	let newBattleInfo = {...battleInfo};
 	let battleLogsToAdd = [];
 	let executingBot = newBattleInfo.objectsToRender[battleInfo.commandsToExecute[0].botIndex];
@@ -36,35 +36,33 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 	} else {
 		pathToTakePreCollisions = battleInfo.commandsToExecute[0].command.instructions.directions;
 	}
-	// console.log({pathToTakePreCollisions});
-
 	// test if a collision occurs anywhere along path or if more MovementDistance is required that the executing bot possesses
 	let collision = null;
 	let exceedingMaximumMovementDistance = false;
 	let pathToTravel = [];
 	let futureFinishLocation = {...executingBot.location};
+	let cellColorsObject = {};
 	while (!collision && !exceedingMaximumMovementDistance && pathToTravel.length !== pathToTakePreCollisions.length) {
 		if (movesAlongPath([...pathToTravel, pathToTakePreCollisions[pathToTravel.length]]) > executingBot.attributes.MovementDistance) {
 			exceedingMaximumMovementDistance = true;
 		} else {
-			// let locationOfNextStep = nextStepGenerator(futureFinishLocation, pathToTakePreCollisions[0]);
-			console.log('next potential move to make is:', pathToTakePreCollisions[pathToTravel.length]);
-			// future finish location isn't updating
 			let locationOfNextStep = nextStepGenerator(futureFinishLocation, pathToTakePreCollisions[pathToTravel.length]);
-			console.log({locationOfNextStep});
+			// console.log({locationOfNextStep});
 			collision = collisionVerification(locationOfNextStep, battleInfo.objectsToRender, battleInfo.levelInfo.height, battleInfo.levelInfo.width, battleInfo.commandsToExecute[0].botIndex);
-			console.log({collision});
+			// console.log({collision});
 			if (!collision) {
 				pathToTravel.push(pathToTakePreCollisions[pathToTravel.length]);
 				futureFinishLocation = {...locationOfNextStep};
+				cellColorsObject[`row${locationOfNextStep.row}col${locationOfNextStep.col}`] = 'rgba(0,255,0,0.5)';
 			} else {
 				collision.impactMove = pathToTakePreCollisions[pathToTravel.length];
+				cellColorsObject[`row${locationOfNextStep.row}col${locationOfNextStep.col}`] = 'rgba(255,0,0,0.5)';
 			}
 		}
 	}
-	console.log({collision});
-	console.log({exceedingMaximumMovementDistance});
-	console.log({pathToTravel});
+	// console.log({collision});
+	// console.log({exceedingMaximumMovementDistance});
+	// console.log({pathToTravel});
 
 	executingBot.stance = null;
 	executingBot.switches[5] = false;
@@ -106,11 +104,15 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 			dispatch(completeCommand(newBattleInfo));
 		} else {
 			// animations and sfx to be produced
-			let timePerMove = 75*speed; // represents 75% of the executionSpeed, leaves 25% for damage indication
+			setCellColors(cellColorsObject);
+			let timePerMove = 750*speed; // represents 75% of the executionSpeed, leaves 25% for damage indication
+			console.log('time per move before division', timePerMove);
 			if (executingBot.attributes.MovementDistance > 0) {
 				timePerMove /= executingBot.attributes.MovementDistance;
 			}
-			const botToMove = document.getElementById(`placer${battleInfo.commandsToExecute[0].botIndex}`);
+			console.log({timePerMove});
+			const botToMoveId = `placer${battleInfo.commandsToExecute[0].botIndex}`;
+			const botToMove = document.getElementById(botToMoveId);
 			
 			let xDisplacement = 0;
 			let yDisplacement = 0;
@@ -118,23 +120,28 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 				if (collision) {
 					// handle collision
 				} else {
-					botToMove.style.transition = `transform ${timePerMove}s ease-in-out`;
+					botToMove.style.transition = `transform ${timePerMove/1000}s ease-in-out`;
 					const translationCalculation = translationGenerator([pathToTravel[0]], cellSize, xDisplacement, yDisplacement);
+					console.log('transform:', translationCalculation.transform);
 					botToMove.style.transform = translationCalculation.transform;
-					executingBot.location.row += translationCalculation.yDisplacement/cellSize;
-					executingBot.location.col += translationCalculation.xDisplacement/cellSize;
+					
 					battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row} COL: ${executingBot.location.col}`});
 					newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 					setTimeout(()=>{
+						const botToMove = document.getElementById(botToMoveId);
+						if (botToMove) {
+							botToMove.style.transition = '0s';
+							botToMove.style.transform = 'translate3d(0px,0px,0px)';
+						}
+						executingBot.location.row += translationCalculation.yDisplacement/cellSize;
+						executingBot.location.col += translationCalculation.xDisplacement/cellSize;
+						setCellColors({});
 						dispatch(completeCommand(newBattleInfo));
-						botToMove.style.transition = '0s';
-						botToMove.style.transform = 'transform(0px,0px)';
 					},((speed*1000)-timePerMove));
 				}
-
 			} else {
 				let moveNumberToExecute = 0;
-				botToMove.style.transition = `transform ${timePerMove}s ease-in`;
+				botToMove.style.transition = `transform ${timePerMove/1000}s ease-in`;
 				const translationCalculation = translationGenerator([pathToTravel[0]], cellSize, xDisplacement, yDisplacement);
 				botToMove.style.transform = translationCalculation.transform;
 				executingBot.location.row += translationCalculation.yDisplacement/cellSize;
@@ -148,7 +155,7 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 						if (collision) {
 							//handle collision
 						} else {
-							botToMove.style.transition = `transform ${timePerMove}s ease-out`;
+							botToMove.style.transition = `transform ${timePerMove/1000}s ease-out`;
 							const translationCalculation = translationGenerator([pathToTravel[moveNumberToExecute]], cellSize, xDisplacement, yDisplacement);
 							botToMove.style.transform = translationCalculation.transform;
 							executingBot.location.row += translationCalculation.yDisplacement/cellSize;
@@ -156,6 +163,7 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 							battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row} COL: ${executingBot.location.col}`});
 							newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 							setTimeout(()=>{
+								setCellColors({});
 								dispatch(completeCommand(newBattleInfo));
 								botToMove.style.transition = '0s';
 								botToMove.style.transform = 'transform(0px,0px)';
@@ -163,7 +171,7 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 						}
 					} else {
 						// in a middle move - collision is impossible
-						botToMove.style.transition = `transform ${timePerMove}s linear`;
+						botToMove.style.transition = `transform ${timePerMove/1000}s linear`;
 						const translationCalculation = translationGenerator([pathToTravel[moveNumberToExecute]], cellSize, xDisplacement, yDisplacement);
 						botToMove.style.transform = translationCalculation.transform;
 						executingBot.location.row += translationCalculation.yDisplacement/cellSize;

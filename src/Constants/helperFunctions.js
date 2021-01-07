@@ -220,7 +220,7 @@ function diagonalMovementTest (move) {
 // utility function to determine number of moves along a path
 export function movesAlongPath (path) {
 	if (path === undefined || path === null) return
-	if (path.length < 2 || !diagonalMovementTest(path[1])) {
+	if (path.length < 2) {
 		return path.length
 	}
 	else {
@@ -504,7 +504,7 @@ export function translationGenerator (movementArray, cellSize, xDisplacement, yD
 		}
 	})
 	// let result = `translate3d(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)},0px)`;
-	let result = { transform: `translate(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)})`, xDisplacement: xDisplacement, yDisplacement: yDisplacement};
+	let result = { transform: `translate3d(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)},0px)`, xDisplacement: xDisplacement, yDisplacement: yDisplacement};
 	return result
 }
 // function generates an array of all possible locations

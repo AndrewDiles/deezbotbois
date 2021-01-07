@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { initializeBattle } from '../../Redux/actions';
+import { initializeBattle, updateUrl } from '../../Redux/actions';
 import styled from 'styled-components';
 import StyledButton from '../StyledButton/StyledButton';
 
@@ -30,6 +30,7 @@ const BattleButton = ({ selectionOptions, setSelectionOptions, setGameLaunched }
 			newSelectionOptions.viewingLevels = false;
 			setSelectionOptions(newSelectionOptions);
 			setGameLaunched(true);
+			dispatch(updateUrl('battle'));
 			dispatch(initializeBattle(newSelectionOptions.challengeNumber, newSelectionOptions.levelNumber, [userInfo.botBuilds[newSelectionOptions.botNumberSelected]]))
 		}
 	}

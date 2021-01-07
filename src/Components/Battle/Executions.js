@@ -69,7 +69,7 @@ const Executions = ({ setCellColors, setCellClicked }) => {
 					break;
 				}
 				case 'moveCommand' : {
-					moveCommand(dispatch, battleInfo, completeCommand, playSFX, settings.executionSpeed, settings.cellSize);
+					moveCommand(dispatch, battleInfo, completeCommand, playSFX, settings.executionSpeed, settings.cellSize, setCellColors);
 					break;
 				}
 				case 'ramCommand' : {

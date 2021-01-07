@@ -55,6 +55,7 @@ const ObjectPlacer = styled.div`
 	width: ${props => `${props.cellSize}px`};
 	top: ${props => props.location && `${(props.cellSize)*(props.location.row)}px`};
 	left: ${props => props.location && `${(props.cellSize)*(props.location.col-2)}px`};
+	/* transform: translate(0px, 0px); */
 	/* below was range before barriers were included */
 	/* top: ${props => props.location && `${(props.cellSize)*(props.location.row-1)}px`};
 	left: ${props => props.location && `${(props.cellSize)*(props.location.col-1)}px`}; */

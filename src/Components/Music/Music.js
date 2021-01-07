@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import mainThemeSrc from './MainTheme.wav';
-// import battleThemeSrc from './BattleTheme.wav';
+import battleThemeSrc from './BattleTheme.wav';
 
 const Music = () => {
 	const settings = useSelector((state) => state.settings);
@@ -11,18 +11,20 @@ const Music = () => {
 		return newAudio
 	}
 	const [mainTheme, setMainTheme] = useState(loopingAudio(mainThemeSrc));
-	// const [battleTheme, setBattleTheme] = useState(loopingAudio(battleThemeSrc));
+	const [battleTheme, setBattleTheme] = useState(loopingAudio(battleThemeSrc));
 	
 	useEffect(()=>{
 		if (settings.music) {
 			if (settings.currentUrl !== 'battle'){
+				battleTheme.pause();
 				mainTheme.play();
 			} else {
-				// battleTheme.play();
+				mainTheme.pause();
+				battleTheme.play();
 			}
 		} else {
 			mainTheme.pause();
-			// battleTheme.pause();
+			battleTheme.pause();
 		}
 	},[settings.music, settings.currentUrl])
 
@@ -30,4 +32,3 @@ const Music = () => {
 }
 
 export default Music;
-// TODO: Uncomment battleTheme lines once asset is acquired
