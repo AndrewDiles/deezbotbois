@@ -10,17 +10,14 @@ const GridPopulator = ({ objectsToBePlaced }) => {
   return (
 		<>
 			{objectsToBePlaced.map((object, index)=>{
-				// index === 0 && console.log(object);
 				return(
 					<ZeroSizedWrapper
 					key = {`ZeroSizedWrapper${index}`} 
-					// id = {`placer${index}`}
 					>
 						<ObjectPlacer
 						cellSize = {settings.cellSize}
 						location = {object.location}
 						id = {`placer${index}`}
-						// executionSpeed = {settings.executionSpeed}
 						>
 							{(object.type === 'Bot' || object.type === 'User') &&
 								<Bot
@@ -32,8 +29,7 @@ const GridPopulator = ({ objectsToBePlaced }) => {
       	  			arm1Angle = {object.arm1Angle}
 								arm2Angle = {object.arm2Angle}
 								arm3Angle = {object.arm3Angle}
-								// alternativeBotSize
-      	  		/>
+      	  			/>
 							}
     				</ObjectPlacer>
 					</ZeroSizedWrapper>
@@ -55,13 +51,4 @@ const ObjectPlacer = styled.div`
 	width: ${props => `${props.cellSize}px`};
 	top: ${props => props.location && `${(props.cellSize)*(props.location.row)}px`};
 	left: ${props => props.location && `${(props.cellSize)*(props.location.col-2)}px`};
-	/* transform: translate(0px, 0px); */
-	/* below was range before barriers were included */
-	/* top: ${props => props.location && `${(props.cellSize)*(props.location.row-1)}px`};
-	left: ${props => props.location && `${(props.cellSize)*(props.location.col-1)}px`}; */
-
-	/* transition: ${props => `transform ${props.executionSpeed}s  cubic-bezier(.8,.15,.65,.9)`}; */
-	/* --top: 0px;
-	--left: 200px;
-	animation: moveBot var(--top, --left) 1s slinein; */
 `

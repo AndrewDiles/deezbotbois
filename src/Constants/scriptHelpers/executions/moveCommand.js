@@ -82,7 +82,7 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 
 	if (totalMovesToMake === 0) {
 		// no movement to take place
-		console.log('no moves to make');
+		// console.log('no moves to make');
 		battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} WAS INSTRUCTED TO MOVE NO CELLS AND REMAINS ON CELL ROW: ${executingBot.location.row} COL: ${executingBot.location.col}`});
 		newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 		if (speed === 0.1) {
@@ -106,11 +106,11 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 			// animations and sfx to be produced
 			setCellColors(cellColorsObject);
 			let timePerMove = 750*speed; // represents 75% of the executionSpeed, leaves 25% for damage indication
-			console.log('time per move before division', timePerMove);
+			// console.log('time per move before division', timePerMove);
 			if (executingBot.attributes.MovementDistance > 0) {
 				timePerMove /= executingBot.attributes.MovementDistance;
 			}
-			console.log({timePerMove});
+			// console.log({timePerMove});
 			const botToMoveId = `placer${battleInfo.commandsToExecute[0].botIndex}`;
 			const botToMove = document.getElementById(botToMoveId);
 			
@@ -122,16 +122,16 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 				} else {
 					botToMove.style.transition = `transform ${timePerMove/1000}s ease-in-out`;
 					const translationCalculation = translationGenerator([pathToTravel[0]], cellSize, xDisplacement, yDisplacement);
-					console.log('transform:', translationCalculation.transform);
+					// console.log('transform:', translationCalculation.transform);
 					botToMove.style.transform = translationCalculation.transform;
 					
-					battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row} COL: ${executingBot.location.col}`});
+					battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row + translationCalculation.yDisplacement/cellSize} COL: ${executingBot.location.col + translationCalculation.xDisplacement/cellSize}`});
 					newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 					setTimeout(()=>{
 						const botToMove = document.getElementById(botToMoveId);
 						if (botToMove) {
 							botToMove.style.transition = '0s';
-							botToMove.style.transform = 'translate3d(0px,0px,0px)';
+							botToMove.style.transform = 'translate(0px,0px)';
 						}
 						executingBot.location.row += translationCalculation.yDisplacement/cellSize;
 						executingBot.location.col += translationCalculation.xDisplacement/cellSize;
@@ -144,10 +144,13 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 				botToMove.style.transition = `transform ${timePerMove/1000}s ease-in`;
 				const translationCalculation = translationGenerator([pathToTravel[0]], cellSize, xDisplacement, yDisplacement);
 				botToMove.style.transform = translationCalculation.transform;
-				executingBot.location.row += translationCalculation.yDisplacement/cellSize;
-				executingBot.location.col += translationCalculation.xDisplacement/cellSize;
-				xDisplacement += translationCalculation.xDisplacement;
-				yDisplacement += translationCalculation.yDisplacement;
+				// console.log('transform 1:',translationCalculation.transform);
+				// let rowLocation = executingBot.location.row + translationCalculation.yDisplacement/cellSize;
+				// let colLocation = executingBot.location.col + translationCalculation.xDisplacement/cellSize;
+				// executingBot.location.row += translationCalculation.yDisplacement/cellSize;
+				// executingBot.location.col += translationCalculation.xDisplacement/cellSize;
+				xDisplacement = translationCalculation.xDisplacement;
+				yDisplacement = translationCalculation.yDisplacement;
 				moveNumberToExecute ++;
 				function performNextMove () {
 					if (moveNumberToExecute === totalMovesToMake) {
@@ -157,34 +160,47 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 						} else {
 							botToMove.style.transition = `transform ${timePerMove/1000}s ease-out`;
 							const translationCalculation = translationGenerator([pathToTravel[moveNumberToExecute]], cellSize, xDisplacement, yDisplacement);
+							// console.log('transform final:',translationCalculation.transform);
 							botToMove.style.transform = translationCalculation.transform;
-							executingBot.location.row += translationCalculation.yDisplacement/cellSize;
-							executingBot.location.col += translationCalculation.xDisplacement/cellSize;
-							battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row} COL: ${executingBot.location.col}`});
+							// rowLocation += translationCalculation.yDisplacement/cellSize;
+							// colLocation += translationCalculation.xDisplacement/cellSize;
+							// executingBot.location.row += translationCalculation.yDisplacement/cellSize;
+							// executingBot.location.col += translationCalculation.xDisplacement/cellSize;
+							battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row + translationCalculation.yDisplacement/cellSize} COL: ${executingBot.location.col + translationCalculation.xDisplacement/cellSize}`});
 							newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 							setTimeout(()=>{
+								const botToMove = document.getElementById(botToMoveId);
+								if (botToMove) {
+									botToMove.style.transition = '0s';
+									botToMove.style.transform = 'translate(0px,0px)';
+								}
 								setCellColors({});
+								executingBot.location.row += translationCalculation.yDisplacement/cellSize;
+								executingBot.location.col += translationCalculation.xDisplacement/cellSize;
 								dispatch(completeCommand(newBattleInfo));
-								botToMove.style.transition = '0s';
-								botToMove.style.transform = 'transform(0px,0px)';
 							},((speed*1000)-(timePerMove*(totalMovesToMake))));
 						}
 					} else {
 						// in a middle move - collision is impossible
 						botToMove.style.transition = `transform ${timePerMove/1000}s linear`;
 						const translationCalculation = translationGenerator([pathToTravel[moveNumberToExecute]], cellSize, xDisplacement, yDisplacement);
+						// console.log('transform #:',moveNumberToExecute+1, translationCalculation.transform);
 						botToMove.style.transform = translationCalculation.transform;
-						executingBot.location.row += translationCalculation.yDisplacement/cellSize;
-						executingBot.location.col += translationCalculation.xDisplacement/cellSize;
-						xDisplacement += translationCalculation.xDisplacement;
-						yDisplacement += translationCalculation.yDisplacement;
+						// rowLocation += translationCalculation.yDisplacement/cellSize;
+						// colLocation += translationCalculation.xDisplacement/cellSize;
+						// executingBot.location.row += translationCalculation.yDisplacement/cellSize;
+						// executingBot.location.col += translationCalculation.xDisplacement/cellSize;
+						xDisplacement = translationCalculation.xDisplacement;
+						yDisplacement = translationCalculation.yDisplacement;
 						moveNumberToExecute ++;
 						setTimeout(()=>{
 							performNextMove();
 						},(timePerMove));
 					}
 				}
-				performNextMove();
+				setTimeout(()=>{
+					performNextMove();
+				},(timePerMove));
 			}
 
 

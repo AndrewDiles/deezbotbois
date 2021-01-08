@@ -80,10 +80,11 @@ const Input = styled.input`
 	padding-left: 8px;
 	color: ${props => props.colors.textColor};
 	border: ${props => `3px solid ${props.colors.secondary}`};
+	background-color: ${props => props.colors.primary};
 	border-radius: 5px;
 	&:hover {
 	background-color: ${props => props.colors.hovered};
-	cursor: pointer;
+	cursor: text;
 	}
 	&:focus {
 	outline-color: ${props => !props.disabled && props.colors.hoveredText};

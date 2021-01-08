@@ -82,7 +82,7 @@ const SizeSlider = ({ disabled }) => {
         disabled = {disabled}
 				left = {left}
 				dialClicked = {dialClicked}
-        onClick = {()=>{handleClick()}}
+        // onClick = {()=>{handleClick()}}
         >
         </Dial>
       </Bar>
@@ -130,8 +130,8 @@ left : ${props => props.left};
 background-image: ${props => `linear-gradient(${props.hoverColor}, rgba(0,0,0,0.5), ${props.hoverColor})`};
 border: rgba(0,0,0,0.5) 1px solid;
 border-radius: 3px;
-&:hover {
+/* &:hover {
   background-image: ${props => props.disabled ? `linear-gradient(${props.hoverColor}, rgba(0,0,0,0.5), ${props.hoverColor})` : `linear-gradient(${props.color}, ${props.hoverColor}, ${props.color})`};
 	cursor: ${props => props.disabled ? 'not-allowed' : props.dialClicked ? 'ew-resize' : 'grab'};
-}
+} */
 `

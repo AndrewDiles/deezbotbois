@@ -252,7 +252,7 @@ const AltLogin = () => {
 					margin = {5}
 					/>
 					<StyledInput
-					maxLength = "24"
+					maxLength = "36"
 					setValue = {setEmailEntry}
 					labelName = 'EMAIL'
 					margin = {5}

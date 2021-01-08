@@ -4,7 +4,6 @@ import { movesAlongPath } from '../../../../Constants/helperFunctions';
 import WarningBar from './WarningBar';
 
 const MovementsRequiredDisplay = ({ movementDistance, activeNodeArray, aiAndScripts }) => {
-	console.log('path to test:',activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions);
 	return (
 		<>
 			<Wrapper

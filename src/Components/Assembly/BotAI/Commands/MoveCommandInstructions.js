@@ -11,8 +11,7 @@ const MoveCommandInstructions = ({ nodeInfo, activeNodeArray, setActiveNodeArray
 	const [emptyPath, setEmptyPath] = React.useState(false);
 
 	React.useEffect(()=>{
-		console.log('effect triggered, directions:',activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions)
-
+		// console.log('effect triggered, directions:',activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions)
 		if (activeNodeArray[aiAndScripts.viewing[aiAndScripts.viewing.length-1].index].command.instructions.directions.length === 0) {
 			setEmptyPath(true)
 		} else {

@@ -15,6 +15,7 @@ import { changeBotName } from '../../../Redux/actions';
 import settings from '../../../Redux/reducers/settings-reducer';
 
 const BotModel = ({ botNumberSelected}) => {
+	const [nameRandomized, setNameRandomized] = React.useState(false);
 	const userInfo = useSelector((state) => state.userInfo);
 	const dispatch = useDispatch();
 	const colors = useSelector(getThemeColors);
@@ -43,12 +44,18 @@ const BotModel = ({ botNumberSelected}) => {
 				type="text" maxLength = "16" 
 				value = {userInfo.botBuilds[botNumberSelected].name}
 				onChange = {(ev)=>{
-					dispatch(changeBotName(botNumberSelected, ev.target.value))}}
+					if (nameRandomized) {
+						setNameRandomized(false)
+					} else {
+						dispatch(changeBotName(botNumberSelected, ev.target.value))}}
+					}
 				/>
 				<DiceDiv>
 					<StyledIcon
 					handleClick = {(ev)=>{
-						dispatch(changeBotName(botNumberSelected, robotNameGen()))}}
+						setNameRandomized(true);
+						dispatch(changeBotName(botNumberSelected, robotNameGen()))
+					}}
 					size = {14}
 					padding = {2}
 					icon = {dice}
