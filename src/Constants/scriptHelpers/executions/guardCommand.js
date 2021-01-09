@@ -8,7 +8,7 @@ function guardCommand (dispatch, battleInfo, completeCommand, playSFX, speed) {
 	executingBot.stance = 'GUARD';
 	battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name}'S CAPACITOR DECREASES FROM ${executingBot.attributes.CurrentCapacitor} TO ${executingBot.attributes.CurrentCapacitor-commandDetails.guardCommand.cost}`});
 	executingBot.attributes.CurrentCapacitor -= commandDetails.guardCommand.cost;
-	
+	// TODO: Add increased shield and armor here!!!  Should decrease at the beginning of the turn if last command was GUARD
 	executingBot.switches[5] = false;
 	executingBot.scanDisplayResults = [];
 	executingBot.scanHostileResults = [];

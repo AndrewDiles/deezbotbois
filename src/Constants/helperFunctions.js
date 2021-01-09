@@ -458,8 +458,11 @@ export function convertNumToPxstring (number) {
 }
 // function takes in an array of moves and the cell size and outputs the translation needed to move an element
 export function translationGenerator (movementArray, cellSize, xDisplacement, yDisplacement) {
-	if (typeof(movementArray) !== 'object' || movementArray.length <1 || typeof(cellSize) !== 'number') {
+	if (typeof(movementArray) !== 'object' || typeof(cellSize) !== 'number') {
 		return;
+	}
+	if (movementArray.length === 0) {
+		return { transform: `translate(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)})`, xDisplacement: xDisplacement, yDisplacement: yDisplacement};
 	}
 	
 	movementArray.forEach((move)=>{
@@ -504,8 +507,8 @@ export function translationGenerator (movementArray, cellSize, xDisplacement, yD
 		}
 	})
 	// let result = `translate3d(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)},0px)`;
-	let result = { transform: `translate(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)})`, xDisplacement: xDisplacement, yDisplacement: yDisplacement};
-	return result
+	// let result = { transform: `translate(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)})`, xDisplacement: xDisplacement, yDisplacement: yDisplacement};
+	return { transform: `translate(${convertNumToPxstring(xDisplacement)},${convertNumToPxstring(yDisplacement)})`, xDisplacement: xDisplacement, yDisplacement: yDisplacement};
 }
 // function generates an array of all possible locations
 function generateAllLocation (maxRows, maxCols) {

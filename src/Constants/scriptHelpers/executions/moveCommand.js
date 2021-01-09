@@ -1,4 +1,5 @@
 import { pathToAdjacentCell, pathToCell, nextStepGenerator, movesAlongPath, collisionVerification, translationGenerator } from '../../helperFunctions';
+import { handleCollision } from '../../combatFormulae';
 
 function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cellSize, setCellColors) {
 	let newBattleInfo = {...battleInfo};
@@ -94,11 +95,27 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 		if (speed === 0.1) {
 			// no animations / sfx
 			const translationCalculation = translationGenerator(pathToTravel, cellSize, 0, 0);
+			// console.log({translationCalculation});
 			executingBot.location.row += translationCalculation.yDisplacement/cellSize;
 			executingBot.location.col += translationCalculation.xDisplacement/cellSize;
 			battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row} COL: ${executingBot.location.col}`});
 			if (collision) {
-				// deal with collision damage, formulae, etc
+				let newRecordChanges = [...battleInfo.recordTracker.recordChanges];
+				let collisionResult = handleCollision(battleInfo.objectsToRender, executingBot.index, collision.type === 'wall', collision.type === 'wall' ? null : collision.index, 1, 0);
+				if (collision.type === 'wall') {
+					newRecordChanges.push(...collisionResult.newRecordsChangesToAdd);
+					newBattleInfo.recordTracker.recordChanges = newRecordChanges;
+					executingBot.attributes.CurrentDurability -= collisionResult.impacterDamageTaken;
+					battleLogsToAdd.push(...collisionResult.newBattleLogsToAdd);
+				} else if (collision.type === 'Bot' || collision.type === 'User') {
+					// begin damage output formula
+					// damage reduction formula
+					// make functions for the calculation of formulas.  It should take in objects, index of dealer, index of recipient, value of output dmg,  ...
+					// function should return new record objects, new log objects
+					// make a function specific for collisions
+				} else {
+					console.log('error, unknown collision type');
+				}
 			}
 			newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 			dispatch(completeCommand(newBattleInfo));

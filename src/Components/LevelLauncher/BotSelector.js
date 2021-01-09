@@ -61,6 +61,7 @@ const BotSelector = ({ selectionOptions, setSelectionOptions }) => {
 					size = {50}
 					/>
 				</Verification>
+				{/* TODO: Add ability to make this your default bot to select; */}
 			</Selector>
 		</BotSelectorWrapper>
   )
