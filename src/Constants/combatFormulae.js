@@ -28,7 +28,7 @@ export function generateAttackObject (armName, attackingBotAttributes, specialMu
 		subType1 = 'Power';
 		superType = 'Collision';
 		baseDamage = 0.25*attackingBotAttributes.Durability;
-		dmgOutFormulaText = `( Collision Base Damage`;
+		dmgOutFormulaText = `( Base Collision Damage`;
 		dmgOutFormulaNumbers = `(${baseDamage}`;
 	} else {
 		subType0 = weaponInfo.subTypes[0];
@@ -47,11 +47,11 @@ export function generateAttackObject (armName, attackingBotAttributes, specialMu
 	const outgoingDamage = (Math.trunc(100*(sumOfDamage * productOfMultipliers))/100);
 	if (attackingBotAttributes.DamageBonus) {
 		dmgOutFormulaText += ` + Damage Bonus`;
-		dmgOutFormulaNumbers += ` + ${attackingBotAttributes.DamageBonus}`;
+		dmgOutFormulaNumbers += `+${attackingBotAttributes.DamageBonus}`;
 	}
 	if (specialAddition !== 0) {
 		dmgOutFormulaText += ` + Command Bonus`;
-		dmgOutFormulaNumbers += ` + ${specialAddition}`;
+		dmgOutFormulaNumbers += `+${specialAddition}`;
 	}
 	dmgOutFormulaText += ' )';
 	dmgOutFormulaNumbers += `)`;
@@ -115,30 +115,60 @@ export function generateAttackObject (armName, attackingBotAttributes, specialMu
 		subType1: subType1,
 		superType: superType,
 		attackingBotAttributes: attackingBotAttributes,
-		dmgOutFormulaText: dmgOutFormulaText,
-		dmgOutFormulaNumbers: dmgOutFormulaNumbers
+		battleLogToAdd: {type: 'damage-calculation', content: `${dmgOutFormulaText} = ${dmgOutFormulaNumbers}`},
 	}
 	return(attackObject)
 }
 
 // function that calculates the amount of damage taken from an attack.  Note: maximum DR% is 90%; minimum damage taken is 1.
 export function calculateDamageTaken (defendingBotAttributes, attackObject, specialMultiplier, specialReduction) {
-	console.log('damage calculationg parameters:','\n',{defendingBotAttributes},'\n',{attackObject},'\n',{specialMultiplier},'\n',{specialReduction})
+	let battleLogToAdd = '';
+	// console.log('damage calculationg parameters:','\n',{defendingBotAttributes},'\n',{attackObject},'\n',{specialMultiplier},'\n',{specialReduction})
 	let appliedShield = defendingBotAttributes.Shield;
 	let appliedArmor = defendingBotAttributes.Armor;
-	if (attackObject.subType0 === 'Energy') appliedShield = 0;
-	else if (attackObject.subType0 === 'Piercing') appliedArmor = 0;
-	if (attackObject.superType === 'Melee') appliedArmor *= attackObject.attackingBotAttributes.MeleeArmorPenetration;
-	else if (attackObject.superType === 'Ranged') appliedShield *= attackObject.attackingBotAttributes.RangedShieldPenetration;
+	if (attackObject.subType0 === 'Energy') {
+		appliedShield = 0;
+		battleLogToAdd += 'Energy Attack => Shield not applied.\n';
+	}
+	else if (attackObject.subType0 === 'Piercing') {
+		appliedArmor = 0;
+		battleLogToAdd += 'Piercing Attack => Armor not applied.\n';
+	}
+	if (attackObject.superType === 'Melee') {
+		if (appliedArmor !== 0) {
+			battleLogToAdd += `Armor of ${appliedArmor} reduced by attacker's armor penetration multiplier of ${attackObject.attackingBotAttributes.MeleeArmorPenetration}\n`;
+			appliedArmor *= attackObject.attackingBotAttributes.MeleeArmorPenetration;
+		}
+	}
+	else if (attackObject.superType === 'Ranged') {
+		if (appliedShield !== 0) {
+			battleLogToAdd += `Shield of ${appliedShield} reduced by attacker's shield penetration multiplier of ${attackObject.attackingBotAttributes.RangedShieldPenetration}\n`;
+			appliedShield *= attackObject.attackingBotAttributes.RangedShieldPenetration;
+		}
+	}
 	const sumOfApplicableAttributeValues = appliedShield + appliedArmor;
-	const attributeDamageReductionMultiplier = returnGreaterNumber(1-(sumOfApplicableAttributeValues*sumOfApplicableAttributeValues/(2*(attackObject.damage*attackObject.damage))),0.1)
+	battleLogToAdd += `Shield and Armor to be applied = ${appliedShield} + ${appliedArmor} = ${sumOfApplicableAttributeValues}\n`;
+	const attributeDamageReductionMultiplier = returnGreaterNumber(1-(sumOfApplicableAttributeValues*sumOfApplicableAttributeValues/(2*(attackObject.damage*attackObject.damage))),0.1);
+	battleLogToAdd += `Shield and Armor damage reduction multiple is greater of 0.1 and 1 - (AppliedArmor&Shield ^2)/ (2 x incomingDamage ^2) : 1 - (${sumOfApplicableAttributeValues}^2)/2x${attackObject.damage.toFixed(2)}^2 => ${attributeDamageReductionMultiplier.toFixed(2)}\n`;
 	const subType0Multiplier = defendingBotAttributes[`${attackObject.subType0}DamageReductionMultiplier`] || 1;
+	if (subType0Multiplier !== 1) {
+		battleLogToAdd += `${attackObject.subType0} damage reduction multiplier to apply: ${subType0Multiplier.toFixed(2)}\n`;
+	}
 	const superTypeMultiplier = defendingBotAttributes[`${attackObject.superType}DamageReductionMultiplier`] || 1;
+	if (superTypeMultiplier !== 1) {
+		battleLogToAdd += `${attackObject.superType} damage reduction multiplier to apply: ${superTypeMultiplier.toFixed(2)}\n`;
+	}
 	const DamageReduction = defendingBotAttributes.DamageReduction || 0;
+	if (DamageReduction !== 0) {
+		battleLogToAdd += `Damage reduction to apply: ${DamageReduction}\n`;
+	}
 	const productOfMultipliers = subType0Multiplier*superTypeMultiplier*attributeDamageReductionMultiplier*specialMultiplier;
+	battleLogToAdd += `Product of multipliers = ${subType0Multiplier.toFixed(2)} x ${superTypeMultiplier.toFixed(2)} x ${attributeDamageReductionMultiplier.toFixed(2)} x ${specialMultiplier.toFixed(2)} = ${productOfMultipliers.toFixed(2)}\n`;
 	const differenceOfDamageAndReductions = attackObject.damage - DamageReduction - specialReduction;
+	battleLogToAdd += `Base damage minus damage reductions = ${attackObject.damage.toFixed(2)} - ${DamageReduction} - ${specialReduction}\n`;
 	const damageTaken = (Math.trunc(10*(differenceOfDamageAndReductions * productOfMultipliers))/10);
-	return (returnGreaterNumber(damageTaken,1))
+	battleLogToAdd += `Damage taken (rounded to tenth) = difference of damage and reductions x multipliers = ${differenceOfDamageAndReductions} x ${productOfMultipliers.toFixed(2)} = ${damageTaken.toFixed(1)}\n`;
+	return ({battleLogToAdd: {type: 'damage-calculation', content: battleLogToAdd}, value: returnGreaterNumber(damageTaken,1)})
 }
 
 
@@ -152,7 +182,6 @@ export function handleCollision (allBots, impacterIndex, wallImpact, recipientIn
 	const newRecordsChangesToAdd = [];
 	const newBattleLogsToAdd = [];
 	if (wallImpact) {
-		console.log('collision with wall being HANDLED');
 		newRecordsChangesToAdd.push({name: 'damageTaken', value: 1});
 		newBattleLogsToAdd.push({type: 'attribute-change', content: `COLLISION BY ${executingBot.name} INTO A WALL. DURABILITY DECREASES FROM ${executingBot.attributes.CurrentDurability +1} TO ${executingBot.attributes.CurrentDurability}`});
 		return {
@@ -162,16 +191,33 @@ export function handleCollision (allBots, impacterIndex, wallImpact, recipientIn
 			recipientDamageTaken: 0,
 		}
 	} else {
-		console.log('collision with a bot being HANDLED');
 		const attackInfo = generateAttackObject('Collision', allBots[impacterIndex].attributes, bonusByMultiplication, bonusByAddition);
-		const recipientDamageTaken = calculateDamageTaken(allBots[recipientIndex].attributes, attackInfo, 1, 0);
-		// calculateDamageTaken (defendingBotAttributes, attackObject, specialMultiplier, specialReduction) {
+		console.log(attackInfo.battleLogToAdd);
+		attackInfo.battleLogToAdd.content = `${allBots[impacterIndex].name}'s outgoing damage: ${attackInfo.battleLogToAdd.content}`;
+		newBattleLogsToAdd.push(attackInfo.battleLogToAdd);
+		const recipientDamageTakenInfo = calculateDamageTaken(allBots[recipientIndex].attributes, attackInfo, 1, 0);
+		recipientDamageTakenInfo.battleLogToAdd.content = `${allBots[recipientIndex].name}'s damage taken: ${recipientDamageTakenInfo.battleLogToAdd.content}`;
+		newBattleLogsToAdd.push(recipientDamageTakenInfo.battleLogToAdd);
+		newRecordsChangesToAdd.push({name: 'damageDealt', superTypes: 'Collision', value: recipientDamageTakenInfo.value});
+
 		const returnAttackInfo = generateAttackObject('Collision', allBots[recipientIndex].attributes, 1, 0);
-		const impacterDamageTaken = calculateDamageTaken(allBots[impacterIndex].attributes, returnAttackInfo, 1, 0);
-		console.log({recipientDamageTaken});
-		console.log({impacterDamageTaken});
+		console.log(returnAttackInfo.battleLogToAdd);
+		returnAttackInfo.battleLogToAdd.content = `${allBots[recipientIndex].name}'s return outgoing damage: ${returnAttackInfo.battleLogToAdd.content}`;
+		newBattleLogsToAdd.push(returnAttackInfo.battleLogToAdd);
+		const impacterDamageTakenInfo = calculateDamageTaken(allBots[impacterIndex].attributes, returnAttackInfo, 1, 0);
+		impacterDamageTakenInfo.battleLogToAdd.content = `${allBots[impacterIndex].name}'s damage taken: ${impacterDamageTakenInfo.battleLogToAdd.content}`;
+		newBattleLogsToAdd.push(impacterDamageTakenInfo.battleLogToAdd);
+		newRecordsChangesToAdd.push({name: 'damageTaken', superTypes: 'Collision', value: impacterDamageTakenInfo.value});
 
+		console.log({recipientDamageTakenInfo});
+		console.log({impacterDamageTakenInfo});
 
+		return {
+			newRecordsChangesToAdd: newRecordsChangesToAdd,
+			newBattleLogsToAdd: newBattleLogsToAdd,
+			impacterDamageTaken: impacterDamageTakenInfo.value,
+			recipientDamageTaken: recipientDamageTakenInfo.value,
+		}
 
 	}
 	

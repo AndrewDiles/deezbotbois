@@ -10,7 +10,7 @@ const baseFilters = {
 	attributeChange: 1,
 	test: 1,
 	executions: 1,
-	formula: 1
+	formula: 0
 }
 
 const BattleLog = ({ viewing }) => {

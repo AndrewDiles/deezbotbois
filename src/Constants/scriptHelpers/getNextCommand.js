@@ -21,7 +21,7 @@ function getNextCommand (objectsToRender, indexInQuestion, levelInfo) {
 	let result = null;
 	let mapToTest = [{type: 'head', index: 0}];
 	// TODO: make sure that if a bot is being targetted from aim or scan results, that it is verified that their durability > 0 and that their location is the same...
-	// on 2nd thought, targets should bge locations, not bots
+	// on 2nd thought, targets should be locations, not bots
 
 	// nodeNumber = mapToTest[mapToTest.length-1].index+1
 	// depthLevel = mapToTest.length

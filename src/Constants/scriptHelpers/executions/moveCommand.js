@@ -102,20 +102,15 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 			if (collision) {
 				let newRecordChanges = [...battleInfo.recordTracker.recordChanges];
 				let collisionResult = handleCollision(battleInfo.objectsToRender, executingBot.index, collision.type === 'wall', collision.type === 'wall' ? null : collision.index, 1, 0);
-				if (collision.type === 'wall') {
-					newRecordChanges.push(...collisionResult.newRecordsChangesToAdd);
-					newBattleInfo.recordTracker.recordChanges = newRecordChanges;
-					executingBot.attributes.CurrentDurability -= collisionResult.impacterDamageTaken;
-					battleLogsToAdd.push(...collisionResult.newBattleLogsToAdd);
-				} else if (collision.type === 'Bot' || collision.type === 'User') {
-					// begin damage output formula
-					// damage reduction formula
-					// make functions for the calculation of formulas.  It should take in objects, index of dealer, index of recipient, value of output dmg,  ...
-					// function should return new record objects, new log objects
-					// make a function specific for collisions
-				} else {
-					console.log('error, unknown collision type');
-				}
+				newRecordChanges.push(...collisionResult.newRecordsChangesToAdd);
+				newBattleInfo.recordTracker.recordChanges = newRecordChanges;
+				battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name}'S DURABILITY DECREASES FROM ${executingBot.attributes.CurrentDurability} TO ${executingBot.attributes.CurrentDurability - collisionResult.impacterDamageTaken}`});
+				executingBot.attributes.CurrentDurability -= collisionResult.impacterDamageTaken;
+				battleLogsToAdd.push({type: 'attribute-change', content: `${battleInfo.objectsToRender[collision.index].name}'S DURABILITY DECREASES FROM ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability} TO ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability - collisionResult.recipientDamageTaken}`});
+				battleInfo.objectsToRender[collision.index].attributes.CurrentDurability -= collisionResult.recipientDamageTaken;
+				battleLogsToAdd.push(...collisionResult.newBattleLogsToAdd);
+				newBattleInfo.recordTracker.recordChanges = newRecordChanges;
+				// console.log('new battle logs:', collisionResult.newBattleLogsToAdd);
 			}
 			newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 			dispatch(completeCommand(newBattleInfo));
