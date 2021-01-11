@@ -1,5 +1,6 @@
 import { pathToAdjacentCell, pathToCell, nextStepGenerator, movesAlongPath, collisionVerification, translationGenerator } from '../../helperFunctions';
 import { handleCollision } from '../../combatFormulae';
+import animateSparks from '../animateSparks';
 
 function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cellSize, setCellColors) {
 	let newBattleInfo = {...battleInfo};
@@ -95,22 +96,24 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 		if (speed === 0.1) {
 			// no animations / sfx
 			const translationCalculation = translationGenerator(pathToTravel, cellSize, 0, 0);
-			// console.log({translationCalculation});
 			executingBot.location.row += translationCalculation.yDisplacement/cellSize;
 			executingBot.location.col += translationCalculation.xDisplacement/cellSize;
-			battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row} COL: ${executingBot.location.col}`});
 			if (collision) {
+				battleLogsToAdd.push({type: 'attribute-change', content: `COLISION! ${executingBot.name} ENDS ON CELL ROW: ${executingBot.location.row + translationCalculation.yDisplacement/cellSize} COL: ${executingBot.location.col + translationCalculation.xDisplacement/cellSize}`});
 				let newRecordChanges = [...battleInfo.recordTracker.recordChanges];
 				let collisionResult = handleCollision(battleInfo.objectsToRender, executingBot.index, collision.type === 'wall', collision.type === 'wall' ? null : collision.index, 1, 0);
 				newRecordChanges.push(...collisionResult.newRecordsChangesToAdd);
-				newBattleInfo.recordTracker.recordChanges = newRecordChanges;
 				battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name}'S DURABILITY DECREASES FROM ${executingBot.attributes.CurrentDurability} TO ${executingBot.attributes.CurrentDurability - collisionResult.impacterDamageTaken}`});
 				executingBot.attributes.CurrentDurability -= collisionResult.impacterDamageTaken;
-				battleLogsToAdd.push({type: 'attribute-change', content: `${battleInfo.objectsToRender[collision.index].name}'S DURABILITY DECREASES FROM ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability} TO ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability - collisionResult.recipientDamageTaken}`});
-				battleInfo.objectsToRender[collision.index].attributes.CurrentDurability -= collisionResult.recipientDamageTaken;
+				if (collision.index) {
+					battleLogsToAdd.push({type: 'attribute-change', content: `${battleInfo.objectsToRender[collision.index].name}'S DURABILITY DECREASES FROM ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability} TO ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability - collisionResult.recipientDamageTaken}`});
+					battleInfo.objectsToRender[collision.index].attributes.CurrentDurability -= collisionResult.recipientDamageTaken;
+				}
 				battleLogsToAdd.push(...collisionResult.newBattleLogsToAdd);
 				newBattleInfo.recordTracker.recordChanges = newRecordChanges;
 				// console.log('new battle logs:', collisionResult.newBattleLogsToAdd);
+			} else {
+				battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row} COL: ${executingBot.location.col}`});
 			}
 			newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 			dispatch(completeCommand(newBattleInfo));
@@ -130,7 +133,43 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 			let yDisplacement = 0;
 			if (totalMovesToMake === 1) {
 				if (collision) {
-					// handle collision
+					const translationCalculation = translationGenerator([collision.impactMove], cellSize, xDisplacement, yDisplacement);
+					const returnTranslationCalculation = translationGenerator([], cellSize, xDisplacement, yDisplacement);
+					botToMove.style.transform = translationCalculation.transform;
+					botToMove.style.transition = `transform ${timePerMove/1000}s ease-in`;
+					setTimeout(()=>{
+						const botToMove = document.getElementById(botToMoveId);
+						if (botToMove) {
+							botToMove.style.transition = `transform ${timePerMove/1000}s ease-out`;
+							botToMove.style.transform = returnTranslationCalculation.transform;
+							dispatch(playSFX('impact'));
+							animateSparks(collision.type === 'wall' && collision.location, collision.index, collision.impactMove, cellSize, collision.type === 'wall' ? 6 : 10, speed*750);
+						}
+					},(0.6*timePerMove));
+					let newRecordChanges = [...battleInfo.recordTracker.recordChanges];
+					let collisionResult = handleCollision(battleInfo.objectsToRender, executingBot.index, collision.type === 'wall', collision.type === 'wall' ? null : collision.index, 1, 0);
+					battleLogsToAdd.push({type: 'attribute-change', content: `COLISION! ${executingBot.name} ENDS ON CELL ROW: ${executingBot.location.row + translationCalculation.yDisplacement/cellSize} COL: ${executingBot.location.col + translationCalculation.xDisplacement/cellSize}`});
+					newRecordChanges.push(...collisionResult.newRecordsChangesToAdd);
+					battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name}'S DURABILITY DECREASES FROM ${executingBot.attributes.CurrentDurability} TO ${executingBot.attributes.CurrentDurability - collisionResult.impacterDamageTaken}`});
+					executingBot.attributes.CurrentDurability -= collisionResult.impacterDamageTaken;
+					if (collision.index) {
+						battleLogsToAdd.push({type: 'attribute-change', content: `${battleInfo.objectsToRender[collision.index].name}'S DURABILITY DECREASES FROM ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability} TO ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability - collisionResult.recipientDamageTaken}`});
+						battleInfo.objectsToRender[collision.index].attributes.CurrentDurability -= collisionResult.recipientDamageTaken;
+					}
+					battleLogsToAdd.push(...collisionResult.newBattleLogsToAdd);
+					newBattleInfo.recordTracker.recordChanges = newRecordChanges;
+					newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
+					setTimeout(()=>{
+						const botToMove = document.getElementById(botToMoveId);
+						if (botToMove) {
+							botToMove.style.transition = '0s';
+							botToMove.style.transform = 'translate(0px,0px)';
+						}
+						executingBot.location.row += returnTranslationCalculation.yDisplacement/cellSize;
+						executingBot.location.col += returnTranslationCalculation.xDisplacement/cellSize;
+						setCellColors({});
+						dispatch(completeCommand(newBattleInfo));
+					},((speed*1000)-timePerMove));
 				} else {
 					botToMove.style.transition = `transform ${timePerMove/1000}s ease-in-out`;
 					const translationCalculation = translationGenerator([pathToTravel[0]], cellSize, xDisplacement, yDisplacement);
@@ -156,28 +195,55 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 				botToMove.style.transition = `transform ${timePerMove/1000}s ease-in`;
 				const translationCalculation = translationGenerator([pathToTravel[0]], cellSize, xDisplacement, yDisplacement);
 				botToMove.style.transform = translationCalculation.transform;
-				// console.log('transform 1:',translationCalculation.transform);
-				// let rowLocation = executingBot.location.row + translationCalculation.yDisplacement/cellSize;
-				// let colLocation = executingBot.location.col + translationCalculation.xDisplacement/cellSize;
-				// executingBot.location.row += translationCalculation.yDisplacement/cellSize;
-				// executingBot.location.col += translationCalculation.xDisplacement/cellSize;
 				xDisplacement = translationCalculation.xDisplacement;
 				yDisplacement = translationCalculation.yDisplacement;
 				moveNumberToExecute ++;
 				function performNextMove () {
-					if (moveNumberToExecute === totalMovesToMake) {
+					if (moveNumberToExecute === totalMovesToMake-1) {
 						// on last move
 						if (collision) {
-							//handle collision
+							const translationCalculation = translationGenerator([collision.impactMove], cellSize, xDisplacement, yDisplacement);
+							const returnTranslationCalculation = translationGenerator([], cellSize, xDisplacement, yDisplacement);
+							botToMove.style.transition = `transform ${timePerMove/1000}s linear`;
+							botToMove.style.transform = translationCalculation.transform;
+							setTimeout(()=>{
+								const botToMove = document.getElementById(botToMoveId);
+								if (botToMove) {
+									botToMove.style.transition = `transform ${timePerMove/1000}s ease-out`;
+									botToMove.style.transform = returnTranslationCalculation.transform;
+									dispatch(playSFX('impact'));
+									animateSparks(collision.type === 'wall' && collision.location, collision.index, collision.impactMove, cellSize, collision.type === 'wall' ? 6 : 10, speed*750);
+								}
+							},(0.6*timePerMove));
+							let newRecordChanges = [...battleInfo.recordTracker.recordChanges];
+							let collisionResult = handleCollision(battleInfo.objectsToRender, executingBot.index, collision.type === 'wall', collision.type === 'wall' ? null : collision.index, 1, 0);
+							battleLogsToAdd.push({type: 'attribute-change', content: `COLISION! ${executingBot.name} ENDS ON CELL ROW: ${executingBot.location.row + translationCalculation.yDisplacement/cellSize} COL: ${executingBot.location.col + translationCalculation.xDisplacement/cellSize}`});
+							newRecordChanges.push(...collisionResult.newRecordsChangesToAdd);
+							battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name}'S DURABILITY DECREASES FROM ${executingBot.attributes.CurrentDurability} TO ${executingBot.attributes.CurrentDurability - collisionResult.impacterDamageTaken}`});
+							executingBot.attributes.CurrentDurability -= collisionResult.impacterDamageTaken;
+							if (collision.index) {
+								battleLogsToAdd.push({type: 'attribute-change', content: `${battleInfo.objectsToRender[collision.index].name}'S DURABILITY DECREASES FROM ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability} TO ${battleInfo.objectsToRender[collision.index].attributes.CurrentDurability - collisionResult.recipientDamageTaken}`});
+								battleInfo.objectsToRender[collision.index].attributes.CurrentDurability -= collisionResult.recipientDamageTaken;
+							}
+							battleLogsToAdd.push(...collisionResult.newBattleLogsToAdd);
+							newBattleInfo.recordTracker.recordChanges = newRecordChanges;
+							newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
+							setTimeout(()=>{
+								const botToMove = document.getElementById(botToMoveId);
+								if (botToMove) {
+									botToMove.style.transition = '0s';
+									botToMove.style.transform = 'translate(0px,0px)';
+								}
+								executingBot.location.row += returnTranslationCalculation.yDisplacement/cellSize;
+								executingBot.location.col += returnTranslationCalculation.xDisplacement/cellSize;
+								setCellColors({});
+								dispatch(completeCommand(newBattleInfo));
+							},((speed*1000)-(timePerMove*(totalMovesToMake))));
 						} else {
 							botToMove.style.transition = `transform ${timePerMove/1000}s ease-out`;
 							const translationCalculation = translationGenerator([pathToTravel[moveNumberToExecute]], cellSize, xDisplacement, yDisplacement);
 							// console.log('transform final:',translationCalculation.transform);
 							botToMove.style.transform = translationCalculation.transform;
-							// rowLocation += translationCalculation.yDisplacement/cellSize;
-							// colLocation += translationCalculation.xDisplacement/cellSize;
-							// executingBot.location.row += translationCalculation.yDisplacement/cellSize;
-							// executingBot.location.col += translationCalculation.xDisplacement/cellSize;
 							battleLogsToAdd.push({type: 'attribute-change', content: `${executingBot.name} MOVES TO CELL ROW: ${executingBot.location.row + translationCalculation.yDisplacement/cellSize} COL: ${executingBot.location.col + translationCalculation.xDisplacement/cellSize}`});
 							newBattleInfo.battleLog = [...newBattleInfo.battleLog, ...battleLogsToAdd];
 							setTimeout(()=>{
@@ -198,10 +264,6 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 						const translationCalculation = translationGenerator([pathToTravel[moveNumberToExecute]], cellSize, xDisplacement, yDisplacement);
 						// console.log('transform #:',moveNumberToExecute+1, translationCalculation.transform);
 						botToMove.style.transform = translationCalculation.transform;
-						// rowLocation += translationCalculation.yDisplacement/cellSize;
-						// colLocation += translationCalculation.xDisplacement/cellSize;
-						// executingBot.location.row += translationCalculation.yDisplacement/cellSize;
-						// executingBot.location.col += translationCalculation.xDisplacement/cellSize;
 						xDisplacement = translationCalculation.xDisplacement;
 						yDisplacement = translationCalculation.yDisplacement;
 						moveNumberToExecute ++;
@@ -214,56 +276,6 @@ function moveCommand (dispatch, battleInfo, completeCommand, playSFX, speed, cel
 					performNextMove();
 				},(timePerMove));
 			}
-
-
-
-			// function moveBot () {
-			// 	if (pathToTravel.length === 1 && !collision) {
-			// 		// no collision, only 1 move
-			// 		// botToMove.style.transition = `transform ${timePerMove}s ease-in-out`;
-			// 		// const translationCalculation = translationGenerator([pathToTravel[0]], cellSize, xDisplacement, yDisplacement);
-			// 		// botToMove.style.transform = translationCalculation.transform;
-			// 		// executingBot.location.row += translationCalculation.yDisplacement;
-			// 		// executingBot.location.col += translationCalculation.xDisplacement;
-
-
-			// 	} else if (collision && moveNumberToExecute === pathToTravel.length) {
-			// 		// final move - requires 2 motions movement based on collision.impactMove
-			// 		botToMove.style.transition = `transform ${timePerMove/2}s linear`;
-
-
-			// 		let finalXDiplacement = xDisplacement;
-			// 		let finalYDiplacement = yDisplacement;
-
-			// 		const translationCalculation = translationGenerator(collision.impactMove, cellSize, xDisplacement, yDisplacement);
-			// 		xDisplacement = translationCalculation.xDisplacement;
-			// 		yDisplacement = translationCalculation.yDisplacement;
-			// 		botToMove.style.transform = translationCalculation.transform;
-				
-			// 	} else if (!collision && moveNumberToExecute === pathToTravel.length) {
-			// 		// final move
-			// 		botToMove.style.transition = `transform ${timePerMove/2}s ease-out`;
-
-			// 		const translationCalculation = translationGenerator([pathToTravel[moveNumberToExecute]], cellSize, xDisplacement, yDisplacement);
-			// 		xDisplacement = translationCalculation.xDisplacement;
-			// 		yDisplacement = translationCalculation.yDisplacement;
-			// 		botToMove.style.transform = translationCalculation.transform;
-
-
-
-			// 		// set a half speed timeOut to dispatch, reset transition etc?
-			// 	} else {
-			// 		// middle move
-			// 		botToMove.style.transition = `transform ${timePerMove/2}s linear`;
-			// 	}
-
-			// 	// ease in, on first move, ease out on last if no collision
-			// 	// check for collision to determine if you need a stutter motion
-			// 	// if something, setTimeout moveBot
-			// 	// on last move, calculate amount of time spent animating and dispatch completeCommand with the remaining time
-			// 	// dispatch(completeCommand(newBattleInfo));
-			// }
-			// moveBot()
 		}
 	}
 }

@@ -8,7 +8,7 @@ const GridPopulator = ({ objectsToBePlaced }) => {
 	const settings = useSelector((state) => state.settings);
 	
   return (
-		<>
+		<ZeroSizedWrapper id = 'gridPopulator'>
 			{objectsToBePlaced.map((object, index)=>{
 				return(
 					<ZeroSizedWrapper
@@ -35,7 +35,7 @@ const GridPopulator = ({ objectsToBePlaced }) => {
 					</ZeroSizedWrapper>
 				)
 			})}
-		</>
+		</ZeroSizedWrapper>
   )
 }
 
