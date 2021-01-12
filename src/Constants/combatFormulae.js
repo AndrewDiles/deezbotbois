@@ -121,11 +121,17 @@ export function generateAttackObject (armName, attackingBotAttributes, specialMu
 }
 
 // function that calculates the amount of damage taken from an attack.  Note: maximum DR% is 90%; minimum damage taken is 1.
-export function calculateDamageTaken (defendingBotAttributes, attackObject, specialMultiplier, specialReduction) {
+export function calculateDamageTaken (defendingBotInfo, attackObject, specialMultiplier, specialReduction) {
+	const defendingBotAttributes = defendingBotInfo.attributes;
 	let battleLogToAdd = '';
 	// console.log('damage calculationg parameters:','\n',{defendingBotAttributes},'\n',{attackObject},'\n',{specialMultiplier},'\n',{specialReduction})
 	let appliedShield = defendingBotAttributes.Shield;
 	let appliedArmor = defendingBotAttributes.Armor;
+	if (defendingBotInfo.stance === 'GUARD') {
+		appliedShield *= 3;
+		appliedArmor *= 3;
+		battleLogToAdd += 'Guard Stance => Tripling Armor and Shield.\n';
+	}
 	if (attackObject.subType0 === 'Energy') {
 		appliedShield = 0;
 		battleLogToAdd += 'Energy Attack => Shield not applied.\n';
@@ -195,7 +201,7 @@ export function handleCollision (allBots, impacterIndex, wallImpact, recipientIn
 		console.log(attackInfo.battleLogToAdd);
 		attackInfo.battleLogToAdd.content = `${allBots[impacterIndex].name}'s outgoing damage: ${attackInfo.battleLogToAdd.content}`;
 		newBattleLogsToAdd.push(attackInfo.battleLogToAdd);
-		const recipientDamageTakenInfo = calculateDamageTaken(allBots[recipientIndex].attributes, attackInfo, 1, 0);
+		const recipientDamageTakenInfo = calculateDamageTaken(allBots[recipientIndex], attackInfo, 1, 0);
 		recipientDamageTakenInfo.battleLogToAdd.content = `${allBots[recipientIndex].name}'s damage taken: ${recipientDamageTakenInfo.battleLogToAdd.content}`;
 		newBattleLogsToAdd.push(recipientDamageTakenInfo.battleLogToAdd);
 		newRecordsChangesToAdd.push({name: 'damageDealt', superTypes: 'Collision', value: recipientDamageTakenInfo.value});
@@ -204,7 +210,7 @@ export function handleCollision (allBots, impacterIndex, wallImpact, recipientIn
 		console.log(returnAttackInfo.battleLogToAdd);
 		returnAttackInfo.battleLogToAdd.content = `${allBots[recipientIndex].name}'s return outgoing damage: ${returnAttackInfo.battleLogToAdd.content}`;
 		newBattleLogsToAdd.push(returnAttackInfo.battleLogToAdd);
-		const impacterDamageTakenInfo = calculateDamageTaken(allBots[impacterIndex].attributes, returnAttackInfo, 1, 0);
+		const impacterDamageTakenInfo = calculateDamageTaken(allBots[impacterIndex], returnAttackInfo, 1, 0);
 		impacterDamageTakenInfo.battleLogToAdd.content = `${allBots[impacterIndex].name}'s damage taken: ${impacterDamageTakenInfo.battleLogToAdd.content}`;
 		newBattleLogsToAdd.push(impacterDamageTakenInfo.battleLogToAdd);
 		newRecordsChangesToAdd.push({name: 'damageTaken', superTypes: 'Collision', value: impacterDamageTakenInfo.value});

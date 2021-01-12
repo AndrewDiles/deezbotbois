@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
 import Filters from './Filters';
+import Records from './Records'
 const baseFilters = {
 	open: 0,
 	newTick: 1,
@@ -10,15 +11,31 @@ const baseFilters = {
 	attributeChange: 1,
 	test: 1,
 	executions: 1,
-	formula: 0
+	formula: 0,
+	lastTick: 0,
+	records: 0
 }
 
 const BattleLog = ({ viewing }) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
 	const [hovering, setHovering] = useState(0);
 	const [filters, setFilters] = useState(baseFilters);
+	const [indexOfCurrentTickStart, setIndexOfCurrentTickStart] = useState(0);
 	let colors = useSelector(getThemeColors);
 
+	React.useEffect(()=>{
+		console.log(battleInfo.battleLog)
+		if (battleInfo.battleLog.length < 2) {
+			setIndexOfCurrentTickStart(0);
+		} else {
+			for (let i = 0; i < battleInfo.battleLog.length; i++) {
+				if (battleInfo.battleLog[i].type === 'newTick' && battleInfo.battleLog[i].number === battleInfo.tick) {
+					setIndexOfCurrentTickStart(i);
+					break;
+				}
+			}
+		}
+	},[battleInfo.tick])
   return (
     <Wrapper className = 'startFlex col'>
 			<Tab
@@ -37,110 +54,117 @@ const BattleLog = ({ viewing }) => {
 				filters = {filters}
 				setFilters = {setFilters}
 				/>
-				{battleInfo.battleLog.map((logEntry, index)=>{
+				{filters.records === 1 && 
+					<Records
+					open = {filters.open}
+					/>
+				}
+				{filters.records === 0  && battleInfo.battleLog.map((logEntry, index)=>{
+					if (!filters.lastTick || index >= indexOfCurrentTickStart) {
 
-					if (logEntry.type === 'newTick') {
-						return filters.newTick ? (
-							<NewTick key = {index}>
-								*** TICK # {logEntry.number} ***
-							</NewTick>
-					) : (null)}
+						if (logEntry.type === 'newTick') {
+							return filters.newTick ? (
+								<NewTick key = {index}>
+									*** TICK # {logEntry.number} ***
+								</NewTick>
+						) : (null)}
 
-					if (logEntry.type === 'phaseChange') {
-						return filters.phaseChange ? (
-							<Phase key = {index}>
-								{logEntry.content}
-							</Phase>
-						) : (null)
-					}
+						if (logEntry.type === 'phaseChange') {
+							return filters.phaseChange ? (
+								<Phase key = {index}>
+									{logEntry.content}
+								</Phase>
+							) : (null)
+						}
 
-					if (logEntry.type === 'testing-bot') {
-						return filters.test ? (
-							<Bot key = {index}>
-								- TESTING {logEntry.name} -
-							</Bot>
-						) : (null)
-					}
+						if (logEntry.type === 'testing-bot') {
+							return filters.test ? (
+								<Bot key = {index}>
+									- TESTING {logEntry.name} -
+								</Bot>
+							) : (null)
+						}
 
-					if (logEntry.type === 'test-fail') {
-						return filters.test ? (
-							<UnMet key = {index}>
-								{logEntry.content}
-							</UnMet>
-						) : (null)
-					}
+						if (logEntry.type === 'test-fail') {
+							return filters.test ? (
+								<UnMet key = {index}>
+									{logEntry.content}
+								</UnMet>
+							) : (null)
+						}
 
-					if (logEntry.type === 'test-pass') {
-						return filters.test ? (
-							<Met key = {index}>
-								{logEntry.content}
-							</Met>
-						) : (null)
-					}
-					if (logEntry.type === 'action-determined') {
-						return filters.test ? (
-							<CommandToBe key = {index}>
-								{logEntry.content}
-							</CommandToBe>
-						) : (null)
-					}
-					if (logEntry.type === 'new-initiative') {
-						return filters.executions ? (
-							<Bot key = {index}>
-								{logEntry.content}
-							</Bot>
-						) : (null)
-					}
-					if (logEntry.type === 'execution') {
-						return filters.executions ? (
-							<Command key = {index}>
-								{logEntry.content}
-							</Command>
-						) : (null)
-					}
-					if (logEntry.type === 'attribute-change') {
-						return filters.attributeChange ? (
-							<Attribute key = {index}>
-								{logEntry.content}
-							</Attribute>
-						) : (null)
-					}
-					if (logEntry.type === 'damage-calculation') {
-						return filters.formula ? (
-							<Formula key = {index}>
-								{logEntry.content}
-							</Formula>
-						) : (null)
-					}
+						if (logEntry.type === 'test-pass') {
+							return filters.test ? (
+								<Met key = {index}>
+									{logEntry.content}
+								</Met>
+							) : (null)
+						}
+						if (logEntry.type === 'action-determined') {
+							return filters.test ? (
+								<CommandToBe key = {index}>
+									{logEntry.content}
+								</CommandToBe>
+							) : (null)
+						}
+						if (logEntry.type === 'new-initiative') {
+							return filters.executions ? (
+								<Bot key = {index}>
+									{logEntry.content}
+								</Bot>
+							) : (null)
+						}
+						if (logEntry.type === 'execution') {
+							return filters.executions ? (
+								<Command key = {index}>
+									{logEntry.content}
+								</Command>
+							) : (null)
+						}
+						if (logEntry.type === 'attribute-change') {
+							return filters.attributeChange ? (
+								<Attribute key = {index}>
+									{logEntry.content}
+								</Attribute>
+							) : (null)
+						}
+						if (logEntry.type === 'damage-calculation') {
+							return filters.formula ? (
+								<Formula key = {index}>
+									{logEntry.content}
+								</Formula>
+							) : (null)
+						}
 
-					
-					if (logEntry.type === 'invalid') {
-						return filters.test ? (
-							<Invalid key = {index}>
-								{logEntry.content}
-							</Invalid>
-						) : (null)
-					}
-					if (logEntry.type === 'empty') {
-						return filters.test ? (
-							<Empty key = {index}>
-								{logEntry.content}
-							</Empty>
-						) : (null)
-					}
-					if (logEntry.type === 'battle-init') {
+
+						if (logEntry.type === 'invalid') {
+							return filters.test ? (
+								<Invalid key = {index}>
+									{logEntry.content}
+								</Invalid>
+							) : (null)
+						}
+						if (logEntry.type === 'empty') {
+							return filters.test ? (
+								<Empty key = {index}>
+									{logEntry.content}
+								</Empty>
+							) : (null)
+						}
+						if (logEntry.type === 'battle-init') {
+							return filters.newTick ? (
+								<Initial key = {index} filtersOpen = {filters.open}>
+									{battleInfo.challenge ? 'CHALLENGE' : 'LEVEL'} INITIALIZATION {battleInfo.challenge ? `\r\nCHALLENGE #${battleInfo.challenge}` : `\r\nLEVEL #${battleInfo.levelInfo.levelNumber} - ${battleInfo.levelInfo.levelName}`}
+								</Initial>
+							) : (null)
+						}
 						return (
-							<Initial key = {index} filtersOpen = {filters.open}>
-								{battleInfo.challenge ? 'CHALLENGE' : 'LEVEL'} INITIALIZATION {battleInfo.challenge ? `\r\nCHALLENGE #${battleInfo.challenge}` : `\r\nLEVEL #${battleInfo.levelInfo.levelNumber} - ${battleInfo.levelInfo.levelName}`}
-							</Initial>
+							<p key = {index}>
+								unspecified action type: 
+								{logEntry}
+							</p>
 						)
 					}
-					return (
-						<p key = {index}>
-							unspecified action type: 
-							{logEntry}
-						</p>
-					)
 				})}
 			</LogContainer>
 		</Wrapper>

@@ -107,6 +107,24 @@ const Filters = ({ filters, setFilters}) => {
 					/>
 					FORMULAE
 				</FormulaeCheckContainer>
+				<LastTickCheckContainer className = 'startFlex'>
+					<StyledCheckbox
+					sfx = 'selected'
+					value = {filters.lastTick}
+					handleClick = {() => {setFilters({...filters, lastTick: !filters.lastTick})}}
+					right = '2px'
+					/>
+					LAST TICK
+				</LastTickCheckContainer>
+				<RecordsCheckContainer className = 'startFlex'>
+					<StyledCheckbox
+					sfx = 'toggle'
+					value = {filters.records}
+					handleClick = {() => {filters.records ? setFilters({...filters, records: 0}) : setFilters({...filters, records: 1})}}
+					right = '2px'
+					/>
+					DISPLAY RECORDS STATES
+				</RecordsCheckContainer>
 			</Options>
 			<Gear
 			open = {filters.open}
@@ -132,7 +150,7 @@ const Filters = ({ filters, setFilters}) => {
 export default Filters;
 
 const Wrapper = styled.div`
-	height: ${props => props.open ? '40px' : '0px'};
+	height: ${props => props.open ? '60px' : '0px'};
 	width: 100%;
 	/* padding-left: 236px; */
 	transition: height ease-in-out 0.5s;
@@ -140,18 +158,19 @@ const Wrapper = styled.div`
 const Options = styled.div`
 	width: 236px;
 	transform: ${props => props.open ? 'scaleX(1)' : 'scaleX(0)'};
-	height: 40px;
+	height: 60px;
 	display: grid;
 	grid-template-columns: repeat(3,81px);  /* 78 */
 	padding-left: -5px;
 `
 const Gear = styled.div`
-	margin-top: ${props => props.open ? '0px' : '40px'};
+	/* margin-top: ${props => props.open ? '0px' : '60px'}; */
+	margin-top: ${props => props.open ? '-20px' : '40px'};
 	transition: margin-top ease-in-out 0.5s, transform ease-in-out 0.5s;
 	transform: ${props => (props.gearSpinning === 'forward' || props.gearSpinning === 'rotated') ? 'rotate(180deg)' : 'rotate(0deg)'};
 `
 const TickCheckContainer = styled.div`
-	color: gold;
+	color: orange;
 `
 const PhaseCheckContainer = styled.div`
 	color: fuchsia;
@@ -169,5 +188,15 @@ const ExecutionCheckContainer = styled.div`
 `
 const FormulaeCheckContainer = styled.div`
 	color: deeppink;
+	font-size: 7px;
+`
+const LastTickCheckContainer = styled.div`
+	color: gold;
+	font-size: 7px;
+	white-space: nowrap;
+`
+const RecordsCheckContainer = styled.div`
+	color: purple;
+	white-space: nowrap;
 	font-size: 7px;
 `
