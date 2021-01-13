@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useSelector } from "react-redux";
 import { getThemeColors } from '../../../Redux/reducers/user-reducer';
 import styled from 'styled-components';
+import Goals from '../../LevelLauncher/Goals';
 import StyledIcon from '../../StyledIcon/StyledIcon';
 import StyledCheckbox from '../../StyledCheckbox/StyledCheckbox';
+import generateAchMetInfo from '../../../Constants/scriptHelpers/generateAchMetInfo';
 
 const Records = ({ open}) => {
 	const battleInfo = useSelector((state) => state.battleInfo);
@@ -68,7 +70,10 @@ const Records = ({ open}) => {
 					{userInfo.levelProgress[battleInfo.levelInfo.levelNumber] ? userInfo.levelProgress[battleInfo.levelInfo.levelNumber][0].minDamageTaken : 'N/A'}
 				</Highlightable>
 			</Row>
-			<Row>
+			<Row
+			colors = {colors}
+			bottomBar = {true}
+			>
 				<p>
 					DAMAGE DEALT
 				</p>
@@ -85,6 +90,11 @@ const Records = ({ open}) => {
 					{userInfo.levelProgress[battleInfo.levelInfo.levelNumber] ? userInfo.levelProgress[battleInfo.levelInfo.levelNumber][0].maxDamageDealt : 'N/A'}
 				</Highlightable>
 			</Row>
+			<br/>
+			<Goals
+			metInfo = {generateAchMetInfo(userInfo.levelProgress, battleInfo)}
+			goalInfo = {[battleInfo.levelInfo.ach1, battleInfo.levelInfo.ach2, battleInfo.levelInfo.ach3]}
+			/>
 		</Wrapper>
   )
 }
@@ -93,7 +103,7 @@ export default Records;
 
 const Wrapper = styled.div`
 	width: 100%;
-	margin-top: ${props => props.open ? '15px' : '75px'};
+	margin-top: ${props => props.open ? '0' : '10px'};
 	transition: margin-top 0.5s ease-in-out;
 `
 const Row = styled.div`
