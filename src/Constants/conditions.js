@@ -36,13 +36,15 @@ export const conditionsData = {
 	aimResults: {
 		camel: 'aimResults',
 		name: 'Aim Results',
-		affect: '',
-		generalUse: '',
+		affect: "Tests the results of a previous tick's AIM or AIM-AND-ATTACK command",
+		generalUse: 'Useful as an energy efficient and long range method of finding other bots',
 		useWhen: [
-			'',
+			'has a ranged weapon equiped',
+			'is not adjacent to a hostile bot',
+			'executed a MOVE command on the previous tick'
 		],
 		testOptions: [
-			''
+			'if last tick did, or did not, find a hostile or friend down scope'
 		]
 	},
 	attribute: {
