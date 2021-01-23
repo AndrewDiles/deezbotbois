@@ -37,7 +37,7 @@ export const conditionsData = {
 		camel: 'aimResults',
 		name: 'Aim Results',
 		affect: "Tests the results of a previous tick's AIM or AIM-AND-ATTACK command",
-		generalUse: 'Useful as an energy efficient and long range method of finding other bots',
+		generalUse: 'Useful as an energy efficient and long range method of finding other bots.',
 		useWhen: [
 			'has a ranged weapon equiped',
 			'is not adjacent to a hostile bot',
@@ -50,13 +50,18 @@ export const conditionsData = {
 	attribute: {
 		camel: 'attribute',
 		name: 'Attribute',
-		affect: '',
-		generalUse: '',
+		affect: 'Tests the quantity of a selected attribute',
+		generalUse: 'Useful to determine whether it is safe to expend resources',
 		useWhen: [
-			'',
+			"wants to verify if it has enough energy stored in it's Capacitor to execute a command",
+			"wants to hold back and regenerate energy",
+			"wants to repair or disengage from a conflict"
 		],
 		testOptions: [
-			''
+			'if a selected attribute is above, below, equal to or not equal to a selected value',
+			"the selected attribute",
+			"the selected test operator",
+			"the selected threshold"
 		]
 	},
 	consecutiveAims: {
