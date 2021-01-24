@@ -67,13 +67,15 @@ export const conditionsData = {
 	consecutiveAims: {
 		camel: 'consecutiveAims',
 		name: 'Consecutive Aims',
-		affect: '',
-		generalUse: '',
+		affect: 'Tests the number of consecutive Ticks where the Aim command was executed',
+		generalUse: "Useful to control Aim command's angle incrementation",
 		useWhen: [
-			'',
+			'has completed a cycle of Aim Commands be it 360, 180 or 90 degrees',
 		],
 		testOptions: [
-			''
+			'if the quantity of consecutive aims is above, below, equal to or not equal to a selected value',
+			"the selected test operator",
+			"the selected threshold"
 		]
 	},
 	damageTaken: {
