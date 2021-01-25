@@ -81,13 +81,15 @@ export const conditionsData = {
 	damageTaken: {
 		camel: 'damageTaken',
 		name: 'Damage Taken',
-		affect: '',
-		generalUse: '',
+		affect: 'Tests the amount of damage that was taken in the previous Tick',
+		generalUse: 'Useful to determine the threat of impending damage in the upcoming Tick',
 		useWhen: [
-			'',
+			'wants to make sure a threat does not need to be addressed immediately',
 		],
 		testOptions: [
-			''
+			'if the amount of damage taken last Tick is above, below, equal to or not equal to a selected value',
+			"the selected test operator",
+			"the selected threshold"
 		]
 	},
 	distanceToTarget: {
