@@ -187,7 +187,6 @@ export const conditionsData = {
 		testOptions: [
 			'if ticks remaining is equal or not equal to the provided number',
 			'if ticks remaining is greater-than or less-than the provided number',
-	
 		]
 	},
 }

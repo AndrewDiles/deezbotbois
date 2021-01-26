@@ -81,15 +81,18 @@ const commandDetails = {
 		]
 	},
 	meleeAttackCommand: {
-		cost: ".",
+		cost: "The energy cost depends on the bot's model, equipment and unlocked technologies.",
 		speed: 11,
-		affect: ".",
-		generalUse: ".",
+		affect: "The execution of this command will cause the executor to attack a direction or target with a melee weapon",
+		generalUse: "Best used when adjacent to a hostile.",
 		useWhen: [
-			'',
+			'is employing a forced-melee strategy',
+			'is willing to exchange blows'
 		],
 		instructionOptions: [
-			'always looks to scanned hostiles for targets',
+			'Required for execution: A selected equipped melee weapon',
+			'can attack a scanned target',
+			'can attack in a provided direction'
 		]
 	},
 	moveCommand: {
