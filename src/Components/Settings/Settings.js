@@ -235,6 +235,9 @@ const Settings = () => {
       </RowDiv>
 			<br/>
 			<RowDiv>
+				<Styledh5>
+					Music / SFX toggles:
+				</Styledh5>
 				<VolumeSetter/>
 			</RowDiv>
       <Styledh5>
