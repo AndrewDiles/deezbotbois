@@ -11,7 +11,11 @@ const commandDetails = {
 			'is predicting the location of an hostile, or has limited the likely locations they may be'
 		],
 		instructionOptions: [
-			'always looks to scanned hostiles for targets',
+			'selection of an equiped ranged weapon',
+			'aiming methods:',
+			'scanned target and target number',
+			'by increment and increment value',
+			'set direction and direction'
 		]
 	},
 	aimCommand: {
