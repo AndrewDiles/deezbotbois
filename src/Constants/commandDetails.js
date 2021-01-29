@@ -29,7 +29,10 @@ const commandDetails = {
 			'is employing a stationary-ranged strategy'
 		],
 		instructionOptions: [
-			
+			'selection of an equiped ranged weapon',
+			'aiming methods:',
+			'by increment and increment value',
+			'set direction and direction'
 		]
 	},
 	chargeCommand: {
