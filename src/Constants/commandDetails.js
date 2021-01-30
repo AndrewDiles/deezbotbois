@@ -45,7 +45,8 @@ const commandDetails = {
 			'is employing a forced-melee strategy'
 		],
 		instructionOptions: [
-			'always looks to scanned hostiles for targets',
+			'selection of an equiped ranged weapon',
+			'must select a scanned target to charge'
 		]
 	},
 	counterCommand: {
