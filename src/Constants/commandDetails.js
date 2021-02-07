@@ -69,10 +69,18 @@ const commandDetails = {
 		generalUse: 'Best used as a source of burst damage when a hostile has been scanned.',
 		useWhen: [
 			'has detected the presence of a hostile',
-			'has a large amount of energy stored in their Capacitor'
+			'has a large amount of energy stored in their Capacitor',
+			'ranged aiming methods:',
+			'scanned target and target number',
+			'by increment and increment value',
+			'set direction and direction',
+			'melee attack direction methods:',
+			'scanned target and target number',
+			'at a given direction'
 		],
 		instructionOptions: [
-			'always looks to scanned hostiles for targets',
+			'selection of type of attack: melee or ranged',
+			'selection of an equiped Energy weapon of the correct type',
 		]
 	},
 	guardCommand: {
@@ -99,8 +107,8 @@ const commandDetails = {
 		],
 		instructionOptions: [
 			'Required for execution: A selected equipped melee weapon',
-			'can attack a scanned target',
-			'can attack in a provided direction'
+			'scanned target and target number',
+			'at a given direction'
 		]
 	},
 	moveCommand: {
