@@ -112,7 +112,7 @@ const commandDetails = {
 		]
 	},
 	moveCommand: {
-		cost: ".",
+		cost: "The energy cost depends on the bot's model, equipment and unlocked technologies.",
 		speed: 17,
 		affect: ".",
 		generalUse: ".",
