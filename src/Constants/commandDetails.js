@@ -114,7 +114,7 @@ const commandDetails = {
 	moveCommand: {
 		cost: "The energy cost depends on the bot's model, equipment and unlocked technologies.",
 		speed: 17,
-		affect: ".",
+		affect: "The execution of this command will cause the executor to attempt to change its location on the battlefield",
 		generalUse: ".",
 		useWhen: [
 			'',
