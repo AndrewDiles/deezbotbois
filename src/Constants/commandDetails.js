@@ -115,9 +115,10 @@ const commandDetails = {
 		cost: "The energy cost depends on the bot's model, equipment and unlocked technologies.",
 		speed: 17,
 		affect: "The execution of this command will cause the executor to attempt to change its location on the battlefield",
-		generalUse: ".",
+		generalUse: "Best used to evade losing encounters, to change the scan origin location or to cause collisions.",
 		useWhen: [
-			'',
+			'is adjacent to a hostile and melee attacks are not a viable win condition',
+			'no hostiles are in your scan area'
 		],
 		instructionOptions: [
 			
