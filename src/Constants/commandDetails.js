@@ -128,7 +128,7 @@ const commandDetails = {
 		cost: "Equivalent to a Move command which depends on the bot's model, equipment and unlocked technologies.",
 		speed: 15,
 		affect: ".",
-		generalUse: ".",
+		generalUse: "Best used as a primary attack when employing a collision strategy.",
 		useWhen: [
 			'',
 		],

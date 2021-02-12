@@ -152,6 +152,7 @@ Intentions with the GUI include:
 - simple-sequence
 - stationary-ranged strategy
 - forced-melee strategy
+- collision strategy
 
 ### Micro Strategies
 - wall strategy
