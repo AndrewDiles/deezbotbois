@@ -151,7 +151,7 @@ const commandDetails = {
 	rechargeCommand: {
 		cost: 0,
 		speed: 24,
-		affect: ".",
+		affect: "The execution of this command will recharge the executor's Capacitor by a value equal to their Reactor - effectively doubling their Reactor for the tick",
 		generalUse: ".",
 		useWhen: [
 			'',
